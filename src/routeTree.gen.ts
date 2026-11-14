@@ -17,10 +17,12 @@ import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KiHinweiseRouteImport } from './routes/ki-hinweise'
 import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as KontoRouteImport } from './routes/konto'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
 import { Route as LoesungenRouteImport } from './routes/loesungen'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as PasswortNeuRouteImport } from './routes/passwort-neu'
 import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
@@ -95,6 +97,11 @@ const KontaktRoute = KontaktRouteImport.update({
   path: '/kontakt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontoRoute = KontoRouteImport.update({
+  id: '/konto',
+  path: '/konto',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeistungenRoute = LeistungenRouteImport.update({
   id: '/leistungen',
   path: '/leistungen',
@@ -113,6 +120,11 @@ const LoesungenRoute = LoesungenRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortNeuRoute = PasswortNeuRouteImport.update({
+  id: '/passwort-neu',
+  path: '/passwort-neu',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
@@ -295,10 +307,12 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
   '/mcp': typeof McpRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -342,10 +356,12 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
   '/mcp': typeof McpRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -390,10 +406,12 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
+  '/konto': typeof KontoRoute
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
   '/mcp': typeof McpRoute
+  '/passwort-neu': typeof PasswortNeuRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -439,10 +457,12 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/ki-hinweise'
     | '/kontakt'
+    | '/konto'
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
     | '/mcp'
+    | '/passwort-neu'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -486,10 +506,12 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/ki-hinweise'
     | '/kontakt'
+    | '/konto'
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
     | '/mcp'
+    | '/passwort-neu'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -533,10 +555,12 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/ki-hinweise'
     | '/kontakt'
+    | '/konto'
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
     | '/mcp'
+    | '/passwort-neu'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -581,10 +605,12 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   KiHinweiseRoute: typeof KiHinweiseRoute
   KontaktRoute: typeof KontaktRoute
+  KontoRoute: typeof KontoRoute
   LeistungenRoute: typeof LeistungenRoute
   LeistungsumfangRoute: typeof LeistungsumfangRoute
   LoesungenRoute: typeof LoesungenRoute
   McpRoute: typeof McpRoute
+  PasswortNeuRoute: typeof PasswortNeuRoute
   PasswortVergessenRoute: typeof PasswortVergessenRoute
   PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
@@ -678,6 +704,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KontaktRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/konto': {
+      id: '/konto'
+      path: '/konto'
+      fullPath: '/konto'
+      preLoaderRoute: typeof KontoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leistungen': {
       id: '/leistungen'
       path: '/leistungen'
@@ -704,6 +737,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-neu': {
+      id: '/passwort-neu'
+      path: '/passwort-neu'
+      fullPath: '/passwort-neu'
+      preLoaderRoute: typeof PasswortNeuRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/passwort-vergessen': {
@@ -949,10 +989,12 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   KiHinweiseRoute: KiHinweiseRoute,
   KontaktRoute: KontaktRoute,
+  KontoRoute: KontoRoute,
   LeistungenRoute: LeistungenRoute,
   LeistungsumfangRoute: LeistungsumfangRoute,
   LoesungenRoute: LoesungenRoute,
   McpRoute: McpRoute,
+  PasswortNeuRoute: PasswortNeuRoute,
   PasswortVergessenRoute: PasswortVergessenRoute,
   PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
