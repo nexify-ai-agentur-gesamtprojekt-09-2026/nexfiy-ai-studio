@@ -5,7 +5,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/leistungen.css?raw";
 
 export const Route = createFileRoute("/leistungen")({
-  head: () => ({ meta: [{ title: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" }] }),
+  head: () => ({
+    meta: [
+      { title: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
+      { name: "description", content: "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal." },
+      { property: "og:title", content: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
+      { property: "og:description", content: "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

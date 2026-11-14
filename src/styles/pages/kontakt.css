@@ -153,6 +153,7 @@ legend { color: var(--color-text-gedaempft); margin-bottom: 10px; font-size: 11p
 .composer-bottom > span { color: var(--color-text-gedaempft); font-family: "Geist Mono", monospace; font-size: 10px; }
 
 .connection-note { color: var(--color-text-gedaempft); margin-top: 10px; font-size: 9px; line-height: 1.5; }
+.reopen-chat { box-shadow: var(--shadow-dialog); border-radius: var(--radius-pille); background: var(--color-graphit-700); z-index: 5; align-items: center; gap: 12px; padding: 8px 18px 8px 8px; font-size: 13px; display: flex; position: fixed; bottom: 24px; right: 24px; }
 
 
 @media (min-width: 1700px) {
@@ -188,6 +189,7 @@ legend { color: var(--color-text-gedaempft); margin-bottom: 10px; font-size: 11p
   .site-footer { gap: 12px; padding: 24px; }
   .aifly-panel { z-index: 10; width: min(100%, 440px); height: 100dvh; box-shadow: var(--shadow-dialog); position: fixed; inset: 0px 0px 0px auto; }
   .panel-heading { min-height: 84px; padding: 16px; }
+  .reopen-chat { bottom: 16px; right: 16px; }
   
   
   

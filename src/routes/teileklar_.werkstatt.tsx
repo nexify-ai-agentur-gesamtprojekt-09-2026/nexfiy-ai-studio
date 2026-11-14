@@ -5,7 +5,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.werkstatt.css?raw";
 
 export const Route = createFileRoute("/teileklar_/werkstatt")({
-  head: () => ({ meta: [{ title: "Eine Werkstatt in Ihrer Nähe. · TEILEKLAR.shop" }] }),
+  head: () => ({
+    meta: [
+      { title: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
+      { name: "description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
+      { property: "og:title", content: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
+      { property: "og:description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

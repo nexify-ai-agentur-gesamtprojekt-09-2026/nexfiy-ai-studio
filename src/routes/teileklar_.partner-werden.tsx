@@ -5,7 +5,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.partner-werden.css?raw";
 
 export const Route = createFileRoute("/teileklar_/partner-werden")({
-  head: () => ({ meta: [{ title: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" }] }),
+  head: () => ({
+    meta: [
+      { title: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" },
+      { name: "description", content: "Werden Sie TEILEKLAR-Werkstattpartner und erhalten Sie vollständige Aufträge mit Fahrzeug, geprüftem Teil und Kontaktdaten." },
+      { property: "og:title", content: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" },
+      { property: "og:description", content: "Werden Sie TEILEKLAR-Werkstattpartner und erhalten Sie vollständige Aufträge mit Fahrzeug, geprüftem Teil und Kontaktdaten." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
