@@ -56,6 +56,7 @@ import { Route as TeileklarTermineRouteImport } from './routes/teileklar_.termin
 import { Route as TeileklarWarenkorbRouteImport } from './routes/teileklar_.warenkorb'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -297,6 +298,11 @@ const WissenProjektVorbereitenRoute =
     path: '/wissen/projekt-vorbereiten',
     getParentRoute: () => rootRouteImport,
   } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -346,6 +352,7 @@ export interface FileRoutesByFullPath {
   '/teileklar/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -395,6 +402,7 @@ export interface FileRoutesByTo {
   '/teileklar/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -445,6 +453,7 @@ export interface FileRoutesById {
   '/teileklar_/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -496,6 +505,7 @@ export interface FileRouteTypes {
     | '/teileklar/warenkorb'
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
+    | '/.lovable/oauth/consent'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -545,6 +555,7 @@ export interface FileRouteTypes {
     | '/teileklar/warenkorb'
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
+    | '/.lovable/oauth/consent'
   id:
     | '__root__'
     | '/'
@@ -594,6 +605,7 @@ export interface FileRouteTypes {
     | '/teileklar_/warenkorb'
     | '/teileklar_/werkstatt'
     | '/wissen_/projekt-vorbereiten'
+    | '/.lovable/oauth/consent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -644,6 +656,7 @@ export interface RootRouteChildren {
   TeileklarWarenkorbRoute: typeof TeileklarWarenkorbRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -977,6 +990,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WissenProjektVorbereitenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1029,6 +1049,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeileklarWarenkorbRoute: TeileklarWarenkorbRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
   WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
