@@ -20,6 +20,7 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
 import { Route as LoesungenRouteImport } from './routes/loesungen'
+import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
@@ -105,6 +106,11 @@ const LeistungsumfangRoute = LeistungsumfangRouteImport.update({
 const LoesungenRoute = LoesungenRouteImport.update({
   id: '/loesungen',
   path: '/loesungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
+  id: '/passwort-vergessen',
+  path: '/passwort-vergessen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortaleRoute = PortaleRouteImport.update({
@@ -279,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
@@ -323,6 +330,7 @@ export interface FileRoutesByTo {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
@@ -368,6 +376,7 @@ export interface FileRoutesById {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
@@ -458,6 +468,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
@@ -502,6 +513,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
@@ -547,6 +559,7 @@ export interface RootRouteChildren {
   LeistungenRoute: typeof LeistungenRoute
   LeistungsumfangRoute: typeof LeistungsumfangRoute
   LoesungenRoute: typeof LoesungenRoute
+  PasswortVergessenRoute: typeof PasswortVergessenRoute
   PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
   RegistrierenRoute: typeof RegistrierenRoute
@@ -657,6 +670,13 @@ declare module '@tanstack/react-router' {
       path: '/loesungen'
       fullPath: '/loesungen'
       preLoaderRoute: typeof LoesungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-vergessen': {
+      id: '/passwort-vergessen'
+      path: '/passwort-vergessen'
+      fullPath: '/passwort-vergessen'
+      preLoaderRoute: typeof PasswortVergessenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portale': {
@@ -891,6 +911,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeistungenRoute: LeistungenRoute,
   LeistungsumfangRoute: LeistungsumfangRoute,
   LoesungenRoute: LoesungenRoute,
+  PasswortVergessenRoute: PasswortVergessenRoute,
   PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
   RegistrierenRoute: RegistrierenRoute,
