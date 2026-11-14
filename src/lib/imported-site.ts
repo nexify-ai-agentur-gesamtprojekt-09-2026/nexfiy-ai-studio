@@ -1,9 +1,44 @@
-import { useEffect, useRef, useState, type MouseEvent, type RefObject } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
  * scroll-driven shell attributes and the "atelier" film players). Markup stays in each route.
  */
+
+const PHONE_QUERY = "(max-width: 767px)";
+
+function subscribePhone(onChange: () => void) {
+  const query = matchMedia(PHONE_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+/** True on phone widths (the breakpoint the imported pages switch their chat panel to a dialog). False during SSR. */
+export function useImportedMobile() {
+  return useSyncExternalStore(subscribePhone, () => matchMedia(PHONE_QUERY).matches, () => false);
+}
+
+/** Plays muted looping background videos only while they are on screen (decorative loops of some imported pages). */
+export function useLoopingVideos() {
+  useEffect(() => {
+    const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([autoplay]):not([controls])"))
+      .filter((video) => video.muted && !video.closest("[data-site-import-carousel-store]"))
+      .slice(0, 32);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) void video.play().catch(() => {});
+        else video.pause();
+      }
+    });
+    loopingVideos.forEach((video) => observer.observe(video));
+    return () => {
+      observer.disconnect();
+      loopingVideos.forEach((video) => video.pause());
+    };
+  }, []);
+}
 
 export function useShellSignals(heroActionSelector?: string) {
   const [scrolled, setScrolled] = useState(false);

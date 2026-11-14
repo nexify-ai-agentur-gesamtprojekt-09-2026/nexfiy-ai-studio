@@ -61,7 +61,7 @@ export function StatusPage({
           </p>
           <h1
             id="status-title"
-            className="mt-6 text-balance font-heading text-[clamp(2.5rem,6.5vw,4.75rem)] font-semibold leading-[1.04] tracking-[-0.045em]"
+            className="mt-6 text-balance font-heading text-[clamp(2.5rem,6.5vw,4.75rem)] font-semibold leading-[1.06] tracking-[-0.035em]"
           >
             {title}
           </h1>

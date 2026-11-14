@@ -10,15 +10,82 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnmeldenRouteImport } from './routes/anmelden'
+import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KiHinweiseRouteImport } from './routes/ki-hinweise'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
+import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
+import { Route as LoesungenRouteImport } from './routes/loesungen'
+import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
+import { Route as PortaleRouteImport } from './routes/portale'
+import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
+import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
+import { Route as UnternehmenRouteImport } from './routes/unternehmen'
+import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
+import { Route as WissenRouteImport } from './routes/wissen'
+import { Route as LeistungenAgentenAutomatisierungRouteImport } from './routes/leistungen_.agenten-automatisierung'
+import { Route as LeistungenAppsPortaleRouteImport } from './routes/leistungen_.apps-portale'
+import { Route as LeistungenWebsitesRouteImport } from './routes/leistungen_.websites'
+import { Route as ProdukteAiflyOracleRouteImport } from './routes/produkte_.aifly-oracle'
+import { Route as ProdukteApiRouteImport } from './routes/produkte_.api'
+import { Route as ProdukteNexAgenticAiflyRouteImport } from './routes/produkte_.nex-agentic-aifly'
+import { Route as ProdukteNex2flyRouteImport } from './routes/produkte_.nex2fly'
+import { Route as ProdukteOneRouteImport } from './routes/produkte_.one'
+import { Route as ProdukteSkillsMcpRouteImport } from './routes/produkte_.skills-mcp'
+import { Route as TeileklarBatterieBeraterRouteImport } from './routes/teileklar_.batterie-berater'
+import { Route as TeileklarBestellungenRouteImport } from './routes/teileklar_.bestellungen'
+import { Route as TeileklarFahrzeugUndPassungRouteImport } from './routes/teileklar_.fahrzeug-und-passung'
+import { Route as TeileklarGutscheineRouteImport } from './routes/teileklar_.gutscheine'
+import { Route as TeileklarKasseRouteImport } from './routes/teileklar_.kasse'
+import { Route as TeileklarKategorienRouteImport } from './routes/teileklar_.kategorien'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
+import { Route as TeileklarRechtlichesRouteImport } from './routes/teileklar_.rechtliches'
+import { Route as TeileklarReifenrechnerRouteImport } from './routes/teileklar_.reifenrechner'
+import { Route as TeileklarShopRouteImport } from './routes/teileklar_.shop'
+import { Route as TeileklarSucheRouteImport } from './routes/teileklar_.suche'
+import { Route as TeileklarTermineRouteImport } from './routes/teileklar_.termine'
+import { Route as TeileklarWarenkorbRouteImport } from './routes/teileklar_.warenkorb'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
+import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnmeldenRoute = AnmeldenRouteImport.update({
+  id: '/anmelden',
+  path: '/anmelden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BarrierefreiheitRoute = BarrierefreiheitRouteImport.update({
+  id: '/barrierefreiheit',
+  path: '/barrierefreiheit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KiHinweiseRoute = KiHinweiseRouteImport.update({
+  id: '/ki-hinweise',
+  path: '/ki-hinweise',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktRoute = KontaktRouteImport.update({
@@ -31,9 +98,132 @@ const LeistungenRoute = LeistungenRouteImport.update({
   path: '/leistungen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeistungsumfangRoute = LeistungsumfangRouteImport.update({
+  id: '/leistungsumfang',
+  path: '/leistungsumfang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoesungenRoute = LoesungenRouteImport.update({
+  id: '/loesungen',
+  path: '/loesungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
+  id: '/passwort-vergessen',
+  path: '/passwort-vergessen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortaleRoute = PortaleRouteImport.update({
+  id: '/portale',
+  path: '/portale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreiseAblaufRoute = PreiseAblaufRouteImport.update({
+  id: '/preise-ablauf',
+  path: '/preise-ablauf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrierenRoute = RegistrierenRouteImport.update({
+  id: '/registrieren',
+  path: '/registrieren',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarRoute = TeileklarRouteImport.update({
   id: '/teileklar',
   path: '/teileklar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnternehmenRoute = UnternehmenRouteImport.update({
+  id: '/unternehmen',
+  path: '/unternehmen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VertragsgrundlagenRoute = VertragsgrundlagenRouteImport.update({
+  id: '/vertragsgrundlagen',
+  path: '/vertragsgrundlagen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WissenRoute = WissenRouteImport.update({
+  id: '/wissen',
+  path: '/wissen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenAgentenAutomatisierungRoute =
+  LeistungenAgentenAutomatisierungRouteImport.update({
+    id: '/leistungen_/agenten-automatisierung',
+    path: '/leistungen/agenten-automatisierung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenAppsPortaleRoute = LeistungenAppsPortaleRouteImport.update({
+  id: '/leistungen_/apps-portale',
+  path: '/leistungen/apps-portale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenWebsitesRoute = LeistungenWebsitesRouteImport.update({
+  id: '/leistungen_/websites',
+  path: '/leistungen/websites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteAiflyOracleRoute = ProdukteAiflyOracleRouteImport.update({
+  id: '/produkte_/aifly-oracle',
+  path: '/produkte/aifly-oracle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteApiRoute = ProdukteApiRouteImport.update({
+  id: '/produkte_/api',
+  path: '/produkte/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteNexAgenticAiflyRoute = ProdukteNexAgenticAiflyRouteImport.update({
+  id: '/produkte_/nex-agentic-aifly',
+  path: '/produkte/nex-agentic-aifly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteNex2flyRoute = ProdukteNex2flyRouteImport.update({
+  id: '/produkte_/nex2fly',
+  path: '/produkte/nex2fly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteOneRoute = ProdukteOneRouteImport.update({
+  id: '/produkte_/one',
+  path: '/produkte/one',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteSkillsMcpRoute = ProdukteSkillsMcpRouteImport.update({
+  id: '/produkte_/skills-mcp',
+  path: '/produkte/skills-mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarBatterieBeraterRoute =
+  TeileklarBatterieBeraterRouteImport.update({
+    id: '/teileklar_/batterie-berater',
+    path: '/teileklar/batterie-berater',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TeileklarBestellungenRoute = TeileklarBestellungenRouteImport.update({
+  id: '/teileklar_/bestellungen',
+  path: '/teileklar/bestellungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarFahrzeugUndPassungRoute =
+  TeileklarFahrzeugUndPassungRouteImport.update({
+    id: '/teileklar_/fahrzeug-und-passung',
+    path: '/teileklar/fahrzeug-und-passung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TeileklarGutscheineRoute = TeileklarGutscheineRouteImport.update({
+  id: '/teileklar_/gutscheine',
+  path: '/teileklar/gutscheine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarKasseRoute = TeileklarKasseRouteImport.update({
+  id: '/teileklar_/kasse',
+  path: '/teileklar/kasse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarKategorienRoute = TeileklarKategorienRouteImport.update({
+  id: '/teileklar_/kategorien',
+  path: '/teileklar/kategorien',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
@@ -41,71 +231,366 @@ const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
   path: '/teileklar/partner-werden',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeileklarRechtlichesRoute = TeileklarRechtlichesRouteImport.update({
+  id: '/teileklar_/rechtliches',
+  path: '/teileklar/rechtliches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarReifenrechnerRoute = TeileklarReifenrechnerRouteImport.update({
+  id: '/teileklar_/reifenrechner',
+  path: '/teileklar/reifenrechner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarShopRoute = TeileklarShopRouteImport.update({
+  id: '/teileklar_/shop',
+  path: '/teileklar/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarSucheRoute = TeileklarSucheRouteImport.update({
+  id: '/teileklar_/suche',
+  path: '/teileklar/suche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarTermineRoute = TeileklarTermineRouteImport.update({
+  id: '/teileklar_/termine',
+  path: '/teileklar/termine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarWarenkorbRoute = TeileklarWarenkorbRouteImport.update({
+  id: '/teileklar_/warenkorb',
+  path: '/teileklar/warenkorb',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarWerkstattRoute = TeileklarWerkstattRouteImport.update({
   id: '/teileklar_/werkstatt',
   path: '/teileklar/werkstatt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WissenProjektVorbereitenRoute =
+  WissenProjektVorbereitenRouteImport.update({
+    id: '/wissen_/projekt-vorbereiten',
+    path: '/wissen/projekt-vorbereiten',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/portale': typeof PortaleRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen/websites': typeof LeistungenWebsitesRoute
+  '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte/api': typeof ProdukteApiRoute
+  '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte/one': typeof ProdukteOneRoute
+  '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar/batterie-berater': typeof TeileklarBatterieBeraterRoute
+  '/teileklar/bestellungen': typeof TeileklarBestellungenRoute
+  '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar/gutscheine': typeof TeileklarGutscheineRoute
+  '/teileklar/kasse': typeof TeileklarKasseRoute
+  '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar/reifenrechner': typeof TeileklarReifenrechnerRoute
+  '/teileklar/shop': typeof TeileklarShopRoute
+  '/teileklar/suche': typeof TeileklarSucheRoute
+  '/teileklar/termine': typeof TeileklarTermineRoute
+  '/teileklar/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/portale': typeof PortaleRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen/websites': typeof LeistungenWebsitesRoute
+  '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte/api': typeof ProdukteApiRoute
+  '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte/one': typeof ProdukteOneRoute
+  '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar/batterie-berater': typeof TeileklarBatterieBeraterRoute
+  '/teileklar/bestellungen': typeof TeileklarBestellungenRoute
+  '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar/gutscheine': typeof TeileklarGutscheineRoute
+  '/teileklar/kasse': typeof TeileklarKasseRoute
+  '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar/reifenrechner': typeof TeileklarReifenrechnerRoute
+  '/teileklar/shop': typeof TeileklarShopRoute
+  '/teileklar/suche': typeof TeileklarSucheRoute
+  '/teileklar/termine': typeof TeileklarTermineRoute
+  '/teileklar/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/passwort-vergessen': typeof PasswortVergessenRoute
+  '/portale': typeof PortaleRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen_/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen_/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen_/websites': typeof LeistungenWebsitesRoute
+  '/produkte_/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte_/api': typeof ProdukteApiRoute
+  '/produkte_/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte_/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte_/one': typeof ProdukteOneRoute
+  '/produkte_/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar_/batterie-berater': typeof TeileklarBatterieBeraterRoute
+  '/teileklar_/bestellungen': typeof TeileklarBestellungenRoute
+  '/teileklar_/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar_/gutscheine': typeof TeileklarGutscheineRoute
+  '/teileklar_/kasse': typeof TeileklarKasseRoute
+  '/teileklar_/kategorien': typeof TeileklarKategorienRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar_/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar_/reifenrechner': typeof TeileklarReifenrechnerRoute
+  '/teileklar_/shop': typeof TeileklarShopRoute
+  '/teileklar_/suche': typeof TeileklarSucheRoute
+  '/teileklar_/termine': typeof TeileklarTermineRoute
+  '/teileklar_/warenkorb': typeof TeileklarWarenkorbRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/anmelden'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/passwort-vergessen'
+    | '/portale'
+    | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
+    | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen/agenten-automatisierung'
+    | '/leistungen/apps-portale'
+    | '/leistungen/websites'
+    | '/produkte/aifly-oracle'
+    | '/produkte/api'
+    | '/produkte/nex-agentic-aifly'
+    | '/produkte/nex2fly'
+    | '/produkte/one'
+    | '/produkte/skills-mcp'
+    | '/teileklar/batterie-berater'
+    | '/teileklar/bestellungen'
+    | '/teileklar/fahrzeug-und-passung'
+    | '/teileklar/gutscheine'
+    | '/teileklar/kasse'
+    | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/rechtliches'
+    | '/teileklar/reifenrechner'
+    | '/teileklar/shop'
+    | '/teileklar/suche'
+    | '/teileklar/termine'
+    | '/teileklar/warenkorb'
     | '/teileklar/werkstatt'
+    | '/wissen/projekt-vorbereiten'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/anmelden'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/passwort-vergessen'
+    | '/portale'
+    | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
+    | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen/agenten-automatisierung'
+    | '/leistungen/apps-portale'
+    | '/leistungen/websites'
+    | '/produkte/aifly-oracle'
+    | '/produkte/api'
+    | '/produkte/nex-agentic-aifly'
+    | '/produkte/nex2fly'
+    | '/produkte/one'
+    | '/produkte/skills-mcp'
+    | '/teileklar/batterie-berater'
+    | '/teileklar/bestellungen'
+    | '/teileklar/fahrzeug-und-passung'
+    | '/teileklar/gutscheine'
+    | '/teileklar/kasse'
+    | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/rechtliches'
+    | '/teileklar/reifenrechner'
+    | '/teileklar/shop'
+    | '/teileklar/suche'
+    | '/teileklar/termine'
+    | '/teileklar/warenkorb'
     | '/teileklar/werkstatt'
+    | '/wissen/projekt-vorbereiten'
   id:
     | '__root__'
     | '/'
+    | '/anmelden'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/passwort-vergessen'
+    | '/portale'
+    | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
+    | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen_/agenten-automatisierung'
+    | '/leistungen_/apps-portale'
+    | '/leistungen_/websites'
+    | '/produkte_/aifly-oracle'
+    | '/produkte_/api'
+    | '/produkte_/nex-agentic-aifly'
+    | '/produkte_/nex2fly'
+    | '/produkte_/one'
+    | '/produkte_/skills-mcp'
+    | '/teileklar_/batterie-berater'
+    | '/teileklar_/bestellungen'
+    | '/teileklar_/fahrzeug-und-passung'
+    | '/teileklar_/gutscheine'
+    | '/teileklar_/kasse'
+    | '/teileklar_/kategorien'
     | '/teileklar_/partner-werden'
+    | '/teileklar_/rechtliches'
+    | '/teileklar_/reifenrechner'
+    | '/teileklar_/shop'
+    | '/teileklar_/suche'
+    | '/teileklar_/termine'
+    | '/teileklar_/warenkorb'
     | '/teileklar_/werkstatt'
+    | '/wissen_/projekt-vorbereiten'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnmeldenRoute: typeof AnmeldenRoute
+  BarrierefreiheitRoute: typeof BarrierefreiheitRoute
+  CookiesRoute: typeof CookiesRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  KiHinweiseRoute: typeof KiHinweiseRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
+  LeistungsumfangRoute: typeof LeistungsumfangRoute
+  LoesungenRoute: typeof LoesungenRoute
+  PasswortVergessenRoute: typeof PasswortVergessenRoute
+  PortaleRoute: typeof PortaleRoute
+  PreiseAblaufRoute: typeof PreiseAblaufRoute
+  RegistrierenRoute: typeof RegistrierenRoute
   TeileklarRoute: typeof TeileklarRoute
+  UnternehmenRoute: typeof UnternehmenRoute
+  VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
+  WissenRoute: typeof WissenRoute
+  LeistungenAgentenAutomatisierungRoute: typeof LeistungenAgentenAutomatisierungRoute
+  LeistungenAppsPortaleRoute: typeof LeistungenAppsPortaleRoute
+  LeistungenWebsitesRoute: typeof LeistungenWebsitesRoute
+  ProdukteAiflyOracleRoute: typeof ProdukteAiflyOracleRoute
+  ProdukteApiRoute: typeof ProdukteApiRoute
+  ProdukteNexAgenticAiflyRoute: typeof ProdukteNexAgenticAiflyRoute
+  ProdukteNex2flyRoute: typeof ProdukteNex2flyRoute
+  ProdukteOneRoute: typeof ProdukteOneRoute
+  ProdukteSkillsMcpRoute: typeof ProdukteSkillsMcpRoute
+  TeileklarBatterieBeraterRoute: typeof TeileklarBatterieBeraterRoute
+  TeileklarBestellungenRoute: typeof TeileklarBestellungenRoute
+  TeileklarFahrzeugUndPassungRoute: typeof TeileklarFahrzeugUndPassungRoute
+  TeileklarGutscheineRoute: typeof TeileklarGutscheineRoute
+  TeileklarKasseRoute: typeof TeileklarKasseRoute
+  TeileklarKategorienRoute: typeof TeileklarKategorienRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
+  TeileklarRechtlichesRoute: typeof TeileklarRechtlichesRoute
+  TeileklarReifenrechnerRoute: typeof TeileklarReifenrechnerRoute
+  TeileklarShopRoute: typeof TeileklarShopRoute
+  TeileklarSucheRoute: typeof TeileklarSucheRoute
+  TeileklarTermineRoute: typeof TeileklarTermineRoute
+  TeileklarWarenkorbRoute: typeof TeileklarWarenkorbRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
+  WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -115,6 +600,48 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anmelden': {
+      id: '/anmelden'
+      path: '/anmelden'
+      fullPath: '/anmelden'
+      preLoaderRoute: typeof AnmeldenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/barrierefreiheit': {
+      id: '/barrierefreiheit'
+      path: '/barrierefreiheit'
+      fullPath: '/barrierefreiheit'
+      preLoaderRoute: typeof BarrierefreiheitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ki-hinweise': {
+      id: '/ki-hinweise'
+      path: '/ki-hinweise'
+      fullPath: '/ki-hinweise'
+      preLoaderRoute: typeof KiHinweiseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontakt': {
@@ -131,11 +658,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leistungsumfang': {
+      id: '/leistungsumfang'
+      path: '/leistungsumfang'
+      fullPath: '/leistungsumfang'
+      preLoaderRoute: typeof LeistungsumfangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loesungen': {
+      id: '/loesungen'
+      path: '/loesungen'
+      fullPath: '/loesungen'
+      preLoaderRoute: typeof LoesungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwort-vergessen': {
+      id: '/passwort-vergessen'
+      path: '/passwort-vergessen'
+      fullPath: '/passwort-vergessen'
+      preLoaderRoute: typeof PasswortVergessenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portale': {
+      id: '/portale'
+      path: '/portale'
+      fullPath: '/portale'
+      preLoaderRoute: typeof PortaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preise-ablauf': {
+      id: '/preise-ablauf'
+      path: '/preise-ablauf'
+      fullPath: '/preise-ablauf'
+      preLoaderRoute: typeof PreiseAblaufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registrieren': {
+      id: '/registrieren'
+      path: '/registrieren'
+      fullPath: '/registrieren'
+      preLoaderRoute: typeof RegistrierenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar': {
       id: '/teileklar'
       path: '/teileklar'
       fullPath: '/teileklar'
       preLoaderRoute: typeof TeileklarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unternehmen': {
+      id: '/unternehmen'
+      path: '/unternehmen'
+      fullPath: '/unternehmen'
+      preLoaderRoute: typeof UnternehmenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vertragsgrundlagen': {
+      id: '/vertragsgrundlagen'
+      path: '/vertragsgrundlagen'
+      fullPath: '/vertragsgrundlagen'
+      preLoaderRoute: typeof VertragsgrundlagenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wissen': {
+      id: '/wissen'
+      path: '/wissen'
+      fullPath: '/wissen'
+      preLoaderRoute: typeof WissenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/agenten-automatisierung': {
+      id: '/leistungen_/agenten-automatisierung'
+      path: '/leistungen/agenten-automatisierung'
+      fullPath: '/leistungen/agenten-automatisierung'
+      preLoaderRoute: typeof LeistungenAgentenAutomatisierungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/apps-portale': {
+      id: '/leistungen_/apps-portale'
+      path: '/leistungen/apps-portale'
+      fullPath: '/leistungen/apps-portale'
+      preLoaderRoute: typeof LeistungenAppsPortaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/websites': {
+      id: '/leistungen_/websites'
+      path: '/leistungen/websites'
+      fullPath: '/leistungen/websites'
+      preLoaderRoute: typeof LeistungenWebsitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/aifly-oracle': {
+      id: '/produkte_/aifly-oracle'
+      path: '/produkte/aifly-oracle'
+      fullPath: '/produkte/aifly-oracle'
+      preLoaderRoute: typeof ProdukteAiflyOracleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/api': {
+      id: '/produkte_/api'
+      path: '/produkte/api'
+      fullPath: '/produkte/api'
+      preLoaderRoute: typeof ProdukteApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/nex-agentic-aifly': {
+      id: '/produkte_/nex-agentic-aifly'
+      path: '/produkte/nex-agentic-aifly'
+      fullPath: '/produkte/nex-agentic-aifly'
+      preLoaderRoute: typeof ProdukteNexAgenticAiflyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/nex2fly': {
+      id: '/produkte_/nex2fly'
+      path: '/produkte/nex2fly'
+      fullPath: '/produkte/nex2fly'
+      preLoaderRoute: typeof ProdukteNex2flyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/one': {
+      id: '/produkte_/one'
+      path: '/produkte/one'
+      fullPath: '/produkte/one'
+      preLoaderRoute: typeof ProdukteOneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/skills-mcp': {
+      id: '/produkte_/skills-mcp'
+      path: '/produkte/skills-mcp'
+      fullPath: '/produkte/skills-mcp'
+      preLoaderRoute: typeof ProdukteSkillsMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/batterie-berater': {
+      id: '/teileklar_/batterie-berater'
+      path: '/teileklar/batterie-berater'
+      fullPath: '/teileklar/batterie-berater'
+      preLoaderRoute: typeof TeileklarBatterieBeraterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/bestellungen': {
+      id: '/teileklar_/bestellungen'
+      path: '/teileklar/bestellungen'
+      fullPath: '/teileklar/bestellungen'
+      preLoaderRoute: typeof TeileklarBestellungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/fahrzeug-und-passung': {
+      id: '/teileklar_/fahrzeug-und-passung'
+      path: '/teileklar/fahrzeug-und-passung'
+      fullPath: '/teileklar/fahrzeug-und-passung'
+      preLoaderRoute: typeof TeileklarFahrzeugUndPassungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/gutscheine': {
+      id: '/teileklar_/gutscheine'
+      path: '/teileklar/gutscheine'
+      fullPath: '/teileklar/gutscheine'
+      preLoaderRoute: typeof TeileklarGutscheineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/kasse': {
+      id: '/teileklar_/kasse'
+      path: '/teileklar/kasse'
+      fullPath: '/teileklar/kasse'
+      preLoaderRoute: typeof TeileklarKasseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/kategorien': {
+      id: '/teileklar_/kategorien'
+      path: '/teileklar/kategorien'
+      fullPath: '/teileklar/kategorien'
+      preLoaderRoute: typeof TeileklarKategorienRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar_/partner-werden': {
@@ -145,6 +840,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarPartnerWerdenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teileklar_/rechtliches': {
+      id: '/teileklar_/rechtliches'
+      path: '/teileklar/rechtliches'
+      fullPath: '/teileklar/rechtliches'
+      preLoaderRoute: typeof TeileklarRechtlichesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/reifenrechner': {
+      id: '/teileklar_/reifenrechner'
+      path: '/teileklar/reifenrechner'
+      fullPath: '/teileklar/reifenrechner'
+      preLoaderRoute: typeof TeileklarReifenrechnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/shop': {
+      id: '/teileklar_/shop'
+      path: '/teileklar/shop'
+      fullPath: '/teileklar/shop'
+      preLoaderRoute: typeof TeileklarShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/suche': {
+      id: '/teileklar_/suche'
+      path: '/teileklar/suche'
+      fullPath: '/teileklar/suche'
+      preLoaderRoute: typeof TeileklarSucheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/termine': {
+      id: '/teileklar_/termine'
+      path: '/teileklar/termine'
+      fullPath: '/teileklar/termine'
+      preLoaderRoute: typeof TeileklarTermineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/warenkorb': {
+      id: '/teileklar_/warenkorb'
+      path: '/teileklar/warenkorb'
+      fullPath: '/teileklar/warenkorb'
+      preLoaderRoute: typeof TeileklarWarenkorbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar_/werkstatt': {
       id: '/teileklar_/werkstatt'
       path: '/teileklar/werkstatt'
@@ -152,16 +889,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarWerkstattRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wissen_/projekt-vorbereiten': {
+      id: '/wissen_/projekt-vorbereiten'
+      path: '/wissen/projekt-vorbereiten'
+      fullPath: '/wissen/projekt-vorbereiten'
+      preLoaderRoute: typeof WissenProjektVorbereitenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnmeldenRoute: AnmeldenRoute,
+  BarrierefreiheitRoute: BarrierefreiheitRoute,
+  CookiesRoute: CookiesRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  KiHinweiseRoute: KiHinweiseRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
+  LeistungsumfangRoute: LeistungsumfangRoute,
+  LoesungenRoute: LoesungenRoute,
+  PasswortVergessenRoute: PasswortVergessenRoute,
+  PortaleRoute: PortaleRoute,
+  PreiseAblaufRoute: PreiseAblaufRoute,
+  RegistrierenRoute: RegistrierenRoute,
   TeileklarRoute: TeileklarRoute,
+  UnternehmenRoute: UnternehmenRoute,
+  VertragsgrundlagenRoute: VertragsgrundlagenRoute,
+  WissenRoute: WissenRoute,
+  LeistungenAgentenAutomatisierungRoute: LeistungenAgentenAutomatisierungRoute,
+  LeistungenAppsPortaleRoute: LeistungenAppsPortaleRoute,
+  LeistungenWebsitesRoute: LeistungenWebsitesRoute,
+  ProdukteAiflyOracleRoute: ProdukteAiflyOracleRoute,
+  ProdukteApiRoute: ProdukteApiRoute,
+  ProdukteNexAgenticAiflyRoute: ProdukteNexAgenticAiflyRoute,
+  ProdukteNex2flyRoute: ProdukteNex2flyRoute,
+  ProdukteOneRoute: ProdukteOneRoute,
+  ProdukteSkillsMcpRoute: ProdukteSkillsMcpRoute,
+  TeileklarBatterieBeraterRoute: TeileklarBatterieBeraterRoute,
+  TeileklarBestellungenRoute: TeileklarBestellungenRoute,
+  TeileklarFahrzeugUndPassungRoute: TeileklarFahrzeugUndPassungRoute,
+  TeileklarGutscheineRoute: TeileklarGutscheineRoute,
+  TeileklarKasseRoute: TeileklarKasseRoute,
+  TeileklarKategorienRoute: TeileklarKategorienRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
+  TeileklarRechtlichesRoute: TeileklarRechtlichesRoute,
+  TeileklarReifenrechnerRoute: TeileklarReifenrechnerRoute,
+  TeileklarShopRoute: TeileklarShopRoute,
+  TeileklarSucheRoute: TeileklarSucheRoute,
+  TeileklarTermineRoute: TeileklarTermineRoute,
+  TeileklarWarenkorbRoute: TeileklarWarenkorbRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
+  WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

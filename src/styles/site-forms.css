@@ -1,0 +1,45 @@
+/* Inquiry forms (contact, TEILEKLAR partner): field errors, summary and the e-mail hand-off state.
+   Loaded once by <InquiryForm>; scoped to the #atelier shell like the captured page styles. */
+:root:root #atelier .tk-form[hidden] { display: none; }
+:root:root #atelier .tk-form .tk-field > .tk-field-label { margin: 0; font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: normal; color: var(--color-text-sekundaer); }
+:root:root #atelier .tk-form .tk-field-error {
+  display: flex; align-items: flex-start; gap: 6px; margin: 0;
+  font-size: 13px; line-height: 1.45; color: var(--color-semantik-fehler);
+  animation: inquiry-in .28s var(--ease-standard, ease) both;
+}
+:root:root #atelier .tk-form .tk-field-error svg { flex: 0 0 auto; width: 14px; height: 14px; margin-top: 2px; }
+:root:root #atelier .tk-form .tk-field :is(input, textarea)[aria-invalid="true"] {
+  border-color: var(--color-semantik-fehler);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-semantik-fehler) 55%, transparent);
+}
+:root:root #atelier .tk-form .tk-check input[aria-invalid="true"] { outline: 2px solid var(--color-semantik-fehler); outline-offset: 2px; }
+:root:root #atelier .tk-form .tk-consent { display: grid; gap: var(--space-2, 8px); }
+:root:root #atelier .tk-form .inquiry-summary {
+  display: flex; align-items: center; gap: 10px; margin: 0; padding: 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--color-semantik-fehler) 45%, transparent); border-radius: 14px;
+  background: color-mix(in srgb, var(--color-semantik-fehler) 9%, transparent);
+  font-size: 14px; line-height: 1.45; color: var(--color-text-primaer);
+  animation: inquiry-in .28s var(--ease-standard, ease) both;
+}
+:root:root #atelier .tk-form .inquiry-summary svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--color-semantik-fehler); }
+:root:root #atelier .tk-form .tk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+:root:root #atelier .tk-form .inquiry-hint { margin: 0; max-width: 34ch; font-size: 13px; line-height: 1.5; color: var(--color-text-tertiaer); }
+
+:root:root #atelier .inquiry-handoff { display: grid; gap: var(--space-4, 16px); margin-block: var(--space-6, 24px); animation: inquiry-in .45s var(--ease-emph, ease) both; }
+:root:root #atelier .inquiry-handoff-mark {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px;
+  background: var(--color-marke-lime); color: var(--color-text-auf-lime); box-shadow: var(--shadow-leuchten);
+}
+:root:root #atelier .inquiry-handoff-mark svg { width: 22px; height: 22px; }
+:root:root #atelier .inquiry-handoff h2 { margin: 0; font-size: 24px; letter-spacing: -0.02em; outline: none; }
+:root:root #atelier .inquiry-handoff p { margin: 0; max-width: 60ch; line-height: 1.6; color: var(--color-text-sekundaer); }
+:root:root #atelier .inquiry-handoff .tk-meta { color: var(--color-text-tertiaer); }
+:root:root #atelier .inquiry-handoff .tk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: var(--space-2, 8px); }
+:root:root #atelier .inquiry-handoff .hc-text-link { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-weight: 600; color: var(--color-text-primaer); min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+:root:root #atelier .inquiry-handoff .hc-text-link:hover { color: var(--color-atelier-champagne); }
+:root:root #atelier .inquiry-handoff .hc-text-link[data-state="copied"] { color: var(--color-marke-lime); }
+
+@keyframes inquiry-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier :is(.tk-form .tk-field-error, .tk-form .inquiry-summary, .inquiry-handoff) { animation: none; }
+}
