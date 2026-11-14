@@ -3,11 +3,11 @@ import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
-import capturedCSS from "../styles/pages/teileklar.partner-werden.css?raw";
+import capturedCSS from "../styles/pages/teileklar.partner-werden.css?url";
 
 export const Route = createFileRoute("/teileklar_/partner-werden")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: "/site-assets/15fa9607b63661b1.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/15fa9607b63661b1.webp", fetchPriority: "high" }],
     meta: [
       { title: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" },
       { name: "description", content: "Werden Sie TEILEKLAR-Werkstattpartner und erhalten Sie vollständige Aufträge mit Fahrzeug, geprüftem Teil und Kontaktdaten." },
@@ -503,7 +503,6 @@ function Index() {
 </>);
   return (
     <>
-      <style>{capturedCSS}</style>
       <div hidden />
       <div id="atelier" className={chatOpen ? "workspace-shell site-teileklar is-open" : "workspace-shell site-teileklar is-closed"} data-scrolled={scrolled ? "true" : "false"} data-footer-visible={footerVisible ? "true" : "false"}>{pageContent}</div>
 

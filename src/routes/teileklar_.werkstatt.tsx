@@ -2,10 +2,11 @@ import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
 import { createFileRoute } from "@tanstack/react-router";
-import capturedCSS from "../styles/pages/teileklar.werkstatt.css?raw";
+import capturedCSS from "../styles/pages/teileklar.werkstatt.css?url";
 
 export const Route = createFileRoute("/teileklar_/werkstatt")({
   head: () => ({
+    links: [{ rel: "stylesheet", href: capturedCSS }],
     meta: [
       { title: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
       { name: "description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
@@ -325,7 +326,6 @@ function Index() {
 </>);
   return (
     <>
-      <style>{capturedCSS}</style>
       <div hidden />
       <div id="atelier" className={chatOpen ? "workspace-shell site-teileklar is-open" : "workspace-shell site-teileklar is-closed"} data-scrolled={scrolled ? "true" : "false"} data-footer-visible={footerVisible ? "true" : "false"}>{pageContent}</div>
 

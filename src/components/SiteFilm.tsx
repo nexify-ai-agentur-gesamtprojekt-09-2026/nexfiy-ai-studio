@@ -1,5 +1,5 @@
 import { useId } from "react";
-import filmCSS from "../styles/site-film.css?raw";
+import filmCSS from "../styles/site-film.css?url";
 import { SITE_FILMS, type SiteFilmId } from "../lib/site-films";
 
 const PLAY_PATH = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";
@@ -10,7 +10,7 @@ export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: bo
   const volumeId = `${useId()}-volume`;
   return (
     <div className="atelier-film atelier-film-hero" data-film={film}>
-      <style href="site-film" precedence="default">{filmCSS}</style>
+      <link rel="stylesheet" href={filmCSS} precedence="site-film" />
       <div className="atelier-film-picture">
         <img className="atelier-film-fallback" src={data.poster} alt={data.alt} width={1280} height={720} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" />
         <video src={data.src} poster={data.poster} width={1280} height={720} preload={eager ? "auto" : "metadata"} playsInline muted aria-label={data.label} />

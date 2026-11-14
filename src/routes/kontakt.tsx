@@ -3,11 +3,11 @@ import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
-import capturedCSS from "../styles/pages/kontakt.css?raw";
+import capturedCSS from "../styles/pages/kontakt.css?url";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
     meta: [
       { title: "Schildern Sie Ihr Vorhaben. · NeXify AI" },
       { name: "description", content: "Beschreiben Sie Ihr Vorhaben in wenigen Sätzen – Pascal meldet sich persönlich mit einem klaren nächsten Schritt." },
@@ -28,7 +28,6 @@ function Index() {
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   return (
     <>
-      <style>{capturedCSS}</style>
       <div hidden />
       <div className={chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"} id="atelier" data-scrolled={scrolled ? "true" : "false"} data-chat-compact={isMobile ? undefined : "false"} data-footer-visible={footerVisible ? "true" : "false"}>
         <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
