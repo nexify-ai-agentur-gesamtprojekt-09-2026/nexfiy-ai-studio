@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnmeldenRouteImport } from './routes/anmelden'
 import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
@@ -19,9 +20,16 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
 import { Route as LoesungenRouteImport } from './routes/loesungen'
+import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
+import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
+import { Route as UnternehmenRouteImport } from './routes/unternehmen'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
+import { Route as WissenRouteImport } from './routes/wissen'
+import { Route as LeistungenAgentenAutomatisierungRouteImport } from './routes/leistungen_.agenten-automatisierung'
+import { Route as LeistungenAppsPortaleRouteImport } from './routes/leistungen_.apps-portale'
+import { Route as LeistungenWebsitesRouteImport } from './routes/leistungen_.websites'
 import { Route as ProdukteAiflyOracleRouteImport } from './routes/produkte_.aifly-oracle'
 import { Route as ProdukteApiRouteImport } from './routes/produkte_.api'
 import { Route as ProdukteNexAgenticAiflyRouteImport } from './routes/produkte_.nex-agentic-aifly'
@@ -30,10 +38,16 @@ import { Route as ProdukteOneRouteImport } from './routes/produkte_.one'
 import { Route as ProdukteSkillsMcpRouteImport } from './routes/produkte_.skills-mcp'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
+import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnmeldenRoute = AnmeldenRouteImport.update({
+  id: '/anmelden',
+  path: '/anmelden',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BarrierefreiheitRoute = BarrierefreiheitRouteImport.update({
@@ -81,9 +95,19 @@ const LoesungenRoute = LoesungenRouteImport.update({
   path: '/loesungen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortaleRoute = PortaleRouteImport.update({
+  id: '/portale',
+  path: '/portale',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PreiseAblaufRoute = PreiseAblaufRouteImport.update({
   id: '/preise-ablauf',
   path: '/preise-ablauf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegistrierenRoute = RegistrierenRouteImport.update({
+  id: '/registrieren',
+  path: '/registrieren',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarRoute = TeileklarRouteImport.update({
@@ -91,9 +115,35 @@ const TeileklarRoute = TeileklarRouteImport.update({
   path: '/teileklar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnternehmenRoute = UnternehmenRouteImport.update({
+  id: '/unternehmen',
+  path: '/unternehmen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VertragsgrundlagenRoute = VertragsgrundlagenRouteImport.update({
   id: '/vertragsgrundlagen',
   path: '/vertragsgrundlagen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WissenRoute = WissenRouteImport.update({
+  id: '/wissen',
+  path: '/wissen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenAgentenAutomatisierungRoute =
+  LeistungenAgentenAutomatisierungRouteImport.update({
+    id: '/leistungen_/agenten-automatisierung',
+    path: '/leistungen/agenten-automatisierung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LeistungenAppsPortaleRoute = LeistungenAppsPortaleRouteImport.update({
+  id: '/leistungen_/apps-portale',
+  path: '/leistungen/apps-portale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenWebsitesRoute = LeistungenWebsitesRouteImport.update({
+  id: '/leistungen_/websites',
+  path: '/leistungen/websites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProdukteAiflyOracleRoute = ProdukteAiflyOracleRouteImport.update({
@@ -136,9 +186,16 @@ const TeileklarWerkstattRoute = TeileklarWerkstattRouteImport.update({
   path: '/teileklar/werkstatt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WissenProjektVorbereitenRoute =
+  WissenProjektVorbereitenRouteImport.update({
+    id: '/wissen_/projekt-vorbereiten',
+    path: '/wissen/projekt-vorbereiten',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -148,9 +205,16 @@ export interface FileRoutesByFullPath {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen/websites': typeof LeistungenWebsitesRoute
   '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
   '/produkte/api': typeof ProdukteApiRoute
   '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
@@ -159,9 +223,11 @@ export interface FileRoutesByFullPath {
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -171,9 +237,16 @@ export interface FileRoutesByTo {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen/websites': typeof LeistungenWebsitesRoute
   '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
   '/produkte/api': typeof ProdukteApiRoute
   '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
@@ -182,10 +255,12 @@ export interface FileRoutesByTo {
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/anmelden': typeof AnmeldenRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -195,9 +270,16 @@ export interface FileRoutesById {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/registrieren': typeof RegistrierenRoute
   '/teileklar': typeof TeileklarRoute
+  '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/wissen': typeof WissenRoute
+  '/leistungen_/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
+  '/leistungen_/apps-portale': typeof LeistungenAppsPortaleRoute
+  '/leistungen_/websites': typeof LeistungenWebsitesRoute
   '/produkte_/aifly-oracle': typeof ProdukteAiflyOracleRoute
   '/produkte_/api': typeof ProdukteApiRoute
   '/produkte_/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
@@ -206,11 +288,13 @@ export interface FileRoutesById {
   '/produkte_/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
+  '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/anmelden'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -220,9 +304,16 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/portale'
     | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
     | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen/agenten-automatisierung'
+    | '/leistungen/apps-portale'
+    | '/leistungen/websites'
     | '/produkte/aifly-oracle'
     | '/produkte/api'
     | '/produkte/nex-agentic-aifly'
@@ -231,9 +322,11 @@ export interface FileRouteTypes {
     | '/produkte/skills-mcp'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
+    | '/wissen/projekt-vorbereiten'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/anmelden'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -243,9 +336,16 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/portale'
     | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
     | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen/agenten-automatisierung'
+    | '/leistungen/apps-portale'
+    | '/leistungen/websites'
     | '/produkte/aifly-oracle'
     | '/produkte/api'
     | '/produkte/nex-agentic-aifly'
@@ -254,9 +354,11 @@ export interface FileRouteTypes {
     | '/produkte/skills-mcp'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
+    | '/wissen/projekt-vorbereiten'
   id:
     | '__root__'
     | '/'
+    | '/anmelden'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -266,9 +368,16 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/portale'
     | '/preise-ablauf'
+    | '/registrieren'
     | '/teileklar'
+    | '/unternehmen'
     | '/vertragsgrundlagen'
+    | '/wissen'
+    | '/leistungen_/agenten-automatisierung'
+    | '/leistungen_/apps-portale'
+    | '/leistungen_/websites'
     | '/produkte_/aifly-oracle'
     | '/produkte_/api'
     | '/produkte_/nex-agentic-aifly'
@@ -277,10 +386,12 @@ export interface FileRouteTypes {
     | '/produkte_/skills-mcp'
     | '/teileklar_/partner-werden'
     | '/teileklar_/werkstatt'
+    | '/wissen_/projekt-vorbereiten'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnmeldenRoute: typeof AnmeldenRoute
   BarrierefreiheitRoute: typeof BarrierefreiheitRoute
   CookiesRoute: typeof CookiesRoute
   DatenschutzRoute: typeof DatenschutzRoute
@@ -290,9 +401,16 @@ export interface RootRouteChildren {
   LeistungenRoute: typeof LeistungenRoute
   LeistungsumfangRoute: typeof LeistungsumfangRoute
   LoesungenRoute: typeof LoesungenRoute
+  PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
+  RegistrierenRoute: typeof RegistrierenRoute
   TeileklarRoute: typeof TeileklarRoute
+  UnternehmenRoute: typeof UnternehmenRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
+  WissenRoute: typeof WissenRoute
+  LeistungenAgentenAutomatisierungRoute: typeof LeistungenAgentenAutomatisierungRoute
+  LeistungenAppsPortaleRoute: typeof LeistungenAppsPortaleRoute
+  LeistungenWebsitesRoute: typeof LeistungenWebsitesRoute
   ProdukteAiflyOracleRoute: typeof ProdukteAiflyOracleRoute
   ProdukteApiRoute: typeof ProdukteApiRoute
   ProdukteNexAgenticAiflyRoute: typeof ProdukteNexAgenticAiflyRoute
@@ -301,6 +419,7 @@ export interface RootRouteChildren {
   ProdukteSkillsMcpRoute: typeof ProdukteSkillsMcpRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
+  WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -310,6 +429,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anmelden': {
+      id: '/anmelden'
+      path: '/anmelden'
+      fullPath: '/anmelden'
+      preLoaderRoute: typeof AnmeldenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/barrierefreiheit': {
@@ -375,11 +501,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoesungenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portale': {
+      id: '/portale'
+      path: '/portale'
+      fullPath: '/portale'
+      preLoaderRoute: typeof PortaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/preise-ablauf': {
       id: '/preise-ablauf'
       path: '/preise-ablauf'
       fullPath: '/preise-ablauf'
       preLoaderRoute: typeof PreiseAblaufRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/registrieren': {
+      id: '/registrieren'
+      path: '/registrieren'
+      fullPath: '/registrieren'
+      preLoaderRoute: typeof RegistrierenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar': {
@@ -389,11 +529,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/unternehmen': {
+      id: '/unternehmen'
+      path: '/unternehmen'
+      fullPath: '/unternehmen'
+      preLoaderRoute: typeof UnternehmenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vertragsgrundlagen': {
       id: '/vertragsgrundlagen'
       path: '/vertragsgrundlagen'
       fullPath: '/vertragsgrundlagen'
       preLoaderRoute: typeof VertragsgrundlagenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wissen': {
+      id: '/wissen'
+      path: '/wissen'
+      fullPath: '/wissen'
+      preLoaderRoute: typeof WissenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/agenten-automatisierung': {
+      id: '/leistungen_/agenten-automatisierung'
+      path: '/leistungen/agenten-automatisierung'
+      fullPath: '/leistungen/agenten-automatisierung'
+      preLoaderRoute: typeof LeistungenAgentenAutomatisierungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/apps-portale': {
+      id: '/leistungen_/apps-portale'
+      path: '/leistungen/apps-portale'
+      fullPath: '/leistungen/apps-portale'
+      preLoaderRoute: typeof LeistungenAppsPortaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen_/websites': {
+      id: '/leistungen_/websites'
+      path: '/leistungen/websites'
+      fullPath: '/leistungen/websites'
+      preLoaderRoute: typeof LeistungenWebsitesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/produkte_/aifly-oracle': {
@@ -452,11 +627,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarWerkstattRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/wissen_/projekt-vorbereiten': {
+      id: '/wissen_/projekt-vorbereiten'
+      path: '/wissen/projekt-vorbereiten'
+      fullPath: '/wissen/projekt-vorbereiten'
+      preLoaderRoute: typeof WissenProjektVorbereitenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnmeldenRoute: AnmeldenRoute,
   BarrierefreiheitRoute: BarrierefreiheitRoute,
   CookiesRoute: CookiesRoute,
   DatenschutzRoute: DatenschutzRoute,
@@ -466,9 +649,16 @@ const rootRouteChildren: RootRouteChildren = {
   LeistungenRoute: LeistungenRoute,
   LeistungsumfangRoute: LeistungsumfangRoute,
   LoesungenRoute: LoesungenRoute,
+  PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
+  RegistrierenRoute: RegistrierenRoute,
   TeileklarRoute: TeileklarRoute,
+  UnternehmenRoute: UnternehmenRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
+  WissenRoute: WissenRoute,
+  LeistungenAgentenAutomatisierungRoute: LeistungenAgentenAutomatisierungRoute,
+  LeistungenAppsPortaleRoute: LeistungenAppsPortaleRoute,
+  LeistungenWebsitesRoute: LeistungenWebsitesRoute,
   ProdukteAiflyOracleRoute: ProdukteAiflyOracleRoute,
   ProdukteApiRoute: ProdukteApiRoute,
   ProdukteNexAgenticAiflyRoute: ProdukteNexAgenticAiflyRoute,
@@ -477,6 +667,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProdukteSkillsMcpRoute: ProdukteSkillsMcpRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
+  WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
