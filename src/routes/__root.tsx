@@ -4,6 +4,7 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
+  useLocation,
   useRouter,
   HeadContent,
   Scripts,
@@ -11,28 +12,65 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { ArrowRight, RotateCcw } from "lucide-react";
+
 import appCss from "../styles.css?url";
+import { StatusPage } from "@/components/system/StatusPage";
+import { Button } from "@/components/ui/button";
+import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+function useDocumentTitle(title: string) {
+  useEffect(() => {
+    const previous = document.title;
+    document.title = title;
+    return () => {
+      document.title = previous;
+    };
+  }, [title]);
+}
+
 function NotFoundComponent() {
+  const pathname = useLocation({ select: (location) => location.pathname });
+  const area = siteAreaFor(pathname);
+  useDocumentTitle("Seite nicht gefunden · NeXify AI");
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
+    <>
+      <meta name="robots" content="noindex" />
+      <StatusPage
+        code="404"
+        kicker={area === "teileklar" ? "TEILEKLAR.shop · Fehler 404" : "NeXify AI · Fehler 404"}
+        title="Diese Seite gibt es hier nicht."
+        description={
+          <p>
+            Vielleicht wurde die Adresse falsch eingegeben, oder die Seite ist umgezogen. Von hier aus geht es direkt
+            weiter – oder Sie schreiben uns, was Sie gesucht haben.
+          </p>
+        }
+        detail={
+          <p>
+            Angefragte Adresse:{" "}
+            <code className="rounded-md border border-border bg-secondary px-1.5 py-0.5 font-label text-[13px] text-foreground break-all">
+              {displayPath(pathname)}
+            </code>
+          </p>
+        }
+        actions={
+          <>
+            <Button asChild variant="brand" size="xl">
+              <Link to={area === "teileklar" ? "/teileklar" : "/"}>
+                {area === "teileklar" ? "Zum Schaufenster" : "Zur Startseite"}
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+            <Button asChild variant="glass" size="xl">
+              <Link to="/kontakt">Uns schreiben</Link>
+            </Button>
+          </>
+        }
+        suggestions={suggestionsFor(pathname)}
+      />
+    </>
   );
 }
 
@@ -42,41 +80,50 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
+  useDocumentTitle("Kurze Störung · NeXify AI");
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+    <StatusPage
+      tone="alert"
+      kicker="NeXify AI · Kurze Störung"
+      title="Diese Seite hat gerade nicht geladen."
+      description={
+        <p>
+          Das liegt an uns, nicht an Ihnen. Meist hilft ein zweiter Versuch. Klappt es dann noch nicht, erreichen Sie uns
+          jederzeit per E-Mail.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+      }
+      actions={
+        <>
+          <Button
+            variant="brand"
+            size="xl"
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
-      </div>
-    </div>
+            <RotateCcw aria-hidden="true" />
+            Erneut versuchen
+          </Button>
+          <Button asChild variant="glass" size="xl">
+            <a href="/">Zur Startseite</a>
+          </Button>
+        </>
+      }
+    >
+      {import.meta.env.DEV && error instanceof Error ? (
+        <details className="mt-10 max-w-xl rounded-[14px] border border-border bg-secondary/60 p-4 text-sm text-muted-foreground">
+          <summary className="cursor-pointer font-label text-xs uppercase tracking-[0.18em]">Technische Details (nur Vorschau)</summary>
+          <pre className="mt-3 whitespace-pre-wrap break-words font-label text-[12px] leading-relaxed text-foreground">{error.message}</pre>
+        </details>
+      ) : null}
+    </StatusPage>
   );
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Replace these placeholders with the app's name and description when first building the app.
     // Each content route, / included, must still set its own head(). Never add og:image or
     // twitter:image here: every page without its own would inherit the root's preview image.
     meta: [
@@ -125,7 +172,7 @@ declare module "@tanstack/react-router" {
 function RootShell({ children }: { children: ReactNode }) {
   const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
   return (
-    <html lang="en" {...importedDocument?.html}>
+    <html lang="de" data-theme="dark" style={{ colorScheme: "dark" }} {...importedDocument?.html}>
       <head>
         <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
         <HeadContent />
