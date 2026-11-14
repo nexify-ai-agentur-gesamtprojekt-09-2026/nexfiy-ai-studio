@@ -472,7 +472,7 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
               <div className={"atelier-film-picture"}>
                 <img className={"atelier-film-fallback"} alt="Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes" aria-hidden="false" width="1280" height="720" src="/site-assets/05c51cdebbdd2aa6.webp" />
                 <video src="/site-assets/e27f88efd05374ec.mp4" poster="/site-assets/05c51cdebbdd2aa6.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Pascal im Studio">
-                  <track kind="captions" label="Deutsch" {...({ srclang: "de" } as any)} />
+                  <track kind="captions" label="Deutsch" srcLang="de" />
                 </video>
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Erneut abspielen">
@@ -1046,7 +1046,7 @@ function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: {
           </div>
           <form className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
-            <textarea id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required style={{ height: "48px" }} {...({ enterkeyhint: "send" } as any)} />
+            <textarea id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required style={{ height: "48px" }} enterKeyHint="send" />
             <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
             <div className={"orientation-composer-actions"}>
               <button className={"primary-button"} disabled aria-label="Nachricht senden">
