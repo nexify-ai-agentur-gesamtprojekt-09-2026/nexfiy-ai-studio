@@ -23,7 +23,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
         </button>
       </div>
       <div className={"sdk-orientation-view"}>
-        <section className={"public-orientation"} aria-label="Was planen Sie?" style={{ "--ca-fuss": "128px" } as CSSProperties} data-site-import-responsive="260">
+        <section className={"public-orientation"} aria-label="Was planen Sie?" style={{ "--ca-fuss": "128px" } as CSSProperties}>
           <div className={"orientation-content"}>
             <div className={"orientation-intro"}>
               <div className={"orientation-host"}>
