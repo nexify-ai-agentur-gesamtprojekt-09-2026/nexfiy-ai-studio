@@ -20,6 +20,7 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
 import { Route as LoesungenRouteImport } from './routes/loesungen'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
@@ -28,6 +29,7 @@ import { Route as TeileklarRouteImport } from './routes/teileklar'
 import { Route as UnternehmenRouteImport } from './routes/unternehmen'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
 import { Route as WissenRouteImport } from './routes/wissen'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as LeistungenAgentenAutomatisierungRouteImport } from './routes/leistungen_.agenten-automatisierung'
 import { Route as LeistungenAppsPortaleRouteImport } from './routes/leistungen_.apps-portale'
 import { Route as LeistungenWebsitesRouteImport } from './routes/leistungen_.websites'
@@ -108,6 +110,11 @@ const LoesungenRoute = LoesungenRouteImport.update({
   path: '/loesungen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PasswortVergessenRoute = PasswortVergessenRouteImport.update({
   id: '/passwort-vergessen',
   path: '/passwort-vergessen',
@@ -148,6 +155,12 @@ const WissenRoute = WissenRouteImport.update({
   path: '/wissen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LeistungenAgentenAutomatisierungRoute =
   LeistungenAgentenAutomatisierungRouteImport.update({
     id: '/leistungen_/agenten-automatisierung',
@@ -285,6 +298,7 @@ export interface FileRoutesByFullPath {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/mcp': typeof McpRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -293,6 +307,7 @@ export interface FileRoutesByFullPath {
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/wissen': typeof WissenRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
   '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
   '/leistungen/websites': typeof LeistungenWebsitesRoute
@@ -330,6 +345,7 @@ export interface FileRoutesByTo {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/mcp': typeof McpRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -338,6 +354,7 @@ export interface FileRoutesByTo {
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/wissen': typeof WissenRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/leistungen/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
   '/leistungen/apps-portale': typeof LeistungenAppsPortaleRoute
   '/leistungen/websites': typeof LeistungenWebsitesRoute
@@ -376,6 +393,7 @@ export interface FileRoutesById {
   '/leistungen': typeof LeistungenRoute
   '/leistungsumfang': typeof LeistungsumfangRoute
   '/loesungen': typeof LoesungenRoute
+  '/mcp': typeof McpRoute
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
@@ -384,6 +402,7 @@ export interface FileRoutesById {
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/wissen': typeof WissenRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/leistungen_/agenten-automatisierung': typeof LeistungenAgentenAutomatisierungRoute
   '/leistungen_/apps-portale': typeof LeistungenAppsPortaleRoute
   '/leistungen_/websites': typeof LeistungenWebsitesRoute
@@ -423,6 +442,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/mcp'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -431,6 +451,7 @@ export interface FileRouteTypes {
     | '/unternehmen'
     | '/vertragsgrundlagen'
     | '/wissen'
+    | '/.well-known/oauth-protected-resource'
     | '/leistungen/agenten-automatisierung'
     | '/leistungen/apps-portale'
     | '/leistungen/websites'
@@ -468,6 +489,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/mcp'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -476,6 +498,7 @@ export interface FileRouteTypes {
     | '/unternehmen'
     | '/vertragsgrundlagen'
     | '/wissen'
+    | '/.well-known/oauth-protected-resource'
     | '/leistungen/agenten-automatisierung'
     | '/leistungen/apps-portale'
     | '/leistungen/websites'
@@ -513,6 +536,7 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/leistungsumfang'
     | '/loesungen'
+    | '/mcp'
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
@@ -521,6 +545,7 @@ export interface FileRouteTypes {
     | '/unternehmen'
     | '/vertragsgrundlagen'
     | '/wissen'
+    | '/.well-known/oauth-protected-resource'
     | '/leistungen_/agenten-automatisierung'
     | '/leistungen_/apps-portale'
     | '/leistungen_/websites'
@@ -559,6 +584,7 @@ export interface RootRouteChildren {
   LeistungenRoute: typeof LeistungenRoute
   LeistungsumfangRoute: typeof LeistungsumfangRoute
   LoesungenRoute: typeof LoesungenRoute
+  McpRoute: typeof McpRoute
   PasswortVergessenRoute: typeof PasswortVergessenRoute
   PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
@@ -567,6 +593,7 @@ export interface RootRouteChildren {
   UnternehmenRoute: typeof UnternehmenRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
   WissenRoute: typeof WissenRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   LeistungenAgentenAutomatisierungRoute: typeof LeistungenAgentenAutomatisierungRoute
   LeistungenAppsPortaleRoute: typeof LeistungenAppsPortaleRoute
   LeistungenWebsitesRoute: typeof LeistungenWebsitesRoute
@@ -672,6 +699,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoesungenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/passwort-vergessen': {
       id: '/passwort-vergessen'
       path: '/passwort-vergessen'
@@ -726,6 +760,13 @@ declare module '@tanstack/react-router' {
       path: '/wissen'
       fullPath: '/wissen'
       preLoaderRoute: typeof WissenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leistungen_/agenten-automatisierung': {
@@ -911,6 +952,7 @@ const rootRouteChildren: RootRouteChildren = {
   LeistungenRoute: LeistungenRoute,
   LeistungsumfangRoute: LeistungsumfangRoute,
   LoesungenRoute: LoesungenRoute,
+  McpRoute: McpRoute,
   PasswortVergessenRoute: PasswortVergessenRoute,
   PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
@@ -919,6 +961,8 @@ const rootRouteChildren: RootRouteChildren = {
   UnternehmenRoute: UnternehmenRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
   WissenRoute: WissenRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   LeistungenAgentenAutomatisierungRoute: LeistungenAgentenAutomatisierungRoute,
   LeistungenAppsPortaleRoute: LeistungenAppsPortaleRoute,
   LeistungenWebsitesRoute: LeistungenWebsitesRoute,
