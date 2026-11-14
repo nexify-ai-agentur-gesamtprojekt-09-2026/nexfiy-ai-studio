@@ -1,21 +1,24 @@
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
+import { fitComposer, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals } from "../lib/imported-site";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/kontakt.css?raw";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({ meta: [{ title: "Schildern Sie Ihr Vorhaben. · NeXify AI" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
 
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
+  const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
+  const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   return (
     <>
       <style>{capturedCSS}</style>
       <div hidden />
-      <div className={isMobile ? "workspace-shell site-nexify is-closed" : "workspace-shell site-nexify is-open"} id="atelier">
+      <div className={chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"} id="atelier" data-scrolled={scrolled ? "true" : "false"} data-chat-compact={isMobile ? undefined : "false"} data-footer-visible={footerVisible ? "true" : "false"}>
         <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
           <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
             <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte" {...({ href: "/glass/linse.svg" } as any)} />
@@ -151,13 +154,22 @@ function Index() {
           </main>
           <ImportedFooterLassenSieUnsBer />
         </div>
-        <ImportedAsideAIFlyORACLE />
+        {!chatOpen && (
+          <button ref={reopenRef} aria-expanded="false" aria-controls="aifly-panel" type="button" className={"nexify-control secondary-button reopen-chat"} data-variant="secondary" onClick={openChat}>
+            <span className={"aifly-symbol oracle-companion"} data-state="idle" aria-hidden="true">
+              <img alt="" width="34" height="34" decoding="async" src="/site-assets/9176c58a16ff634a.png" />
+            </span>
+            Ihr Projekt mit NeXify
+          </button>
+        )}
+        <ImportedAsideAIFlyORACLE open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />
       </div>
     </>
   );
 }
 
 function ImportedHeaderNeXifyAI() {
+  const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
   return (
     <header className={"site-header"}>
       <a aria-label="NeXify AI · Startseite" className={"brand"} href="/">
@@ -173,8 +185,8 @@ function ImportedHeaderNeXifyAI() {
       </a>
       <nav className={"main-navigation"} aria-label="Hauptnavigation">
         <a href="/leistungen">Leistungen</a>
-        <details className={"product-navigation"}>
-          <summary aria-expanded="false" aria-controls="_R_14lb_-products">Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
+        <details className={"product-navigation"} open={openMenu === "products"}>
+          <summary ref={productsSummary} aria-expanded={openMenu === "products"} aria-controls="_R_14lb_-products" onClick={toggleMenu("products")}>Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
           <div className={"product-navigation-menu"} id="_R_14lb_-products">
             <div className={"megamenu-heading"}>
               <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
@@ -260,8 +272,8 @@ function ImportedHeaderNeXifyAI() {
         <a href="/wissen">Arbeitsweise</a>
         <a aria-current="page" href="#">Kontakt</a>
       </nav>
-      <details className={"mobile-navigation"}>
-        <summary aria-label="Menü" aria-expanded="false" aria-controls="_R_14lb_-mobile">
+      <details className={"mobile-navigation"} open={openMenu === "mobile"}>
+        <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls="_R_14lb_-mobile" onClick={toggleMenu("mobile")}>
           <span className={"mobile-menu-mark"} aria-hidden="true">
             <i />
             <i />
@@ -357,28 +369,17 @@ function ImportedHeaderNeXifyAI() {
               </svg>
             </a>
           </div>
-          <button type="button" className={"nexify-control  "} data-variant="quiet">Menü schließen</button>
+          <button type="button" className={"nexify-control  "} data-variant="quiet" onClick={closeMenu}>Menü schließen</button>
         </nav>
       </details>
       <div className={"header-actions"}>
-        <label className={"visually-hidden"} htmlFor="locale" id="bb-customSelect-ID2pn-label">Sprache</label>
-        <div className={"bb-custom-select-container bb-customSelect"}>
-          <span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-ID2pn-panel" aria-activedescendant="bb-customSelect-ID2pn-selectedOption" aria-labelledby="bb-customSelect-ID2pn-label" tabIndex={0}>
-            <span>DE</span>
-          </span>
-          <select id="locale" aria-describedby="locale-hint" tabIndex={-1} defaultValue="de">
-            <option value="de" selected>DE</option>
+        <label className={"visually-hidden"} htmlFor="locale">Sprache</label>
+        <select id="locale" aria-describedby="locale-hint" defaultValue="de">
+            <option value="de">DE</option>
             <option value="nl">NL</option>
             <option value="fr">FR</option>
             <option value="en">EN</option>
           </select>
-          <div id="bb-customSelect-ID2pn-panel" className={"bb-custom-select-panel"} role="listbox">
-            <div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-ID2pn-selectedOption">DE</div>
-            <div className={"bb-custom-select-option"} role="option">NL</div>
-            <div className={"bb-custom-select-option"} role="option">FR</div>
-            <div className={"bb-custom-select-option"} role="option">EN</div>
-          </div>
-        </div>
         <span id="locale-hint" className={"visually-hidden"}>Auswahl mit der Eingabetaste bestätigen.</span>
         <button type="button" className={"theme-switch"} role="switch" aria-checked="false" aria-label="Helle Ansicht" title="Helle Ansicht">
           <svg className={"theme-sun"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
@@ -410,7 +411,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
           <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-xxmUJ-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-xxmUJ-panel" aria-activedescendant="bb-customSelect-xxmUJ-selectedOption" aria-labelledby="bb-customSelect-xxmUJ-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website" selected>Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-xxmUJ-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-xxmUJ-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
+            <label>Welchen Bereich möchten Sie erkunden?<select defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select></label>
             <button type="button" aria-pressed="false">Begleitung starten</button>
           </div>
         </div>
@@ -618,9 +619,10 @@ function ImportedFooterLassenSieUnsBer() {
   );
 }
 
-function ImportedAsideAIFlyORACLE() {
+function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
+  const composerRef = useComposerFit(open, isMobile, viewportHeight);
   return (
-    <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" style={{ "--chat-viewport-height": "864px", "--chat-viewport-top": "0px" } as CSSProperties} data-site-import-responsive="252">
+    <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
       <div className={"panel-heading"}>
         <div className={"panel-heading-copy"}>
@@ -631,7 +633,7 @@ function ImportedAsideAIFlyORACLE() {
             <h2 className={"nx-oracle-name panel-brandline"}><strong>AIFly ORACLE</strong> <span className={"panel-identity-subtitle"}>with NeXify AI Intelligence by NeXify</span></h2>
           </div>
         </div>
-        <button aria-label="Beratung einklappen" title="Beratung einklappen" type="button" className={"nexify-control icon-button panel-minimize"} data-variant="icon">
+        <button aria-label="Beratung einklappen" title="Beratung einklappen" type="button" className={"nexify-control icon-button panel-minimize"} data-variant="icon" onClick={onClose}>
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
             <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -691,7 +693,7 @@ function ImportedAsideAIFlyORACLE() {
           </div>
           <form className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
-            <textarea id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required style={{ height: "48px" }} {...({ enterkeyhint: "send" } as any)} />
+            <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required enterKeyHint="send" />
             <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
             <div className={"orientation-composer-actions"}>
               <button className={"primary-button"} disabled aria-label="Nachricht senden">
