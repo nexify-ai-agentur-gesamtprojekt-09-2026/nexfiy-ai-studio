@@ -154,12 +154,6 @@ function Index() {
 
 function ImportedHeaderNeXifyAI() {
   const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
-  return () => window.removeEventListener("keydown", onKey);
-  }, [openMenu]);
-  const toggleMenu = (menu: "products" | "mobile") => (event: import("react").MouseEvent) => {
-    event.preventDefault();
-    setOpenMenu((current) => (current === menu ? null : menu));
-  };
   return (
     <header className={"site-header"}>
       <a aria-label="NeXify AI · Startseite" className={"brand"} href="/">
