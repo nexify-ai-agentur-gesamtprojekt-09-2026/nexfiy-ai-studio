@@ -7,6 +7,7 @@ import capturedCSS from "../styles/pages/teileklar.css?raw";
 
 export const Route = createFileRoute("/teileklar")({
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }],
     meta: [
       { title: "TEILEKLAR.shop – Zubehör für Auto & Motorrad" },
       { name: "description", content: "Passende Teile und Zubehör für Auto und Motorrad – mit klaren Angaben zu Fahrzeug, Passung und Werkstatt." },
@@ -119,23 +120,18 @@ function Index() {
           <p className={"hc-caption"}>Keine ungeprüfte Passformzusage</p>
         </div>
       </section>
-      <section className={"hc-section hc-container tk-window-categories"}>
-        <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Ihr Einstieg</span>
-          <h2>Was suchen Sie?</h2>
-          <a className={"hc-text-link"} href="/teileklar/kategorien">Alle Kategorien<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-        </header>
-        <div className={"tk-category-tiles"} />
-      </section>
       <section className={"hc-section hc-container tk-window-selection"} id="sortiment">
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Aus dem Sortiment</span>
           <h2>Artikel im Schaufenster</h2>
           <a className={"hc-text-link"} href="/teileklar/shop">Alle Artikel ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
         </header>
-        <div className={"tk-empty"} role="alert">
-          <p>Das Sortiment konnte nicht geladen werden.</p>
-          <button type="button" className={"nexify-control secondary-button hc-text-link"} data-variant="secondary">Erneut versuchen</button>
+        <div className={"tk-empty"} role="status">
+          <p>Das Schaufenster wird gerade neu bestückt. Bis dahin finden Sie hier die passende Werkstatt oder schreiben uns direkt, welches Teil Sie suchen.</p>
+          <div className={"identity-links"}>
+            <a className={"nexify-control primary-button"} data-variant="primary" href="/teileklar/werkstatt">Werkstatt finden</a>
+            <a className={"nexify-control secondary-button"} data-variant="secondary" href="/kontakt">Teil anfragen</a>
+          </div>
         </div>
       </section>
       <section className={"hc-section hc-budget hc-container"}>

@@ -12,7 +12,7 @@ export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: bo
     <div className="atelier-film atelier-film-hero" data-film={film}>
       <style href="site-film" precedence="default">{filmCSS}</style>
       <div className="atelier-film-picture">
-        <img className="atelier-film-fallback" src={data.poster} alt={data.alt} width={1280} height={720} loading={eager ? "eager" : "lazy"} />
+        <img className="atelier-film-fallback" src={data.poster} alt={data.alt} width={1280} height={720} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" />
         <video src={data.src} poster={data.poster} width={1280} height={720} preload={eager ? "auto" : "metadata"} playsInline muted aria-label={data.label} />
         <div className="atelier-film-controls">
           <button type="button" aria-label="Film abspielen">
