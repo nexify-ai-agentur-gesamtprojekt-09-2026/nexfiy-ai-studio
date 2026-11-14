@@ -124,7 +124,6 @@ function Index() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Aus dem Sortiment</span>
           <h2>Artikel im Schaufenster</h2>
-          <a className={"hc-text-link"} href="/teileklar/shop">Alle Artikel ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
         </header>
         <div className={"tk-empty"} role="status">
           <p>Das Schaufenster wird gerade neu bestückt. Bis dahin finden Sie hier die passende Werkstatt oder schreiben uns direkt, welches Teil Sie suchen.</p>
