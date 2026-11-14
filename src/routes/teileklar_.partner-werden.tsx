@@ -7,6 +7,7 @@ import capturedCSS from "../styles/pages/teileklar.partner-werden.css?raw";
 
 export const Route = createFileRoute("/teileklar_/partner-werden")({
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: "/site-assets/15fa9607b63661b1.webp", fetchPriority: "high" }],
     meta: [
       { title: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" },
       { name: "description", content: "Werden Sie TEILEKLAR-Werkstattpartner und erhalten Sie vollständige Aufträge mit Fahrzeug, geprüftem Teil und Kontaktdaten." },

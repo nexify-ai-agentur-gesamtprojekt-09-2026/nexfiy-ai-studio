@@ -8,6 +8,7 @@ import capturedCSS from "../styles/captured.css?raw";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [{ rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
     meta: [
       { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
       { name: "description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
