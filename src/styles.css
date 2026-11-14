@@ -77,7 +77,7 @@
   --color-surface-raised: var(--surface-raised);
   --font-heading: var(--font-brand-display);
   --font-label: var(--font-brand-mono);
-  --ease-brand: var(--ease-brand);
+  --ease-brand: var(--motion-ease-brand);
 }
 
 /* Brand fonts (self-hosted copies in /public/site-assets). The imported page stylesheets declare the
@@ -134,7 +134,7 @@
     radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
   --elevation-card: inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%), 0 2px 6px oklch(0 0 0 / 30%);
   --elevation-primary: inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%), 0 2px 0 oklch(0 0 0 / 30%);
-  --ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
+  --motion-ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
 }
 
 @layer base {
@@ -334,3 +334,23 @@
   --tracking-heading: -.035em;
 }
 /* site-import tokens: end */
+
+/* New UI keeps a neutral hover surface: the imported block above maps --accent to the lime signal,
+   which is reserved for focus rings and highlights (bright lime under light text fails contrast). */
+:root {
+  --accent: oklch(0.3264 0.0089 173.77);
+  --accent-foreground: oklch(0.9558 0.0086 84.57);
+}
+
+@layer base {
+  html { color-scheme: dark; }
+  :focus-visible { outline-color: var(--ring); }
+}
+
+/* System pages (not found, error) fade in once; motion is skipped for visitors who reduce it. */
+@keyframes status-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@utility animate-status-rise {
+  animation: status-rise 0.7s var(--motion-ease-brand) both;
+  @media (prefers-reduced-motion: reduce) { animation: none; }
+}
+
