@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { fitComposer, useAtelierFilms, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals } from "../lib/imported-site";
 import { useSyncExternalStore } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/captured.css?raw";
@@ -21,62 +22,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
-  const [chatPreference, setChatPreference] = useState<boolean | null>(null);
-  const chatOpen = chatPreference ?? !isMobile;
-  const [scrolled, setScrolled] = useState(false);
-  const [heroActionVisible, setHeroActionVisible] = useState(true);
-  const [footerVisible, setFooterVisible] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
-  const reopenRef = useRef<HTMLButtonElement>(null);
-  const focusAfterToggle = useRef<"composer" | "launcher" | null>(null);
-  const openChat = () => {
-    focusAfterToggle.current = "composer";
-    setChatPreference(true);
-  };
-  const closeChat = () => {
-    focusAfterToggle.current = "launcher";
-    setChatPreference(false);
-  };
-  useEffect(() => {
-    const target = focusAfterToggle.current;
-    focusAfterToggle.current = null;
-    if (target === "composer") document.getElementById("orientation-message")?.focus();
-    if (target === "launcher") reopenRef.current?.focus();
-  }, [chatOpen]);
-  useEffect(() => {
-    if (!chatOpen) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open]")) closeChat();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [chatOpen]);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    const onResize = () => setViewportHeight(window.innerHeight);
-    onScroll();
-    onResize();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
-    const observers: IntersectionObserver[] = [];
-    const heroAction = document.querySelector(".identity-primary-link");
-    if (heroAction) {
-      const observer = new IntersectionObserver((entries) => setHeroActionVisible(entries.at(-1)?.isIntersecting ?? true));
-      observer.observe(heroAction);
-      observers.push(observer);
-    }
-    const footer = document.querySelector("#atelier footer");
-    if (footer) {
-      const observer = new IntersectionObserver((entries) => setFooterVisible(entries.at(-1)?.isIntersecting ?? false));
-      observer.observe(footer);
-      observers.push(observer);
-    }
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, []);
+  const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
+  const { scrolled, heroActionVisible, footerVisible, viewportHeight } = useShellSignals(".identity-primary-link");
   useImportedLayout();
   useAtelierFilms();
   return (
@@ -206,25 +153,8 @@ function Index() {
 }
 
 function ImportedHeaderNeXifyAI() {
-  const [openMenu, setOpenMenu] = useState<"products" | "mobile" | null>(null);
-  const productsSummary = useRef<HTMLElement>(null);
-  const mobileSummary = useRef<HTMLElement>(null);
-  const closeMenu = () => {
-    const summary = openMenu === "mobile" ? mobileSummary.current : productsSummary.current;
-    setOpenMenu(null);
-    summary?.focus();
-  };
-  useEffect(() => {
-    if (!openMenu) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      event.stopPropagation();
-      const summary = openMenu === "mobile" ? mobileSummary.current : productsSummary.current;
-      setOpenMenu(null);
-      summary?.focus();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+  const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
+  return () => window.removeEventListener("keydown", onKey);
   }, [openMenu]);
   const toggleMenu = (menu: "products" | "mobile") => (event: import("react").MouseEvent) => {
     event.preventDefault();
@@ -982,16 +912,8 @@ function ImportedFooterLassenSieUnsBer() {
   );
 }
 
-function fitComposer(textarea: HTMLTextAreaElement) {
-  textarea.style.height = "auto";
-  textarea.style.height = textarea.scrollHeight + "px";
-}
-
 function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
-  const composerRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    if (open && composerRef.current) fitComposer(composerRef.current);
-  }, [open, isMobile, viewportHeight]);
+  const composerRef = useComposerFit(open, isMobile, viewportHeight);
   return (
     <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
@@ -1205,105 +1127,6 @@ function useImportedLayout() {
       document.removeEventListener("load", handleScroll, true);
       window.removeEventListener("resize", resizeSummaries);
       document.removeEventListener("scroll", handleScroll, true);
-    };
-  }, []);
-}
-
-const PLAY_ICON = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";
-const PAUSE_ICON = "M5.5 3.5h3v13h-3Zm6 0h3v13h-3Z";
-
-function useAtelierFilms() {
-  useEffect(() => {
-    const films = Array.from(document.querySelectorAll<HTMLElement>(".atelier-film")).slice(0, 16);
-    const videos: HTMLVideoElement[] = [];
-    const cleanups: (() => void)[] = [];
-    const autoPaused = new WeakSet<HTMLVideoElement>();
-    const listen = (target: EventTarget, type: string, handler: EventListener) => {
-      target.addEventListener(type, handler);
-      cleanups.push(() => target.removeEventListener(type, handler));
-    };
-    for (const film of films) {
-      const video = film.querySelector("video");
-      if (!video) continue;
-      video.muted = true;
-      videos.push(video);
-      const buttons = Array.from(film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"));
-      const playButton = buttons[0];
-      const soundButton = buttons.find((button) => /Ton/.test(button.getAttribute("aria-label") || ""));
-      const captionsButton = buttons.find((button) => button.getAttribute("aria-label") === "Untertitel");
-      const fallback = film.querySelector<HTMLImageElement>(".atelier-film-fallback");
-      const bar = film.querySelector<HTMLElement>(".atelier-film-progress span");
-      const volume = film.querySelector<HTMLInputElement>('.atelier-volume input[type="range"]');
-      const sync = () => {
-        if (playButton) {
-          playButton.setAttribute("aria-label", video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren");
-          const label = playButton.querySelector("span");
-          if (label) label.textContent = video.paused ? "Abspielen" : "Pausieren";
-          playButton.querySelector("path")?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
-        }
-        if (soundButton) {
-          soundButton.setAttribute("aria-label", video.muted ? "Film mit Ton starten" : "Ton ausschalten");
-          const label = soundButton.querySelector("span");
-          if (label) label.textContent = video.muted ? "Ton an" : "Ton aus";
-        }
-        if (fallback && !video.paused) fallback.hidden = true;
-        if (bar && video.duration > 0) bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
-      };
-      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"]) listen(video, type, sync);
-      listen(video, "play", () => {
-        for (const other of videos) if (other !== video && !other.paused) other.pause();
-      });
-      if (playButton)
-        listen(playButton, "click", () => {
-          autoPaused.delete(video);
-          if (video.paused) void video.play().catch(() => {});
-          else video.pause();
-        });
-      if (soundButton)
-        listen(soundButton, "click", () => {
-          if (video.muted) {
-            video.currentTime = 0;
-            video.muted = false;
-            void video.play().catch(() => {});
-          } else video.muted = true;
-        });
-      if (captionsButton)
-        listen(captionsButton, "click", () => {
-          const pressed = captionsButton.getAttribute("aria-pressed") !== "true";
-          captionsButton.setAttribute("aria-pressed", String(pressed));
-          const track = video.textTracks[0];
-          if (track) track.mode = pressed ? "showing" : "hidden";
-        });
-      if (volume) {
-        listen(volume, "input", () => {
-          video.volume = Number(volume.value);
-        });
-        video.volume = Number(volume.value);
-      }
-      sync();
-    }
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        const video = entry.target as HTMLVideoElement;
-        if (!entry.isIntersecting && !video.paused) {
-          autoPaused.add(video);
-          video.pause();
-        } else if (entry.isIntersecting && autoPaused.has(video)) {
-          autoPaused.delete(video);
-          void video.play().catch(() => {});
-        }
-      }
-    });
-    videos.forEach((video) => observer.observe(video));
-    const heroVideo = document.querySelector<HTMLVideoElement>(".identity-hero video");
-    if (heroVideo && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      heroVideo.muted = true;
-      void heroVideo.play().catch(() => {});
-    }
-    return () => {
-      observer.disconnect();
-      cleanups.forEach((cleanup) => cleanup());
-      videos.forEach((video) => video.pause());
     };
   }, []);
 }
