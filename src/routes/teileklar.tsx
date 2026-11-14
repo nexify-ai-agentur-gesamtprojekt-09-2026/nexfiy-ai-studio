@@ -48,7 +48,7 @@ function Index() {
       <a href="/kontakt">Persönlicher Kontakt</a>
     </div>
     <div className={"tk-commerce-main"}>
-      <a className={"tk-wordmark"} href="#">TEILE<span>KLAR</span><small>Passende Auswahl. Klare Angaben.</small></a>
+      <a className={"tk-wordmark"} href="/teileklar">TEILE<span>KLAR</span><small>Passende Auswahl. Klare Angaben.</small></a>
       <form role="search" className={"tk-header-search"} method="get">
         <label className={"visually-hidden"} htmlFor="store-search">Artikel, Marke oder Artikelnummer suchen</label>
         <input id="store-search" type="search" maxLength={120} placeholder="Artikel, Marke oder Artikelnummer" name="q" />
@@ -60,7 +60,7 @@ function Index() {
       </div>
     </div>
     <nav className={"tk-commerce-nav"} aria-label="Shopnavigation">
-      <a aria-current="page" href="#">Schaufenster</a>
+      <a aria-current="page" href="/teileklar">Schaufenster</a>
       <a href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
@@ -176,7 +176,7 @@ function Index() {
       </div>
       <div className={"footer-main"}>
         <div className={"footer-brand-block"}>
-          <a aria-label="Zur Startseite" className={"brand"} href="#">
+          <a aria-label="Zur Startseite" className={"brand"} href="/teileklar">
             <span className={"nx-logo"} data-groesse="s">
               <span className={"nx-logo-wort"}>
                 <span className={"nx-logo-name"}>TEILE<span className={"nx-logo-x"}>KLAR</span></span>
@@ -190,7 +190,7 @@ function Index() {
         <div className={"footer-link-groups "}>
           <nav aria-label={"Produkte & Arbeitsbereiche"}>
             <h2>Produkte &amp; Arbeitsbereiche</h2>
-            <a href="#">TEILEKLAR</a>
+            <a href="/teileklar">TEILEKLAR</a>
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
@@ -232,7 +232,7 @@ function Index() {
             <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
               <div className={"footer-overview-group"}>
                 <h3>TEILEKLAR</h3>
-                <a href="#">TEILEKLAR. Für Auto und Motorrad.</a>
+                <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
                 <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>

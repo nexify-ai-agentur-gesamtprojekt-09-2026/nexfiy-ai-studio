@@ -64,7 +64,7 @@ function Index() {
       <a href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
-      <a aria-current="page" href="#">Werkstätten</a>
+      <a aria-current="page" href="/teileklar/werkstatt">Werkstätten</a>
       <a href="/teileklar/bestellungen">Meine Bestellungen</a>
     </nav>
   </header>
@@ -143,7 +143,7 @@ function Index() {
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
-            <a href="#">Eine Werkstatt in Ihrer Nähe.</a>
+            <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
           </nav>
           <nav aria-label={"Leistungen & Zusammenarbeit"}>
             <h2>Leistungen &amp; Zusammenarbeit</h2>
@@ -191,7 +191,7 @@ function Index() {
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
-                <a href="#">Eine Werkstatt in Ihrer Nähe.</a>
+                <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
                 <a href="/teileklar/batterie-berater">Die passende Batterie finden.</a>

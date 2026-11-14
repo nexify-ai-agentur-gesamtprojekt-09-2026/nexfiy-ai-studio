@@ -317,7 +317,7 @@ function Index() {
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
-            <a href="#">Partner werden</a>
+            <a href="/teileklar/partner-werden">Partner werden</a>
             <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
           </nav>
           <nav aria-label={"Leistungen & Zusammenarbeit"}>
@@ -365,7 +365,7 @@ function Index() {
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
-                <a href="#">Werkstatt? Werden Sie Partner.</a>
+                <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
