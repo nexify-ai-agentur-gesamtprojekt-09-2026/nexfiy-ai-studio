@@ -217,7 +217,7 @@ function ImportedHeaderNeXifyAI() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [openMenu]);
-  const toggleMenu = (menu: "products" | "mobile") => (event: React.MouseEvent) => {
+  const toggleMenu = (menu: "products" | "mobile") => (event: import("react").MouseEvent) => {
     event.preventDefault();
     setOpenMenu((current) => (current === menu ? null : menu));
   };
@@ -1207,6 +1207,7 @@ function useAtelierFilms() {
     for (const film of films) {
       const video = film.querySelector("video");
       if (!video) continue;
+      video.muted = true;
       videos.push(video);
       const buttons = Array.from(film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"));
       const playButton = buttons[0];
