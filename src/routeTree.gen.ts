@@ -17,6 +17,9 @@ import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KiHinweiseRouteImport } from './routes/ki-hinweise'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
+import { Route as LeistungsumfangRouteImport } from './routes/leistungsumfang'
+import { Route as LoesungenRouteImport } from './routes/loesungen'
+import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
 import { Route as ProdukteAiflyOracleRouteImport } from './routes/produkte_.aifly-oracle'
@@ -66,6 +69,21 @@ const KontaktRoute = KontaktRouteImport.update({
 const LeistungenRoute = LeistungenRouteImport.update({
   id: '/leistungen',
   path: '/leistungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungsumfangRoute = LeistungsumfangRouteImport.update({
+  id: '/leistungsumfang',
+  path: '/leistungsumfang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoesungenRoute = LoesungenRouteImport.update({
+  id: '/loesungen',
+  path: '/loesungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreiseAblaufRoute = PreiseAblaufRouteImport.update({
+  id: '/preise-ablauf',
+  path: '/preise-ablauf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarRoute = TeileklarRouteImport.update({
@@ -128,6 +146,9 @@ export interface FileRoutesByFullPath {
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
@@ -148,6 +169,9 @@ export interface FileRoutesByTo {
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
@@ -169,6 +193,9 @@ export interface FileRoutesById {
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
+  '/leistungsumfang': typeof LeistungsumfangRoute
+  '/loesungen': typeof LoesungenRoute
+  '/preise-ablauf': typeof PreiseAblaufRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/produkte_/aifly-oracle': typeof ProdukteAiflyOracleRoute
@@ -191,6 +218,9 @@ export interface FileRouteTypes {
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/preise-ablauf'
     | '/teileklar'
     | '/vertragsgrundlagen'
     | '/produkte/aifly-oracle'
@@ -211,6 +241,9 @@ export interface FileRouteTypes {
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/preise-ablauf'
     | '/teileklar'
     | '/vertragsgrundlagen'
     | '/produkte/aifly-oracle'
@@ -231,6 +264,9 @@ export interface FileRouteTypes {
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
+    | '/leistungsumfang'
+    | '/loesungen'
+    | '/preise-ablauf'
     | '/teileklar'
     | '/vertragsgrundlagen'
     | '/produkte_/aifly-oracle'
@@ -252,6 +288,9 @@ export interface RootRouteChildren {
   KiHinweiseRoute: typeof KiHinweiseRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
+  LeistungsumfangRoute: typeof LeistungsumfangRoute
+  LoesungenRoute: typeof LoesungenRoute
+  PreiseAblaufRoute: typeof PreiseAblaufRoute
   TeileklarRoute: typeof TeileklarRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
   ProdukteAiflyOracleRoute: typeof ProdukteAiflyOracleRoute
@@ -320,6 +359,27 @@ declare module '@tanstack/react-router' {
       path: '/leistungen'
       fullPath: '/leistungen'
       preLoaderRoute: typeof LeistungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungsumfang': {
+      id: '/leistungsumfang'
+      path: '/leistungsumfang'
+      fullPath: '/leistungsumfang'
+      preLoaderRoute: typeof LeistungsumfangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loesungen': {
+      id: '/loesungen'
+      path: '/loesungen'
+      fullPath: '/loesungen'
+      preLoaderRoute: typeof LoesungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preise-ablauf': {
+      id: '/preise-ablauf'
+      path: '/preise-ablauf'
+      fullPath: '/preise-ablauf'
+      preLoaderRoute: typeof PreiseAblaufRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar': {
@@ -404,6 +464,9 @@ const rootRouteChildren: RootRouteChildren = {
   KiHinweiseRoute: KiHinweiseRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
+  LeistungsumfangRoute: LeistungsumfangRoute,
+  LoesungenRoute: LoesungenRoute,
+  PreiseAblaufRoute: PreiseAblaufRoute,
   TeileklarRoute: TeileklarRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
   ProdukteAiflyOracleRoute: ProdukteAiflyOracleRoute,
