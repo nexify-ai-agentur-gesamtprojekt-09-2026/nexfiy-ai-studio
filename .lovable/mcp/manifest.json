@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "sdk_version": "3.5.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "nexfiy-ai-studio",
+      "version": "0.1.0",
+      "title": "Nexfiy Ai Studio"
+    },
+    "tools": [
+      {
+        "name": "list_pages",
+        "title": "Seiten auflisten",
+        "description": "List the public pages of the NeXify AI and TEILEKLAR website, optionally filtered by brand.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "brand": {
+              "description": "Only pages of this brand.",
+              "type": "string",
+              "enum": [
+                "NeXify AI",
+                "TEILEKLAR"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_pages",
+        "title": "Seiten suchen",
+        "description": "Find public website pages whose title or path matches a search term (e.g. 'API', 'Preise', 'Werkstatt').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100,
+              "description": "Search term."
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact",
+        "title": "Kontakt abrufen",
+        "description": "Return the public contact channel of NeXify AI for project inquiries.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {},
+          "additionalProperties": false
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
