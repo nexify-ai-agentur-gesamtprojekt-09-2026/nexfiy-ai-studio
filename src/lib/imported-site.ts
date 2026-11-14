@@ -112,7 +112,12 @@ export function fitComposer(textarea: HTMLTextAreaElement) {
 export function useComposerFit(open: boolean, ...deps: unknown[]) {
   const composerRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
-    if (open && composerRef.current) fitComposer(composerRef.current);
+    const composer = composerRef.current;
+    if (!open || !composer) return;
+    fitComposer(composer);
+    // Like the original chat log, the conversation area starts scrolled to its latest entry.
+    const log = composer.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
+    if (log) log.scrollTop = log.scrollHeight;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, ...deps]);
   return composerRef;
