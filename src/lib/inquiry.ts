@@ -42,6 +42,10 @@ const PROFILES: Record<InquiryKind, InquiryProfile> = {
   },
 };
 
+export function isInquiryFieldRequired(kind: InquiryKind, field: InquiryField): boolean {
+  return field === "company" ? PROFILES[kind].companyRequired : true;
+}
+
 export const MIN_MESSAGE_LENGTH = 10;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
