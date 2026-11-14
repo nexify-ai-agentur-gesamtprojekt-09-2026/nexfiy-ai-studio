@@ -4,11 +4,11 @@ import { fitComposer, useAtelierFilms, useChatPanel, useComposerFit, useHeaderMe
 import { useSyncExternalStore } from "react";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
-import capturedCSS from "../styles/captured.css?raw";
+import capturedCSS from "../styles/captured.css?url";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
     meta: [
       { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
       { name: "description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
@@ -30,7 +30,6 @@ function Index() {
   useAtelierFilms();
   return (
     <>
-      <style>{capturedCSS}</style>
       <div hidden />
       <div className={chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"} id="atelier" data-hero-action-visible={heroActionVisible ? "true" : undefined} data-scrolled={scrolled ? "true" : "false"} data-chat-compact={isMobile ? undefined : "false"} data-footer-visible={footerVisible ? "true" : "false"}>
         <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>

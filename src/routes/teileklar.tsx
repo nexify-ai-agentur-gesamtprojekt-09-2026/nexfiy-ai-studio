@@ -3,11 +3,11 @@ import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
-import capturedCSS from "../styles/pages/teileklar.css?raw";
+import capturedCSS from "../styles/pages/teileklar.css?url";
 
 export const Route = createFileRoute("/teileklar")({
   head: () => ({
-    links: [{ rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }],
     meta: [
       { title: "TEILEKLAR.shop – Zubehör für Auto & Motorrad" },
       { name: "description", content: "Passende Teile und Zubehör für Auto und Motorrad – mit klaren Angaben zu Fahrzeug, Passung und Werkstatt." },
@@ -374,7 +374,6 @@ function Index() {
 </>);
   return (
     <>
-      <style>{capturedCSS}</style>
       <div hidden />
       <div id="atelier" className={chatOpen ? "workspace-shell site-teileklar is-open" : "workspace-shell site-teileklar is-closed"} data-scrolled={scrolled ? "true" : "false"} data-footer-visible={footerVisible ? "true" : "false"}>{pageContent}</div>
 
