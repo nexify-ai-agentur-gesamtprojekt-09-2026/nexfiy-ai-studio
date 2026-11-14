@@ -6,6 +6,7 @@ import capturedCSS from "../styles/pages/anmelden.css?url";
 export const Route = createFileRoute("/anmelden")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Anmelden und weiterarbeiten. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  validateSearch: (s: Record<string, unknown>): { next?: string } => (typeof s["next"] === "string" ? { next: s["next"] } : {}),
   component: Index,
 });
 

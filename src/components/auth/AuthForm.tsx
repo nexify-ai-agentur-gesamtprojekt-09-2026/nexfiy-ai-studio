@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
+import { oauthReturnPath } from "@/lib/oauth-return-path";
 
 export type AuthMode = "login" | "signup" | "forgot" | "reset";
 
@@ -22,6 +23,7 @@ function germanError(message: string) {
 
 /** Shared sign-in / sign-up / password forms, styled with the imported tk-form classes. */
 export function AuthForm({ mode }: { mode: AuthMode }) {
+  const returnTo = () => { const n = typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("next"); return n ? oauthReturnPath(n) : null; };
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,9 +44,9 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
         if (error) throw error;
-        await navigate({ to: "/konto" });
+        const next = returnTo(); if (next && next !== "/") window.location.assign(next); else await navigate({ to: "/konto" });
       } else if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: `${window.location.origin}/konto` } });
+        const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: new URL(returnTo() && returnTo() !== "/" ? returnTo()! : "/konto", window.location.origin).href } });
         if (error) throw error;
         setDone("Fast geschafft: Wir haben Ihnen eine E-Mail geschickt. Bestätigen Sie den Link darin, dann können Sie sich anmelden.");
       } else if (mode === "forgot") {
@@ -99,8 +101,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         {pending ? "Einen Moment …" : LABELS[mode]}
       </button>
       <div className="tk-actions">
-        {mode !== "login" && <p><a href="/anmelden">Ich habe schon ein Konto</a></p>}
-        {mode !== "signup" && <p><a href="/registrieren">Neues Konto erstellen</a></p>}
+        {mode !== "login" && <p><a href={"/anmelden" + (typeof window !== "undefined" ? window.location.search : "")}>Ich habe schon ein Konto</a></p>}
+        {mode !== "signup" && <p><a href={"/registrieren" + (typeof window !== "undefined" ? window.location.search : "")}>Neues Konto erstellen</a></p>}
         {mode === "login" && <p><a href="/passwort-vergessen">Passwort vergessen?</a></p>}
         <p className="nx-konto-hinweis"><a href="/datenschutz">Datenschutz</a></p>
       </div>

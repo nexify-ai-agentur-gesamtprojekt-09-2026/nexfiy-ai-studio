@@ -6,6 +6,7 @@ import capturedCSS from "../styles/pages/registrieren.css?url";
 export const Route = createFileRoute("/registrieren")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  validateSearch: (s: Record<string, unknown>): { next?: string } => (typeof s["next"] === "string" ? { next: s["next"] } : {}),
   component: Index,
 });
 
