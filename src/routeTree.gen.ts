@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as LeistungenRouteImport } from './routes/leistungen'
+import { Route as TeileklarRouteImport } from './routes/teileklar'
+import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
+import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeistungenRoute = LeistungenRouteImport.update({
+  id: '/leistungen',
+  path: '/leistungen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarRoute = TeileklarRouteImport.update({
+  id: '/teileklar',
+  path: '/teileklar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
+  id: '/teileklar_/partner-werden',
+  path: '/teileklar/partner-werden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarWerkstattRoute = TeileklarWerkstattRouteImport.update({
+  id: '/teileklar_/werkstatt',
+  path: '/teileklar/werkstatt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/teileklar': typeof TeileklarRoute
+  '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/teileklar': typeof TeileklarRoute
+  '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kontakt': typeof KontaktRoute
+  '/leistungen': typeof LeistungenRoute
+  '/teileklar': typeof TeileklarRoute
+  '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/kontakt'
+    | '/leistungen'
+    | '/teileklar'
+    | '/teileklar/partner-werden'
+    | '/teileklar/werkstatt'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/kontakt'
+    | '/leistungen'
+    | '/teileklar'
+    | '/teileklar/partner-werden'
+    | '/teileklar/werkstatt'
+  id:
+    | '__root__'
+    | '/'
+    | '/kontakt'
+    | '/leistungen'
+    | '/teileklar'
+    | '/teileklar_/partner-werden'
+    | '/teileklar_/werkstatt'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KontaktRoute: typeof KontaktRoute
+  LeistungenRoute: typeof LeistungenRoute
+  TeileklarRoute: typeof TeileklarRoute
+  TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
+  TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leistungen': {
+      id: '/leistungen'
+      path: '/leistungen'
+      fullPath: '/leistungen'
+      preLoaderRoute: typeof LeistungenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar': {
+      id: '/teileklar'
+      path: '/teileklar'
+      fullPath: '/teileklar'
+      preLoaderRoute: typeof TeileklarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/partner-werden': {
+      id: '/teileklar_/partner-werden'
+      path: '/teileklar/partner-werden'
+      fullPath: '/teileklar/partner-werden'
+      preLoaderRoute: typeof TeileklarPartnerWerdenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/werkstatt': {
+      id: '/teileklar_/werkstatt'
+      path: '/teileklar/werkstatt'
+      fullPath: '/teileklar/werkstatt'
+      preLoaderRoute: typeof TeileklarWerkstattRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KontaktRoute: KontaktRoute,
+  LeistungenRoute: LeistungenRoute,
+  TeileklarRoute: TeileklarRoute,
+  TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
+  TeileklarWerkstattRoute: TeileklarWerkstattRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

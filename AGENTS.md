@@ -30,5 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
-- The home page is an imported copy of nexifyai.cloud: keep its markup and interactions in `src/routes/index.tsx` and its original styles in `src/styles/captured.css` (full capture under `.site-import/`), because edits elsewhere break the clone's cascade.
+- Pages are imported copies of nexifyai.cloud: each page keeps its markup in its own route file and its original styles in `src/styles/captured.css` (home) or `src/styles/pages/<page>.css` (full captures under `.site-import/`), because edits elsewhere break the clone's cascade.
+- Shared page behaviour (chat panel, header menus, scroll/footer shell attributes, film players) lives in `src/lib/imported-site.ts` so every imported route behaves the same; routes only wire its hooks into their JSX.
 - The copy is independent of the live site: never write back to or link assets from the original domain; downloaded media lives in `public/site-assets/` and `public/glass/`.
