@@ -973,7 +973,16 @@ function ImportedFooterLassenSieUnsBer() {
   );
 }
 
+function fitComposer(textarea: HTMLTextAreaElement) {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + 2 + "px";
+}
+
 function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
+  const composerRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (open && composerRef.current) fitComposer(composerRef.current);
+  }, [open, isMobile, viewportHeight]);
   return (
     <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
@@ -1046,7 +1055,7 @@ function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: {
           </div>
           <form className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
-            <textarea id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required style={{ height: "48px" }} enterKeyHint="send" />
+            <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required enterKeyHint="send" />
             <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
             <div className={"orientation-composer-actions"}>
               <button className={"primary-button"} disabled aria-label="Nachricht senden">
