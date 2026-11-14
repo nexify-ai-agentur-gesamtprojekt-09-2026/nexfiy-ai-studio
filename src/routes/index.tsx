@@ -52,13 +52,13 @@ function Index() {
     const observers: IntersectionObserver[] = [];
     const heroAction = document.querySelector(".identity-primary-link");
     if (heroAction) {
-      const observer = new IntersectionObserver(([entry]) => setHeroActionVisible(entry.isIntersecting));
+      const observer = new IntersectionObserver(([entry]) => setHeroActionVisible(entry?.isIntersecting ?? true));
       observer.observe(heroAction);
       observers.push(observer);
     }
     const footer = document.querySelector("#atelier footer");
     if (footer) {
-      const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting));
+      const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry?.isIntersecting ?? false));
       observer.observe(footer);
       observers.push(observer);
     }
