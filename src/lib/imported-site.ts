@@ -111,19 +111,15 @@ export function fitComposer(textarea: HTMLTextAreaElement) {
 /** Sizes the chat composer like the original whenever the panel opens or the viewport changes. */
 export function useComposerFit(open: boolean, ...deps: unknown[]) {
   const composerRef = useRef<HTMLTextAreaElement>(null);
-  const firstRun = useRef(true);
   useEffect(() => {
-    const composer = composerRef.current;
-    if (!open || !composer) {
-      if (composer) firstRun.current = false;
-      return;
-    }
-    const initial = firstRun.current;
-    firstRun.current = false;
-    fitComposer(composer);
-    // Like the original, a panel that is open on page load starts scrolled to its latest entry.
-    const log = composer.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
-    if (!initial || !log) return;
+    if (open && composerRef.current) fitComposer(composerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, ...deps]);
+  // Like the original, a panel that is open on page load starts scrolled to its latest entry.
+  const openOnLoad = useRef(open);
+  useEffect(() => {
+    const log = composerRef.current?.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
+    if (!openOnLoad.current || !log) return;
     const toLatest = () => {
       log.scrollTop = log.scrollHeight;
     };
@@ -136,8 +132,7 @@ export function useComposerFit(open: boolean, ...deps: unknown[]) {
       window.clearTimeout(timer);
       window.removeEventListener("load", toLatest);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, ...deps]);
+  }, []);
   return composerRef;
 }
 
