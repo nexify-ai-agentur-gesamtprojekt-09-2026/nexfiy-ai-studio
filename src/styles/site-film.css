@@ -59,3 +59,31 @@
 :root:root #atelier .atelier-film .atelier-playback-icon { flex: 0 0 auto; display: block; }
 :root:root #atelier .atelier-film .atelier-volume { color: var(--color-atelier-ink); }
 :root:root #atelier .atelier-film .atelier-film-transcript { padding: 14px 20px; font-size: 12px; line-height: 1.7; color: var(--color-atelier-platinum); }
+
+/* Refined controls v2: smaller glass pill, calmer at rest, clear focus ring, comfortable touch area. */
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls {
+  inset: auto auto 10px 10px; bottom: 10px; gap: 0; padding: 2px;
+  background: color-mix(in oklab, var(--color-atelier-film-control-fill) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  opacity: .55; transition: opacity .3s ease, transform .3s ease;
+}
+:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
+  width: 26px; min-width: 26px; max-width: 26px; height: 26px; min-height: 26px;
+  transition: background-color .2s ease, color .2s ease, transform .15s ease; position: relative;
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button::after,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary::after { content: ""; position: absolute; inset: -7px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:active,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:active { transform: scale(.92); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:focus-visible,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 1px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { width: 12px; height: 12px; }
+@media (max-width: 600px) {
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .8; }
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary { width: 26px; min-width: 26px; max-width: 26px; height: 26px; min-height: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { :root:root #atelier .atelier-film .atelier-film-controls * { transition: none; } }
