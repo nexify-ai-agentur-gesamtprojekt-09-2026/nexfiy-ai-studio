@@ -176,13 +176,13 @@ function ImportedHeaderNeXifyAI() {
         </span>
       </a>
       <nav className={"main-navigation"} aria-label="Hauptnavigation">
-        <a aria-current="page" href="#">Leistungen</a>
+        <a aria-current="page" href="/leistungen">Leistungen</a>
         <details className={"product-navigation"} open={openMenu === "products"}>
           <summary ref={productsSummary} aria-expanded={openMenu === "products"} aria-controls="_R_14lb_-products" onClick={toggleMenu("products")}>Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
           <div className={"product-navigation-menu"} id="_R_14lb_-products">
             <div className={"megamenu-heading"}>
               <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
-              <a href="#">Leistungen der FACTORY<svg className={"nx-zeichen"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
+              <a href="/leistungen">Leistungen der FACTORY<svg className={"nx-zeichen"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
             </div>
             <div className={"megamenu-columns"}>
               <div className={"megamenu-group"}>
@@ -273,7 +273,7 @@ function ImportedHeaderNeXifyAI() {
         </summary>
         <nav className={"mobile-navigation-panel"} id="_R_14lb_-mobile" aria-label="Hauptnavigation">
           <div className={"mobile-primary-links"}>
-            <a aria-current="page" href="#">Leistungen</a>
+            <a aria-current="page" href="/leistungen">Leistungen</a>
             <a href="/wissen">Arbeitsweise</a>
             <a href="/kontakt">Kontakt</a>
           </div>
@@ -702,7 +702,7 @@ function ImportedFooterLassenSieUnsBer() {
               <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
                 <div className={"footer-overview-group"}>
                   <h3>Leistungen</h3>
-                  <a href="#">Website, System, Kampagne. Aus einer Hand.</a>
+                  <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
                   <a href="/leistungen/websites">Eine Website, die Ihr Angebot erklärt.</a>
                   <a href="/leistungen/agenten-automatisierung">Routine abgeben. Kontrolle behalten.</a>
                   <a href="/leistungen/apps-portale">Portale und Apps für Ihren Ablauf.</a>

@@ -279,7 +279,7 @@ function ImportedHeaderNeXifyAI() {
           </div>
         </details>
         <a href="/wissen">Arbeitsweise</a>
-        <a aria-current="page" href="#">Kontakt</a>
+        <a aria-current="page" href="/kontakt">Kontakt</a>
       </nav>
       <details className={"mobile-navigation"} open={openMenu === "mobile"}>
         <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls="_R_14lb_-mobile" onClick={toggleMenu("mobile")}>
@@ -292,7 +292,7 @@ function ImportedHeaderNeXifyAI() {
           <div className={"mobile-primary-links"}>
             <a href="/leistungen">Leistungen</a>
             <a href="/wissen">Arbeitsweise</a>
-            <a aria-current="page" href="#">Kontakt</a>
+            <a aria-current="page" href="/kontakt">Kontakt</a>
           </div>
           <div className={"megamenu-group"}>
             <h2>NeXify AI</h2>
@@ -399,7 +399,7 @@ function ImportedHeaderNeXifyAI() {
             <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
           </svg>
         </button>
-        <a className={"header-cta"} href="#"><span aria-hidden="true" />Projektgespräch anfragen</a>
+        <a className={"header-cta"} href="/kontakt"><span aria-hidden="true" />Projektgespräch anfragen</a>
       </div>
     </header>
   );
@@ -478,7 +478,7 @@ function ImportedFooterLassenSieUnsBer() {
             <h2>Lassen Sie uns über Ihr Vorhaben sprechen.</h2>
             <p>Erzählen Sie uns, was Sie verändern möchten. Wir klären gemeinsam den passenden nächsten Schritt.</p>
           </div>
-          <a className={"nexify-control primary-button "} data-variant="primary" href="#">Projekt besprechen<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+          <a className={"nexify-control primary-button "} data-variant="primary" href="/kontakt">Projekt besprechen<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
         </div>
         <div className={"footer-main"}>
           <div className={"footer-brand-block"}>
@@ -494,7 +494,7 @@ function ImportedFooterLassenSieUnsBer() {
               </span>
             </a>
             <p>Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Persönlich begleitet von Pascal Courbois.</p>
-            <a className={"nexify-control  footer-contact"} data-variant="text" href="#">Ihr Projekt mit NeXify besprechen{" "}<span aria-hidden="true">→</span></a>
+            <a className={"nexify-control  footer-contact"} data-variant="text" href="/kontakt">Ihr Projekt mit NeXify besprechen{" "}<span aria-hidden="true">→</span></a>
           </div>
           <div className={"footer-link-groups "}>
             <nav aria-label={"Produkte & Arbeitsbereiche"}>
@@ -516,7 +516,7 @@ function ImportedFooterLassenSieUnsBer() {
             <nav aria-label="NeXify AI">
               <h2>NeXify AI</h2>
               <a href="/unternehmen">Über NeXify</a>
-              <a href="#">Kontakt</a>
+              <a href="/kontakt">Kontakt</a>
               <a href="/anmelden">Anmelden</a>
               <a href="/registrieren">Registrieren</a>
             </nav>
@@ -567,7 +567,7 @@ function ImportedFooterLassenSieUnsBer() {
                   <a href="/wissen">So arbeiten wir.</a>
                   <a href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.</a>
                   <a href="/unternehmen">Ein Ansprechpartner. Ein Agententeam.</a>
-                  <a href="#">Schildern Sie Ihr Vorhaben.</a>
+                  <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
                 </div>
                 <div className={"footer-overview-group"}>
                   <h3>Konto</h3>
