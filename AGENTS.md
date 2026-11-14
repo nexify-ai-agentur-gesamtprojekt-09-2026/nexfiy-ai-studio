@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- The home page is an imported copy of nexifyai.cloud: keep its markup and interactions in `src/routes/index.tsx` and its original styles in `src/styles/captured.css` (full capture under `.site-import/`), because edits elsewhere break the clone's cascade.
+- The copy is independent of the live site: never write back to or link assets from the original domain; downloaded media lives in `public/site-assets/` and `public/glass/`.
