@@ -10,15 +10,46 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KiHinweiseRouteImport } from './routes/ki-hinweise'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
+import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BarrierefreiheitRoute = BarrierefreiheitRouteImport.update({
+  id: '/barrierefreiheit',
+  path: '/barrierefreiheit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KiHinweiseRoute = KiHinweiseRouteImport.update({
+  id: '/ki-hinweise',
+  path: '/ki-hinweise',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KontaktRoute = KontaktRouteImport.update({
@@ -36,6 +67,11 @@ const TeileklarRoute = TeileklarRouteImport.update({
   path: '/teileklar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VertragsgrundlagenRoute = VertragsgrundlagenRouteImport.update({
+  id: '/vertragsgrundlagen',
+  path: '/vertragsgrundlagen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
   id: '/teileklar_/partner-werden',
   path: '/teileklar/partner-werden',
@@ -49,26 +85,44 @@ const TeileklarWerkstattRoute = TeileklarWerkstattRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/barrierefreiheit': typeof BarrierefreiheitRoute
+  '/cookies': typeof CookiesRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
+  '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
 }
@@ -76,34 +130,58 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
     | '/teileklar'
+    | '/vertragsgrundlagen'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
     | '/teileklar'
+    | '/vertragsgrundlagen'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
   id:
     | '__root__'
     | '/'
+    | '/barrierefreiheit'
+    | '/cookies'
+    | '/datenschutz'
+    | '/impressum'
+    | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
     | '/teileklar'
+    | '/vertragsgrundlagen'
     | '/teileklar_/partner-werden'
     | '/teileklar_/werkstatt'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BarrierefreiheitRoute: typeof BarrierefreiheitRoute
+  CookiesRoute: typeof CookiesRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  KiHinweiseRoute: typeof KiHinweiseRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
   TeileklarRoute: typeof TeileklarRoute
+  VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
 }
@@ -115,6 +193,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/barrierefreiheit': {
+      id: '/barrierefreiheit'
+      path: '/barrierefreiheit'
+      fullPath: '/barrierefreiheit'
+      preLoaderRoute: typeof BarrierefreiheitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ki-hinweise': {
+      id: '/ki-hinweise'
+      path: '/ki-hinweise'
+      fullPath: '/ki-hinweise'
+      preLoaderRoute: typeof KiHinweiseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kontakt': {
@@ -138,6 +251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vertragsgrundlagen': {
+      id: '/vertragsgrundlagen'
+      path: '/vertragsgrundlagen'
+      fullPath: '/vertragsgrundlagen'
+      preLoaderRoute: typeof VertragsgrundlagenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar_/partner-werden': {
       id: '/teileklar_/partner-werden'
       path: '/teileklar/partner-werden'
@@ -157,9 +277,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BarrierefreiheitRoute: BarrierefreiheitRoute,
+  CookiesRoute: CookiesRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  KiHinweiseRoute: KiHinweiseRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
   TeileklarRoute: TeileklarRoute,
+  VertragsgrundlagenRoute: VertragsgrundlagenRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
 }
