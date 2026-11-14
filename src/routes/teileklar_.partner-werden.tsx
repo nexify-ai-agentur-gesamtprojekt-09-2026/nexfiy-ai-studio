@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
+import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.partner-werden.css?url";
 
@@ -174,23 +175,7 @@ function Index() {
             </div>
           </section>
         </div>
-        <form onSubmit={(event) => event.preventDefault()} className={"tk-form"} method="post" noValidate aria-labelledby="contact-form-title">
-          <h2 id="contact-form-title">Als Partnerwerkstatt anfragen</h2>
-          <p className={"tk-meta"}>Pflichtfelder sind mit * markiert.</p>
-          <div className={"tk-form-grid"}>
-            <label className={"tk-field"}>Name *<input autoComplete="name" maxLength={100} aria-invalid="false" name="name" /></label>
-            <label className={"tk-field"}>E-Mail *<input autoComplete="email" maxLength={160} aria-invalid="false" type="email" name="email" /></label>
-            <label className={"tk-field"}>Werkstatt / Betrieb *<input autoComplete="organization" maxLength={120} aria-invalid="false" name="company" /></label>
-            <label className={"tk-field is-wide"}>Ihr Anliegen *<textarea name="message" rows={5} maxLength={4000} aria-invalid="false" /></label>
-          </div>
-          <label className={"tk-check"}>
-            <input aria-invalid="false" type="checkbox" name="consent" />
-            <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Details in der <a href="/teileklar/rechtliches">Datenschutzerklärung</a>. *</span>
-          </label>
-          <div className={"tk-actions"}>
-            <button type="submit" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary">Anfrage senden</button>
-          </div>
-        </form>
+        <InquiryForm kind="partner" title="Als Partnerwerkstatt anfragen" companyLabel="Werkstatt / Betrieb" privacyHref="/teileklar/rechtliches" successBody={<>Ihr E-Mail-Programm öffnet sich mit der fertigen Partneranfrage an mail@nexifyai.cloud. Bitte dort nur noch auf „Senden“ tippen – wir melden uns für ein erstes Gespräch.</>} />
       </section>
       <div className={"pc-sections"}>
         <section className={"hc-intro hc-container pc-section"} id="content-tk-partner-tk-partner-customer-1-0" tabIndex={-1} aria-labelledby="content-tk-partner-tk-partner-customer-1-0-title">

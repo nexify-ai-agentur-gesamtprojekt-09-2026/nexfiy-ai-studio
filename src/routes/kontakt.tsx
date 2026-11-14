@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
+import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/kontakt.css?url";
 
@@ -85,23 +86,7 @@ function Index() {
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
               <section className={"hc-container pc-supplement"}>
-                <form onSubmit={(event) => event.preventDefault()} className={"tk-form"} noValidate aria-labelledby="contact-form-title" method="post">
-                  <h2 id="contact-form-title">Anfrage senden</h2>
-                  <p className={"tk-meta"}>Pflichtfelder sind mit * markiert.</p>
-                  <div className={"tk-form-grid"}>
-                    <label className={"tk-field"}>Name *<input autoComplete="name" maxLength={100} aria-invalid="false" name="name" /></label>
-                    <label className={"tk-field"}>E-Mail *<input type="email" autoComplete="email" maxLength={160} aria-invalid="false" name="email" /></label>
-                    <label className={"tk-field"}>Unternehmen<input autoComplete="organization" maxLength={120} aria-invalid="false" name="company" /></label>
-                    <label className={"tk-field is-wide"}>Ihr Anliegen *<textarea name="message" rows={5} maxLength={4000} aria-invalid="false" /></label>
-                  </div>
-                  <label className={"tk-check"}>
-                    <input type="checkbox" aria-invalid="false" name="consent" />
-                    <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Details in der{" "}<a href="/datenschutz">Datenschutzerklärung</a>. *</span>
-                  </label>
-                  <div className={"tk-actions"}>
-                    <button type="submit" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary">Anfrage senden</button>
-                  </div>
-                </form>
+                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" />
               </section>
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-contact-contact-customer-1-0" tabIndex={-1} aria-labelledby="content-contact-contact-customer-1-0-title">
