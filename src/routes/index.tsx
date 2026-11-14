@@ -975,7 +975,7 @@ function ImportedFooterLassenSieUnsBer() {
 
 function fitComposer(textarea: HTMLTextAreaElement) {
   textarea.style.height = "auto";
-  textarea.style.height = textarea.scrollHeight + 2 + "px";
+  textarea.style.height = textarea.scrollHeight + "px";
 }
 
 function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
