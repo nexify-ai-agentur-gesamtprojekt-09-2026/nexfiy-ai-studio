@@ -36,7 +36,12 @@ import { Route as ProdukteNexAgenticAiflyRouteImport } from './routes/produkte_.
 import { Route as ProdukteNex2flyRouteImport } from './routes/produkte_.nex2fly'
 import { Route as ProdukteOneRouteImport } from './routes/produkte_.one'
 import { Route as ProdukteSkillsMcpRouteImport } from './routes/produkte_.skills-mcp'
+import { Route as TeileklarFahrzeugUndPassungRouteImport } from './routes/teileklar_.fahrzeug-und-passung'
+import { Route as TeileklarKategorienRouteImport } from './routes/teileklar_.kategorien'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
+import { Route as TeileklarRechtlichesRouteImport } from './routes/teileklar_.rechtliches'
+import { Route as TeileklarShopRouteImport } from './routes/teileklar_.shop'
+import { Route as TeileklarSucheRouteImport } from './routes/teileklar_.suche'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 
@@ -176,9 +181,35 @@ const ProdukteSkillsMcpRoute = ProdukteSkillsMcpRouteImport.update({
   path: '/produkte/skills-mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeileklarFahrzeugUndPassungRoute =
+  TeileklarFahrzeugUndPassungRouteImport.update({
+    id: '/teileklar_/fahrzeug-und-passung',
+    path: '/teileklar/fahrzeug-und-passung',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TeileklarKategorienRoute = TeileklarKategorienRouteImport.update({
+  id: '/teileklar_/kategorien',
+  path: '/teileklar/kategorien',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
   id: '/teileklar_/partner-werden',
   path: '/teileklar/partner-werden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarRechtlichesRoute = TeileklarRechtlichesRouteImport.update({
+  id: '/teileklar_/rechtliches',
+  path: '/teileklar/rechtliches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarShopRoute = TeileklarShopRouteImport.update({
+  id: '/teileklar_/shop',
+  path: '/teileklar/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarSucheRoute = TeileklarSucheRouteImport.update({
+  id: '/teileklar_/suche',
+  path: '/teileklar/suche',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarWerkstattRoute = TeileklarWerkstattRouteImport.update({
@@ -221,7 +252,12 @@ export interface FileRoutesByFullPath {
   '/produkte/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte/one': typeof ProdukteOneRoute
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar/shop': typeof TeileklarShopRoute
+  '/teileklar/suche': typeof TeileklarSucheRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
@@ -253,7 +289,12 @@ export interface FileRoutesByTo {
   '/produkte/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte/one': typeof ProdukteOneRoute
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar/shop': typeof TeileklarShopRoute
+  '/teileklar/suche': typeof TeileklarSucheRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
@@ -286,7 +327,12 @@ export interface FileRoutesById {
   '/produkte_/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte_/one': typeof ProdukteOneRoute
   '/produkte_/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/teileklar_/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
+  '/teileklar_/kategorien': typeof TeileklarKategorienRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar_/rechtliches': typeof TeileklarRechtlichesRoute
+  '/teileklar_/shop': typeof TeileklarShopRoute
+  '/teileklar_/suche': typeof TeileklarSucheRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
@@ -320,7 +366,12 @@ export interface FileRouteTypes {
     | '/produkte/nex2fly'
     | '/produkte/one'
     | '/produkte/skills-mcp'
+    | '/teileklar/fahrzeug-und-passung'
+    | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/rechtliches'
+    | '/teileklar/shop'
+    | '/teileklar/suche'
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
   fileRoutesByTo: FileRoutesByTo
@@ -352,7 +403,12 @@ export interface FileRouteTypes {
     | '/produkte/nex2fly'
     | '/produkte/one'
     | '/produkte/skills-mcp'
+    | '/teileklar/fahrzeug-und-passung'
+    | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/rechtliches'
+    | '/teileklar/shop'
+    | '/teileklar/suche'
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
   id:
@@ -384,7 +440,12 @@ export interface FileRouteTypes {
     | '/produkte_/nex2fly'
     | '/produkte_/one'
     | '/produkte_/skills-mcp'
+    | '/teileklar_/fahrzeug-und-passung'
+    | '/teileklar_/kategorien'
     | '/teileklar_/partner-werden'
+    | '/teileklar_/rechtliches'
+    | '/teileklar_/shop'
+    | '/teileklar_/suche'
     | '/teileklar_/werkstatt'
     | '/wissen_/projekt-vorbereiten'
   fileRoutesById: FileRoutesById
@@ -417,7 +478,12 @@ export interface RootRouteChildren {
   ProdukteNex2flyRoute: typeof ProdukteNex2flyRoute
   ProdukteOneRoute: typeof ProdukteOneRoute
   ProdukteSkillsMcpRoute: typeof ProdukteSkillsMcpRoute
+  TeileklarFahrzeugUndPassungRoute: typeof TeileklarFahrzeugUndPassungRoute
+  TeileklarKategorienRoute: typeof TeileklarKategorienRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
+  TeileklarRechtlichesRoute: typeof TeileklarRechtlichesRoute
+  TeileklarShopRoute: typeof TeileklarShopRoute
+  TeileklarSucheRoute: typeof TeileklarSucheRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
 }
@@ -613,11 +679,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProdukteSkillsMcpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teileklar_/fahrzeug-und-passung': {
+      id: '/teileklar_/fahrzeug-und-passung'
+      path: '/teileklar/fahrzeug-und-passung'
+      fullPath: '/teileklar/fahrzeug-und-passung'
+      preLoaderRoute: typeof TeileklarFahrzeugUndPassungRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/kategorien': {
+      id: '/teileklar_/kategorien'
+      path: '/teileklar/kategorien'
+      fullPath: '/teileklar/kategorien'
+      preLoaderRoute: typeof TeileklarKategorienRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar_/partner-werden': {
       id: '/teileklar_/partner-werden'
       path: '/teileklar/partner-werden'
       fullPath: '/teileklar/partner-werden'
       preLoaderRoute: typeof TeileklarPartnerWerdenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/rechtliches': {
+      id: '/teileklar_/rechtliches'
+      path: '/teileklar/rechtliches'
+      fullPath: '/teileklar/rechtliches'
+      preLoaderRoute: typeof TeileklarRechtlichesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/shop': {
+      id: '/teileklar_/shop'
+      path: '/teileklar/shop'
+      fullPath: '/teileklar/shop'
+      preLoaderRoute: typeof TeileklarShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/suche': {
+      id: '/teileklar_/suche'
+      path: '/teileklar/suche'
+      fullPath: '/teileklar/suche'
+      preLoaderRoute: typeof TeileklarSucheRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar_/werkstatt': {
@@ -665,7 +766,12 @@ const rootRouteChildren: RootRouteChildren = {
   ProdukteNex2flyRoute: ProdukteNex2flyRoute,
   ProdukteOneRoute: ProdukteOneRoute,
   ProdukteSkillsMcpRoute: ProdukteSkillsMcpRoute,
+  TeileklarFahrzeugUndPassungRoute: TeileklarFahrzeugUndPassungRoute,
+  TeileklarKategorienRoute: TeileklarKategorienRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
+  TeileklarRechtlichesRoute: TeileklarRechtlichesRoute,
+  TeileklarShopRoute: TeileklarShopRoute,
+  TeileklarSucheRoute: TeileklarSucheRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
   WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
 }
