@@ -4,3 +4,14 @@
   :root #atelier #aifly-panel { --chat-viewport-height: 100dvh !important; }
   :root #atelier #aifly-panel .public-orientation { --ca-fuss: 0px !important; }
 }
+
+/* Header on scroll: smooth glass condensation, no jump. */
+#atelier .site-header, #atelier header.site-header, #atelier .tk-commerce-header {
+  transition: background-color .35s ease, backdrop-filter .35s ease, box-shadow .35s ease, padding .35s ease;
+}
+#atelier[data-scrolled="true"] .site-header, #atelier[data-scrolled="true"] .tk-commerce-header {
+  background: color-mix(in oklab, var(--color-atelier-film-control-fill, #0b0d10) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 1px 0 var(--color-linie-fein, rgba(255,255,255,.08));
+}
+@media (prefers-reduced-motion: reduce) { #atelier .site-header, #atelier .tk-commerce-header { transition: none; } }
