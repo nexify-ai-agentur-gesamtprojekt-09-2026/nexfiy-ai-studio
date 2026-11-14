@@ -2,7 +2,7 @@
 
 # Leitstern
 
-Unternehmen bekommen ihr KI-Vorhaben von der Agentur umgesetzt
+Unternehmen setzen ihr KI-Vorhaben selbst mit Suite und API um
 
 ## Kennzahl
 
