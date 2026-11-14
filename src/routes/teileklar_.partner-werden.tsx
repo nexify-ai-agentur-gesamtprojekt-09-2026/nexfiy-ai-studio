@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
-import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
+import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
+import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.partner-werden.css?raw";
 
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/teileklar_/partner-werden")({
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(false);
+  useAtelierFilms();
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   const composerRef = useComposerFit(chatOpen, isMobile, viewportHeight);
   const pageContent = (<>
@@ -100,8 +102,8 @@ function Index() {
           </div>
           <div className={"identity-media"}>
             <figure className={"identity-hero-photo"}>
-              <img sizes="(max-width: 820px) 100vw, 60vw" alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei" width="2000" height="1125" loading="eager" fetchPriority="high" decoding="async" srcSet="/site-assets/b1c49cd9be2fd13d.webp 800w, /site-assets/28c1aab4293b944a.webp 1280w, /site-assets/15fa9607b63661b1.webp 1920w" src="/site-assets/15fa9607b63661b1.webp" />
-            </figure>
+<SiteFilm film="fertigung" eager />
+</figure>
           </div>
         </div>
       </section>

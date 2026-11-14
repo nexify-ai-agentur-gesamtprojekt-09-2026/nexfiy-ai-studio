@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
-import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
+import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
+import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.css?raw";
 
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/teileklar")({
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(false);
+  useAtelierFilms();
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   const composerRef = useComposerFit(chatOpen, isMobile, viewportHeight);
   const pageContent = (<>
@@ -88,9 +90,9 @@ function Index() {
             </div>
           </div>
           <div className={"identity-media"}>
-            <div className={"tk-window-products"} aria-label="Einblicke ins Sortiment">
-              <div className={"tk-window-loading"} role="status">Sortiment momentan nicht erreichbar</div>
-            </div>
+            <figure className={"identity-hero-photo"}>
+<SiteFilm film="teileklar" eager />
+</figure>
           </div>
         </div>
       </section>
