@@ -3340,8 +3340,8 @@ html[data-theme="light"] #atelier { --as-front-licht: radial-gradient(34% 42% at
 
 
 /* ── Refinement: discreet, unified film controls (icon-only, all films, all viewports) ── */
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls,
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls {
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls {
   position: absolute; inset: auto auto 12px 12px; bottom: 12px;
   display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 2px;
   padding: 3px; border: 1px solid var(--color-atelier-film-control-edge); border-radius: 999px;
@@ -3349,30 +3349,30 @@ html[data-theme="light"] #atelier { --as-front-licht: radial-gradient(34% 42% at
   backdrop-filter: blur(14px); box-shadow: none;
   opacity: .72; transition: opacity .25s ease;
 }
-:root .workspace-shell .atelier-film.atelier-film:hover .atelier-film-controls,
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls button,
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls button,
-:root .workspace-shell .atelier-film.atelier-film .atelier-volume summary,
-:root .workspace-shell .atelier-film.atelier-film .atelier-volume summary {
+:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
   width: 30px; height: 30px; min-height: 30px; padding: 0; gap: 0;
   border: 0; border-radius: 999px; background: transparent; box-shadow: none;
   display: inline-grid; place-items: center; color: var(--color-atelier-ink);
 }
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls button:hover,
-:root .workspace-shell .atelier-film.atelier-film .atelier-volume summary:hover { background: var(--color-atelier-film-control-hover); }
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] { color: var(--color-marke-lime); }
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls button > span {
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:hover,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:hover { background: var(--color-atelier-film-control-hover); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] { color: var(--color-marke-lime); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button > span {
   position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
-:root .workspace-shell .atelier-film.atelier-film .atelier-film-controls svg { width: 14px; height: 14px; }
-:root .workspace-shell .atelier-film.atelier-film .atelier-volume, :root .workspace-shell .atelier-film.atelier-film .atelier-volume { margin: 0; position: relative; }
-:root .workspace-shell .atelier-film.atelier-film .atelier-volume > div { left: 0; right: auto; bottom: calc(100% + 8px); width: 180px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { width: 14px; height: 14px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume, :root:root #atelier .atelier-film.atelier-film .atelier-volume { margin: 0; position: relative; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume > div { left: 0; right: auto; bottom: calc(100% + 8px); width: 180px; }
 @media (max-width: 600px) {
-  :root .workspace-shell .atelier-film.atelier-film .atelier-film-controls,
-  :root .workspace-shell .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .85; }
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .85; }
   .atelier-film .atelier-film-controls button,
-  :root .workspace-shell .atelier-film.atelier-film .atelier-volume summary { width: 28px; height: 28px; min-height: 28px; }
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary { width: 28px; height: 28px; min-height: 28px; }
   .atelier-film .atelier-film-controls svg { width: 13px; height: 13px; }
 }
-@media (hover: none) { :root .workspace-shell .atelier-film.atelier-film .atelier-film-controls { opacity: .9; } }
+@media (hover: none) { :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { opacity: .9; } }
