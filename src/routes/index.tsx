@@ -1,23 +1,80 @@
 import type { CSSProperties } from "react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSyncExternalStore } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/captured.css?raw";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [{ title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
 
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
+  const [chatPreference, setChatPreference] = useState<boolean | null>(null);
+  const chatOpen = chatPreference ?? !isMobile;
+  const [scrolled, setScrolled] = useState(false);
+  const [heroActionVisible, setHeroActionVisible] = useState(true);
+  const [footerVisible, setFooterVisible] = useState(false);
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
+  const reopenRef = useRef<HTMLButtonElement>(null);
+  const focusAfterToggle = useRef<"composer" | "launcher" | null>(null);
+  const openChat = () => {
+    focusAfterToggle.current = "composer";
+    setChatPreference(true);
+  };
+  const closeChat = () => {
+    focusAfterToggle.current = "launcher";
+    setChatPreference(false);
+  };
+  useEffect(() => {
+    const target = focusAfterToggle.current;
+    focusAfterToggle.current = null;
+    if (target === "composer") document.getElementById("orientation-message")?.focus();
+    if (target === "launcher") reopenRef.current?.focus();
+  }, [chatOpen]);
+  useEffect(() => {
+    if (!chatOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !document.querySelector(".site-header details[open]")) closeChat();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [chatOpen]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onResize = () => setViewportHeight(window.innerHeight);
+    onScroll();
+    onResize();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    const observers: IntersectionObserver[] = [];
+    const heroAction = document.querySelector(".identity-primary-link");
+    if (heroAction) {
+      const observer = new IntersectionObserver(([entry]) => setHeroActionVisible(entry.isIntersecting));
+      observer.observe(heroAction);
+      observers.push(observer);
+    }
+    const footer = document.querySelector("#atelier footer");
+    if (footer) {
+      const observer = new IntersectionObserver(([entry]) => setFooterVisible(entry.isIntersecting));
+      observer.observe(footer);
+      observers.push(observer);
+    }
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
   useImportedLayout();
+  useAtelierFilms();
   return (
     <>
       <style>{capturedCSS}</style>
       <div hidden />
-      <div className={isMobile ? "workspace-shell site-nexify is-closed" : "workspace-shell site-nexify is-open"} id="atelier" data-hero-action-visible="true">
+      <div className={chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"} id="atelier" data-hero-action-visible={heroActionVisible ? "true" : undefined} data-scrolled={scrolled ? "true" : "false"} data-chat-compact={isMobile ? undefined : "false"} data-footer-visible={footerVisible ? "true" : "false"}>
         <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
           <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
             <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte" {...({ href: "/glass/linse.svg" } as any)} />
@@ -37,7 +94,7 @@ function Index() {
           <ImportedHeaderNeXifyAI />
           <main id="page-content" tabIndex={-1}>
             <div className={"home-concept"} data-fx="on">
-              <ImportedSectionEinGesprChEin />
+              <ImportedSectionEinGesprChEin onOpenChat={openChat} />
               <section className={"hc-intro hc-container is-in"} aria-labelledby="hc-intro-title">
                 <div>
                   <span className={"hc-kicker"}>Hier fängt die Arbeit an</span>
@@ -116,7 +173,7 @@ function Index() {
                 <div className={"hc-finish-next is-in"}>
                   <p>Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.</p>
                   <div className={"hc-finish-actions"}>
-                    <button aria-controls="aifly-panel" type="button" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
+                    <button aria-controls="aifly-panel" aria-expanded={chatOpen} type="button" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary" onClick={openChat}>Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
                   </div>
                   <small />
                 </div>
@@ -125,13 +182,45 @@ function Index() {
           </main>
           <ImportedFooterLassenSieUnsBer />
         </div>
-        <ImportedAsideAIFlyORACLE />
+        {!chatOpen && (
+          <button ref={reopenRef} aria-expanded="false" aria-controls="aifly-panel" type="button" className={"nexify-control secondary-button reopen-chat"} data-variant="secondary" onClick={openChat}>
+            <span className={"aifly-symbol oracle-companion"} data-state="idle" aria-hidden="true">
+              <img alt="" width="34" height="34" decoding="async" src="/site-assets/9176c58a16ff634a.png" />
+            </span>
+            Ihr Projekt mit NeXify
+          </button>
+        )}
+        <ImportedAsideAIFlyORACLE open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />
       </div>
     </>
   );
 }
 
 function ImportedHeaderNeXifyAI() {
+  const [openMenu, setOpenMenu] = useState<"products" | "mobile" | null>(null);
+  const productsSummary = useRef<HTMLElement>(null);
+  const mobileSummary = useRef<HTMLElement>(null);
+  const closeMenu = () => {
+    const summary = openMenu === "mobile" ? mobileSummary.current : productsSummary.current;
+    setOpenMenu(null);
+    summary?.focus();
+  };
+  useEffect(() => {
+    if (!openMenu) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.stopPropagation();
+      const summary = openMenu === "mobile" ? mobileSummary.current : productsSummary.current;
+      setOpenMenu(null);
+      summary?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openMenu]);
+  const toggleMenu = (menu: "products" | "mobile") => (event: React.MouseEvent) => {
+    event.preventDefault();
+    setOpenMenu((current) => (current === menu ? null : menu));
+  };
   return (
     <header className={"site-header"}>
       <a aria-label="NeXify AI · Startseite" className={"brand"} href="/">
@@ -147,8 +236,8 @@ function ImportedHeaderNeXifyAI() {
       </a>
       <nav className={"main-navigation"} aria-label="Hauptnavigation">
         <a href="/leistungen">Leistungen</a>
-        <details className={"product-navigation"}>
-          <summary aria-expanded="false" aria-controls="_R_14lb_-products">Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
+        <details className={"product-navigation"} open={openMenu === "products"}>
+          <summary ref={productsSummary} aria-expanded={openMenu === "products"} aria-controls="_R_14lb_-products" onClick={toggleMenu("products")}>Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
           <div className={"product-navigation-menu"} id="_R_14lb_-products">
             <div className={"megamenu-heading"}>
               <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
@@ -234,8 +323,8 @@ function ImportedHeaderNeXifyAI() {
         <a href="/wissen">Arbeitsweise</a>
         <a href="/kontakt">Kontakt</a>
       </nav>
-      <details className={"mobile-navigation"}>
-        <summary aria-label="Menü" aria-expanded="false" aria-controls="_R_14lb_-mobile">
+      <details className={"mobile-navigation"} open={openMenu === "mobile"}>
+        <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls="_R_14lb_-mobile" onClick={toggleMenu("mobile")}>
           <span className={"mobile-menu-mark"} aria-hidden="true">
             <i />
             <i />
@@ -331,28 +420,17 @@ function ImportedHeaderNeXifyAI() {
               </svg>
             </a>
           </div>
-          <button type="button" className={"nexify-control  "} data-variant="quiet">Menü schließen</button>
+          <button type="button" className={"nexify-control  "} data-variant="quiet" onClick={closeMenu}>Menü schließen</button>
         </nav>
       </details>
       <div className={"header-actions"}>
-        <label className={"visually-hidden"} htmlFor="locale" id="bb-customSelect-am2pU-label">Sprache</label>
-        <div className={"bb-custom-select-container bb-customSelect"}>
-          <span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-am2pU-panel" aria-activedescendant="bb-customSelect-am2pU-selectedOption" aria-labelledby="bb-customSelect-am2pU-label" tabIndex={0}>
-            <span>DE</span>
-          </span>
-          <select id="locale" aria-describedby="locale-hint" tabIndex={-1} defaultValue="de">
-            <option value="de" selected>DE</option>
-            <option value="nl">NL</option>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-          </select>
-          <div id="bb-customSelect-am2pU-panel" className={"bb-custom-select-panel"} role="listbox">
-            <div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-am2pU-selectedOption">DE</div>
-            <div className={"bb-custom-select-option"} role="option">NL</div>
-            <div className={"bb-custom-select-option"} role="option">FR</div>
-            <div className={"bb-custom-select-option"} role="option">EN</div>
-          </div>
-        </div>
+        <label className={"visually-hidden"} htmlFor="locale">Sprache</label>
+        <select id="locale" aria-describedby="locale-hint" defaultValue="de">
+          <option value="de">DE</option>
+          <option value="nl">NL</option>
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+        </select>
         <span id="locale-hint" className={"visually-hidden"}>Auswahl mit der Eingabetaste bestätigen.</span>
         <button type="button" className={"theme-switch"} role="switch" aria-checked="false" aria-label="Helle Ansicht" title="Helle Ansicht">
           <svg className={"theme-sun"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
@@ -369,7 +447,7 @@ function ImportedHeaderNeXifyAI() {
   );
 }
 
-function ImportedSectionEinGesprChEin() {
+function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }) {
   return (
     <section className={"identity-hero"} aria-labelledby="home-headline">
       <div className={"identity-scene"}>
@@ -382,7 +460,7 @@ function ImportedSectionEinGesprChEin() {
           <p className={"identity-subtitle"}>Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.</p>
           <p className={"identity-body"}>Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Und Sie wissen vor dem Start, was enthalten ist.</p>
           <div className={"identity-links"}>
-            <button aria-controls="aifly-panel" type="button" className={"nexify-control primary-button identity-primary-link"} data-variant="primary">
+            <button aria-controls="aifly-panel" type="button" className={"nexify-control primary-button identity-primary-link"} data-variant="primary" onClick={onOpenChat}>
               <span>Vorhaben schildern</span>
               <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
             </button>
@@ -895,9 +973,9 @@ function ImportedFooterLassenSieUnsBer() {
   );
 }
 
-function ImportedAsideAIFlyORACLE() {
+function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
   return (
-    <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" style={{ "--chat-viewport-height": "864px", "--chat-viewport-top": "0px" } as CSSProperties} data-site-import-responsive="398">
+    <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
       <div className={"panel-heading"}>
         <div className={"panel-heading-copy"}>
@@ -908,7 +986,7 @@ function ImportedAsideAIFlyORACLE() {
             <h2 className={"nx-oracle-name panel-brandline"}><strong>AIFly ORACLE</strong> <span className={"panel-identity-subtitle"}>with NeXify AI Intelligence by NeXify</span></h2>
           </div>
         </div>
-        <button aria-label="Beratung einklappen" title="Beratung einklappen" type="button" className={"nexify-control icon-button panel-minimize"} data-variant="icon">
+        <button aria-label="Beratung einklappen" title="Beratung einklappen" type="button" className={"nexify-control icon-button panel-minimize"} data-variant="icon" onClick={onClose}>
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
             <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -1109,6 +1187,104 @@ function useImportedLayout() {
       document.removeEventListener("load", handleScroll, true);
       window.removeEventListener("resize", resizeSummaries);
       document.removeEventListener("scroll", handleScroll, true);
+    };
+  }, []);
+}
+
+const PLAY_ICON = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";
+const PAUSE_ICON = "M5.5 3.5h3v13h-3Zm6 0h3v13h-3Z";
+
+function useAtelierFilms() {
+  useEffect(() => {
+    const films = Array.from(document.querySelectorAll<HTMLElement>(".atelier-film")).slice(0, 16);
+    const videos: HTMLVideoElement[] = [];
+    const cleanups: (() => void)[] = [];
+    const autoPaused = new WeakSet<HTMLVideoElement>();
+    const listen = (target: EventTarget, type: string, handler: EventListener) => {
+      target.addEventListener(type, handler);
+      cleanups.push(() => target.removeEventListener(type, handler));
+    };
+    for (const film of films) {
+      const video = film.querySelector("video");
+      if (!video) continue;
+      videos.push(video);
+      const buttons = Array.from(film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"));
+      const playButton = buttons[0];
+      const soundButton = buttons.find((button) => /Ton/.test(button.getAttribute("aria-label") || ""));
+      const captionsButton = buttons.find((button) => button.getAttribute("aria-label") === "Untertitel");
+      const fallback = film.querySelector<HTMLImageElement>(".atelier-film-fallback");
+      const bar = film.querySelector<HTMLElement>(".atelier-film-progress span");
+      const volume = film.querySelector<HTMLInputElement>('.atelier-volume input[type="range"]');
+      const sync = () => {
+        if (playButton) {
+          playButton.setAttribute("aria-label", video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren");
+          const label = playButton.querySelector("span");
+          if (label) label.textContent = video.paused ? "Abspielen" : "Pausieren";
+          playButton.querySelector("path")?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
+        }
+        if (soundButton) {
+          soundButton.setAttribute("aria-label", video.muted ? "Film mit Ton starten" : "Ton ausschalten");
+          const label = soundButton.querySelector("span");
+          if (label) label.textContent = video.muted ? "Ton an" : "Ton aus";
+        }
+        if (fallback && !video.paused) fallback.hidden = true;
+        if (bar && video.duration > 0) bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
+      };
+      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"]) listen(video, type, sync);
+      listen(video, "play", () => {
+        for (const other of videos) if (other !== video && !other.paused) other.pause();
+      });
+      if (playButton)
+        listen(playButton, "click", () => {
+          autoPaused.delete(video);
+          if (video.paused) void video.play().catch(() => {});
+          else video.pause();
+        });
+      if (soundButton)
+        listen(soundButton, "click", () => {
+          if (video.muted) {
+            video.currentTime = 0;
+            video.muted = false;
+            void video.play().catch(() => {});
+          } else video.muted = true;
+        });
+      if (captionsButton)
+        listen(captionsButton, "click", () => {
+          const pressed = captionsButton.getAttribute("aria-pressed") !== "true";
+          captionsButton.setAttribute("aria-pressed", String(pressed));
+          const track = video.textTracks[0];
+          if (track) track.mode = pressed ? "showing" : "hidden";
+        });
+      if (volume) {
+        listen(volume, "input", () => {
+          video.volume = Number(volume.value);
+        });
+        video.volume = Number(volume.value);
+      }
+      sync();
+    }
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (!entry.isIntersecting && !video.paused) {
+          autoPaused.add(video);
+          video.pause();
+        } else if (entry.isIntersecting && autoPaused.has(video)) {
+          autoPaused.delete(video);
+          void video.play().catch(() => {});
+        }
+      }
+    });
+    videos.forEach((video) => observer.observe(video));
+    const heroVideo = document.querySelector<HTMLVideoElement>(".identity-hero video");
+    if (heroVideo && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      heroVideo.muted = true;
+      void heroVideo.play().catch(() => {});
+    }
+    return () => {
+      observer.disconnect();
+      cleanups.forEach((cleanup) => cleanup());
+      videos.forEach((video) => video.pause());
     };
   }, []);
 }
