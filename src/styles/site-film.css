@@ -39,3 +39,5 @@
 /* Fallback poster stays visible until playback starts, on every page. */
 :root:root #atelier .atelier-film.atelier-film .atelier-film-fallback { aspect-ratio: 16 / 9; height: auto; inset: 0 auto auto 0; }
 :root:root #atelier .identity-hero-photo .atelier-film { width: 100%; }
+:root:root #atelier .identity-media:has(.atelier-film) { width: 100%; max-width: none; justify-self: stretch; }
+:root:root #atelier .identity-media:has(.atelier-film) > .identity-hero-photo { width: 100%; max-width: none; margin-inline: 0; }
