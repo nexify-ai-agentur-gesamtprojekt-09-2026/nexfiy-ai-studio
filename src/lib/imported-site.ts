@@ -113,14 +113,29 @@ export function useComposerFit(open: boolean, ...deps: unknown[]) {
   const composerRef = useRef<HTMLTextAreaElement>(null);
   const firstRun = useRef(true);
   useEffect(() => {
+    const composer = composerRef.current;
+    if (!open || !composer) {
+      if (composer) firstRun.current = false;
+      return;
+    }
     const initial = firstRun.current;
     firstRun.current = false;
-    const composer = composerRef.current;
-    if (!open || !composer) return;
     fitComposer(composer);
     // Like the original, a panel that is open on page load starts scrolled to its latest entry.
     const log = composer.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
-    if (initial && log) log.scrollTop = log.scrollHeight;
+    if (!initial || !log) return;
+    const toLatest = () => {
+      log.scrollTop = log.scrollHeight;
+    };
+    toLatest();
+    const frame = requestAnimationFrame(toLatest);
+    const timer = window.setTimeout(toLatest, 400);
+    window.addEventListener("load", toLatest, { once: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(timer);
+      window.removeEventListener("load", toLatest);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, ...deps]);
   return composerRef;
