@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
-import { fitComposer, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals } from "../lib/imported-site";
+import { fitComposer, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals, useAtelierFilms } from "../lib/imported-site";
+import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/leistungen.css?raw";
 
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/leistungen")({
 function Index() {
   const isMobile = useSyncExternalStore(subscribeMobile, () => matchMedia("(max-width: 767px)").matches, () => false);
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
+  useAtelierFilms();
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   return (
     <>
@@ -73,8 +75,8 @@ function Index() {
                   </div>
                   <div className={"identity-media"}>
                     <figure className={"identity-hero-photo"}>
-                      <img src="/site-assets/5b8e74b98d950c05.webp" srcSet="/site-assets/05d4134e5686af4f.webp 800w, /site-assets/55d521535e5fc86c.webp 1280w, /site-assets/5b8e74b98d950c05.webp 1920w" sizes="(max-width: 820px) 100vw, 60vw" alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier" width="2000" height="1125" loading="eager" fetchPriority="high" decoding="async" />
-                    </figure>
+<SiteFilm film="angebot" eager />
+</figure>
                   </div>
                 </div>
               </section>

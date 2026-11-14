@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import { useEffect } from "react";
 import { fitComposer, useAtelierFilms, useChatPanel, useComposerFit, useHeaderMenus, useShellSignals } from "../lib/imported-site";
 import { useSyncExternalStore } from "react";
+import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/captured.css?raw";
 
@@ -401,55 +402,7 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img className={"atelier-film-fallback"} alt="Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes" aria-hidden="false" width="1280" height="720" src="/site-assets/05c51cdebbdd2aa6.webp" />
-                <video src="/site-assets/e27f88efd05374ec.mp4" poster="/site-assets/05c51cdebbdd2aa6.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Pascal im Studio">
-                  <track kind="captions" label="Deutsch" srcLang="de" />
-                </video>
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Erneut abspielen">
-                    <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <button type="button" aria-label="Untertitel" aria-pressed="false">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <rect x="2" y="5" width="20" height="14" rx="3" />
-                      <path d="M10 9a3 3 0 1 0 0 6m9-6a3 3 0 1 0 0 6" />
-                    </svg>
-                    <span>Untertitel</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_4ainmlb_-volume">Lautstärke<input id="_R_4ainmlb_-volume" type="range" min="0" max="1" step="0.05" defaultValue="0.8" /></label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0.602545)" }} data-site-import-responsive="601" />
-                </div>
-              </div>
-              <details className={"atelier-film-transcript"}>
-                <summary>Gesprochener Text</summary>
-                <p lang="de">Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität und zu einem fairen Preis. Erzählen Sie mir, woran Sie gerade arbeiten.</p>
-              </details>
-            </div>
+            <SiteFilm film="studio" eager />
           </figure>
         </div>
       </div>
@@ -463,42 +416,7 @@ function ImportedNavWoHaktEsGerade() {
       <article className={"hc-gallery-card is-in"}>
         <div className={"identity-media hc-art hc-art-0"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img className={"atelier-film-fallback"} src="/site-assets/5c592a5dc791fcc3.webp" alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch" aria-hidden="false" width="1280" height="720" />
-                <video src="/site-assets/e3638738b1263f00.mp4" poster="/site-assets/5c592a5dc791fcc3.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Ihr Angebot, auf den Punkt." />
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Film abspielen">
-                    <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_aiinmlb_-volume">Lautstärke<input id="_R_aiinmlb_-volume" type="range" min="0" max="1" step="0.05" defaultValue="0.8" /></label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0)" }} />
-                </div>
-              </div>
-            </div>
+            <SiteFilm film="angebot" />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/websites">
@@ -512,42 +430,7 @@ function ImportedNavWoHaktEsGerade() {
       <article className={"hc-gallery-card is-in"}>
         <div className={"identity-media hc-art hc-art-1"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img className={"atelier-film-fallback"} src="/site-assets/15fa9607b63661b1.webp" alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei" aria-hidden="false" width="1280" height="720" />
-                <video src="/site-assets/8b4870140b46d3f8.mp4" poster="/site-assets/15fa9607b63661b1.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Mehr Zeit für die Arbeit, die zählt." />
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Film abspielen">
-                    <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_ciinmlb_-volume">Lautstärke<input id="_R_ciinmlb_-volume" type="range" min="0" max="1" step="0.05" defaultValue="0.8" /></label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0)" }} />
-                </div>
-              </div>
-            </div>
+            <SiteFilm film="fertigung" />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/agenten-automatisierung">
@@ -561,42 +444,7 @@ function ImportedNavWoHaktEsGerade() {
       <article className={"hc-gallery-card is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":1296}}"}>
         <div className={"identity-media hc-art hc-art-2"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img className={"atelier-film-fallback"} src="/site-assets/506495187c091a6f.webp" alt="Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons; begleitet von NeX und AIFly ORACLE" aria-hidden="false" width="1280" height="720" />
-                <video src="/site-assets/086cadaa7ccbfdc9.mp4" poster="/site-assets/506495187c091a6f.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Das richtige Teil. Der richtige Weg." />
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Film abspielen">
-                    <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_eiinmlb_-volume">Lautstärke<input id="_R_eiinmlb_-volume" type="range" min="0" max="1" step="0.05" defaultValue="0.8" /></label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0)" }} />
-                </div>
-              </div>
-            </div>
+            <SiteFilm film="teileklar" />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/teileklar">

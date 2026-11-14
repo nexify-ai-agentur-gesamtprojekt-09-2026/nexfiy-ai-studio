@@ -1,0 +1,43 @@
+/* Shared film player refinements – loaded once by <SiteFilm>, applies to every page (#atelier shell). */
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls {
+  position: absolute; inset: auto auto 12px 12px; bottom: 12px;
+  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 2px;
+  padding: 3px; border: 1px solid var(--color-atelier-film-control-edge); border-radius: 999px;
+  background: color-mix(in oklab, var(--color-atelier-film-control-fill) 70%, transparent);
+  backdrop-filter: blur(14px); box-shadow: none;
+  opacity: .72; transition: opacity .25s ease;
+}
+:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
+  width: 30px; min-width: 30px; max-width: 30px; height: 30px; min-height: 30px; padding: 0; gap: 0; margin: 0;
+  border: 0; border-radius: 999px; background: transparent; box-shadow: none;
+  display: inline-grid; place-items: center; color: var(--color-atelier-ink);
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:hover,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:hover { background: var(--color-atelier-film-control-hover); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] { color: var(--color-marke-lime); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button > span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { width: 14px; height: 14px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume, :root:root #atelier .atelier-film.atelier-film .atelier-volume { margin: 0; position: relative; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume > div { left: 0; right: auto; bottom: calc(100% + 8px); width: 180px; }
+@media (max-width: 600px) {
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .85; }
+  .atelier-film .atelier-film-controls button,
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary { width: 28px; min-width: 28px; max-width: 28px; height: 28px; min-height: 28px; }
+  .atelier-film .atelier-film-controls svg { width: 13px; height: 13px; }
+}
+@media (hover: none) { :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { opacity: .9; } }
+
+/* Fallback poster stays visible until playback starts, on every page. */
+:root:root #atelier .atelier-film.atelier-film .atelier-film-fallback { aspect-ratio: 16 / 9; height: auto; inset: 0 auto auto 0; }
+:root:root #atelier .identity-hero-photo .atelier-film { width: 100%; }
+:root:root #atelier .identity-media:has(.atelier-film) { width: 100%; max-width: none; justify-self: stretch; }
+:root:root #atelier .identity-media:has(.atelier-film) > .identity-hero-photo { width: 100%; max-width: none; margin-inline: 0; }
