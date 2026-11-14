@@ -70,77 +70,71 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border-strong: var(--border-strong);
+  --color-brand-signal: var(--brand-signal);
+  --color-surface-raised: var(--surface-raised);
+  --font-heading: var(--font-brand-display);
+  --font-label: var(--font-brand-mono);
+  --ease-brand: var(--ease-brand);
 }
 
+/* Brand fonts (self-hosted copies in /public/site-assets). The imported page stylesheets declare the
+   same faces; declaring them here lets system pages (not found, error) use them too. */
+@font-face { font-family: Inter; src: url("/site-assets/0848630eef4b593d.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Plus Jakarta Sans"; src: url("/site-assets/f7f6e92afae6f3df.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url("/site-assets/a978be7d3173a36e.woff2") format("woff2"); font-display: swap; }
+
+/* NeXify dark palette (graphite + lime) on the shadcn roles, so every new UI piece matches the pages. */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
-
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --radius: 0.75rem;
+  --background: oklch(0.2315 0.0049 173.96);
+  --foreground: oklch(0.9558 0.0086 84.57);
+  --card: oklch(0.2803 0.0068 164.5);
+  --card-foreground: oklch(0.9558 0.0086 84.57);
+  --popover: oklch(0.3264 0.0089 173.77);
+  --popover-foreground: oklch(0.9558 0.0086 84.57);
+  --primary: oklch(0.786 0.125 124.36);
+  --primary-foreground: oklch(0.154 0.0092 264.28);
+  --secondary: oklch(0.2965 0.0067 164.54);
+  --secondary-foreground: oklch(0.9558 0.0086 84.57);
+  --muted: oklch(0.2965 0.0067 164.54);
+  --muted-foreground: oklch(0.783 0.0087 157.04);
+  --accent: oklch(0.3264 0.0089 173.77);
+  --accent-foreground: oklch(0.9558 0.0086 84.57);
+  --destructive: oklch(0.7582 0.1448 29.02);
+  --destructive-foreground: oklch(0.154 0.0092 264.28);
+  --success: oklch(0.8426 0.11 180.74);
+  --warning: oklch(0.8489 0.149 80.87);
+  --border: oklch(1 0 0 / 9%);
+  --border-strong: oklch(1 0 0 / 18%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.8861 0.2017 123.37);
+  --brand-signal: oklch(0.8861 0.2017 123.37);
+  --surface-raised: oklch(0.3264 0.0089 173.77);
+  --chart-1: oklch(0.786 0.125 124.36);
+  --chart-2: oklch(0.8426 0.11 180.74);
+  --chart-3: oklch(0.8489 0.149 80.87);
+  --chart-4: oklch(0.7949 0.0125 223.56);
+  --chart-5: oklch(0.7582 0.1448 29.02);
+  --sidebar: oklch(0.2803 0.0068 164.5);
+  --sidebar-foreground: oklch(0.9558 0.0086 84.57);
+  --sidebar-primary: oklch(0.786 0.125 124.36);
+  --sidebar-primary-foreground: oklch(0.154 0.0092 264.28);
+  --sidebar-accent: oklch(0.3264 0.0089 173.77);
+  --sidebar-accent-foreground: oklch(0.9558 0.0086 84.57);
+  --sidebar-border: oklch(1 0 0 / 9%);
+  --sidebar-ring: oklch(0.8861 0.2017 123.37);
+  --font-brand-text: Inter, "Segoe UI", system-ui, sans-serif;
+  --font-brand-display: "Plus Jakarta Sans", Inter, "Segoe UI", system-ui, sans-serif;
+  --font-brand-mono: "Geist Mono", ui-monospace, "Courier New", monospace;
+  --gradient-surface: linear-gradient(180deg, oklch(0.3264 0.0089 173.77) 0%, oklch(0.2803 0.0068 164.5) 100%);
+  --gradient-stage-glow: radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
+    radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
+  --elevation-card: inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%), 0 2px 6px oklch(0 0 0 / 30%);
+  --elevation-primary: inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%), 0 2px 0 oklch(0 0 0 / 30%);
+  --ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
 }
 
 @layer base {
