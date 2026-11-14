@@ -24,6 +24,8 @@ function Index() {
   useImportedLayout();
   return (
     <NexifyShell heroActionSelector=".identity-primary-link">
+      {({ chatOpen, openChat }) => (
+        <>
             <div className={"home-concept"} data-fx="on">
               <ImportedSectionEinGesprChEin onOpenChat={openChat} />
               <section className={"hc-intro hc-container is-in"} aria-labelledby="hc-intro-title">
@@ -110,6 +112,8 @@ function Index() {
                 </div>
               </section>
             </div>
+        </>
+      )}
     </NexifyShell>
   );
 }

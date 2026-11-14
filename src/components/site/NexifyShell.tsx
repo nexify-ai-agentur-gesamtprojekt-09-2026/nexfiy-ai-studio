@@ -1,4 +1,10 @@
 import type { ReactNode } from "react";
+
+export interface ShellChat {
+  chatOpen: boolean;
+  openChat: () => void;
+  closeChat: () => void;
+}
 import shellCSS from "../../styles/site-shell.css?url";
 import { useAtelierFilms, useChatPanel, useImportedMobile, useLoopingVideos, useShellSignals } from "@/lib/imported-site";
 import { GlassLensFilters } from "./GlassLensFilters";
@@ -10,7 +16,14 @@ import { OracleAside } from "./OracleAside";
  * Page frame of every NeXify page: header, footer, AIFly ORACLE panel and the scroll/footer signals the
  * imported styles react to. Routes pass only their page body.
  */
-export function NexifyShell({ children, heroActionSelector }: { children: ReactNode; heroActionSelector?: string }) {
+export function NexifyShell({
+  children,
+  heroActionSelector,
+}: {
+  /** Page body; pass a function to reach the chat panel controls (e.g. a call to action that opens it). */
+  children: ReactNode | ((chat: ShellChat) => ReactNode);
+  heroActionSelector?: string;
+}) {
   const isMobile = useImportedMobile();
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
   const { scrolled, heroActionVisible, footerVisible, viewportHeight } = useShellSignals(heroActionSelector);
@@ -33,7 +46,7 @@ export function NexifyShell({ children, heroActionSelector }: { children: ReactN
         </a>
         <NexifyHeader />
         <main id="page-content" tabIndex={-1}>
-          {children}
+          {typeof children === "function" ? children({ chatOpen, openChat, closeChat }) : children}
         </main>
         <NexifyFooter />
       </div>
