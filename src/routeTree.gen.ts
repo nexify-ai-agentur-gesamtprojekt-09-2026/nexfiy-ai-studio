@@ -19,6 +19,12 @@ import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
+import { Route as ProdukteAiflyOracleRouteImport } from './routes/produkte_.aifly-oracle'
+import { Route as ProdukteApiRouteImport } from './routes/produkte_.api'
+import { Route as ProdukteNexAgenticAiflyRouteImport } from './routes/produkte_.nex-agentic-aifly'
+import { Route as ProdukteNex2flyRouteImport } from './routes/produkte_.nex2fly'
+import { Route as ProdukteOneRouteImport } from './routes/produkte_.one'
+import { Route as ProdukteSkillsMcpRouteImport } from './routes/produkte_.skills-mcp'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 
@@ -72,6 +78,36 @@ const VertragsgrundlagenRoute = VertragsgrundlagenRouteImport.update({
   path: '/vertragsgrundlagen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProdukteAiflyOracleRoute = ProdukteAiflyOracleRouteImport.update({
+  id: '/produkte_/aifly-oracle',
+  path: '/produkte/aifly-oracle',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteApiRoute = ProdukteApiRouteImport.update({
+  id: '/produkte_/api',
+  path: '/produkte/api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteNexAgenticAiflyRoute = ProdukteNexAgenticAiflyRouteImport.update({
+  id: '/produkte_/nex-agentic-aifly',
+  path: '/produkte/nex-agentic-aifly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteNex2flyRoute = ProdukteNex2flyRouteImport.update({
+  id: '/produkte_/nex2fly',
+  path: '/produkte/nex2fly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteOneRoute = ProdukteOneRouteImport.update({
+  id: '/produkte_/one',
+  path: '/produkte/one',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdukteSkillsMcpRoute = ProdukteSkillsMcpRouteImport.update({
+  id: '/produkte_/skills-mcp',
+  path: '/produkte/skills-mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
   id: '/teileklar_/partner-werden',
   path: '/teileklar/partner-werden',
@@ -94,6 +130,12 @@ export interface FileRoutesByFullPath {
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte/api': typeof ProdukteApiRoute
+  '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte/one': typeof ProdukteOneRoute
+  '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
@@ -108,6 +150,12 @@ export interface FileRoutesByTo {
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/produkte/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte/api': typeof ProdukteApiRoute
+  '/produkte/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte/one': typeof ProdukteOneRoute
+  '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
 }
@@ -123,6 +171,12 @@ export interface FileRoutesById {
   '/leistungen': typeof LeistungenRoute
   '/teileklar': typeof TeileklarRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
+  '/produkte_/aifly-oracle': typeof ProdukteAiflyOracleRoute
+  '/produkte_/api': typeof ProdukteApiRoute
+  '/produkte_/nex-agentic-aifly': typeof ProdukteNexAgenticAiflyRoute
+  '/produkte_/nex2fly': typeof ProdukteNex2flyRoute
+  '/produkte_/one': typeof ProdukteOneRoute
+  '/produkte_/skills-mcp': typeof ProdukteSkillsMcpRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
 }
@@ -139,6 +193,12 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/teileklar'
     | '/vertragsgrundlagen'
+    | '/produkte/aifly-oracle'
+    | '/produkte/api'
+    | '/produkte/nex-agentic-aifly'
+    | '/produkte/nex2fly'
+    | '/produkte/one'
+    | '/produkte/skills-mcp'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +213,12 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/teileklar'
     | '/vertragsgrundlagen'
+    | '/produkte/aifly-oracle'
+    | '/produkte/api'
+    | '/produkte/nex-agentic-aifly'
+    | '/produkte/nex2fly'
+    | '/produkte/one'
+    | '/produkte/skills-mcp'
     | '/teileklar/partner-werden'
     | '/teileklar/werkstatt'
   id:
@@ -167,6 +233,12 @@ export interface FileRouteTypes {
     | '/leistungen'
     | '/teileklar'
     | '/vertragsgrundlagen'
+    | '/produkte_/aifly-oracle'
+    | '/produkte_/api'
+    | '/produkte_/nex-agentic-aifly'
+    | '/produkte_/nex2fly'
+    | '/produkte_/one'
+    | '/produkte_/skills-mcp'
     | '/teileklar_/partner-werden'
     | '/teileklar_/werkstatt'
   fileRoutesById: FileRoutesById
@@ -182,6 +254,12 @@ export interface RootRouteChildren {
   LeistungenRoute: typeof LeistungenRoute
   TeileklarRoute: typeof TeileklarRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
+  ProdukteAiflyOracleRoute: typeof ProdukteAiflyOracleRoute
+  ProdukteApiRoute: typeof ProdukteApiRoute
+  ProdukteNexAgenticAiflyRoute: typeof ProdukteNexAgenticAiflyRoute
+  ProdukteNex2flyRoute: typeof ProdukteNex2flyRoute
+  ProdukteOneRoute: typeof ProdukteOneRoute
+  ProdukteSkillsMcpRoute: typeof ProdukteSkillsMcpRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
 }
@@ -258,6 +336,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VertragsgrundlagenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/produkte_/aifly-oracle': {
+      id: '/produkte_/aifly-oracle'
+      path: '/produkte/aifly-oracle'
+      fullPath: '/produkte/aifly-oracle'
+      preLoaderRoute: typeof ProdukteAiflyOracleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/api': {
+      id: '/produkte_/api'
+      path: '/produkte/api'
+      fullPath: '/produkte/api'
+      preLoaderRoute: typeof ProdukteApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/nex-agentic-aifly': {
+      id: '/produkte_/nex-agentic-aifly'
+      path: '/produkte/nex-agentic-aifly'
+      fullPath: '/produkte/nex-agentic-aifly'
+      preLoaderRoute: typeof ProdukteNexAgenticAiflyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/nex2fly': {
+      id: '/produkte_/nex2fly'
+      path: '/produkte/nex2fly'
+      fullPath: '/produkte/nex2fly'
+      preLoaderRoute: typeof ProdukteNex2flyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/one': {
+      id: '/produkte_/one'
+      path: '/produkte/one'
+      fullPath: '/produkte/one'
+      preLoaderRoute: typeof ProdukteOneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produkte_/skills-mcp': {
+      id: '/produkte_/skills-mcp'
+      path: '/produkte/skills-mcp'
+      fullPath: '/produkte/skills-mcp'
+      preLoaderRoute: typeof ProdukteSkillsMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar_/partner-werden': {
       id: '/teileklar_/partner-werden'
       path: '/teileklar/partner-werden'
@@ -286,6 +406,12 @@ const rootRouteChildren: RootRouteChildren = {
   LeistungenRoute: LeistungenRoute,
   TeileklarRoute: TeileklarRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
+  ProdukteAiflyOracleRoute: ProdukteAiflyOracleRoute,
+  ProdukteApiRoute: ProdukteApiRoute,
+  ProdukteNexAgenticAiflyRoute: ProdukteNexAgenticAiflyRoute,
+  ProdukteNex2flyRoute: ProdukteNex2flyRoute,
+  ProdukteOneRoute: ProdukteOneRoute,
+  ProdukteSkillsMcpRoute: ProdukteSkillsMcpRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
 }
