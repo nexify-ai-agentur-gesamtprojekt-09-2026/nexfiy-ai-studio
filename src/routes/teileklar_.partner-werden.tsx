@@ -171,7 +171,7 @@ function Index() {
             </div>
           </section>
         </div>
-        <form className={"tk-form"} method="post" noValidate aria-labelledby="contact-form-title">
+        <form onSubmit={(event) => event.preventDefault()} className={"tk-form"} method="post" noValidate aria-labelledby="contact-form-title">
           <h2 id="contact-form-title">Als Partnerwerkstatt anfragen</h2>
           <p className={"tk-meta"}>Pflichtfelder sind mit * markiert.</p>
           <div className={"tk-form-grid"}>
@@ -480,7 +480,7 @@ function Index() {
           <li data-state="open"><small>03</small>Nächsten Weg wählen</li>
         </ol>
       </div>
-      <form className={"orientation-composer"}>
+      <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
         <label htmlFor="orientation-message">Ihr Fahrzeug-/Teile-Anliegen</label>
         <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Ihr Fahrzeug-/Teile-Anliegen" aria-describedby="orientation-keys" required enterKeyHint="send" />
         <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>

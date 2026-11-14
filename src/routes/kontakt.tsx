@@ -83,7 +83,7 @@ function Index() {
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
               <section className={"hc-container pc-supplement"}>
-                <form className={"tk-form"} noValidate aria-labelledby="contact-form-title" method="post">
+                <form onSubmit={(event) => event.preventDefault()} className={"tk-form"} noValidate aria-labelledby="contact-form-title" method="post">
                   <h2 id="contact-form-title">Anfrage senden</h2>
                   <p className={"tk-meta"}>Pflichtfelder sind mit * markiert.</p>
                   <div className={"tk-form-grid"}>
@@ -700,7 +700,7 @@ function ImportedAsideAIFlyORACLE({ open, isMobile, viewportHeight, onClose }: {
               <li data-state="open"><small>03</small>Persönlich vertiefen</li>
             </ol>
           </div>
-          <form className={"orientation-composer"}>
+          <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
             <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required enterKeyHint="send" />
             <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>

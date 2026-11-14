@@ -357,7 +357,7 @@ function Index() {
           <li data-state="open"><small>03</small>Nächsten Weg wählen</li>
         </ol>
       </div>
-      <form className={"orientation-composer"}>
+      <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
         <label htmlFor="orientation-message">Ihr Fahrzeug-/Teile-Anliegen</label>
         <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Ihr Fahrzeug-/Teile-Anliegen" aria-describedby="orientation-keys" required enterKeyHint="send" />
         <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
