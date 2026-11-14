@@ -10,7 +10,7 @@
 - [x] Layout-Sprünge beim Laden (CLS 0.1–0.23 auf Unterseiten) beseitigen – jetzt ≤ 0.002 auf allen Seiten
 - [x] Seiten-Stylesheets als cachebare Dateien statt 420-KB-Text in HTML + JS (pixelgleich geprüft)
 - [x] Deutsche, markengerechte Fehler- und „Seite nicht gefunden“-Seite
-- [ ] Kontakt- und Partnerformular: Prüfung mit verständlichen Fehlermeldungen, Sende-, Erfolgs- und Fehlerzustand, echte Zustellung
+- [x] Kontakt- und Partnerformular: Prüfung mit verständlichen Fehlermeldungen, Bestätigung, Zustellung per E-Mail-Programm an mail@nexifyai.cloud
 - [ ] Buttons ohne Funktion (z. B. „Angebot anfragen“, „Terminwunsch nennen“) mit echter Funktion belegen
 - [ ] Chat-Eingabe: verständlicher Zustand statt stillem Nichts beim Absenden
 - [ ] Tastatur & Screenreader: Fokus-Ringe, Menüs, Chat-Panel auf allen Seiten prüfen

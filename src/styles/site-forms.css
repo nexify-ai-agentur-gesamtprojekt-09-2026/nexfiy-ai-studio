@@ -1,7 +1,7 @@
 /* Inquiry forms (contact, TEILEKLAR partner): field errors, summary and the e-mail hand-off state.
    Loaded once by <InquiryForm>; scoped to the #atelier shell like the captured page styles. */
 :root:root #atelier .tk-form[hidden] { display: none; }
-:root:root #atelier .tk-form .tk-field > .tk-field-label { font: inherit; color: inherit; letter-spacing: inherit; margin: 0; }
+:root:root #atelier .tk-form .tk-field > .tk-field-label { margin: 0; font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: normal; color: var(--color-text-sekundaer); }
 :root:root #atelier .tk-form .tk-field-error {
   display: flex; align-items: flex-start; gap: 6px; margin: 0;
   font-size: 13px; line-height: 1.45; color: var(--color-semantik-fehler);

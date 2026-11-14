@@ -110,7 +110,7 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Wir klären offene Punkte und den passenden Umfang. Dann erhalten Sie ein Angebot mit Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</p>
-                    <p>Nach dem Absenden bestätigt das Formular den Eingang. Sie können uns auch direkt schreiben.</p>
+                    <p>Nach dem Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie können uns auch direkt schreiben.</p>
                   </div>
                 </section>
               </div>
