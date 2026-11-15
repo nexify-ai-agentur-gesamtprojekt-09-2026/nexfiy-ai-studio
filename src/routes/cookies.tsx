@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/cookies.css?url";
 
 export const Route = createFileRoute("/cookies")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" }, { name: "description", content: "Informationen zu Cookies und zusätzlichen Diensten auf der NeXify-Website." }, { property: "og:title", content: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" }, { property: "og:description", content: "Informationen zu Cookies und zusätzlichen Diensten auf der NeXify-Website." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

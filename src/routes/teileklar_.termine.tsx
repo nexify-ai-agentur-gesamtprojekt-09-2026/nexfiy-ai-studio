@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.termine.css?raw";
 
 export const Route = createFileRoute("/teileklar_/termine")({
-  head: () => ({ meta: [{ title: "Termin? Direkt bei der Werkstatt. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Termin? Direkt bei der Werkstatt. · TEILEKLAR.shop" }, { name: "description", content: "Informationen zur direkten Terminvereinbarung mit Ihrer Werkstatt." }, { property: "og:title", content: "Termin? Direkt bei der Werkstatt. · TEILEKLAR.shop" }, { property: "og:description", content: "Informationen zur direkten Terminvereinbarung mit Ihrer Werkstatt." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

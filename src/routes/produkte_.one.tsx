@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.one.css?url";
 
 export const Route = createFileRoute("/produkte_/one")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Zwei Agenten. Eine klare Aufgabe. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Zwei Agenten. Eine klare Aufgabe. · NeXify AI" }, { name: "description", content: "AIFly ORACLE und NeX: Aufgaben ordnen und vereinbarte Arbeitsschritte gemeinsam ausführen." }, { property: "og:title", content: "Zwei Agenten. Eine klare Aufgabe. · NeXify AI" }, { property: "og:description", content: "AIFly ORACLE und NeX: Aufgaben ordnen und vereinbarte Arbeitsschritte gemeinsam ausführen." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

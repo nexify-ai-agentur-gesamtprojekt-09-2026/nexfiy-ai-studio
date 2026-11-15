@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
 
 export const Route = createFileRoute("/barrierefreiheit")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }, { name: "description", content: "Informationen zur zugänglichen Nutzung und Barrierefreiheit der NeXify-Website." }, { property: "og:title", content: "Qualität soll zugänglich sein. · NeXify AI" }, { property: "og:description", content: "Informationen zur zugänglichen Nutzung und Barrierefreiheit der NeXify-Website." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

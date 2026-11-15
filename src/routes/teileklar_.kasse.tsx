@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.kasse.css?raw";
 
 export const Route = createFileRoute("/teileklar_/kasse")({
-  head: () => ({ meta: [{ title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }, { name: "description", content: "Der Kassenbereich von TEILEKLAR für den nächsten Schritt Ihrer Bestellung." }, { property: "og:title", content: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }, { property: "og:description", content: "Der Kassenbereich von TEILEKLAR für den nächsten Schritt Ihrer Bestellung." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

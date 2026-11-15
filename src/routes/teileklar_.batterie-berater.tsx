@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.batterie-berater.css?raw";
 
 export const Route = createFileRoute("/teileklar_/batterie-berater")({
-  head: () => ({ meta: [{ title: "Die passende Batterie finden. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Die passende Batterie finden. · TEILEKLAR.shop" }, { name: "description", content: "Informationen zur passenden Fahrzeugbatterie und den benötigten Fahrzeugangaben bei TEILEKLAR." }, { property: "og:title", content: "Die passende Batterie finden. · TEILEKLAR.shop" }, { property: "og:description", content: "Informationen zur passenden Fahrzeugbatterie und den benötigten Fahrzeugangaben bei TEILEKLAR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

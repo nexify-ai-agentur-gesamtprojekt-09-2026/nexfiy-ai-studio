@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/wissen.css?url";
 
 export const Route = createFileRoute("/wissen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "So arbeiten wir. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "So arbeiten wir. · NeXify AI" }, { name: "description", content: "Die Arbeitsweise von NeXify AI und Wissen für die Vorbereitung Ihres Projekts." }, { property: "og:title", content: "So arbeiten wir. · NeXify AI" }, { property: "og:description", content: "Die Arbeitsweise von NeXify AI und Wissen für die Vorbereitung Ihres Projekts." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

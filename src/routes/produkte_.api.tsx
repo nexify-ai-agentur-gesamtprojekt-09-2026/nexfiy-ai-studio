@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.api.css?url";
 
 export const Route = createFileRoute("/produkte_/api")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeXify API. KI in Ihrer Anwendung. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeXify API. KI in Ihrer Anwendung. · NeXify AI" }, { name: "description", content: "Informationen zur NeXify API und zur Einbindung von KI-Funktionen in Ihre eigene Anwendung." }, { property: "og:title", content: "NeXify API. KI in Ihrer Anwendung. · NeXify AI" }, { property: "og:description", content: "Informationen zur NeXify API und zur Einbindung von KI-Funktionen in Ihre eigene Anwendung." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

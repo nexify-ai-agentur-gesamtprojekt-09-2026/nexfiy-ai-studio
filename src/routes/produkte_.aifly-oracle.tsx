@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.aifly-oracle.css?url";
 
 export const Route = createFileRoute("/produkte_/aifly-oracle")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "AIFly ORACLE. Erst ordnen, dann handeln. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "AIFly ORACLE. Erst ordnen, dann handeln. · NeXify AI" }, { name: "description", content: "AIFly ORACLE unterstützt beim Ordnen von Fragen, Wissen und nächsten Schritten." }, { property: "og:title", content: "AIFly ORACLE. Erst ordnen, dann handeln. · NeXify AI" }, { property: "og:description", content: "AIFly ORACLE unterstützt beim Ordnen von Fragen, Wissen und nächsten Schritten." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

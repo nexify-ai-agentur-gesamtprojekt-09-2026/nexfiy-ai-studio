@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/datenschutz.css?url";
 
 export const Route = createFileRoute("/datenschutz")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { name: "description", content: "Erfahren Sie, wie NeXify personenbezogene Daten verarbeitet und welche Rechte Sie haben." }, { property: "og:title", content: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { property: "og:description", content: "Erfahren Sie, wie NeXify personenbezogene Daten verarbeitet und welche Rechte Sie haben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

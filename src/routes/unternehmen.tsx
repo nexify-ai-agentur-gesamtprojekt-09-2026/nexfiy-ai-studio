@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/unternehmen.css?url";
 
 export const Route = createFileRoute("/unternehmen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }, { name: "description", content: "NeXify AI: persönliche Projektbegleitung und ein Agententeam für digitale Vorhaben." }, { property: "og:title", content: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }, { property: "og:description", content: "NeXify AI: persönliche Projektbegleitung und ein Agententeam für digitale Vorhaben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.shop.css?raw";
 
 export const Route = createFileRoute("/teileklar_/shop")({
-  head: () => ({ meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { name: "description", content: "Das TEILEKLAR-Schaufenster für Teile und Zubehör für Auto und Motorrad." }, { property: "og:title", content: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { property: "og:description", content: "Das TEILEKLAR-Schaufenster für Teile und Zubehör für Auto und Motorrad." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

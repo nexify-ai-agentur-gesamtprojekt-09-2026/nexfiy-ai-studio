@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/loesungen.css?url";
 
 export const Route = createFileRoute("/loesungen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Kampagne und Zielseite aus einem Guss. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Kampagne und Zielseite aus einem Guss. · NeXify AI" }, { name: "description", content: "Kampagnenkonzept, Werbemittel und Zielseite gemeinsam entwickeln – mit klarem Budget und vereinbartem Ziel." }, { property: "og:title", content: "Kampagne und Zielseite aus einem Guss. · NeXify AI" }, { property: "og:description", content: "Kampagnenkonzept, Werbemittel und Zielseite gemeinsam entwickeln – mit klarem Budget und vereinbartem Ziel." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

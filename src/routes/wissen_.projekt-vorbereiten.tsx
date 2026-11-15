@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/wissen.projekt-vorbereiten.css?url";
 
 export const Route = createFileRoute("/wissen_/projekt-vorbereiten")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihr Briefing in fünf Fragen. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihr Briefing in fünf Fragen. · NeXify AI" }, { name: "description", content: "Bereiten Sie Ihr Projekt mit klaren Angaben zu Angebot, Zielgruppe, Umfang und gewünschtem Ergebnis vor." }, { property: "og:title", content: "Ihr Briefing in fünf Fragen. · NeXify AI" }, { property: "og:description", content: "Bereiten Sie Ihr Projekt mit klaren Angaben zu Angebot, Zielgruppe, Umfang und gewünschtem Ergebnis vor." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

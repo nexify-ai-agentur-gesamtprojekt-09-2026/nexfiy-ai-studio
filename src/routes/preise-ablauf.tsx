@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/preise-ablauf.css?url";
 
 export const Route = createFileRoute("/preise-ablauf")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Sie kennen die Kosten vor dem Start. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Sie kennen die Kosten vor dem Start. · NeXify AI" }, { name: "description", content: "Informationen zu Kalkulation, Projektkosten und Ablauf der Zusammenarbeit mit NeXify AI." }, { property: "og:title", content: "Sie kennen die Kosten vor dem Start. · NeXify AI" }, { property: "og:description", content: "Informationen zu Kalkulation, Projektkosten und Ablauf der Zusammenarbeit mit NeXify AI." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungen.agenten-automatisierung.css?url";
 
 export const Route = createFileRoute("/leistungen_/agenten-automatisierung")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Routine abgeben. Kontrolle behalten. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Routine abgeben. Kontrolle behalten. · NeXify AI" }, { name: "description", content: "KI-Agenten und Automatisierung für wiederkehrende Aufgaben mit klaren Freigaben und Kontrolle." }, { property: "og:title", content: "Routine abgeben. Kontrolle behalten. · NeXify AI" }, { property: "og:description", content: "KI-Agenten und Automatisierung für wiederkehrende Aufgaben mit klaren Freigaben und Kontrolle." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
