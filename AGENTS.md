@@ -37,3 +37,4 @@ use the editor.
 - Brand films render only through `src/components/SiteFilm.tsx` with data from `src/lib/site-films.ts` and styles in `src/styles/site-film.css`, so every page shows identical players and a film is defined once.
 - Playback rules live in `src/lib/media-policy.ts` and DOM wiring stays in `src/lib/imported-site.ts`; test the policy independently and keep media changes from rerendering page content.
 - Shared visual refinements use semantic roles from `src/styles.css` and high-specificity rules in the relevant shared stylesheet; apply scroll glass to the existing header pseudo-element so captured layers do not double-paint it.
+- ORACLE product advice uses a bounded public catalog in `oracle-products.ts`, a server-only AI Gateway call in `oracle.functions.ts`, and isolated state in `use-oracle-advice.ts`; never connect the public adviser to account data or MCP, and derive links from the catalog rather than model URLs.
