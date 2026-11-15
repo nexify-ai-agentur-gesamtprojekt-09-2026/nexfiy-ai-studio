@@ -1,4 +1,15 @@
 /* Scope refinements to the shared adviser; captured page layouts remain intact. */
+:root:root #atelier .oracle-advice .sdk-orientation-view { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+:root:root #atelier .oracle-advice .public-orientation { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; gap: 12px; padding: 16px 24px; }
+:root:root #atelier .oracle-advice .public-orientation::after { display: none; }
+:root:root #atelier .oracle-advice .oracle-conversation { flex: 1; min-height: 0; }
+:root:root #atelier .oracle-advice .orientation-content { padding: 16px 0; gap: 24px; }
+:root:root #atelier .oracle-advice .orientation-intro { position: static; transform: none; display: flex; flex-direction: column; gap: 16px; width: 100%; }
+:root:root #atelier .oracle-advice .orientation-host { min-height: 0; }
+:root:root #atelier .oracle-advice .orientation-host-figure { width: 80px; height: 80px; }
+:root:root #atelier .oracle-advice .orientation-host-name { display: none; }
+:root:root #atelier .oracle-advice .panel-brandline { font-size: 15px; line-height: 1.4; }
+:root:root #atelier .oracle-advice .panel-identity-subtitle { font-size: 12px; }
 :root:root #atelier .oracle-advice .orientation-content { overflow-y: auto; min-height: 0; overscroll-behavior: contain; scroll-padding-block: 16px; }
 :root:root #atelier .oracle-advice .orientation-starter { height: auto; min-height: 64px; width: 100%; white-space: normal; justify-content: start; text-align: left; }
 :root:root #atelier .oracle-advice .orientation-starter-copy { min-width: 0; flex: 1; }
@@ -6,7 +17,9 @@
 :root:root #atelier .oracle-advice .orientation-history { display: grid; gap: 24px; }
 :root:root #atelier .oracle-advice .orientation-history:empty { display: none; }
 :root:root #atelier .oracle-advice .oracle-message { min-width: 0; padding: 0; color: var(--foreground); }
-:root:root #atelier .oracle-advice .oracle-message[data-role="user"] { padding: 12px 16px; border-radius: 8px; background: var(--secondary); }
+:root:root #atelier .oracle-advice .oracle-message { max-width: 100%; }
+:root:root #atelier .oracle-advice .oracle-message-content { width: 100%; padding: 0; gap: 12px; }
+:root:root #atelier .oracle-advice .oracle-message[data-role="user"] .oracle-message-content { padding: 12px 16px; border-radius: 8px; background: var(--secondary); color: var(--foreground); }
 :root:root #atelier .oracle-advice .oracle-message-author { display: block; margin-bottom: 8px; font-size: 12px; line-height: 1.5; color: var(--muted-foreground); }
 :root:root #atelier .oracle-advice .oracle-message p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.6; letter-spacing: 0; }
 :root:root #atelier .oracle-advice .oracle-entry-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
@@ -15,6 +28,11 @@
 :root:root #atelier .oracle-advice .oracle-error { padding: 16px 0; color: var(--foreground); border-block: 1px solid var(--border); font-size: 14px; line-height: 1.6; }
 :root:root #atelier .oracle-advice .oracle-error a { text-decoration: underline; }
 :root:root #atelier .oracle-advice .orientation-composer { flex-shrink: 0; }
+:root:root #atelier .oracle-advice .orientation-composer { display: block; position: static; width: 100%; margin: 0; padding: 0; background: none; border: 0; box-shadow: none; }
+:root:root #atelier .oracle-advice .orientation-composer [data-slot="input-group"] { flex-direction: column; align-items: stretch; height: auto; border-radius: 8px; background: var(--secondary); border-color: var(--border-strong); padding: 8px; }
+:root:root #atelier .oracle-advice .orientation-composer-actions { display: flex; justify-content: flex-end; position: static; padding: 0; margin: 0; width: 100%; }
+:root:root #atelier .oracle-advice .orientation-composer textarea { position: static; border: 0; padding: 8px; box-shadow: none; border-radius: 0; width: 100%; margin: 0; }
+:root:root #atelier .oracle-advice .connection-note { margin: 0; flex-shrink: 0; font-size: 12px; line-height: 1.5; }
 :root:root #atelier .oracle-advice .orientation-composer textarea { max-height: 144px; min-height: 48px; resize: none; font-size: 16px; line-height: 1.5; color: var(--foreground); }
 :root:root #atelier .oracle-advice .orientation-composer textarea::placeholder { color: var(--muted-foreground); }
 :root:root #atelier .oracle-advice .orientation-composer button { min-width: 44px; min-height: 44px; }
@@ -22,7 +40,7 @@
 :root:root #atelier .oracle-advice .panel-heading > button { min-width: 44px; min-height: 44px; flex-shrink: 0; }
 :root:root #atelier .oracle-advice .panel-heading-copy { min-width: 0; flex: 1; }
 @media (max-width: 767px) {
-  :root:root #atelier .oracle-advice .orientation-host-figure { width: 96px; height: 96px; }
+  :root:root #atelier .oracle-advice .orientation-host-figure { width: 64px; height: 64px; }
   :root:root #atelier .oracle-advice .orientation-intro { gap: 16px; }
   :root:root #atelier .oracle-advice .connection-note { padding-bottom: max(8px, env(safe-area-inset-bottom)); }
 }

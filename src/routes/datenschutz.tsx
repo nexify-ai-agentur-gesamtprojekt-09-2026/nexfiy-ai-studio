@@ -49,7 +49,8 @@ function Index() {
                     <h2 id="content-privacy-ueberblick-0-title">Information passend zum Anliegen</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Für den ersten Kontakt reichen Ihr Ziel und eine Kontaktmöglichkeit. Senden Sie keine Passwörter, Schlüssel oder vertraulichen Kundendaten über öffentliche Felder. Projektunterlagen benötigen einen gesondert vereinbarten Übergabeweg.</p>
+                    <p>Für eine Anfrage genügen Ihr Vorhaben und eine Kontaktmöglichkeit. Geben Sie in öffentliche Felder keine Passwörter, API-Schlüssel, Zahlungsdaten oder vertraulichen Kundendaten ein. Für Projektunterlagen vereinbaren wir einen eigenen Übergabeweg.</p>
+                    <p>Für die ORACLE-Produktberatung werden Ihre Nachricht und der begrenzte Gesprächsverlauf über AI Gateway an ein KI-Modell übermittelt. Die Beratung verwendet die öffentlichen Produktinformationen, nicht Ihre Kontodaten. Der Gesprächsverlauf wird in dieser App nur während der geöffneten Seite gehalten; ein Neuladen setzt ihn zurück. Diese Aussage betrifft nicht die gesonderte Verarbeitung durch die beteiligten Dienste.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/cookies">Sie wählen, was zusätzlich aktiv wird.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
