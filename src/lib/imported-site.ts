@@ -264,11 +264,12 @@ export function useAtelierFilms() {
         film.removeAttribute("data-loading");
         showStatus("");
       });
-      listen(video, "error", () => {
+      const onMediaError = () => {
         film.removeAttribute("data-loading");
         if (fallback) fallback.hidden = false;
         showStatus("Der Film ist gerade nicht verfügbar. Bitte später erneut versuchen.");
-      });
+      };
+      listen(video, "error", onMediaError);
       listen(video, "play", () => {
         for (const other of videos) if (other !== video && !other.paused) other.pause();
       });
@@ -320,6 +321,8 @@ export function useAtelierFilms() {
         volumeSummary?.setAttribute("aria-expanded", "false");
       }
       sync();
+      // Preloaded media can fail before hydration attaches the error listener.
+      if (video.error) onMediaError();
     }
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
