@@ -1,4 +1,9 @@
 # Roadmap
+## ORACLE-Produktberatung (15.11.)
+- [ ] Öffentliche Suite/API-Produktinformationen als begrenzte Beratungsgrundlage hinterlegen
+- [ ] AI-Gateway-Beratung mit passenden lokalen Einstiegslinks im gemeinsamen ORACLE ergänzen
+- [ ] Antworten, Folgefragen, Fehlerzustände und Handy-Bedienung prüfen
+
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
 - [x] Kopfbereich beim Scrollen: bestehende Glasfläche, Menü-Fokus und mobile Bedienung vereinheitlicht
