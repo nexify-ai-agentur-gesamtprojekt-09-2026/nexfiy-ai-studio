@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
+import { mayAutoplayFilm, normalizeVolume } from "./media-policy";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
@@ -18,23 +19,17 @@ export function useImportedMobile() {
   return useSyncExternalStore(subscribePhone, () => matchMedia(PHONE_QUERY).matches, () => false);
 }
 
-/** Plays muted looping background videos only while they are on screen (decorative loops of some imported pages). */
+/** Imported decorative loops must not bypass the hero-only playback policy. */
 export function useLoopingVideos() {
   useEffect(() => {
     const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([autoplay]):not([controls])"))
       .filter((video) => video.muted && !video.closest("[data-site-import-carousel-store]"))
       .slice(0, 32);
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        const video = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) void video.play().catch(() => {});
-        else video.pause();
-      }
+    loopingVideos.forEach((video) => {
+      video.removeAttribute("autoplay");
+      video.pause();
     });
-    loopingVideos.forEach((video) => observer.observe(video));
     return () => {
-      observer.disconnect();
       loopingVideos.forEach((video) => video.pause());
     };
   }, []);
@@ -46,7 +41,14 @@ export function useShellSignals(heroActionSelector?: string) {
   const [footerVisible, setFooterVisible] = useState(false);
   const [viewportHeight, setViewportHeight] = useState<number | null>(null);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 40);
+        frame = 0;
+      });
+    };
     const onResize = () => setViewportHeight(window.innerHeight);
     onScroll();
     onResize();
@@ -67,6 +69,7 @@ export function useShellSignals(heroActionSelector?: string) {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
       window.removeEventListener("resize", onResize);
       observers.forEach((observer) => observer.disconnect());
     };
@@ -128,8 +131,25 @@ export function useHeaderMenus() {
       setOpenMenu(null);
       summary?.focus();
     };
+    const disclosure = summaryFor(openMenu).current?.closest("details");
+    const onPointer = (event: PointerEvent) => {
+      if (event.target instanceof Node && !disclosure?.contains(event.target)) setOpenMenu(null);
+    };
+    const onFocus = (event: FocusEvent) => {
+      if (event.target instanceof Node && !disclosure?.contains(event.target)) setOpenMenu(null);
+    };
+    const onResize = () => setOpenMenu(null);
+    const query = matchMedia(PHONE_QUERY);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    document.addEventListener("focusin", onFocus);
+    query.addEventListener("change", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+      document.removeEventListener("focusin", onFocus);
+      query.removeEventListener("change", onResize);
+    };
   }, [openMenu]);
   const toggleMenu = (menu: HeaderMenu) => (event: MouseEvent) => {
     event.preventDefault();
@@ -197,37 +217,72 @@ export function useAtelierFilms() {
       const fallback = film.querySelector<HTMLImageElement>(".atelier-film-fallback");
       const bar = film.querySelector<HTMLElement>(".atelier-film-progress span");
       const volume = film.querySelector<HTMLInputElement>('.atelier-volume input[type="range"]');
+      const volumeDetails = film.querySelector<HTMLDetailsElement>(".atelier-volume");
+      const volumeSummary = volumeDetails?.querySelector("summary");
+      const status = film.querySelector<HTMLElement>(".atelier-film-status");
+      const showStatus = (message: string) => {
+        if (!status) return;
+        status.textContent = message;
+        status.hidden = !message;
+      };
+      const play = () => {
+        showStatus("");
+        void video.play().catch(() => {
+          film.removeAttribute("data-loading");
+          showStatus("Der Film konnte nicht starten. Bitte erneut versuchen.");
+          sync();
+        });
+      };
       const sync = () => {
         if (playButton) {
           playButton.setAttribute("aria-label", video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren");
+          playButton.title = playButton.getAttribute("aria-label") ?? "Film abspielen";
           const label = playButton.querySelector("span");
           if (label) label.textContent = video.paused ? "Abspielen" : "Pausieren";
           playButton.querySelector("path")?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
         }
         if (soundButton) {
-          soundButton.setAttribute("aria-label", video.muted ? "Film mit Ton starten" : "Ton ausschalten");
+          const muted = video.muted || video.volume === 0;
+          soundButton.setAttribute("aria-label", muted ? "Ton einschalten" : "Ton ausschalten");
+          soundButton.title = soundButton.getAttribute("aria-label") ?? "Ton einschalten";
+          soundButton.querySelector(".atelier-sound-state")?.setAttribute("d", muted ? "m17 9 5 6m0-6-5 6" : "M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14");
           const label = soundButton.querySelector("span");
-          if (label) label.textContent = video.muted ? "Ton an" : "Ton aus";
+          if (label) label.textContent = muted ? "Ton an" : "Ton aus";
+        }
+        if (volume) {
+          volume.value = String(video.volume);
+          volume.setAttribute("aria-valuetext", `${video.muted ? 0 : Math.round(video.volume * 100)} Prozent`);
         }
         if (fallback && !video.paused) fallback.hidden = true;
         if (bar && video.duration > 0) bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
       };
       for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"]) listen(video, type, sync);
+      listen(video, "waiting", () => {
+        if (!video.paused) film.setAttribute("data-loading", "true");
+      });
+      listen(video, "playing", () => {
+        film.removeAttribute("data-loading");
+        showStatus("");
+      });
+      listen(video, "error", () => {
+        film.removeAttribute("data-loading");
+        if (fallback) fallback.hidden = false;
+        showStatus("Der Film ist gerade nicht verfügbar. Bitte später erneut versuchen.");
+      });
       listen(video, "play", () => {
         for (const other of videos) if (other !== video && !other.paused) other.pause();
       });
       if (playButton)
         listen(playButton, "click", () => {
           autoPaused.delete(video);
-          if (video.paused) void video.play().catch(() => {});
+          if (video.paused) play();
           else video.pause();
         });
       if (soundButton)
         listen(soundButton, "click", () => {
-          if (video.muted) {
-            video.currentTime = 0;
+          if (video.muted || video.volume === 0) {
+            if (video.volume === 0) video.volume = 0.8;
             video.muted = false;
-            void video.play().catch(() => {});
           } else video.muted = true;
         });
       if (captionsButton)
@@ -239,9 +294,30 @@ export function useAtelierFilms() {
         });
       if (volume) {
         listen(volume, "input", () => {
-          video.volume = Number(volume.value);
+          video.volume = normalizeVolume(Number(volume.value));
+          video.muted = video.volume === 0;
         });
-        video.volume = Number(volume.value);
+        const requested = normalizeVolume(Number(volume.defaultValue));
+        video.volume = requested;
+        // iOS keeps volume at 1 and delegates it to the hardware controls.
+        if (Math.abs(video.volume - requested) > 0.01) {
+          volume.hidden = true;
+          const deviceNote = film.querySelector<HTMLElement>(".atelier-volume-device");
+          if (deviceNote) deviceNote.hidden = false;
+        }
+      }
+      if (volumeDetails) {
+        listen(volumeDetails, "toggle", () => volumeSummary?.setAttribute("aria-expanded", String(volumeDetails.open)));
+        listen(document, "pointerdown", (event) => {
+          if (event.target instanceof Node && !volumeDetails.contains(event.target)) volumeDetails.open = false;
+        });
+        listen(volumeDetails, "keydown", (event) => {
+          if ((event as KeyboardEvent).key !== "Escape") return;
+          event.stopPropagation();
+          volumeDetails.open = false;
+          volumeSummary?.focus();
+        });
+        volumeSummary?.setAttribute("aria-expanded", "false");
       }
       sync();
     }
@@ -259,10 +335,13 @@ export function useAtelierFilms() {
     });
     videos.forEach((video) => observer.observe(video));
     const heroVideo = document.querySelector<HTMLVideoElement>(".identity-hero video");
-    if (heroVideo && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (heroVideo && mayAutoplayFilm(true, matchMedia("(prefers-reduced-motion: reduce)").matches)) {
       heroVideo.muted = true;
       void heroVideo.play().catch(() => {});
     }
+    listen(document, "visibilitychange", () => {
+      if (document.hidden) videos.forEach((video) => video.pause());
+    });
     return () => {
       observer.disconnect();
       cleanups.forEach((cleanup) => cleanup());
