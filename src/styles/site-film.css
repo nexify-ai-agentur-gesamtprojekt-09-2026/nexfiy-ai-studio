@@ -1,89 +1,104 @@
-/* Shared film player refinements – loaded once by <SiteFilm>, applies to every page (#atelier shell). */
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
+/* One self-contained player treatment. Specificity protects it from captured
+   per-page rules without stacking competing refinement blocks. */
+:root:root #atelier .atelier-film { isolation: isolate; position: relative; width: 100%; min-width: 0; }
+:root:root #atelier .atelier-film.atelier-film-hero { overflow: visible; }
+:root:root #atelier .atelier-film .atelier-film-picture {
+  isolation: isolate; position: relative; overflow: visible; border-radius: inherit;
+}
+:root:root #atelier .atelier-film .atelier-film-picture > video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: inherit;
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-film-fallback {
+  position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%;
+  object-fit: cover; border-radius: inherit; pointer-events: none;
+}
+:root:root #atelier .atelier-film .atelier-film-fallback[hidden],
+:root:root #atelier .atelier-film [hidden] { display: none; }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls {
-  position: absolute; inset: auto auto 12px 12px; bottom: 12px;
-  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 2px;
-  padding: 3px; border: 1px solid var(--color-atelier-film-control-edge); border-radius: 999px;
-  background: color-mix(in oklab, var(--color-atelier-film-control-fill) 70%, transparent);
-  backdrop-filter: blur(14px); box-shadow: none;
-  opacity: .72; transition: opacity .25s ease;
+  position: absolute; inset: auto auto 12px 12px; z-index: 5;
+  display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 4px;
+  margin: 0; padding: 4px; width: auto; border: 1px solid var(--border-strong); border-radius: 999px;
+  color: var(--foreground); background: var(--surface-media-glass);
+  backdrop-filter: blur(16px) saturate(1.2); box-shadow: var(--elevation-media);
+  opacity: .88; transition: opacity 200ms var(--motion-ease-brand);
 }
-:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls,
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within,
+:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls { opacity: 1; }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
-  width: 30px; min-width: 30px; max-width: 30px; height: 30px; min-height: 30px; padding: 0; gap: 0; margin: 0;
-  border: 0; border-radius: 999px; background: transparent; box-shadow: none;
-  display: inline-grid; place-items: center; color: var(--color-atelier-ink);
+  position: relative; box-sizing: border-box; display: inline-grid; place-items: center;
+  flex: 0 0 32px; width: 32px; min-width: 32px; max-width: 32px;
+  height: 32px; min-height: 32px; padding: 0; margin: 0; gap: 0;
+  list-style: none; cursor: pointer; touch-action: manipulation;
+  border: 0; border-radius: 999px; background: transparent; box-shadow: none; color: var(--foreground);
+  transition: background-color 180ms var(--motion-ease-brand), color 180ms var(--motion-ease-brand);
 }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button::after,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary::after { content: none; }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:hover,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:hover { background: var(--color-atelier-film-control-hover); }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] { color: var(--color-marke-lime); }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:hover,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume[open] > summary { background: var(--accent); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:active,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:active { background: var(--secondary); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:focus-visible,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:focus-visible,
+:root:root #atelier .atelier-film.atelier-film .atelier-volume input:focus-visible {
+  outline: 2px solid var(--ring); outline-offset: 2px; box-shadow: none;
+}
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button > span {
-  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { width: 14px; height: 14px; }
-:root:root #atelier .atelier-film.atelier-film .atelier-volume, :root:root #atelier .atelier-film.atelier-film .atelier-volume { margin: 0; position: relative; }
-:root:root #atelier .atelier-film.atelier-film .atelier-volume > div { left: 0; right: auto; bottom: calc(100% + 8px); width: 180px; }
-@media (max-width: 600px) {
-  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls,
-  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .85; }
-  .atelier-film .atelier-film-controls button,
-  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary { width: 28px; min-width: 28px; max-width: 28px; height: 28px; min-height: 28px; }
-  .atelier-film .atelier-film-controls svg { width: 13px; height: 13px; }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { display: block; width: 16px; height: 16px; flex: 0 0 auto; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume {
+  position: relative; display: block; flex: 0 0 auto; margin: 0;
 }
-@media (hover: none) { :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { opacity: .9; } }
-
+:root:root #atelier .atelier-film.atelier-film .atelier-volume summary::-webkit-details-marker { display: none; }
+:root:root #atelier .atelier-film.atelier-film .atelier-volume > div {
+  position: absolute; inset: auto auto calc(100% + 12px) 0; z-index: 6;
+  box-sizing: border-box; width: 184px; min-width: 0; margin: 0; padding: 12px;
+  border: 1px solid var(--border-strong); border-radius: 8px;
+  background: var(--background); box-shadow: var(--elevation-media); color: var(--foreground);
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-volume label {
+  display: grid; gap: 4px; font-size: 12px; line-height: 1.5; letter-spacing: 0;
+}
+:root:root #atelier .atelier-film.atelier-film .atelier-volume input {
+  width: 100%; min-width: 0; height: 32px; margin: 0; padding: 0;
+  accent-color: var(--primary); cursor: pointer;
+}
+:root:root #atelier .atelier-film .atelier-volume-device { font-size: 12px; line-height: 1.5; color: var(--muted-foreground); margin: 8px 0 0; }
+:root:root #atelier .atelier-film .atelier-film-progress {
+  position: absolute; inset: auto 0 0; z-index: 4; height: 2px; overflow: hidden;
+  pointer-events: none; background: var(--border);
+}
+:root:root #atelier .atelier-film .atelier-film-progress > span {
+  display: block; width: 100%; height: 100%; transform-origin: 0 50%; background: var(--primary);
+}
+:root:root #atelier .atelier-film .atelier-film-transcript { padding: 16px 20px; font-size: 12px; line-height: 1.6; color: var(--muted-foreground); }
+:root:root #atelier .atelier-film .atelier-film-transcript summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+:root:root #atelier .atelier-film .atelier-film-status {
+  position: absolute; inset: 12px 12px auto; z-index: 4; margin: 0; padding: 8px 12px;
+  border-radius: 8px; background: var(--surface-media-glass); color: var(--foreground);
+  font-size: 12px; line-height: 1.5; letter-spacing: 0;
+}
+:root:root #atelier .atelier-film[data-loading="true"] .atelier-playback-icon { animation: film-buffer 1s var(--motion-ease-brand) infinite; }
+@keyframes film-buffer { 50% { opacity: .3; } }
 :root:root #atelier .identity-hero-photo .atelier-film { width: 100%; }
 :root:root #atelier .identity-media:has(.atelier-film) { width: 100%; max-width: none; justify-self: stretch; }
 :root:root #atelier .identity-media:has(.atelier-film) > .identity-hero-photo { width: 100%; max-width: none; margin-inline: 0; }
-
-/* Base player layout, complete here so every page lays films out identically even when its captured
-   stylesheet never contained the player rules. The poster overlays the video instead of stacking above
-   it, so hiding it when playback starts moves nothing (no layout shift). */
-:root:root #atelier .atelier-film { isolation: isolate; position: relative; width: 100%; min-width: 0; }
-:root:root #atelier .atelier-film.atelier-film-hero { overflow: visible; }
-:root:root #atelier .atelier-film .atelier-film-picture { isolation: isolate; position: relative; overflow: hidden; }
-:root:root #atelier .atelier-film .atelier-film-picture > video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-fallback {
-  position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; pointer-events: none;
-}
-:root:root #atelier .atelier-film .atelier-film-fallback[hidden] { display: none; }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls { z-index: 3; }
-:root:root #atelier .atelier-film .atelier-film-progress {
-  position: absolute; inset: auto 0 0; z-index: 4; height: 2px; overflow: hidden; pointer-events: none; background: var(--color-linie-fein);
-}
-:root:root #atelier .atelier-film .atelier-film-progress > span { display: block; width: 100%; height: 100%; transform-origin: 0 50%; background: var(--color-marke-lime); }
-:root:root #atelier .atelier-film .atelier-playback-icon { flex: 0 0 auto; display: block; }
-:root:root #atelier .atelier-film .atelier-volume { color: var(--color-atelier-ink); }
-:root:root #atelier .atelier-film .atelier-film-transcript { padding: 14px 20px; font-size: 12px; line-height: 1.7; color: var(--color-atelier-platinum); }
-
-/* Refined controls v2: smaller glass pill, calmer at rest, clear focus ring, comfortable touch area. */
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls {
-  inset: auto auto 10px 10px; bottom: 10px; gap: 0; padding: 2px;
-  background: color-mix(in oklab, var(--color-atelier-film-control-fill) 55%, transparent);
-  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2);
-  opacity: .55; transition: opacity .3s ease, transform .3s ease;
-}
-:root:root #atelier .atelier-film.atelier-film:hover .atelier-film-controls,
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls:focus-within { opacity: 1; }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
-  width: 26px; min-width: 26px; max-width: 26px; height: 26px; min-height: 26px;
-  transition: background-color .2s ease, color .2s ease, transform .15s ease; position: relative;
-}
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button::after,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary::after { content: ""; position: absolute; inset: -7px; }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:active,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:active { transform: scale(.92); }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:focus-visible,
-:root:root #atelier .atelier-film.atelier-film .atelier-volume summary:focus-visible { outline: 2px solid var(--color-marke-lime); outline-offset: 1px; }
-:root:root #atelier .atelier-film.atelier-film .atelier-film-controls svg { width: 12px; height: 12px; }
-@media (max-width: 600px) {
-  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; bottom: 8px; opacity: .8; }
+@media (max-width: 767px), (pointer: coarse) {
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { inset: auto auto 8px 8px; gap: 0; padding: 0; opacity: 1; }
   :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
-  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary { width: 26px; min-width: 26px; max-width: 26px; height: 26px; min-height: 26px; }
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
+    flex-basis: 44px; width: 44px; min-width: 44px; max-width: 44px; height: 44px; min-height: 44px;
+  }
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume input { height: 44px; }
+  :root:root #atelier .atelier-film.atelier-film .atelier-volume > div { left: -44px; }
 }
-@media (prefers-reduced-motion: reduce) { :root:root #atelier .atelier-film .atelier-film-controls * { transition: none; } }
+@supports not (backdrop-filter: blur(1px)) {
+  :root:root #atelier .atelier-film.atelier-film .atelier-film-controls { background: var(--background); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier .atelier-film .atelier-film-controls,
+  :root:root #atelier .atelier-film .atelier-film-controls * { transition: none; animation: none; }
+}
