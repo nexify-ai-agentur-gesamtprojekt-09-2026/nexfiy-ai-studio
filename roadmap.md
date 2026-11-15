@@ -1,4 +1,9 @@
 # Roadmap
+## UI/UX-Vorgaben (15.11.)
+- [ ] Gemeinsame Video-Bedienung: stabile Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinern
+- [ ] Kopfbereich beim Scrollen: Glasdarstellung, Menü-Fokus und mobile Bedienung vereinheitlichen
+- [ ] Gemeinsame Änderungen auf Desktop und Handy prüfen; bestehende Anmeldung und MCP-Zugriff unverändert lassen
+
 - [x] Startseite von nexifyai.cloud kopieren
 - [x] Seiten übernehmen: /leistungen, /kontakt, /teileklar, /teileklar/werkstatt, /teileklar/partner-werden
 - [x] Menü-/Footer-Links auf die neuen Seiten verknüpfen und prüfen (Desktop + Handy)
