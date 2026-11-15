@@ -11,6 +11,7 @@
 - [ ] UI/UX-Skill um das Textkonzept erweitern, sofern ein aktiver Skill vorhanden ist
 - [ ] Änderungen und verbleibende Fakten-/Freigabegrenzen prüfen
 - [ ] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung abgestimmt veredeln
+- [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
 
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
