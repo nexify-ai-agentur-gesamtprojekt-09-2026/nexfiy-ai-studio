@@ -1,10 +1,13 @@
 import { useHeaderMenus } from "@/lib/imported-site";
 import { useCurrentPage } from "@/hooks/use-current-page";
+import { useId } from "react";
+import { Button } from "@/components/ui/button";
 
 /** NeXify site header (brand, main and product navigation, phone menu, language, theme, call to action), shared by every NeXify page. */
 export function NexifyHeader() {
   const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
   const here = useCurrentPage();
+  const id = useId();
   return (
     <header className={"site-header"}>
       <a aria-label="NeXify AI · Startseite" className={"brand"} href="/" {...here("/")}>
@@ -21,8 +24,8 @@ export function NexifyHeader() {
       <nav className={"main-navigation"} aria-label="Hauptnavigation">
         <a href="/leistungen" {...here("/leistungen")}>Leistungen</a>
         <details className={"product-navigation"} open={openMenu === "products"}>
-          <summary ref={productsSummary} aria-expanded={openMenu === "products"} aria-controls="_R_14lb_-products" onClick={toggleMenu("products")}>Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
-          <div className={"product-navigation-menu"} id="_R_14lb_-products">
+          <summary ref={productsSummary} aria-expanded={openMenu === "products"} aria-controls={`${id}-products`} onClick={toggleMenu("products")}>Produkte<span className={"navigation-chevron"} aria-hidden="true">⌄</span></summary>
+          <div className={"product-navigation-menu"} id={`${id}-products`}>
             <div className={"megamenu-heading"}>
               <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
               <a href="/leistungen" {...here("/leistungen")}>Leistungen der FACTORY<svg className={"nx-zeichen"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
@@ -108,13 +111,13 @@ export function NexifyHeader() {
         <a href="/kontakt" {...here("/kontakt")}>Kontakt</a>
       </nav>
       <details className={"mobile-navigation"} open={openMenu === "mobile"}>
-        <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls="_R_14lb_-mobile" onClick={toggleMenu("mobile")}>
+        <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls={`${id}-mobile`} onClick={toggleMenu("mobile")}>
           <span className={"mobile-menu-mark"} aria-hidden="true">
             <i />
             <i />
           </span>
         </summary>
-        <nav className={"mobile-navigation-panel"} id="_R_14lb_-mobile" aria-label="Hauptnavigation">
+        <nav className={"mobile-navigation-panel"} id={`${id}-mobile`} aria-label="Hauptnavigation">
           <div className={"mobile-primary-links"}>
             <a href="/leistungen" {...here("/leistungen")}>Leistungen</a>
             <a href="/wissen" {...here("/wissen")}>Arbeitsweise</a>
@@ -204,7 +207,7 @@ export function NexifyHeader() {
               </svg>
             </a>
           </div>
-          <button type="button" className={"nexify-control  "} data-variant="quiet" onClick={closeMenu}>Menü schließen</button>
+          <Button variant="ghost" type="button" className={"nexify-control"} data-variant="quiet" onClick={closeMenu}>Menü schließen</Button>
         </nav>
       </details>
       <div className={"header-actions"}>

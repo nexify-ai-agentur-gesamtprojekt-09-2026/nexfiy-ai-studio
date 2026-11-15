@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/ki-hinweise.css?url";
 
 export const Route = createFileRoute("/ki-hinweise")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "KI mit klarer Verantwortung. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "KI mit klarer Verantwortung. · NeXify AI" }, { name: "description", content: "Hinweise zu KI-Inhalten, Verantwortlichkeiten und Grenzen bei NeXify AI." }, { property: "og:title", content: "KI mit klarer Verantwortung. · NeXify AI" }, { property: "og:description", content: "Hinweise zu KI-Inhalten, Verantwortlichkeiten und Grenzen bei NeXify AI." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

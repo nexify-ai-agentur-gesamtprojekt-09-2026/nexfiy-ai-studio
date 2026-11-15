@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.fahrzeug-und-passung.css?raw";
 
 export const Route = createFileRoute("/teileklar_/fahrzeug-und-passung")({
-  head: () => ({ meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }, { name: "description", content: "Welche Angaben Sie benötigen, um die Passung eines Fahrzeugteils zu prüfen." }, { property: "og:title", content: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }, { property: "og:description", content: "Welche Angaben Sie benötigen, um die Passung eines Fahrzeugteils zu prüfen." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

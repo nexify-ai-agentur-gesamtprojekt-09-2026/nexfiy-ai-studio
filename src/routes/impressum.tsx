@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/impressum.css?url";
 
 export const Route = createFileRoute("/impressum")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }, { name: "description", content: "Anbieterkennzeichnung und Kontaktangaben von NeXify AI." }, { property: "og:title", content: "Impressum · NeXify AI by NeXify · NeXify AI" }, { property: "og:description", content: "Anbieterkennzeichnung und Kontaktangaben von NeXify AI." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

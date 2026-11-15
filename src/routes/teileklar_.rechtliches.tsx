@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.rechtliches.css?raw";
 
 export const Route = createFileRoute("/teileklar_/rechtliches")({
-  head: () => ({ meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { name: "description", content: "Informationen zu Bedingungen, Versand und Rückgabe bei TEILEKLAR." }, { property: "og:title", content: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { property: "og:description", content: "Informationen zu Bedingungen, Versand und Rückgabe bei TEILEKLAR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

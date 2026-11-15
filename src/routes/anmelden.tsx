@@ -4,7 +4,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/anmelden.css?url";
 
 export const Route = createFileRoute("/anmelden")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Anmelden und weiterarbeiten. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Anmelden und weiterarbeiten. · NeXify AI" }, { name: "description", content: "Melden Sie sich mit Ihrem NeXify-Konto an und arbeiten Sie in Ihrem persönlichen Bereich weiter." }, { property: "og:title", content: "Anmelden und weiterarbeiten. · NeXify AI" }, { property: "og:description", content: "Melden Sie sich mit Ihrem NeXify-Konto an und arbeiten Sie in Ihrem persönlichen Bereich weiter." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   validateSearch: (s: Record<string, unknown>): { next?: string } => (typeof s["next"] === "string" ? { next: s["next"] } : {}),
   component: Index,

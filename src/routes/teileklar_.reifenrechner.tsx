@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.reifenrechner.css?raw";
 
 export const Route = createFileRoute("/teileklar_/reifenrechner")({
-  head: () => ({ meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }, { name: "description", content: "Informationen zum Vergleich von Reifengrößen bei TEILEKLAR." }, { property: "og:title", content: "Reifengrößen vergleichen. · TEILEKLAR.shop" }, { property: "og:description", content: "Informationen zum Vergleich von Reifengrößen bei TEILEKLAR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

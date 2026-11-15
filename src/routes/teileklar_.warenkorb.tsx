@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.warenkorb.css?raw";
 
 export const Route = createFileRoute("/teileklar_/warenkorb")({
-  head: () => ({ meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }, { name: "description", content: "Ihr Warenkorb bei TEILEKLAR mit den ausgewählten Artikeln im Überblick." }, { property: "og:title", content: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }, { property: "og:description", content: "Ihr Warenkorb bei TEILEKLAR mit den ausgewählten Artikeln im Überblick." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

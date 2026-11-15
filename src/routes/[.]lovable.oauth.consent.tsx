@@ -12,7 +12,7 @@ const oauth = (supabase.auth as unknown as { oauth: {
 
 export const Route = createFileRoute("/.lovable/oauth/consent")({
   ssr: false,
-  head: () => ({ meta: [{ title: "Verbindung erlauben · NeXify AI" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Verbindung erlauben · NeXify AI" }, { name: "description", content: "Prüfen und bestätigen Sie die Verbindung eines KI-Assistenten mit Ihrem NeXify-Konto." }, { property: "og:title", content: "Verbindung erlauben · NeXify AI" }, { property: "og:description", content: "Prüfen und bestätigen Sie die Verbindung eines KI-Assistenten mit Ihrem NeXify-Konto." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }, { name: "robots", content: "noindex" }] }),
   validateSearch: (s: Record<string, unknown>) => ({ authorization_id: typeof s["authorization_id"] === "string" ? s["authorization_id"] : "" }),
   beforeLoad: async ({ search, location }) => {
     if (!search.authorization_id) throw new Error("Die Anfrage ist unvollständig oder abgelaufen.");

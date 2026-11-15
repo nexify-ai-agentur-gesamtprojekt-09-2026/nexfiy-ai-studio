@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.gutscheine.css?raw";
 
 export const Route = createFileRoute("/teileklar_/gutscheine")({
-  head: () => ({ meta: [{ title: "Gutscheine gibt es noch nicht. · TEILEKLAR.shop" }] }),
+  head: () => ({ meta: [{ title: "Gutscheine gibt es noch nicht. · TEILEKLAR.shop" }, { name: "description", content: "Der aktuelle Stand zu Gutscheinen und Gutscheinbedingungen bei TEILEKLAR." }, { property: "og:title", content: "Gutscheine gibt es noch nicht. · TEILEKLAR.shop" }, { property: "og:description", content: "Der aktuelle Stand zu Gutscheinen und Gutscheinbedingungen bei TEILEKLAR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

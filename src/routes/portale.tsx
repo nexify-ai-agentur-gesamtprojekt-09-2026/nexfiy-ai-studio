@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/portale.css?url";
 
 export const Route = createFileRoute("/portale")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Portale. Ihr Zugang, Ihr Bereich. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Portale. Ihr Zugang, Ihr Bereich. · NeXify AI" }, { name: "description", content: "Die Zugänge und persönlichen Arbeitsbereiche von NeXify AI im Überblick." }, { property: "og:title", content: "Portale. Ihr Zugang, Ihr Bereich. · NeXify AI" }, { property: "og:description", content: "Die Zugänge und persönlichen Arbeitsbereiche von NeXify AI im Überblick." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

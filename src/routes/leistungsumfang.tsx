@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungsumfang.css?url";
 
 export const Route = createFileRoute("/leistungsumfang")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Drei Pakete. Ein klarer Umfang. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Drei Pakete. Ein klarer Umfang. · NeXify AI" }, { name: "description", content: "Vergleichen Sie die NeXify-Leistungspakete und den enthaltenen Projektumfang." }, { property: "og:title", content: "Drei Pakete. Ein klarer Umfang. · NeXify AI" }, { property: "og:description", content: "Vergleichen Sie die NeXify-Leistungspakete und den enthaltenen Projektumfang." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

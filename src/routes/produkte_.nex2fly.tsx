@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex2fly.css?url";
 
 export const Route = createFileRoute("/produkte_/nex2fly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }, { name: "description", content: "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich." }, { property: "og:title", content: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }, { property: "og:description", content: "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

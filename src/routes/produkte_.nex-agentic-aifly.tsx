@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex-agentic-aifly.css?url";
 
 export const Route = createFileRoute("/produkte_/nex-agentic-aifly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" }, { name: "description", content: "NeX Agentic AIFly unterstützt bei benannten Arbeitsschritten und der Ausführung von Aufgaben." }, { property: "og:title", content: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" }, { property: "og:description", content: "NeX Agentic AIFly unterstützt bei benannten Arbeitsschritten und der Ausführung von Aufgaben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

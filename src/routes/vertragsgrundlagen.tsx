@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/vertragsgrundlagen.css?url";
 
 export const Route = createFileRoute("/vertragsgrundlagen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }, { name: "description", content: "Die Grundlagen der Zusammenarbeit mit NeXify: Umfang, Mitwirkung, Freigaben und Übergabe." }, { property: "og:title", content: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }, { property: "og:description", content: "Die Grundlagen der Zusammenarbeit mit NeXify: Umfang, Mitwirkung, Freigaben und Übergabe." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -4,7 +4,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/registrieren.css?url";
 
 export const Route = createFileRoute("/registrieren")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }, { name: "description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:title", content: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }, { property: "og:description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   validateSearch: (s: Record<string, unknown>): { next?: string } => (typeof s["next"] === "string" ? { next: s["next"] } : {}),
   component: Index,

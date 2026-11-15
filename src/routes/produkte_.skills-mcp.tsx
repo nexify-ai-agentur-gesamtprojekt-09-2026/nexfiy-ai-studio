@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.skills-mcp.css?url";
 
 export const Route = createFileRoute("/produkte_/skills-mcp")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Skills und MCP. Ihre Werkzeuge, angebunden. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Skills und MCP. Ihre Werkzeuge, angebunden. · NeXify AI" }, { name: "description", content: "Informationen zu Skills, MCP und angebundenen Werkzeugen für NeXify-Agenten." }, { property: "og:title", content: "Skills und MCP. Ihre Werkzeuge, angebunden. · NeXify AI" }, { property: "og:description", content: "Informationen zu Skills, MCP und angebundenen Werkzeugen für NeXify-Agenten." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
