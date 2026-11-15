@@ -1,4 +1,8 @@
 /* Scope refinements to the shared adviser; captured page layouts remain intact. */
+:root:root #atelier #aifly-panel.oracle-advice { position: sticky; top: 0; inset-inline: auto; width: 100%; max-width: none; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border-radius: 0; background: var(--background); border-left: 1px solid var(--border); box-shadow: none; container: oracle / inline-size; }
+:root:root #atelier #aifly-panel.oracle-advice[hidden] { display: none; }
+:root:root #atelier #aifly-panel.oracle-advice .panel-heading { display: flex; position: static; width: 100%; max-width: none; min-height: 80px; padding: 16px 24px; background: var(--secondary); border-bottom: 1px solid var(--border); }
+:root:root #atelier #aifly-panel.oracle-advice .orientation-intro { position: static; transform: none; top: auto; left: auto; min-height: 0; padding: 0; margin: 0; }
 :root:root #atelier .oracle-advice .sdk-orientation-view { display: flex; flex: 1; min-height: 0; overflow: hidden; }
 :root:root #atelier .oracle-advice .public-orientation { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; gap: 12px; padding: 16px 24px; }
 :root:root #atelier .oracle-advice .public-orientation::after { display: none; }
@@ -31,6 +35,9 @@
 :root:root #atelier .oracle-advice .orientation-composer { display: block; position: static; width: 100%; margin: 0; padding: 0; background: none; border: 0; box-shadow: none; }
 :root:root #atelier .oracle-advice .orientation-composer [data-slot="input-group"] { flex-direction: column; align-items: stretch; height: auto; border-radius: 8px; background: var(--secondary); border-color: var(--border-strong); padding: 8px; }
 :root:root #atelier .oracle-advice .orientation-composer-actions { display: flex; justify-content: flex-end; position: static; padding: 0; margin: 0; width: 100%; }
+:root:root #atelier #aifly-panel.oracle-advice .orientation-composer-actions button { position: static; width: 44px; height: 44px; padding: 0; margin: 0; }
+:root:root #atelier #aifly-panel.oracle-advice .orientation-composer { max-width: 100%; grid-template-columns: none; }
+:root:root #atelier #aifly-panel.oracle-advice .oracle-conversation { width: 100%; max-width: none; }
 :root:root #atelier .oracle-advice .orientation-composer textarea { position: static; border: 0; padding: 8px; box-shadow: none; border-radius: 0; width: 100%; margin: 0; }
 :root:root #atelier .oracle-advice .connection-note { margin: 0; flex-shrink: 0; font-size: 12px; line-height: 1.5; }
 :root:root #atelier .oracle-advice .orientation-composer textarea { max-height: 144px; min-height: 48px; resize: none; font-size: 16px; line-height: 1.5; color: var(--foreground); }
@@ -40,6 +47,7 @@
 :root:root #atelier .oracle-advice .panel-heading > button { min-width: 44px; min-height: 44px; flex-shrink: 0; }
 :root:root #atelier .oracle-advice .panel-heading-copy { min-width: 0; flex: 1; }
 @media (max-width: 767px) {
+  :root:root #atelier #aifly-panel.oracle-advice { position: fixed; inset: 0; z-index: 30; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); background: var(--background); }
   :root:root #atelier .oracle-advice .orientation-host-figure { width: 64px; height: 64px; }
   :root:root #atelier .oracle-advice .orientation-intro { gap: 16px; }
   :root:root #atelier .oracle-advice .connection-note { padding-bottom: max(8px, env(safe-area-inset-bottom)); }
