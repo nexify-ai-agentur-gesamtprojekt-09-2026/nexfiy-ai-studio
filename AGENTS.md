@@ -38,3 +38,4 @@ use the editor.
 - Playback rules live in `src/lib/media-policy.ts` and DOM wiring stays in `src/lib/imported-site.ts`; test the policy independently and keep media changes from rerendering page content.
 - Shared visual refinements use semantic roles from `src/styles.css` and high-specificity rules in the relevant shared stylesheet; apply scroll glass to the existing header pseudo-element so captured layers do not double-paint it.
 - ORACLE product advice uses a bounded public catalog in `oracle-products.ts`, a server-only AI Gateway call in `oracle.functions.ts`, and isolated state in `use-oracle-advice.ts`; never connect the public adviser to account data or MCP, and derive links from the catalog rather than model URLs.
+- NeXify page/chat resizing uses `PageSplit` and the existing resizable-panel primitives, with viewport bounds in `page-split.ts`; library-managed sizing avoids rerendering page content while dragging.

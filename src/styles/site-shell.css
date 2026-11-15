@@ -1,5 +1,26 @@
 /* Shared page shell (NeXify and TEILEKLAR): phone sizing of the chat panel. Previously repeated per page
    as generated [data-site-import-responsive] rules; one semantic copy now serves every page. */
+:root:root #atelier.site-nexify { display: block; }
+:root:root #atelier .site-page-split { height: auto; min-height: 100dvh; align-items: stretch; overflow: visible; }
+:root:root #atelier :is(.site-page-pane,.site-oracle-pane) { overflow: visible; min-width: 0; }
+:root:root #atelier .site-oracle-pane { position: relative; }
+:root:root #atelier .site-page-divider { width: 8px; background: transparent; flex-shrink: 0; z-index: 7; }
+:root:root #atelier .site-page-divider > div { position: sticky; top: 50dvh; height: 40px; width: 4px; border: 0; background: var(--border-strong); }
+:root:root #atelier .site-page-divider svg { display: none; }
+:root:root #atelier .site-page-divider:is(:hover,:focus-visible) > div { background: var(--primary); }
+:root:root #atelier .website { min-width: 0; }
+:root:root #atelier .home-concept :is(h1,h2,h3) { letter-spacing: 0; text-wrap: balance; overflow-wrap: anywhere; }
+:root:root #atelier .home-concept .identity-copy h1 { font-size: 48px; line-height: 1.15; }
+:root:root #atelier .home-concept .pc-section-body > p { max-width: 68ch; line-height: 1.6; }
+@container website (max-width: 1000px) {
+  :root:root #atelier .site-header .primary-navigation { display: none; }
+  :root:root #atelier .site-header .mobile-navigation { display: block; }
+  :root:root #atelier .home-concept .identity-copy h1 { font-size: 40px; }
+}
+@container website (max-width: 600px) {
+  :root:root #atelier .home-concept .identity-copy h1 { font-size: 32px; }
+  :root:root #atelier .home-concept .identity-links { flex-wrap: wrap; }
+}
 @media (max-width: 767px) {
   :root #atelier #aifly-panel { --chat-viewport-height: 100dvh !important; }
   :root #atelier #aifly-panel .public-orientation { --ca-fuss: 0px !important; }
