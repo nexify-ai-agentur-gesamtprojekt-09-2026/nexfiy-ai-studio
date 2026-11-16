@@ -190,3 +190,6 @@
 - [x] NeXify 9router (DeepSeek) mit Projekt verbunden; Test 16.11. 06:41 UTC: Modell deepseek/deepseek-v4.1-flash-1017 antwortet korrekt
 - [x] ORACLE bleibt auf bisherigem KI-Modell (Pascal 16.11.) – keine Umstellung
 - [ ] Wofür DeepSeek im Projekt eingesetzt werden soll, wenn nicht ORACLE – Entscheidung Pascal
+
+- [x] ORACLE (ChatGPT) Anbindungsweg: MCP-Server nexifyai.de/mcp mit Anmeldung; neues lesendes Werkzeug „Anfragen lesen“ (nur Admin-Rolle)
+- [ ] ORACLE in ChatGPT: Connector https://nexifyai.de/mcp anlegen und mit Inhaberkonto anmelden (Pascal)
