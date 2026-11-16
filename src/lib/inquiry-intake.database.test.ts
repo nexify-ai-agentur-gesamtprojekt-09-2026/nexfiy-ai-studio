@@ -37,7 +37,7 @@ beforeEach(() => { state.ip = `2001:db8:${idPart.toString(16)}:${Math.floor(Math
 
 type Args = { p_ip_hash: string; p_fingerprint: string; p_kind: string; p_name: string; p_email: string; p_company: string; p_message: string; p_source_path: string; p_consent: boolean; p_consent_version: string };
 
-async function rollbackTest(check: (tx: postgres.TransactionSql) => Promise<void>) {
+async function draftTest(check: (tx: postgres.TransactionSql) => Promise<void>) {
   // Nur isolierte Entwurfsdaten: keine Rechteänderung, kein Löschen; Testzeilen bleiben nachvollziehbar.
   state.rpc.mockImplementation((name: string, args?: Args) => service.rpc(name, args));
   await db.begin(async tx => { await check(tx); });
@@ -54,7 +54,7 @@ function send(index: number, email = testEmail) {
 
 describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
   it("nimmt exakt fünf an und lehnt die sechste innerhalb einer Stunde ab", async () => {
-    await rollbackTest(async tx => {
+    await draftTest(async tx => {
       const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
       for (let i = 1; i <= 5; i++) expect((await send(i)).ok).toBe(true);
       expect(await send(6)).toMatchObject({ ok: false, reason: "rate_limited" });
@@ -64,7 +64,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("speichert gleiche E-Mail und Nachricht innerhalb von zehn Minuten nur einmal und meldet einmal", async () => {
-    await rollbackTest(async tx => {
+    await draftTest(async tx => {
       const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
       expect((await send(11, testEmail.toUpperCase())).ok).toBe(true);
       state.ip = "192.0.2.81";
@@ -75,7 +75,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("setzt Einwilligungszeit und exakte Version serverseitig bei neuer Speicherung", async () => {
-    await rollbackTest(async tx => {
+    await draftTest(async tx => {
       const before = Date.now();
       expect((await send(21)).ok).toBe(true);
       const rows = await tx`SELECT consent_version,consent_at,created_at FROM public.inquiries WHERE email=${testEmail} ORDER BY created_at DESC LIMIT 1`;
@@ -86,7 +86,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("lässt nach Ablauf der rollierenden Stunde wieder eine Anfrage zu", async () => {
-    await rollbackTest(async () => {
+    await draftTest(async () => {
       for (let i = 31; i <= 35; i++) await send(i);
       const hash = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1]?.p_ip_hash;
       expect(typeof hash).toBe("string");
@@ -96,7 +96,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("lässt dieselbe Nachricht nach zehn Minuten wieder zu", async () => {
-    await rollbackTest(async tx => {
+    await draftTest(async () => {
       await send(41);
       const args = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1];
       const accepted = await service.from("inquiry_duplicate_guards").select("inquiry_id").eq("fingerprint", args?.p_fingerprint).single();
@@ -109,7 +109,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("meldet kein Slack bei Speicherfehler und weist fehlende Einwilligung vorher ab", async () => {
-    await rollbackTest(async () => {
+    await draftTest(async () => {
       state.rpc.mockResolvedValue({ data: null, error: { message: "Testfehler" } });
       expect(await send(1)).toMatchObject({ ok: false, reason: "unavailable" });
       expect(state.deliver).not.toHaveBeenCalled();
@@ -129,5 +129,45 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     const functions = await db`SELECT r.rolname,p.proname,has_function_privilege(r.rolname,p.oid,'EXECUTE') AS access FROM pg_roles r CROSS JOIN pg_proc p WHERE r.rolname IN ('anon','authenticated') AND p.proname IN ('get_inquiry_guard_salt','accept_guarded_inquiry')`;
     expect(functions).toHaveLength(4);
     expect(functions.every(row => row["access"] === false)).toBe(true);
+  });
+  it("begrenzt zwölf parallele unterschiedliche Nachrichten derselben IP auf fünf", async () => {
+    await draftTest(async () => {
+      const results = await Promise.all(Array.from({ length: 12 }, (_, i) => send(100 + i)));
+      expect(results.filter(row => row.ok)).toHaveLength(5);
+      expect(results.filter(row => !row.ok && row.reason === "rate_limited")).toHaveLength(7);
+      expect(state.deliver).toHaveBeenCalledTimes(5);
+    });
+  });
+  it("speichert zehn parallele Dubletten von verschiedenen IPs einmal", async () => {
+    await draftTest(async () => {
+      const salt = await service.rpc("get_inquiry_guard_salt");
+      if (salt.error || !salt.data) throw new Error("Testschutz fehlt");
+      const { inquiryGuardHashes } = await import("./inquiry-guard.server");
+      const results = await Promise.all(Array.from({ length: 10 }, async (_, index) => {
+        const hashes = await inquiryGuardHashes(salt.data, `2001:db8:${idPart.toString(16)}::${index + 100}`, testEmail, `Parallel ${runId}`);
+        return service.rpc("accept_guarded_inquiry", { p_ip_hash: hashes.ipHash, p_fingerprint: hashes.fingerprint, p_kind: "contact", p_name: "NX LEAD Parallel", p_email: testEmail, p_company: "", p_message: `Parallel ${runId}`, p_source_path: "/kontakt", p_consent: true, p_consent_version: INQUIRY_CONSENT_VERSION });
+      }));
+      expect(results.every(row => !row.error)).toBe(true);
+      expect(results.filter(row => row.data?.[0]?.outcome === "accepted")).toHaveLength(1);
+      expect(results.filter(row => row.data?.[0]?.outcome === "duplicate")).toHaveLength(9);
+    });
+  });
+  it("zählt reale Datenbankzeitgrenzen exakt unter der bestehenden Admin-RLS", async () => {
+    const { readFile } = await import("node:fs/promises");
+    const { homedir } = await import("node:os");
+    const session = JSON.parse(await readFile(`${homedir()}/.cache/lovable-auth/session.json`, "utf8"));
+    const publicKey = process.env["SUPABASE_PUBLISHABLE_KEY"];
+    if (!publicKey) throw new Error("Testanmeldung fehlt");
+    const client = createClient<import("@/integrations/supabase/types").Database>(url, publicKey, { global: { headers: { Authorization: `Bearer ${session.session.access_token}` } }, auth: { persistSession: false } });
+    const end = new Date("2026-01-08T00:00:00Z");
+    const rows = await service.from("inquiries").insert([
+      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze innerhalb des Fensters.", created_at: "2026-01-01T00:00:00Z" },
+      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze vor dem Fenster.", created_at: "2025-12-31T23:59:59Z" },
+      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze am Ende ausgeschlossen.", created_at: end.toISOString() },
+      { kind: "partner", name: "NX LEAD Grenze", email: testEmail, company: "Testbetrieb", message: "Partnerfrage innerhalb des Fensters.", created_at: "2026-01-04T12:00:00Z" },
+    ]);
+    if (rows.error) throw new Error("Testfenster konnte nicht vorbereitet werden");
+    const { countInquiryWeek } = await import("./inquiry-metrics");
+    expect(await countInquiryWeek(client, end)).toMatchObject({ contact: 1, teileklar: 1 });
   });
 });
