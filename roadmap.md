@@ -1,5 +1,6 @@
 # Roadmap
 ## NX-DESIGN-02 · Restverlauf und Fremdfarben (16.11.2026, 17:37 UTC)
+- [ ] Restnachweise 17:59 UTC: genannte Menütitel, Footer-/PWA-Titel und vorgemerkten ORACLE-Link per Bildschirm-Pixeln messen; keine Gestaltungsänderung, separaten Typprüfungsnachweis nur über erlaubte vorhandene Signale prüfen
 - [x] NeXify-Überschriften inklusive Kopf, Fuß, Installation und ORACLE in Vollfarbe: 0 Verlaufstexte je geprüfter Seite (inklusive geschlossener Menüs); H1-Schlüsselwort bleibt Akzent
 - [x] Fremdfarben durch Graphite-/Zustands-/Akzentrollen ersetzt; 0 Ziel-Farbtreffer in 11 dunklen Seiten und Start/Kontakt hell; TEILEKLAR-Referenzseiten identisch zur Ausgangsmessung
 - [x] 11 Seiten × 1440/390 px, Start/Kontakt zusätzlich hell; 31 axe-A/AA-Läufe mit 0 Verstößen; 11 Seiten und offene Menüs/ORACLE bei 320 px mit 0 Überlauf; Selektorenliste im Bericht
