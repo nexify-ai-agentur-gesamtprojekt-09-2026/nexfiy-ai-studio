@@ -302,3 +302,54 @@
     animation: none;
   }
 }
+
+/* Transkript als ruhige Aufklappzeile: Pfeil zeigt den Zustand, Text bleibt in der Fußzeile des Films. */
+:root:root #atelier .atelier-film .atelier-film-transcript {
+  padding: 0 20px;
+  border-top: 1px solid var(--border);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+:root:root #atelier .atelier-film .atelier-film-transcript summary {
+  list-style: none;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+:root:root #atelier .atelier-film .atelier-film-transcript summary::-webkit-details-marker {
+  display: none;
+}
+:root:root #atelier .atelier-film .atelier-film-transcript summary::after {
+  content: "";
+  inline-size: 8px;
+  block-size: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 200ms ease;
+}
+:root:root #atelier .atelier-film .atelier-film-transcript[open] summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+:root:root #atelier .atelier-film .atelier-film-transcript summary:hover {
+  color: var(--foreground);
+}
+:root:root #atelier .atelier-film .atelier-film-transcript summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+:root:root #atelier .atelier-film .atelier-film-transcript p {
+  margin: 0 0 16px;
+  max-inline-size: 64ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier .atelier-film .atelier-film-transcript summary,
+  :root:root #atelier .atelier-film .atelier-film-transcript summary::after {
+    transition: none;
+  }
+}

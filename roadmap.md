@@ -220,3 +220,8 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 - [x] Veröffentlicht 16.11. 08:35 UTC: Produkttexte, Shop (Sortierung, Varianten, freigestellte Fotos), Sitemap; live geprüft 37 Seiten × 1280/390 px ohne Fehler, Überlauf oder fehlende Alternativtexte
 - [x] DeepSeek deepseek-v4.1-flash-1017 über 9router 16.11.: 16 Seitenbewertungen als JSON, Modellkennung jedes Mal bestätigt; 3 Läufe brauchten mehr Antwortspielraum
 - [x] Arbeitsmodus erweitert (Omni-Enterprise-Papier 16.11.): alle Bereiche, gleiche harten Grenzen
+- [x] Antwortzeiten gemessen 16.11.: 0,07–2,6 s schwankend auch bei statischen Seiten (Kaltstart der Auslieferung, nicht App-Code); Datenbankabfragen 10–27 ms, Index auf synced_at ergänzt
+- [ ] Kaltstarts der Auslieferung (bis 3,4 s von Server 1) – nur über Hosting beeinflussbar, weiter beobachten
+- [x] Server 1: Freistellung täglich 06:15 UTC eingerichtet, Probelauf 16.11.: 13 offen, 13 bewusst ausgelassen (Rand nicht weiß); Doku ops/server1/README.md
+- [ ] Erster Freistellungs-Upload durch den Server-Auftrag mit neuem Foto nachweisen (nach Nachtlauf 17.11.)
+- [x] Server 1: Überwachung alle 5 Min aktiv, Slack-Testmeldung 16.11. zugestellt; Grenze: bei Totalausfall nur Protokoll
