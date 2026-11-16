@@ -54,6 +54,11 @@ use the editor.
 - Glass uses shared semantic material/filter roles for navigation, reading surfaces and menus; accessibility fallbacks override those roles without changing geometry, and header controls do not stack blur over the header's existing glass layer.
 - Inquiry validation and mail profiles remain pure shared rules; long drafts require visible review and explicit copy/open actions, never an assumed clipboard or delivery success.
 - Auth input validation is field-specific and browser-local; provider failures remain form-level and never change hosted authentication settings.
-- TEILEKLAR search helpers preserve the current query and prepare explicit contact or external-map links; guidance selectors remain brand-scoped and cannot imply catalogue, booking or partner access.
+- TEILEKLAR search helpers preserve the current query and prepare explicit contact or external-map links; guidance selectors remain brand-scoped and cannot imply booking, partner access or fitment.
 - Engineering skills preserve uploaded source provenance and project/platform boundaries; their checklists cannot activate infrastructure or imply verified production operations.
 - Brand tokens live only in `src/design-system/graphite/` (tokens.css, theme.css), imported before page styles; client brands override the same roles in their own token file so the library stays reusable across projects.
+- The TEILEKLAR catalogue is a stepwise, cron-authenticated daily copy of the shop feed in `teileklar_products`; rows are archived only after a ≥95 % complete run and never deleted, so a partial feed cannot empty the shop.
+- Catalogue areas derive from article names in `teileklar-areas.ts` (tested) because the supplier categories are wrong; the supplier value stays in `source_category` for traceability.
+- Catalogue photos are copied into a private bucket by a stepwise mirror job and served only via `/api/public/shop/image?artikel=` for active articles; the workspace blocks public buckets and the site must not depend on supplier or old-shop hosts at runtime.
+- Public inquiries are stored server-side with service-role writes and announced in Slack without e-mail or message text; reading them requires the `admin` role via `has_role`.
+- The site is German-only: no language selector is shown until real translated routes exist, because a non-functional control reads as a defect.
