@@ -63,7 +63,7 @@ function Index() {
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
               <section className={"hc-container pc-supplement"} id="anfrage" tabIndex={-1}>
-                <InquiryForm kind="contact" title="Ihre Anfrage vorbereiten" companyLabel="Unternehmen" privacyHref="/datenschutz" initialMessage={anliegen ?? ""} />
+                <InquiryForm kind="contact" title="Ihre Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" initialMessage={anliegen ?? ""} />
               </section>
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-contact-contact-customer-1-0" tabIndex={-1} aria-labelledby="content-contact-contact-customer-1-0-title">
@@ -93,11 +93,11 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <ol className={"contact-steps"} role="list">
-  <li><span className={"contact-step-index"} aria-hidden="true">1</span><div><strong>Sie senden die vorbereitete E-Mail</strong><span>Das Formular prüft Ihre Angaben und öffnet die Nachricht in Ihrem E-Mail-Programm. Erst Ihr Versand dort stellt sie zu.</span></div></li>
+  <li><span className={"contact-step-index"} aria-hidden="true">1</span><div><strong>Ihre Anfrage geht direkt ein</strong><span>Das Formular prüft Ihre Angaben, speichert sie und meldet sie Pascal Courbois. Sie erhalten sofort eine Vorgangsnummer.</span></div></li>
   <li><span className={"contact-step-index"} aria-hidden="true">2</span><div><strong>Pascal klärt offene Punkte</strong><span>Persönlich, per E-Mail oder im Gespräch – mit Blick auf den passenden Umfang.</span></div></li>
   <li><span className={"contact-step-index"} aria-hidden="true">3</span><div><strong>Sie erhalten ein Angebot</strong><span>Mit benannten Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</span></div></li>
 </ol>
-<p className={"contact-note"}>Ohne eingerichtetes E-Mail-Programm können Sie den Entwurf kopieren und selbst versenden. Eine sichtbare Vorbereitung ist noch keine Zustellbestätigung.</p>
+<p className={"contact-note"}>Kann die Anfrage ausnahmsweise nicht gespeichert werden, zeigt das Formular das an und bietet Ihnen eine vorbereitete E-Mail als Alternative.</p>
 </div>
                 </section>
               </div>

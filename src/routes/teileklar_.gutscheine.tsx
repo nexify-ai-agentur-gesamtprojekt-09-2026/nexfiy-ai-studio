@@ -53,7 +53,7 @@ function Index() {
         <a href="#content-tk-vouchers-tk-vouchers-customer-2-1">Einlösen beim Aussteller<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
       </nav>
       <section className={"hc-container pc-supplement"}>
-        <InquiryForm kind="voucher" title="Gutscheinfrage vorbereiten" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Aussteller, Leistung und Ihre Frage" />
+        <InquiryForm kind="voucher" title="Gutscheinfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Aussteller, Leistung und Ihre Frage" />
       </section>
       <div className={"pc-sections"}>
         <section className={"hc-intro hc-container pc-section"} id="content-tk-vouchers-tk-vouchers-customer-1-0" tabIndex={-1} aria-labelledby="content-tk-vouchers-tk-vouchers-customer-1-0-title">
@@ -80,8 +80,8 @@ function Index() {
           <div className={"pc-section-body"}>
             <p>Ob ein Gutschein gültig oder schon eingelöst ist, weiß sein Aussteller. Diese Seite zeigt keinen Stand zu einem Guthaben.</p>
           
-<h3>Eine Frage zum Gutschein vorbereiten</h3>
-<p>Nennen Sie Aussteller, Leistung und Ihre offene Frage. Vollständige Zahlungsdaten oder andere vertrauliche Angaben sind dafür nicht nötig. Die Anfrage wird als E-Mail vorbereitet; sie löst keine Einlösung oder Buchung aus.</p>
+<h3>Eine Frage zum Gutschein stellen</h3>
+<p>Nennen Sie Aussteller, Leistung und Ihre offene Frage. Vollständige Zahlungsdaten oder andere vertrauliche Angaben sind dafür nicht nötig. Die Anfrage wird gespeichert und persönlich beantwortet; sie löst keine Einlösung oder Buchung aus.</p>
 </div>
         </section>
       </div>
