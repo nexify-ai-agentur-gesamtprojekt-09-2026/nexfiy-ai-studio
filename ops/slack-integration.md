@@ -1,6 +1,6 @@
 # Slack und AIFly ORACLE – vorhandene Lösung erweitern
 
-## Fortsetzung: aktuelle Prüfung 16.11.2026, 10:38 UTC
+## Fortsetzung: aktuelle Prüfung 16.11.2026, 10:53 UTC
 - **IST:** Die bestehende Verbindung „My Slack“ ist weiter projektverknüpft, zugänglich und persönlich; ihre Metadaten bestätigen Lesezugriff auf den privaten Ursprungskanal und `chat:write`. Sie ist kein nachgewiesener ORACLE-Bot-Ausgang.
 - **IST:** Slack `users.info` bestätigt den bestehenden Bot `nexify.login-aifly-oracle` und die bekannte App-Zuordnung. `conversations.info` bestätigt `#oracle-agent-inbox` als privat, nicht archiviert und nicht extern geteilt. Keine neue App provisioniert und keine Verbindung getrennt.
 - **IST:** Der [bestehende Prüfthread](https://nexifyai.slack.com/archives/C0CDW3K4KDY/p1794824205972329) enthält beim aktuellen vollständigen Threadabruf weiterhin nur die Ausgangsanfrage; `has_more:false`. Die jüngere Kanalabfrage enthält keine Nachrichten. **OFFEN:** Empfänger-ACK und Rückschema, kein Roundtrip behauptet und kein weiterer Auftrag/Modellaufruf gesendet.
