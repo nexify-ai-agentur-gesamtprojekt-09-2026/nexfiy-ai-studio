@@ -69,7 +69,10 @@ export const adviseOracle = createServerFn({ method: "POST" })
         signal: AbortSignal.timeout(PUBLIC_AI_TIMEOUT_MS),
       });
       if (!response.ok) {
-        console.error("ORACLE router failure", { status: response.status, body: (await response.text()).slice(0, 500) });
+        console.error("ORACLE router failure", {
+          status: response.status,
+          body: (await response.text()).slice(0, 500),
+        });
         if (response.status === 402)
           return {
             ok: false,
@@ -79,13 +82,17 @@ export const adviseOracle = createServerFn({ method: "POST" })
         if (response.status === 429)
           return {
             ok: false,
-            error: "ORACLE ist gerade stark ausgelastet. Bitte warten Sie vor einem weiteren Versuch.",
+            error:
+              "ORACLE ist gerade stark ausgelastet. Bitte warten Sie vor einem weiteren Versuch.",
           };
         return { ok: false, error: UNAVAILABLE };
       }
       const body = (await response.json()) as {
         model?: unknown;
-        choices?: { finish_reason?: string; message?: { content?: string | null; refusal?: string | null } }[];
+        choices?: {
+          finish_reason?: string;
+          message?: { content?: string | null; refusal?: string | null };
+        }[];
       };
       const choice = body.choices?.[0];
       if (choice?.message?.refusal) {
@@ -114,44 +121,5 @@ export const adviseOracle = createServerFn({ method: "POST" })
     } catch {
       console.error("ORACLE response could not be processed");
       return { ok: false, error: UNAVAILABLE };
-    }
-  });
-        return {
-          ok: false,
-          error:
-            "Die Beratung konnte nicht geprüft abgeschlossen werden. Ihre Eingabe bleibt erhalten.",
-        };
-      }
-      const text = parts
-        .flatMap((part) => (part.type === "output_text" ? [part.text] : []))
-        .join("");
-      const advice = oracleAnswerSchema.parse(JSON.parse(text));
-      return { ok: true, advice, links: oracleEntryLinks(advice.recommendation) };
-    } catch (error) {
-      if (error instanceof GatewayError) {
-        console.error("ORACLE Gateway failure", {
-          code: error.code,
-          outcome: error.outcome,
-          ids: error.ids,
-          remote: error.remote,
-        });
-        if (error.code === "payment_required")
-          return {
-            ok: false,
-            error:
-              "Die KI-Beratung ist wegen ihres Nutzungsbudgets vorübergehend nicht verfügbar. Die Produktseiten bleiben erreichbar.",
-          };
-        if (error.code === "rate_limited")
-          return {
-            ok: false,
-            error:
-              "ORACLE ist gerade stark ausgelastet. Bitte warten Sie vor einem weiteren Versuch.",
-          };
-      } else console.error("ORACLE response could not be processed");
-      return {
-        ok: false,
-        error:
-          "Die KI-Beratung ist gerade nicht erreichbar. Ihre Eingabe bleibt erhalten; Sie können die Produktseiten direkt ansehen.",
-      };
     }
   });
