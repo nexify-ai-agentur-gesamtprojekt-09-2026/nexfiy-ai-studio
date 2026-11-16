@@ -1,7 +1,7 @@
 # Roadmap
 ## Markierte Film-Aufklappzeilen korrigieren (16.11., 11:18 UTC)
-- [ ] Gemeinsame Film-Fußzeile gegen konkurrierende Seitenregeln absichern; Texte, Filmzuordnung und abgenommenes Design erhalten
-- [ ] Aufklappen, Schließen, Tastaturfokus und Textabstände auf Desktop/Handy prüfen; gemeldeten Seitenfehler aktuell reproduzieren oder als nicht reproduzierbar abgrenzen
+- [x] Gemeinsame Film-Fußzeile gegen konkurrierende Seitenregeln abgesichert: 16px-Symbol statt konkurrierender CSS-Pfeile, 44px-Aufklappzeile, Filmhinweis 12px/Transkript 14px mit identischen Einzügen. Texte, Filmzuordnung und abgenommenes Design erhalten
+- [x] 12 Filmseiten × 1280/390/2554px = 36 Ansichten geprüft; 24 Transkripte per Enter geöffnet/Space geschlossen, sichtbarer Tastaturfokus, keine Überläufe/Laufzeitfehler. 11 bestehende Filmtests bestanden, build OK 11:20:52 UTC. Gemeldeter Seitenfehler nicht reproduzierbar: aktuelle Aufrufe HTTP 200. Nur Vorschau korrigiert, nicht veröffentlicht
 
 ## Nötige Slack-Workspace-Freigabe (16.11., 11:18 UTC)
 - [x] Connector-Dialog ausdrücklich erneut geöffnet; Ergebnis erneut bestehendes persönliches „My Slack“, vorher/nachher dieselben drei Verbindungen. Nichts getrennt oder ersetzt
