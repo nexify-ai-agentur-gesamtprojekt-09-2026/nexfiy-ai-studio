@@ -884,3 +884,15 @@
     transition: none;
   }
 }
+
+/* Touch-Ziele mindestens 44 px hoch (WCAG 2.5.5); Breite und Gestaltung bleiben. */
+@media (pointer: coarse), (max-width: 760px) {
+  :root:root #atelier .pc-guide-controls > a,
+  :root:root #atelier .footer-brand-block .tk-wordmark {
+    min-block-size: 44px;
+  }
+  :root:root #atelier .footer-brand-block .tk-wordmark {
+    display: inline-flex;
+    align-items: center;
+  }
+}
