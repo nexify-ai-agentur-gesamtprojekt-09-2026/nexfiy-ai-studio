@@ -1,4 +1,18 @@
 /* Arbeitsplatz-Posteingang: nur semantische Rollen der Graphite-Bibliothek, keine festen Farben. */
+#atelier .ws-slack-workflows { display: grid; gap: 24px; padding-block: 32px; border-top: 1px solid var(--border); }
+#atelier .ws-slack-flow-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 0; }
+#atelier .ws-slack-flow-list > div { padding-block: 12px; border-bottom: 1px solid var(--border); }
+#atelier .ws-slack-flow-list dt { font-weight: 650; margin-bottom: 8px; }
+#atelier .ws-slack-flow-list dd { margin: 0; overflow-wrap: anywhere; }
+#atelier .ws-slack-simulator { display: grid; gap: 16px; }
+#atelier .ws-slack-simulator form { display: grid; gap: 16px; justify-items: start; }
+#atelier .ws-slack-simulator label { display: grid; gap: 8px; width: 100%; }
+#atelier .ws-slack-simulator :is(select, textarea) { min-height: 44px; width: 100%; padding: 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--secondary); color: var(--foreground); font: inherit; }
+#atelier .ws-slack-simulator :is(select, textarea):focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+#atelier .ws-slack-receipt-heading { display: flex; gap: 16px; justify-content: space-between; align-items: center; }
+#atelier .ws-slack-receipts { margin: 0; padding: 0; list-style: none; display: grid; }
+#atelier .ws-slack-receipts li { display: flex; flex-wrap: wrap; gap: 8px 24px; padding-block: 12px; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+@media (max-width: 640px) { #atelier .ws-slack-flow-list { grid-template-columns: minmax(0, 1fr); } }
 #atelier .ws-page .ws-stage {
   display: grid;
   gap: var(--space-6, 24px);

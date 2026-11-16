@@ -66,6 +66,9 @@ import { Route as ApiPublicJobsTeileklarCatalogSyncRouteImport } from './routes/
 import { Route as ApiPublicJobsTeileklarImageMirrorRouteImport } from './routes/api/public/jobs/teileklar-image-mirror'
 import { Route as ApiPublicShopCutoutRouteImport } from './routes/api/public/shop/cutout'
 import { Route as ApiPublicShopImageRouteImport } from './routes/api/public/shop/image'
+import { Route as ApiPublicSlackCommandsRouteImport } from './routes/api/public/slack/commands'
+import { Route as ApiPublicSlackEventsRouteImport } from './routes/api/public/slack/events'
+import { Route as ApiPublicSlackInteractionsRouteImport } from './routes/api/public/slack/interactions'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -360,6 +363,22 @@ const ApiPublicShopImageRoute = ApiPublicShopImageRouteImport.update({
   path: '/api/public/shop/image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSlackCommandsRoute = ApiPublicSlackCommandsRouteImport.update({
+  id: '/api/public/slack/commands',
+  path: '/api/public/slack/commands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSlackEventsRoute = ApiPublicSlackEventsRouteImport.update({
+  id: '/api/public/slack/events',
+  path: '/api/public/slack/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSlackInteractionsRoute =
+  ApiPublicSlackInteractionsRouteImport.update({
+    id: '/api/public/slack/interactions',
+    path: '/api/public/slack/interactions',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -419,6 +438,9 @@ export interface FileRoutesByFullPath {
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
+  '/api/public/slack/commands': typeof ApiPublicSlackCommandsRoute
+  '/api/public/slack/events': typeof ApiPublicSlackEventsRoute
+  '/api/public/slack/interactions': typeof ApiPublicSlackInteractionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -478,6 +500,9 @@ export interface FileRoutesByTo {
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
+  '/api/public/slack/commands': typeof ApiPublicSlackCommandsRoute
+  '/api/public/slack/events': typeof ApiPublicSlackEventsRoute
+  '/api/public/slack/interactions': typeof ApiPublicSlackInteractionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -538,6 +563,9 @@ export interface FileRoutesById {
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
+  '/api/public/slack/commands': typeof ApiPublicSlackCommandsRoute
+  '/api/public/slack/events': typeof ApiPublicSlackEventsRoute
+  '/api/public/slack/interactions': typeof ApiPublicSlackInteractionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -599,6 +627,9 @@ export interface FileRouteTypes {
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
     | '/api/public/shop/image'
+    | '/api/public/slack/commands'
+    | '/api/public/slack/events'
+    | '/api/public/slack/interactions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -658,6 +689,9 @@ export interface FileRouteTypes {
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
     | '/api/public/shop/image'
+    | '/api/public/slack/commands'
+    | '/api/public/slack/events'
+    | '/api/public/slack/interactions'
   id:
     | '__root__'
     | '/'
@@ -717,6 +751,9 @@ export interface FileRouteTypes {
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
     | '/api/public/shop/image'
+    | '/api/public/slack/commands'
+    | '/api/public/slack/events'
+    | '/api/public/slack/interactions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -777,6 +814,9 @@ export interface RootRouteChildren {
   ApiPublicJobsTeileklarImageMirrorRoute: typeof ApiPublicJobsTeileklarImageMirrorRoute
   ApiPublicShopCutoutRoute: typeof ApiPublicShopCutoutRoute
   ApiPublicShopImageRoute: typeof ApiPublicShopImageRoute
+  ApiPublicSlackCommandsRoute: typeof ApiPublicSlackCommandsRoute
+  ApiPublicSlackEventsRoute: typeof ApiPublicSlackEventsRoute
+  ApiPublicSlackInteractionsRoute: typeof ApiPublicSlackInteractionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1180,6 +1220,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicShopImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/slack/commands': {
+      id: '/api/public/slack/commands'
+      path: '/api/public/slack/commands'
+      fullPath: '/api/public/slack/commands'
+      preLoaderRoute: typeof ApiPublicSlackCommandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/slack/events': {
+      id: '/api/public/slack/events'
+      path: '/api/public/slack/events'
+      fullPath: '/api/public/slack/events'
+      preLoaderRoute: typeof ApiPublicSlackEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/slack/interactions': {
+      id: '/api/public/slack/interactions'
+      path: '/api/public/slack/interactions'
+      fullPath: '/api/public/slack/interactions'
+      preLoaderRoute: typeof ApiPublicSlackInteractionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1244,6 +1305,9 @@ const rootRouteChildren: RootRouteChildren = {
     ApiPublicJobsTeileklarImageMirrorRoute,
   ApiPublicShopCutoutRoute: ApiPublicShopCutoutRoute,
   ApiPublicShopImageRoute: ApiPublicShopImageRoute,
+  ApiPublicSlackCommandsRoute: ApiPublicSlackCommandsRoute,
+  ApiPublicSlackEventsRoute: ApiPublicSlackEventsRoute,
+  ApiPublicSlackInteractionsRoute: ApiPublicSlackInteractionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
