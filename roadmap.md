@@ -318,3 +318,10 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 ## Brain- und Wissensinventar (16.11., 12:17 UTC)
 - [ ] Brain (agentmemory, mcp-gateway, LightRAG, Wissensbasis) auf beiden Servern nur lesend per SSH inventarisieren; keine Geheimnisse, keine Änderungen
 - [ ] Repository nexify-ai-finales-agentur-gesamtprojekt-09-2026 als Quelle für Jeff- und ORACLE-Funktionen auswerten (nur lesend)
+
+## NX-LEAD-02 · Chat-Übergabe ins Kontaktformular (Leitstern Schritt 2, 16.11., 15:25 UTC)
+- [ ] ORACLE-Beratung: nach einer Antwort ausdrücklich bestätigte Übernahme der eigenen Besucherangaben plus katalogeigenem Einstieg ins Kontaktformular; kein automatischer Versand, keine Inhalte in der Adresse, keine Antworttexte des Modells
+- [ ] TEILEKLAR Hilfe: frei eingegebener Text nicht mehr über die Adresse, sondern über dieselbe einmalige Übergabe im Browserfenster
+- [ ] Kontaktseite übernimmt den Entwurf einmalig (30 Minuten gültig), erhält bereits eingetragene Angaben und zeigt die Herkunft sichtbar an
+- [ ] Tests, Browserprüfung 1280/390 px mit echter Beratung, ohne Absenden; keine Veröffentlichung
+- [ ] Herkunftsmerkmal „Formular/Chat-Übergabe“ als eigene Spalte: bereit nach Übernahme des Entwurfs NX-LEAD-01 (gleiche Tabelle und Migrationsfolge, sonst Konflikt)
