@@ -23,7 +23,7 @@ vi.mock("@tanstack/react-start/server", () => ({
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: state.rpc } }));
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
-const db = postgres({ host: process.env.PGHOST, port: Number(process.env.PGPORT || 5432), database: process.env.PGDATABASE, username: process.env.PGUSER, password: process.env.PGPASSWORD, max: 1 });
+const db = postgres({ host: process.env["PGHOST"], port: Number(process.env["PGPORT"] || 5432), database: process.env["PGDATABASE"], username: process.env["PGUSER"], password: process.env["PGPASSWORD"], max: 1 });
 afterAll(async () => { await db.end(); });
 beforeEach(() => { state.ip = "192.0.2.80"; state.deliver.mockClear(); state.rpc.mockReset(); });
 
@@ -37,7 +37,7 @@ async function rollbackTest(check: (tx: postgres.TransactionSql) => Promise<void
       state.rpc.mockImplementation(async (name: string, args?: Args) => {
         if (name === "get_inquiry_guard_salt") {
           const rows = await tx`SELECT public.get_inquiry_guard_salt() AS salt`;
-          return { data: rows[0]?.salt, error: null };
+          return { data: rows[0]?.["salt"], error: null };
         }
         if (!args) throw new Error("Testparameter fehlen");
         try {
@@ -62,7 +62,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
       for (let i = 1; i <= 5; i++) expect((await send(i)).ok).toBe(true);
       expect(await send(6)).toMatchObject({ ok: false, reason: "rate_limited" });
       const after = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
-      expect(after[0]?.count - before[0]?.count).toBe(5);
+      expect(after[0]?.["count"] - before[0]?.["count"]).toBe(5);
       expect(state.deliver).toHaveBeenCalledTimes(5);
     });
   });
@@ -73,7 +73,7 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
       state.ip = "192.0.2.81";
       expect(await send(1, " nx-lead-01-test@example.test ")).toMatchObject({ ok: false, reason: "duplicate" });
       const after = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
-      expect(after[0]?.count - before[0]?.count).toBe(1);
+      expect(after[0]?.["count"] - before[0]?.["count"]).toBe(1);
       expect(state.deliver).toHaveBeenCalledTimes(1);
     });
   });
@@ -82,10 +82,10 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
       const before = Date.now();
       expect((await send(1)).ok).toBe(true);
       const rows = await tx`SELECT consent_version,consent_at,created_at FROM public.inquiries WHERE email='nx-lead-01-test@example.test' ORDER BY created_at DESC LIMIT 1`;
-      expect(rows[0]?.consent_version).toBe("inquiry-storage-2026-11-16-v1");
-      expect(rows[0]?.consent_version).toBe(INQUIRY_CONSENT_VERSION);
-      expect(new Date(rows[0]?.consent_at).getTime()).toBeGreaterThanOrEqual(before - 1000);
-      expect(new Date(rows[0]?.consent_at).getTime()).toBe(new Date(rows[0]?.created_at).getTime());
+      expect(rows[0]?.["consent_version"]).toBe("inquiry-storage-2026-11-16-v1");
+      expect(rows[0]?.["consent_version"]).toBe(INQUIRY_CONSENT_VERSION);
+      expect(new Date(rows[0]?.["consent_at"]).getTime()).toBeGreaterThanOrEqual(before - 1000);
+      expect(new Date(rows[0]?.["consent_at"]).getTime()).toBe(new Date(rows[0]?.["created_at"]).getTime());
     });
   });
   it("lässt nach Ablauf der rollierenden Stunde wieder eine Anfrage zu", async () => {
@@ -119,15 +119,15 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
   });
   it("erweitert keine bestehenden Rechte und hält neue Tabellen und Funktionen vollständig serverseitig", async () => {
     const roles = await db`SELECT rolname,has_table_privilege(rolname,'public.inquiries','SELECT') AS s,has_table_privilege(rolname,'public.inquiries','INSERT') AS i,has_table_privilege(rolname,'public.inquiries','UPDATE') AS u,has_table_privilege(rolname,'public.inquiries','DELETE') AS d FROM pg_roles WHERE rolname IN ('anon','authenticated') ORDER BY rolname`;
-    expect(roles.map(row => ({ role: row.rolname, select: row.s, insert: row.i, update: row.u, delete: row.d }))).toEqual([
+    expect(roles.map(row => ({ role: row["rolname"], select: row["s"], insert: row["i"], update: row["u"], delete: row["d"] }))).toEqual([
       { role: "anon", select: false, insert: false, update: false, delete: false },
       { role: "authenticated", select: true, insert: false, update: false, delete: false },
     ]);
     const guards = await db`SELECT r.rolname,c.relname,c.relrowsecurity,has_table_privilege(r.rolname,c.oid,'SELECT,INSERT,UPDATE,DELETE') AS access FROM pg_roles r CROSS JOIN pg_class c WHERE r.rolname IN ('anon','authenticated') AND c.oid IN ('public.inquiry_guard_secret'::regclass,'public.inquiry_rate_guards'::regclass,'public.inquiry_duplicate_guards'::regclass)`;
     expect(guards).toHaveLength(6);
-    expect(guards.every(row => row.access === false && row.relrowsecurity === true)).toBe(true);
+    expect(guards.every(row => row["access"] === false && row["relrowsecurity"] === true)).toBe(true);
     const functions = await db`SELECT r.rolname,p.proname,has_function_privilege(r.rolname,p.oid,'EXECUTE') AS access FROM pg_roles r CROSS JOIN pg_proc p WHERE r.rolname IN ('anon','authenticated') AND p.proname IN ('get_inquiry_guard_salt','accept_guarded_inquiry')`;
     expect(functions).toHaveLength(4);
-    expect(functions.every(row => row.access === false)).toBe(true);
+    expect(functions.every(row => row["access"] === false)).toBe(true);
   });
 });
