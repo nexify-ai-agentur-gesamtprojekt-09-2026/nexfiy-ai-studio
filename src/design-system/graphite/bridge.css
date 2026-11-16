@@ -59,6 +59,7 @@
   --site-legacy-lime-deep: var(--color-marke-lime-gruen);
   --site-legacy-page-gradient: var(--gradient-seitengrund);
   --site-legacy-band-gradient: var(--gradient-band);
+  --site-legacy-button-gradient: var(--gradient-button-primaer);
   --site-legacy-secondary-text: var(--color-text-secondary);
   --site-legacy-muted-text: var(--color-text-muted);
 }
@@ -79,6 +80,7 @@
   --color-text-muted: var(--muted-foreground);
   --gradient-seitengrund: var(--background);
   --gradient-band: var(--gradient-surface);
+  --gradient-button-primaer: linear-gradient(180deg, var(--brand-signal-hover), var(--brand-signal), var(--brand-signal-active));
 }
 :root:root #atelier.site-nexify :where([class*="tk-"], [class*="tkc-"]) {
   --color-marke-cyan: var(--site-legacy-cyan);
@@ -96,4 +98,5 @@
   --color-text-muted: var(--site-legacy-muted-text);
   --gradient-seitengrund: var(--site-legacy-page-gradient);
   --gradient-band: var(--site-legacy-band-gradient);
+  --gradient-button-primaer: var(--site-legacy-button-gradient);
 }
