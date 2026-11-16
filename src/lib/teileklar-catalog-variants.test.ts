@@ -1,0 +1,85 @@
+import { describe, expect, it } from "vitest";
+import {
+  formatPriceRange,
+  groupAvailabilityLabel,
+  normalizeCatalogSort,
+  variantLabels,
+} from "./teileklar-catalog";
+
+const euro = (value: string | null) => value?.replace(/\s/g, " ") ?? null;
+
+describe("Artikelgruppen im TEILEKLAR-Katalog", () => {
+  it("lässt nur bekannte Sortierungen zu und fällt sonst auf „Empfohlen“ zurück", () => {
+    expect(normalizeCatalogSort("preis-auf")).toBe("preis-auf");
+    expect(normalizeCatalogSort("preis-ab")).toBe("preis-ab");
+    expect(normalizeCatalogSort("name")).toBe("name");
+    expect(normalizeCatalogSort("price;drop")).toBe("empfohlen");
+    expect(normalizeCatalogSort(undefined)).toBe("empfohlen");
+  });
+
+  it("zeigt bei unterschiedlichen Ausführungspreisen „ab“ den günstigsten Preis", () => {
+    expect(euro(formatPriceRange(6.3, 119.85))).toBe("ab 6,30 €");
+    expect(euro(formatPriceRange(70.4, 70.4))).toBe("70,40 €");
+    expect(formatPriceRange(null, null)).toBeNull();
+  });
+
+  it("benennt Ausführungen nur nach Merkmalen, die sich tatsächlich unterscheiden", () => {
+    const labels = variantLabels([
+      {
+        id: "M1203136",
+        specs: [
+          { label: "Gewicht", value: "0.3 kg" },
+          { label: "Zustand", value: "Neu" },
+          { label: "EAN", value: "4007140025968" },
+        ],
+      },
+      {
+        id: "M1203138",
+        specs: [
+          { label: "Gewicht", value: "0.49 kg" },
+          { label: "Zustand", value: "Neu" },
+          { label: "EAN", value: "4007140025982" },
+        ],
+      },
+    ]);
+    expect(labels.get("M1203136")).toBe("Gewicht 0,3 kg");
+    expect(labels.get("M1203138")).toBe("Gewicht 0,49 kg");
+  });
+
+  it("erfindet keine Größe, wenn der Katalog keinen Unterschied nennt", () => {
+    const same = [{ label: "Gewicht", value: "1 kg" }];
+    const labels = variantLabels([
+      { id: "S37116817", specs: same },
+      { id: "S37116818", specs: same },
+    ]);
+    expect(labels.get("S37116817")).toBe("Art.-Nr. S37116817");
+    expect(labels.get("S37116818")).toBe("Art.-Nr. S37116818");
+  });
+
+  it("macht gleiche Merkmalsbezeichnungen über die Artikelnummer eindeutig", () => {
+    const labels = variantLabels([
+      { id: "A1", specs: [{ label: "Gewicht", value: "1 kg" }] },
+      { id: "A2", specs: [{ label: "Gewicht", value: "1 kg" }] },
+      { id: "A3", specs: [{ label: "Gewicht", value: "2 kg" }] },
+    ]);
+    expect(labels.get("A1")).toBe("Gewicht 1 kg · Art.-Nr. A1");
+    expect(labels.get("A3")).toBe("Gewicht 2 kg");
+  });
+
+  it("schreibt einer Gruppe keinen Bestand zu, den der Vertreter nicht hat", () => {
+    expect(
+      groupAvailabilityLabel({ stock: 0, delivery_note: "", in_stock: true, variant_count: 3 }),
+    ).toBe("Einzelne Ausführungen vorrätig");
+    expect(
+      groupAvailabilityLabel({ stock: 0, delivery_note: "", in_stock: false, variant_count: 3 }),
+    ).toBe("Verfügbarkeit auf Anfrage");
+    expect(
+      groupAvailabilityLabel({
+        stock: 4,
+        delivery_note: "Auf Lager",
+        in_stock: true,
+        variant_count: 3,
+      }),
+    ).toBe("Auf Lager");
+  });
+});
