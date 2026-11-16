@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
@@ -50,7 +51,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Klare Hierarchien, sichtbarer Fokus und verständliche Beschriftungen gehören zum Gestaltungsanspruch. Medien unterstützen die Botschaft; wichtige Informationen dürfen nicht allein von Bewegung oder Farbe abhängen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Information bleibt unabhängig von Effekten</h3>
+<p>Eine Überschrift soll den folgenden Abschnitt verständlich benennen. Fehlermeldungen müssen den betroffenen Schritt nennen, statt nur eine Farbe zu ändern. Das gilt gleichermaßen für die Seitennavigation, eine Anfrage und die Produktberatung.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -63,7 +67,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Beschreiben Sie eine Barriere mit Seite, betroffener Funktion und Gerät. Über den Kontaktweg erreicht Ihr Hinweis das Projektteam. Übermitteln Sie dabei keine Zugangsdaten oder vertraulichen Inhalte.</p>
-                  </div>
+                  
+<h3>Eine hilfreiche Rückmeldung</h3>
+<p>Nennen Sie die Seitenadresse, was Sie tun wollten und was tatsächlich passiert ist. Gerät, Browser und eine Beschreibung der betroffenen Stelle helfen bei der Eingrenzung. Eine umfassende Prüfung aller Hilfsmittel und Geräte steht weiterhin aus.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -99,10 +106,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-t2Tmf-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-t2Tmf-panel" aria-activedescendant="bb-customSelect-t2Tmf-selectedOption" aria-labelledby="bb-customSelect-t2Tmf-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website" selected>Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-t2Tmf-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-t2Tmf-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

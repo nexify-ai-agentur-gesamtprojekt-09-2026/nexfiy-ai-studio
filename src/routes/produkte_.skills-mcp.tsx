@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.skills-mcp.css?url";
@@ -57,7 +58,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wie wird eine Anfrage strukturiert, wie ein Ergebnis geprüft? Ein Skill hält das einmal fest, damit ein Agent es jedes Mal gleich macht. Vor dem Einsatz prüfen wir Herkunft, Eignung und Version.</p>
                     <p>Die fachliche Verantwortung bleibt bei Ihnen, Ihre Daten bleiben in Ihrem Projekt.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein Skill beschreibt die Methode</h3>
+<p>Eine wiederverwendbare Vorgehensweise hilft, dieselbe Art von Aufgabe konsistent zu bearbeiten. Sie erteilt aber keine zusätzlichen Datenrechte. Methode, verwendete Quellen und Freigaben müssen für den jeweiligen Einsatz zusammenpassen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/api">NeXify API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -71,7 +75,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Über das Model Context Protocol (MCP) nutzt ein Agent zugelassene Werkzeuge und Fachsysteme auf einem einheitlichen Weg. Für jede Verbindung steht fest, wer sie betreibt, wozu sie dient und was sie darf.</p>
                     <p>Welche Verbindungen wir für Ihr Projekt einrichten, hängt von Ihren Systemen ab und steht im Angebot.</p>
-                  </div>
+                  
+<h3>MCP beschreibt den Werkzeugzugang</h3>
+<p>Eine Verbindung kann einem Agenten klar benannte Werkzeuge zugänglich machen. Das sagt noch nichts darüber aus, welche Daten er sehen oder welche Änderungen er ausführen darf. Identität und bestehende Rechte müssen auch bei einer standardisierten Verbindung erhalten bleiben.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-skills-mcp-skills-3-2" tabIndex={-1} aria-labelledby="content-skills-mcp-skills-3-2-title">
                   <div>
@@ -81,7 +88,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Beschreiben Sie das System und die Aufgabe. Wir sehen uns die vorhandene Schnittstelle, die nötigen Rechte und den Nutzen an.</p>
                     <p>Danach erhalten Sie ein Angebot mit Aufwand und nächstem Schritt.</p>
-                  </div>
+                  
+<h3>Für eine Prüfung benötigte Angaben</h3>
+<p>Hilfreich sind der Name des Systems, die wiederkehrende Aufgabe und das gewünschte Ergebnis. Zugangsdaten oder Tokens gehören nicht in die öffentliche Anfrage. Welche Verbindung eingerichtet werden kann, hängt von verfügbaren Schnittstellen und Berechtigungen ab.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -120,10 +130,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-AALyz-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-AALyz-panel" aria-activedescendant="bb-customSelect-AALyz-selectedOption" aria-labelledby="bb-customSelect-AALyz-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-AALyz-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-AALyz-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

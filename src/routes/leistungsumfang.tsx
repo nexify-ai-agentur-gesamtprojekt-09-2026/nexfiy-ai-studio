@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungsumfang.css?url";
@@ -61,7 +62,10 @@ function Index() {
                     <p>Markenstart baut Ihren Marken- und Webauftritt. KI im Betrieb entlastet einen ausgewählten Ablauf. Wachstum verbindet Kampagne und Zielseite.</p>
                     <p>Im Gespräch klären wir, welcher Einstieg zu Ihrer Lage passt und was schon vorhanden ist. Das Angebot nennt Ergebnisse, Ihre Mitwirkung, den Zeitrahmen und die Kosten, bevor Sie entscheiden.</p>
                     <p>Sie möchten KI selbst nutzen? Die <a href="/produkte/nex2fly">Suite</a> und die <a href="/produkte/api">API</a> sind eigene Produkte, keine dieser Agenturpakete.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein Ergebnis je Einstieg</h3>
+<p>Markenstart betrifft den Auftritt, KI im Betrieb einen benannten Ablauf und Wachstum eine Kampagne mit Zielseite. Die Auswahl richtet sich nach dem wichtigsten Ergebnis, nicht nach dem größten Funktionsumfang. Die konkrete Leistung steht im Angebot, nicht allein im Paketnamen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -74,7 +78,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Zusätzliche Inhalte, Sprachen, Anbindungen, Anzeigen und die Betreuung mit NeXify Care stehen als eigene Posten im Angebot. So sehen Sie, was zum Start gehört und was Sie später ergänzen können – samt laufender Kosten.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Optionen mit ihren Folgekosten betrachten</h3>
+<p>Bei zusätzlichen Inhalten geht es auch um Pflege, bei Anbindungen um den Betrieb und bei Kampagnen um das Medienbudget. Vergleichen Sie daher nicht nur den einmaligen Aufwand. Welche laufenden Kosten hinzukommen, muss vor Ihrer Entscheidung verständlich ausgewiesen sein.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -118,10 +125,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-nG9MF-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-nG9MF-panel" aria-activedescendant="bb-customSelect-nG9MF-selectedOption" aria-labelledby="bb-customSelect-nG9MF-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-nG9MF-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-nG9MF-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

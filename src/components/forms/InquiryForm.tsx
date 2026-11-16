@@ -1,4 +1,5 @@
 import { useId, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
 import formsCSS from "../../styles/site-forms.css?url";
 import { useInquiryForm } from "@/hooks/use-inquiry-form";
 import { CopyButton } from "@/components/system/CopyButton";
@@ -20,6 +21,7 @@ export interface InquiryFormProps {
   submitLabel?: string;
   successTitle?: string;
   successBody?: ReactNode;
+  initialMessage?: string;
 }
 
 /**
@@ -35,6 +37,7 @@ export function InquiryForm({
   submitLabel = "Anfrage senden",
   successTitle = "Fast geschafft.",
   successBody,
+  initialMessage = "",
 }: InquiryFormProps) {
   const form = useInquiryForm(kind);
   const titleId = useId();
@@ -95,7 +98,7 @@ export function InquiryForm({
           </div>
           <div className="tk-field is-wide">
             {label("message", messageLabel)}
-            <textarea {...form.fieldProps("message")} rows={5} maxLength={4000} />
+            <textarea {...form.fieldProps("message")} rows={5} maxLength={4000} defaultValue={initialMessage} />
             {error("message")}
           </div>
         </div>
@@ -103,16 +106,16 @@ export function InquiryForm({
           <label className="tk-check">
             <input {...form.fieldProps("consent")} type="checkbox" />
             <span>
-              Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Details in der{" "}
+              Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner E-Mail-Anfrage verwendet werden. Details in der{" "}
               <a href={privacyHref}>Datenschutzerklärung</a>. *
             </span>
           </label>
           {error("consent")}
         </div>
         <div className="tk-actions">
-          <button type="submit" className="nexify-control primary-button hc-finish-primary" data-variant="primary" aria-describedby={hintId}>
+          <Button variant="brand" type="submit" className="nexify-control primary-button hc-finish-primary" data-variant="primary" aria-describedby={hintId}>
             {submitLabel}
-          </button>
+          </Button>
           <p id={hintId} className="inquiry-hint">
             Öffnet Ihr E-Mail-Programm mit der fertigen Anfrage an {INQUIRY_RECIPIENT}.
           </p>
@@ -149,9 +152,9 @@ export function InquiryForm({
               E-Mail erneut öffnen
             </a>
             <CopyButton className="hc-text-link" text={`An: ${INQUIRY_RECIPIENT}\nBetreff: ${form.mail.subject}\n\n${form.mail.body}`} />
-            <button type="button" className="hc-text-link" onClick={form.editAgain}>
+            <Button variant="ghost" type="button" className="hc-text-link" onClick={form.editAgain}>
               Angaben bearbeiten
-            </button>
+            </Button>
           </div>
         </section>
       ) : null}

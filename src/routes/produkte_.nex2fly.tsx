@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex2fly.css?url";
@@ -58,7 +59,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen nicht bei jeder Frage von vorn an.</p>
                     <p>Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Für Menschen, die selbst mit KI arbeiten möchten</h3>
+<p>Die Suite ist der Einstieg, wenn Gespräch, Aufgabe und Projektwissen gemeinsam bearbeitet werden sollen. Sie ist kein Agenturpaket für eine beauftragte Website. Für Ihre Entscheidung zählt, welche Funktionen und Werkzeuge für Ihren Zugang tatsächlich aktiviert sind.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/registrieren">NeX AIFly Suite. In Ruhe testen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -72,7 +76,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.</p>
                     <p>Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Quellen und Ergebnis bewusst trennen</h3>
+<p>Nennen Sie der KI, worauf sie sich stützen soll, und prüfen Sie das Ergebnis vor der Weiterverwendung. Ein erstellter Text ist noch keine versendete Nachricht. Kalender oder Versand sind nur nutzbar, wenn das entsprechende Werkzeug im Zugang freigeschaltet ist.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -86,7 +93,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.</p>
                     <p>Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen.</p>
-                  </div>
+                  
+<h3>Den Test an einer echten Aufgabe ausrichten</h3>
+<p>Wählen Sie einen überschaubaren Fall, etwa Informationen ordnen oder einen Entwurf vorbereiten. Prüfen Sie, ob das Ergebnis für Ihren Alltag brauchbar ist. Testdauer und Modellbudget sind getrennte Angaben; aus dem Test folgt keine Zusage unbegrenzter KI-Nutzung.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-4-3" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-4-3-title">
                   <div>
@@ -96,7 +106,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen mitarbeiten.</p>
                     <p>Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung aktiviert.</p>
-                  </div>
+                  
+<h3>Anmeldung und Produktaktivierung sind nicht dasselbe</h3>
+<p>Die Anmeldung dieses Auftritts bestätigt Ihr Konto. Einen vollständig freigeschalteten Suite-Arbeitsbereich belegt sie allein nicht. Die Aktivierung und die für Ihren Zugang verfügbaren Funktionen müssen am jeweiligen Produkteinstieg nachvollziehbar sein.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -137,10 +150,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-0Mnh7-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-0Mnh7-panel" aria-activedescendant="bb-customSelect-0Mnh7-selectedOption" aria-labelledby="bb-customSelect-0Mnh7-label" tabIndex={0}><span>NeX AIFly Suite · Ihr eigener Bereich</span></span><select tabIndex={-1} defaultValue="nex2fly-trial"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-0Mnh7-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-0Mnh7-selectedOption">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="nex2fly-trial" />
         </div>
       </details>
     </section>

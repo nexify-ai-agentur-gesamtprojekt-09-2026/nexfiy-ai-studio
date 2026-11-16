@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/wissen.css?url";
@@ -56,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Zuerst klären wir Zielgruppe, Angebot und die gewünschte Wirkung. Daraus folgen Gestaltung, Inhalte, Funktionen und der Umfang.</p>
                     <p>Ein Beispiel: Soll Ihre Website mehr passende Anfragen bringen, beginnen wir beim Angebot und der Zielgruppe, dann kommen Seitenführung und Kontaktweg. So wissen Sie bei jedem Teil des Projekts, warum es ihn gibt.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die erste Frage ist die wichtigste</h3>
+<p>Beginnen Sie nicht mit einer Liste von Werkzeugen, sondern mit einem konkreten Problem. Wer ist betroffen, was passiert heute und welches Ergebnis würde helfen? So lassen sich Inhalte und Funktionen an einer Aufgabe beurteilen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -70,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Am Ende erhalten Sie das geprüfte Ergebnis mit den Dateien, der Dokumentation und der Einweisung, die im Angebot stehen. Offene Punkte und nächste Schritte halten wir schriftlich fest.</p>
                     <p>Pflege und Aktualisierung übernehmen Sie selbst oder vereinbaren sie mit NeXify Care.</p>
-                  </div>
+                  
+<h3>Den nächsten Betriebsschritt mitdenken</h3>
+<p>Zur Übergabe gehört die Frage, wer Inhalte pflegt und wer bei Änderungen entscheidet. Welche Dokumentation, Einweisung und Betreuung enthalten sind, wird im Angebot benannt. Ein fertiger Auftritt ist kein Versprechen, dass spätere Pflege automatisch übernommen wird.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -109,10 +116,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-ZAXI5-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-ZAXI5-panel" aria-activedescendant="bb-customSelect-ZAXI5-selectedOption" aria-labelledby="bb-customSelect-ZAXI5-label" tabIndex={0}><span>Ihr Projektbriefing</span></span><select tabIndex={-1} defaultValue="knowledge-to-project"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-ZAXI5-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-ZAXI5-selectedOption">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="knowledge-to-project" />
         </div>
       </details>
     </section>

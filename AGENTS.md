@@ -30,7 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
-- Imported pages keep their content markup in their route and captured styles in `src/styles/captured.css` or `src/styles/pages/<page>.css`; shared NeXify navigation, footer and chat markup belongs in `src/components/site/NexifyShell.tsx` and its children so fixes propagate without duplicating the frame.
+- Imported pages keep content in their route and captured styles in `src/styles/captured.css` or `src/styles/pages/<page>.css`; NeXify and TEILEKLAR use the brand-aware `NexifyShell` and its children so frame, focus and resizing fixes propagate without duplication.
 - Shared page behaviour (chat panel, header menus, scroll/footer shell attributes, film players) lives in `src/lib/imported-site.ts` so every imported route behaves the same; routes only wire its hooks into their JSX.
 - The copy is independent of the live site: never write back to or link assets from the original domain; downloaded media lives in `public/site-assets/` and `public/glass/`.
 
@@ -41,3 +41,9 @@ use the editor.
 - NeXify page/chat resizing uses `PageSplit` and the existing resizable-panel primitives, with viewport bounds in `page-split.ts`; library-managed sizing avoids rerendering page content while dragging.
 - ORACLE retains the existing single transient page conversation and uses AI Elements for messages, scrolling and composing; short validated advice is delivered atomically via RPC rather than partially exposing unvalidated product selections.
 - ORACLE formats replies through a static, restricted MessageResponse with semantic typography; model HTML, images and inline destinations are disabled so product links remain catalog-owned.
+- TEILEKLAR help is public topic navigation plus an explicit contact-draft handoff, never an invented parts-matching AI or commerce backend.
+- Shared imported CTAs and guides resolve fixed destinations centrally; unavailable commerce never displays fabricated loading/results or grants fitment.
+- Tyre comparisons use pure nominal geometry tested against existing page examples; the view never grants legal approval or fitment.
+- Captured and semantic light/dark surfaces use one document theme attribute, read after hydration to keep SSR stable.
+- Load shell, adviser and film geometry through the root stylesheet; reserve CSS-based panel widths before hydration so the initial page never depends on delayed route JavaScript.
+- Editorial hierarchy lives in shared shell styles; informative expansions stay in each route, distinguish existing capabilities from planned integrations, and add no commercial or legal promises.

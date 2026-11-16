@@ -1,6 +1,11 @@
 /* Inquiry forms (contact, TEILEKLAR partner): field errors, summary and the e-mail hand-off state.
    Loaded once by <InquiryForm>; scoped to the #atelier shell like the captured page styles. */
 :root:root #atelier .tk-form[hidden] { display: none; }
+:root:root #atelier :is(.tk-form,.inquiry-handoff) { background: var(--glass-fill); color: var(--foreground); border-color: var(--border); }
+:root:root #atelier .tk-form :is(h2,h3) { color: var(--foreground); }
+:root:root #atelier .tk-form :is(input,textarea) { font-size: 16px; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; }
+:root:root #atelier .tk-form .tk-check input { flex: 0 0 20px; width: 20px; height: 20px; min-height: 20px; accent-color: var(--primary); }
+:root:root #atelier .tk-form .tk-check { min-height: 44px; }
 :root:root #atelier .tk-form .tk-field > .tk-field-label { margin: 0; font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: normal; color: var(--color-text-sekundaer); }
 :root:root #atelier .tk-form .tk-field-error {
   display: flex; align-items: flex-start; gap: 6px; margin: 0;

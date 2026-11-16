@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
 import { mayAutoplayFilm, normalizeVolume } from "./media-policy";
+import { contactDraftPath } from "./site-navigation";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
@@ -100,7 +101,7 @@ export function useChatPanel(defaultOpen: boolean) {
   useEffect(() => {
     if (!chatOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open]")) closeChat();
+      if (event.key === "Escape" && !document.querySelector(".site-header details[open], .tk-mobile-nav[open]")) closeChat();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -109,6 +110,57 @@ export function useChatPanel(defaultOpen: boolean) {
 }
 
 export type HeaderMenu = "products" | "mobile";
+
+/** Shared mobile panels isolate background controls and contain keyboard focus. */
+export function useMobilePanelFocus(open: boolean, mobile: boolean) {
+  useEffect(() => {
+    if (!open || !mobile) return;
+    const panel = document.getElementById("aifly-panel");
+    const website = document.querySelector<HTMLElement>("#atelier .website");
+    if (!panel || !website) return;
+    const previousInert = website.inert;
+    const overflow = document.body.style.overflow;
+    website.inert = true;
+    document.body.style.overflow = "hidden";
+    const focusable = () => Array.from(panel.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],textarea:not([disabled]),input:not([disabled]),[tabindex="0"]')).filter((element) => element.getClientRects().length > 0);
+    const frame = requestAnimationFrame(() => (panel.querySelector<HTMLElement>("#orientation-message") ?? focusable()[0])?.focus({ preventScroll: true }));
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const items = focusable();
+      const first = items[0];
+      const last = items.at(-1);
+      if (!first || !last) return;
+      if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+    };
+    panel.addEventListener("keydown", onKey);
+    return () => { cancelAnimationFrame(frame); panel.removeEventListener("keydown", onKey); website.inert = previousInert; document.body.style.overflow = overflow; };
+  }, [open, mobile]);
+}
+
+/** Delegated legacy CTA behavior stays in the shell, not duplicated imported routes. */
+export function useImportedActions() {
+  useEffect(() => {
+    const onClick = (event: globalThis.MouseEvent) => {
+      const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("#page-content button[type='button']") : null;
+      if (!button || button.disabled) return;
+      const text = button.textContent?.trim().replace(/\s+/g, " ") ?? "";
+      const drafts: Record<string, string> = {
+        "Angebot anfragen": "Ich möchte ein Angebot für folgendes Vorhaben anfragen:\n",
+        "Terminwunsch nennen": "Ich möchte folgenden Terminwunsch besprechen:\n",
+        "Kampagne besprechen": "Ich möchte eine Kampagne für folgendes Angebot besprechen:\n",
+        "Frage stellen": "Meine Frage zu TEILEKLAR:\n",
+        "Ihr Anliegen mit TEILEKLAR klären": "Mein Anliegen zu TEILEKLAR:\n",
+      };
+      const draft = drafts[text];
+      if (draft === undefined) return;
+      event.preventDefault();
+      window.location.assign(contactDraftPath(draft));
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+}
 
 /** Disclosure menus in the NeXify header: one open at a time, Escape closes and returns focus. */
 export function useHeaderMenus() {

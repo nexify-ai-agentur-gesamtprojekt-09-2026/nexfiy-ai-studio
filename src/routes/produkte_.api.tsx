@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.api.css?url";
@@ -56,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Welche Anwendung sendet welche Anfrage, welches Ergebnis brauchen Sie, und wer darf zugreifen? Daraus beschreiben wir die Schnittstelle mit Datenformaten und Fehlerfällen.</p>
                     <p>Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre Verbindung eingerichtet. Der API-Zugang wird derzeit im Rahmen eines Projekts eingerichtet; diese Seite bietet keine direkte Freischaltung.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Für eine eigene Anwendung gedacht</h3>
+<p>Wenn Ihre Software eine KI-Anfrage auslösen und das Ergebnis weiterverarbeiten soll, ist die API der passende Themenbereich. Dazu gehören Eingabeformat, Rückgabe und der Umgang mit Fehlern. Die öffentliche Beratung erklärt den Einstieg, schaltet aber keinen API-Zugang frei.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -70,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Die API nutzt Prepaid-Guthaben: Sie laden es vorab auf und verbrauchen es mit Ihren Aufrufen. Ohne ausreichendes Guthaben wird keine API-Anfrage ausgeführt.</p>
                     <p>Die Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung mit Ihnen.</p>
-                  </div>
+                  
+<h3>Verbrauch nicht mit Projektaufwand verwechseln</h3>
+<p>Die Einrichtung einer Verbindung und der spätere Modellverbrauch sind unterschiedliche Kostenarten. Prepaid-Guthaben betrifft die Nutzung der API. Die aktuellen Freischaltungsbedingungen und freigegebenen Tarife müssen vor dem produktiven Einsatz geklärt sein.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -111,10 +118,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-OjRPM-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-OjRPM-panel" aria-activedescendant="bb-customSelect-OjRPM-selectedOption" aria-labelledby="bb-customSelect-OjRPM-label" tabIndex={0}><span>Agentische KI &amp; Integrationen</span></span><select tabIndex={-1} defaultValue="business-api"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-OjRPM-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-OjRPM-selectedOption">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-api" />
         </div>
       </details>
     </section>

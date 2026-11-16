@@ -46,8 +46,10 @@ import { Route as TeileklarBestellungenRouteImport } from './routes/teileklar_.b
 import { Route as TeileklarFahrzeugUndPassungRouteImport } from './routes/teileklar_.fahrzeug-und-passung'
 import { Route as TeileklarGutscheineRouteImport } from './routes/teileklar_.gutscheine'
 import { Route as TeileklarKasseRouteImport } from './routes/teileklar_.kasse'
+import { Route as TeileklarKategorieRouteImport } from './routes/teileklar_.kategorie'
 import { Route as TeileklarKategorienRouteImport } from './routes/teileklar_.kategorien'
 import { Route as TeileklarPartnerWerdenRouteImport } from './routes/teileklar_.partner-werden'
+import { Route as TeileklarProduktRouteImport } from './routes/teileklar_.produkt'
 import { Route as TeileklarRechtlichesRouteImport } from './routes/teileklar_.rechtliches'
 import { Route as TeileklarReifenrechnerRouteImport } from './routes/teileklar_.reifenrechner'
 import { Route as TeileklarShopRouteImport } from './routes/teileklar_.shop'
@@ -247,6 +249,11 @@ const TeileklarKasseRoute = TeileklarKasseRouteImport.update({
   path: '/teileklar/kasse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeileklarKategorieRoute = TeileklarKategorieRouteImport.update({
+  id: '/teileklar_/kategorie',
+  path: '/teileklar/kategorie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeileklarKategorienRoute = TeileklarKategorienRouteImport.update({
   id: '/teileklar_/kategorien',
   path: '/teileklar/kategorien',
@@ -255,6 +262,11 @@ const TeileklarKategorienRoute = TeileklarKategorienRouteImport.update({
 const TeileklarPartnerWerdenRoute = TeileklarPartnerWerdenRouteImport.update({
   id: '/teileklar_/partner-werden',
   path: '/teileklar/partner-werden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeileklarProduktRoute = TeileklarProduktRouteImport.update({
+  id: '/teileklar_/produkt',
+  path: '/teileklar/produkt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarRechtlichesRoute = TeileklarRechtlichesRouteImport.update({
@@ -342,8 +354,10 @@ export interface FileRoutesByFullPath {
   '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
   '/teileklar/gutscheine': typeof TeileklarGutscheineRoute
   '/teileklar/kasse': typeof TeileklarKasseRoute
+  '/teileklar/kategorie': typeof TeileklarKategorieRoute
   '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/produkt': typeof TeileklarProduktRoute
   '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
   '/teileklar/reifenrechner': typeof TeileklarReifenrechnerRoute
   '/teileklar/shop': typeof TeileklarShopRoute
@@ -392,8 +406,10 @@ export interface FileRoutesByTo {
   '/teileklar/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
   '/teileklar/gutscheine': typeof TeileklarGutscheineRoute
   '/teileklar/kasse': typeof TeileklarKasseRoute
+  '/teileklar/kategorie': typeof TeileklarKategorieRoute
   '/teileklar/kategorien': typeof TeileklarKategorienRoute
   '/teileklar/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar/produkt': typeof TeileklarProduktRoute
   '/teileklar/rechtliches': typeof TeileklarRechtlichesRoute
   '/teileklar/reifenrechner': typeof TeileklarReifenrechnerRoute
   '/teileklar/shop': typeof TeileklarShopRoute
@@ -443,8 +459,10 @@ export interface FileRoutesById {
   '/teileklar_/fahrzeug-und-passung': typeof TeileklarFahrzeugUndPassungRoute
   '/teileklar_/gutscheine': typeof TeileklarGutscheineRoute
   '/teileklar_/kasse': typeof TeileklarKasseRoute
+  '/teileklar_/kategorie': typeof TeileklarKategorieRoute
   '/teileklar_/kategorien': typeof TeileklarKategorienRoute
   '/teileklar_/partner-werden': typeof TeileklarPartnerWerdenRoute
+  '/teileklar_/produkt': typeof TeileklarProduktRoute
   '/teileklar_/rechtliches': typeof TeileklarRechtlichesRoute
   '/teileklar_/reifenrechner': typeof TeileklarReifenrechnerRoute
   '/teileklar_/shop': typeof TeileklarShopRoute
@@ -495,8 +513,10 @@ export interface FileRouteTypes {
     | '/teileklar/fahrzeug-und-passung'
     | '/teileklar/gutscheine'
     | '/teileklar/kasse'
+    | '/teileklar/kategorie'
     | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/produkt'
     | '/teileklar/rechtliches'
     | '/teileklar/reifenrechner'
     | '/teileklar/shop'
@@ -545,8 +565,10 @@ export interface FileRouteTypes {
     | '/teileklar/fahrzeug-und-passung'
     | '/teileklar/gutscheine'
     | '/teileklar/kasse'
+    | '/teileklar/kategorie'
     | '/teileklar/kategorien'
     | '/teileklar/partner-werden'
+    | '/teileklar/produkt'
     | '/teileklar/rechtliches'
     | '/teileklar/reifenrechner'
     | '/teileklar/shop'
@@ -595,8 +617,10 @@ export interface FileRouteTypes {
     | '/teileklar_/fahrzeug-und-passung'
     | '/teileklar_/gutscheine'
     | '/teileklar_/kasse'
+    | '/teileklar_/kategorie'
     | '/teileklar_/kategorien'
     | '/teileklar_/partner-werden'
+    | '/teileklar_/produkt'
     | '/teileklar_/rechtliches'
     | '/teileklar_/reifenrechner'
     | '/teileklar_/shop'
@@ -646,8 +670,10 @@ export interface RootRouteChildren {
   TeileklarFahrzeugUndPassungRoute: typeof TeileklarFahrzeugUndPassungRoute
   TeileklarGutscheineRoute: typeof TeileklarGutscheineRoute
   TeileklarKasseRoute: typeof TeileklarKasseRoute
+  TeileklarKategorieRoute: typeof TeileklarKategorieRoute
   TeileklarKategorienRoute: typeof TeileklarKategorienRoute
   TeileklarPartnerWerdenRoute: typeof TeileklarPartnerWerdenRoute
+  TeileklarProduktRoute: typeof TeileklarProduktRoute
   TeileklarRechtlichesRoute: typeof TeileklarRechtlichesRoute
   TeileklarReifenrechnerRoute: typeof TeileklarReifenrechnerRoute
   TeileklarShopRoute: typeof TeileklarShopRoute
@@ -920,6 +946,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeileklarKasseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teileklar_/kategorie': {
+      id: '/teileklar_/kategorie'
+      path: '/teileklar/kategorie'
+      fullPath: '/teileklar/kategorie'
+      preLoaderRoute: typeof TeileklarKategorieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teileklar_/kategorien': {
       id: '/teileklar_/kategorien'
       path: '/teileklar/kategorien'
@@ -932,6 +965,13 @@ declare module '@tanstack/react-router' {
       path: '/teileklar/partner-werden'
       fullPath: '/teileklar/partner-werden'
       preLoaderRoute: typeof TeileklarPartnerWerdenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teileklar_/produkt': {
+      id: '/teileklar_/produkt'
+      path: '/teileklar/produkt'
+      fullPath: '/teileklar/produkt'
+      preLoaderRoute: typeof TeileklarProduktRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar_/rechtliches': {
@@ -1039,8 +1079,10 @@ const rootRouteChildren: RootRouteChildren = {
   TeileklarFahrzeugUndPassungRoute: TeileklarFahrzeugUndPassungRoute,
   TeileklarGutscheineRoute: TeileklarGutscheineRoute,
   TeileklarKasseRoute: TeileklarKasseRoute,
+  TeileklarKategorieRoute: TeileklarKategorieRoute,
   TeileklarKategorienRoute: TeileklarKategorienRoute,
   TeileklarPartnerWerdenRoute: TeileklarPartnerWerdenRoute,
+  TeileklarProduktRoute: TeileklarProduktRoute,
   TeileklarRechtlichesRoute: TeileklarRechtlichesRoute,
   TeileklarReifenrechnerRoute: TeileklarReifenrechnerRoute,
   TeileklarShopRoute: TeileklarShopRoute,

@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { SiteFilm } from "@/components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -27,7 +28,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wer gibt etwas ein, wer prüft, und was ist der nächste Schritt? Aus diesen Fragen wird ein Ablauf, in dem Eingaben, Dokumente und der Stand zusammenstehen.</p>
                     <p>Daraus entstehen die Ansichten für Ihre Nutzergruppen. Gestaltung und Technik planen wir zusammen und prüfen sie an den Fällen, die bei Ihnen wirklich vorkommen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ansichten nach Aufgaben statt nach Abteilungen</h3>
+<p>Ein Nutzer muss erkennen, was offen ist, welche Angaben fehlen und was er als Nächstes entscheiden kann. Dabei werden normale Vorgänge und Ausnahmen gemeinsam betrachtet. Die benötigten Ansichten ergeben sich aus diesen Aufgaben, nicht aus einer möglichst großen Liste von Funktionen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -41,7 +45,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Soll die Anwendung mit vorhandenen Systemen arbeiten, legen wir für jede Verbindung Zweck, Daten und Rechte fest. Rollen bestimmen, wer was sieht und entscheidet.</p>
                     <p>Datenübernahme, externe Dienste, Betrieb und spätere Erweiterungen sind eigene Posten im Angebot – mit Voraussetzungen und Kosten, bevor wir sie umsetzen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die Verbindung vor der Umsetzung klären</h3>
+<p>Nennen Sie vorhandene Systeme und die Daten, die übernommen oder zurückgeschrieben werden sollen. Zuständigkeit, Schnittstellenzugang und Rechte beeinflussen den Aufwand. Eine gewünschte Anbindung ist erst nach Prüfung ihrer Voraussetzungen Teil eines bestätigten Umfangs.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -125,10 +132,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-3Dist-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-3Dist-panel" aria-activedescendant="bb-customSelect-3Dist-selectedOption" aria-labelledby="bb-customSelect-3Dist-label" tabIndex={0}><span>Digitale Arbeitsräume</span></span><select tabIndex={-1} defaultValue="business-apps"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-3Dist-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-3Dist-selectedOption">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-apps" />
         </div>
       </details>
     </section>

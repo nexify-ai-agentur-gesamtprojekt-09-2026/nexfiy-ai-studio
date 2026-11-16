@@ -1,17 +1,80 @@
 /* Shared page shell (NeXify and TEILEKLAR): phone sizing of the chat panel. Previously repeated per page
    as generated [data-site-import-responsive] rules; one semantic copy now serves every page. */
-:root:root #atelier.site-nexify { display: block; }
+:root:root #atelier.site-shared { display: block; }
 :root:root #atelier .site-page-split { height: auto; min-height: 100dvh; align-items: stretch; overflow: visible !important; }
 :root:root #atelier :is(.site-page-pane,.site-oracle-pane) { overflow: visible !important; min-width: 0; }
 :root:root #atelier .site-oracle-pane { position: relative; }
+:root:root #atelier .site-page-split[data-split-ready="false"] > :has(> .site-page-pane) { flex: 1 1 0px !important; }
+:root:root #atelier.is-open .site-page-split[data-split-ready="false"] > :has(> .site-oracle-pane) { flex: 0 0 clamp(320px,30vw,520px) !important; }
 :root:root #atelier.is-closed .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
 :root:root #atelier.is-closed .site-page-pane { flex-grow: 1 !important; }
+:root:root #atelier.is-closed .site-page-split > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+:root:root #atelier.is-closed .site-page-split > :has(> .site-page-pane) { flex: 1 1 0px !important; }
 :root:root #atelier .site-page-divider { width: 8px; background: transparent; flex-shrink: 0; z-index: 7; }
 :root:root #atelier .site-page-divider.is-hidden { display: none; }
 :root:root #atelier .site-page-divider > div { position: sticky; top: 50dvh; height: 40px; width: 4px; border: 0; background: var(--border-strong); }
 :root:root #atelier .site-page-divider svg { display: none; }
 :root:root #atelier .site-page-divider:is(:hover,:focus-visible) > div { background: var(--primary); }
 :root:root #atelier .website { min-width: 0; }
+:root:root #atelier .tk-help-content { display: grid; gap: 24px; flex: 1; min-height: 0; overflow-y: auto; }
+:root:root #atelier .tk-help-form { display: grid; gap: 12px; flex-shrink: 0; font-size: 14px; }
+:root:root #atelier .tk-help-form textarea { min-height: 96px; font-size: 16px; line-height: 1.5; background: var(--secondary); color: var(--foreground); }
+:root:root #atelier .tk-commerce-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+:root:root #atelier .tk-commerce-header :is(a,button,input) { min-height: 44px; }
+:root:root #atelier .tk-commerce-header { background: var(--glass-fill); color: var(--foreground); backdrop-filter: blur(20px); }
+:root:root #atelier .tk-commerce-header { position: relative; z-index: 8; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+:root:root #atelier .tk-service-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 12px; color: var(--muted-foreground); }
+:root:root #atelier .tk-service-strip a { display: inline-flex; align-items: center; }
+:root:root #atelier .tk-commerce-main { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(180px, 2fr); gap: 8px 24px; align-items: center; margin-block: 8px; padding: 0; }
+:root:root #atelier .tk-wordmark { font-size: 24px; font-weight: 750; line-height: 1.2; text-decoration: none; color: var(--foreground); }
+:root:root #atelier .tk-wordmark span { color: var(--primary); }
+:root:root #atelier .tk-wordmark small { display: block; font-size: 12px; font-weight: 400; margin-top: 6px; color: var(--muted-foreground); }
+:root:root #atelier .tk-header-search { display: flex; min-width: 0; gap: 8px; grid-area: auto; }
+:root:root #atelier .tk-header-search input { min-width: 0; width: 100%; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; }
+:root:root #atelier .tk-header-account { grid-column: 1/-1; display: flex; justify-content: flex-end; align-items: center; gap: 8px; font-size: 14px; }
+:root:root #atelier .tk-header-account > a { display: inline-flex; }
+:root:root #atelier .tk-commerce-header :is(button,.tk-header-account > a) { flex: 0 0 44px; width: 44px; height: 44px; min-width: 44px; padding: 0; }
+:root:root #atelier .tk-commerce-header :is(button,a,summary) > svg { width: 18px; height: 18px; flex: 0 0 18px; }
+:root:root #atelier .tk-mobile-nav { display: none; }
+:root:root #atelier .tk-mobile-nav > summary { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; list-style: none; cursor: pointer; border: 1px solid var(--border-strong); border-radius: 6px; }
+:root:root #atelier .tk-mobile-nav > summary::-webkit-details-marker { display: none; }
+:root:root #atelier .tk-mobile-nav > nav { padding: 16px 0 4px; }
+:root:root #atelier .tk-commerce-nav a { display: inline-flex; align-items: center; font-size: 14px; color: var(--foreground); text-decoration: none; }
+:root:root #atelier .tk-commerce-header a[aria-current="page"] { color: var(--primary); text-decoration: underline; text-underline-offset: 6px; }
+:root:root #atelier .tk-help-content { flex: 1 1 auto; align-content: start; }
+:root:root #atelier .tk-help-content .oracle-starters { align-content: start; }
+:root:root #atelier .tk-help-content .oracle-starter { min-height: 56px; }
+:root:root #atelier .tk-help-form { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+:root:root #atelier .oracle-heading > button { padding: 0; }
+:root:root #atelier .oracle-heading > button > svg { width: 18px; height: 18px; flex: 0 0 18px; }
+:root:root #atelier .tk-help-form label { color: var(--muted-foreground); }
+:root:root #atelier .tk-tyre-size { border: 0; padding: 0; margin: 24px 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+:root:root #atelier .tk-tyre-size legend { margin-bottom: 16px; color: var(--foreground); font-weight: 600; }
+:root:root #atelier .tk-tyre-size [role="combobox"] { width: 100%; min-height: 44px; font-size: 16px; }
+:root:root #atelier .tk-tyre-results { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin: 24px 0; }
+:root:root #atelier .tk-tyre-results > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; background: none; border-radius: 0; border: 0; border-bottom: 1px solid var(--border); padding: 0 0 12px; }
+:root:root #atelier .tk-tyre-results dt { color: var(--muted-foreground); }
+:root:root #atelier .tk-tyre-results dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+:root:root #atelier .tk-checklist { list-style: disc; padding-left: 20px; margin-block: 16px; display: grid; gap: 12px; }
+:root:root #atelier .tk-search { display: grid; gap: 12px; max-width: 640px; margin-bottom: 32px; }
+:root:root #atelier .tk-search-row { display: flex; gap: 12px; }
+:root:root #atelier .tk-search-row input { min-width: 0; flex: 1; min-height: 44px; background: var(--secondary); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; color: var(--foreground); }
+:root:root #atelier .tk-empty { max-width: 65ch; display: grid; justify-items: start; gap: 16px; }
+@container website (max-width: 600px) {
+  :root:root #atelier .tk-commerce-header { padding: 12px 16px; display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px 12px; }
+  :root:root #atelier .tk-service-strip { display: none; }
+  :root:root #atelier .tk-commerce-main { display: contents; }
+  :root:root #atelier .tk-wordmark { grid-column: 1; grid-row: 1; }
+  :root:root #atelier .tk-wordmark small { display: none; }
+  :root:root #atelier .tk-header-search { grid-column: 1/-1; grid-row: 3; }
+  :root:root #atelier .tk-header-account { justify-content: flex-start; grid-column: 1; grid-row: 2; }
+  :root:root #atelier .tk-desktop-nav { display: none; }
+  :root:root #atelier .tk-mobile-nav { display: block; grid-column: 2; grid-row: 1/3; align-self: start; }
+  :root:root #atelier .tk-mobile-nav[open] { grid-column: 1/-1; z-index: 1; background: var(--background); }
+  :root:root #atelier .tk-mobile-nav[open] > summary { margin-left: auto; }
+  :root:root #atelier .tk-search-row { flex-wrap: wrap; }
+  :root:root #atelier .tk-search-row input { flex-basis: 100%; }
+}
 :root:root #atelier .website { background-image: var(--stage-light); }
 :root:root #atelier :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 8px 8px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.06); }
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.35); }
@@ -20,6 +83,23 @@
 :root:root #atelier .home-concept :is(h1,h2,h3) { letter-spacing: 0; text-wrap: balance; overflow-wrap: anywhere; }
 :root:root #atelier .home-concept .identity-copy h1 { font-size: 48px; line-height: 1.15; }
 :root:root #atelier .home-concept .pc-section-body > p { max-width: 68ch; line-height: 1.6; }
+:root:root #atelier .home-concept { font-family: var(--font-brand-text); font-size: 17px; line-height: 1.7; }
+:root:root #atelier .home-concept :is(h1,h2,h3,h4) { font-family: var(--font-brand-display); font-weight: 600; letter-spacing: 0; hyphens: none; word-break: normal; }
+:root:root #atelier .home-concept .identity-copy h1 { font-weight: 600; margin-bottom: 24px; max-width: 21ch; }
+:root:root #atelier .home-concept .identity-body { font-size: 18px; line-height: 1.7; max-width: 55ch; }
+:root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-block: 56px; border-bottom: 1px solid var(--border); }
+:root:root #atelier .home-concept .pc-section h2 { font-size: 30px; line-height: 1.25; max-width: 24ch; margin: 16px 0 0; }
+:root:root #atelier .home-concept .pc-section-body { display: block; min-width: 0; max-width: 68ch; }
+:root:root #atelier .home-concept .pc-section-body > p { font-size: 17px; line-height: 1.75; margin: 0 0 24px; color: var(--muted-foreground); }
+:root:root #atelier .home-concept .pc-section-body > p:first-child { color: var(--foreground); font-size: 18px; }
+:root:root #atelier .home-concept .pc-section-body > h3 { font-size: 20px; line-height: 1.4; margin: 32px 0 12px; color: var(--foreground); }
+:root:root #atelier .home-concept .pc-section-body :is(ul,ol) { padding-left: 24px; margin: 16px 0 24px; }
+:root:root #atelier .home-concept .pc-section-body li { margin-block: 8px; }
+:root:root #atelier .home-concept .hc-kicker { font-family: var(--font-brand-mono); font-size: 11px; letter-spacing: 0; line-height: 1.6; color: var(--muted-foreground); }
+:root:root #atelier .home-concept .hc-section-heading h2 { font-size: 32px; line-height: 1.25; }
+:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) h3 { font-size: 23px; line-height: 1.35; }
+:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) p { font-size: 16px; line-height: 1.65; }
+:root:root #atelier .home-concept .pc-module { background: var(--glass-frosted); box-shadow: var(--glass-lens-shadow); backdrop-filter: blur(20px); margin-block: 24px; padding: 20px; border-radius: 8px; }
 @container website (max-width: 1000px) {
   :root:root #atelier .site-header .main-navigation { display: none; }
   :root:root #atelier .site-header .mobile-navigation { display: block; }
@@ -28,10 +108,18 @@
 @container website (max-width: 600px) {
   :root:root #atelier .home-concept .identity-copy h1 { font-size: 32px; }
   :root:root #atelier .home-concept .identity-links { flex-wrap: wrap; }
+  :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,1fr); gap: 24px; padding-block: 40px; }
+  :root:root #atelier .home-concept .pc-section h2 { font-size: 27px; margin-top: 12px; }
+  :root:root #atelier .home-concept .hc-section-heading h2 { font-size: 28px; }
 }
 @media (max-width: 767px) {
+  :root:root #atelier .site-page-divider { display: none !important; }
+  :root:root #atelier.is-open .site-page-split[data-split-ready="false"] > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+  :root:root #atelier.is-open .site-page-split[data-split-ready="false"] > :has(> .site-page-pane) { flex: 1 1 0px !important; }
   :root:root #atelier .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
   :root:root #atelier .site-page-pane { flex-grow: 1 !important; }
+  :root:root #atelier .site-page-split > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+  :root:root #atelier .site-page-split > :has(> .site-page-pane) { flex: 1 1 0px !important; }
   :root #atelier #aifly-panel { --chat-viewport-height: 100dvh !important; }
   :root #atelier #aifly-panel .public-orientation { --ca-fuss: 0px !important; }
 }
@@ -39,17 +127,30 @@
 /* The existing glass sits on ::before. Condense that layer rather than painting a
    second rectangular header behind it; keep its height stable while scrolling. */
 :root:root #atelier .site-header {
-  transition: padding 240ms var(--motion-ease-brand);
+  position: sticky; top: 0; z-index: 20; margin: 0; min-height: 84px; height: 84px;
+  padding: 20px 20px 20px 28px; gap: 16px; background: transparent; border: 0;
+  transition: none;
   scroll-margin-top: calc(112px + env(safe-area-inset-top));
 }
 :root:root #atelier .site-header::before {
-  transition: inset 240ms var(--motion-ease-brand), background-color 240ms var(--motion-ease-brand), box-shadow 240ms var(--motion-ease-brand);
+  inset: 12px; border-radius: 999px; transform: none; background: var(--glass-clear);
+  backdrop-filter: blur(24px) saturate(1.4); box-shadow: var(--glass-lens-shadow); border: 1px solid var(--border-strong);
+  transition: background 240ms var(--motion-ease-brand), box-shadow 240ms var(--motion-ease-brand);
 }
 :root:root #atelier[data-scrolled="true"] .site-header::before {
-  background: var(--surface-header-glass);
-  backdrop-filter: blur(20px) saturate(1.2);
-  box-shadow: var(--elevation-header);
+  inset: 12px; transform: none; background: var(--glass-frosted);
+  backdrop-filter: blur(28px) saturate(1.35); box-shadow: var(--glass-lens-shadow);
 }
+:root:root #atelier[data-scrolled="true"] .site-header { padding: 20px 20px 20px 28px; }
+:root:root #atelier .site-header > * { transform: none; }
+:root:root #atelier .site-header .header-actions { display: flex; flex: 0 0 auto; gap: 8px; margin-left: auto; }
+:root:root #atelier .site-header :is(.header-cta,.theme-switch,.header-actions select,.mobile-navigation > summary) { height: 44px; min-height: 44px; }
+:root:root #atelier .site-header .header-cta { display: inline-flex; align-items: center; padding: 0 16px; font-size: 12px; white-space: nowrap; background: var(--glass-clear); box-shadow: var(--glass-lens-shadow); }
+:root:root #atelier .site-header .theme-switch { width: 44px; min-width: 44px; padding: 0; }
+:root:root #atelier .site-header .theme-switch svg { width: 18px; height: 18px; }
+:root:root #atelier .site-header .main-navigation { gap: 20px; margin-left: auto; font-size: 13px; }
+:root:root #atelier .site-header :is(.product-navigation-menu,.mobile-navigation-panel) { background: var(--glass-frosted); backdrop-filter: blur(32px) saturate(1.25); box-shadow: var(--glass-lens-shadow); border-color: var(--border-strong); }
+:root:root #atelier .home-concept .hc-anchors { background: var(--glass-clear); backdrop-filter: blur(24px) saturate(1.25); box-shadow: var(--glass-lens-shadow); }
 :root:root #atelier .site-header :is(a, summary, button, select) {
   letter-spacing: 0;
   transition: color 180ms var(--motion-ease-brand), background-color 180ms var(--motion-ease-brand), box-shadow 180ms var(--motion-ease-brand);
@@ -68,6 +169,11 @@
 }
 :root:root #atelier :is(main[id], main [id]) { scroll-margin-top: calc(112px + env(safe-area-inset-top)); }
 @media (max-width: 767px) {
+  :root:root #atelier:not([data-mobile-chat="true"]) #aifly-panel { display: none !important; }
+  :root:root #atelier .site-header, :root:root #atelier[data-scrolled="true"] .site-header { height: calc(76px + env(safe-area-inset-top)); min-height: calc(76px + env(safe-area-inset-top)); padding: calc(16px + env(safe-area-inset-top)) 16px 16px 20px; gap: 8px; }
+  :root:root #atelier .site-header::before, :root:root #atelier[data-scrolled="true"] .site-header::before { inset: calc(8px + env(safe-area-inset-top)) 8px 8px; }
+  :root:root #atelier .site-header .header-cta { display: none; }
+  :root:root #atelier .site-header .header-actions { gap: 4px; }
   :root:root #atelier .site-header :is(.mobile-navigation > summary, .theme-switch) {
     min-width: 44px;
     min-height: 44px;
@@ -79,10 +185,10 @@
   :root:root #atelier :is(main[id], main [id]) { scroll-margin-top: calc(96px + env(safe-area-inset-top)); }
 }
 @supports not (backdrop-filter: blur(1px)) {
-  :root:root #atelier[data-scrolled="true"] .site-header::before { background: var(--background); }
+  :root:root #atelier .site-header::before, :root:root #atelier :is(.mobile-navigation-panel,.product-navigation-menu) { background: var(--background); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  :root:root #atelier[data-scrolled="true"] .site-header::before { background: var(--background); backdrop-filter: none; }
+  :root:root #atelier .site-header::before, :root:root #atelier :is(.mobile-navigation-panel,.product-navigation-menu,.hc-anchors) { background: var(--background); backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root:root #atelier .site-header,

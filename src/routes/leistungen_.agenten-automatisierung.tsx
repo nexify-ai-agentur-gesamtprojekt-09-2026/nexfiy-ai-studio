@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { SiteFilm } from "@/components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -27,7 +28,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Zum Beispiel: Eingehende Anfragen werden zugeordnet, oder die Angaben für ein Angebot liegen fertig bereit. Gemeinsam sehen wir uns die Schritte an, die beteiligten Systeme und die Stellen, an denen ein Mensch entscheidet.</p>
                     <p>Dann legen wir Eingaben, Ergebnis und Ausnahmen fest, setzen um und prüfen an einem echten Arbeitsfall. Erst wenn dieser Ablauf verlässlich läuft, planen wir den nächsten.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>So wird die Aufgabe prüfbar</h3>
+<p>Beschreiben Sie den heutigen Eingang, die benötigten Informationen und das erwartete Ergebnis. Dazu kommen Fälle, die nicht automatisch entschieden werden dürfen. Ein solcher Arbeitsfall lässt sich besser prüfen als das allgemeine Ziel, alles mit KI zu erledigen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -41,7 +45,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Eine Automatisierung ist so gut wie ihre Quellen. Deshalb steht fest, welche Dokumente und Daten sie nutzt, wer sie pflegt und wie Änderungen ankommen.</p>
                     <p>Fehler werden sichtbar gemeldet, Ausnahmen gehen an eine benannte Person. Auf welche Systeme und Daten die KI zugreift, vereinbaren wir für Ihr Projekt im Angebot.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Quellen und Zuständigkeiten gehören zusammen</h3>
+<p>Für jede Information braucht es eine verlässliche Quelle und eine Person, die sie pflegt. Für Ausnahmen muss klar sein, wer weiterarbeitet. Eine Verbindung allein macht veraltete Daten nicht richtig und ersetzt keine fachliche Entscheidung.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -125,10 +132,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-pmvPI-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-pmvPI-panel" aria-activedescendant="bb-customSelect-pmvPI-selectedOption" aria-labelledby="bb-customSelect-pmvPI-label" tabIndex={0}><span>KI im Betrieb</span></span><select tabIndex={-1} defaultValue="business-automation"><option value="business-website">Markenstart</option><option value="business-automation" selected>KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-pmvPI-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-pmvPI-selectedOption">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-automation" />
         </div>
       </details>
     </section>

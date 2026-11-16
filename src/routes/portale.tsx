@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/portale.css?url";
@@ -56,7 +57,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Der Kundenbereich ist für Projektstand, Dokumente und Anfragen gedacht. Der Partnerbereich richtet sich an Partner von NeXify AI. Werkstätten arbeiten im Partnerportal von TEILEKLAR, unserer eigenen Shop-Marke.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die Beschreibung ist noch kein freigeschalteter Bereich</h3>
+<p>Ein Kunden- oder Partnerbereich braucht eine tatsächlich angebundene Anwendung mit passenden Inhalten. Die Anmeldung dieses Auftritts allein bestätigt weder einen Projektzugang noch ein angeschlossenes Werkstattportal. Fragen Sie nach dem für Ihr Vorhaben vorgesehenen Einstieg.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/anmelden">Anmelden<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -69,7 +73,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Jeder Bereich hat eigene Rollen und Rechte. Eine Anmeldung gilt für Ihren Bereich, nicht für einen anderen. Private Inhalte sehen Sie erst nach der Anmeldung.</p>
-                  </div>
+                  
+<h3>Zugang und Inhalt getrennt beurteilen</h3>
+<p>Ein Konto weist nicht automatisch Rechte für jede Anwendung nach. Welche Inhalte zugänglich sind, bestimmt der tatsächlich freigeschaltete Bereich. Die Beschreibungen dieser Seite sind keine Zusage, dass alle genannten Portalfunktionen bereits in diesem Auftritt verfügbar sind.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-portals-portals-3-2" tabIndex={-1} aria-labelledby="content-portals-portals-3-2-title">
                   <div>
@@ -78,7 +85,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Die Bereiche richten wir je Kunde und Partner ein; nicht jeder Bereich steht jedem Konto offen. Beschreiben Sie, wofür Sie einen Zugang brauchen. Wir nennen Ihnen den passenden Bereich und den nächsten Schritt.</p>
-                  </div>
+                  
+<h3>Wofür Sie einen Zugang benötigen</h3>
+<p>Nennen Sie Projekt oder Zusammenarbeit und die gewünschte Aufgabe. So lässt sich der passende Einstieg klären, ohne Zugangsdaten in einer öffentlichen Anfrage zu übermitteln.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -118,10 +128,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-6nLnI-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-6nLnI-panel" aria-activedescendant="bb-customSelect-6nLnI-selectedOption" aria-labelledby="bb-customSelect-6nLnI-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-6nLnI-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-6nLnI-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

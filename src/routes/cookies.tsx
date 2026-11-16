@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/cookies.css?url";
@@ -50,7 +51,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Technisch erforderliche Speicherung ist von Analyse und externen Diensten zu trennen. Eine Zustimmung für diesen Auftritt gilt nicht automatisch für andere Markenbereiche, Domains oder eigenständige Produkte.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Website, Konto und verbundene Dienste unterscheiden</h3>
+<p>Die Wahl zwischen heller und dunkler Ansicht wird im Browser gespeichert. Anmeldung und verbundene Dienste haben andere Aufgaben und müssen gesondert beschrieben werden. Eine allgemeine Aussage über Cookies ersetzt diese Unterscheidung nicht.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -63,7 +67,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Diese Seite stellt noch keine Cookie-Einstellungen bereit. Welche optionalen Dienste eingesetzt werden und wie eine Entscheidung geändert werden kann, muss in der vollständigen, geprüften Beschreibung ergänzt werden.</p>
-          </div>
+          
+<h3>Was diese Seite noch nicht anbietet</h3>
+<p>Es gibt hier noch keinen Schalter für optionale Analyse- oder Marketingdienste. Aus dem Besuch dieser Seite lässt sich daher keine Auswahl solcher Dienste ableiten. Die endgültigen Angaben müssen den tatsächlich eingesetzten Diensten entsprechen.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
@@ -78,10 +85,7 @@ function Index() {
           </summary>
           <div className={"hc-service-body"}>
             <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-            <div className={"pc-guide-controls"}>
-              <label id="bb-customSelect-zDBGg-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-zDBGg-panel" aria-activedescendant="bb-customSelect-zDBGg-selectedOption" aria-labelledby="bb-customSelect-zDBGg-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website" selected>Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-zDBGg-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-zDBGg-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-              <button type="button" aria-pressed="false">Begleitung starten</button>
-            </div>
+            <GuideNavigation initial="business-website" />
           </div>
         </details>
       </section>

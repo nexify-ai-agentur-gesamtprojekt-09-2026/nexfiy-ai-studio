@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { SiteFilm } from "../components/SiteFilm";
 import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
@@ -17,10 +18,12 @@ export const Route = createFileRoute("/kontakt")({
     ],
   }),
   staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  validateSearch: (search: Record<string, unknown>): { anliegen?: string } => typeof search["anliegen"] === "string" ? { anliegen: search["anliegen"].slice(0, 1000) } : {},
   component: Index,
 });
 
 function Index() {
+  const { anliegen } = Route.useSearch();
   return (
     <NexifyShell>
             <div className={"home-concept page-concept page-contact layout-company context-nexify"}>
@@ -59,8 +62,8 @@ function Index() {
                 <a href="#content-contact-contact-customer-1-0">Das genügt für den Anfang<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
-              <section className={"hc-container pc-supplement"}>
-                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" />
+              <section className={"hc-container pc-supplement"} id="anfrage" tabIndex={-1}>
+                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" initialMessage={anliegen ?? ""} />
               </section>
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-contact-contact-customer-1-0" tabIndex={-1} aria-labelledby="content-contact-contact-customer-1-0-title">
@@ -71,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Was bietet Ihr Unternehmen an, wen wollen Sie erreichen, und was soll sich ändern? Sie können auch einfach beschreiben, wo es heute hakt.</p>
                     <p>Ein ungefährer Zeit- und Budgetrahmen und vorhandene Unterlagen helfen, sind aber kein Muss. Was fehlt, klären wir im Gespräch.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein konkretes Beispiel hilft mehr als eine lange Wunschliste</h3>
+<p>Beschreiben Sie einen typischen Vorgang: Wer benötigt welche Information, was dauert zu lange und welches Ergebnis wäre hilfreich? Bei einer Website können Sie Ihr Angebot, die Zielgruppe und den gewünschten Kontaktweg nennen. Zugangsdaten oder vertrauliche Unterlagen gehören nicht in das öffentliche Formular.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -85,7 +91,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wir klären offene Punkte und den passenden Umfang. Dann erhalten Sie ein Angebot mit Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</p>
                     <p>Nach dem Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie können uns auch direkt schreiben.</p>
-                  </div>
+                  
+<h3>Sie behalten den Versand in der Hand</h3>
+<p>Das Formular prüft Ihre Angaben und öffnet eine vorbereitete Nachricht im E-Mail-Programm. Erst Ihr Versand dort stellt die Anfrage zu. Ist kein E-Mail-Programm eingerichtet, können Sie die Nachricht kopieren und selbst versenden; eine sichtbare Vorbereitung ist noch keine Zustellbestätigung.</p>
+</div>
                 </section>
               </div>
               <section className={"hc-section hc-container hc-budget"} aria-labelledby="contact-title-contact">
@@ -139,10 +148,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label>Welchen Bereich möchten Sie erkunden?<select defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

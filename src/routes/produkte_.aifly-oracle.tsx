@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.aifly-oracle.css?url";
@@ -57,7 +58,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>AIFly ORACLE zerlegt ein Vorhaben in Aufgaben, ordnet Zuständigkeiten zu und macht sichtbar, was wovon abhängt. So ist klar, was als Nächstes dran ist und wer es erledigt.</p>
                     <p>In Kundenprojekten vereinbaren wir vorab, welche Werkzeuge und Verbindungen AIFly ORACLE nutzt.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Abhängigkeiten sichtbar machen</h3>
+<p>Bei einem Vorhaben kann ein Entwurf erst entstehen, wenn Quellen, Ziel und Zuständigkeit feststehen. ORACLE ist für diese Ordnung gedacht. Welche Werkzeuge es außerhalb der öffentlichen Website nutzen darf, wird für den jeweiligen Einsatz gesondert festgelegt.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/ki-hinweise">KI-Hinweise lesen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -71,7 +75,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Fachliche Entscheidungen, technische Änderungen und verbindliche Zusagen haben jeweils eine benannte verantwortliche Person. Das legen wir vor dem Einsatz fest.</p>
                     <p>Verträge, Zahlungen und Zusagen entscheiden Menschen. AIFly ORACLE bereitet vor und ordnet.</p>
-                  </div>
+                  
+<h3>Vorbereiten, prüfen und ausführen unterscheiden</h3>
+<p>Eine Empfehlung ist keine Freigabe. Ein formulierter Entwurf ist kein Versand. Gerade bei Folgen für Kunden, Verträge oder Zahlungen muss der verantwortliche Mensch den nächsten verbindlichen Schritt bestätigen.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-aifly-oracle-oracle-3-2" tabIndex={-1} aria-labelledby="content-aifly-oracle-oracle-3-2-title">
                   <div>
@@ -81,7 +88,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Im Chat vergleicht ORACLE Suite und API anhand Ihres Vorhabens. Es hat keinen Zugriff auf Konten oder private Projekte und führt keine Aktionen aus. Es ist ein KI-System und kann sich irren; prüfen Sie wichtige Angaben auf der Produktseite.</p>
                     <p>Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Ihre Anfrage senden Sie selbst ab.</p>
-                  </div>
+                  
+<h3>Die Grenzen der öffentlichen Beratung</h3>
+<p>Der Chat vergleicht Suite und API anhand öffentlicher Informationen. Er prüft weder Ihr Guthaben noch aktivierte Werkzeuge oder private Dokumente. Für eine belastbare Einordnung genügt eine allgemeine Beschreibung Ihres Vorhabens ohne vertrauliche Angaben.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -120,10 +130,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-nX0Xd-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-nX0Xd-panel" aria-activedescendant="bb-customSelect-nX0Xd-selectedOption" aria-labelledby="bb-customSelect-nX0Xd-label" tabIndex={0}><span>Markenstart</span></span><select tabIndex={-1} defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-nX0Xd-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-nX0Xd-selectedOption">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option"} role="option">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-website" />
         </div>
       </details>
     </section>

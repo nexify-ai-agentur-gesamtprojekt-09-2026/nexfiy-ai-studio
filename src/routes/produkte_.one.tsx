@@ -1,3 +1,4 @@
+import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.one.css?url";
@@ -56,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Am Anfang steht eine konkrete Aufgabe, etwa: Informationen für ein Projekt ordnen oder einen Entwurf vorbereiten. Wir beschreiben, was hineingeht, welche Werkzeuge erlaubt sind und was herauskommen soll.</p>
                     <p>Recherche, Entwurf, Prüfung und Ausführung sind getrennte Schritte. Welche davon die Agenten für Sie übernehmen, steht im Angebot.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Zwei Rollen, ein nachvollziehbarer Ablauf</h3>
+<p>ORACLE ordnet die Aufgabe und ihre Abhängigkeiten. NeX ist für die Ausarbeitung freigegebener Schritte vorgesehen. Für den konkreten Einsatz zählen die erlaubten Quellen und Werkzeuge, nicht allein die Namen der Agenten.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/api">NeXify API. KI in Ihrer Anwendung.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -70,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>AIFly ORACLE ist dafür da, Zuständigkeiten und Abhängigkeiten zu ordnen. Ein Arbeitsstand zeigt, ob etwas vorbereitet, geprüft oder ausgeführt ist.</p>
                     <p>Veröffentlichen und Versenden bleiben Ihre Entscheidung. Ein Entwurf ist noch kein versendetes Ergebnis.</p>
-                  </div>
+                  
+<h3>Ein Arbeitsstand muss eine Bedeutung haben</h3>
+<p>Vorbereitet, geprüft und ausgeführt bezeichnen unterschiedliche Zustände. Halten Sie fest, welches Ergebnis zu jedem Schritt gehört und wer es bestätigt. Dadurch bleibt erkennbar, ob noch eine Entscheidung fehlt oder der freigegebene Vorgang abgeschlossen ist.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />
@@ -111,10 +118,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label id="bb-customSelect-wvGgC-label">Welchen Bereich möchten Sie erkunden?<div className={"bb-custom-select-container bb-customSelect"}><span className={"bb-custom-select-opener"} role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="bb-customSelect-wvGgC-panel" aria-activedescendant="bb-customSelect-wvGgC-selectedOption" aria-labelledby="bb-customSelect-wvGgC-label" tabIndex={0}><span>Agentische KI &amp; Integrationen</span></span><select tabIndex={-1} defaultValue="business-api"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select><div id="bb-customSelect-wvGgC-panel" className={"bb-custom-select-panel"} role="listbox"><div className={"bb-custom-select-option"} role="option">Markenstart</div><div className={"bb-custom-select-option"} role="option">KI im Betrieb</div><div className={"bb-custom-select-option"} role="option">Wachstum &amp; Kampagnen</div><div className={"bb-custom-select-option"} role="option">Digitale Arbeitsräume</div><div className={"bb-custom-select-option bb-is-selected bb-has-focus"} role="option" id="bb-customSelect-wvGgC-selectedOption">Agentische KI &amp; Integrationen</div><div className={"bb-custom-select-option"} role="option">Ihr Projektbriefing</div><div className={"bb-custom-select-option"} role="option">Ihr Fahrzeug. Die passende Anfrage.</div><div className={"bb-custom-select-option"} role="option">Werkstatt &amp; Zusammenarbeit</div><div className={"bb-custom-select-option"} role="option">Gutschein &amp; Bedingungen</div><div className={"bb-custom-select-option"} role="option">Zusammenarbeit mit der FACTORY</div><div className={"bb-custom-select-option"} role="option">NeX AIFly Suite · Ihr eigener Bereich</div></div></div></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <GuideNavigation initial="business-api" />
         </div>
       </details>
     </section>
