@@ -1134,3 +1134,12 @@
   :root:root #atelier.site-shared :is(.pc-module, .ws-card) { padding: 22px; }
 }
 :root:root #atelier.site-shared :is(div, ul, section):has(> :is(.pc-module, .ws-card, .tkc-card) + :is(.pc-module, .ws-card, .tkc-card)) { gap: 16px; }
+/* Mobile Hauptnutzerkette: auf Startseite und Kontakt steht die Botschaft mit Haupt-CTA vor dem Film,
+   damit der nächste Schritt ohne Vorstrecke sichtbar ist. Desktop-Anordnung bleibt unverändert. */
+@container website (max-width: 600px) {
+  :root:root #atelier.site-nexify :is(section[aria-labelledby="home-headline"], section[aria-labelledby="page-title-contact"]) .identity-scene {
+    display: flex;
+    flex-direction: column;
+  }
+  :root:root #atelier.site-nexify :is(section[aria-labelledby="home-headline"], section[aria-labelledby="page-title-contact"]) .identity-copy { order: -1; }
+}
