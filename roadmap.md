@@ -147,7 +147,10 @@
 
 ## Gesamtfertigstellung (16.11.)
 - [ ] Skill hinzufügen („npx skills add <owner/repo>“) – wartet auf konkretes Repository von Pascal; Übernahme dann nur als geprüfte Dokumentation mit Herkunftsangabe
-- [ ] Studienkolleg-Aachen-Projekt lesend auswerten: übertragbare Best Practices (Technik, Qualität, Abläufe) agenturweit übernehmen – ohne Kundeninhalte, -namen oder -daten (Kundenschutz, Mandantentrennung)
+- [x] Studienkolleg-Aachen-Projekt lesend ausgewertet (nur Muster, keine Kundeninhalte); übernommen: Modellprüfung ohne stillen Ersatz + Zeitlimit für KI-Aufrufe (ORACLE), Regel in AGENTS.md
+- [ ] KI-Modellvorgabe klären: Regel sagt DeepSeek V4.1 Flash 1017, ORACLE nutzt GPT-6 Astra (DeepSeek nicht im KI-Gateway); Messung im Schwesterprojekt: 1017 bestand JSON-Test nicht, 0731 schon – Entscheidung Pascal, dann 9router-Verbindung verknüpfen
+- [ ] Liefernachweise je Paket (Abhängigkeiten, Abnahmebeleg, Rückweg) als agenturweite Vorlage – nach Pascals Freigabe des Formats
+- [ ] Rechte-Negativtests für den MCP-Zugang (fremde Identität, falsche Mandanten) ergänzen
 - [x] Sprachumschaltung (i18n): Auswahl DE/NL/FR/EN hatte keine Funktion und keine Übersetzungen – entfernt
 - [ ] Mehrsprachigkeit NL/EN als echtes Vorhaben: Übersetzungen inkl. Rechtstexte brauchen Pascals Entscheidung und Freigabe der Texte
 - [x] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigiert (12 px statt 8 px; eingeklappt bündig mit Footer-Spalte)

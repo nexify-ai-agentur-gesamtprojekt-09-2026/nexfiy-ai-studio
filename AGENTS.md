@@ -62,3 +62,4 @@ use the editor.
 - Catalogue photos are copied into a private bucket by a stepwise mirror job and served only via `/api/public/shop/image?artikel=` for active articles; the workspace blocks public buckets and the site must not depend on supplier or old-shop hosts at runtime.
 - Public inquiries are stored server-side with service-role writes and announced in Slack without e-mail or message text; reading them requires the `admin` role via `has_role`.
 - The site is German-only: no language selector is shown until real translated routes exist, because a non-functional control reads as a defect.
+- Managed AI calls fail closed: they bound waiting with `PUBLIC_AI_TIMEOUT_MS`, never auto-replay, and accept a result only if `isRequestedModel` confirms the reported response model, so a provider cannot silently substitute another model.
