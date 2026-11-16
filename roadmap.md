@@ -143,7 +143,7 @@
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
 - [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
 - [x] Helles Design (#FFC758): Vergleich Startseite, Kontakt, Produktseite (Computer + Handy) erstellt; Farbkante im Beratungsfeld und Sprachauswahl in der Hauptversion behoben (übernimmt der Entwurf bei Annahme); TEILEKLAR bleibt dunkel
-- [ ] Helles Design: Annahme oder Ablehnung durch Pascal; Maskottchen-Bilder bleiben grün (neue Bilder nur nach Entscheidung)
+- [x] Helles Design abgelehnt (16.11.) – dunkles Graphite-Design bleibt
 
 ## Gesamtfertigstellung (16.11.)
 - [ ] Skill hinzufügen („npx skills add <owner/repo>“) – wartet auf konkretes Repository von Pascal; Übernahme dann nur als geprüfte Dokumentation mit Herkunftsangabe
@@ -166,3 +166,6 @@
 - [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
 - [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
 - [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht
+
+## Zurückgestellt (Pascal, 16.11.)
+- Modellwechsel KI, Skill-Import, Veröffentlichung
