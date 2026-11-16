@@ -1013,3 +1013,42 @@
     transition: none;
   }
 }
+
+/* NX-DESIGN-01 Gesamtveredelung: ein Kartentyp, eine Abschnittsskala, Footer-Raster, gestapelte Kopfknöpfe. */
+@media (max-width: 768px) {
+  :root { --section-space: 56px; --section-space-compact: 40px; }
+}
+:root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form, .ws-card, .tkc-card) {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--glass-content-fill, var(--card));
+  box-shadow: var(--elevation-glass-lift, var(--elevation-card));
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+:root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .ws-card, .tkc-card):hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elevation-glass-hover, var(--elevation-card));
+}
+:root:root #atelier.site-shared :is(.hc-art, .hc-product-art, .identity-media) {
+  border-radius: var(--radius-media);
+}
+:root:root #atelier.site-shared main .hc-section { padding-block: var(--section-space); }
+:root:root #atelier.site-shared main :is(.hc-intro, .product-overview) { padding-top: var(--section-space-compact); }
+:root:root #atelier.site-shared main h4 { font-size: var(--type-h4); line-height: 1.4; }
+/* Kopfknöpfe: nebeneinander, sonst sauber gestapelt mit gleicher Breite (Chatbreite bleibt unberührt). */
+:root:root #atelier.site-shared .identity-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 12px;
+  max-width: 30rem;
+  align-items: stretch;
+}
+:root:root #atelier.site-shared .identity-links > :is(a, button) { justify-content: center; width: 100%; margin: 0; }
+/* Footer-Raster: zwei Spalten auf dem Handy statt einer langen Liste, gleiche Abstände. */
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared .structured-footer .footer-link-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+}
+:root:root #atelier.site-shared .structured-footer .footer-link-groups a { min-height: 44px; display: inline-flex; align-items: center; }
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form, .ws-card, .tkc-card) { transition: none; }
+}
