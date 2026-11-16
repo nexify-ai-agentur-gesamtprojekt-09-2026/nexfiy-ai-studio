@@ -1,11 +1,14 @@
 # Roadmap
 ## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
 - [x] Ausgangsrechte lesend bestätigt: anon ohne Tabellenrechte; authenticated SELECT unter Admin-RLS, kein INSERT/UPDATE/DELETE. Bestehendes SELECT bleibt erhalten; keine Rechteausweitung
-- [ ] Plan und Trade-off der eigenen Datenbank-Ratenbegrenzung bestätigen; kein Standardlimit der Plattform vorhanden
-- [ ] Additive servergeschützte Raten-/Dublettensperre und Einwilligungsnachweis umsetzen; keine Klartext-IP, keine doppelten Slack-Meldungen
-- [ ] Exakte rollierende 7-Tage-Zahlen für Kontakt und getrennte TEILEKLAR-Anfragen im vorhandenen Admin-Arbeitsplatz
-- [ ] Regel-, Parallelitäts-, Rechte- und Browserprüfungen sowie automatische Typ-/Buildsignale dokumentieren; abnahmebereit ja/nein berichten
-- [ ] Keine Veröffentlichung; UPDATE-Recht, Chat-Modell und Datenschutzinhalt unverändert halten
+- [x] Plan unverändert freigegeben; Trade-off eigene Datenbankbegrenzung bestätigt
+- [x] Migration 0013 nur im Entwurf: servergeschütztes Salz, atomare rollierende 5/Stunde-Grenze, 10-Minuten-Dublettensperre, consent_at/version; keine Klartext-IP und keine zusätzliche Slack-Meldung bei Dubletten
+- [x] Exakte rollierende 7-Tage-Zahlen im Admin-Arbeitsplatz, Kontakt getrennt von TEILEKLAR; bestehendes Admin-RLS, keine neue Nutzerberechtigung
+- [x] 172/172 Tests in 36 Dateien, davon 10 echte Datenbanktests mit gemocktem Slack einschließlich 12 parallelen Eingängen (5 angenommen) und 10 Cross-IP-Dubletten (1 angenommen); automatische Typ-/Buildprüfung OK 15:13:53 UTC
+- [x] Echter Entwurfs-Admin 1280/390px: Wochenzahl/Zeitraum sichtbar, kein Überlauf/Laufzeitfehler; serverseitiger Honeypot abgelehnt, Eingaben erhalten und Wochenzahl unverändert zurückgelesen
+- [x] Keine Veröffentlichung; UPDATE-Recht, Chat-Modell und Datenschutzinhalt unverändert. Testdaten nur im Entwurf erhalten; keine Entwurfsdaten in der App. Bericht ops/nx-lead-01-2026-11-16.md
+- [ ] Produktivabnahme OFFEN: verlässliche native/Edge-IP im tatsächlichen Hosting nachweisen (Owner: Hosting-Prüfung im Folgeauftrag); kein Publish in NX-LEAD-01. Fehlende Provenienz scheitert geschlossen; deshalb abnahmebereit für Produktivübernahme NEIN
+- [ ] Vollständiger positiver Formular-UI-Speicherweg mit transportseitig blockiertem/gemocktem Slack OFFEN; echter Service-Speicherweg und UI-Ablehnung separat belegt, nicht als vollständiger Ende-zu-Ende-Nachweis ausgegeben
 
 ## NX-MCP-01 · Verbindung über nexifyai.de (16.11., 13:10 UTC)
 - [x] Lesende Konfigurationsprüfung: OAuth und dynamische Registrierung aktiv, Zustimmungsadresse /.lovable/oauth/consent, Site URL nexifyai.de; keine Einstellungsänderung nötig (13:11 UTC)
