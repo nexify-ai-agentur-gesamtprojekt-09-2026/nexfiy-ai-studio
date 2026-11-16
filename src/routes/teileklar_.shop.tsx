@@ -3,13 +3,20 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { CatalogBrowser } from "@/components/catalog/CatalogBrowser";
 import { catalogCategoriesQuery, catalogListQuery } from "@/lib/teileklar-catalog.queries";
-import { normalizeCatalogQuery, normalizePage } from "@/lib/teileklar-catalog";
+import {
+  DEFAULT_CATALOG_SORT,
+  normalizeCatalogQuery,
+  normalizeCatalogSort,
+  normalizePage,
+  type CatalogSort,
+} from "@/lib/teileklar-catalog";
 import capturedCSS from "../styles/pages/teileklar.shop.css?url";
 
 interface ShopSearch {
   q?: string;
   kategorie?: string;
   seite?: number;
+  sortierung?: CatalogSort;
 }
 
 const TITLE = "Katalog Auto & Motorrad · TEILEKLAR.shop";
@@ -22,16 +29,19 @@ export const Route = createFileRoute("/teileklar_/shop")({
     const kategorie =
       typeof search["kategorie"] === "string" ? search["kategorie"].slice(0, 120) : "";
     const seite = normalizePage(search["seite"]);
+    const sortierung = normalizeCatalogSort(search["sortierung"]);
     return {
       ...(q ? { q } : {}),
       ...(kategorie ? { kategorie } : {}),
       ...(seite > 1 ? { seite } : {}),
+      ...(sortierung !== DEFAULT_CATALOG_SORT ? { sortierung } : {}),
     };
   },
   loaderDeps: ({ search }) => ({
     q: search.q ?? "",
     category: search.kategorie ?? "",
     page: search.seite ?? 1,
+    sort: search.sortierung ?? DEFAULT_CATALOG_SORT,
   }),
   loader: async ({ context, deps }) => {
     await Promise.all([

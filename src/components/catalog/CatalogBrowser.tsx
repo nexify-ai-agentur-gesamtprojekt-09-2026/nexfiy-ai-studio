@@ -2,12 +2,20 @@ import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CatalogCard } from "./CatalogCard";
 import { partInquiryPath } from "@/lib/teileklar-search";
+import { CATALOG_SORTS, DEFAULT_CATALOG_SORT, type CatalogSort } from "@/lib/teileklar-catalog";
 import type { CatalogCategory, CatalogListResult } from "@/lib/teileklar-catalog.functions";
 
-function shopHref(params: { q?: string; kategorie?: string; seite?: number }) {
+function shopHref(params: {
+  q?: string;
+  kategorie?: string;
+  seite?: number;
+  sortierung?: CatalogSort;
+}) {
   const search = new URLSearchParams();
   if (params.q) search.set("q", params.q);
   if (params.kategorie) search.set("kategorie", params.kategorie);
+  if (params.sortierung && params.sortierung !== DEFAULT_CATALOG_SORT)
+    search.set("sortierung", params.sortierung);
   if (params.seite && params.seite > 1) search.set("seite", String(params.seite));
   const query = search.toString();
   return `/teileklar/shop${query ? `?${query}` : ""}#katalog`;
@@ -23,7 +31,7 @@ export function CatalogBrowser({
   result: CatalogListResult;
   categories: CatalogCategory[];
 }) {
-  const { q, category, page, pages, total, items } = result;
+  const { q, category, page, pages, total, items, sort } = result;
   const first = total === 0 ? 0 : (page - 1) * 24 + 1;
   const last = Math.min(total, page * 24);
   return (
@@ -45,6 +53,9 @@ export function CatalogBrowser({
             placeholder="z. B. Eiskratzer, Warnweste, 8435527823900"
           />
           {category ? <input type="hidden" name="kategorie" value={category} /> : null}
+          {sort !== DEFAULT_CATALOG_SORT ? (
+            <input type="hidden" name="sortierung" value={sort} />
+          ) : null}
           <Button variant="brand" type="submit">
             <Search aria-hidden="true" />
             Suchen
@@ -53,13 +64,13 @@ export function CatalogBrowser({
       </form>
 
       <nav className="tkc-categories" aria-label="Kategorien">
-        <a href={shopHref({ q })} aria-current={!category ? "true" : undefined}>
+        <a href={shopHref({ q, sortierung: sort })} aria-current={!category ? "true" : undefined}>
           Alle Kategorien
         </a>
         {categories.map((entry) => (
           <a
             key={entry.category}
-            href={shopHref({ q, kategorie: entry.category })}
+            href={shopHref({ q, kategorie: entry.category, sortierung: sort })}
             aria-current={category === entry.category ? "true" : undefined}
           >
             {entry.category}
@@ -76,13 +87,30 @@ export function CatalogBrowser({
           {total === 0
             ? "Keine Artikel gefunden"
             : `${COUNT.format(first)}–${COUNT.format(last)} von ${COUNT.format(total)} Artikeln`}
-          {q || category ? (
+          {q || category || sort !== DEFAULT_CATALOG_SORT ? (
             <>
               {" "}
               · <a href={shopHref({})}>Filter zurücksetzen</a>
             </>
           ) : null}
         </p>
+        {total > 1 ? (
+          <nav className="tkc-sort" aria-label="Sortierung">
+            <span aria-hidden="true">Sortieren:</span>
+            <ul role="list">
+              {CATALOG_SORTS.map((option) => (
+                <li key={option.key}>
+                  <a
+                    href={shopHref({ q, kategorie: category, sortierung: option.key })}
+                    aria-current={sort === option.key ? "true" : undefined}
+                  >
+                    {option.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : null}
       </header>
 
       {items.length === 0 ? (
@@ -128,7 +156,7 @@ export function CatalogBrowser({
       {pages > 1 ? (
         <nav className="tkc-pagination" aria-label="Seiten">
           {page > 1 ? (
-            <a href={shopHref({ q, kategorie: category, seite: page - 1 })} rel="prev">
+            <a href={shopHref({ q, kategorie: category, sortierung: sort, seite: page - 1 })} rel="prev">
               Zurück
             </a>
           ) : (
@@ -138,7 +166,7 @@ export function CatalogBrowser({
             Seite {page} von {pages}
           </span>
           {page < pages ? (
-            <a href={shopHref({ q, kategorie: category, seite: page + 1 })} rel="next">
+            <a href={shopHref({ q, kategorie: category, sortierung: sort, seite: page + 1 })} rel="next">
               Weiter
             </a>
           ) : (

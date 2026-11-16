@@ -1,11 +1,13 @@
 import { ImageOff } from "lucide-react";
 import {
-  availabilityLabel,
   catalogImageUrl,
   catalogProductPath,
-  formatPrice,
+  formatPriceRange,
+  groupAvailabilityLabel,
 } from "@/lib/teileklar-catalog";
-import type { CatalogListItem } from "@/lib/teileklar-catalog.functions";
+import type { CatalogGroupItem } from "@/lib/teileklar-catalog.functions";
+
+const COUNT = new Intl.NumberFormat("de-DE");
 
 export function CatalogImage({
   id,
@@ -40,8 +42,8 @@ export function CatalogImage({
   );
 }
 
-export function CatalogCard({ item }: { item: CatalogListItem }) {
-  const price = formatPrice(item.price_value);
+export function CatalogCard({ item }: { item: CatalogGroupItem }) {
+  const price = formatPriceRange(item.min_price, item.max_price);
   return (
     <article className="tkc-card">
       <a className="tkc-card-link" href={catalogProductPath(item.id)}>
@@ -53,8 +55,11 @@ export function CatalogCard({ item }: { item: CatalogListItem }) {
         {price ?? "Preis auf Anfrage"}
         {price ? <small>inkl. MwSt., zzgl. Versand</small> : null}
       </p>
-      <p className="tkc-card-stock" data-available={item.stock > 0 || undefined}>
-        {availabilityLabel(item)}
+      {item.variant_count > 1 ? (
+        <p className="tkc-card-variants">{COUNT.format(item.variant_count)} Ausführungen</p>
+      ) : null}
+      <p className="tkc-card-stock" data-available={item.stock > 0 || item.in_stock || undefined}>
+        {groupAvailabilityLabel(item)}
       </p>
     </article>
   );
