@@ -62,11 +62,11 @@ export function composeOracleHandoff(
     [ORACLE_HANDOFF_HEADING, ...parts, ...(footer ? [footer] : [])].join("\n\n");
   const full = build(visitor);
   if (full.length <= limit) return full;
-  const [first, ...rest] = visitor;
+  const [first = "", ...rest] = visitor;
   const kept: string[] = [];
-  for (let index = rest.length - 1; index >= 0; index -= 1) {
-    if (build([first, HANDOFF_OMISSION, rest[index], ...kept]).length > limit) break;
-    kept.unshift(rest[index]);
+  for (const message of [...rest].reverse()) {
+    if (build([first, HANDOFF_OMISSION, message, ...kept]).length > limit) break;
+    kept.unshift(message);
   }
   const text = build([first, HANDOFF_OMISSION, ...kept]);
   return text.length <= limit ? text : `${text.slice(0, limit - 1)}…`;

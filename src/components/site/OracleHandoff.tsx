@@ -24,7 +24,7 @@ export function OracleHandoff({
 }: {
   messages: readonly OracleMessage[];
   /** Called after a confirmed transfer, e.g. to close the phone dialog so the form is visible. */
-  onTransferred?: () => void;
+  onTransferred?: (() => void) | undefined;
 }) {
   const navigate = useNavigate();
   const [stage, setStage] = useState<Stage>("offer");
