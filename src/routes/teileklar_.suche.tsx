@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { CatalogUnavailable } from "@/components/site/CatalogUnavailable";
+import { PartInquiryForm } from "@/components/forms/PartInquiryForm";
 import capturedCSS from "../styles/pages/teileklar.suche.css?url";
 
 export const Route = createFileRoute("/teileklar_/suche")({
@@ -36,6 +37,7 @@ function Index() {
         </div>
       </section>
       <CatalogUnavailable />
+      <section className="pc-section" id="teilefrage"><PartInquiryForm /></section>
     </div>
 </NexifyShell>;
 }
