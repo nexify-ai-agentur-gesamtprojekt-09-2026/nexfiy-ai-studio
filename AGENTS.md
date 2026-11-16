@@ -49,3 +49,4 @@ use the editor.
 - Editorial hierarchy lives in root-loaded `site-typography.css` using global type, measure and spacing tokens across pages, tools, chat and StatusPage; informative expansions stay in each route and add no commercial or legal promises.
 - Compact header geometry follows the website container, not viewport width; group fixed controls beside a shrinkable brand and retain equal glass-to-control insets while scrolling so chat resizing cannot overflow navigation.
 - ProductOverview renders comparable product briefs from route-owned facts; keep current website capabilities, separately activated products and unapproved legal archives visibly distinct so presentation never implies access or contractual approval.
+- App installation uses the existing manifest and one root-level PwaInstallProvider to retain the browser's single-use prompt across routes; shared footer bars offer device-specific fallbacks without adding offline caching or service workers.

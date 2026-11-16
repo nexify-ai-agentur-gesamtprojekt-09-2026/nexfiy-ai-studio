@@ -1,4 +1,5 @@
 import { useCurrentPage } from "@/hooks/use-current-page";
+import { PwaInstallBar } from "./PwaInstallBar";
 
 /** NeXify site footer, shared by every NeXify page; the link to the current page is marked for assistive tech. */
 export function NexifyFooter() {
@@ -151,6 +152,7 @@ export function NexifyFooter() {
           </div>
         </details>
       </div>
+      <PwaInstallBar />
     </footer>
   );
 }

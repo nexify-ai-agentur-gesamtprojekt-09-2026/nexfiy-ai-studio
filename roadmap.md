@@ -1,8 +1,9 @@
 # Roadmap
 ## App-Installation unter dem Footer (16.11.)
-- [ ] Gemeinsame, designgerechte Installationsleiste mit Browser-Installation und gerätespezifischer Anleitung ergänzen
-- [ ] Generierten App-Worker nur auf der veröffentlichten Website aktivieren; Vorschau, private Seiten und Schnittstellen nicht zwischenspeichern
-- [ ] Installation, Abbrechen, Anleitung und bereits installierte Ansicht auf Desktop/Handy prüfen; echte Geräteinstallation benötigt Veröffentlichung
+- [x] Gemeinsame Glas-Installationsleiste mit Browser-Installation und Anleitungen für iPhone/iPad, Android und Computer ergänzt; exakt mit Rechtslinks ausgerichtet (beide x=59,28px bei 1705px)
+- [x] Gemäß Geräteauswahl nur Installation mit Internet umgesetzt; kein Offline-Worker und keine Zwischenspeicherung hinzugefügt, Manifest und vier App-Symbole erreichbar
+- [x] Desktop/Handy 320–1705px, helle Ansicht, Fokus, Wiederherstellen, simuliertes Browser-Akzeptieren/Abbrechen/Fehler und bereits installierte Ansicht geprüft; 40 Tests bestanden, keine Laufzeitfehler
+- [ ] Echte Geräteinstallation: wartet auf Veröffentlichung; Browser-Installationsdialog im Test simuliert, Safari/iPhone-Systeminstallation nicht nachgewiesen
 
 ## Hintergrund und Tiefenwirkung (16.11.)
 - [x] Markierte Hintergrundlinie als vollbreiten Abschnittsrand reproduziert und entfernt; Datenzeilen behalten ihre Orientierungslinien
