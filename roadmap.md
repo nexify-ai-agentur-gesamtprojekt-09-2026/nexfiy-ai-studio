@@ -320,8 +320,9 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 - [ ] Repository nexify-ai-finales-agentur-gesamtprojekt-09-2026 als Quelle für Jeff- und ORACLE-Funktionen auswerten (nur lesend)
 
 ## NX-LEAD-02 · Chat-Übergabe ins Kontaktformular (Leitstern Schritt 2, 16.11., 15:25 UTC)
-- [ ] ORACLE-Beratung: nach einer Antwort ausdrücklich bestätigte Übernahme der eigenen Besucherangaben plus katalogeigenem Einstieg ins Kontaktformular; kein automatischer Versand, keine Inhalte in der Adresse, keine Antworttexte des Modells
-- [ ] TEILEKLAR Hilfe: frei eingegebener Text nicht mehr über die Adresse, sondern über dieselbe einmalige Übergabe im Browserfenster
-- [ ] Kontaktseite übernimmt den Entwurf einmalig (30 Minuten gültig), erhält bereits eingetragene Angaben und zeigt die Herkunft sichtbar an
-- [ ] Tests, Browserprüfung 1280/390 px mit echter Beratung, ohne Absenden; keine Veröffentlichung
-- [ ] Herkunftsmerkmal „Formular/Chat-Übergabe“ als eigene Spalte: bereit nach Übernahme des Entwurfs NX-LEAD-01 (gleiche Tabelle und Migrationsfolge, sonst Konflikt)
+- [x] ORACLE-Beratung: Karte „Mit Pascal weitersprechen“ nach jeder Antwort; Vorschau zeigt exakt den Entwurf (nur eigene Besuchernachrichten plus katalogeigener Einstieg, keine Modellantwort), erst „In Kontaktformular übernehmen“ speichert ihn im Browserfenster. Kein automatischer Versand, nichts in der Adresse
+- [x] TEILEKLAR Hilfe: frei eingegebener Text geht nicht mehr über ?anliegen, sondern über dieselbe einmalige Übergabe; Fehlweg mit Kopieren und Formularlink statt stillem Ersatz
+- [x] Kontaktseite übernimmt einmalig (≤30 Minuten), ergänzt bereits Getipptes statt es zu ersetzen, zeigt Herkunft sichtbar und setzt den Fokus aufs erste leere Kontaktfeld; Neuladen übernimmt nichts erneut
+- [x] 173/173 Tests in 36 Dateien (21 neu), Typprüfung 0 Fehler, build OK 15:38:30 UTC. Browser: echte Beratung 1280/390 px → Vorschau → Übernahme → /kontakt#anfrage, Text identisch, kein Überlauf, keine Fehler; helle Ansicht geprüft. Anfragen in der Datenbank vorher/nachher 1 (nichts abgesendet). Keine Veröffentlichung. Bericht ops/nx-lead-02-2026-11-16.md
+- [ ] Herkunftsmerkmal „Formular/Chat-Übergabe“ als eigene Spalte: bereit nach abgeschlossener Übernahme des Entwurfs NX-LEAD-01 (gleiche Tabelle und Migrationsfolge); bis dahin trägt der übernommene Text die sichtbare Kopfzeile „Aus meiner Beratung mit AIFly ORACLE:“
+- [ ] Nach Übernahme NX-LEAD-01 im Hauptstand prüfen, ob Pascals Punkte vom 15:16 UTC umgesetzt sind: fehlende IP überspringt nur die Ratenbegrenzung (`rate_guard_ip_missing`, `cf-connecting-ip` bevorzugt), vollständiger positiver Formularablauf getestet, Spaltenrecht UPDATE nur auf Statusspalten
