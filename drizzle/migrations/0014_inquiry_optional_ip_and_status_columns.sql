@@ -1,0 +1,44 @@
+CREATE OR REPLACE FUNCTION public.accept_guarded_inquiry(p_ip_hash text, p_fingerprint text, p_kind text, p_name text, p_email text, p_company text, p_message text, p_source_path text, p_consent boolean, p_consent_version text) RETURNS TABLE(outcome text, inquiry_id uuid, retry_after_seconds integer) LANGUAGE plpgsql SECURITY INVOKER SET search_path = pg_catalog SET lock_timeout = '5s' AS $function$
+DECLARE
+  v_has_ip boolean := p_ip_hash <> '';
+  v_ip_lock bigint := hashtextextended('inquiry-ip:' || p_ip_hash, 0);
+  v_duplicate_lock bigint := hashtextextended('inquiry-duplicate:' || p_fingerprint, 0);
+  v_now timestamptz;
+  v_recent timestamptz[];
+  v_id uuid;
+BEGIN
+  IF p_ip_hash IS NULL OR (v_has_ip AND p_ip_hash !~ '^[0-9a-f]{64}$') OR p_fingerprint IS NULL OR p_fingerprint !~ '^[0-9a-f]{64}$' OR p_consent IS DISTINCT FROM true OR p_consent_version IS NULL OR char_length(p_consent_version) NOT BETWEEN 1 AND 100 THEN
+    RAISE EXCEPTION 'Invalid guarded inquiry' USING ERRCODE = '22023';
+  END IF;
+  IF v_has_ip THEN
+    PERFORM pg_advisory_xact_lock(least(v_ip_lock, v_duplicate_lock));
+    IF v_ip_lock <> v_duplicate_lock THEN PERFORM pg_advisory_xact_lock(greatest(v_ip_lock, v_duplicate_lock)); END IF;
+  ELSE
+    PERFORM pg_advisory_xact_lock(v_duplicate_lock);
+  END IF;
+  v_now := clock_timestamp();
+  IF EXISTS (SELECT 1 FROM public.inquiry_duplicate_guards d WHERE d.fingerprint = p_fingerprint AND d.accepted_at > v_now - interval '10 minutes') OR EXISTS (SELECT 1 FROM public.inquiries i WHERE i.email = p_email AND i.message = p_message AND i.created_at > v_now - interval '10 minutes') THEN
+    RETURN QUERY SELECT 'duplicate'::text, NULL::uuid, 0;
+    RETURN;
+  END IF;
+  IF v_has_ip THEN
+    SELECT coalesce(array_agg(t ORDER BY t), '{}'::timestamptz[]) INTO v_recent FROM public.inquiry_rate_guards g CROSS JOIN LATERAL unnest(g.accepted_at) t WHERE g.ip_hash = p_ip_hash AND t > v_now - interval '1 hour';
+    IF cardinality(v_recent) >= 5 THEN
+      RETURN QUERY SELECT 'rate_limited'::text, NULL::uuid, greatest(1, ceil(extract(epoch FROM v_recent[1] + interval '1 hour' - v_now))::integer);
+      RETURN;
+    END IF;
+  END IF;
+  v_id := gen_random_uuid();
+  INSERT INTO public.inquiries(id, created_at, kind, name, email, company, message, source_path, consent_version, consent_at) VALUES (v_id, v_now, p_kind, p_name, p_email, p_company, p_message, p_source_path, p_consent_version, v_now);
+  IF v_has_ip THEN
+    INSERT INTO public.inquiry_rate_guards(ip_hash, accepted_at) VALUES (p_ip_hash, array_append(v_recent, v_now)) ON CONFLICT (ip_hash) DO UPDATE SET accepted_at = EXCLUDED.accepted_at;
+  END IF;
+  INSERT INTO public.inquiry_duplicate_guards(fingerprint, accepted_at, inquiry_id) VALUES (p_fingerprint, v_now, v_id) ON CONFLICT (fingerprint) DO UPDATE SET accepted_at = EXCLUDED.accepted_at, inquiry_id = EXCLUDED.inquiry_id;
+  RETURN QUERY SELECT 'accepted'::text, v_id, 0;
+END;
+$function$;
+REVOKE ALL ON FUNCTION public.accept_guarded_inquiry(text,text,text,text,text,text,text,text,boolean,text) FROM PUBLIC, anon, authenticated;
+GRANT EXECUTE ON FUNCTION public.accept_guarded_inquiry(text,text,text,text,text,text,text,text,boolean,text) TO service_role;
+COMMENT ON FUNCTION public.accept_guarded_inquiry(text,text,text,text,text,text,text,text,boolean,text) IS 'Service-only atomic intake. Empty IP checksum skips only rate guarding; duplicate checks and consent evidence remain mandatory. Never pass raw IP addresses.';
+GRANT UPDATE (status, updated_at) ON public.inquiries TO authenticated;
+COMMENT ON COLUMN public.inquiries.status IS 'Admin status workflow under existing UPDATE RLS; authenticated column grant does not permit editing inquiry content.';

@@ -33,4 +33,21 @@ describe("NX-LEAD-01 Prüfsummen", () => {
   it("weist ungültiges Salz ab statt ungesalzen zu speichern", async () => {
     await expect(inquiryGuardHashes("", "192.0.2.1", "test@example.test", "Vorhaben")).rejects.toThrow();
   });
+  it("bevorzugt die attestierte Cloudflare-IP gegenüber der Proxy-Adresse", () => {
+    const req = new Request("https://nexifyai.de/kontakt", { headers: { "cf-connecting-ip": "192.0.2.10", "x-forwarded-for": "192.0.2.11" } });
+    Object.assign(req, { cf: { colo: "FRA", asn: 13335 } });
+    expect(resolveInquiryIp(req, "192.0.2.12")).toBe("192.0.2.10");
+  });
+  it("verwendet bei ungültiger Cloudflare-IP nur eine gültige native IP und niemals XFF", () => {
+    const req = new Request("https://nexifyai.de/kontakt", { headers: { "cf-connecting-ip": "invalid", "x-forwarded-for": "192.0.2.11" } });
+    Object.assign(req, { cf: { colo: "FRA", asn: 13335 } });
+    expect(resolveInquiryIp(req, "192.0.2.12")).toBe("192.0.2.12");
+    expect(resolveInquiryIp(req, "invalid")).toBeNull();
+  });
+  it("erhält ohne IP dieselbe Dublettenprüfsumme ohne Ersatz-IP", async () => {
+    const missing = await inquiryGuardHashes("a".repeat(64), null, "test@example.test", "Vorhaben");
+    const present = await inquiryGuardHashes("a".repeat(64), "192.0.2.1", "test@example.test", "Vorhaben");
+    expect(missing.ipHash).toBeNull();
+    expect(missing.fingerprint).toBe(present.fingerprint);
+  });
 });

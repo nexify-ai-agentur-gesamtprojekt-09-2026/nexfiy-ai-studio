@@ -99,6 +99,13 @@
       "when": 1794841487633,
       "tag": "0013_inquiry_intake_guard_and_consent",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1794842361867,
+      "tag": "0014_inquiry_optional_ip_and_status_columns",
+      "breakpoints": true
     }
   ]
 }

@@ -40,8 +40,9 @@ export const submitInquiry = createServerFn({ method: "POST" })
     const { buildInquiryNotice, inquiryReference } = await import("./inquiry-notification");
     const { resolveInquiryIp } = await import("./inquiry-guard.server");
     const { acceptInquiry } = await import("./inquiry-intake.server");
-    const ip = resolveInquiryIp(getRequest(), getRequestIP(), import.meta.env.DEV);
-    if (!ip) return { ok: false, reason: "unavailable", error: "Ihre Anfrage konnte nicht sicher angenommen werden. Ihre Angaben bleiben im Formular. Bitte versuchen Sie es später erneut." };
+    const ip = resolveInquiryIp(getRequest(), getRequestIP({ xForwardedFor: false }), import.meta.env.DEV);
+    // Fehlende IP darf keinen echten Lead verhindern; keine Anfrage- oder Personenmetadaten protokollieren.
+    if (!ip) console.warn("rate_guard_ip_missing");
     let accepted;
     try {
       accepted = await acceptInquiry(supabaseAdmin, ip, data.kind, data.sourcePath, data.values);
