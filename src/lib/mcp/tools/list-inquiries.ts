@@ -1,6 +1,7 @@
 import { defineTool } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import { supabaseForUser } from "../supabase";
+import { INQUIRY_STATUSES } from "../../inquiry-inbox";
 
 /** Nur lesend. Sichtbar sind Anfragen ausschließlich für Konten mit Admin-Rolle (RLS über has_role). */
 export default defineTool({
@@ -9,7 +10,7 @@ export default defineTool({
   description:
     "List recent website inquiries and TEILEKLAR part inquiries. Read-only; only returns rows for accounts with the admin role.",
   inputSchema: {
-    status: z.enum(["neu", "in_bearbeitung", "erledigt"]).optional().describe("Optional status filter"),
+    status: z.enum(INQUIRY_STATUSES).optional().describe("Optional status filter"),
     limit: z.number().int().min(1).max(100).default(25),
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
