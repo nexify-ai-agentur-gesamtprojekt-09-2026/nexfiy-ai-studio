@@ -1,4 +1,12 @@
 # Roadmap
+## Technische Nacharbeit (16.11.)
+- [ ] TEILEKLAR-Seiten an einen gemeinsamen Rahmen mit funktionierender Hilfe, Navigation und Suchübergabe anschließen
+- [ ] Wirkungslose Angebots-/Termin- und Begleitungsaktionen an vorhandene echte Einstiege anschließen
+- [ ] Terminanfrage mit bestehender Prüfung und E-Mail-Übergabe verbinden
+- [ ] Theme-Umschaltung und mobile Fokusführung vervollständigen
+- [ ] Fehlende Detailziele und Rechner anhand vorhandener Daten/Regeln prüfen und technisch schließen
+- [ ] Änderungen auf Desktop/Handy und mit Tests prüfen; externe Waren-/Zahlungsanbindung nicht erfinden
+
 ## ORACLE-Produktberatung (15.11.)
 - [x] Öffentliche Suite/API-Produktinformationen als begrenzte Beratungsgrundlage hinterlegt
 - [x] AI-Gateway-Beratung mit geprüften lokalen Einstiegslinks im gemeinsamen ORACLE ergänzt
