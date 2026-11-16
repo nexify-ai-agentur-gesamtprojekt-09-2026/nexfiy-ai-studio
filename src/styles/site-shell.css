@@ -6,6 +6,8 @@
 :root:root #atelier .site-oracle-pane { position: relative; }
 :root:root #atelier.is-closed .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
 :root:root #atelier.is-closed .site-page-pane { flex-grow: 1 !important; }
+:root:root #atelier.is-closed .site-page-split > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+:root:root #atelier.is-closed .site-page-split > :has(> .site-page-pane) { flex: 1 1 0px !important; }
 :root:root #atelier .site-page-divider { width: 8px; background: transparent; flex-shrink: 0; z-index: 7; }
 :root:root #atelier .site-page-divider.is-hidden { display: none; }
 :root:root #atelier .site-page-divider > div { position: sticky; top: 50dvh; height: 40px; width: 4px; border: 0; background: var(--border-strong); }
@@ -91,6 +93,8 @@
 @media (max-width: 767px) {
   :root:root #atelier .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
   :root:root #atelier .site-page-pane { flex-grow: 1 !important; }
+  :root:root #atelier .site-page-split > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+  :root:root #atelier .site-page-split > :has(> .site-page-pane) { flex: 1 1 0px !important; }
   :root #atelier #aifly-panel { --chat-viewport-height: 100dvh !important; }
   :root #atelier #aifly-panel .public-orientation { --ca-fuss: 0px !important; }
 }
