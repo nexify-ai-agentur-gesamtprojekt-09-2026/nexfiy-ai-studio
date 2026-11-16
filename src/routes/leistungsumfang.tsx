@@ -348,7 +348,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
             jeden Bereich auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
@@ -727,7 +727,7 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
+                Aufwand und Kosten legen wir für Ihr Vorhaben im Angebot fest. Hosting,
                 Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>

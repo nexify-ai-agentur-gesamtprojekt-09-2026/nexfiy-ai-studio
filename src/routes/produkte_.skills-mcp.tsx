@@ -154,7 +154,7 @@ function Index() {
         <ProductOverview
           id="skills"
           label="Methoden und Werkzeugzugang"
-          title="Die Methode ist nicht die Berechtigung."
+          title="Die Methode regelt nicht, wer was darf."
           summary="Skills beschreiben wiederverwendbare Arbeitsweisen. MCP macht benannte Werkzeuge erreichbar; Datenrechte und erlaubte Handlungen bleiben gesondert festgelegt."
           facts={[
             {
@@ -165,7 +165,7 @@ function Index() {
             {
               label: "MCP",
               content:
-                "Ein Standard für zugelassene Werkzeuge. Eine Verbindung ist keine pauschale Ausführungsvollmacht.",
+                "Ein Standard für zugelassene Werkzeuge. Eine Verbindung ist keine Erlaubnis, alles auszuführen.",
             },
             {
               label: "Diese Website",
@@ -286,7 +286,7 @@ function Index() {
 
               <h3>Für eine Prüfung benötigte Angaben</h3>
               <p>
-                Hilfreich sind der Name des Systems, die wiederkehrende Aufgabe und das gewünschte
+                Nennen Sie den Namen des Systems, die wiederkehrende Aufgabe und das gewünschte
                 Ergebnis. Zugangsdaten oder Tokens gehören nicht in die öffentliche Anfrage. Welche
                 Verbindung eingerichtet werden kann, hängt von verfügbaren Schnittstellen und
                 Berechtigungen ab.
@@ -415,7 +415,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
             jeden Bereich auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
@@ -463,7 +463,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-            Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab
+            Schnittstelle nach Ihrem Datenfluss; die Nutzung läuft über ein Guthaben, das Sie vorab
             aufladen.
           </p>
           <a

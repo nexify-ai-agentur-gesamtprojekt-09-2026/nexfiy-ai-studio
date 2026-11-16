@@ -511,7 +511,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
             jeden Bereich auch direkt öffnen.
           </p>
           <GuideNavigation initial="nex2fly-trial" />
@@ -576,7 +576,7 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-                Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+                Bereich. Testen Sie die Suite 24 Stunden lang.
               </p>
             </div>
           </details>

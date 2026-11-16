@@ -55,7 +55,7 @@ export function WorkshopSearch() {
       </form>
       <div role="status" className="tk-empty">
         <p>
-          Ein eigenes Werkstattverzeichnis ist nicht angebunden. Die Kartensuche öffnet Google Maps
+          Ein eigenes Werkstattverzeichnis gibt es hier nicht. Die Kartensuche öffnet Google Maps
           erst nach Ihrem Klick; Termine vereinbaren Sie direkt mit dem Betrieb.
         </p>
         <div className="tk-actions">
