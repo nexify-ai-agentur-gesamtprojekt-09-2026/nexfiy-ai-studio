@@ -7,9 +7,9 @@ export const Route = createFileRoute("/leistungen")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/5c592a5dc791fcc3.webp", fetchPriority: "high" }],
     meta: [
-      { title: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
+      { title: "Agenturleistungen: Websites, Systeme und Kampagnen · NeXify AI" },
       { name: "description", content: "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal." },
-      { property: "og:title", content: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
+      { property: "og:title", content: "Agenturleistungen: Websites, Systeme und Kampagnen · NeXify AI" },
       { property: "og:description", content: "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -38,7 +38,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Leistungen</span>
                     <h1 id="page-title-services">Website, System, Kampagne. Aus einer Hand.</h1>
-                    <p className={"identity-body"}>Drei Leistungsfelder, ein Ansprechpartner: Wir bauen Ihren Auftritt, entlasten Ihre Abläufe und bringen Ihr Angebot zu den richtigen Kunden. Sie wählen, wo wir anfangen.</p>
+                    <p className={"identity-body"}>Eine Website, ein digitaler Ablauf oder eine Kampagne: Wir entwickeln den Teil, den Ihr Unternehmen jetzt braucht. Pascal begleitet den Auftrag; Umfang, Mitwirkung und Kosten stehen vor dem Start fest.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/leistungsumfang">
                         <span>Pakete vergleichen</span>
@@ -66,7 +66,7 @@ function Index() {
                     <h2 id="content-services-services-customer-1-0-title">Marke &amp; Web</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Ihre Kunden verstehen auf den ersten Blick, was Sie anbieten und wie sie Sie erreichen. Positionierung, Gestaltung, Texte und Website entstehen zusammen.</p>
+                    <p>Wir strukturieren Angebot und Kontaktweg so, dass Ihre Kunden sich leichter orientieren. Positionierung, Gestaltung, Texte und Website entstehen zusammen.</p>
                     <p>Das Paket Markenstart bündelt die Markenbasis und den Webauftritt. Weitere Seiten, Inhalte und Sprachen kommen als Optionen dazu.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>

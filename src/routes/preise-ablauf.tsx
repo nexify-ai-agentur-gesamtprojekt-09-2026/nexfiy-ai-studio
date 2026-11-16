@@ -27,7 +27,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen</span>
                     <h1 id="page-title-pricing">Sie kennen die Kosten vor dem Start.</h1>
-                    <p className={"identity-body"}>Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung danach und externe Kosten sind getrennt ausgewiesen.</p>
+                    <p className={"identity-body"}>Was kostet Ihr Agenturprojekt? Das hängt vom vereinbarten Ergebnis ab. Vor der Beauftragung erhalten Sie ein Angebot, das Umsetzung, optionale Betreuung und externe Kosten getrennt ausweist.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Vorhaben schildern</span>
@@ -54,9 +54,9 @@ function Index() {
                     <h2 id="content-pricing-pricing-customer-1-0-title">Drei Kostenarten, klar getrennt</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Entwicklung: Konzept, Texte, Gestaltung und Technik für das vereinbarte Ergebnis – einmalig.</p>
-                    <p>Betreuung danach: Pflege und Weiterentwicklung, wenn Sie sie wünschen.</p>
-                    <p>Externe Kosten: Hosting, Software, KI-Nutzung und Werbebudget, offen ausgewiesen statt im Projektpreis versteckt.</p>
+                    <p><strong>Einmalige Umsetzung.</strong> Konzept, Texte, Gestaltung und Technik für das Ergebnis, das Sie beauftragen.</p>
+                    <p><strong>Betreuung nach der Übergabe.</strong> Pflege und Weiterentwicklung können Sie gesondert vereinbaren.</p>
+                    <p><strong>Externe und verbrauchsabhängige Kosten.</strong> Hosting, Software, KI-Nutzung und Werbebudget werden separat ausgewiesen.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -71,6 +71,7 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Sind Budget oder Zeit begrenzt, legen wir gemeinsam fest, welches Ergebnis Sie zuerst brauchen. Daraus wird ein abgegrenzter Einstieg; alles Weitere steht als Option daneben.</p>
                     <p>Sie entscheiden auf Grundlage des Angebots. Zusätzliche Arbeit stimmen wir mit Ihnen ab, bevor sie entsteht.</p>
+                    <p>Suite und API sind davon getrennte Produkte. Die Suite weist KI-Nutzung mit einem eigenen Budget aus; die API nutzt Prepaid-Guthaben. Die Produkttarife stehen noch zur Freigabe. Einzelheiten finden Sie auf den <a href="/produkte/nex2fly">Suite-</a> und <a href="/produkte/api">API-Seiten</a>.</p>
                   </div>
                 </section>
               </div>

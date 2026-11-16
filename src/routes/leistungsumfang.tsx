@@ -31,7 +31,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Leistungen</span>
                     <h1 id="page-title-scope">Drei Pakete. Ein klarer Umfang.</h1>
-                    <p className={"identity-body"}>Markenstart, KI im Betrieb oder Wachstum: Aus Ihrem Ziel wird ein Auftrag mit benannten Ergebnissen, wählbaren Optionen und Kosten, die Sie vor dem Start kennen.</p>
+                    <p className={"identity-body"}>Markenstart, KI im Betrieb und Wachstum sind drei Einstiege in ein Agenturprojekt. Welches Ergebnis entsteht, welche Leistungen dazugehören und was es kostet, wird für Ihren Auftrag vereinbart.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Vorhaben schildern</span>
@@ -60,6 +60,7 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Markenstart baut Ihren Marken- und Webauftritt. KI im Betrieb entlastet einen ausgewählten Ablauf. Wachstum verbindet Kampagne und Zielseite.</p>
                     <p>Im Gespräch klären wir, welcher Einstieg zu Ihrer Lage passt und was schon vorhanden ist. Das Angebot nennt Ergebnisse, Ihre Mitwirkung, den Zeitrahmen und die Kosten, bevor Sie entscheiden.</p>
+                    <p>Sie möchten KI selbst nutzen? Die <a href="/produkte/nex2fly">Suite</a> und die <a href="/produkte/api">API</a> sind eigene Produkte, keine dieser Agenturpakete.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>

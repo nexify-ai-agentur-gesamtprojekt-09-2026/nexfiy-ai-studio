@@ -40,7 +40,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
       </div>
       <div className="oracle-body">
         <section className="oracle-layout" aria-label="Was planen Sie?">
-          <Conversation className="oracle-conversation" initial="instant" resize="instant" aria-label="Produktberatung" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
+          <Conversation className="oracle-conversation" initial={false} resize="instant" aria-label="Produktberatung" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
           <ConversationContent className="oracle-scroll">
             {messages.length === 0 && <div className="oracle-intro">
               <div className="oracle-host">
@@ -65,8 +65,8 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
             <div className="orientation-history" aria-busy={busy}>
               {messages.map((message, index) => <Message from={message.role} className="oracle-message" data-role={message.role} key={index}>
                 <MessageContent className="oracle-message-content">
-                <span className="oracle-message-author">{message.role === "user" ? "Sie" : "AIFly ORACLE · KI-Beratung"}</span>
-                {message.role === "assistant" ? <MessageResponse>{message.content}</MessageResponse> : <p>{message.content}</p>}
+                <span className="oracle-message-author">{message.role === "assistant" && <img src="/site-assets/9176c58a16ff634a.png" alt="" width="24" height="24" aria-hidden="true" />}<span>{message.role === "user" ? "Sie" : "AIFly ORACLE"}</span></span>
+                {message.role === "assistant" ? <MessageResponse className="oracle-response" mode="static" isAnimating={false} parseIncompleteMarkdown={false} plugins={{}} controls={false} skipHtml allowedElements={["p", "strong", "em", "ul", "ol", "li", "h3", "h4", "blockquote", "br"]} unwrapDisallowed>{message.content}</MessageResponse> : <p className="oracle-user-text">{message.content}</p>}
                 {message.links && <nav className="oracle-entry-links" aria-label="Passender Einstieg">{message.links.map((link) => <Button variant="outline" asChild key={link.path}><a href={link.path}>{link.label}<ArrowRight aria-hidden="true" /></a></Button>)}</nav>}
                 </MessageContent>
               </Message>)}

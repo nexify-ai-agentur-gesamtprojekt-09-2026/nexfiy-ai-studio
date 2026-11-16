@@ -40,3 +40,4 @@ use the editor.
 - ORACLE product advice uses a bounded public catalog in `oracle-products.ts`, a server-only AI Gateway call in `oracle.functions.ts`, and isolated state in `use-oracle-advice.ts`; never connect the public adviser to account data or MCP, and derive links from the catalog rather than model URLs.
 - NeXify page/chat resizing uses `PageSplit` and the existing resizable-panel primitives, with viewport bounds in `page-split.ts`; library-managed sizing avoids rerendering page content while dragging.
 - ORACLE retains the existing single transient page conversation and uses AI Elements for messages, scrolling and composing; short validated advice is delivered atomically via RPC rather than partially exposing unvalidated product selections.
+- ORACLE formats replies through a static, restricted MessageResponse with semantic typography; model HTML, images and inline destinations are disabled so product links remain catalog-owned.
