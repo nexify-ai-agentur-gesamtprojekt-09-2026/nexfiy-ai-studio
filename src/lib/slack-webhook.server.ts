@@ -19,11 +19,16 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
   if (transport === "events" && payload["type"] === "url_verification" && typeof payload["challenge"] === "string")
     return Response.json({ challenge: payload["challenge"] });
   if (request.headers.has("x-slack-retry-num")) return new Response(null, { status: 200 });
-  const secret = process.env["SLACK_ORACLE_SIGNING_SECRET"];
-  if (!secret) return new Response(null, { status: 200 });
-  if (!(await verifySlackSignature(secret, request.headers.get("x-slack-request-timestamp"), request.headers.get("x-slack-signature"), raw)))
-    return new Response("Unauthorized", { status: 401 });
-  if (payload["api_app_id"] !== SLACK_WORKSPACE.oracleApp) return new Response("Wrong app", { status: 403 });
+  // Jedes Signaturgeheimnis gehört genau einer App: die verwaltete Betriebsanbindung (teamgebunden) oder die bestehende ORACLE-App.
+  const operationsSecret = process.env[`SLACK_SIGNING_SECRET_${SLACK_WORKSPACE.team}`];
+  const oracleSecret = process.env["SLACK_ORACLE_SIGNING_SECRET"];
+  if (!operationsSecret && !oracleSecret) return new Response(null, { status: 200 });
+  const timestamp = request.headers.get("x-slack-request-timestamp");
+  const signature = request.headers.get("x-slack-signature");
+  const viaOperations = Boolean(operationsSecret) && await verifySlackSignature(operationsSecret!, timestamp, signature, raw);
+  const viaOracle = !viaOperations && Boolean(oracleSecret) && await verifySlackSignature(oracleSecret!, timestamp, signature, raw);
+  if (!viaOperations && !viaOracle) return new Response("Unauthorized", { status: 401 });
+  if (viaOracle && payload["api_app_id"] !== SLACK_WORKSPACE.oracleApp) return new Response("Wrong app", { status: 403 });
   let candidate: unknown;
   if (transport === "events") {
     const event = payload["event"] as Record<string, unknown> | undefined;

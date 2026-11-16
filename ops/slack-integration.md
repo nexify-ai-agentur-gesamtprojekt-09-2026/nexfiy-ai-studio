@@ -99,3 +99,9 @@ Rückweg ohne Löschen:
 3. Geforderte App-Ereignisse/Scopes im tatsächlichen Slack-Freigabedialog bestätigen.
 4. ORACLE liefert ACK, führendes System, Writer/Lease und konkrete Rückmeldeschemata. Erst danach synthetischer vollständiger Roundtrip und danach reale Betriebsabläufe.
 Kostenbetrag für neue Leistungen: nicht freigegeben. Kein neues Paket, Abo, zusätzlicher Modellaufruf oder kostenpflichtiger Agent eingerichtet.
+## Verwaltete Slack-App „NeXify Betriebsanbindung“ (16.11.2026, 11:45 UTC, IST)
+- Installiert im Team T0AR7LG3V7U mit vier Rechten (chat:write, app_mentions:read, im:history, im:write) und den Ereignissen app_mention und message.im. Es sind keine Kosten angefallen.
+- Das Signaturgeheimnis liegt als Projektgeheimnis `SLACK_SIGNING_SECRET_T0AR7LG3V7U` vor. Der Webhook prüft es zusätzlich zum ORACLE-Geheimnis; die ORACLE-App bleibt an ihre App-ID gebunden.
+- Live um 11:49 UTC: `nexifyai.de/api/public/slack/events` beantwortet die Challenge, unsignierte Anfragen erhalten 401.
+- OFFEN: Slack liefert an `nexfiy-ai-studio.lovable.app/...`. Diese Adresse antwortet mit 307 auf nexifyai.de, und Slack folgt keinen Weiterleitungen. Die Lovable-Domain muss für `/api/public/slack/*` ohne Weiterleitung erreichbar sein.
+- OFFEN: Der Name des Bot-Schlüssels wurde nicht zurückgemeldet. Antworten laufen weiter über die bestehende Verbindung `SLACK_API_KEY`.
