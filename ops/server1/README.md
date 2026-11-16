@@ -39,3 +39,6 @@ Aus dem Projekt: `scripts/teileklar_cutout.py` und dieses Verzeichnis auf den Se
 - Freistellungsprobelauf 09:41:34 UTC: 13 offene, bereits bewusst ausgelassene Bilder; 0 neue Bearbeitungen, 0 Uploads, 0 Fehler. Daher keine behauptete Upload-Abnahme.
 - BigBuy: gesuchter Variablenfehler in den untersuchten Importprogrammen nicht reproduzierbar. Vorhandene Konfiguration kennt `BIGBUY_API_KEY`; dokumentierter 401 vom 09.11. ist HISTORIE, aktuelle Gültigkeit OFFEN. Pausierter alter Bestandslauf unverändert, keine Aktivierung, keine Bestellung.
 - Ein neuer Server-Schlüssel, zusätzliche Agentenschleifen oder kostenpflichtige Verpflichtungen wurden nicht eingerichtet. Betriebskosten werden nicht aus Exit-Codes abgeleitet.
+
+## Zugangsprüfung 16.11., 10:13 UTC
+Aktuelle BigBuy-Gültigkeit bleibt OFFEN: strikter SSH-Verbindungsversuch brach vor Anmeldung wegen fehlendem Server-Vertrauensnachweis ab, kein Import oder authentifizierter BigBuy-Aufruf. Beide VPS werden im Hosting als laufend gemeldet; das ersetzt keinen Zugangsbeweis. Der überarbeitete, nicht ausgeführte SSH-Stilllegungsplan und die offenen Freigaben stehen in `access-review-2026-11-16.md`. Frühere Anweisungen zum Auftrennen zusammengeklebter Schlüsselzeilen sind nicht ungeprüft ausführbar, weil sie unwirksame Schlüssel erstmals aktivieren könnten. Kein Schlüssel wurde gesperrt, kopiert oder gelöscht.
