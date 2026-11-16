@@ -1,4 +1,12 @@
 # Roadmap
+## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
+- [x] Ausgangsrechte lesend bestätigt: anon ohne Tabellenrechte; authenticated SELECT unter Admin-RLS, kein INSERT/UPDATE/DELETE. Bestehendes SELECT bleibt erhalten; keine Rechteausweitung
+- [ ] Plan und Trade-off der eigenen Datenbank-Ratenbegrenzung bestätigen; kein Standardlimit der Plattform vorhanden
+- [ ] Additive servergeschützte Raten-/Dublettensperre und Einwilligungsnachweis umsetzen; keine Klartext-IP, keine doppelten Slack-Meldungen
+- [ ] Exakte rollierende 7-Tage-Zahlen für Kontakt und getrennte TEILEKLAR-Anfragen im vorhandenen Admin-Arbeitsplatz
+- [ ] Regel-, Parallelitäts-, Rechte- und Browserprüfungen sowie automatische Typ-/Buildsignale dokumentieren; abnahmebereit ja/nein berichten
+- [ ] Keine Veröffentlichung; UPDATE-Recht, Chat-Modell und Datenschutzinhalt unverändert halten
+
 ## NX-MCP-01 · Verbindung über nexifyai.de (16.11., 13:10 UTC)
 - [x] Lesende Konfigurationsprüfung: OAuth und dynamische Registrierung aktiv, Zustimmungsadresse /.lovable/oauth/consent, Site URL nexifyai.de; keine Einstellungsänderung nötig (13:11 UTC)
 - [x] Vier vorhandene Lese-Werkzeuge/SDK-Seiten bestätigt; Rückadresse lag tatsächlich oben in redirect_uri statt client.redirect_uri. Anzeige, konkrete Scopes, angemeldetes Konto, Ereignisfehler und Signup-Rückweg korrigiert; keine Rollen-/Konfigurationsänderung
