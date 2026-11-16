@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, type ErrorComponentProps } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { CatalogBrowser } from "@/components/catalog/CatalogBrowser";
@@ -65,7 +65,7 @@ function Index() {
   </NexifyShell>;
 }
 
-function CatalogError({ error, reset }: { error: Error; reset: () => void }) {
+function CatalogError({ error, reset }: ErrorComponentProps) {
   return <NexifyShell brand="teileklar">
     <div className={"home-concept page-concept tk-shop"}>
       <Hero />
