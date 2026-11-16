@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { contactDraftPath } from "@/lib/site-navigation";
+import { CopyButton } from "@/components/system/CopyButton";
+import {
+  CONTACT_FORM_ANCHOR,
+  CONTACT_FORM_PATH,
+  writeContactHandoff,
+} from "@/lib/contact-handoff";
 
 /** Public topic navigation and an explicit contact handoff, not a parts-matching AI. */
 export function TeileklarHelp({
@@ -14,7 +20,9 @@ export function TeileklarHelp({
   mobile: boolean;
   onClose: () => void;
 }) {
+  const navigate = useNavigate();
   const [draft, setDraft] = useState("");
+  const [handoffFailed, setHandoffFailed] = useState(false);
   return (
     <aside
       id="aifly-panel"
@@ -82,7 +90,17 @@ export function TeileklarHelp({
             className="tk-help-form"
             onSubmit={(event) => {
               event.preventDefault();
-              if (draft.trim()) window.location.assign(contactDraftPath(draft));
+              if (!draft.trim()) return;
+              // Free text stays out of the address bar; the contact page reads it once from this tab.
+              try {
+                writeContactHandoff(window.sessionStorage, "teileklar-help", draft);
+              } catch (error) {
+                console.error("teileklar help handoff could not be stored", error);
+                setHandoffFailed(true);
+                return;
+              }
+              setHandoffFailed(false);
+              void navigate({ to: CONTACT_FORM_PATH, hash: CONTACT_FORM_ANCHOR });
             }}
           >
             <label htmlFor="orientation-message">Ihr Fahrzeug-/Teile-Anliegen</label>
@@ -99,6 +117,16 @@ export function TeileklarHelp({
               Anfrage vorbereiten
               <ArrowRight aria-hidden="true" />
             </Button>
+            {handoffFailed ? (
+              <div className="tk-help-failure" role="alert">
+                <p>
+                  Ihr Browser lässt die Übergabe an das Formular hier nicht zu. Kopieren Sie den Text
+                  und fügen Sie ihn im Kontaktformular ein.
+                </p>
+                <CopyButton text={draft.trim()} label="Text kopieren" />
+                <a href={`${CONTACT_FORM_PATH}#${CONTACT_FORM_ANCHOR}`}>Zum Kontaktformular</a>
+              </div>
+            ) : null}
           </form>
           <p className="oracle-note">
             Keine automatische Teileprüfung. Keine Passwörter oder Zahlungsdaten eingeben.{" "}
