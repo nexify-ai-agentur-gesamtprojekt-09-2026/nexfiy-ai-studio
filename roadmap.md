@@ -206,3 +206,5 @@
 - [ ] MCP lokal in der Desktop-App: Einrichtung durch Pascal (Einstellungen → Connectors → Local MCP servers); hier Verbindung zu nexifyai.de/mcp per Karte
 - [ ] Nächtliche Aufträge: Zeitlimit 5 s beim Aufruf – prüfen, ob Schritte trotzdem durchlaufen
 - [ ] nexifyai.cloud (nur Hauptadresse + www) auf nexifyai.de weiterleiten, Subdomains wie brain.nexifyai.cloud unverändert
+- [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
+- [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
