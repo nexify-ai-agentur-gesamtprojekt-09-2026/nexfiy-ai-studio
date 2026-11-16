@@ -215,4 +215,7 @@
 - [x] Produktdarstellung: 16 Seiten mit Anthropic-Prüfregeln (knowledge-work-plugins e91a134) durch DeepSeek bewertet, 20 geprüfte Textverbesserungen in 26 Dateien übernommen, Bericht unter Dateien/produktdarstellung (16.11.)
 - [ ] Gesprochene Filmtexte enthalten Du-Form und unbelegte Superlative („Effizienter geht es wirklich nicht“, „höchste Qualität“), auf TEILEKLAR eine nicht belegte Kundenstimme – Untertitel folgen dem Ton, Änderung nur durch neue Aufnahme oder andere Filmzuordnung (Entscheidung Pascal)
 - [ ] Produktnamen vereinheitlichen? („NeX AIFly Suite“, „NeX Agentic AIFly“, „NeX“, „FACTORY“ ohne Erklärung) – Markenentscheidung Pascal
-- [ ] Arbeitsmodus laut „Autonomous Finisher Protocol“ (16.11.): Lücken selbst finden und schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten)
+Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbst finden, schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten).
+
+- [x] Veröffentlicht 16.11. 08:35 UTC: Produkttexte, Shop (Sortierung, Varianten, freigestellte Fotos), Sitemap; live geprüft 37 Seiten × 1280/390 px ohne Fehler, Überlauf oder fehlende Alternativtexte
+- [x] DeepSeek deepseek-v4.1-flash-1017 über 9router 16.11.: 16 Seitenbewertungen als JSON, Modellkennung jedes Mal bestätigt; 3 Läufe brauchten mehr Antwortspielraum
