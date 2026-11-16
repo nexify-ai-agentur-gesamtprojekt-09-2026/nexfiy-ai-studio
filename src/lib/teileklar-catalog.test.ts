@@ -11,7 +11,7 @@ const feedItem = {
 describe("TEILEKLAR-Katalog", () => {
   it("bildet einen Feed-Artikel vollständig ab", () => {
     const row = mapFeedItem(feedItem);
-    expect(row).toMatchObject({ id: "V0103601", brand: "InnovaGoods", category: "Autozubehör", price_value: 7.06, ean: "8435527823900", oe_number: "", stock: 0 });
+    expect(row).toMatchObject({ id: "V0103601", brand: "InnovaGoods", category: "Karosserie & Sicht", source_category: "Autozubehör", price_value: 7.06, ean: "8435527823900", oe_number: "", stock: 0 });
     expect(row?.image_src).toBe("https://cdnbigbuy.com/images/V0103601_000_MKT5.jpg");
     expect(row?.specs).toEqual([{ label: "Gewicht", value: "0.46 kg" }]);
   });
