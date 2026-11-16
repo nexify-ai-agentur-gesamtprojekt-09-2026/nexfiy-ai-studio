@@ -32,7 +32,7 @@ export function PageSplit({ page, chat, open, mobile }: { page: ReactNode; chat:
   };
   if (mobile) return <>{page}{chat}</>;
   return <ResizablePanelGroup className="site-page-split" orientation="horizontal">
-    <ResizablePanel id="website-pane" minSize={440} className="site-page-pane">{page}</ResizablePanel>
+    <ResizablePanel id="website-pane" defaultSize={width - bounds.preferred - 8} minSize={440} className="site-page-pane">{page}</ResizablePanel>
     <ResizableHandle className={open ? "site-page-divider" : "site-page-divider is-hidden"} disabled={!open} aria-label="Chatbreite anpassen" title="Chatbreite anpassen" disableDoubleClick onDoubleClick={reset} withHandle />
     <ResizablePanel id="oracle-pane" panelRef={panelRef} collapsible collapsedSize={0} defaultSize={open ? bounds.preferred : 0} minSize={bounds.min} maxSize={bounds.max} className="site-oracle-pane" onResize={(size, _id, previous) => {
       if (previous && !adjusting.current) preference.current = size.asPercentage / 100;

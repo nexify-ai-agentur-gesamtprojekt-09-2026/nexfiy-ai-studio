@@ -38,8 +38,8 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
         {messages.length > 0 && <Button variant="ghost" size="icon" aria-label="Neue Beratung" title="Neue Beratung" disabled={busy} onClick={reset}><RotateCcw aria-hidden="true" /></Button>}
         <Button variant="ghost" size="icon" aria-label="Beratung einklappen" title="Beratung einklappen" type="button" className={"nexify-control icon-button panel-minimize"} data-variant="icon" onClick={onClose}><ChevronDown aria-hidden="true" /></Button>
       </div>
-      <div className={"sdk-orientation-view"}>
-        <section className={"public-orientation"} aria-label="Was planen Sie?">
+      <div className="oracle-body">
+        <section className="oracle-layout" aria-label="Was planen Sie?">
           <Conversation className="oracle-conversation" initial="instant" resize="instant" aria-label="Produktberatung" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
           <ConversationContent className="oracle-scroll">
             {messages.length === 0 && <div className="oracle-intro">
@@ -51,12 +51,12 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
               <h3>Suite oder API?</h3>
               <p>Was möchten Sie umsetzen? Ich ordne Ihr Vorhaben anhand unserer öffentlichen Produktinformationen ein und zeige Ihnen den passenden Einstieg.</p>
             </div>}
-            {messages.length === 0 && <div className="orientation-starters" role="group" aria-label="Vorhaben auswählen">
+            {messages.length === 0 && <div className="oracle-starters" role="group" aria-label="Vorhaben auswählen">
               {[
                 { title: "KI im Arbeitsalltag", detail: "Dokumente, Aufgaben und Wissen bündeln.", prompt: "Ich möchte mit meinem Team Dokumente bearbeiten, Aufgaben organisieren und unser Projektwissen mit KI nutzen. Passt die Suite?" },
                 { title: "KI in eigener Software", detail: "Eine bestehende Anwendung erweitern.", prompt: "Ich entwickle eine eigene Anwendung und möchte KI-Funktionen über eine Schnittstelle integrieren. Passt die API?" },
                 { title: "Den passenden Weg finden", detail: "Suite und API für mein Vorhaben vergleichen.", prompt: "Ich möchte KI selbst einsetzen. Worin unterscheiden sich Suite und API und was muss ich für meine Entscheidung klären?" },
-              ].map((starter, index) => <Button key={starter.title} variant="ghost" className="orientation-starter" disabled={busy} onClick={() => void send(starter.prompt)}>
+              ].map((starter, index) => <Button key={starter.title} variant="ghost" className="oracle-starter" disabled={busy} onClick={() => void send(starter.prompt)}>
                 <span className="orientation-starter-index" aria-hidden="true">0{index + 1}</span>
                 <span className="orientation-starter-copy"><strong>{starter.title}</strong><small>{starter.detail}</small></span>
                 <ArrowRight aria-hidden="true" />
@@ -84,7 +84,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
               <PromptInputSubmit className="oracle-submit" status={busy ? "submitted" : "ready"} disabled={busy || !draft.trim()} aria-label="Nachricht senden" />
             </PromptInputFooter>
           </PromptInput>
-          <p className={"connection-note"}>KI-Beratung · Angaben bitte auf der Produktseite prüfen. Keine vertraulichen Daten eingeben. <a href="/datenschutz">Datenschutz</a></p>
+          <p className="oracle-note">KI-Beratung · Angaben bitte auf der Produktseite prüfen. Keine vertraulichen Daten eingeben. <a href="/datenschutz">Datenschutz</a></p>
         </section>
       </div>
     </aside>
