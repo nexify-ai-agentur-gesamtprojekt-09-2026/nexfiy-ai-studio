@@ -36,7 +36,7 @@ function Index() {
             <p className={"identity-body"}>Der Modellname allein reicht nicht. Mit Schlüsselnummern, Baujahr und Motor finden Sie heraus, worauf es bei Ihrem Teil ankommt.</p>
             <div className={"identity-links"}>
               <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/teileklar/suche">
-                <span>Teilefrage vorbereiten</span>
+                <span>Teil anfragen</span>
                 <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
               </a>
               <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/produkt">Artikelangaben vorbereiten</a>
@@ -154,7 +154,7 @@ function Index() {
         <div className={"hc-finish-next"}>
           <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
           <div className={"hc-finish-actions"}>
-            <a className={"hc-finish-primary"} href="/teileklar/suche">Teilefrage vorbereiten<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+            <a className={"hc-finish-primary"} href="/teileklar/suche">Teil anfragen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <a className={"hc-text-link"} href="/teileklar/produkt">Artikelangaben vorbereiten<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <button type="button" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
           </div>

@@ -38,7 +38,7 @@ function Index() {
                 <span>Passung prüfen</span>
                 <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
               </a>
-              <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/suche">Teilefrage vorbereiten</a>
+              <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/suche">Teil anfragen</a>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ function Index() {
           <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
           <div className={"hc-finish-actions"}>
             <a className={"hc-finish-primary"} href="/teileklar/fahrzeug-und-passung">Passung prüfen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-            <a className={"hc-text-link"} href="/teileklar/suche">Teilefrage vorbereiten<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+            <a className={"hc-text-link"} href="/teileklar/suche">Teil anfragen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <button type="button" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
           </div>
         </div>
