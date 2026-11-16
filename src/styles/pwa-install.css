@@ -1,6 +1,6 @@
 /* The final footer band follows the same inner grid as the legal links above. */
 :root:root #atelier.site-shared .pwa-install-band { width: 100%; max-width: var(--layout-home-wide-max); box-sizing: border-box; padding: 0 var(--layout-page-padding) calc(80px + env(safe-area-inset-bottom)); margin-inline: auto; color: var(--foreground); font-family: var(--font-brand-text); }
-:root:root #atelier.site-shared .pwa-install-bar { display: grid; grid-template-columns: 56px minmax(0,1fr) auto; align-items: center; gap: 24px; padding: 24px; background: var(--glass-frosted); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); backdrop-filter: blur(24px) saturate(1.2); }
+:root:root #atelier.site-shared .pwa-install-bar { display: grid; grid-template-columns: 56px minmax(0,1fr) auto; align-items: center; gap: 24px; padding: 24px; background: var(--glass-content-fill); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); backdrop-filter: var(--glass-content-filter); }
 :root:root #atelier.site-shared .pwa-install-mark { width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 8px 6px var(--figure-shadow)) drop-shadow(0 -1px 1px var(--figure-rim)); }
 :root:root #atelier.site-shared .pwa-install-copy { min-width: 0; }
 :root:root #atelier.site-shared .pwa-install-copy h2 { margin: 0 0 8px; font: 600 var(--type-subheading)/1.4 var(--font-brand-display); letter-spacing: 0; color: var(--foreground); overflow-wrap: anywhere; text-wrap: balance; }

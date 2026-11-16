@@ -1,4 +1,23 @@
 # Roadmap
+## Hostinger-Zugang und Engineering-Skill (16.11.)
+- [ ] Composio-/Hostinger-Verbindung auf verfügbaren sicheren Anmeldeweg prüfen; keine VPS-Betriebsänderungen
+- [ ] Hochgeladenen Engineering-Skill lesen und als geprüften, projektgebundenen Skill vorbereiten; fremde Anweisungen bleiben bis Aktivierung Daten
+
+## Shop- und Werkstattseiten (16.11.)
+- [ ] Alle TEILEKLAR-Seiten auf gemeinsame Darstellung, klare nächste Schritte und widersprüchliche Waren-/Werkstattzusagen prüfen
+- [ ] Shop, Werkstatt, Fahrzeug/Passung und begleitende Seiten im bestehenden Design schärfen; fehlende reale Anbindungen nicht simulieren
+- [ ] Alle TEILEKLAR-Seiten am Desktop/Handy sowie Suche, Anfrageübergabe und Werkzeugwege prüfen
+
+## Formulare technisch und visuell (16.11.)
+- [ ] Fahrzeug-/Passungsseite und übrige echte Formulare auf Eingabe, Validierung, Zustände, Barrierefreiheit und Darstellung prüfen
+- [ ] Gemeinsame Formularqualität verbessern, ohne erfundene Passung, Zustellung oder Commerce-Funktionen
+- [ ] Reale Formularwege am Desktop/Handy und vorhandene Tests prüfen; externe Zustellung/Passungsfreigabe bleiben ausdrücklich getrennt
+
+## Glasflächen nach Apple-Design-Prüfung (16.11.)
+- [ ] Kontrast, Durchsicht und Lichtkanten bestehender Flächen in heller/dunkler Ansicht messen und ausschließlich Materialwerte verfeinern
+- [ ] Unveränderte Header-Innenabstände, Seiten-/Chat-Geometrie und Footer-Ausrichtung vor/nach Änderung vergleichen
+- [ ] Menüs, Chat-Eingabe und Installationshinweise mit erhöhtem Kontrast, reduzierter Transparenz/Bewegung und vorhandenen Tests prüfen
+
 ## App-Installation unter dem Footer (16.11.)
 - [x] Gemeinsame Glas-Installationsleiste mit Browser-Installation und Anleitungen für iPhone/iPad, Android und Computer ergänzt; exakt mit Rechtslinks ausgerichtet (beide x=59,28px bei 1705px)
 - [x] Gemäß Geräteauswahl nur Installation mit Internet umgesetzt; kein Offline-Worker und keine Zwischenspeicherung hinzugefügt, Manifest und vier App-Symbole erreichbar

@@ -21,7 +21,7 @@
 :root:root #atelier .tk-help-form textarea { min-height: 96px; font-size: 16px; line-height: 1.5; background: var(--secondary); color: var(--foreground); }
 :root:root #atelier .tk-commerce-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 :root:root #atelier .tk-commerce-header :is(a,button,input) { min-height: 44px; }
-:root:root #atelier .tk-commerce-header { background: var(--glass-fill); color: var(--foreground); backdrop-filter: blur(20px); }
+:root:root #atelier .tk-commerce-header { background: var(--glass-frosted); color: var(--foreground); backdrop-filter: var(--glass-navigation-filter); }
 :root:root #atelier .tk-commerce-header { position: relative; z-index: 8; padding: 16px 24px; border-bottom: 1px solid var(--border); }
 :root:root #atelier .tk-service-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 12px; color: var(--muted-foreground); }
 :root:root #atelier .tk-service-strip a { display: inline-flex; align-items: center; }
@@ -77,17 +77,17 @@
 }
 :root:root #atelier .website { background-image: var(--stage-light); }
 :root:root #atelier :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 8px 8px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.06); }
-:root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.35); }
+:root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: var(--glass-control-filter); }
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .header-cta,.reopen-chat):hover { background: var(--glass-fill-hover); }
 :root:root #atelier .site-header::before { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.3); }
 :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-block: 56px; border-bottom: 1px solid var(--border); }
-:root:root #atelier .home-concept .pc-module { background: var(--glass-frosted); box-shadow: var(--glass-lens-shadow); backdrop-filter: blur(20px); margin-block: 24px; padding: 20px; border-radius: 8px; }
+:root:root #atelier .home-concept .pc-module { background: var(--glass-content-fill); box-shadow: var(--glass-lens-shadow); backdrop-filter: var(--glass-content-filter); margin-block: 24px; padding: 20px; border-radius: 8px; }
 /* Section borders were painting a full-width line behind the guide. Keep the
    page continuous; data rows and actual framed controls retain their borders. */
 :root:root #atelier.site-shared .home-concept .pc-section { border-block: 0; }
 :root:root #atelier.site-shared .home-concept .product-overview { border-block: 0; }
 :root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-top: 24px; }
-:root:root #atelier.site-shared .home-concept :is(.pc-guide > .hc-service-detail,.hc-service-list > .hc-service-detail,.pc-module) { background: var(--glass-frosted); box-shadow: var(--elevation-glass-lift); backdrop-filter: blur(24px) saturate(1.2); border: 1px solid var(--border); }
+:root:root #atelier.site-shared .home-concept :is(.pc-guide > .hc-service-detail,.hc-service-list > .hc-service-detail,.pc-module) { background: var(--glass-content-fill); box-shadow: var(--elevation-glass-lift); backdrop-filter: var(--glass-content-filter); border: 1px solid var(--border); }
 :root:root #atelier.site-shared .oracle-advice .oracle-starter { box-shadow: var(--elevation-glass-lift); }
 :root:root #atelier.site-shared .oracle-advice .oracle-starter:is(:hover,:focus-visible) { box-shadow: var(--elevation-glass-hover); }
 :root:root #atelier.site-shared :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 10px 8px var(--figure-shadow)) drop-shadow(0 3px 2px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.1); }
@@ -125,12 +125,12 @@
 }
 :root:root #atelier .site-header::before {
   inset: 12px; border-radius: 999px; transform: none; background: var(--glass-clear);
-  backdrop-filter: blur(24px) saturate(1.4); box-shadow: var(--glass-lens-shadow); border: 1px solid var(--border-strong);
+  backdrop-filter: var(--glass-navigation-filter); box-shadow: var(--glass-lens-shadow); border: 1px solid var(--border-strong);
   transition: background 240ms var(--motion-ease-brand), box-shadow 240ms var(--motion-ease-brand);
 }
 :root:root #atelier[data-scrolled="true"] .site-header::before {
   inset: 12px; transform: none; background: var(--glass-frosted);
-  backdrop-filter: blur(28px) saturate(1.35); box-shadow: var(--glass-lens-shadow);
+  backdrop-filter: var(--glass-scroll-filter); box-shadow: var(--glass-lens-shadow);
 }
 :root:root #atelier[data-scrolled="true"] .site-header { padding: 20px 20px 20px 28px; }
 :root:root #atelier .site-header > * { transform: none; }
@@ -141,8 +141,11 @@
 :root:root #atelier .site-header .theme-switch { width: 44px; min-width: 44px; padding: 0; }
 :root:root #atelier .site-header .theme-switch svg { width: 18px; height: 18px; }
 :root:root #atelier .site-header .main-navigation { gap: 20px; margin-left: auto; font-size: 13px; }
-:root:root #atelier .site-header :is(.product-navigation-menu,.mobile-navigation-panel) { background: var(--glass-frosted); backdrop-filter: blur(32px) saturate(1.25); box-shadow: var(--glass-lens-shadow); border-color: var(--border-strong); }
-:root:root #atelier .home-concept .hc-anchors { background: var(--glass-clear); backdrop-filter: blur(24px) saturate(1.25); box-shadow: var(--glass-lens-shadow); }
+:root:root #atelier .site-header :is(.product-navigation-menu,.mobile-navigation-panel) { background: var(--glass-menu-fill); backdrop-filter: var(--glass-menu-filter); box-shadow: var(--glass-lens-shadow); border-color: var(--border-strong); }
+:root:root #atelier .home-concept .hc-anchors { background: var(--glass-frosted); backdrop-filter: var(--glass-navigation-filter); box-shadow: var(--glass-lens-shadow); }
+/* Der äußere Header übernimmt die Durchsicht; seine Bedienelemente brauchen
+   keinen zweiten Unschärfefilter über derselben Hintergrundfläche. */
+:root:root #atelier .site-header :is(.theme-switch,.mobile-navigation > summary,.language-switch,.header-cta) { backdrop-filter: none; }
 :root:root #atelier .site-header :is(a, summary, button, select) {
   letter-spacing: 0;
   transition: color 180ms var(--motion-ease-brand), background-color 180ms var(--motion-ease-brand), box-shadow 180ms var(--motion-ease-brand);
@@ -175,7 +178,7 @@
   :root:root #atelier.site-shared .site-header .mobile-navigation { grid-column: 2; grid-row: 1; margin: 0; }
   :root:root #atelier.site-shared .site-header .mobile-navigation > summary { width: 44px; min-width: 44px; inline-size: 44px; min-inline-size: 44px; height: 44px; min-height: 44px; min-block-size: 44px; padding: 0; }
   :root:root #atelier.site-shared .site-header .header-cta { display: none; }
-  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--glass-header-compact); backdrop-filter: blur(24px) saturate(1.25); }
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--glass-header-compact); backdrop-filter: var(--glass-navigation-filter); }
   :root:root #atelier.site-shared .site-header .mobile-navigation[open] .mobile-navigation-panel { inset: calc(100% - 4px) 12px auto; margin: 0; padding: 20px; gap: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); max-height: calc(100dvh - 104px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow-y: auto; }
   :root:root #atelier.site-shared .site-header .mobile-navigation-panel :is(.megamenu-group,.mobile-primary-links) { min-width: 0; }
   :root:root #atelier.site-shared .site-header .mobile-navigation-panel a { display: grid; grid-template-columns: minmax(0,1fr) auto; min-height: 44px; gap: 12px; white-space: normal; overflow-wrap: anywhere; font-size: 15px; line-height: 1.5; }
