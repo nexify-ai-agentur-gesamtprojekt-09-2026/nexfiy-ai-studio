@@ -22,7 +22,7 @@ export function useImportedMobile() {
 /** Imported decorative loops must not bypass the hero-only playback policy. */
 export function useLoopingVideos() {
   useEffect(() => {
-    const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([autoplay]):not([controls])"))
+    const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([controls])"))
       .filter((video) => video.muted && !video.closest("[data-site-import-carousel-store]"))
       .slice(0, 32);
     loopingVideos.forEach((video) => {
@@ -332,7 +332,9 @@ export function useAtelierFilms() {
           video.pause();
         } else if (entry.isIntersecting && autoPaused.has(video)) {
           autoPaused.delete(video);
-          void video.play().catch(() => {});
+          if (mayAutoplayFilm(Boolean(video.closest(".identity-hero")), matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+            void video.play().catch(() => {});
+          }
         }
       }
     });

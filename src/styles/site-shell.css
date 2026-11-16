@@ -1,9 +1,11 @@
 /* Shared page shell (NeXify and TEILEKLAR): phone sizing of the chat panel. Previously repeated per page
    as generated [data-site-import-responsive] rules; one semantic copy now serves every page. */
 :root:root #atelier.site-nexify { display: block; }
-:root:root #atelier .site-page-split { height: auto; min-height: 100dvh; align-items: stretch; overflow: visible; }
-:root:root #atelier :is(.site-page-pane,.site-oracle-pane) { overflow: visible; min-width: 0; }
+:root:root #atelier .site-page-split { height: auto; min-height: 100dvh; align-items: stretch; overflow: visible !important; }
+:root:root #atelier :is(.site-page-pane,.site-oracle-pane) { overflow: visible !important; min-width: 0; }
 :root:root #atelier .site-oracle-pane { position: relative; }
+:root:root #atelier.is-closed .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
+:root:root #atelier.is-closed .site-page-pane { flex-grow: 1 !important; }
 :root:root #atelier .site-page-divider { width: 8px; background: transparent; flex-shrink: 0; z-index: 7; }
 :root:root #atelier .site-page-divider.is-hidden { display: none; }
 :root:root #atelier .site-page-divider > div { position: sticky; top: 50dvh; height: 40px; width: 4px; border: 0; background: var(--border-strong); }
@@ -28,6 +30,8 @@
   :root:root #atelier .home-concept .identity-links { flex-wrap: wrap; }
 }
 @media (max-width: 767px) {
+  :root:root #atelier .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
+  :root:root #atelier .site-page-pane { flex-grow: 1 !important; }
   :root #atelier #aifly-panel { --chat-viewport-height: 100dvh !important; }
   :root #atelier #aifly-panel .public-orientation { --ca-fuss: 0px !important; }
 }

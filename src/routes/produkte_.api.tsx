@@ -27,10 +27,10 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen</span>
                     <h1 id="page-title-api">NeXify API. KI in Ihrer Anwendung.</h1>
-                    <p className={"identity-body"}>Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab aufladen.</p>
+                    <p className={"identity-body"}>Ergänzen Sie Ihre eigene Software um KI-Funktionen. Die NeXify API verbindet Ihre Anwendung mit diesen Funktionen; die Nutzung wird über vorab aufgeladenes Guthaben abgerechnet.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
-                        <span>Vorhaben schildern</span>
+                        <span>API-Anbindung anfragen</span>
                         <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
                       </a>
                       <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/produkte/nex2fly">NeX AIFly Suite ansehen</a>
@@ -55,7 +55,7 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Welche Anwendung sendet welche Anfrage, welches Ergebnis brauchen Sie, und wer darf zugreifen? Daraus beschreiben wir die Schnittstelle mit Datenformaten und Fehlerfällen.</p>
-                    <p>Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre Verbindung eingerichtet. Den Zugang erhalten Sie im Rahmen eines Projekts, nicht über diese Seite.</p>
+                    <p>Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre Verbindung eingerichtet. Der API-Zugang wird derzeit im Rahmen eines Projekts eingerichtet; diese Seite bietet keine direkte Freischaltung.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -68,7 +68,7 @@ function Index() {
                     <h2 id="content-api-api-customer-2-1-title">Nutzung und Kosten</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf und verbrauchen es mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt, damit keine Kosten entstehen, die Sie nicht erwarten.</p>
+                    <p>Die API nutzt Prepaid-Guthaben: Sie laden es vorab auf und verbrauchen es mit Ihren Aufrufen. Ohne ausreichendes Guthaben wird keine API-Anfrage ausgeführt.</p>
                     <p>Die Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung mit Ihnen.</p>
                   </div>
                 </section>

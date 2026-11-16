@@ -62,7 +62,7 @@ function Index() {
             <h2 id="content-cookies-einstellungen-1-title">Eine Entscheidung bleibt änderbar</h2>
           </div>
           <div className={"pc-section-body"}>
-            <p>Optionale Messfunktionen benötigen Ihre Zustimmung. Über die zugehörigen Einstellungen können Sie Ihre Wahl ändern. Welche Funktionen tatsächlich verfügbar sind, zeigt der jeweilige Einstellungsbereich.</p>
+            <p>Diese Seite stellt noch keine Cookie-Einstellungen bereit. Welche optionalen Dienste eingesetzt werden und wie eine Entscheidung geändert werden kann, muss in der vollständigen, geprüften Beschreibung ergänzt werden.</p>
           </div>
         </section>
       </div>

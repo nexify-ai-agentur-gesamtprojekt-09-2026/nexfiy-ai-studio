@@ -27,7 +27,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht</span>
                     <h1 id="page-title-terms">Gute Zusammenarbeit hat klare Grundlagen.</h1>
-                    <p className={"identity-body"}>Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest. Die Vertragsunterlagen bleiben bis zur gesonderten Endprüfung Entwürfe.</p>
+                    <p className={"identity-body"}>Bei Agenturprojekten legt die bestätigte Vereinbarung fest, welche Leistungen und welche Betreuung beauftragt sind. Die Vertragsunterlagen sind noch Entwürfe und nicht abschließend geprüft.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Mit NeXify Kontakt aufnehmen</span>
@@ -63,6 +63,7 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Umsetzung, optionale NeXify Care und variabler Modellverbrauch werden getrennt vereinbart. Maßgeblich sind die freigegebenen Konditionen Ihres Angebots; Beispielpakete und Chattexte setzen keine eigenen Preise oder Garantien.</p>
+                    <p>Für eigenständige Produkte gelten die jeweils freigegebenen Produktbedingungen. Diese Übersicht legt keine zusätzlichen Suite- oder API-Tarife fest.</p>
                   </div>
                 </section>
               </div>

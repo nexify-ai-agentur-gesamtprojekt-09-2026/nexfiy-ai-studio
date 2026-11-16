@@ -27,7 +27,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht</span>
                     <h1 id="page-title-privacy">Ihre Daten. Ein klarer Zweck.</h1>
-                    <p className={"identity-body"}>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.</p>
+                    <p className={"identity-body"}>Hier finden Sie Hinweise zu Anfragen und zur ORACLE-Beratung. Die vollständige Datenschutzerklärung ist noch nicht abgeschlossen; insbesondere Angaben zu beteiligten Diensten, Rechtsgrundlagen und Aufbewahrung müssen geprüft und ergänzt werden.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Mit NeXify Kontakt aufnehmen</span>

@@ -1,5 +1,5 @@
 /** Every brand film of the site, defined once and reused by each page that shows it. */
-export type SiteFilmId = "studio" | "angebot" | "fertigung" | "teileklar";
+export type SiteFilmId = "studio" | "angebot" | "fertigung" | "teileklar" | "arbeitsbereich";
 
 export interface SiteFilmData {
   src: string;
@@ -10,6 +10,12 @@ export interface SiteFilmData {
 }
 
 export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
+  arbeitsbereich: {
+    src: "/site-assets/b82843cf77d572df.mp4",
+    poster: "/site-assets/4b45951db0b51136.webp",
+    label: "Gemeinsam am Arbeitsbereich",
+    alt: "Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie",
+  },
   studio: {
     src: "/site-assets/e27f88efd05374ec.mp4",
     poster: "/site-assets/05c51cdebbdd2aa6.webp",

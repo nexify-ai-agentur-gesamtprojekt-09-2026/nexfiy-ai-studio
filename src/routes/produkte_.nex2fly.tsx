@@ -27,13 +27,13 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen</span>
                     <h1 id="page-title-nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</h1>
-                    <p className={"identity-body"}>Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.</p>
+                    <p className={"identity-body"}>Arbeiten Sie mit KI in Ihrem eigenen Bereich: Gespräche, Aufgaben, Dokumente und Projektwissen bleiben zusammen. Den 24-Stunden-Test starten Sie nach der Aktivierung selbst – ohne Agenturauftrag.</p>
                     <div className={"identity-links"}>
-                      <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
-                        <span>Vorhaben schildern</span>
+                      <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/registrieren">
+                        <span>Konto erstellen</span>
                         <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
                       </a>
-                      <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/registrieren">Konto erstellen</a>
+                      <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/produkte/api">Mit der API vergleichen</a>
                     </div>
                   </div>
                   <div className={"identity-media"}>
@@ -207,15 +207,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen nicht bei jeder Frage von vorn an.
-
-    Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht. Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.
-
-    Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich. Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.
-
-    Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen. Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen mitarbeiten.
-
-    Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung aktiviert.</p>
+              <p>Gespräche mit KI, Aufgaben, Dokumente und Projektwissen in einem eigenen Arbeitsbereich. Sie wählen Ihre Quellen und die Personen, die mitarbeiten. Welche zusätzlichen Werkzeuge verfügbar sind, zeigt Ihr Zugang.</p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -228,7 +220,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe. Laufende Betreuung wird separat vereinbart.</p>
+              <p>Erstellen Sie ein Konto und bestätigen Sie Ihren Arbeitsbereich. Nach der Aktivierung starten Sie den 24-Stunden-Test selbst. Ein Agenturauftrag ist dafür nicht nötig.</p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -241,7 +233,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Zugang, Umfang und Verbrauch stehen in Ihrem Produktangebot; die Tarife stehen noch zur Freigabe. Individuelle Integrationsarbeit bieten wir nach dem vereinbarten Umfang an.</p>
+              <p>Die KI-Modellnutzung hat ein eigenes Budget. Die für Ihren Zugang geltenden Modelle und Kosten werden vor der Nutzung angezeigt. Die Produkttarife stehen noch zur Freigabe; individuelle Integrationsarbeit wird gesondert angeboten.</p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -267,7 +259,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist noch keine Beauftragung.</p>
+              <p><a href="/registrieren">Erstellen Sie ein Konto</a> oder vergleichen Sie die Suite mit der <a href="/produkte/api">NeXify API</a>. Für offene Produktfragen steht Ihnen ORACLE zur Seite.</p>
             </div>
           </details>
         </div>

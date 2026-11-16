@@ -5,13 +5,26 @@
 - [x] Echte Suite/API-Antworten, Folgefrage, Einstiegslink und erhaltene Eingabe bei Fehler am Handy geprüft (25 Tests bestanden)
 
 ## Anpassbare Seiten und Textkonzept (15.11.)
-- [ ] Automatisch abgestimmte Chatbreite und verschiebbare Grenze mit Maus/Tastatur ergänzen
-- [ ] Ausrichtung, Schrift und Chat-Inhalt auf schmalen/breiten Ansichten prüfen
-- [ ] Gesamtkonzept für menschliche, informative Produkt-, Angebots-, Preis- und Rechtstexte aus öffentlichen Fakten umsetzen
-- [ ] UI/UX-Skill um das Textkonzept erweitern, sofern ein aktiver Skill vorhanden ist
-- [ ] Änderungen und verbleibende Fakten-/Freigabegrenzen prüfen
-- [ ] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung abgestimmt veredeln
-- [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
+- [x] Automatisch abgestimmte Chatbreite und verschiebbare Grenze mit Maus/Tastatur ergänzt und geprüft
+- [x] Ausrichtung, Schrift und Chat-Inhalt bei 1705/1280/900/390px geprüft; echte Folgefrage und API-Einstiegslink am Handy funktionieren
+- [x] Produkt-/Angebots-/Preistextkonzept auf Kernseiten umgesetzt; Suite-FAQ von Agenturauftrag getrennt, rechtliche Entwurfsgrenzen sichtbar
+- [x] UI/UX-Skill um das Textkonzept erweitert und aktiviert
+- [x] Änderungen und verbleibende Fakten-/Freigabegrenzen geprüft; 28 Tests bestanden
+- [x] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung in gemeinsamen NeXify-Flächen veredelt
+- [x] Realistische Glaswirkung in gemeinsame NeXify-Bedienelemente integriert, reduzierte Transparenz und Fallback berücksichtigt
+- [x] Leistungsseite auf Desktop und Handy vermessen; kein horizontaler Seitenüberlauf
+- [x] Chatantworten: 16px Schrift, 26,4px Zeilenhöhe, 16px Absatzabstand; statische Formatierung und sichere Einstiegslinks geprüft
+- [x] Bisherige Umsetzungen seit Task 01 anhand Chatvorgaben und Quellen auf Abweichungen geprüft; Befunde in .lovable/frontend-audit.md festgehalten
+
+## Offene Grenzen aus der Gesamtprüfung
+- [ ] Vollständige Datenschutz-/Vertragsangaben und Produkttarife: wartet auf verifizierte Angaben/Freigabe, keine Werte erfunden
+- [ ] Eigenständiger API-Zugang: vorhandene Produktseite beschreibt Projekteinstellung; tatsächliche Selbstfreischaltung fehlt
+- [ ] Echtes Safari/iPhone und externe MCP-OAuth-Autorisierung: bisher nicht abschließend nachgewiesen
+
+## Erkannter älterer Nacharbeitsbestand (nicht als fertig bezeichnet)
+- TEILEKLAR: doppelte Rahmen, teilweise funktionslose Hilfe/Formulare, statischer Shop und unvollständige Rechner; Waren-/Zahlungsanbindung fehlt
+- Gemeinsame CTAs/Themes und seitenübergreifende Teaser: teilweise noch statisch oder nicht abschließend redigiert
+- Projektweite Lint-Prüfung: zahlreiche bestehende Formatierungs-/Regelverletzungen; aktuelle Vorschau kompiliert fehlerfrei
 
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
@@ -28,18 +41,18 @@
 
 ## Frontend-Feinschliff (Auftrag 14.11., autonome UX-Engine)
 - [x] Layout-Sprünge beim Laden (CLS 0.1–0.23 auf Unterseiten) beseitigen – jetzt ≤ 0.002 auf allen Seiten
-- [x] Seiten-Stylesheets als cachebare Dateien statt 420-KB-Text in HTML + JS (pixelgleich geprüft)
+- [x] NeXify-Seiten-Stylesheets als cachebare Dateien statt 420-KB-Text in HTML + JS; ältere TEILEKLAR-Seiten noch nicht vollständig migriert
 - [x] Deutsche, markengerechte Fehler- und „Seite nicht gefunden“-Seite
 - [x] Kontakt- und Partnerformular: Prüfung mit verständlichen Fehlermeldungen, Bestätigung, Zustellung per E-Mail-Programm an mail@nexifyai.cloud
 - [ ] Buttons ohne Funktion (z. B. „Angebot anfragen“, „Terminwunsch nennen“) mit echter Funktion belegen
-- [ ] Chat-Eingabe: verständlicher Zustand statt stillem Nichts beim Absenden
+- [x] NeXify-Chat: echte ORACLE-Beratung mit Lade-/Fehlerzustand; ältere TEILEKLAR-Hilfe noch offen
 - [ ] Tastatur & Screenreader: Fokus-Ringe, Menüs, Chat-Panel auf allen Seiten prüfen
 
 
 ## Fehlende Seiten übernehmen (Hinweis Nutzer 14.11. „dir fehlen aber Seiten“)
-- [ ] Rechtliches: /impressum, /datenschutz, /cookies, /barrierefreiheit, /ki-hinweise, /vertragsgrundlagen
-- [ ] Produkte: /produkte/nex2fly, /produkte/one, /produkte/api, /produkte/aifly-oracle, /produkte/nex-agentic-aifly, /produkte/skills-mcp
-- [ ] Angebot & Wissen: /loesungen, /preise-ablauf, /leistungsumfang, /leistungen/websites, /leistungen/agenten-automatisierung, /leistungen/apps-portale, /wissen, /wissen/projekt-vorbereiten, /unternehmen, /portale
-- [ ] Konto: /anmelden, /registrieren
+- [x] Rechtliche Seiten importiert; vollständige inhaltliche/rechtliche Freigabe nicht bestätigt
+- [x] Produktseiten importiert; Verfügbarkeit/Zugang nur gemäß vorhandenen Informationen beschrieben
+- [x] Angebots-, Leistungs-, Wissens- und Unternehmensseiten importiert
+- [x] Konto: /anmelden, /registrieren mit echter Anmeldung vorhanden
 - [ ] TEILEKLAR: /teileklar/rechtliches, /shop, /kategorien, /kategorie, /produkt, /fahrzeug-und-passung, /suche, /warenkorb, /kasse, /bestellungen, /termine, /gutscheine, /reifenrechner, /batterie-berater
 - [ ] Neue Seiten an gemeinsame Bausteine anschließen (Stylesheet-Datei, Filme, Formulare, Menüs) und Links prüfen

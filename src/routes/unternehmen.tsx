@@ -27,7 +27,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen</span>
                     <h1 id="page-title-company">Ein Ansprechpartner. Ein Agententeam.</h1>
-                    <p className={"identity-body"}>NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir nennen das AI FACTORY.</p>
+                    <p className={"identity-body"}>NeXify AI ist die Agentur von Pascal Courbois in Venlo. Er begleitet Websites, Apps und digitale Abläufe persönlich. Bei der Ausarbeitung unterstützen die KI-Agenten NeX und AIFly ORACLE.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Vorhaben schildern</span>
@@ -69,7 +69,7 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>NeXify AI steht für die Agenturarbeit: Websites, Shops, Portale, Apps und KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich, die Agenten NeX und AIFly ORACLE, die NeXify API.</p>
-                    <p>TEILEKLAR.shop ist unsere eigene Marke für Auto und Motorrad. Dort zeigen wir im eigenen Shop, was wir für Kunden bauen.</p>
+                    <p>Die Suite lässt sich ohne Agenturauftrag nutzen; für die API gelten die auf ihrer Produktseite beschriebenen Zugangsbedingungen. TEILEKLAR.shop ist unsere eigene Marke für Auto und Motorrad.</p>
                   </div>
                 </section>
               </div>
