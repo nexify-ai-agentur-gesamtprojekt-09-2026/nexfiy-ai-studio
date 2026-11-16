@@ -12,7 +12,7 @@ export const SITE_PAGES = [
   },
   {
     path: "/cookies",
-    title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI",
+    title: "Cookies und lokale Speicherung · NeXify AI",
     brand: "NeXify AI",
   },
   {
@@ -117,12 +117,12 @@ export const SITE_PAGES = [
   },
   {
     path: "/registrieren",
-    title: "NeX AIFly Suite. In Ruhe testen. · NeXify AI",
+    title: "NeXify-Websitekonto erstellen. · NeXify AI",
     brand: "NeXify AI",
   },
   {
     path: "/teileklar",
-    title: "TEILEKLAR.shop – Zubehör für Auto & Motorrad",
+    title: "TEILEKLAR.shop – Katalog und Teilefragen für Auto und Motorrad",
     brand: "TEILEKLAR",
   },
   {
@@ -147,12 +147,12 @@ export const SITE_PAGES = [
   },
   {
     path: "/teileklar/kasse",
-    title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop",
+    title: "Onlinekauf noch nicht verfügbar. · TEILEKLAR.shop",
     brand: "TEILEKLAR",
   },
   {
     path: "/teileklar/kategorien",
-    title: "Alle Kategorien auf einen Blick. · TEILEKLAR.shop",
+    title: "Kategorien und Prüfhinweise · TEILEKLAR.shop",
     brand: "TEILEKLAR",
   },
   {
@@ -172,12 +172,12 @@ export const SITE_PAGES = [
   },
   {
     path: "/teileklar/shop",
-    title: "Auto & Motorrad Â· TEILEKLAR.shop",
+    title: "Katalog Auto & Motorrad · TEILEKLAR.shop",
     brand: "TEILEKLAR",
   },
   {
     path: "/teileklar/suche",
-    title: "Teil, Marke oder Nummer suchen. · TEILEKLAR.shop",
+    title: "Teil anfragen · TEILEKLAR.shop",
     brand: "TEILEKLAR",
   },
   {
@@ -187,7 +187,7 @@ export const SITE_PAGES = [
   },
   {
     path: "/teileklar/warenkorb",
-    title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop",
+    title: "Warenkorb noch nicht verfügbar. · TEILEKLAR.shop",
     brand: "TEILEKLAR",
   },
   {
@@ -197,7 +197,7 @@ export const SITE_PAGES = [
   },
   {
     path: "/unternehmen",
-    title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI",
+    title: "NeXify AI · Persönliche Projektbegleitung und KI",
     brand: "NeXify AI",
   },
   {

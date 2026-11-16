@@ -34,10 +34,10 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     poster: "/site-assets/15fa9607b63661b1.webp",
     label: "Technologie und Teamarbeit",
     alt: "Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage",
-    duration: 5.5,
+    duration: 4.85,
     captions: [
       { start: 0.45, end: 2.45, text: "Bei NeXify gehen wir neue Wege." },
-      { start: 2.5, end: 5.5, text: "Mit intelligenter Technologie und echter Teamarbeit" },
+      { start: 2.5, end: 4.45, text: "Willkommen in der Zukunft." },
     ],
   },
   arbeitsbereich: {

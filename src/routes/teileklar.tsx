@@ -162,7 +162,7 @@ function Index() {
               <h2>
                 Gut informiert.
                 <br />
-                Klar entschieden.
+                Klar einordnen. Gezielt anfragen.
               </h2>
               <p>
                 Vergleichen Sie Artikelnummer und Herstellerangaben. Ein Produktfoto allein

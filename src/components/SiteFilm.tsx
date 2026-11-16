@@ -1,6 +1,7 @@
 import { useId } from "react";
 import filmCSS from "../styles/site-film.css?url";
 import { SITE_FILMS, type SiteFilmId } from "../lib/site-films";
+import { isPublicPlaybackFilm } from "../lib/site-film-policy";
 import { filmCaptionsPath, filmTranscript } from "../lib/film-captions";
 import { Button } from "@/components/ui/button";
 
@@ -10,14 +11,14 @@ const PLAY_PATH = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.
 export function SiteFilm({ film, eager = false, still = false }: { film: SiteFilmId; eager?: boolean; still?: boolean }) {
   const data = SITE_FILMS[film];
   const volumeId = `${useId()}-volume`;
-  if (still) {
+  if (still || !isPublicPlaybackFilm(film)) {
     return (
       <div className="atelier-film atelier-film-hero" data-film={film} data-still="true">
         <link rel="stylesheet" href={filmCSS} precedence="site-film" />
         <div className="atelier-film-picture">
-          <img src={data.poster} alt={data.alt} width={1280} height={720}
+          <img className="atelier-film-still" src={data.poster} alt={data.alt} width={1280} height={720}
             loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"}
-            decoding="async" style={{ display: "block", width: "100%", height: "auto", aspectRatio: "16 / 9" }} />
+            decoding="async" />
         </div>
         <p className="hc-caption">Markeninszenierung · kein Kundenprojekt</p>
       </div>
