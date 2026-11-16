@@ -134,7 +134,7 @@
 - [ ] Zugang „nexify.login-aifly-oracle“ klären und einordnen
 - [ ] Umfang: Anfragen/Leads, TEILEKLAR, Kundenportal/Suite, Tagesbericht/Aufgaben
 - [ ] Bestehenden ORACLE-Zugang lesend klären (keine Betriebsänderung, kein neuer Agent)
-- [ ] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
+- [x] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
 
 ## Offen (16.11.)
 - [x] TEILEKLAR-Teilefragen speichern (Tabelle)
@@ -155,8 +155,8 @@
 - [ ] Mehrsprachigkeit NL/EN als echtes Vorhaben: Übersetzungen inkl. Rechtstexte brauchen Pascals Entscheidung und Freigabe der Texte
 - [x] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigiert (12 px statt 8 px; eingeklappt bündig mit Footer-Spalte)
 - [x] Anfragen echt speichern + Slack-Meldung (Kontakt end-to-end geprüft; Partner, Termin, Gutschein, Teilefrage nutzen denselben Weg)
-- [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
-- [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
+- [x] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
+- [x] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
   - [x] Import, Liste, Suche, Kategorien, Artikelseite, Seitenwechsel
   - [x] 14 Sortimentsbereiche aus Artikelnamen statt fehlerhafter Lieferantenkategorien (13 Artikel im Sammelbereich)
   - [x] Eigene Bildkopien: 410 Fotos in privater Ablage, 3.310 Artikel ohne Foto an beiden Quellen („Kein Produktfoto“), Artikel mit Foto zuerst
@@ -164,7 +164,7 @@
   - [ ] Zeitpläne (Katalog 02:00–02:55 UTC, Fotos 03:00–05:50 UTC) laufen erst nach Veröffentlichung gegen die echte Adresse – ersten Lauf prüfen
 - [x] Texte zu Formular/Datenschutz an echtes Absenden angepasst
 - [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
-- [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
+- [x] Admin-Rolle: Inhaberkonto von Pascal bestätigt (16.11.) und freigeschaltet
 - [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht
 
 ## Zurückgestellt (Pascal, 16.11.)
