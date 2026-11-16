@@ -1,5 +1,16 @@
 # Slack und AIFly ORACLE – vorhandene Lösung erweitern
 
+## Workspace-Freigabe gezielt klären (16.11.2026, 11:18 UTC)
+**SOLL:** Den benötigten Slack-Freigabedialog zugänglich machen, vorhandene Verbindungen erhalten und die Einrichtung erst nach bestätigter Workspace-Autorisierung fortsetzen. Keine Geheimnisse im Chat und keine kostenpflichtigen Schritte.
+
+**IST:** Vor und nach dem in diesem Lauf geöffneten Connector-Dialog sind dieselben drei zugänglichen persönlichen Slack-Verbindungen vorhanden: „NeXify's Slack“, „My Slack“ und „NeXify's Slack (1)“. Ausschließlich „My Slack“ bleibt projektverknüpft. Der Dialog wurde mit hervorgehobener Neuanlage geöffnet, lieferte aber erneut die bestehende persönliche Verbindung zurück (`token_type=personal`). Das ist kein Nachweis einer Installationsfreigabe. Keine Verbindung getrennt, gelöscht oder ersetzt; kein neuer Provisionierungsversuch, kein Deployment und kein Modellaufruf.
+
+**IST / Quelle:** Die offizielle Dokumentationsauskunft in diesem Lauf benennt einen getrennten Workspace-Freigabeweg: [Connectors](https://lovable.dev/dashboard?connectors) → Slack → **Your apps in Slack** → **Connect Slack workspace**. Ein Lovable-Workspace-Owner/Admin wählt dort den vorgesehenen Slack-Workspace und bestätigt die Slack-Freigabe. Zusätzlich ist Slack-App-Installationsrecht erforderlich; bei einer Genehmigungsanforderung muss der Slack-Admin zustimmen. Quelle: [Authorize your Slack workspace](https://docs.lovable.dev/integrations/slack#authorize-your-slack-workspace), abgerufen 16.11.2026, 11:18 UTC. Die frühere Anweisung „Neue Verbindung“ allein führt nicht gezielt zu dieser separaten Freigabe und ist hierfür überholt.
+
+**OFFEN:** Der korrekte Workspace muss unter **Your apps in Slack** als autorisiert erscheinen; der dokumentierte Button wechselt danach zu **Connect another workspace**. Der vorhandene Connector-Dialog kann diesen getrennten Dialog nicht nachweislich direkt öffnen. Die Zuordnung dieses UI-Erfolgs zum Provisionierungsdienst ist erst durch dessen anschließenden erfolgreichen Aufruf belegt, nicht durch einen persönlichen Verbindungsabruf. Nur die tatsächliche Freigabe durch Pascal bzw. den zuständigen Workspace-/Slack-Admin fehlt als nächster Schritt; keine Tokens oder Screenshots mit Geheimnissen anfordern. Bis dahin Einrichtung und vollständiger Auslöser mit Empfängerantwort nicht fortsetzen oder als erfolgreich melden.
+
+**Rückweg / Prüfung:** Nur diese Belege und die bestehende Aufgabenliste ergänzen. Anwendung, bestehende ORACLE-App, Server, Zeitpläne und vorhandene Verbindungen bleiben unverändert. Keine Codeänderung; kein Funktionstest oder neue Empfängerantwort in diesem Lauf behauptet. Keine neue kostenpflichtige Verpflichtung ausgelöst; laufende Vertragskosten wurden nicht gemessen.
+
 ## Neuer Auftrag 16.11.2026, 11:03 UTC: Einrichtung von Grund auf
 **SOLL:** Pascal findet die vorhandene App-Verwaltung nicht und beauftragt ausdrücklich die eigenständige Einrichtung von Grund auf. Für diesen Auftrag ist eine getrennte verwaltete Website-App zulässig; der ursprüngliche ORACLE-Bot bleibt unverändert. Das ersetzt die frühere Grenze „keine zweite App“ nur für dieses Einrichtungspaket, nicht die Trennung vom öffentlichen KI-Berater und nicht die Kosten-/Zugangsgrenzen.
 

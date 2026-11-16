@@ -1,4 +1,10 @@
 # Roadmap
+## Nötige Slack-Workspace-Freigabe (16.11., 11:18 UTC)
+- [x] Connector-Dialog ausdrücklich erneut geöffnet; Ergebnis erneut bestehendes persönliches „My Slack“, vorher/nachher dieselben drei Verbindungen. Nichts getrennt oder ersetzt
+- [x] Offizielle Anleitung geprüft: separater Weg Connectors → Slack → Your apps in Slack → Connect Slack workspace; persönliche Neuanlage allein ist keine Installationsfreigabe. Beleg ops/slack-integration.md
+- [ ] Pascal bzw. Workspace-Owner/Admin mit Slack-Installationsrecht bestätigt den vorgesehenen Workspace im separaten Freigabedialog; autorisierter Eintrag unter Your apps in Slack noch nicht belegt
+- [ ] Einrichtung erst nach belegter Workspace-Freigabe fortsetzen und Provisionierungsergebnis prüfen; vollständiger Auslöser/Empfängerantwort bleiben offen, kein erneuter Provisionierungsloop, kein Deployment, keine neuen Kosten
+
 ## Eigenständige Slack-Einrichtung von Grund auf (16.11., 11:03 UTC)
 - [x] Verwaltete Einrichtung versucht: zulässige Scopes/Mention+DM festgelegt; groups:history vom Tool nicht erlaubt. Ursprünglichen ORACLE-Bot und Nachrichtenausgang unverändert erhalten
 - [ ] App-Erstellung blockiert: Provisionierungsdienst meldet auch nach abgeschlossenem Verbindungsdialog „No Slack workspace is connected“; Dialog wählte bestehendes persönliches My Slack. Pascal/Lovable-Workspace-Verantwortlicher muss Slack-Workspace für verwaltete App-Installation autorisieren
