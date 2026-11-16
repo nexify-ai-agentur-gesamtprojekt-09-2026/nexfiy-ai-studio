@@ -1,7 +1,7 @@
 /* NeXify Graphite – Design-Grundwerte (abgenommen). Einzige Quelle; Kundenprojekte überschreiben nur über eigene Token-Datei. */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.2315 0.0049 173.96);
+  --background: #242826;
   --foreground: oklch(0.9558 0.0086 84.57);
   --card: oklch(0.2803 0.0068 164.5);
   --card-foreground: oklch(0.9558 0.0086 84.57);
@@ -11,7 +11,7 @@
   --brand-signal-hover: oklch(0.925 0.185 123.4);
   --brand-signal-active: oklch(0.83 0.195 124.2);
   --brand-signal-deep: oklch(0.62 0.15 127);
-  --brand-signal-foreground: oklch(0.17 0.03 128);
+  --brand-signal-foreground: #111312;
   --primary: oklch(0.8861 0.2017 123.37);
   --primary-foreground: var(--brand-signal-foreground);
   --secondary: oklch(0.2965 0.0067 164.54);
@@ -45,11 +45,11 @@
   --sidebar-accent-foreground: oklch(0.9558 0.0086 84.57);
   --sidebar-border: oklch(1 0 0 / 9%);
   --sidebar-ring: oklch(0.8861 0.2017 123.37);
-  --font-brand-text: Inter, "Segoe UI", system-ui, sans-serif;
-  --font-brand-display: "Plus Jakarta Sans", Inter, "Segoe UI", system-ui, sans-serif;
+  --font-brand-text: Geist, "Segoe UI", system-ui, sans-serif;
+  --font-brand-display: Geist, "Segoe UI", system-ui, sans-serif;
   --font-brand-mono: "Geist Mono", ui-monospace, "Courier New", monospace;
-  --type-page-title: 48px;
-  --type-section-title: 30px;
+  --type-page-title: 80px;
+  --type-section-title: 44px;
   --type-subheading: 20px;
   --type-feature-title: 22px;
   --type-body: 17px;
@@ -57,18 +57,38 @@
   --type-conversation: 16px;
   --type-detail: 14px;
   --type-caption: 12px;
-  --leading-editorial: 1.75;
+  --leading-editorial: 1.55;
   --leading-conversation: 1.75;
-  --measure-prose: 68ch;
+  --measure-prose: 66ch;
   --measure-lead: 55ch;
   --measure-heading: 24ch;
   --space-paragraph: 24px;
   --space-subheading: 32px;
   --type-h4: 18px;
+  /* Projektplan-Palette (docs/09-final/03-designsystem.md), einzige Stelle für Hex-Werte. */
+  --graphite-50: #1b1e1d;
+  --graphite-100: #1e2220;
+  --graphite-200: #242826;
+  --graphite-300: #262a28;
+  --graphite-400: #2a2e2c;
+  --graphite-500: #303634;
+  --line-soft: rgb(255 255 255 / 8%);
+  --line-mid: #363a38;
+  --line-strong: #4a4f4c;
+  --text-1: #ffffff;
+  --text-2: #e3e6e3;
+  --text-3: #bcc1bd;
+  --text-4: #9ca29e;
+  --state-success: #6fe3cf;
+  --state-open: #ffc24a;
+  --state-error: #ff8a7a;
+  --card-fill: linear-gradient(180deg, var(--graphite-500), var(--graphite-300));
+  --card-edge: inset 0 1px 0 rgb(255 255 255 / 7%);
+  --card-shadow: 0 28px 56px -32px rgb(0 0 0 / 85%);
   --type-eyebrow: 12px;
-  --radius-card: 24px;
-  --radius-media: 24px;
-  --section-space: 80px;
+  --radius-card: 20px;
+  --radius-media: 20px;
+  --section-space: 96px;
   --section-space-compact: 48px;
   --glass-header-compact:
     linear-gradient(125deg, oklch(1 0 0 / 7%), transparent 42%, oklch(0.83 0.025 200 / 4%)),
@@ -143,6 +163,10 @@
     0 22px 36px -20px oklch(0 0 0 / 80%);
 }
 html[data-theme="light"] {
+  --card-fill: var(--card);
+  --card-edge: inset 0 1px 0 rgb(255 255 255 / 60%);
+  --card-shadow: 0 20px 40px -28px rgb(0 0 0 / 25%);
+  --line-strong: oklch(0.23 0.006 165 / 28%);
   --background: oklch(0.925 0.006 240);
   --foreground: oklch(0.23 0.006 165);
   --card: oklch(0.96 0.004 240);

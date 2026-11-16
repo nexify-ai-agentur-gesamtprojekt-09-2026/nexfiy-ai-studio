@@ -1016,18 +1016,18 @@
 
 /* NX-DESIGN-01 Gesamtveredelung: ein Kartentyp, eine Abschnittsskala, Footer-Raster, gestapelte Kopfknöpfe. */
 @media (max-width: 768px) {
-  :root { --section-space: 56px; --section-space-compact: 40px; }
+  :root { --section-space: 64px; --section-space-compact: 40px; }
 }
 :root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form.tk-form, .ws-card, .tkc-card) {
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
-  background: var(--glass-content-fill, var(--card));
-  box-shadow: var(--elevation-glass-lift, var(--elevation-card));
+  background: var(--card-fill);
+  box-shadow: var(--card-edge), var(--card-shadow);
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 :root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .ws-card, .tkc-card):hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--elevation-glass-hover, var(--elevation-card));
+  border-color: var(--line-strong);
+  box-shadow: var(--card-edge), 0 32px 64px -30px rgb(0 0 0 / 90%);
 }
 :root:root #atelier.site-shared :is(.hc-art, .hc-product-art, .identity-media) {
   border-radius: var(--radius-media);
@@ -1053,3 +1053,19 @@
 @media (prefers-reduced-motion: reduce) {
   :root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form, .ws-card, .tkc-card) { transition: none; }
 }
+
+/* Projektplan-Typografie und Zustände (NX-DESIGN-01 Zusatz). */
+:root:root:root #atelier#atelier.site-shared main h1 { line-height: 0.98; letter-spacing: -0.04em; text-wrap: balance; }
+:root:root:root #atelier#atelier.site-shared main h2 { line-height: 1.12; text-wrap: balance; }
+:root:root #atelier.site-shared main :is(p, li, dd) { text-wrap: pretty; }
+:root:root #atelier.site-shared :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+:root:root #atelier.site-shared :is(button, input, select, textarea):disabled,
+:root:root #atelier.site-shared [aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+:root:root #atelier.site-shared :is(input, select, textarea)[aria-invalid="true"] { border-color: var(--state-error); }
+/* Links im Fließtext nicht nur über Farbe erkennbar (WCAG 1.4.1). */
+:root:root #atelier.site-shared :is(main p, main label, main li, form) a:not([class]) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+/* Die übernommenen Seitenstile entfernen Unterstreichungen global mit !important; Fließtext-Links brauchen sie (WCAG 1.4.1). */
+:root:root:root #atelier#atelier.site-shared :is(.tk-check, .tk-consent, main p, main li) a:not([class]) { text-decoration-line: underline !important; text-underline-offset: 3px; }
