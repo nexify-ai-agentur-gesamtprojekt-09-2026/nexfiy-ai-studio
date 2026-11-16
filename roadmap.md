@@ -1,4 +1,10 @@
 # Roadmap
+## NX-MCP-01 · Verbindung über nexifyai.de (16.11., 13:10 UTC)
+- [x] Lesende Konfigurationsprüfung: OAuth und dynamische Registrierung aktiv, Zustimmungsadresse /.lovable/oauth/consent, Site URL nexifyai.de; keine Einstellungsänderung nötig (13:11 UTC)
+- [ ] Vorhandene Zustimmungs-/Anmelderückwege, Fehlerprotokolle und vorhandene vier Lese-Werkzeuge prüfen; belegte Fehler minimal korrigieren
+- [ ] Registrierung → Zustimmung → Token → initialize/tools/list prüfen; Konfiguration, lokale Tests und veröffentlichte Nachweise getrennt dokumentieren
+- [ ] Rückweg und ggf. Pascal-Anmeldung benennen; NX-ORA-02, Server, BigBuy und Nutzerrechte unberührt lassen
+
 ## Erneut hochgeladener Projektauftrag (16.11., 11:29 UTC)
 - [x] Upload byteidentisch mit ops/references/nexify-project-chat-2026-11-16.md (SHA256 4bf9a383…301f3, 6893 Bytes); keine neuen Vorgaben, keine zweite Kopie
 - [x] Startverhalten: ORACLE-Prüfthread 11:30 UTC rückgelesen – weiterhin nur Ausgangsanfrage + Revision 2, keine Kanalnachricht danach; keine weitere Meldung gesendet (unbestätigter Kanal, keine blinde Wiederholung). Slack-Verbindungen unverändert drei persönliche, keine Workspace-Freigabe belegt
