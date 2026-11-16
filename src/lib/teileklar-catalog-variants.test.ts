@@ -56,6 +56,22 @@ describe("Artikelgruppen im TEILEKLAR-Katalog", () => {
     expect(labels.get("S37116818")).toBe("Art.-Nr. S37116818");
   });
 
+  it("benennt Größen-Ausführungen nach dem abweichenden Namensende", () => {
+    const labels = variantLabels([
+      { id: "OMP-S", name: "Monokarting OMP SUMMER-K Rot S", specs: [] },
+      { id: "OMP-XXL", name: "Monokarting OMP SUMMER-K Rot XXL", specs: [] },
+      { id: "SP-46", name: "Rennstiefel Sparco Schwarz Größe 46", specs: [] },
+    ]);
+    expect(labels.get("OMP-S")).toBe("Monokarting OMP SUMMER-K Rot S");
+    const sizes = variantLabels([
+      { id: "OMP-S", name: "Monokarting OMP SUMMER-K Rot S", specs: [] },
+      { id: "OMP-XXL", name: "Monokarting OMP SUMMER-K Rot XXL", specs: [] },
+    ]);
+    expect(sizes.get("OMP-S")).toBe("S");
+    expect(sizes.get("OMP-XXL")).toBe("XXL");
+    expect(labels.size).toBe(3);
+  });
+
   it("macht gleiche Merkmalsbezeichnungen über die Artikelnummer eindeutig", () => {
     const labels = variantLabels([
       { id: "A1", specs: [{ label: "Gewicht", value: "1 kg" }] },

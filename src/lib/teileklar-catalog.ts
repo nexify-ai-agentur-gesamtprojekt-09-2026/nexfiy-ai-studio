@@ -185,7 +185,20 @@ export function germanDecimals(value: string): string {
 
 export interface CatalogVariantSource {
   id: string;
+  name?: string;
   specs: CatalogSpec[];
+}
+
+/** Namensteil, in dem sich die Ausführungen unterscheiden (z. B. die Größe „XL“ am Namensende). */
+function nameSuffixes(variants: CatalogVariantSource[]): Map<string, string> | null {
+  const words = variants.map((variant) => (variant.name ?? "").split(" ").filter(Boolean));
+  if (new Set(words.map((list) => list.join(" "))).size < 2) return null;
+  let common = 0;
+  while (words.every((list) => list.length > common && list[common] === words[0]![common]))
+    common++;
+  return new Map(
+    variants.map((variant, index) => [variant.id, words[index]!.slice(common).join(" ")]),
+  );
 }
 
 const VARIANT_IGNORED_SPECS = new Set(["EAN", "Zustand"]);
@@ -205,7 +218,13 @@ export function variantLabels(variants: CatalogVariantSource[]): Map<string, str
     );
     return values.size > 1;
   });
+  const suffixes = nameSuffixes(variants);
   for (const variant of variants) {
+    const suffix = suffixes?.get(variant.id);
+    if (suffix) {
+      labels.set(variant.id, suffix);
+      continue;
+    }
     const parts = differing.flatMap((label) => {
       const value = variant.specs.find((spec) => spec.label === label)?.value;
       return value ? [`${label} ${germanDecimals(value)}`] : [];
