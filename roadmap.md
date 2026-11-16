@@ -194,3 +194,8 @@
 - [x] ORACLE (ChatGPT) Anbindungsweg: MCP-Server nexifyai.de/mcp mit Anmeldung; neues lesendes Werkzeug „Anfragen lesen“ (nur Admin-Rolle)
 - [ ] ORACLE in ChatGPT: Connector https://nexifyai.de/mcp anlegen und mit Inhaberkonto anmelden (Pascal)
 - [x] Shopbilder: helle Studiofläche + Abschneide-Fehler behoben (Bild 218px in 190px-Feld → passt)
+
+- [ ] Server 1: BigBuy-Schlüssel in OpenBao/Starteinstellungen nur per Metadaten prüfen
+- [ ] Eigenen MCP-Server (nexifyai.de/mcp) als Verbindung hier einbinden; Anleitung Claude Code/ChatGPT
+- [ ] Arbeitsplatz absichern (Zugriff nur admin) prüfen
+- [ ] SSH-Schlüsselübersicht mit Markierungen (nichts löschen)
