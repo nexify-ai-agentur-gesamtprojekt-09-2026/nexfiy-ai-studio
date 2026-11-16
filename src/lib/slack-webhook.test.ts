@@ -18,6 +18,8 @@ it("bestätigt die Slack-URL ohne Geheimnis und ohne Ereignisverarbeitung", asyn
 });
 it("ignoriert Ereignisse ohne eingerichtetes Signaturgeheimnis", async () => {
   vi.stubEnv("SLACK_ORACLE_SIGNING_SECRET", "");
+  // Beide bestehenden App-Wege isolieren: ein gesetztes Laufzeitgeheimnis darf diesen Test nicht verändern.
+  vi.stubEnv(`SLACK_SIGNING_SECRET_${SLACK_WORKSPACE.team}`, "");
   expect((await receiveSlack(new Request("https://example.invalid", { method: "POST", body: "{}" }), "events")).status).toBe(200);
 });
 it("weist falsche Signaturen zurück und verarbeitet keine Slack-Wiederholung", async () => {

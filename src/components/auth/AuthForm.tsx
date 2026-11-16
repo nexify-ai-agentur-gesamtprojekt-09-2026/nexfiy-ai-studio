@@ -28,16 +28,12 @@ function germanError(message: string) {
 
 /** Shared sign-in / sign-up / password forms, styled with the imported tk-form classes. */
 export function AuthForm({ mode }: { mode: AuthMode }) {
-  const returnTo = () => {
-    const n =
-      typeof window === "undefined"
-        ? null
-        : new URLSearchParams(window.location.search).get("next");
-    return n ? oauthReturnPath(n) : null;
-  };
   const navigate = useNavigate();
   // Router state is identical on server and client, so the switch links keep "next" without a hydration mismatch.
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
+  const rawNext = new URLSearchParams(searchStr).get("next");
+  const next = rawNext === null ? null : oauthReturnPath(rawNext);
+  const authSearch = next ? `?next=${encodeURIComponent(next)}` : "";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -79,12 +75,10 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       if (mode === "login") {
         const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
         if (error) throw error;
-        const next = returnTo();
         if (next && next !== "/") window.location.assign(next);
         else await navigate({ to: "/konto" });
       } else if (mode === "signup") {
-        const next = returnTo();
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email: email.trim(),
           password,
           options: {
@@ -93,6 +87,11 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
           },
         });
         if (error) throw error;
+        if (data.session) {
+          if (next && next !== "/") window.location.assign(next);
+          else await navigate({ to: "/konto" });
+          return;
+        }
         setDone(
           "Fast geschafft: Wir haben Ihnen eine E-Mail geschickt. Bestätigen Sie den Link darin, dann können Sie sich anmelden.",
         );
@@ -124,7 +123,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         </p>
         <div className="tk-actions">
           <p>
-            <a href="/anmelden">Zur Anmeldung</a>
+            <a href={"/anmelden" + authSearch}>Zur Anmeldung</a>
           </p>
         </div>
       </div>
@@ -229,12 +228,12 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <div className="tk-actions">
         {mode !== "login" && (
           <p>
-            <a href={"/anmelden" + searchStr}>Ich habe schon ein Konto</a>
+            <a href={"/anmelden" + authSearch}>Ich habe schon ein Konto</a>
           </p>
         )}
         {mode !== "signup" && (
           <p>
-            <a href={"/registrieren" + searchStr}>Neues Konto erstellen</a>
+            <a href={"/registrieren" + authSearch}>Neues Konto erstellen</a>
           </p>
         )}
         {mode === "login" && (
