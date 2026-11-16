@@ -136,7 +136,7 @@ export function OracleHandoff({
             Übernahme nicht möglich
           </h3>
           <p>
-            Ihr Browser erlaubt hier keine Zwischenablage für die Seite. Kopieren Sie den Entwurf
+            Ihr Browser lässt die Übergabe an das Formular hier nicht zu. Kopieren Sie den Entwurf
             und fügen Sie ihn im Kontaktformular ein.
           </p>
           <div className="oracle-handoff-preview" role="region" aria-label="Entwurf" tabIndex={0}>
