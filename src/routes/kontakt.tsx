@@ -3,6 +3,8 @@ import { SiteFilm } from "../components/SiteFilm";
 import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
+import { contactHandoffNotice } from "@/lib/contact-handoff";
+import { useContactHandoff } from "@/lib/use-contact-handoff";
 import capturedCSS from "../styles/pages/kontakt.css?url";
 
 export const Route = createFileRoute("/kontakt")({
@@ -50,6 +52,7 @@ export const Route = createFileRoute("/kontakt")({
 
 function Index() {
   const { anliegen } = Route.useSearch();
+  const { handoff, formKey, initialMessage } = useContactHandoff();
   return (
     <NexifyShell>
       <div className={"home-concept page-concept page-contact layout-company context-nexify"}>
@@ -141,12 +144,34 @@ function Index() {
           </a>
         </nav>
         <section className={"hc-container pc-supplement"} id="anfrage" tabIndex={-1}>
+          <div role="status" aria-live="polite" className="contact-handoff-status">
+            {handoff ? (
+              <p className="contact-handoff-notice" data-origin={handoff.origin}>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M4 12h12M11 6l6 6-6 6M20 5v14" />
+                </svg>
+                <span>{contactHandoffNotice(handoff.origin)}</span>
+              </p>
+            ) : null}
+          </div>
           <InquiryForm
+            key={formKey}
             kind="contact"
             title="Ihre Anfrage senden"
             companyLabel="Unternehmen"
             privacyHref="/datenschutz"
-            initialMessage={anliegen ?? ""}
+            initialMessage={initialMessage ?? anliegen ?? ""}
           />
         </section>
         <div className={"pc-sections"}>
