@@ -199,3 +199,6 @@
 - [ ] Eigenen MCP-Server (nexifyai.de/mcp) als Verbindung hier einbinden; Anleitung Claude Code/ChatGPT
 - [ ] Arbeitsplatz absichern (Zugriff nur admin) prüfen
 - [x] SSH-Schlüsselübersicht mit Markierungen (nichts löschen)
+- [ ] SSH-Bereinigung: Plan liegt vor, wartet auf Freigabe
+- [x] Unbekannte SSH-Anmeldungen geprüft
+- [x] Arbeitsplatz-Sicherheitsprüfung
