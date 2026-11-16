@@ -1,4 +1,4 @@
-import { useMatches as useImportedMatches } from "@tanstack/react-router";
+import { useMatches as useImportedMatches, useRouterState } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -19,6 +19,7 @@ import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
 import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { canonicalFor } from "@/lib/sitemap";
 import { PwaInstallProvider } from "@/lib/use-pwa-install";
 
 function useDocumentTitle(title: string) {
@@ -199,6 +200,7 @@ function RootShell({ children }: { children: ReactNode }) {
   const importedDocument = useImportedMatches({
     select: (matches) => matches.at(-1)?.staticData.importedDocument,
   });
+  const canonical = useRouterState({ select: (s) => canonicalFor(s.location.pathname) });
   return (
     <html lang="de" {...importedDocument?.html}>
       <head>
@@ -206,6 +208,7 @@ function RootShell({ children }: { children: ReactNode }) {
           {"@layer imported-inline;"}
         </style>
         <HeadContent />
+        {canonical ? <link rel="canonical" href={canonical} /> : null}
       </head>
       <body {...importedDocument?.body}>
         {children}

@@ -54,3 +54,15 @@ export function buildSitemapXml(
     .join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
 }
+
+const SITEMAP_SET = new Set<string>(SITEMAP_PATHS);
+
+/**
+ * Kanonische Adresse einer öffentlichen Inhaltsseite auf nexifyai.de, sonst null.
+ * Dieselben Seiten sind auch unter der Lovable-Vorschauadresse erreichbar; der Verweis
+ * verhindert doppelte Inhalte in Suchmaschinen. Konto-, Warenkorb- und Kassenseiten erhalten keinen.
+ */
+export function canonicalFor(pathname: string): string | null {
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  return SITEMAP_SET.has(path) ? `${SITE_ORIGIN}${path}` : null;
+}

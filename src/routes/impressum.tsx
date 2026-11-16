@@ -7,9 +7,9 @@ export const Route = createFileRoute("/impressum")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }],
     meta: [
-      { title: "Impressum · NeXify AI by NeXify · NeXify AI" },
+      { title: "Impressum · NeXify AI" },
       { name: "description", content: "Anbieterkennzeichnung und Kontaktangaben von NeXify AI." },
-      { property: "og:title", content: "Impressum · NeXify AI by NeXify · NeXify AI" },
+      { property: "og:title", content: "Impressum · NeXify AI" },
       {
         property: "og:description",
         content: "Anbieterkennzeichnung und Kontaktangaben von NeXify AI.",
@@ -40,7 +40,7 @@ function Index() {
                     <a href="/">Startseite</a>
                   </li>
                   <li className={"visually-hidden"}>
-                    <span aria-current="page">Impressum · NeXify AI by NeXify</span>
+                    <span aria-current="page">Impressum</span>
                   </li>
                 </ol>
               </nav>
