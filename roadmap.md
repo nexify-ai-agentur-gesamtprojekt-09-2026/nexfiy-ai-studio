@@ -303,3 +303,6 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 - [x] Server 1: Freistellung täglich 06:15 UTC eingerichtet, Probelauf 16.11.: 13 offen, 13 bewusst ausgelassen (Rand nicht weiß); Doku ops/server1/README.md
 - [ ] Erster Freistellungs-Upload durch den Server-Auftrag mit neuem Foto nachweisen (nach Nachtlauf 17.11.)
 - [x] Server 1: Überwachung alle 5 Min aktiv, Slack-Testmeldung 16.11. zugestellt; Grenze: bei Totalausfall nur Protokoll
+
+## Slack-Empfangsadresse auf nexifyai.de (16.11., 11:50 UTC)
+- [ ] Event-URL der App „NeXify Betriebsanbindung“ auf https://nexifyai.de/api/public/slack/events umstellen. BLOCKER: Das Einrichtungswerkzeug setzt die URL fest, und das Recht app_configurations fehlt. Lösung durch Pascal (Weiterleitung unter Domains) oder durch einen Slack-Admin.
