@@ -24,9 +24,9 @@ Pfadpräfix `/agentmemory/` auf `127.0.0.1:3111`, `Authorization: Bearer` mit `A
 Datei `/usr/local/bin/nx-jeff-workloop`, Zeile 695:
 ```
 alt: choices = {t["id"]: f"{t['id']}: {t['titel']}" for t in offen}
-neu: choices = {t["id"]: f"{t['id']}: {t['titel']}" for t in offen if not t["id"].startswith("MAIL-")][:240]
+neu: choices = {t["id"]: f"{t['id']}: {t['titel']}" for t in [x for x in offen if not x["id"].startswith("MAIL-")][:240]}
 ```
-(korrekt als `dict(list(...)[:240])` umzusetzen; 240 + 4 Sonderoptionen < 255). Mail-Aufgaben bleiben in der Datei unverändert, werden nur nicht zur Auswahl gestellt.
+(240 + 4 Sonderoptionen < 255). Mail-Aufgaben bleiben in der Datei unverändert, werden nur nicht zur Auswahl gestellt.
 Ablauf: Sicherung `cp -a nx-jeff-workloop nx-jeff-workloop.bak-20261116-choices`, Änderung, `python3 -m py_compile`, `systemctl restart nx-jeff-workloop`, danach eine Journalzeile „NeXify waehlt: …“ als Beleg.
 Rückweg: Sicherung zurückkopieren, Dienst neu starten.
 Risiko: gering bis mittel – die Schleife beginnt danach wieder echte Arbeit (Codex-Läufe bis 30 min) an den 240 ältesten Nicht-Mail-Aufgaben; ob diese Ausführung gewollt ist, ist Pascals Entscheidung. Die Mail-Flut selbst (Quelle der 3.517 Einträge) wird damit nicht behoben.
