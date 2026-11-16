@@ -13,12 +13,12 @@ const text = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
 export function normalizePartInquiry(raw: Record<string, unknown>): PartInquiryValues {
   return {
-    name: text(raw.name).replace(/\s+/g, " "),
-    email: text(raw.email).toLowerCase(),
-    vehicle: text(raw.vehicle),
-    part: text(raw.part),
-    message: text(raw.message),
-    consent: raw.consent === true || raw.consent === "on" || raw.consent === "true",
+    name: text(raw["name"]).replace(/\s+/g, " "),
+    email: text(raw["email"]).toLowerCase(),
+    vehicle: text(raw["vehicle"]),
+    part: text(raw["part"]),
+    message: text(raw["message"]),
+    consent: raw["consent"] === true || raw["consent"] === "on" || raw["consent"] === "true",
   };
 }
 
