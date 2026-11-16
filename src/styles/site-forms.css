@@ -94,3 +94,11 @@
 .page-contact .contact-steps div > span { display: block; color: var(--muted-foreground); line-height: 1.55; }
 .page-contact .contact-step-index { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-weight: 700; }
 .page-contact .contact-note { color: var(--muted-foreground); font-size: 0.95em; }
+.home-concept.page-contact .pc-section-body .contact-checklist,
+.home-concept.page-contact .pc-section-body .contact-steps { padding-inline-start: 0; margin-inline: 0; }
+.home-concept.page-contact .pc-section-body .contact-checklist { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.home-concept.page-contact .pc-section-body .contact-checklist li,
+.home-concept.page-contact .pc-section-body .contact-steps li { margin: 0; background: color-mix(in oklab, var(--foreground) 5%, transparent); border-color: color-mix(in oklab, var(--foreground) 14%, transparent); }
+.home-concept.page-contact .pc-section-body .contact-checklist li { border-left: 3px solid var(--primary); }
+.home-concept.page-contact .pc-section-body li::before,
+.home-concept.page-contact .pc-section-body li::marker { content: none; }
