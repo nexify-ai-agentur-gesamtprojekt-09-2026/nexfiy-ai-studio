@@ -1,104 +1,406 @@
 /* Inquiry forms (contact, TEILEKLAR partner): field errors, summary and the e-mail hand-off state.
    Loaded once by <InquiryForm>; scoped to the #atelier shell like the captured page styles. */
-:root:root #atelier .tk-form[hidden] { display: none; }
-:root:root #atelier.site-shared :is(.tk-form,.inquiry-handoff) { background: var(--glass-content-fill); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); padding: 24px; display: grid; gap: 24px; min-width: 0; }
-:root:root #atelier.site-shared .tk-form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
-:root:root #atelier.site-shared .tk-field { display: grid; gap: 8px; min-width: 0; }
-:root:root #atelier.site-shared .tk-field.is-wide { grid-column: 1 / -1; }
-:root:root #atelier.site-shared .home-concept .inquiry-form-heading { display: grid; gap: 12px; }
-:root:root #atelier.site-shared .home-concept .inquiry-form-heading :is(h2,p) { margin: 0; }
-:root:root #atelier.site-shared :is(.tk-form,.inquiry-preview) :is(input:not([type="checkbox"]),textarea) { width: 100%; min-width: 0; min-height: 48px; padding: 12px 16px; box-sizing: border-box; font: inherit; }
-:root:root #atelier.site-shared :is(.tk-form,.inquiry-preview) textarea { resize: vertical; min-height: 160px; }
-:root:root #atelier.site-shared :is(.tk-form,.inquiry-preview,.tk-search) :is(input,textarea,[role="combobox"]):focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
-:root:root #atelier.site-shared .tk-form :is(input,textarea) { transition: border-color 180ms var(--motion-ease-brand), box-shadow 180ms var(--motion-ease-brand); }
-:root:root #atelier.site-shared .tk-form :is(input,textarea):hover { border-color: var(--ring); }
-:root:root #atelier.site-shared .tk-form .tk-check { display: flex; align-items: flex-start; gap: 12px; }
-:root:root #atelier.site-shared .tk-form .tk-check > input { margin-top: 4px; }
-:root:root #atelier.site-shared .tk-form .tk-check a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }
-:root:root #atelier .tk-form :is(h2,h3) { color: var(--foreground); }
-:root:root #atelier .tk-form :is(input,textarea) { font-size: 16px; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; }
-:root:root #atelier .tk-form .tk-check input { flex: 0 0 20px; width: 20px; height: 20px; min-height: 20px; accent-color: var(--primary); }
-:root:root #atelier .tk-form .tk-check { min-height: 44px; }
-:root:root #atelier .tk-form .tk-field > .tk-field-label { margin: 0; font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: normal; color: var(--color-text-sekundaer); }
-:root:root #atelier .tk-form .tk-field-error {
-  display: flex; align-items: flex-start; gap: 6px; margin: 0;
-  font-size: 14px; line-height: 1.5; color: var(--destructive);
-  animation: inquiry-in .28s var(--ease-standard, ease) both;
+:root:root #atelier .tk-form[hidden] {
+  display: none;
 }
-:root:root #atelier .tk-form .tk-field-error svg { flex: 0 0 auto; width: 14px; height: 14px; margin-top: 2px; }
+:root:root #atelier.site-shared :is(.tk-form, .inquiry-handoff) {
+  background: var(--glass-content-fill);
+  color: var(--foreground);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  box-shadow: var(--elevation-glass-lift);
+  padding: 24px;
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+:root:root #atelier.site-shared .tk-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+:root:root #atelier.site-shared .tk-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+:root:root #atelier.site-shared .tk-field.is-wide {
+  grid-column: 1 / -1;
+}
+:root:root #atelier.site-shared .home-concept .inquiry-form-heading {
+  display: grid;
+  gap: 12px;
+}
+:root:root #atelier.site-shared .home-concept .inquiry-form-heading :is(h2, p) {
+  margin: 0;
+}
+:root:root
+  #atelier.site-shared
+  :is(.tk-form, .inquiry-preview)
+  :is(input:not([type="checkbox"]), textarea) {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  font: inherit;
+}
+:root:root #atelier.site-shared :is(.tk-form, .inquiry-preview) textarea {
+  resize: vertical;
+  min-height: 160px;
+}
+:root:root
+  #atelier.site-shared
+  :is(.tk-form, .inquiry-preview, .tk-search)
+  :is(input, textarea, [role="combobox"]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+:root:root #atelier.site-shared .tk-form :is(input, textarea) {
+  transition:
+    border-color 180ms var(--motion-ease-brand),
+    box-shadow 180ms var(--motion-ease-brand);
+}
+:root:root #atelier.site-shared .tk-form :is(input, textarea):hover {
+  border-color: var(--ring);
+}
+:root:root #atelier.site-shared .tk-form .tk-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+:root:root #atelier.site-shared .tk-form .tk-check > input {
+  margin-top: 4px;
+}
+:root:root #atelier.site-shared .tk-form .tk-check a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:root:root #atelier .tk-form :is(h2, h3) {
+  color: var(--foreground);
+}
+:root:root #atelier .tk-form :is(input, textarea) {
+  font-size: 16px;
+  background: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+}
+:root:root #atelier .tk-form .tk-check input {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  accent-color: var(--primary);
+}
+:root:root #atelier .tk-form .tk-check {
+  min-height: 44px;
+}
+:root:root #atelier .tk-form .tk-field > .tk-field-label {
+  margin: 0;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: var(--color-text-sekundaer);
+}
+:root:root #atelier .tk-form .tk-field-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--destructive);
+  animation: inquiry-in 0.28s var(--ease-standard, ease) both;
+}
+:root:root #atelier .tk-form .tk-field-error svg {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+}
 :root:root #atelier .tk-form .tk-field :is(input, textarea)[aria-invalid="true"] {
   border-color: var(--destructive);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--destructive) 55%, transparent);
 }
-:root:root #atelier .tk-form .tk-check input[aria-invalid="true"] { outline: 2px solid var(--destructive); outline-offset: 2px; }
-:root:root #atelier .tk-form .tk-consent { display: grid; gap: var(--space-2, 8px); }
+:root:root #atelier .tk-form .tk-check input[aria-invalid="true"] {
+  outline: 2px solid var(--destructive);
+  outline-offset: 2px;
+}
+:root:root #atelier .tk-form .tk-consent {
+  display: grid;
+  gap: var(--space-2, 8px);
+}
 :root:root #atelier .tk-form .inquiry-summary {
-  display: flex; align-items: center; gap: 10px; margin: 0; padding: 12px 16px;
-  border: 1px solid color-mix(in srgb, var(--destructive) 45%, transparent); border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--destructive) 45%, transparent);
+  border-radius: 6px;
   background: color-mix(in srgb, var(--color-semantik-fehler) 9%, transparent);
-  font-size: 14px; line-height: 1.45; color: var(--color-text-primaer);
-  animation: inquiry-in .28s var(--ease-standard, ease) both;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--color-text-primaer);
+  animation: inquiry-in 0.28s var(--ease-standard, ease) both;
 }
-:root:root #atelier .tk-form .inquiry-summary svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--color-semantik-fehler); }
-:root:root #atelier .tk-form .tk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
-:root:root #atelier .tk-form .inquiry-hint { margin: 0; max-width: 48ch; font-size: 14px; line-height: 1.5; color: var(--muted-foreground); overflow-wrap: anywhere; }
+:root:root #atelier .tk-form .inquiry-summary svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--color-semantik-fehler);
+}
+:root:root #atelier .tk-form .tk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+:root:root #atelier .tk-form .inquiry-hint {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  overflow-wrap: anywhere;
+}
 
-:root:root #atelier .inquiry-handoff { display: grid; gap: var(--space-4, 16px); margin-block: var(--space-6, 24px); animation: inquiry-in .45s var(--ease-emph, ease) both; }
+:root:root #atelier .inquiry-handoff {
+  display: grid;
+  gap: var(--space-4, 16px);
+  margin-block: var(--space-6, 24px);
+  animation: inquiry-in 0.45s var(--ease-emph, ease) both;
+}
 :root:root #atelier .inquiry-handoff-mark {
-  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px;
-  background: var(--color-marke-lime); color: var(--color-text-auf-lime); box-shadow: var(--shadow-leuchten);
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--color-marke-lime);
+  color: var(--color-text-auf-lime);
+  box-shadow: var(--shadow-leuchten);
 }
-:root:root #atelier .inquiry-handoff-mark svg { width: 22px; height: 22px; }
-:root:root #atelier .inquiry-handoff h2 { margin: 0; font-size: 24px; letter-spacing: 0; outline: none; }
-:root:root #atelier .inquiry-handoff p { margin: 0; max-width: 60ch; line-height: 1.6; color: var(--color-text-sekundaer); }
-:root:root #atelier .inquiry-handoff .tk-meta { color: var(--color-text-tertiaer); }
-:root:root #atelier .inquiry-handoff .tk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: var(--space-2, 8px); }
-:root:root #atelier .inquiry-handoff .hc-text-link { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-weight: 600; color: var(--color-text-primaer); min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
-:root:root #atelier .inquiry-handoff .hc-text-link:hover { color: var(--color-atelier-champagne); }
-:root:root #atelier .inquiry-handoff .hc-text-link[data-state="copied"] { color: var(--color-marke-lime); }
-:root:root #atelier.site-shared .inquiry-preview { display: grid; gap: 12px; min-width: 0; }
-:root:root #atelier.site-shared .inquiry-preview summary { cursor: pointer; min-height: 44px; padding-block: 12px; font-weight: 600; }
-:root:root #atelier.site-shared .inquiry-preview textarea { background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; font-size: 16px; line-height: 1.6; }
-:root:root #atelier.site-shared :is(.tk-field-error,.tk-alert) { color: var(--destructive); }
-:root:root #atelier.site-shared .tk-auth .nx-feld { display: block; position: relative; min-width: 0; }
-:root:root #atelier.site-shared .tk-auth .nx-feld input { padding-right: 56px; }
-:root:root #atelier.site-shared .tk-auth .nx-feld-schalter { position: absolute; right: 4px; top: 4px; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; background: transparent; color: var(--muted-foreground); }
-:root:root #atelier.site-shared .tk-auth .tk-cta { justify-self: start; min-height: 48px; white-space: normal; }
-:root:root #atelier.site-shared .tk-search-row > button { min-height: 48px; white-space: normal; }
-:root:root #atelier.site-shared .tk-search-row input[aria-invalid="true"] { border-color: var(--destructive); }
-:root:root #atelier.site-shared .tk-empty .tk-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-:root:root #atelier.site-shared .tk-empty .tk-actions :is(a,button) { white-space: normal; height: auto; min-height: 44px; }
-:root:root #atelier.site-shared .tk-form .tk-tyre-size { grid-template-columns: repeat(3,minmax(0,1fr)); }
+:root:root #atelier .inquiry-handoff-mark svg {
+  width: 22px;
+  height: 22px;
+}
+:root:root #atelier .inquiry-handoff h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: 0;
+  outline: none;
+}
+:root:root #atelier .inquiry-handoff p {
+  margin: 0;
+  max-width: 60ch;
+  line-height: 1.6;
+  color: var(--color-text-sekundaer);
+}
+:root:root #atelier .inquiry-handoff .tk-meta {
+  color: var(--color-text-tertiaer);
+}
+:root:root #atelier .inquiry-handoff .tk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: var(--space-2, 8px);
+}
+:root:root #atelier .inquiry-handoff .hc-text-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-text-primaer);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+:root:root #atelier .inquiry-handoff .hc-text-link:hover {
+  color: var(--color-atelier-champagne);
+}
+:root:root #atelier .inquiry-handoff .hc-text-link[data-state="copied"] {
+  color: var(--color-marke-lime);
+}
+:root:root #atelier.site-shared .inquiry-preview {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+:root:root #atelier.site-shared .inquiry-preview summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 12px;
+  font-weight: 600;
+}
+:root:root #atelier.site-shared .inquiry-preview textarea {
+  background: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+:root:root #atelier.site-shared :is(.tk-field-error, .tk-alert) {
+  color: var(--destructive);
+}
+:root:root #atelier.site-shared .tk-auth .nx-feld {
+  display: block;
+  position: relative;
+  min-width: 0;
+}
+:root:root #atelier.site-shared .tk-auth .nx-feld input {
+  padding-right: 56px;
+}
+:root:root #atelier.site-shared .tk-auth .nx-feld-schalter {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+}
+:root:root #atelier.site-shared .tk-auth .tk-cta {
+  justify-self: start;
+  min-height: 48px;
+  white-space: normal;
+}
+:root:root #atelier.site-shared .tk-search-row > button {
+  min-height: 48px;
+  white-space: normal;
+}
+:root:root #atelier.site-shared .tk-search-row input[aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+:root:root #atelier.site-shared .tk-empty .tk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+:root:root #atelier.site-shared .tk-empty .tk-actions :is(a, button) {
+  white-space: normal;
+  height: auto;
+  min-height: 44px;
+}
+:root:root #atelier.site-shared .tk-form .tk-tyre-size {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 @container website (max-width: 600px) {
-  :root:root #atelier.site-shared :is(.tk-form,.inquiry-handoff) { padding: 16px; }
-  :root:root #atelier.site-shared .tk-form-grid { grid-template-columns: minmax(0,1fr); }
-  :root:root #atelier.site-shared .tk-form .tk-tyre-size { grid-template-columns: minmax(0,1fr); }
+  :root:root #atelier.site-shared :is(.tk-form, .inquiry-handoff) {
+    padding: 16px;
+  }
+  :root:root #atelier.site-shared .tk-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  :root:root #atelier.site-shared .tk-form .tk-tyre-size {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-@keyframes inquiry-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes inquiry-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  :root:root #atelier :is(.tk-form .tk-field-error, .tk-form .inquiry-summary, .inquiry-handoff) { animation: none; }
-  :root:root #atelier.site-shared .tk-form :is(input,textarea) { transition: none; }
+  :root:root #atelier :is(.tk-form .tk-field-error, .tk-form .inquiry-summary, .inquiry-handoff) {
+    animation: none;
+  }
+  :root:root #atelier.site-shared .tk-form :is(input, textarea) {
+    transition: none;
+  }
 }
 
 /* Kontaktseite: gestaltete Hinweise und Ablaufschritte statt Fließtext */
 .page-contact .contact-checklist,
-.page-contact .contact-steps { display: grid; gap: 12px; margin: 24px 0; padding: 0; list-style: none; }
-.page-contact .contact-checklist { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.page-contact .contact-steps {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+}
+.page-contact .contact-checklist {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
 .page-contact .contact-checklist li,
-.page-contact .contact-steps li { display: flex; gap: 16px; padding: 16px 20px; border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent); border-radius: 16px; background: color-mix(in oklab, var(--card) 72%, transparent); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--foreground) 6%, transparent), 0 12px 32px -20px color-mix(in oklab, var(--background) 80%, transparent); }
-.page-contact .contact-checklist li { flex-direction: column; gap: 4px; border-left: 3px solid var(--primary); }
+.page-contact .contact-steps li {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
+  border-radius: 16px;
+  background: color-mix(in oklab, var(--card) 72%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--foreground) 6%, transparent),
+    0 12px 32px -20px color-mix(in oklab, var(--background) 80%, transparent);
+}
+.page-contact .contact-checklist li {
+  flex-direction: column;
+  gap: 4px;
+  border-left: 3px solid var(--primary);
+}
 .page-contact .contact-checklist strong,
-.page-contact .contact-steps strong { display: block; color: var(--foreground); font-weight: 600; }
+.page-contact .contact-steps strong {
+  display: block;
+  color: var(--foreground);
+  font-weight: 600;
+}
 .page-contact .contact-checklist span,
-.page-contact .contact-steps div > span { display: block; color: var(--muted-foreground); line-height: 1.55; }
-.page-contact .contact-step-index { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-weight: 700; }
-.page-contact .contact-note { color: var(--muted-foreground); font-size: 0.95em; }
+.page-contact .contact-steps div > span {
+  display: block;
+  color: var(--muted-foreground);
+  line-height: 1.55;
+}
+.page-contact .contact-step-index {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 700;
+}
+.page-contact .contact-note {
+  color: var(--muted-foreground);
+  font-size: 0.95em;
+}
 .home-concept.page-contact .pc-section-body .contact-checklist,
-.home-concept.page-contact .pc-section-body .contact-steps { padding: 0 !important; margin-inline: 0; }
-.home-concept.page-contact .pc-section-body .contact-checklist { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
+.home-concept.page-contact .pc-section-body .contact-steps {
+  padding: 0 !important;
+  margin-inline: 0;
+}
+.home-concept.page-contact .pc-section-body .contact-checklist {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+}
 .home-concept.page-contact .pc-section-body .contact-checklist li,
-.home-concept.page-contact .pc-section-body .contact-steps li { margin: 0; background: color-mix(in oklab, var(--foreground) 5%, transparent); border-color: color-mix(in oklab, var(--foreground) 14%, transparent); }
-.home-concept.page-contact .pc-section-body .contact-checklist li { border-left: 3px solid var(--primary); }
+.home-concept.page-contact .pc-section-body .contact-steps li {
+  margin: 0;
+  background: color-mix(in oklab, var(--foreground) 5%, transparent);
+  border-color: color-mix(in oklab, var(--foreground) 14%, transparent);
+}
+.home-concept.page-contact .pc-section-body .contact-checklist li {
+  border-left: 3px solid var(--primary);
+}
 .home-concept.page-contact .pc-section-body li::before,
-.home-concept.page-contact .pc-section-body li::marker { content: none; }
+.home-concept.page-contact .pc-section-body li::marker {
+  content: none;
+}

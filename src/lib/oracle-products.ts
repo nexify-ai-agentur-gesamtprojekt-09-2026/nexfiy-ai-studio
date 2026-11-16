@@ -30,21 +30,31 @@ export const ORACLE_PRODUCTS = {
   },
 } as const;
 
-export const oracleInputSchema = z.object({
-  messages: z.array(z.object({
-    role: z.enum(["user", "assistant"]),
-    content: z.string().trim().min(1).max(4000),
-  })).min(1).max(12),
-}).superRefine(({ messages }, ctx) => {
-  if (messages[0]?.role !== "user" || messages.at(-1)?.role !== "user") {
-    ctx.addIssue({ code: "custom", message: "Das Gespräch muss mit einem Vorhaben beginnen und mit einer Frage enden." });
-  }
-  for (let index = 1; index < messages.length; index++) {
-    if (messages[index]?.role === messages[index - 1]?.role) {
-      ctx.addIssue({ code: "custom", message: "Ungültiger Gesprächsverlauf." });
+export const oracleInputSchema = z
+  .object({
+    messages: z
+      .array(
+        z.object({
+          role: z.enum(["user", "assistant"]),
+          content: z.string().trim().min(1).max(4000),
+        }),
+      )
+      .min(1)
+      .max(12),
+  })
+  .superRefine(({ messages }, ctx) => {
+    if (messages[0]?.role !== "user" || messages.at(-1)?.role !== "user") {
+      ctx.addIssue({
+        code: "custom",
+        message: "Das Gespräch muss mit einem Vorhaben beginnen und mit einer Frage enden.",
+      });
     }
-  }
-});
+    for (let index = 1; index < messages.length; index++) {
+      if (messages[index]?.role === messages[index - 1]?.role) {
+        ctx.addIssue({ code: "custom", message: "Ungültiger Gesprächsverlauf." });
+      }
+    }
+  });
 
 export const oracleAnswerSchema = z.object({
   answer: z.string().trim().min(1).max(4000),
@@ -54,9 +64,12 @@ export type OracleAnswer = z.infer<typeof oracleAnswerSchema>;
 export type OracleInput = z.infer<typeof oracleInputSchema>;
 
 export function oracleEntryLinks(recommendation: OracleAnswer["recommendation"]) {
-  const products = recommendation === "suite" ? [ORACLE_PRODUCTS.suite]
-    : recommendation === "api" ? [ORACLE_PRODUCTS.api]
-    : [ORACLE_PRODUCTS.suite, ORACLE_PRODUCTS.api];
+  const products =
+    recommendation === "suite"
+      ? [ORACLE_PRODUCTS.suite]
+      : recommendation === "api"
+        ? [ORACLE_PRODUCTS.api]
+        : [ORACLE_PRODUCTS.suite, ORACLE_PRODUCTS.api];
   return products.map(({ name, path }) => ({ label: `${name} ansehen`, path }));
 }
 

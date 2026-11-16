@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { buildInquiryNotice, inquiryReference } from "./inquiry-notification";
 
-const base = { kind: "contact" as const, id: "3fa85f64-5717-4562-b3fc-2c963f66afa6", name: "Erika Muster", workspaceUrl: "https://nexifyai.de/arbeitsplatz" };
+const base = {
+  kind: "contact" as const,
+  id: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  name: "Erika Muster",
+  workspaceUrl: "https://nexifyai.de/arbeitsplatz",
+};
 
 describe("Slack-Meldung zu Anfragen", () => {
   it("nennt Art, Vorgangsnummer und Absender", () => {

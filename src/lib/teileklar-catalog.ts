@@ -12,7 +12,10 @@ export const CATALOG_MIN_COMPLETENESS = 0.95;
 
 const IMAGE_HOSTS = new Set(["cdnbigbuy.com", "www.cdnbigbuy.com"]);
 
-export interface CatalogSpec { label: string; value: string }
+export interface CatalogSpec {
+  label: string;
+  value: string;
+}
 
 export interface CatalogRow {
   id: string;
@@ -36,13 +39,21 @@ export interface CatalogRow {
   feed_created_at: string | null;
 }
 
-const text = (value: unknown, max = 300) => (typeof value === "string" ? value.replace(/\s+/g, " ").trim().slice(0, max) : "");
+const text = (value: unknown, max = 300) =>
+  typeof value === "string" ? value.replace(/\s+/g, " ").trim().slice(0, max) : "";
 
 /** Nur HTTPS-Bilder des Lieferanten-CDN sind erlaubt; alles andere wird verworfen. */
 export function allowedImageSource(value: string): string | null {
   try {
     const url = new URL(value);
-    if (url.protocol !== "https:" || !IMAGE_HOSTS.has(url.hostname) || url.username || url.password || url.port) return null;
+    if (
+      url.protocol !== "https:" ||
+      !IMAGE_HOSTS.has(url.hostname) ||
+      url.username ||
+      url.password ||
+      url.port
+    )
+      return null;
     return url.href;
   } catch {
     return null;
@@ -55,7 +66,9 @@ export function feedImageSource(image: unknown): string {
   if (!raw) return "";
   try {
     const url = new URL(raw, "https://teileklar.shop");
-    const inner = url.pathname.endsWith("/api/shop/image") ? url.searchParams.get("src") ?? "" : url.href;
+    const inner = url.pathname.endsWith("/api/shop/image")
+      ? (url.searchParams.get("src") ?? "")
+      : url.href;
     return allowedImageSource(inner) ?? "";
   } catch {
     return "";
@@ -68,17 +81,25 @@ export function mapFeedItem(raw: unknown): CatalogRow | null {
   const id = text(item["id"], 80) || text(item["sku"], 80);
   const name = text(item["name"]) || text(item["feed_title"]);
   if (!id || !name) return null;
-  const value = typeof item["value"] === "number" && Number.isFinite(item["value"]) && item["value"] > 0 ? Math.round(item["value"] * 100) / 100 : null;
+  const value =
+    typeof item["value"] === "number" && Number.isFinite(item["value"]) && item["value"] > 0
+      ? Math.round(item["value"] * 100) / 100
+      : null;
   const specs = Array.isArray(item["specs"])
-    ? item["specs"].flatMap((spec): CatalogSpec[] => {
-        if (!spec || typeof spec !== "object") return [];
-        const label = text((spec as Record<string, unknown>)["label"], 60);
-        const specValue = text((spec as Record<string, unknown>)["value"], 200);
-        return label && specValue ? [{ label, value: specValue }] : [];
-      }).slice(0, 20)
+    ? item["specs"]
+        .flatMap((spec): CatalogSpec[] => {
+          if (!spec || typeof spec !== "object") return [];
+          const label = text((spec as Record<string, unknown>)["label"], 60);
+          const specValue = text((spec as Record<string, unknown>)["value"], 200);
+          return label && specValue ? [{ label, value: specValue }] : [];
+        })
+        .slice(0, 20)
     : [];
   const created = text(item["created_at"], 40);
-  const stock = typeof item["stock"] === "number" && Number.isInteger(item["stock"]) && item["stock"] > 0 ? item["stock"] : 0;
+  const stock =
+    typeof item["stock"] === "number" && Number.isInteger(item["stock"]) && item["stock"] > 0
+      ? item["stock"]
+      : 0;
   return {
     id,
     name,
@@ -117,11 +138,15 @@ export function formatPrice(value: number | null): string | null {
 
 /** Suchbegriff für PostgREST-Filter: Steuerzeichen der Filtersyntax entfernen, Länge begrenzen. */
 export function normalizeCatalogQuery(value: unknown): string {
-  return text(value, CATALOG_QUERY_MAX).replace(/[%,()*\\:"']/g, " ").replace(/\s+/g, " ").trim();
+  return text(value, CATALOG_QUERY_MAX)
+    .replace(/[%,()*\\:"']/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 export function normalizePage(value: unknown): number {
-  const page = typeof value === "number" ? value : typeof value === "string" ? Number.parseInt(value, 10) : 1;
+  const page =
+    typeof value === "number" ? value : typeof value === "string" ? Number.parseInt(value, 10) : 1;
   return Number.isInteger(page) && page >= 1 && page <= 1000 ? page : 1;
 }
 

@@ -18,7 +18,12 @@ export const Route = createFileRoute("/konto")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  staticData: { importedDocument: { html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties }, body: {} } },
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   component: Page,
 });
 
@@ -31,10 +36,12 @@ function Page() {
       if (!data.user) navigate({ to: "/anmelden", replace: true });
       else {
         setEmail(data.user.email ?? "");
-        supabase.rpc("has_role", { _user_id: data.user.id, _role: "admin" }).then(({ data: admin, error }) => {
-          if (error) console.error("role check failed", error);
-          setIsAdmin(admin === true);
-        });
+        supabase
+          .rpc("has_role", { _user_id: data.user.id, _role: "admin" })
+          .then(({ data: admin, error }) => {
+            if (error) console.error("role check failed", error);
+            setIsAdmin(admin === true);
+          });
       }
     });
     const { data } = supabase.auth.onAuthStateChange((event) => {
@@ -46,20 +53,50 @@ function Page() {
   return (
     <NexifyShell>
       <div className="home-concept page-concept tk-shop nx-konto">
-        <section className="hc-container nx-konto-buehne" aria-labelledby="konto-title" aria-busy={email === undefined}>
+        <section
+          className="hc-container nx-konto-buehne"
+          aria-labelledby="konto-title"
+          aria-busy={email === undefined}
+        >
           <div className="nx-konto-blatt">
             <h1 id="konto-title">Mein Konto</h1>
             {email === undefined ? (
-              <p className="nx-konto-lead" role="status">Konto wird geladen …</p>
+              <p className="nx-konto-lead" role="status">
+                Konto wird geladen …
+              </p>
             ) : (
               <>
-                <p className="nx-konto-lead">Angemeldet als <strong>{email}</strong>.</p>
-                {isAdmin ? <p><a className="nexify-control primary-button hc-finish-primary" data-variant="primary" href="/arbeitsplatz">Zum Arbeitsplatz: Anfragen</a></p> : null}
+                <p className="nx-konto-lead">
+                  Angemeldet als <strong>{email}</strong>.
+                </p>
+                {isAdmin ? (
+                  <p>
+                    <a
+                      className="nexify-control primary-button hc-finish-primary"
+                      data-variant="primary"
+                      href="/arbeitsplatz"
+                    >
+                      Zum Arbeitsplatz: Anfragen
+                    </a>
+                  </p>
+                ) : null}
                 <div className="tk-form tk-auth">
-                  <button type="button" className="nexify-control secondary-button tk-cta" data-variant="secondary" onClick={async () => { await supabase.auth.signOut(); navigate({ to: "/anmelden", replace: true }); }}>
+                  <button
+                    type="button"
+                    className="nexify-control secondary-button tk-cta"
+                    data-variant="secondary"
+                    onClick={async () => {
+                      await supabase.auth.signOut();
+                      navigate({ to: "/anmelden", replace: true });
+                    }}
+                  >
                     Abmelden
                   </button>
-                  <div className="tk-actions"><p><a href="/passwort-neu">Passwort ändern</a></p></div>
+                  <div className="tk-actions">
+                    <p>
+                      <a href="/passwort-neu">Passwort ändern</a>
+                    </p>
+                  </div>
                 </div>
               </>
             )}

@@ -4,9 +4,14 @@ import { InquiryForm } from "./InquiryForm";
 
 const submitInquiry = vi.fn();
 vi.mock("@/lib/clipboard", () => ({ copyText: vi.fn().mockResolvedValue(false) }));
-vi.mock("@/lib/inquiry.functions", () => ({ submitInquiry: (...args: unknown[]) => submitInquiry(...args) }));
+vi.mock("@/lib/inquiry.functions", () => ({
+  submitInquiry: (...args: unknown[]) => submitInquiry(...args),
+}));
 vi.mock("@tanstack/react-start", () => ({ useServerFn: (fn: unknown) => fn }));
-afterEach(() => { cleanup(); submitInquiry.mockReset(); });
+afterEach(() => {
+  cleanup();
+  submitInquiry.mockReset();
+});
 
 function fillValid(message = "Wir möchten Anfragen automatisch vorsortieren.") {
   fireEvent.change(screen.getByLabelText("Name *"), { target: { value: "Erika Muster" } });
@@ -17,35 +22,72 @@ function fillValid(message = "Wir möchten Anfragen automatisch vorsortieren.") 
 
 describe("inquiry submission", () => {
   it("updates only remaining errors after corrections and sends nothing while invalid", () => {
-    render(<InquiryForm kind="contact" title="Anfrage" companyLabel="Unternehmen" privacyHref="/datenschutz" />);
+    render(
+      <InquiryForm
+        kind="contact"
+        title="Anfrage"
+        companyLabel="Unternehmen"
+        privacyHref="/datenschutz"
+      />,
+    );
     fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
     fireEvent.change(screen.getByLabelText("Name *"), { target: { value: "Erika Muster" } });
-    expect(screen.getAllByRole("textbox").filter((input) => input.getAttribute("aria-invalid") === "true")).toHaveLength(2);
+    expect(
+      screen
+        .getAllByRole("textbox")
+        .filter((input) => input.getAttribute("aria-invalid") === "true"),
+    ).toHaveLength(2);
     expect(submitInquiry).not.toHaveBeenCalled();
   });
 
   it("stores a valid inquiry and shows the returned reference", async () => {
     submitInquiry.mockResolvedValue({ ok: true, reference: "AB12CD34" });
-    render(<InquiryForm kind="partner" title="Partner" companyLabel="Werkstatt / Betrieb" privacyHref="/datenschutz" messageLabel="Ihr Anliegen" />);
+    render(
+      <InquiryForm
+        kind="partner"
+        title="Partner"
+        companyLabel="Werkstatt / Betrieb"
+        privacyHref="/datenschutz"
+        messageLabel="Ihr Anliegen"
+      />,
+    );
     fillValid();
-    fireEvent.change(screen.getByLabelText("Werkstatt / Betrieb *"), { target: { value: "Muster KFZ" } });
+    fireEvent.change(screen.getByLabelText("Werkstatt / Betrieb *"), {
+      target: { value: "Muster KFZ" },
+    });
     fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
-    expect(await screen.findByRole("heading", { name: "Ihre Anfrage ist eingegangen." })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Ihre Anfrage ist eingegangen." }),
+    ).toBeInTheDocument();
     expect(screen.getByText("AB12CD34")).toBeInTheDocument();
-    expect(submitInquiry.mock.calls[0]?.[0]).toMatchObject({ data: { kind: "partner", company: "Muster KFZ", email: "erika@example.test", consent: true } });
+    expect(submitInquiry.mock.calls[0]?.[0]).toMatchObject({
+      data: { kind: "partner", company: "Muster KFZ", email: "erika@example.test", consent: true },
+    });
   });
 
   it("keeps the entries after a failure and offers the e-mail draft only as explicit alternative", async () => {
-    submitInquiry.mockResolvedValue({ ok: false, error: "Ihre Anfrage konnte nicht gespeichert werden." });
+    submitInquiry.mockResolvedValue({
+      ok: false,
+      error: "Ihre Anfrage konnte nicht gespeichert werden.",
+    });
     const message = "Fahrzeug und benötigtes Ersatzteil. ".repeat(80);
-    render(<InquiryForm kind="appointment" title="Termin" companyLabel="Unternehmen" privacyHref="/datenschutz" />);
+    render(
+      <InquiryForm
+        kind="appointment"
+        title="Termin"
+        companyLabel="Unternehmen"
+        privacyHref="/datenschutz"
+      />,
+    );
     fillValid(message);
     fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("nicht gespeichert");
     expect(screen.getByLabelText("Ihr Anliegen *")).toHaveValue(message);
     fireEvent.click(screen.getByRole("button", { name: /Stattdessen als E-Mail/ }));
     const draft = screen.getByRole("textbox", { name: "Anfrageentwurf" });
-    expect(draft instanceof HTMLTextAreaElement ? draft.value : "").toContain("TEILEKLAR Terminwunsch von Erika Muster");
+    expect(draft instanceof HTMLTextAreaElement ? draft.value : "").toContain(
+      "TEILEKLAR Terminwunsch von Erika Muster",
+    );
     fireEvent.click(screen.getByRole("button", { name: "Angaben bearbeiten" }));
     expect(screen.getByLabelText("Ihr Anliegen *")).toHaveValue(message);
   });

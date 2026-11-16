@@ -44,8 +44,8 @@ function NotFoundComponent() {
         title="Diese Seite gibt es hier nicht."
         description={
           <p>
-            Vielleicht wurde die Adresse falsch eingegeben, oder die Seite ist umgezogen. Von hier aus geht es direkt
-            weiter – oder Sie schreiben uns, was Sie gesucht haben.
+            Vielleicht wurde die Adresse falsch eingegeben, oder die Seite ist umgezogen. Von hier
+            aus geht es direkt weiter – oder Sie schreiben uns, was Sie gesucht haben.
           </p>
         }
         detail={
@@ -90,8 +90,8 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
       title="Diese Seite hat gerade nicht geladen."
       description={
         <p>
-          Das liegt an uns, nicht an Ihnen. Meist hilft ein zweiter Versuch. Klappt es dann noch nicht, erreichen Sie uns
-          jederzeit per E-Mail.
+          Das liegt an uns, nicht an Ihnen. Meist hilft ein zweiter Versuch. Klappt es dann noch
+          nicht, erreichen Sie uns jederzeit per E-Mail.
         </p>
       }
       actions={
@@ -115,8 +115,12 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     >
       {import.meta.env.DEV && error instanceof Error ? (
         <details className="mt-10 max-w-xl rounded-[14px] border border-border bg-secondary/60 p-4 text-sm text-muted-foreground">
-          <summary className="cursor-pointer font-label text-xs uppercase tracking-[0.18em]">Technische Details (nur Vorschau)</summary>
-          <pre className="mt-3 whitespace-pre-wrap break-words font-label text-[12px] leading-relaxed text-foreground">{error.message}</pre>
+          <summary className="cursor-pointer font-label text-xs uppercase tracking-[0.18em]">
+            Technische Details (nur Vorschau)
+          </summary>
+          <pre className="mt-3 whitespace-pre-wrap break-words font-label text-[12px] leading-relaxed text-foreground">
+            {error.message}
+          </pre>
         </details>
       ) : null}
     </StatusPage>
@@ -138,10 +142,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-title", content: "NeXify" },
       { name: "format-detection", content: "telephone=no" },
       { title: "NeXify AI" },
-      { name: "description", content: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen." },
+      {
+        name: "description",
+        content: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen.",
+      },
       { name: "author", content: "NeXify AI" },
       { property: "og:title", content: "NeXify AI" },
-      { property: "og:description", content: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen." },
+      {
+        property: "og:description",
+        content: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -154,8 +164,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", sizes: "16x16 32x32 48x48" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
-      { rel: "preload", href: "/site-assets/0848630eef4b593d.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
-      { rel: "preload", href: "/site-assets/f7f6e92afae6f3df.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      {
+        rel: "preload",
+        href: "/site-assets/0848630eef4b593d.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/site-assets/f7f6e92afae6f3df.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -174,11 +196,15 @@ declare module "@tanstack/react-router" {
 }
 
 function RootShell({ children }: { children: ReactNode }) {
-  const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
+  const importedDocument = useImportedMatches({
+    select: (matches) => matches.at(-1)?.staticData.importedDocument,
+  });
   return (
     <html lang="de" {...importedDocument?.html}>
       <head>
-        <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
+        <style href="site-import-inline" precedence="imported-inline">
+          {"@layer imported-inline;"}
+        </style>
         <HeadContent />
       </head>
       <body {...importedDocument?.body}>
@@ -195,8 +221,8 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PwaInstallProvider>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
       </PwaInstallProvider>
     </QueryClientProvider>
   );
