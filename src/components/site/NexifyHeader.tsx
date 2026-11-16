@@ -4,7 +4,7 @@ import { useId } from "react";
 import { Button } from "@/components/ui/button";
 import { useSiteTheme } from "@/lib/use-site-theme";
 
-/** NeXify site header (brand, main and product navigation, phone menu, language, theme, call to action), shared by every NeXify page. */
+/** NeXify site header (brand, main and product navigation, phone menu, theme, call to action); the site is German-only, so no language selector is offered, shared by every NeXify page. */
 export function NexifyHeader() {
   const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
   const here = useCurrentPage();
@@ -214,14 +214,6 @@ export function NexifyHeader() {
         </nav>
       </details>
       <div className={"header-actions"}>
-        <label className={"visually-hidden"} htmlFor="locale">Sprache</label>
-        <select id="locale" aria-describedby="locale-hint" defaultValue="de">
-            <option value="de">DE</option>
-            <option value="nl">NL</option>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-          </select>
-        <span id="locale-hint" className={"visually-hidden"}>Auswahl mit der Eingabetaste bestätigen.</span>
         <Button variant="ghost" size="icon" type="button" className={"theme-switch"} role="switch" aria-checked={light} aria-label="Helle Ansicht" title={light ? "Dunkle Ansicht" : "Helle Ansicht"} onClick={toggleTheme}>
           <svg className={"theme-sun"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
             <circle cx="12" cy="12" r="4" />
