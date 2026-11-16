@@ -39,9 +39,9 @@
   --color-marke-lime-hell: #c7da98;
   --color-marke-lime-dunkel: #8ead51;
   --color-marke-lime-gruen: #638c45;
-  --color-semantik-erfolg: #6fe3cf;
-  --color-semantik-warnung: #ffc24a;
-  --color-semantik-fehler: #ff8a7a;
+  --color-semantik-erfolg: var(--state-success);
+  --color-semantik-warnung: var(--state-open);
+  --color-semantik-fehler: var(--state-error);
   --color-semantik-licht: #a78bfa;
   --color-identity-scene-wall-top: #e0e3dc;
   --color-identity-scene-wall-base: #d8ded4;
@@ -411,9 +411,9 @@
   --color-action-secondary: transparent;
   --color-action-disabled: #ffffff1f;
   --color-status-info: var(--color-brand-cyan);
-  --color-status-success: #6fe3cf;
-  --color-status-warning: #ffc24a;
-  --color-status-error: #ff8a7a;
+  --color-status-success: var(--state-success);
+  --color-status-warning: var(--state-open);
+  --color-status-error: var(--state-error);
   --color-graphit-900: var(--color-canvas);
   --color-graphit-850: var(--color-background-surface);
   --color-graphit-800: var(--color-background-surface);
