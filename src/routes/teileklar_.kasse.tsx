@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/teileklar.kasse.css?url";
 
 export const Route = createFileRoute("/teileklar_/kasse")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }, { name: "description", content: "Der Kassenbereich von TEILEKLAR für den nächsten Schritt Ihrer Bestellung." }, { property: "og:title", content: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }, { property: "og:description", content: "Der Kassenbereich von TEILEKLAR für den nächsten Schritt Ihrer Bestellung." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Onlinekauf noch nicht verfügbar. · TEILEKLAR.shop" }, { name: "description", content: "Dieser Auftritt löst keine Bestellung aus und nimmt keine Zahlung an." }, { property: "og:title", content: "Onlinekauf noch nicht verfügbar. · TEILEKLAR.shop" }, { property: "og:description", content: "Dieser Auftritt löst keine Bestellung aus und nimmt keine Zahlung an." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -35,7 +35,7 @@ function Index() {
         </div>
       </section>
       <section className={"hc-container pc-supplement tk-shop-body"}>
-        <div className="tk-empty" role="status"><h2>Onlinekauf noch nicht verfügbar</h2><p>Eine Waren- und Zahlungsanbindung ist in diesem Auftritt noch nicht vorhanden. Hier werden keine Bestellungen ausgelöst oder Zahlungen angenommen.</p><a className="hc-text-link" href="/teileklar/shop">Zum Schaufenster</a><a className="hc-text-link" href="/kontakt#anfrage">Teil anfragen</a></div>
+        <div className="tk-empty" role="status"><h2>Onlinekauf noch nicht verfügbar</h2><p>Eine Waren- und Zahlungsanbindung ist in diesem Auftritt noch nicht vorhanden. Hier werden keine Bestellungen ausgelöst oder Zahlungen angenommen.</p><a className="hc-text-link" href="/teileklar/shop">Zum Katalogstand</a><a className="hc-text-link" href="/kontakt#anfrage">Teil anfragen</a></div>
       </section>
     </div>
   </NexifyShell>;

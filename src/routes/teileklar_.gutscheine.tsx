@@ -53,7 +53,7 @@ function Index() {
         <a href="#content-tk-vouchers-tk-vouchers-customer-2-1">Einlösen beim Aussteller<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
       </nav>
       <section className={"hc-container pc-supplement"}>
-        <InquiryForm kind="contact" title="Anfrage vorbereiten" companyLabel="Unternehmen" privacyHref="/teileklar/rechtliches" />
+        <InquiryForm kind="voucher" title="Gutscheinfrage vorbereiten" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Aussteller, Leistung und Ihre Frage" />
       </section>
       <div className={"pc-sections"}>
         <section className={"hc-intro hc-container pc-section"} id="content-tk-vouchers-tk-vouchers-customer-1-0" tabIndex={-1} aria-labelledby="content-tk-vouchers-tk-vouchers-customer-1-0-title">
@@ -85,19 +85,19 @@ function Index() {
 </div>
         </section>
       </div>
-      <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
+      <section className={"hc-container pc-guide"} aria-label="TEILEKLAR · Fahrzeug, Werkstatt und Hinweise">
         <details className={"hc-service-detail"}>
           <summary>
             <span>
-              <strong className={"hc-service-name"}>Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE</strong>
+              <strong className={"hc-service-name"}>TEILEKLAR · Fahrzeug, Werkstatt und Hinweise</strong>
             </span>
             <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <path d="M5 12h14m-7-7v14" />
             </svg>
           </summary>
           <div className={"hc-service-body"}>
-            <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-            <GuideNavigation />
+            <p>Fahrzeugangaben, Werkstattsuche und Gutschein-Hinweise bleiben getrennte Themen.</p>
+            <GuideNavigation brand="teileklar" />
           </div>
         </details>
       </section>
@@ -115,7 +115,7 @@ function Index() {
             <h3>
               <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Zubehör und Teile mit klaren Angaben: Originalfotos des Lieferanten, Preise inklusive Mehrwertsteuer und Versandkosten, die Sie vor dem Kauf sehen.</p>
+            <p>Fahrzeug- und Teilehinweise, Reifenvergleich und Anfragevorbereitung. Warenkatalog und Onlinekauf sind hier noch nicht angebunden.</p>
             <a aria-label="TEILEKLAR. Für Auto und Motorrad. – Seite ansehen" className={"hc-text-link"} href="/teileklar">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
@@ -131,16 +131,16 @@ function Index() {
             <h3>
               <a href="/anmelden">Anmelden und weiterarbeiten.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder Partnerbereich.</p>
+            <p>Die Anmeldung gilt für das NeXify-Websitekonto. Sie schaltet weder Suite noch TEILEKLAR-Bestellungen oder Partnerfunktionen frei.</p>
             <a aria-label="Anmelden und weiterarbeiten. – Seite ansehen" className={"hc-text-link"} href="/anmelden">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
             <span className={"hc-kicker"}>TEILEKLAR</span>
             <h3>
-              <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+              <a href="/teileklar/suche">Teil, Marke oder Nummer benennen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Am sichersten finden Sie Ihr Teil über eine Nummer: Herstellernummer, EAN oder Artikelnummer. Sie können auch nach Bezeichnung oder Marke suchen.</p>
-            <a aria-label="Teil, Marke oder Nummer suchen. – Seite ansehen" className={"hc-text-link"} href="/teileklar/suche">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+            <p>Eine Hersteller-, EAN- oder Artikelnummer hilft bei Ihrer Teilefrage. Halten Sie Fahrzeugdaten bereit; Artikel und Verfügbarkeiten können hier noch nicht abgerufen werden.</p>
+            <a aria-label="Teil, Marke oder Nummer benennen. – Seite ansehen" className={"hc-text-link"} href="/teileklar/suche">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
         </ol>
       </section>
