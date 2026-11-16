@@ -918,16 +918,21 @@
 :root:root #atelier.site-shared .site-header {
   min-height: 104px;
   align-items: center;
+  /* Seitlicher Abstand wie oben/unten: Logo 12px, Knöpfe 18px zur Glaskante. */
+  padding-left: 32px;
+  padding-right: 30px;
 }
 @container website (max-width: 1000px) {
   :root:root #atelier.site-shared .site-header,
   :root:root #atelier.site-shared[data-scrolled="true"] .site-header {
     min-height: 88px;
+    padding-inline: 20px;
   }
 }
 @media (max-width: 767px) {
   :root:root #atelier.site-shared .site-header,
   :root:root #atelier.site-shared[data-scrolled="true"] .site-header {
     min-height: 76px;
+    padding-inline: 16px;
   }
 }
