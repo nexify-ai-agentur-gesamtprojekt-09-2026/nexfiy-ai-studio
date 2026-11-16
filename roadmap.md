@@ -2,6 +2,7 @@
 ## Glas und Header-Veredelung (16.11.)
 - [ ] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinern
 - [ ] Header schmaler abstimmen; rechten Innenabstand zum oberen/unteren Buttonabstand exakt messen und angleichen
+- [ ] Header beim Scrollen sichtbar mitführen; Glaswirkung und Abstände oben sowie im gescrollten Zustand eigenständig vermessen
 - [ ] Lesbarkeit, Transparenz-Fallbacks, Mobile und reduzierte Bewegung erneut überprüfen
 
 ## Stabiler Seitenstart (16.11.)
