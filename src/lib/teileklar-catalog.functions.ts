@@ -151,7 +151,7 @@ export const getCatalogProduct = createServerFn({ method: "GET" })
     const variants = await client
       .from("teileklar_products")
       .select("id, price_value, ean, specs, stock, delivery_note")
-      .eq("variant_group", variantGroup)
+      .eq("variant_group", variantGroup ?? "")
       .order("price_value", { ascending: true, nullsFirst: false })
       .order("id", { ascending: true })
       .limit(VARIANT_LIMIT);
