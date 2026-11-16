@@ -242,9 +242,11 @@ export function variantLabels(variants: CatalogVariantSource[]): Map<string, str
 
 const LETTER_SIZES = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
-/** Rang einer Größenangabe (S < M < XL, 42 < 44); null, wenn die Bezeichnung keine Größe ist. */
+/** Rang einer Größenangabe (Kinder 140 < S < M < XL, 42 < 44); null, wenn die Bezeichnung keine Größe ist. */
 export function sizeRank(label: string): number | null {
   const value = label.replace(/^Größe\s+/, "").trim();
+  const child = /^Kinder\s+(\d{2,3})$/.exec(value);
+  if (child) return -1 + Number(child[1]) / 1000;
   const letter = LETTER_SIZES.indexOf(value);
   if (letter >= 0) return letter;
   const multi = /^([2-6])XL$/.exec(value);

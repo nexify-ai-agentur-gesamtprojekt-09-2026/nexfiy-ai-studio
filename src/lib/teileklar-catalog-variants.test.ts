@@ -78,6 +78,8 @@ describe("Artikelgruppen im TEILEKLAR-Katalog", () => {
     expect(sizeRank("XS")! < sizeRank("M")!).toBe(true);
     expect(sizeRank("XL")! < sizeRank("3XL")!).toBe(true);
     expect(sizeRank("Größe 42")! < sizeRank("46")!).toBe(true);
+    expect(sizeRank("Kinder 130")! < sizeRank("Kinder 140")!).toBe(true);
+    expect(sizeRank("Kinder 140")! < sizeRank("S")!).toBe(true);
     expect(sizeRank("Art.-Nr. M1203136")).toBeNull();
     const variants = [{ id: "a" }, { id: "b" }, { id: "c" }];
     const sized = new Map([
