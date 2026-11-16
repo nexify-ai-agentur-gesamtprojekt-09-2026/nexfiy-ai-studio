@@ -34,12 +34,12 @@ export function StatusPage({
   children,
 }: StatusPageProps) {
   return (
-    <div className="relative isolate flex min-h-dvh flex-col overflow-hidden bg-background font-sans text-foreground antialiased">
+    <div className="site-system-page relative isolate flex min-h-dvh flex-col overflow-hidden bg-background font-sans text-foreground antialiased">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-(image:--gradient-stage-glow)" />
       {code ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute -right-[4vw] top-1/2 -z-10 -translate-y-1/2 select-none font-heading text-[clamp(12rem,34vw,30rem)] font-bold leading-none tracking-[-0.06em] text-transparent opacity-60 [-webkit-text-stroke:1px_var(--border-strong)]"
+          className="pointer-events-none absolute -right-12 top-1/2 -z-10 -translate-y-1/2 select-none font-heading text-[12rem] sm:text-[24rem] lg:text-[30rem] font-bold leading-none tracking-normal text-transparent opacity-60 [-webkit-text-stroke:1px_var(--border-strong)]"
         >
           {code}
         </span>
@@ -55,25 +55,25 @@ export function StatusPage({
           role={tone === "alert" ? "alert" : undefined}
           className="max-w-2xl animate-status-rise"
         >
-          <p className="flex items-center gap-2.5 font-label text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="status-kicker flex items-center gap-2.5 font-label text-xs uppercase tracking-normal text-muted-foreground">
             <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-signal shadow-[0_0_12px_var(--brand-signal)]" />
             {kicker}
           </p>
           <h1
             id="status-title"
-            className="mt-6 text-balance font-heading text-[clamp(2.5rem,6.5vw,4.75rem)] font-semibold leading-[1.06] tracking-[-0.035em]"
+            className="mt-6 text-balance font-heading font-semibold tracking-normal"
           >
             {title}
           </h1>
-          <div className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">{description}</div>
-          {detail ? <div className="mt-4 text-sm text-muted-foreground">{detail}</div> : null}
+          <div className="status-copy mt-6 text-pretty text-muted-foreground">{description}</div>
+          {detail ? <div className="status-detail mt-4 text-muted-foreground">{detail}</div> : null}
           <div className="mt-10 flex flex-wrap items-center gap-3">{actions}</div>
           {children}
         </section>
 
         {suggestions && suggestions.length > 0 ? (
           <nav aria-labelledby="status-suggestions" className="mt-20 animate-status-rise [animation-delay:120ms]">
-            <h2 id="status-suggestions" className="font-label text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            <h2 id="status-suggestions" className="font-heading font-semibold tracking-normal text-foreground">
               {suggestionsLabel}
             </h2>
             <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -83,7 +83,7 @@ export function StatusPage({
                     to={suggestion.to}
                     className="group flex h-full flex-col gap-2 rounded-[18px] border border-border bg-(image:--gradient-surface) p-5 shadow-(--elevation-card) outline-none transition-[transform,border-color] duration-300 ease-brand hover:-translate-y-0.5 hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   >
-                    <span className="flex items-center justify-between gap-3 font-heading text-base font-semibold tracking-[-0.02em]">
+                    <span className="status-suggestion-label flex items-center justify-between gap-3 font-heading text-base font-semibold tracking-normal">
                       {suggestion.label}
                       <ArrowUpRight
                         aria-hidden="true"

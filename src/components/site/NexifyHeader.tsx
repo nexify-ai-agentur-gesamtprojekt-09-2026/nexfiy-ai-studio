@@ -112,6 +112,7 @@ export function NexifyHeader() {
         <a href="/wissen" {...here("/wissen")}>Arbeitsweise</a>
         <a href="/kontakt" {...here("/kontakt")}>Kontakt</a>
       </nav>
+      <div className="header-tools">
       <details className={"mobile-navigation"} open={openMenu === "mobile"}>
         <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls={`${id}-mobile`} onClick={toggleMenu("mobile")}>
           <span className={"mobile-menu-mark"} aria-hidden="true">
@@ -209,6 +210,10 @@ export function NexifyHeader() {
               </svg>
             </a>
           </div>
+          <div className="mobile-localization">
+            <label htmlFor={`${id}-locale-menu`}>Sprache</label>
+            <select id={`${id}-locale-menu`} defaultValue="de"><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>
+          </div>
           <Button variant="ghost" type="button" className={"nexify-control"} data-variant="quiet" onClick={closeMenu}>Menü schließen</Button>
         </nav>
       </details>
@@ -231,6 +236,7 @@ export function NexifyHeader() {
           </svg>
         </Button>
         <a className={"header-cta"} href="/kontakt" {...here("/kontakt")}><span aria-hidden="true" />Projektgespräch anfragen</a>
+      </div>
       </div>
     </header>
   );
