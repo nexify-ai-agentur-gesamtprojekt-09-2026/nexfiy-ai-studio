@@ -1,8 +1,10 @@
 # Roadmap
 ## ORACLE-Anbindung fortsetzen (16.11., 10:35 UTC)
-- [ ] Bestehenden Slack-Ausgang, App-Konfiguration, ORACLE-Antworten und veröffentlichte Empfangsadressen aktuell prüfen; keine zweite App, kein Modellwechsel
-- [ ] Nachgewiesene Empfangs-/Rückmeldegrenzen innerhalb des bestehenden Sicherheitsmodells beheben und betroffene Tests ausführen
-- [ ] Sichere Einrichtung fehlender bestehender App-Zugänge vorbereiten; vollständigen Roundtrip nur bei bestätigter App-Zuordnung und echten Empfangsbelegen melden
+- [x] Slack-Verbindung und bestehende ORACLE-App-Zuordnung aktuell bestätigt, privater Ursprungskanal nicht extern geteilt; Thread vollständig ohne ACK, live Event-Handshake 200, keine zweite App/Modelländerung
+- [x] 22 betroffene Sicherheits-/Empfangstests bestanden (10:37 UTC); realer Request-waitUntil im Nitro-Adapter vorhanden, kein Fehler oder ungeprüfter Umbau
+- [ ] Signaturgeheimnis der bestehenden App: sicherer Dialog von Pascal abgelehnt, weiterhin nicht gesetzt; Empfang verarbeitet keine Ereignisse
+- [ ] Bestehende App-Konfiguration und identischen ORACLE-Ausgang abstimmen: Pascal/App-Verantwortlicher; keine vorhandene Request-URL überschreiben, keine Verbindung ersetzen
+- [ ] Vollständiger Roundtrip: wartet auf bestätigte Konfiguration/Zugang, tatsächlichen ACK und Rückschema; keine weitere Nachricht/kein Betriebsauftrag ausgelöst. Belege ops/slack-integration.md
 
 ## SSH-Hostidentität vor BigBuy bestätigen (16.11., 10:29 UTC)
 - [x] Konsolenvergleich für Server 1 vorbereitet; 10:30 UTC Hostname/Hosting-IP liefern denselben öffentlichen ED25519-SHA256-Kandidaten, ausdrücklich unbestätigt. Anleitung/Abbruch/Rückweg: ops/server1/host-identity-2026-11-16.md; keine private Schlüsseldatei gelesen
