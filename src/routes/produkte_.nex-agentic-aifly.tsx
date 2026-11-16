@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { SiteFilm } from "@/components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
@@ -20,6 +21,8 @@ function Index() {
                 <a href="#content-nex-agentic-nex-2-1">Was bei Ihnen bleibt<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-nex-agentic-nex-3-2">So setzen Sie NeX ein<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="nex" label="Freigegebene Arbeitsschritte" title="Ein Auftrag mit einem überprüfbaren Ende." summary="NeX ist für die Bearbeitung benannter Aufgaben vorgesehen. Der konkrete Einsatz hängt von erlaubten Werkzeugen, Quellen und Freigaben ab." facts={[{"label": "Passt zu", "content": "Wiederkehrende Recherche, Vorbereitung und Ausarbeitung klar abgegrenzter Aufgaben."}, {"label": "Voraussetzung", "content": "Ziel, zugelassene Quellen, Werkzeugrechte und eine Person, die das Ergebnis prüft."}, {"label": "Nicht automatisch", "content": "Eine Ausgabe bestätigt weder Versand noch Veröffentlichung. Verbindliche Angebote und Zahlungen bleiben gesonderte Entscheidungen."}, {"label": "Nächster Schritt", "content": "Aufgabe und beteiligte Systeme beschreiben; Umfang und Kosten werden im Angebot abgegrenzt."}]} example="Ein wiederkehrender Vorgang soll nicht jedes Mal neu vorbereitet werden. Benennen Sie zuerst Eingaben, erlaubte Systeme und das gewünschte Ergebnis, bevor eine Ausführung vereinbart wird." links={[{"label": "Aufgabe beschreiben", "href": "/kontakt"}, {"label": "Werkzeuge und Methoden", "href": "/produkte/skills-mcp"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-nex-agentic-nex-1-0" tabIndex={-1} aria-labelledby="content-nex-agentic-nex-1-0-title">
                   <div>

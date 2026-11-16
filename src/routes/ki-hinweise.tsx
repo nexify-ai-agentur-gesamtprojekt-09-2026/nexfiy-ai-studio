@@ -55,6 +55,14 @@ function Index() {
                     
 <h3>Eine hilfreiche Orientierung, keine verbindliche Entscheidung</h3>
 <p>Beschreiben Sie das gewünschte Ergebnis: Zusammenarbeit an Dokumenten, Organisation von Aufgaben oder KI in einer eigenen Anwendung. ORACLE ordnet diese Frage ein. Zugang, aktuelle Tarife und verbindliche Bedingungen prüfen Sie auf der jeweiligen Einstiegsseite.</p>
+<h3>Website-Beratung und Produktnutzung sind nicht dasselbe</h3>
+<p>Die öffentliche Beratung vergleicht zwei Produktwege: Die Suite ist ein eigener KI-Arbeitsbereich; die API bindet KI in Ihre eigene Software ein. Eine Empfehlung aktiviert weder das Produkt noch dessen Werkzeuge. Der Chat prüft keine Guthaben, Kontoberechtigungen oder privaten Quellen.</p>
+<h3>Agenten, Skills und MCP im konkreten Einsatz</h3>
+<p>NeX, AIFly ORACLE und wiederverwendbare Skills können in einem gesondert beschriebenen Einsatz unterschiedliche Aufgaben übernehmen. Ein Skill beschreibt eine Methode, MCP einen Werkzeugzugang. Beides erteilt keine zusätzlichen Datenrechte und keine pauschale Freigabe zum Versenden, Veröffentlichen oder Bezahlen.</p>
+<p>Die Agentenwerkzeuge dieses Auftritts geben nach Anmeldung und Autorisierung öffentliche Seiten- und Kontaktinformationen zurück. Sie sind keine Verbindung zum Suite-Arbeitsbereich und kein Zugang zu vertraulichen Projekten. Ein KI-Ergebnis ist vor fachlicher oder folgenreicher Verwendung zu prüfen.</p>
+<h3>TEILEKLAR: Information statt Passungsentscheidung</h3>
+<p>Die TEILEKLAR-Hilfe verweist auf Themen und bereitet eine Anfrage vor. Der Reifenrechner vergleicht rechnerische Nennmaße; er prüft keine Fahrzeugfreigabe oder rechtliche Zulässigkeit. Teileauswahl, Einbau und Terminbestätigung benötigen eine eigene fachliche Prüfung.</p>
+<nav className="legal-scope-links" aria-label="Produkte und Einsatzgrenzen"><a href="/produkte/nex2fly">Suite</a><a href="/produkte/api">API</a><a href="/produkte/skills-mcp">Skills und MCP</a><a href="/datenschutz">Datenverarbeitung</a></nav>
 <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>

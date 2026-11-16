@@ -46,4 +46,6 @@ use the editor.
 - Tyre comparisons use pure nominal geometry tested against existing page examples; the view never grants legal approval or fitment.
 - Captured and semantic light/dark surfaces use one document theme attribute, read after hydration to keep SSR stable.
 - Load shell, adviser and film geometry through the root stylesheet; reserve CSS-based panel widths before hydration so the initial page never depends on delayed route JavaScript.
-- Editorial hierarchy lives in shared shell styles; informative expansions stay in each route, distinguish existing capabilities from planned integrations, and add no commercial or legal promises.
+- Editorial hierarchy lives in root-loaded `site-typography.css` using global type, measure and spacing tokens across pages, tools, chat and StatusPage; informative expansions stay in each route and add no commercial or legal promises.
+- Compact header geometry follows the website container, not viewport width; group fixed controls beside a shrinkable brand and retain equal glass-to-control insets while scrolling so chat resizing cannot overflow navigation.
+- ProductOverview renders comparable product briefs from route-owned facts; keep current website capabilities, separately activated products and unapproved legal archives visibly distinct so presentation never implies access or contractual approval.

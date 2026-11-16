@@ -112,6 +112,7 @@ export function NexifyHeader() {
         <a href="/wissen" {...here("/wissen")}>Arbeitsweise</a>
         <a href="/kontakt" {...here("/kontakt")}>Kontakt</a>
       </nav>
+      <div className="header-tools">
       <details className={"mobile-navigation"} open={openMenu === "mobile"}>
         <summary ref={mobileSummary} aria-label="Menü" aria-expanded={openMenu === "mobile"} aria-controls={`${id}-mobile`} onClick={toggleMenu("mobile")}>
           <span className={"mobile-menu-mark"} aria-hidden="true">
@@ -231,6 +232,7 @@ export function NexifyHeader() {
           </svg>
         </Button>
         <a className={"header-cta"} href="/kontakt" {...here("/kontakt")}><span aria-hidden="true" />Projektgespräch anfragen</a>
+      </div>
       </div>
     </header>
   );

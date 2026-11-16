@@ -145,14 +145,8 @@ export function NexifyFooter() {
         <details className={"diagnostic-consent"}>
           <summary>Fehlerdiagnose-Einstellungen</summary>
           <div className={"diagnostic-consent-content"}>
-            <p>Optional: Fehlerdiagnose mit PostHog. Mit Ihrer Zustimmung können technische Fehlerstellen, Fehlertyp und App-Version übermittelt werden. Eingaben und Fehlertexte werden entfernt. Keine Marketing- oder Klickerfassung und keine Sitzungsaufzeichnung.</p>
-            <p>Bei einer Übertragung erhält der Dienst Netzwerkdaten wie Ihre IP-Adresse.</p>
-            <p>Ihre Auswahl gilt nur bis zum Neuladen und wird nicht gespeichert. Ablehnen schränkt die Seitenfunktionen nicht ein.</p>
-            <p className={"diagnostic-consent-status"} role="status" aria-live="polite">Aus · noch keine Auswahl</p>
-            <div className={"diagnostic-consent-actions"} role="group" aria-label="Fehlerdiagnose-Einstellungen">
-              <button type="button" className={"\x6futline-button"}>Zulassen</button>
-              <button type="button" className={"\x6futline-button"}>Ablehnen</button>
-            </div>
+            <p>Eine Verwaltung optionaler Fehlerdiagnose ist in diesem Auftritt noch nicht angeschlossen. Die ursprünglich übernommenen Schalter bestätigten keine wirksame Auswahl und werden deshalb nicht angeboten.</p>
+            <p>Die vollständigen Angaben zu tatsächlich eingesetzten Diensten stehen noch zur Prüfung. Diese Information sagt nicht zu, dass beteiligte Dienste keine technischen Daten verarbeiten.</p>
             <a href="/datenschutz" {...here("/datenschutz")}>Datenschutzhinweise</a>
           </div>
         </details>

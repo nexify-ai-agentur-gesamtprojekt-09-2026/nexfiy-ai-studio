@@ -4,7 +4,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/datenschutz.css?url";
 
 export const Route = createFileRoute("/datenschutz")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { name: "description", content: "Erfahren Sie, wie NeXify personenbezogene Daten verarbeitet und welche Rechte Sie haben." }, { property: "og:title", content: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { property: "og:description", content: "Erfahren Sie, wie NeXify personenbezogene Daten verarbeitet und welche Rechte Sie haben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { name: "description", content: "Datenhinweise zu Website, Konto, ORACLE, Agentenverbindungen und Anfragen. Die vollständige Datenschutzerklärung steht noch zur Prüfung." }, { property: "og:title", content: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { property: "og:description", content: "Datenhinweise zu Website, Konto, ORACLE, Agentenverbindungen und Anfragen. Die vollständige Datenschutzerklärung steht noch zur Prüfung." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -28,7 +28,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht</span>
                     <h1 id="page-title-privacy">Ihre Daten. Ein klarer Zweck.</h1>
-                    <p className={"identity-body"}>Hier finden Sie Hinweise zu Anfragen und zur ORACLE-Beratung. Die vollständige Datenschutzerklärung ist noch nicht abgeschlossen; insbesondere Angaben zu beteiligten Diensten, Rechtsgrundlagen und Aufbewahrung müssen geprüft und ergänzt werden.</p>
+                    <p className={"identity-body"}>Website, Konto, Produktberatung und individuelle Projekte verarbeiten unterschiedliche Informationen. Hier sind die vorhandenen Abläufe zugeordnet. Die vollständige Datenschutzerklärung bleibt in Prüfung: Empfänger, Rechtsgrundlagen, Aufbewahrung und mögliche Übermittlungen müssen abschließend bestätigt werden.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Mit NeXify Kontakt aufnehmen</span>
@@ -55,6 +55,14 @@ function Index() {
                     
 <h3>Anfrage und Beratung sind unterschiedliche Wege</h3>
 <p>Das Anfrageformular bereitet eine E-Mail vor. Sie versenden sie anschließend selbst in Ihrem E-Mail-Programm. Die ORACLE-Beratung dagegen verarbeitet Ihre eingegebene Frage über einen KI-Dienst. Nutzen Sie für beide Wege nur die Angaben, die für Ihr Anliegen erforderlich sind.</p>
+<h3>Konto und Agentenverbindung</h3>
+<p>Für die Registrierung verwenden Sie E-Mail-Adresse und Passwort. Anmeldung, E-Mail-Bestätigung und Passwortzurücksetzung werden über den Kontodienst verarbeitet. Die Anmeldung allein bestätigt weder einen aktivierten Suite-Arbeitsbereich noch einen API-Zugang.</p>
+<p>Eine externe Agentenverbindung wird nach Anmeldung gesondert autorisiert. Die Website-Werkzeuge liefern ausschließlich festgelegte öffentliche Seitentitel, Pfade und Kontaktangaben. Die Anmeldung ist kein Anlass, diese Antworten um private Kontodaten oder Projektinhalte zu ergänzen. Welche Kontoinformationen im Autorisierungsvorgang geteilt werden, wird dort angezeigt.</p>
+<h3>Suite, API und Agenturprojekt getrennt betrachten</h3>
+<p>Die Suite kann eigene Arbeitsmaterialien und Teamzugänge verwenden; bei der API sendet eine eigene Anwendung Daten für einen Aufruf. Welche Dienste, Inhalte und Zugriffe dafür tatsächlich vorgesehen sind, muss am konkreten Produktzugang beschrieben sein. Diese Website-Beratung bestätigt keine Verarbeitung innerhalb eines bereits aktivierten Produkts.</p>
+<p>Für beauftragte Websites, Portale, Kampagnen oder Automatisierungen werden die benötigten Daten und Übergabewege projektbezogen geklärt. Übergeben Sie vertrauliche Unterlagen erst über den dafür vereinbarten Weg, nicht über den öffentlichen ORACLE-Chat.</p>
+<h3>TEILEKLAR-Anfragen</h3>
+<p>Die TEILEKLAR-Hilfe ist eine Themenauswahl mit Anfrageübergabe, keine Teile-Matching-KI. Fahrzeugdaten, Teilenummer und Terminwunsch können in einem E-Mail-Entwurf stehen. Dieser Auftritt verarbeitet keine Onlinebestellung oder Zahlung; eine Anfrage erteilt keine Passungszusage.</p>
 <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/cookies">Sie wählen, was zusätzlich aktiv wird.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -71,6 +79,9 @@ function Index() {
                   
 <h3>Der Umfang dieser Information</h3>
 <p>Eine vollständige Datenschutzerklärung muss die Verantwortlichen und die tatsächlich eingesetzten Dienste benennen. Diese Übersicht erläutert einzelne Abläufe, bestätigt aber keine vollständige rechtliche Prüfung und legt keine zusätzlichen Speicherfristen fest.</p>
+<h3>Was vor einer abschließenden Freigabe noch feststehen muss</h3>
+<p>Für jeden Dienst sind Anbieter und Verantwortlichkeit, Zweck, Datenkategorien, Empfänger, Rechtsgrundlage, Aufbewahrung beziehungsweise deren Kriterien und gegebenenfalls internationale Übermittlungen zu bestätigen. Die konkrete Bearbeitung von Auskunfts-, Berichtigungs-, Löschungs- und weiteren Datenschutzanliegen gehört ebenfalls in die abschließenden Unterlagen. Aus dieser Übersicht folgen keine erfundenen Fristen oder Zusagen zur Verarbeitung durch Dienstanbieter.</p>
+<nav className="legal-scope-links" aria-label="Zugeordnete Datenhinweise"><a href="/impressum">Anbieterangaben</a><a href="/cookies">Browserspeicherung</a><a href="/ki-hinweise">KI-Beratung</a><a href="/teileklar/rechtliches">TEILEKLAR</a></nav>
 </div>
                 </section>
               </div>

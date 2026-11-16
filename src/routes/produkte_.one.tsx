@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -48,6 +49,8 @@ function Index() {
                 <a href="#content-one-one-customer-1-0">Von der Aufgabe zum Arbeitsschritt<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-one-one-customer-2-1">Sie sehen, was geschehen ist<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="one" label="Zwei Rollen im Auftrag" title="Ordnen, ausarbeiten, prüfen." summary="Agentenarbeit beginnt mit einem benannten Ergebnis. Welche Arbeitsschritte übernommen werden, gehört in das konkrete Angebot." facts={[{"label": "Passt zu", "content": "Klar umrissene Aufgaben mit nachvollziehbaren Quellen und überprüfbarem Ergebnis."}, {"label": "Rollen", "content": "AIFly ORACLE ordnet Aufgabe und Abhängigkeiten; NeX bearbeitet die freigegebenen Schritte."}, {"label": "Freigabe", "content": "Recherche, Entwurf und tatsächliche Ausführung bleiben unterscheidbar. Veröffentlichen und Versenden sind eigene Entscheidungen."}, {"label": "Umfang und Kosten", "content": "Werkzeuge, Datenzugriffe, Budget und Integration werden für den Einsatz vereinbart. Kein allgemeiner Autopilotzugang durch die Anmeldung."}]} example="Aus verstreuten Projektinformationen soll ein Entwurf entstehen. Zuerst werden Quellen und Ziel geklärt, anschließend wird der Entwurf ausgearbeitet und geprüft. Ein Versand folgt daraus nicht automatisch." links={[{"label": "Aufgabe schildern", "href": "/kontakt"}, {"label": "KI-Hinweise", "href": "/ki-hinweise"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-one-one-customer-1-0" tabIndex={-1} aria-labelledby="content-one-one-customer-1-0-title">
                   <div>
@@ -241,7 +244,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist noch keine Beauftragung.</p>
+              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Das Formular bereitet eine E-Mail vor, die Sie selbst versenden. Die Anfrage ist noch keine Beauftragung.</p>
             </div>
           </details>
         </div>

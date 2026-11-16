@@ -80,37 +80,28 @@
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.35); }
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .header-cta,.reopen-chat):hover { background: var(--glass-fill-hover); }
 :root:root #atelier .site-header::before { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.3); }
-:root:root #atelier .home-concept :is(h1,h2,h3) { letter-spacing: 0; text-wrap: balance; overflow-wrap: anywhere; }
-:root:root #atelier .home-concept .identity-copy h1 { font-size: 48px; line-height: 1.15; }
-:root:root #atelier .home-concept .pc-section-body > p { max-width: 68ch; line-height: 1.6; }
-:root:root #atelier .home-concept { font-family: var(--font-brand-text); font-size: 17px; line-height: 1.7; }
-:root:root #atelier .home-concept :is(h1,h2,h3,h4) { font-family: var(--font-brand-display); font-weight: 600; letter-spacing: 0; hyphens: none; word-break: normal; }
-:root:root #atelier .home-concept .identity-copy h1 { font-weight: 600; margin-bottom: 24px; max-width: 21ch; }
-:root:root #atelier .home-concept .identity-body { font-size: 18px; line-height: 1.7; max-width: 55ch; }
 :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-block: 56px; border-bottom: 1px solid var(--border); }
-:root:root #atelier .home-concept .pc-section h2 { font-size: 30px; line-height: 1.25; max-width: 24ch; margin: 16px 0 0; }
-:root:root #atelier .home-concept .pc-section-body { display: block; min-width: 0; max-width: 68ch; }
-:root:root #atelier .home-concept .pc-section-body > p { font-size: 17px; line-height: 1.75; margin: 0 0 24px; color: var(--muted-foreground); }
-:root:root #atelier .home-concept .pc-section-body > p:first-child { color: var(--foreground); font-size: 18px; }
-:root:root #atelier .home-concept .pc-section-body > h3 { font-size: 20px; line-height: 1.4; margin: 32px 0 12px; color: var(--foreground); }
-:root:root #atelier .home-concept .pc-section-body :is(ul,ol) { padding-left: 24px; margin: 16px 0 24px; }
-:root:root #atelier .home-concept .pc-section-body li { margin-block: 8px; }
-:root:root #atelier .home-concept .hc-kicker { font-family: var(--font-brand-mono); font-size: 11px; letter-spacing: 0; line-height: 1.6; color: var(--muted-foreground); }
-:root:root #atelier .home-concept .hc-section-heading h2 { font-size: 32px; line-height: 1.25; }
-:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) h3 { font-size: 23px; line-height: 1.35; }
-:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) p { font-size: 16px; line-height: 1.65; }
 :root:root #atelier .home-concept .pc-module { background: var(--glass-frosted); box-shadow: var(--glass-lens-shadow); backdrop-filter: blur(20px); margin-block: 24px; padding: 20px; border-radius: 8px; }
+/* Section borders were painting a full-width line behind the guide. Keep the
+   page continuous; data rows and actual framed controls retain their borders. */
+:root:root #atelier.site-shared .home-concept .pc-section { border-block: 0; }
+:root:root #atelier.site-shared .home-concept .product-overview { border-block: 0; }
+:root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-top: 24px; }
+:root:root #atelier.site-shared .home-concept :is(.pc-guide > .hc-service-detail,.hc-service-list > .hc-service-detail,.pc-module) { background: var(--glass-frosted); box-shadow: var(--elevation-glass-lift); backdrop-filter: blur(24px) saturate(1.2); border: 1px solid var(--border); }
+:root:root #atelier.site-shared .oracle-advice .oracle-starter { box-shadow: var(--elevation-glass-lift); }
+:root:root #atelier.site-shared .oracle-advice .oracle-starter:is(:hover,:focus-visible) { box-shadow: var(--elevation-glass-hover); }
+:root:root #atelier.site-shared :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 10px 8px var(--figure-shadow)) drop-shadow(0 3px 2px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.1); }
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  :root:root #atelier.site-shared .home-concept .pc-guide > details { grid-column: 1; }
+}
 @container website (max-width: 1000px) {
   :root:root #atelier .site-header .main-navigation { display: none; }
   :root:root #atelier .site-header .mobile-navigation { display: block; }
-  :root:root #atelier .home-concept .identity-copy h1 { font-size: 40px; }
 }
 @container website (max-width: 600px) {
-  :root:root #atelier .home-concept .identity-copy h1 { font-size: 32px; }
   :root:root #atelier .home-concept .identity-links { flex-wrap: wrap; }
   :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,1fr); gap: 24px; padding-block: 40px; }
-  :root:root #atelier .home-concept .pc-section h2 { font-size: 27px; margin-top: 12px; }
-  :root:root #atelier .home-concept .hc-section-heading h2 { font-size: 28px; }
 }
 @media (max-width: 767px) {
   :root:root #atelier .site-page-divider { display: none !important; }
@@ -144,6 +135,7 @@
 :root:root #atelier[data-scrolled="true"] .site-header { padding: 20px 20px 20px 28px; }
 :root:root #atelier .site-header > * { transform: none; }
 :root:root #atelier .site-header .header-actions { display: flex; flex: 0 0 auto; gap: 8px; margin-left: auto; }
+:root:root #atelier .site-header .header-tools { display: contents; }
 :root:root #atelier .site-header :is(.header-cta,.theme-switch,.header-actions select,.mobile-navigation > summary) { height: 44px; min-height: 44px; }
 :root:root #atelier .site-header .header-cta { display: inline-flex; align-items: center; padding: 0 16px; font-size: 12px; white-space: nowrap; background: var(--glass-clear); box-shadow: var(--glass-lens-shadow); }
 :root:root #atelier .site-header .theme-switch { width: 44px; min-width: 44px; padding: 0; }
@@ -168,6 +160,38 @@
   min-height: 44px;
 }
 :root:root #atelier :is(main[id], main [id]) { scroll-margin-top: calc(112px + env(safe-area-inset-top)); }
+/* Use the available page-column width, not the device width: a resized chat can
+   turn a desktop page into a compact navigation surface. */
+@container website (max-width: 1000px) {
+  :root:root #atelier.site-shared .site-header { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; padding: 20px; }
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header { padding: 20px; }
+  :root:root #atelier.site-shared .site-header > .brand { min-width: 0; min-height: 44px; margin: 0; padding: 0; }
+  :root:root #atelier.site-shared .site-header .nx-logo { --logo-h: 40px; min-width: 0; gap: 8px; }
+  :root:root #atelier.site-shared .site-header .nx-logo-wort { min-width: 0; }
+  :root:root #atelier.site-shared .site-header .nx-logo-name { font-size: 20px; letter-spacing: 0; }
+  :root:root #atelier.site-shared .site-header .nx-logo-claim { letter-spacing: 0; }
+  :root:root #atelier.site-shared .site-header .header-tools { display: grid; grid-template-columns: auto 44px; align-items: center; gap: 8px; min-width: 0; }
+  :root:root #atelier.site-shared .site-header .header-actions { grid-column: 1; grid-row: 1; flex-wrap: nowrap; margin: 0; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation { grid-column: 2; grid-row: 1; margin: 0; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation > summary { width: 44px; min-width: 44px; inline-size: 44px; min-inline-size: 44px; height: 44px; min-height: 44px; min-block-size: 44px; padding: 0; }
+  :root:root #atelier.site-shared .site-header .header-cta { display: none; }
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--glass-header-compact); backdrop-filter: blur(24px) saturate(1.25); }
+  :root:root #atelier.site-shared .site-header .mobile-navigation[open] .mobile-navigation-panel { inset: calc(100% - 4px) 12px auto; margin: 0; padding: 20px; gap: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); max-height: calc(100dvh - 104px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow-y: auto; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation-panel :is(.megamenu-group,.mobile-primary-links) { min-width: 0; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation-panel a { display: grid; grid-template-columns: minmax(0,1fr) auto; min-height: 44px; gap: 12px; white-space: normal; overflow-wrap: anywhere; font-size: 15px; line-height: 1.5; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation-panel svg { flex-shrink: 0; width: 18px; height: 18px; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation-panel > .nexify-control { position: static; justify-self: start; }
+}
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared .site-header,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header { height: calc(76px + env(safe-area-inset-top)); min-height: calc(76px + env(safe-area-inset-top)); padding: calc(16px + env(safe-area-inset-top)) 16px 16px; }
+  :root:root #atelier.site-shared .site-header::before,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { inset: calc(8px + env(safe-area-inset-top)) 8px 8px; }
+  :root:root #atelier.site-shared .site-header .nx-logo { --logo-h: 36px; }
+  :root:root #atelier.site-shared .site-header .nx-logo-claim { display: none; }
+  :root:root #atelier.site-shared .site-header .header-actions > select { display: none; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation[open] .mobile-navigation-panel { inset: calc(100% - 4px) 8px auto; padding: 16px; padding-bottom: max(16px,env(safe-area-inset-bottom)); grid-template-columns: minmax(0,1fr); max-height: calc(100dvh - 92px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+}
 @media (max-width: 767px) {
   :root:root #atelier:not([data-mobile-chat="true"]) #aifly-panel { display: none !important; }
   :root:root #atelier .site-header, :root:root #atelier[data-scrolled="true"] .site-header { height: calc(76px + env(safe-area-inset-top)); min-height: calc(76px + env(safe-area-inset-top)); padding: calc(16px + env(safe-area-inset-top)) 16px 16px 20px; gap: 8px; }
@@ -186,9 +210,13 @@
 }
 @supports not (backdrop-filter: blur(1px)) {
   :root:root #atelier .site-header::before, :root:root #atelier :is(.mobile-navigation-panel,.product-navigation-menu) { background: var(--background); }
+  :root:root #atelier.site-shared .site-header::before,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--background); }
 }
 @media (prefers-reduced-transparency: reduce) {
   :root:root #atelier .site-header::before, :root:root #atelier :is(.mobile-navigation-panel,.product-navigation-menu,.hc-anchors) { background: var(--background); backdrop-filter: none; }
+  :root:root #atelier.site-shared .site-header::before,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--background); backdrop-filter: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   :root:root #atelier .site-header,

@@ -1,6 +1,8 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { StatusPage } from "@/components/system/StatusPage";
+import { Button } from "@/components/ui/button";
 
 type Details = { client?: { name?: string; redirect_uri?: string } | null; scope?: string; redirect_url?: string; redirect_to?: string } | null;
 type Res = { data: Details; error: { message: string } | null };
@@ -29,11 +31,9 @@ export const Route = createFileRoute("/.lovable/oauth/consent")({
   },
   component: Consent,
   errorComponent: ({ error }) => (
-    <main style={{ maxWidth: 520, margin: "15vh auto", padding: 24, fontFamily: "system-ui" }}>
-      <h1>Verbindung nicht möglich</h1>
-      <p>{error instanceof Error ? error.message : "Unbekannter Fehler."}</p>
-      <a href="/">Zur Startseite</a>
-    </main>
+    <StatusPage tone="alert" kicker="NeXify AI · Verbindung" title="Verbindung nicht möglich"
+      description={<p>{error instanceof Error ? error.message : "Unbekannter Fehler."}</p>}
+      actions={<Button asChild variant="glass"><a href="/">Zur Startseite</a></Button>} />
   ),
 });
 
@@ -51,17 +51,16 @@ function Consent() {
     window.location.href = target;
   }
   return (
-    <main style={{ maxWidth: 520, margin: "12vh auto", padding: 24, fontFamily: "system-ui", lineHeight: 1.5 }}>
-      <h1>{name} mit NeXify AI verbinden</h1>
+    <StatusPage kicker="NeXify AI · Verbindung" title={`${name} mit NeXify AI verbinden`} description={<>
       <p>{name} kann die Werkzeuge dieser App in Ihrem Namen nutzen, solange Sie angemeldet sind.</p>
       {details?.client?.redirect_uri && <p><small>Rückleitung an: {details.client.redirect_uri}</small></p>}
       <ul><li>Ihr Basisprofil teilen</li><li>Ihre E-Mail-Adresse teilen</li></ul>
       <p><small>Die Berechtigungen der App gelten weiterhin unverändert.</small></p>
-      {error && <p role="alert">{error}</p>}
-      <div style={{ display: "flex", gap: 12 }}>
-        <button disabled={busy} onClick={() => decide(true)}>Erlauben</button>
-        <button disabled={busy} onClick={() => decide(false)}>Verbindung abbrechen</button>
-      </div>
-    </main>
+      </>} actions={<>
+        <Button variant="brand" disabled={busy} onClick={() => decide(true)}>Erlauben</Button>
+        <Button variant="glass" disabled={busy} onClick={() => decide(false)}>Verbindung abbrechen</Button>
+      </>}>
+        {error && <p role="alert" className="status-detail mt-6 text-destructive">{error}</p>}
+    </StatusPage>
   );
 }

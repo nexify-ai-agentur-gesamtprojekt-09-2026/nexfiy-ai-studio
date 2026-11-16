@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -48,6 +49,8 @@ function Index() {
                 <a href="#content-api-api-customer-1-0">Eine Schnittstelle nach Ihrem Datenfluss<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-api-api-customer-2-1">Nutzung und Kosten<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="api" label="In eigene Software integrieren" title="Die KI-Anfrage gehört in Ihren Datenfluss." summary="Die API ist der passende Produktweg für eine eigene Anwendung. Eine fertige Arbeitsoberfläche und individuelle Entwicklungsarbeit sind davon zu unterscheiden." facts={[{"label": "Passt zu", "content": "Unternehmen mit eigener Software und einer technischen Ansprechperson für Integration und Datenformate."}, {"label": "Voraussetzung", "content": "Definierte Eingaben, erwartete Ergebnisse, Berechtigungen und ein überprüfbarer Fehlerweg."}, {"label": "Kostenprinzip", "content": "Prepaid-Guthaben für Aufrufe; Integrationsaufwand separat. Tarife sind noch nicht freigegeben."}, {"label": "Heute hier", "content": "Produktinformationen und Anfrageweg. Kein direkter API-Schlüssel, Guthabenkauf oder sofortiger Endpunktzugang auf dieser Website."}]} example="Ihre Kunden-App soll einen Textentwurf erhalten und in ihrer eigenen Oberfläche anzeigen. Klären Sie vorab, welche Daten die App sendet, wie sie die Antwort prüft und was bei einem Fehler geschehen soll." links={[{"label": "API-Zugang klären", "href": "/kontakt?anliegen=Ich%20m%C3%B6chte%20die%20aktuellen%20Zugangsbedingungen%20der%20NeXify%20API%20kl%C3%A4ren."}, {"label": "Suite vergleichen", "href": "/produkte/nex2fly"}, {"label": "Produktbedingungen", "href": "/vertragsgrundlagen"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-api-api-customer-1-0" tabIndex={-1} aria-labelledby="content-api-api-customer-1-0-title">
                   <div>
@@ -185,11 +188,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Welche Anwendung sendet welche Anfrage, welches Ergebnis brauchen Sie, und wer darf zugreifen? Daraus beschreiben wir die Schnittstelle mit Datenformaten und Fehlerfällen.
-
-    Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre Verbindung eingerichtet. Den Zugang erhalten Sie im Rahmen eines Projekts, nicht über diese Seite. Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf und verbrauchen es mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt, damit keine Kosten entstehen, die Sie nicht erwarten.
-
-    Die Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung mit Ihnen.</p>
+              <p>Für die Verbindung müssen Eingaben, Ergebnisse, Datenformate und Fehlerfälle beschrieben sein. Berechtigungen und ein nachvollziehbarer Test gehören zur Einrichtung.</p><p>Der Zugang wird derzeit im Rahmen eines Projekts eingerichtet, nicht direkt über diese Seite. Prepaid-Guthaben betrifft den späteren Verbrauch; die Tarife stehen noch zur Freigabe.</p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -241,7 +240,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist noch keine Beauftragung.</p>
+              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Das Formular bereitet eine E-Mail vor, die Sie selbst versenden. Die Anfrage ist noch keine Beauftragung.</p>
             </div>
           </details>
         </div>

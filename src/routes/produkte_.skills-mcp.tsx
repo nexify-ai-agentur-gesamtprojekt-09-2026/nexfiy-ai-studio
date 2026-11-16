@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -49,6 +50,8 @@ function Index() {
                 <a href="#content-skills-mcp-skills-2-1">MCP: ein Zugang mit klaren Regeln<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-skills-mcp-skills-3-2">So kommen Sie zu Ihrer Anbindung<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="skills" label="Methoden und Werkzeugzugang" title="Die Methode ist nicht die Berechtigung." summary="Skills beschreiben wiederverwendbare Arbeitsweisen. MCP macht benannte Werkzeuge erreichbar; Datenrechte und erlaubte Handlungen bleiben gesondert festgelegt." facts={[{"label": "Skills", "content": "Strukturieren eine Aufgabe und ihre Prüfung; Herkunft, Eignung und Version gehören zur Auswahl."}, {"label": "MCP", "content": "Ein Standard für zugelassene Werkzeuge. Eine Verbindung ist keine pauschale Ausführungsvollmacht."}, {"label": "Diese Website", "content": "Nach Anmeldung und Autorisierung können Agenten öffentliche Seitentitel, Seitenpfade und Kontaktangaben abrufen. Keine privaten Projekt- oder Kontodaten über diese Werkzeuge."}, {"label": "Individuelle Anbindung", "content": "Benötigte Schnittstellen und Rechte hängen vom System ab und werden im konkreten Angebot benannt."}]} example="Ein Agent soll passende Informationsseiten finden. Die Website-Werkzeuge geben dafür öffentliche Angaben zurück; daraus folgt keine Berechtigung, Kundendokumente zu lesen oder Bestellungen auszuführen." links={[{"label": "Anmeldung", "href": "/anmelden"}, {"label": "KI-Hinweise", "href": "/ki-hinweise"}, {"label": "Anbindung anfragen", "href": "/kontakt"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-skills-mcp-skills-1-0" tabIndex={-1} aria-labelledby="content-skills-mcp-skills-1-0-title">
                   <div>

@@ -1,4 +1,20 @@
 # Roadmap
+## Hintergrund und Tiefenwirkung (16.11.)
+- [x] Markierte Hintergrundlinie als vollbreiten Abschnittsrand reproduziert und entfernt; Datenzeilen behalten ihre Orientierungslinien
+- [x] Glasflächen, Chat-Einstiege und freigestellte Figuren mit abgestimmten Lichtkanten und Kontaktschatten verstärkt; Desktop/Handy ohne Überlauf geprüft
+- [x] Guide und Fließtext auf Leistungen exakt ausgerichtet: Desktop beide x=489,48px, Handy beide x=24px; Header-Randabstände zuvor in sieben Breiten gemessen
+
+## Durchgängige Typografie (16.11.)
+- [x] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abgestimmt
+- [x] Chat-Einstieg, Antworten, Listen und Eingabe vereinheitlicht; echte Antwort mit H3-Zwischenüberschriften, 16px Schrift, 28px Zeilenhöhe und 24px Absatzrhythmus geprüft
+- [x] 46 öffentliche Seiten bei 1280/390px ohne Überlauf geprüft; reale API-Beratung und Einstiegslink auch am Handy erfolgreich, Berechtigungen unverändert
+- [x] Glasheader bei 320/390/600/768/900/1280/1705px vor und nach Scrollen geprüft: rechts/oben/unten je 8px zwischen Glas und rechtem Bedienelement; mobile Navigation und Escape funktionieren
+
+## Produktdarstellung und zugeordnete Rechtstexte (16.11.)
+- [x] Sechs Produktseiten und Agenturleistungen mit vergleichbaren Kurzprofilen, Voraussetzungen, Kostenprinzip, Beispiel und passenden Links ausgearbeitet; keine neuen Preise oder Fähigkeiten erfunden
+- [x] Datenschutz, KI-Hinweise, Cookies, Vertragsgrundlagen und TEILEKLAR den vorhandenen Funktionen zugeordnet; wirkungslose importierte Diagnose-Auswahl nicht mehr als wirksame Einwilligung dargestellt
+- [x] Beratungsgrundlage aktualisiert, irreführende Vorgangsnummer-Zusage auf bearbeiteten Seiten entfernt; Produkt-/Rechtsseiten bei 1280/390px und importiertes Rechtsarchiv geprüft; fehlende Anbieter-/Verarbeitungsangaben bleiben Freigabegrenze
+
 ## Glas und Header-Veredelung (16.11.)
 - [x] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinert
 - [x] Header schmaler: rechts/oben/unten exakt 8px Innenabstand gemessen, 84px Gesamthöhe auf Desktop
