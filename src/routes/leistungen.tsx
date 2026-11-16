@@ -315,7 +315,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Das Formular bereitet eine E-Mail vor, die Sie selbst versenden. Die Anfrage ist noch keine Beauftragung.</p>
+              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Das Formular speichert Ihre Anfrage und gibt Ihnen eine Vorgangsnummer. Die Anfrage ist noch keine Beauftragung.</p>
             </div>
           </details>
         </div>

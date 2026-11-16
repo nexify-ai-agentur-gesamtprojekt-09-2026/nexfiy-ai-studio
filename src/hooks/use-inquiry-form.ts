@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import {
   INQUIRY_FIELD_ORDER,
   buildInquiryMail,
@@ -11,47 +12,81 @@ import {
   type InquiryField,
   type InquiryKind,
   type InquiryMail,
+  type InquiryValues,
 } from "@/lib/inquiry";
+import { submitInquiry } from "@/lib/inquiry.functions";
+
+export type InquiryPhase = "editing" | "sending" | "sent" | "failed";
 
 /**
- * State for an inquiry form: validates on submit, re-checks edited fields after the first attempt,
- * focuses the first problem and hands a valid inquiry to the visitor's e-mail program.
+ * State for an inquiry form: validates locally, submits to the stored inquiry inbox and, only when the
+ * server cannot accept it, offers the e-mail draft as an explicit alternative.
  */
 export function useInquiryForm(kind: InquiryKind) {
   const baseId = useId();
+  const send = useServerFn(submitInquiry);
   const formRef = useRef<HTMLFormElement>(null);
   const handoffRef = useRef<HTMLHeadingElement>(null);
-  const focusTarget = useRef<InquiryField | "handoff" | null>(null);
+  const failureRef = useRef<HTMLParagraphElement>(null);
+  const focusTarget = useRef<InquiryField | "handoff" | "failure" | null>(null);
+  const lastValues = useRef<InquiryValues | null>(null);
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [attempts, setAttempts] = useState(0);
+  const [phase, setPhase] = useState<InquiryPhase>("editing");
+  const [reference, setReference] = useState<string | null>(null);
+  const [failure, setFailure] = useState<string | null>(null);
   const [mail, setMail] = useState<InquiryMail | null>(null);
 
   useEffect(() => {
     const target = focusTarget.current;
     focusTarget.current = null;
     if (target === "handoff") handoffRef.current?.focus();
+    else if (target === "failure") failureRef.current?.focus();
     else if (target) (formRef.current?.elements.namedItem(target) as HTMLElement | null)?.focus();
   });
 
   const onSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const values = readInquiryForm(event.currentTarget);
+      const form = event.currentTarget;
+      const values = readInquiryForm(form);
       const next = validateInquiry(kind, values);
       setAttempts((count) => count + 1);
       setErrors(next);
+      setFailure(null);
       const first = firstInvalidField(next);
       if (first) {
         focusTarget.current = first;
         return;
       }
-      const built = buildInquiryMail(kind, values);
-      focusTarget.current = "handoff";
-      setMail(built);
-      // Lange Texte bleiben zunächst sichtbar, damit kein unvollständiger Entwurf unbemerkt versendet wird.
-      if (!built.shortened) window.location.href = built.href;
+      lastValues.current = values;
+      setPhase("sending");
+      try {
+        const trap = new FormData(form).get("website");
+        const result = await send({
+          data: { kind, ...values, sourcePath: window.location.pathname, website: typeof trap === "string" ? trap : "" },
+        });
+        if (result.ok) {
+          setReference(result.reference);
+          setPhase("sent");
+          focusTarget.current = "handoff";
+          return;
+        }
+        if (result.errors && Object.values(result.errors).some(Boolean)) {
+          setErrors(result.errors);
+          setPhase("editing");
+          focusTarget.current = firstInvalidField(result.errors) ?? null;
+          return;
+        }
+        setFailure(result.error ?? "Ihre Anfrage konnte nicht gespeichert werden.");
+      } catch (error) {
+        console.error("inquiry submit failed", error);
+        setFailure("Die Verbindung ist fehlgeschlagen. Ihre Angaben sind noch im Formular.");
+      }
+      setPhase("failed");
+      focusTarget.current = "failure";
     },
-    [kind],
+    [kind, send],
   );
 
   /** After the first attempt, each edit re-checks just that field so messages clear as soon as it is fixed. */
@@ -72,9 +107,21 @@ export function useInquiryForm(kind: InquiryKind) {
     [attempts, kind],
   );
 
+  /** Explicit alternative after a failed submission: the visitor sends the prepared e-mail themselves. */
+  const prepareMail = useCallback(() => {
+    const values = lastValues.current ?? (formRef.current ? readInquiryForm(formRef.current) : null);
+    if (!values) return;
+    const built = buildInquiryMail(kind, values);
+    focusTarget.current = "handoff";
+    setMail(built);
+    // Lange Texte bleiben zunächst sichtbar, damit kein unvollständiger Entwurf unbemerkt versendet wird.
+    if (!built.shortened) window.location.href = built.href;
+  }, [kind]);
+
   const editAgain = useCallback(() => {
     focusTarget.current = "name";
     setMail(null);
+    setPhase("editing");
   }, []);
 
   const errorId = useCallback((field: InquiryField) => `${baseId}-${field}-error`, [baseId]);
@@ -84,11 +131,12 @@ export function useInquiryForm(kind: InquiryKind) {
     (field: InquiryField) => ({
       id: inputId(field),
       name: field,
+      disabled: phase === "sending",
       "aria-invalid": errors[field] ? ("true" as const) : ("false" as const),
       "aria-required": isInquiryFieldRequired(kind, field) || undefined,
       "aria-describedby": errors[field] ? errorId(field) : undefined,
     }),
-    [errors, errorId, inputId, kind],
+    [errors, errorId, inputId, kind, phase],
   );
 
   const hasErrors = useMemo(() => Object.values(errors).some(Boolean), [errors]);
@@ -96,12 +144,18 @@ export function useInquiryForm(kind: InquiryKind) {
   return {
     formRef,
     handoffRef,
+    failureRef,
     errors,
     hasErrors,
     attempts,
+    phase,
+    reference,
+    failure,
     mail,
+    submittedEmail: lastValues.current?.email ?? "",
     onSubmit,
     onChange,
+    prepareMail,
     editAgain,
     fieldProps,
     errorId,

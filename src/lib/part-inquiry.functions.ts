@@ -30,5 +30,10 @@ export const submitPartInquiry = createServerFn({ method: "POST" })
       attachment_type: attachment?.type ?? null, attachment_size: attachment?.size ?? null,
     });
     if (ins.error) { console.error("part inquiry insert failed", ins.error); return { ok: false, error: "Ihre Teilefrage konnte nicht gespeichert werden. Bitte erneut versuchen." }; }
-    return { ok: true, reference: id.slice(0, 8).toUpperCase() };
+    const { buildInquiryNotice, inquiryReference } = await import("./inquiry-notification");
+    const { deliverInquiryNotice, workspaceUrl } = await import("./inquiry-delivery.server");
+    await deliverInquiryNotice("teileklar_part_inquiries", id, buildInquiryNotice({
+      kind: "part", id, name: row.name, company: row.vehicle, sourcePath: "/teileklar/suche", hasAttachment: attachment !== null, workspaceUrl: await workspaceUrl(),
+    }));
+    return { ok: true, reference: inquiryReference(id) };
   });

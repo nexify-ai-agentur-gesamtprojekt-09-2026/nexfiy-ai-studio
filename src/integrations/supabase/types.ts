@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      inquiries: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          id: string
+          kind: string
+          message: string
+          name: string
+          slack_error: string | null
+          slack_notified_at: string | null
+          source_path: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          company?: string
+          created_at?: string
+          email: string
+          id?: string
+          kind: string
+          message: string
+          name: string
+          slack_error?: string | null
+          slack_notified_at?: string | null
+          source_path?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          id?: string
+          kind?: string
+          message?: string
+          name?: string
+          slack_error?: string | null
+          slack_notified_at?: string | null
+          source_path?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       teileklar_part_inquiries: {
         Row: {
           attachment_name: string | null
@@ -26,7 +71,10 @@ export type Database = {
           message: string
           name: string
           part: string
+          slack_error: string | null
+          slack_notified_at: string | null
           status: string
+          updated_at: string
           vehicle: string
         }
         Insert: {
@@ -40,7 +88,10 @@ export type Database = {
           message?: string
           name: string
           part: string
+          slack_error?: string | null
+          slack_notified_at?: string | null
           status?: string
+          updated_at?: string
           vehicle: string
         }
         Update: {
@@ -54,20 +105,119 @@ export type Database = {
           message?: string
           name?: string
           part?: string
+          slack_error?: string | null
+          slack_notified_at?: string | null
           status?: string
+          updated_at?: string
           vehicle?: string
+        }
+        Relationships: []
+      }
+      teileklar_products: {
+        Row: {
+          archived_at: string | null
+          brand: string
+          category: string
+          condition: string
+          delivery_note: string
+          ean: string
+          feed_created_at: string | null
+          id: string
+          image_alt: string
+          image_src: string
+          name: string
+          oe_number: string
+          price_value: number | null
+          source: string
+          specs: Json
+          status_label: string
+          stock: number
+          synced_at: string
+        }
+        Insert: {
+          archived_at?: string | null
+          brand?: string
+          category?: string
+          condition?: string
+          delivery_note?: string
+          ean?: string
+          feed_created_at?: string | null
+          id: string
+          image_alt?: string
+          image_src?: string
+          name: string
+          oe_number?: string
+          price_value?: number | null
+          source?: string
+          specs?: Json
+          status_label?: string
+          stock?: number
+          synced_at?: string
+        }
+        Update: {
+          archived_at?: string | null
+          brand?: string
+          category?: string
+          condition?: string
+          delivery_note?: string
+          ean?: string
+          feed_created_at?: string | null
+          id?: string
+          image_alt?: string
+          image_src?: string
+          name?: string
+          oe_number?: string
+          price_value?: number | null
+          source?: string
+          specs?: Json
+          status_label?: string
+          stock?: number
+          synced_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      teileklar_categories: {
+        Row: {
+          category: string | null
+          product_count: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -194,6 +344,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

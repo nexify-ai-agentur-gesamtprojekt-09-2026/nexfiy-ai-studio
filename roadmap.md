@@ -142,4 +142,13 @@
 - [ ] Shop füllen nach .de-Verbindung – Quelle der 3720 Produkte klären
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
 - [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
-- [~] Helles Design (#FFC758) läuft im Entwurf „Helles Design #FFC758“ – wartet auf Ergebnis und Pascals Vergleich
+- [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertig (Build OK) – wartet auf Pascals Vergleich und Annahme/Ablehnung
+
+## Gesamtfertigstellung (16.11.)
+- [ ] Anfragen echt speichern + Slack-Meldung (Kontakt, Partner, Termin, Gutschein, Teilefrage)
+- [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
+- [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
+- [ ] Texte zu Formular/Datenschutz an echtes Absenden anpassen
+- [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
+- [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
+- [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht

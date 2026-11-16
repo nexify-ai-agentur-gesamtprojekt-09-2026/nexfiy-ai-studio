@@ -53,7 +53,7 @@ function Index() {
         <a href="#content-tk-appointments-tk-appointments-customer-2-1">Den Termin bestätigt der Betrieb<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
       </nav>
       <section className={"hc-container pc-supplement"}>
-        <InquiryForm kind="appointment" title="Terminwunsch vorbereiten" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Fahrzeug, gewünschte Arbeit und Zeitraum" successTitle="Ihr Terminwunsch ist vorbereitet." initialMessage="Fahrzeug, Baujahr und Motor: 
+        <InquiryForm kind="appointment" title="Terminwunsch senden" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Fahrzeug, gewünschte Arbeit und Zeitraum" successTitle="Ihr Terminwunsch ist eingegangen." successBody="Ihre Angaben sind gespeichert. Das ist noch keine Buchung: Werkstatt, Umfang, Preis und Zeitpunkt werden Ihnen erst nach Rücksprache bestätigt." initialMessage="Fahrzeug, Baujahr und Motor: 
 Gewünschte Arbeit: 
 Ort und möglicher Zeitraum: 
 Vorhandenes Teil und offene Fragen: " />
@@ -84,7 +84,7 @@ Vorhandenes Teil und offene Fragen: " />
             <p>Umfang, Preis und Termin vereinbaren Sie mit der Werkstatt. Verbindlich ist ihre Zusage.</p>
           
 <h3>Was verbindlich werden muss</h3>
-<p>Werkstatt, Leistungsumfang, Preis und Zeitpunkt müssen vom Betrieb bestätigt werden. Die vorbereitete E-Mail ist keine Terminbestätigung. Ein Werkstattverzeichnis ist hier noch nicht angebunden; die Suche kann Ihnen stattdessen den Weg zu einer externen Kartensuche öffnen.</p>
+<p>Werkstatt, Leistungsumfang, Preis und Zeitpunkt müssen vom Betrieb bestätigt werden. Ein gesendeter Terminwunsch ist keine Terminbestätigung. Ein Werkstattverzeichnis ist hier noch nicht angebunden; die Suche kann Ihnen stattdessen den Weg zu einer externen Kartensuche öffnen.</p>
 </div>
         </section>
       </div>
