@@ -210,10 +210,6 @@ export function NexifyHeader() {
               </svg>
             </a>
           </div>
-          <div className="mobile-localization">
-            <label htmlFor={`${id}-locale-menu`}>Sprache</label>
-            <select id={`${id}-locale-menu`} defaultValue="de"><option value="de">DE</option><option value="nl">NL</option><option value="fr">FR</option><option value="en">EN</option></select>
-          </div>
           <Button variant="ghost" type="button" className={"nexify-control"} data-variant="quiet" onClick={closeMenu}>Menü schließen</Button>
         </nav>
       </details>

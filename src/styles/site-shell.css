@@ -123,7 +123,6 @@
 :root:root #atelier .site-header > * { transform: none; }
 :root:root #atelier .site-header .header-actions { display: flex; flex: 0 0 auto; gap: 8px; margin-left: auto; }
 :root:root #atelier .site-header .header-tools { display: contents; }
-:root:root #atelier .site-header .mobile-localization { display: none; }
 :root:root #atelier .site-header :is(.header-cta,.theme-switch,.header-actions select,.mobile-navigation > summary) { height: 44px; min-height: 44px; }
 :root:root #atelier .site-header .header-cta { display: inline-flex; align-items: center; padding: 0 16px; font-size: 12px; white-space: nowrap; background: var(--glass-clear); box-shadow: var(--glass-lens-shadow); }
 :root:root #atelier .site-header .theme-switch { width: 44px; min-width: 44px; padding: 0; }
@@ -153,7 +152,7 @@
 @container website (max-width: 1000px) {
   :root:root #atelier.site-shared .site-header { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; padding: 20px; }
   :root:root #atelier.site-shared[data-scrolled="true"] .site-header { padding: 20px; }
-  :root:root #atelier.site-shared .site-header > .brand { min-width: 0; min-height: 44px; padding: 0; }
+  :root:root #atelier.site-shared .site-header > .brand { min-width: 0; min-height: 44px; margin: 0; padding: 0; }
   :root:root #atelier.site-shared .site-header .nx-logo { --logo-h: 40px; min-width: 0; gap: 8px; }
   :root:root #atelier.site-shared .site-header .nx-logo-wort { min-width: 0; }
   :root:root #atelier.site-shared .site-header .nx-logo-name { font-size: 20px; letter-spacing: 0; }
@@ -163,12 +162,12 @@
   :root:root #atelier.site-shared .site-header .mobile-navigation { grid-column: 2; grid-row: 1; margin: 0; }
   :root:root #atelier.site-shared .site-header .mobile-navigation > summary { width: 44px; min-width: 44px; inline-size: 44px; min-inline-size: 44px; height: 44px; min-height: 44px; min-block-size: 44px; padding: 0; }
   :root:root #atelier.site-shared .site-header .header-cta { display: none; }
-  :root:root #atelier.site-shared .site-header[data-scrolled]::before,
   :root:root #atelier.site-shared[data-scrolled="true"] .site-header::before { background: var(--glass-header-compact); backdrop-filter: blur(24px) saturate(1.25); }
   :root:root #atelier.site-shared .site-header .mobile-navigation[open] .mobile-navigation-panel { inset: calc(100% - 4px) 12px auto; margin: 0; padding: 20px; gap: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); max-height: calc(100dvh - 104px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow-y: auto; }
   :root:root #atelier.site-shared .site-header .mobile-navigation-panel :is(.megamenu-group,.mobile-primary-links) { min-width: 0; }
   :root:root #atelier.site-shared .site-header .mobile-navigation-panel a { display: grid; grid-template-columns: minmax(0,1fr) auto; min-height: 44px; gap: 12px; white-space: normal; overflow-wrap: anywhere; font-size: 15px; line-height: 1.5; }
   :root:root #atelier.site-shared .site-header .mobile-navigation-panel svg { flex-shrink: 0; width: 18px; height: 18px; }
+  :root:root #atelier.site-shared .site-header .mobile-navigation-panel > .nexify-control { position: static; justify-self: start; }
 }
 @container website (max-width: 600px) {
   :root:root #atelier.site-shared .site-header,
@@ -178,8 +177,6 @@
   :root:root #atelier.site-shared .site-header .nx-logo { --logo-h: 36px; }
   :root:root #atelier.site-shared .site-header .nx-logo-claim { display: none; }
   :root:root #atelier.site-shared .site-header .header-actions > select { display: none; }
-  :root:root #atelier.site-shared .site-header .mobile-localization { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; font-size: 14px; }
-  :root:root #atelier.site-shared .site-header .mobile-localization select { min-width: 72px; min-height: 44px; padding: 8px 12px; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 8px; }
   :root:root #atelier.site-shared .site-header .mobile-navigation[open] .mobile-navigation-panel { inset: calc(100% - 4px) 8px auto; padding: 16px; padding-bottom: max(16px,env(safe-area-inset-bottom)); grid-template-columns: minmax(0,1fr); max-height: calc(100dvh - 92px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
 }
 @media (max-width: 767px) {

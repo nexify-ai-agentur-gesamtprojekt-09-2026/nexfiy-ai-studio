@@ -59,6 +59,7 @@
 :root:root #atelier.site-shared .oracle-advice .oracle-response p { font-size: inherit; line-height: inherit; margin: 0; }
 :root:root #atelier.site-shared .oracle-advice .oracle-response > * + *,
 :root:root #atelier.site-shared .oracle-advice .oracle-response :is(li,blockquote) > * + * { margin-top: var(--space-paragraph); }
+:root:root #atelier.site-shared .oracle-advice .oracle-message .oracle-response p + p { margin-top: var(--space-paragraph); }
 :root:root #atelier.site-shared .oracle-advice .oracle-response :is(h3,h4) { font-size: var(--type-subheading); line-height: 1.4; margin-bottom: 12px; max-width: var(--measure-heading); }
 :root:root #atelier.site-shared .oracle-advice .oracle-response :is(h3,h4) + * { margin-top: 0; }
 :root:root #atelier.site-shared .oracle-advice .oracle-response :is(ul,ol) { padding-inline-start: 24px; line-height: inherit; }
