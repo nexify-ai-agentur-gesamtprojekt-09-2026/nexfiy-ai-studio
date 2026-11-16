@@ -3,7 +3,8 @@
 - [x] Kommentar 80c95bd2-dd43-44d0-b80a-a305a4faee35 gelesen: Standard-/Hover-Füllungen für Abschnittslinks getauscht; sechs Breiten-/Theme-Zustände ohne Geometrieänderung geprüft und im Thread beantwortet, nicht aufgelöst
 
 ## Domain-Reihenfolge (16.11.)
-- [ ] Zuerst nexifyai.de durch Pascal verbinden und öffentlich prüfen; erst nach erfolgreicher Prüfung nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen
+- [x] nexifyai.de veröffentlicht (05:51 UTC) und geprüft: Start, Kontakt, Shop 200, www leitet auf nexifyai.de, Shop-Bild 200, MCP ohne Anmeldung 401
+- [ ] nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen (Pascal, Domain-Einstellungen)
 - [ ] teileklar.shop erst nach gesonderter Shop-Abnahme anschließen: mindestens 3720 Produkte, Livezahlung und erfolgreiche Testbestellung; bestehende Domain nicht vorzeitig umschalten
 
 ## Hostinger-Zugang und Engineering-Skill (16.11.)
@@ -141,7 +142,7 @@
 - [x] Anhang bis 10 MB, privat
 - [x] Shop gefüllt: 3.720 Artikel aus dem bisherigen Shop-Feed, Katalog/Suche/Kategorien/Artikelseiten
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
-- [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
+- [x] Veröffentlicht: nexifyai.de erreichbar (16.11. 05:51 UTC)
 - [x] Helles Design (#FFC758): Vergleich Startseite, Kontakt, Produktseite (Computer + Handy) erstellt; Farbkante im Beratungsfeld und Sprachauswahl in der Hauptversion behoben (übernimmt der Entwurf bei Annahme); TEILEKLAR bleibt dunkel
 - [x] Helles Design abgelehnt (16.11.) – dunkles Graphite-Design bleibt
 
@@ -174,9 +175,10 @@
 - [x] 47 Seiten bei 1280px: 0 Laufzeitfehler, 0 Überlauf, 0 automatisch erkannte WCAG-A/AA-Verstöße (axe 4.10); 97 interne Links alle 200
 - [x] Filme: alle fünf Markenfilme enthalten Sprache (lokal erkannt), nur einer hatte Text – Untertitel und „Gesprochener Text“ für alle fünf ergänzt, Untertitel-Knopf in der gemeinsamen Filmbedienung; 12 Filmseiten bei 1280/390px ohne Größenänderung, Untertitel bei 1280/390/320px im Browser geprüft. ANNAHME: Wortlaut automatisch erkannt, Markennamen von Hand gesetzt – Pascal bitte gegenlesen
 - [x] aria-label auf zwei rollenlosen Containern (Kostenhinweis Startseite, Geräteliste App-Leiste) korrigieren
-- [ ] Handy-Durchlauf (390px) aller Seiten auf Überlauf/Laufzeitfehler
+- [x] Handy-Durchlauf (390px): 47 Seiten ohne Überlauf/Laufzeitfehler
+- [x] Anmeldeseite mit Rücksprungziel (z. B. vom Arbeitsplatz): Hydrationsfehler der Kontowechsel-Links behoben und geprüft
 - [x] „Lovable“ entfernen: Favicon (Lovable-Herz) durch NeXify-Figur ersetzt (PNG + ICO 16/32/48); App-Symbole und Manifest waren bereits NeXify; ausgelieferte Seiten ohne „Lovable“
-- [ ] Plattform-Hinweis „Edit with Lovable“ auf der veröffentlichten Seite ausblenden (Freigabe Pascal im Dialog)
+- [x] Plattform-Hinweis „Edit with Lovable“: bereits ausgeblendet (Einstellung gelesen 06:06 UTC); Live-Seiten ohne „Lovable“ im Seitentext
 - [ ] Anmelde-E-Mails (Registrierung, Passwort) kommen noch mit Standard-Absender der Plattform – eigene Absenderdomain nexifyai.de einrichten (Dialog + DNS, Pascal)
 - [ ] Abschlussprüfung vor Veröffentlichung (Build, Tests, Sicherheit, Seitenrundgang) und Veröffentlichung auf Pascals Wunsch
 - [ ] Formatierung: 6.394 reine Formatierungsmeldungen und 550 „any“-Meldungen der Code-Prüfung abbauen (ohne generierte Dateien)
