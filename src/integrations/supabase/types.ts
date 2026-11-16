@@ -169,6 +169,8 @@ export type Database = {
           image_alt: string
           image_checked_at: string | null
           image_checked_src: string
+          image_cutout_of: string
+          image_cutout_path: string
           image_path: string
           image_pending: boolean | null
           image_src: string
@@ -196,6 +198,8 @@ export type Database = {
           image_alt?: string
           image_checked_at?: string | null
           image_checked_src?: string
+          image_cutout_of?: string
+          image_cutout_path?: string
           image_path?: string
           image_pending?: boolean | null
           image_src?: string
@@ -223,6 +227,8 @@ export type Database = {
           image_alt?: string
           image_checked_at?: string | null
           image_checked_src?: string
+          image_cutout_of?: string
+          image_cutout_path?: string
           image_path?: string
           image_pending?: boolean | null
           image_src?: string
@@ -277,6 +283,7 @@ export type Database = {
           has_image: boolean | null
           id: string | null
           image_alt: string | null
+          image_cutout: string | null
           image_path: string | null
           in_stock: boolean | null
           max_price: number | null
