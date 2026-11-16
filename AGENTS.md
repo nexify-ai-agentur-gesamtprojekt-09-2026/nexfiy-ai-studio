@@ -56,3 +56,4 @@ use the editor.
 - Auth input validation is field-specific and browser-local; provider failures remain form-level and never change hosted authentication settings.
 - TEILEKLAR search helpers preserve the current query and prepare explicit contact or external-map links; guidance selectors remain brand-scoped and cannot imply catalogue, booking or partner access.
 - Engineering skills preserve uploaded source provenance and project/platform boundaries; their checklists cannot activate infrastructure or imply verified production operations.
+- Brand tokens live only in `src/design-system/graphite/` (tokens.css, theme.css), imported before page styles; client brands override the same roles in their own token file so the library stays reusable across projects.

@@ -142,3 +142,4 @@
 - [ ] Shop füllen nach .de-Verbindung – Quelle der 3720 Produkte klären
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
 - [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
+- [~] Helles Design (#FFC758) läuft im Entwurf „Helles Design #FFC758“ – wartet auf Ergebnis und Pascals Vergleich
