@@ -1,7 +1,7 @@
 # Roadmap
 ## App-Installation unter dem Footer (16.11.)
 - [ ] Gemeinsame, designgerechte Installationsleiste mit Browser-Installation und gerätespezifischer Anleitung ergänzen
-- [ ] Generierten App-Worker nur auf der veröffentlichten Website aktivieren; Vorschau, private Seiten und Schnittstellen nicht zwischenspeichern
+- [ ] Gemäß Geräteauswahl nur Installation mit Internet umsetzen; kein Offline-Worker und keine Zwischenspeicherung hinzufügen
 - [ ] Installation, Abbrechen, Anleitung und bereits installierte Ansicht auf Desktop/Handy prüfen; echte Geräteinstallation benötigt Veröffentlichung
 
 ## Hintergrund und Tiefenwirkung (16.11.)
