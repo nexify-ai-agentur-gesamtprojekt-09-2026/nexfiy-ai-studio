@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { submitPartInquiry } from "@/lib/part-inquiry.functions";
 import { PART_LIMITS, normalizePartInquiry, validatePartInquiry, type PartInquiryErrors, type PartInquiryField } from "@/lib/part-inquiry";
 
-export function PartInquiryForm() {
+export function PartInquiryForm({ initialPart = "" }: { initialPart?: string }) {
   const id = useId();
   const submit = useServerFn(submitPartInquiry);
   const formRef = useRef<HTMLFormElement>(null);
@@ -47,7 +47,7 @@ export function PartInquiryForm() {
       <div className="tk-field"><label htmlFor={`${id}-name`}>Name *</label><input {...f("name")} required autoComplete="name" maxLength={PART_LIMITS.name} />{err("name")}</div>
       <div className="tk-field"><label htmlFor={`${id}-email`}>E-Mail *</label><input {...f("email")} required type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={PART_LIMITS.email} />{err("email")}</div>
       <div className="tk-field"><label htmlFor={`${id}-vehicle`}>Fahrzeug (Marke, Modell, Baujahr) *</label><input {...f("vehicle")} required maxLength={PART_LIMITS.vehicle} />{err("vehicle")}</div>
-      <div className="tk-field"><label htmlFor={`${id}-part`}>Gesuchtes Teil oder Nummer *</label><input {...f("part")} required maxLength={PART_LIMITS.part} />{err("part")}</div>
+      <div className="tk-field"><label htmlFor={`${id}-part`}>Gesuchtes Teil oder Nummer *</label><input {...f("part")} required maxLength={PART_LIMITS.part} defaultValue={initialPart.slice(0, PART_LIMITS.part)} />{err("part")}</div>
       <div className="tk-field is-wide"><label htmlFor={`${id}-message`}>Weitere Angaben</label><textarea {...f("message")} rows={4} maxLength={PART_LIMITS.message} />{err("message")}</div>
       <div className="tk-field is-wide"><label htmlFor={`${id}-attachment`}>Foto oder Dokument (optional, bis 10 MB)</label><input {...f("attachment")} type="file" accept="image/jpeg,image/png,image/webp,image/heic,application/pdf" /><p className="tk-meta">JPG, PNG, WebP, HEIC oder PDF, z. B. Fahrzeugschein ohne persönliche Daten oder ein Foto des Teils.</p>{err("attachment")}</div>
     </div>

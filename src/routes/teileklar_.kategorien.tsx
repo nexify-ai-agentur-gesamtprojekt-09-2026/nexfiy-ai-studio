@@ -28,7 +28,7 @@ function Index() {
                   <span aria-hidden="true">/</span>
                 </li>
                 <li>
-                  <a href="/teileklar/shop">Shop</a>
+                  <a href="/teileklar/shop">Katalog</a>
                   <span aria-hidden="true">/</span>
                 </li>
                 <li>
@@ -47,8 +47,7 @@ function Index() {
           {data.categories.map((entry) => <li key={entry.category}><a href={`/teileklar/shop?kategorie=${encodeURIComponent(entry.category)}#katalog`}>{entry.category}<span>{COUNT.format(entry.product_count)} Artikel</span></a></li>)}
         </ul>
       </section>
-      <section className={"hc-container pc-supplement tk-shop-body"} aria-labelledby="tkc-fitment-title">
-        <h2 id="tkc-fitment-title">Prüfhinweise nach Teileart</h2>
+      <section className={"hc-container pc-supplement tk-shop-body"}>
         <p className="tk-meta">Für Fahrzeugteile zählt die Passung. Wählen Sie eine Teileart, um die wichtigen Angaben für Ihre Anfrage vorzubereiten.</p>
         <FitmentChecklist />
       </section>
