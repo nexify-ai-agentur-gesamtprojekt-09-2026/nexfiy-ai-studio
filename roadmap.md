@@ -1,28 +1,28 @@
 # Roadmap
 ## Glas und Header-Veredelung (16.11.)
-- [ ] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinern
-- [ ] Header schmaler abstimmen; rechten Innenabstand zum oberen/unteren Buttonabstand exakt messen und angleichen
-- [ ] Header beim Scrollen sichtbar mitführen; Glaswirkung und Abstände oben sowie im gescrollten Zustand eigenständig vermessen
-- [ ] Lesbarkeit, Transparenz-Fallbacks, Mobile und reduzierte Bewegung erneut überprüfen
+- [x] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinert
+- [x] Header schmaler: rechts/oben/unten exakt 8px Innenabstand gemessen, 84px Gesamthöhe auf Desktop
+- [x] Header beim Scrollen sichtbar mitgeführt; Abstände bei 1705/1280px oben und gescrollt identisch
+- [x] Desktop/Handy und helle Ansicht geprüft; Transparenz-/Bewegungs-Fallbacks erhalten
 
 ## Stabiler Seitenstart (16.11.)
-- [ ] Den mittig erscheinenden und nach rechts springenden Chat beim Laden reproduzieren und beseitigen
-- [ ] Gemeinsame Seiten-, Schrift- und Medienladeprobleme auf allen Inhaltsseiten prüfen und korrigieren
-- [ ] Kalte Seitenaufrufe und Seitenwechsel auf Desktop/Handy mit Layout-Verschiebungsmessung überprüfen
+- [x] Falsche Startbreite und mobil vorzeitig sichtbaren Chat reproduziert und beseitigt
+- [x] Gemeinsame Geometrie vor Hydration geladen, Schriftdateien vorgeladen und mobile Trennlinie sofort verborgen
+- [x] Initiale Chatposition mit/ohne JavaScript verglichen; finaler mobiler Unternehmens-Kaltstart CLS 0; 46 öffentliche Inhaltsseiten ohne Laufzeitfehler geprüft
 
 ## Schriftbild und Informationskonzept (16.11.)
-- [ ] Alle Texte mit klarerer typografischer Hierarchie, gegliederten Überschriften und lesbaren Textmaßen gestalten
-- [ ] Informationsgehalt und längere, konkret gegliederte Inhalte auf allen Inhaltsseiten erweitern, beginnend mit Unternehmen
-- [ ] Faktengebunden bleiben: keine zusätzlichen Leistungs-, Preis- oder Rechtsversprechen erfinden
-- [ ] Darstellung auf Desktop und Handy sowie vorhandene Abläufe nach der Erweiterung prüfen
+- [x] Gemeinsames Schriftbild mit klarer Hierarchie, festen Schriftgrößen und lesbaren Textmaßen gestaltet
+- [x] Unternehmen, Startseiten und 28 weitere Themenseiten mit konkreten Unterüberschriften und Informationen erweitert; reine Konto-/Formulartexte nicht künstlich verlängert
+- [x] Bestehende Fakten und Grenzen erhalten; keine Tarife oder Rechtsfreigabe erfunden
+- [x] Desktop/Handy und vorhandene Abläufe geprüft; 35 Tests erfolgreich
 
 ## Technische Nacharbeit (16.11.)
-- [ ] TEILEKLAR-Seiten an einen gemeinsamen Rahmen mit funktionierender Hilfe, Navigation und Suchübergabe anschließen
-- [ ] Wirkungslose Angebots-/Termin- und Begleitungsaktionen an vorhandene echte Einstiege anschließen
-- [ ] Terminanfrage mit bestehender Prüfung und E-Mail-Übergabe verbinden
-- [ ] Theme-Umschaltung und mobile Fokusführung vervollständigen
-- [ ] Fehlende Detailziele und Rechner anhand vorhandener Daten/Regeln prüfen und technisch schließen
-- [ ] Änderungen auf Desktop/Handy und mit Tests prüfen; externe Waren-/Zahlungsanbindung nicht erfinden
+- [x] 15 TEILEKLAR-Seiten an gemeinsamen Rahmen mit Hilfe, Navigation und Such-Anfrageübergabe angeschlossen
+- [x] Angebots-/Terminaktionen und 24 Begleitungsmenüs an echte lokale Einstiege angeschlossen
+- [x] Terminanfrage mit Prüfung und E-Mail-Übergabe im Browser vollständig getestet
+- [x] Theme-Umschaltung, mobile Menübedienung, Fokusbegrenzung und Fokusrückkehr geprüft
+- [x] Produkt-/Kategorieziel ergänzt, nominalen Reifenrechner und Checkliste implementiert und getestet
+- [x] Desktop/Handy geprüft; ohne Waren-/Zahlungsanbindung keine falschen Ergebnisse angezeigt
 
 ## ORACLE-Produktberatung (15.11.)
 - [x] Öffentliche Suite/API-Produktinformationen als begrenzte Beratungsgrundlage hinterlegt
@@ -47,8 +47,8 @@
 - [ ] Echtes Safari/iPhone und externe MCP-OAuth-Autorisierung: bisher nicht abschließend nachgewiesen
 
 ## Erkannter älterer Nacharbeitsbestand (nicht als fertig bezeichnet)
-- TEILEKLAR: doppelte Rahmen, teilweise funktionslose Hilfe/Formulare, statischer Shop und unvollständige Rechner; Waren-/Zahlungsanbindung fehlt
-- Gemeinsame CTAs/Themes und seitenübergreifende Teaser: teilweise noch statisch oder nicht abschließend redigiert
+- TEILEKLAR: Rahmen/Hilfe/Formulare/Reifenrechner technisch nachgearbeitet; reale Waren-/Zahlungs-/Werkstattdaten sowie automatische Passung benötigen eine echte externe Anbindung
+- Seitenübergreifende ältere Teaser und importierte Rechtstexte benötigen weiter eine vollständige fachliche/redaktionelle Freigabe
 - Projektweite Lint-Prüfung: zahlreiche bestehende Formatierungs-/Regelverletzungen; aktuelle Vorschau kompiliert fehlerfrei
 
 ## UI/UX-Vorgaben (15.11.)
@@ -69,9 +69,9 @@
 - [x] NeXify-Seiten-Stylesheets als cachebare Dateien statt 420-KB-Text in HTML + JS; ältere TEILEKLAR-Seiten noch nicht vollständig migriert
 - [x] Deutsche, markengerechte Fehler- und „Seite nicht gefunden“-Seite
 - [x] Kontakt- und Partnerformular: Prüfung mit verständlichen Fehlermeldungen, Bestätigung, Zustellung per E-Mail-Programm an mail@nexifyai.cloud
-- [ ] Buttons ohne Funktion (z. B. „Angebot anfragen“, „Terminwunsch nennen“) mit echter Funktion belegen
+- [x] Bekannte Angebots-/Termin-/Frageknöpfe mit validiertem Anfrageentwurf verbunden
 - [x] NeXify-Chat: echte ORACLE-Beratung mit Lade-/Fehlerzustand; ältere TEILEKLAR-Hilfe noch offen
-- [ ] Tastatur & Screenreader: Fokus-Ringe, Menüs, Chat-Panel auf allen Seiten prüfen
+- [x] Gemeinsame Menü-/Chat-Tastaturabläufe geprüft; vollständige Screenreader-/WCAG-Prüfung nicht bestätigt
 
 
 ## Fehlende Seiten übernehmen (Hinweis Nutzer 14.11. „dir fehlen aber Seiten“)
@@ -79,5 +79,5 @@
 - [x] Produktseiten importiert; Verfügbarkeit/Zugang nur gemäß vorhandenen Informationen beschrieben
 - [x] Angebots-, Leistungs-, Wissens- und Unternehmensseiten importiert
 - [x] Konto: /anmelden, /registrieren mit echter Anmeldung vorhanden
-- [ ] TEILEKLAR: /teileklar/rechtliches, /shop, /kategorien, /kategorie, /produkt, /fahrzeug-und-passung, /suche, /warenkorb, /kasse, /bestellungen, /termine, /gutscheine, /reifenrechner, /batterie-berater
-- [ ] Neue Seiten an gemeinsame Bausteine anschließen (Stylesheet-Datei, Filme, Formulare, Menüs) und Links prüfen
+- [x] Alle genannten TEILEKLAR-Seiten vorhanden; Produkt-/Kategorieziel ergänzt, fehlende Commerce-Anbindung transparent
+- [x] Neue Seiten an gemeinsame Bausteine angeschlossen; 46 öffentliche Inhaltsseiten mit 200-Antwort und einem Inhaltsrahmen geprüft

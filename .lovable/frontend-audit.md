@@ -10,12 +10,12 @@ Stand: 16. November 2026. Grundlage: frühere Aufträge, aktuelle Quellen, sechs
 - Deutsche Dokument-Standardsprache; Cookie-Seite behauptet keine verfügbaren Einstellungen mehr.
 
 ## Erkannte offene Abweichungen
-1. TEILEKLAR besitzt noch kopierte Rahmen und unvollständige Chatbedienung; neuere Seiten nutzen nicht alle gemeinsamen Bausteine. Der öffentliche Suite/API-Berater ist kein Teileberater.
-2. Angebote/Terminwünsche und „Begleitung starten“ enthalten noch wirkungslose Knöpfe. Kontakt- und Partnerformulare verwenden E-Mail-Übergabe, keine serverseitige Zustellung.
-3. Shop, Warenkorb und Kasse sind nicht mit einem funktionierenden Warenkatalog oder Zahlungsablauf verbunden. Such-, Filter- und Wiederholen-Knöpfe sind teilweise statisch.
-4. Passungsoberfläche und Reifenrechner sind keine vollständigen Rechner; Batterie-Berater ist ausdrücklich noch nicht verfügbar. Produkt- und Kategorie-Detailseiten fehlen.
-5. TEILEKLAR-Terminformular verwendet noch eine native, nicht angeschlossene Übermittlung.
-6. Theme-Schalter hat noch keine funktionale Umschaltung. Einige TEILEKLAR-Seiten betten große Styles als Text ein.
+1. TEILEKLAR-Rahmen/Hilfe vereinheitlicht; öffentliche Hilfe ist ausdrücklich keine automatische Teileprüfung.
+2. Bekannte Angebots-/Termin-/Frageknöpfe und 24 Begleitungsmenüs angeschlossen. Formulare verwenden weiterhin E-Mail-Übergabe, keine serverseitige Zustellung.
+3. Warenkatalog, Werkstattverzeichnis und Zahlungsablauf fehlen extern; keine vorgetäuschten Ladefehler mehr. Suchbegriffe gehen in Anfrageentwürfe, Werkstattsuche öffnet auf Wunsch Karten.
+4. Nominaler Reifenvergleich funktioniert und ist getestet, erteilt keine Fahrzeugfreigabe. Produkt-/Kategorieziel ergänzt; automatische Passung/Batterieauswahl fehlen weiterhin.
+5. Terminanfrage mit Pflichtfeldprüfung und gültiger E-Mail-Übergabe getestet; keine Online-Terminreservierung.
+6. Theme-Schalter funktioniert und bleibt gespeichert; TEILEKLAR-Styles als Dateien eingebunden.
 7. API-Produktseite verlangt derzeit eine Projekteinstellung. Das steht im Spannungsfeld zum gewünschten vollständig eigenständigen DIY-Zugang. Einen nicht vorhandenen Freischaltungsablauf zu versprechen wäre falsch.
 8. Gesamte Texte, wiederholte Teaser und Rechtsseiten sind noch nicht abschließend redigiert. Produkttarife sowie vollständige Datenschutz-/Vertragsinformationen warten auf verifizierte Angaben/Freigabe.
 9. Manifest und iOS-Metadaten sind vorhanden, jedoch kein Offlinebetrieb. Echtes Safari/iPhone, vollständige WCAG-Konformität und externer MCP-OAuth-Client-Flow sind nicht abschließend getestet.
@@ -28,3 +28,10 @@ Stand: 16. November 2026. Grundlage: frühere Aufträge, aktuelle Quellen, sechs
 
 ## Messungen
 Leistungsseite: 1705px = 1185px Seite + 8px Trennlinie + 512px Chat; 1280px = 888px + 8px + 384px; 900px = 572px + 8px + 320px. Bei 390px ist der Chat eine eigene Vollbildansicht. Keine horizontale Überbreite in den gemessenen Ansichten.
+
+## Technische und gestalterische Nacharbeit 16.11.
+- 46 öffentliche Inhaltsseiten: HTTP 200, genau ein main, keine Browser-Laufzeitfehler. 35 Tests erfolgreich.
+- Desktop-Mausziehen: 384px → 483px; einklappen gibt volle Seitenbreite frei. Mobile Menüs, Escape, Fokusbegrenzung und Fokusrückkehr funktionieren.
+- Chatposition vor/nach Hydration bei 1280px identisch; mobil vor Öffnung unsichtbar. Finaler mobiler Unternehmens-Kaltstart CLS 0 im geprüften Lauf; keine allgemeine Core-Web-Vitals-Garantie.
+- Header sticky, 84px Desktop-Gesamthöhe; Buttonabstand rechts/oben/unten jeweils 8px vor/nach 800px Scroll bei 1705 und 1280px.
+- Shared Schriftbild und Glasrollen verfeinert; Unternehmen, Startseiten und 28 Themenseiten mit konkreterer Gliederung erweitert. Fachliche/Rechtsfreigabe bleibt ausstehend.
