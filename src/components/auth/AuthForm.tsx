@@ -1,9 +1,11 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { oauthReturnPath } from "@/lib/oauth-return-path";
+import { Button } from "@/components/ui/button";
+import { validateAuthInput, type AuthMode, type AuthField } from "@/lib/auth-form-validation";
 
-export type AuthMode = "login" | "signup" | "forgot" | "reset";
+export type { AuthMode } from "@/lib/auth-form-validation";
 
 const LABELS: Record<AuthMode, string> = {
   login: "Anmelden",
@@ -31,14 +33,24 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<AuthField,string>>>({});
+  const formRef = useRef<HTMLFormElement>(null);
+  const updateField = (field: AuthField, value: string) => {
+    if (field === "email") setEmail(value); else setPassword(value);
+    setError(null);
+    if (fieldErrors[field]) setFieldErrors((current) => ({ ...current, [field]: validateAuthInput(mode, field === "email" ? value : email, field === "password" ? value : password)[field] }));
+  };
   const needsEmail = mode !== "reset";
   const needsPassword = mode !== "forgot";
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
+    if (pending) return;
     setError(null);
-    if (needsEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) return setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
-    if (needsPassword && password.length < (mode === "login" ? 1 : 8)) return setError(mode === "login" ? "Bitte geben Sie Ihr Passwort ein." : "Das Passwort braucht mindestens 8 Zeichen.");
+    const nextErrors = validateAuthInput(mode, email, password);
+    setFieldErrors(nextErrors);
+    const first = nextErrors.email ? "auth-email" : nextErrors.password ? "auth-password" : null;
+    if (first) { formRef.current?.querySelector<HTMLInputElement>(`#${first}`)?.focus(); return; }
     setPending(true);
     try {
       if (mode === "login") {
@@ -46,7 +58,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         if (error) throw error;
         const next = returnTo(); if (next && next !== "/") window.location.assign(next); else await navigate({ to: "/konto" });
       } else if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: new URL(returnTo() && returnTo() !== "/" ? returnTo()! : "/konto", window.location.origin).href } });
+        const next = returnTo();
+        const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: new URL(next && next !== "/" ? next : "/konto", window.location.origin).href } });
         if (error) throw error;
         setDone("Fast geschafft: Wir haben Ihnen eine E-Mail geschickt. Bestätigen Sie den Link darin, dann können Sie sich anmelden.");
       } else if (mode === "forgot") {
@@ -75,31 +88,33 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   }
 
   return (
-    <form className="tk-form tk-auth" noValidate onSubmit={onSubmit} aria-busy={pending}>
+    <form ref={formRef} className="tk-form tk-auth" noValidate onSubmit={onSubmit} aria-busy={pending}>
       {needsEmail && (
         <div className="tk-field is-wide">
           <label htmlFor="auth-email">E-Mail-Adresse</label>
-          <input id="auth-email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} aria-invalid={error ? "true" : "false"} aria-describedby={error ? "auth-error" : undefined} required />
+          <input id="auth-email" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} value={email} onChange={(e) => updateField("email", e.target.value)} aria-invalid={fieldErrors.email ? "true" : "false"} aria-describedby={fieldErrors.email ? "auth-email-error" : undefined} disabled={pending} required />
+          {fieldErrors.email && <span id="auth-email-error" className="tk-field-error" role="alert">{fieldErrors.email}</span>}
         </div>
       )}
       {needsPassword && (
         <div className="tk-field is-wide">
           <label htmlFor="auth-password">{mode === "reset" ? "Neues Passwort" : "Passwort"}</label>
           <span className="nx-feld">
-            <input id="auth-password" type={showPassword ? "text" : "password"} autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} aria-invalid={error ? "true" : "false"} aria-describedby={error ? "auth-error" : undefined} required />
-            <button type="button" className="nx-feld-schalter" aria-pressed={showPassword} aria-label={showPassword ? "Passwort verbergen" : "Passwort anzeigen"} title={showPassword ? "Passwort verbergen" : "Passwort anzeigen"} onClick={() => setShowPassword((v) => !v)}>
+            <input id="auth-password" type={showPassword ? "text" : "password"} autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(e) => updateField("password", e.target.value)} aria-invalid={fieldErrors.password ? "true" : "false"} aria-describedby={fieldErrors.password ? "auth-password-error" : undefined} disabled={pending} required />
+            <Button variant="ghost" size="icon" type="button" className="nx-feld-schalter" aria-pressed={showPassword} aria-label={showPassword ? "Passwort verbergen" : "Passwort anzeigen"} title={showPassword ? "Passwort verbergen" : "Passwort anzeigen"} onClick={() => setShowPassword((v) => !v)}>
               <svg className="nx-zeichen" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5z" />
                 {showPassword && <path d="M4 4l16 16" />}
               </svg>
-            </button>
+            </Button>
           </span>
+          {fieldErrors.password && <span id="auth-password-error" className="tk-field-error" role="alert">{fieldErrors.password}</span>}
         </div>
       )}
       {error && <p id="auth-error" className="tk-alert" role="alert">{error}</p>}
-      <button type="submit" className="nexify-control primary-button hc-finish-primary tk-cta" data-variant="primary" disabled={pending}>
+      <Button variant="brand" type="submit" className="nexify-control primary-button hc-finish-primary tk-cta" data-variant="primary" disabled={pending}>
         {pending ? "Einen Moment …" : LABELS[mode]}
-      </button>
+      </Button>
       <div className="tk-actions">
         {mode !== "login" && <p><a href={"/anmelden" + (typeof window !== "undefined" ? window.location.search : "")}>Ich habe schon ein Konto</a></p>}
         {mode !== "signup" && <p><a href={"/registrieren" + (typeof window !== "undefined" ? window.location.search : "")}>Neues Konto erstellen</a></p>}
