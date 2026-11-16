@@ -8,7 +8,15 @@ import { Button } from "@/components/ui/button";
 const PLAY_PATH = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";
 
 /** One brand film with the site-wide discreet controls. Behaviour is wired by useAtelierFilms(). */
-export function SiteFilm({ film, eager = false, still = false }: { film: SiteFilmId; eager?: boolean; still?: boolean }) {
+export function SiteFilm({
+  film,
+  eager = false,
+  still = false,
+}: {
+  film: SiteFilmId;
+  eager?: boolean;
+  still?: boolean;
+}) {
   const data = SITE_FILMS[film];
   const volumeId = `${useId()}-volume`;
   if (still || !isPublicPlaybackFilm(film)) {
@@ -16,9 +24,16 @@ export function SiteFilm({ film, eager = false, still = false }: { film: SiteFil
       <div className="atelier-film atelier-film-hero" data-film={film} data-still="true">
         <link rel="stylesheet" href={filmCSS} precedence="site-film" />
         <div className="atelier-film-picture">
-          <img className="atelier-film-still" src={data.poster} alt={data.alt} width={1280} height={720}
-            loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"}
-            decoding="async" />
+          <img
+            className="atelier-film-still"
+            src={data.poster}
+            alt={data.alt}
+            width={1280}
+            height={720}
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager ? "high" : "auto"}
+            decoding="async"
+          />
         </div>
         <p className="hc-caption">Markeninszenierung · kein Kundenprojekt</p>
       </div>

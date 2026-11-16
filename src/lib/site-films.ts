@@ -1,7 +1,14 @@
 import type { FilmCue } from "./film-captions";
 
 /** Every brand film of the site, defined once and reused by each page that shows it. */
-export type SiteFilmId = "studio" | "angebot" | "fertigung" | "teileklar" | "arbeitsbereich" | "kennenlernen" | "zusammenarbeit";
+export type SiteFilmId =
+  | "studio"
+  | "angebot"
+  | "fertigung"
+  | "teileklar"
+  | "arbeitsbereich"
+  | "kennenlernen"
+  | "zusammenarbeit";
 
 export interface SiteFilmData {
   src: string;
