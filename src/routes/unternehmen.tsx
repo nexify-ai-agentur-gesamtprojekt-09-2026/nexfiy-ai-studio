@@ -27,7 +27,7 @@ function Index() {
                       </ol>
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen</span>
-                    <h1 id="page-title-company">Ein Ansprechpartner. Ein Agententeam.</h1>
+                    <h1 id="page-title-company">NeXify AI. Persönlich geführt. Mit KI umgesetzt.</h1>
                     <p className={"identity-body"}>NeXify AI ist die Agentur von Pascal Courbois in Venlo. Er begleitet Websites, Apps und digitale Abläufe persönlich. Bei der Ausarbeitung unterstützen die KI-Agenten NeX und AIFly ORACLE.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
@@ -57,6 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Im ersten Gespräch geht es um Ihr Unternehmen, Ihre Kunden und das Ergebnis, das Sie erreichen wollen. Pascal Courbois bleibt Ihr Ansprechpartner bis zur Übergabe.</p>
                     <p>Die Ausarbeitung tragen die KI-Agenten: NeX führt aus, AIFly ORACLE ordnet und koordiniert. Was entsteht, verantwortet Pascal. Vor dem Auftrag wissen Sie, welche Leistungen vereinbart sind.</p>
+                    <h3>Ein Gespräch über das Ergebnis, nicht über Schlagworte</h3>
+                    <p>Eine Website, eine Anwendung und ein automatisierter Ablauf lösen unterschiedliche Aufgaben. Deshalb beginnt ein Projekt mit der Frage, was im Alltag besser werden soll: Verstehen Kunden Ihr Angebot? Finden Mitarbeitende die benötigten Informationen? Wo muss heute dieselbe Angabe mehrfach erfasst werden? Aus diesen Fragen entsteht ein abgegrenzter Auftrag.</p>
+                    <h3>Persönliche Verantwortung und KI-Unterstützung</h3>
+                    <p>NeX und AIFly ORACLE sind KI-Systeme, keine zusätzlichen menschlichen Mitarbeiter. Sie unterstützen Ausarbeitung und Strukturierung. Ansprechpartner, vereinbarter Umfang und Verantwortung bleiben davon getrennt. Ein KI-Entwurf ersetzt weder die fachliche Prüfung noch eine verbindliche Freigabe.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/impressum">Impressum lesen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -71,6 +75,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>NeXify AI steht für die Agenturarbeit: Websites, Shops, Portale, Apps und KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich, die Agenten NeX und AIFly ORACLE, die NeXify API.</p>
                     <p>Die Suite lässt sich ohne Agenturauftrag nutzen; für die API gelten die auf ihrer Produktseite beschriebenen Zugangsbedingungen. TEILEKLAR.shop ist unsere eigene Marke für Auto und Motorrad.</p>
+                    <h3>Auftrag oder eigener Arbeitsbereich?</h3>
+                    <p>Wenn ein Ergebnis für Ihr Unternehmen konzipiert und umgesetzt werden soll, führt der Weg zu den Agenturleistungen. Wenn Sie selbst mit KI arbeiten möchten, steht die Suite als eigenständiges Produkt daneben. Die API richtet sich an Vorhaben, bei denen eine eigene Anwendung KI-Aufrufe verarbeitet. Die jeweiligen Einstiegsseiten beschreiben Voraussetzungen und Kostenmechanismus.</p>
+                    <h3>TEILEKLAR bleibt ein eigener Themenbereich</h3>
+                    <p>Fahrzeugdaten, Teilefragen und Werkstattkontakte gehören zu TEILEKLAR. Die dortige Hilfe bereitet eine Anfrage vor; sie bestätigt keine Fahrzeugpassung. Warenkatalog, Onlinekauf und Werkstattverzeichnis sind in diesem Auftritt noch nicht angebunden. Diese Grenzen bleiben sichtbar, auch wenn Gestaltung und Bedienung die gemeinsame Marke tragen.</p>
                   </div>
                 </section>
               </div>

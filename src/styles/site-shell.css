@@ -83,6 +83,23 @@
 :root:root #atelier .home-concept :is(h1,h2,h3) { letter-spacing: 0; text-wrap: balance; overflow-wrap: anywhere; }
 :root:root #atelier .home-concept .identity-copy h1 { font-size: 48px; line-height: 1.15; }
 :root:root #atelier .home-concept .pc-section-body > p { max-width: 68ch; line-height: 1.6; }
+:root:root #atelier .home-concept { font-family: var(--font-brand-text); font-size: 17px; line-height: 1.7; }
+:root:root #atelier .home-concept :is(h1,h2,h3,h4) { font-family: var(--font-brand-display); font-weight: 600; letter-spacing: 0; hyphens: none; word-break: normal; }
+:root:root #atelier .home-concept .identity-copy h1 { font-weight: 600; margin-bottom: 24px; max-width: 21ch; }
+:root:root #atelier .home-concept .identity-body { font-size: 18px; line-height: 1.7; max-width: 55ch; }
+:root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-block: 56px; border-bottom: 1px solid var(--border); }
+:root:root #atelier .home-concept .pc-section h2 { font-size: 30px; line-height: 1.25; max-width: 24ch; margin: 16px 0 0; }
+:root:root #atelier .home-concept .pc-section-body { display: block; min-width: 0; max-width: 68ch; }
+:root:root #atelier .home-concept .pc-section-body > p { font-size: 17px; line-height: 1.75; margin: 0 0 24px; color: var(--muted-foreground); }
+:root:root #atelier .home-concept .pc-section-body > p:first-child { color: var(--foreground); font-size: 18px; }
+:root:root #atelier .home-concept .pc-section-body > h3 { font-size: 20px; line-height: 1.4; margin: 32px 0 12px; color: var(--foreground); }
+:root:root #atelier .home-concept .pc-section-body :is(ul,ol) { padding-left: 24px; margin: 16px 0 24px; }
+:root:root #atelier .home-concept .pc-section-body li { margin-block: 8px; }
+:root:root #atelier .home-concept .hc-kicker { font-family: var(--font-brand-mono); font-size: 11px; letter-spacing: 0; line-height: 1.6; color: var(--muted-foreground); }
+:root:root #atelier .home-concept .hc-section-heading h2 { font-size: 32px; line-height: 1.25; }
+:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) h3 { font-size: 23px; line-height: 1.35; }
+:root:root #atelier .home-concept :is(.hc-gallery-card,.hc-process li) p { font-size: 16px; line-height: 1.65; }
+:root:root #atelier .home-concept .pc-module { background: var(--glass-frosted); box-shadow: var(--glass-lens-shadow); backdrop-filter: blur(20px); margin-block: 24px; padding: 20px; border-radius: 8px; }
 @container website (max-width: 1000px) {
   :root:root #atelier .site-header .main-navigation { display: none; }
   :root:root #atelier .site-header .mobile-navigation { display: block; }
@@ -91,6 +108,9 @@
 @container website (max-width: 600px) {
   :root:root #atelier .home-concept .identity-copy h1 { font-size: 32px; }
   :root:root #atelier .home-concept .identity-links { flex-wrap: wrap; }
+  :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,1fr); gap: 24px; padding-block: 40px; }
+  :root:root #atelier .home-concept .pc-section h2 { font-size: 27px; margin-top: 12px; }
+  :root:root #atelier .home-concept .hc-section-heading h2 { font-size: 28px; }
 }
 @media (max-width: 767px) {
   :root:root #atelier .site-oracle-pane { flex: 0 0 0px !important; width: 0; }

@@ -45,3 +45,5 @@ use the editor.
 - Shared imported CTAs and guides resolve fixed destinations centrally; unavailable commerce never displays fabricated loading/results or grants fitment.
 - Tyre comparisons use pure nominal geometry tested against existing page examples; the view never grants legal approval or fitment.
 - Captured and semantic light/dark surfaces use one document theme attribute, read after hydration to keep SSR stable.
+- Load shell, adviser and film geometry through the root stylesheet; reserve CSS-based panel widths before hydration so the initial page never depends on delayed route JavaScript.
+- Editorial hierarchy lives in shared shell styles; informative expansions stay in each route, distinguish existing capabilities from planned integrations, and add no commercial or legal promises.
