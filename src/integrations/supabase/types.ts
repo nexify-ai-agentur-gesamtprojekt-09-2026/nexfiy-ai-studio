@@ -181,6 +181,7 @@ export type Database = {
           status_label: string
           stock: number
           synced_at: string
+          variant_group: string | null
         }
         Insert: {
           archived_at?: string | null
@@ -207,6 +208,7 @@ export type Database = {
           status_label?: string
           stock?: number
           synced_at?: string
+          variant_group?: string | null
         }
         Update: {
           archived_at?: string | null
@@ -233,6 +235,7 @@ export type Database = {
           status_label?: string
           stock?: number
           synced_at?: string
+          variant_group?: string | null
         }
         Relationships: []
       }
@@ -263,6 +266,27 @@ export type Database = {
         Row: {
           category: string | null
           product_count: number | null
+        }
+        Relationships: []
+      }
+      teileklar_product_groups: {
+        Row: {
+          brand: string | null
+          category: string | null
+          delivery_note: string | null
+          has_image: boolean | null
+          id: string | null
+          image_alt: string | null
+          image_path: string | null
+          in_stock: boolean | null
+          max_price: number | null
+          min_price: number | null
+          name: string | null
+          price_value: number | null
+          search_keys: string | null
+          stock: number | null
+          variant_count: number | null
+          variant_group: string | null
         }
         Relationships: []
       }
