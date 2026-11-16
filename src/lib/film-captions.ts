@@ -6,9 +6,6 @@ export interface FilmCue {
   text: string;
 }
 
-/** Lifts cues above the bottom-left film controls on small players. */
-const CUE_SETTINGS = "line:68%";
-
 export function formatVttTime(seconds: number): string {
   if (!Number.isFinite(seconds) || seconds < 0) throw new Error(`Ungültige Untertitelzeit: ${seconds}`);
   const totalMs = Math.round(seconds * 1000);
@@ -34,7 +31,7 @@ export function assertValidCues(cues: readonly FilmCue[], duration: number): voi
 }
 
 export function toWebVtt(cues: readonly FilmCue[]): string {
-  const blocks = cues.map((cue, index) => `${index + 1}\n${formatVttTime(cue.start)} --> ${formatVttTime(cue.end)} ${CUE_SETTINGS}\n${cue.text}`);
+  const blocks = cues.map((cue, index) => `${index + 1}\n${formatVttTime(cue.start)} --> ${formatVttTime(cue.end)}\n${cue.text}`);
   return `WEBVTT\n\n${blocks.join("\n\n")}\n`;
 }
 

@@ -59,6 +59,8 @@ export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: bo
         <div className="atelier-film-progress" aria-hidden="true">
           <span style={{ transform: "scaleX(0)" }} />
         </div>
+        {/* Visual captions; screen readers get the same words from the transcript below. */}
+        <p className="atelier-film-caption" aria-hidden="true" hidden />
         <p className="atelier-film-status" role="status" hidden />
       </div>
       <details className="atelier-film-transcript">
