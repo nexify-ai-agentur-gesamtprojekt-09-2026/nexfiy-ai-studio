@@ -5,6 +5,11 @@
 - [ ] Desktop, Handy, verschobene Chatbreiten und reale Beratung prüfen; Inhalte und Berechtigungen unverändert lassen
 - [ ] Mitgehenden Glasheader auf schmalen Bildschirmen mit bedienbarer Navigation, abgestimmter Durchsicht und gemessenen Randabständen prüfen und verfeinern
 
+## Produktdarstellung und zugeordnete Rechtstexte (16.11.)
+- [ ] Suite, API und Agenturleistungen inhaltlich und visuell als unterschiedliche Einstiege präzisieren, ohne neue Preise oder Fähigkeiten zu erfinden
+- [ ] Datenschutz, KI-Hinweise, Cookies und Vertragsgrundlagen mit den tatsächlichen öffentlichen Funktionen und Produktgrenzen abgleichen
+- [ ] Produktinformationen, Beratungsgrundlage und Metadaten auf Konsistenz prüfen; fehlende Anbieter-/Verarbeitungsangaben als Freigabegrenze erhalten
+
 ## Glas und Header-Veredelung (16.11.)
 - [x] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinert
 - [x] Header schmaler: rechts/oben/unten exakt 8px Innenabstand gemessen, 84px Gesamthöhe auf Desktop
