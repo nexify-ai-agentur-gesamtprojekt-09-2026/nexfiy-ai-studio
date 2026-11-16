@@ -19,23 +19,23 @@
 
 /* site-import: preserve source CSS */
 :root {
-  --color-graphit-600: #303634;
-  --color-graphit-650: #2a2e2c;
-  --color-graphit-700: #242826;
-  --color-graphit-800: #1b1e1d;
-  --color-graphit-850: #1e2220;
-  --color-graphit-900: #1b1e1d;
+  --color-graphit-600: var(--graphite-500);
+  --color-graphit-650: var(--graphite-400);
+  --color-graphit-700: var(--graphite-200);
+  --color-graphit-800: var(--graphite-50);
+  --color-graphit-850: var(--graphite-100);
+  --color-graphit-900: var(--graphite-50);
   --color-linie-fein: #ffffff14;
-  --color-linie-mittel: #363a38;
-  --color-linie-stark: #4a4f4c;
-  --color-text-primaer: #f3f0ea;
-  --color-text-sekundaer: #e3e6e3;
-  --color-text-tertiaer: #bcc1bd;
-  --color-text-gedaempft: #9ca29e;
-  --color-text-auf-lime: #111312;
+  --color-linie-mittel: var(--line-mid);
+  --color-linie-stark: var(--line-strong);
+  --color-text-primaer: var(--foreground);
+  --color-text-sekundaer: var(--text-2);
+  --color-text-tertiaer: var(--text-3);
+  --color-text-gedaempft: var(--text-4);
+  --color-text-auf-lime: var(--brand-signal-foreground);
   --color-marke-cyan: #38bdf8;
-  --color-marke-lime: #a8c76a;
-  --color-marke-lime-signal: #c0ee38;
+  --color-marke-lime: var(--brand-signal);
+  --color-marke-lime-signal: var(--brand-signal);
   --color-marke-lime-hell: #c7da98;
   --color-marke-lime-dunkel: #8ead51;
   --color-marke-lime-gruen: #638c45;
@@ -55,15 +55,15 @@
   --color-identity-scene-rim: #555f55;
   --color-print-tinte: #14191c;
   --color-print-papier: #f2f3ef;
-  --color-print-lime: #a8c76a;
+  --color-print-lime: var(--brand-signal);
   --color-print-grau: #646769;
-  --color-atelier-canvas: #1b1e1d;
-  --color-atelier-surface: #262a28;
-  --color-atelier-raised: #303634;
+  --color-atelier-canvas: var(--graphite-50);
+  --color-atelier-surface: var(--graphite-300);
+  --color-atelier-raised: var(--graphite-500);
   --color-atelier-platinum: #bdc5c9;
   --color-atelier-champagne: #b4bec2;
-  --color-atelier-ink: #f3f0ea;
-  --color-atelier-muted: #b9bbba;
+  --color-atelier-ink: var(--foreground);
+  --color-atelier-muted: var(--text-3);
   --color-atelier-glass: #1e2122e8;
   --color-atelier-glass-edge: #becacd38;
   --color-atelier-film-canvas: #131415;
@@ -83,10 +83,10 @@
   --color-hell-ebene: #d9dde1;
   --color-hell-flaeche: #eceef1;
   --color-hell-licht: #f6f7f9;
-  --color-hell-schrift: #1b1e1d;
+  --color-hell-schrift: var(--graphite-50);
   --color-hell-schrift-neben: #454b49;
   --color-hell-schrift-leise: #555b59;
-  --color-hell-schatten: #1b1e1d;
+  --color-hell-schatten: var(--graphite-50);
   --color-hell-tag-warm: #edeef0;
   --color-hell-tag-silber: #c9d1d8;
   --color-hell-tag-lime: #dce8be;
@@ -94,21 +94,21 @@
   --color-hell-lime-handlung-hell: #74963f;
   --color-hell-lime-schein: #b9cf8e;
   --color-hell-auf-lime: #10180b;
-  --color-dunkel-grund: #1b1e1d;
-  --color-dunkel-ebene: #222625;
-  --color-dunkel-flaeche: #2a2e2c;
-  --color-dunkel-licht: #f3f0ea;
-  --color-dunkel-schrift: #ecefec;
-  --color-dunkel-schrift-neben: #cdd3cf;
-  --color-dunkel-schrift-leise: #b4bab6;
+  --color-dunkel-grund: var(--graphite-50);
+  --color-dunkel-ebene: var(--graphite-200);
+  --color-dunkel-flaeche: var(--graphite-400);
+  --color-dunkel-licht: var(--foreground);
+  --color-dunkel-schrift: var(--foreground);
+  --color-dunkel-schrift-neben: var(--text-2);
+  --color-dunkel-schrift-leise: var(--text-3);
   --color-dunkel-schatten: #0b0d0c;
-  --color-dunkel-tag-warm: #3a403e;
+  --color-dunkel-tag-warm: var(--line-mid);
   --color-dunkel-tag-silber: #bdc5c9;
-  --color-dunkel-tag-lime: #a8c76a;
-  --color-dunkel-lime-handlung: #9ab864;
-  --color-dunkel-lime-handlung-hell: #b4cf7c;
-  --color-dunkel-lime-schein: #8fae5a;
-  --color-dunkel-auf-lime: #162010;
+  --color-dunkel-tag-lime: var(--brand-signal);
+  --color-dunkel-lime-handlung: var(--brand-signal);
+  --color-dunkel-lime-handlung-hell: var(--brand-signal-hover);
+  --color-dunkel-lime-schein: var(--brand-signal-active);
+  --color-dunkel-auf-lime: var(--brand-signal-foreground);
   --font-text: Inter, Helvetica, Arial, sans-serif;
   --font-display: "Plus Jakarta Sans", Inter, Arial, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
@@ -195,14 +195,14 @@
       color-mix(in srgb, var(--color-marke-cyan) 6%, transparent),
       transparent 100%
     );
-  --gradient-karte: linear-gradient(180deg, #303634 0%, #262a28 100%);
-  --gradient-kleine-karte: linear-gradient(180deg, #303634 0%, #262a28 100%);
-  --gradient-button-primaer: #a8c76a;
-  --gradient-balken: linear-gradient(90deg, #789c48, #a8c76a);
-  --gradient-band: #1e2220;
+  --gradient-karte: linear-gradient(180deg, var(--graphite-500) 0%, var(--graphite-300) 100%);
+  --gradient-kleine-karte: linear-gradient(180deg, var(--graphite-500) 0%, var(--graphite-300) 100%);
+  --gradient-button-primaer: var(--brand-signal);
+  --gradient-balken: linear-gradient(90deg, #789c48, var(--brand-signal));
+  --gradient-band: var(--graphite-100);
   --gradient-seitengrund:
     radial-gradient(ellipse 52% 30% at 82% 0%, #c4b39417, transparent 100%),
-    radial-gradient(ellipse 40% 26% at 12% 68%, #6fe3cf0d, transparent 100%), #242826;
+    radial-gradient(ellipse 40% 26% at 12% 68%, #6fe3cf0d, transparent 100%), var(--graphite-200);
   --gradient-spotlight: none;
   --gradient-atelier-glass:
     linear-gradient(
@@ -289,7 +289,7 @@
   --motion-laufband: 46s linear;
   --motion-schimmer: 7s ease-in-out;
   --motion-light-entrance: 3.6s ease-out;
-  --focus-ring: 2px solid #a8c76a;
+  --focus-ring: 2px solid var(--brand-signal);
   --focus-offset: 2px;
   --focus-logo: Unterstreichung Lime, 6px Abstand;
   --material-blur: 20px;
@@ -392,13 +392,13 @@
   --atelier-system-schwelle-breit: 1920px;
 }
 :root {
-  --color-canvas: #242826;
+  --color-canvas: var(--graphite-200);
   --color-brand-lime: var(--color-marke-lime);
   --color-brand-lime-soft: var(--color-marke-lime-hell);
   --color-brand-cyan: #38bdf8;
   --color-background-canvas: var(--color-canvas);
-  --color-background-surface: #262a28;
-  --color-background-elevated: #303634;
+  --color-background-surface: var(--graphite-300);
+  --color-background-elevated: var(--graphite-500);
   --color-text-primary: var(--color-text-primaer);
   --color-text-secondary: #cbd1d6;
   --color-text-muted: #8b939b;
@@ -418,8 +418,8 @@
   --color-graphit-850: var(--color-background-surface);
   --color-graphit-800: var(--color-background-surface);
   --color-graphit-700: var(--color-background-elevated);
-  --color-graphit-650: #2a2e2c;
-  --color-graphit-600: #303634;
+  --color-graphit-650: var(--graphite-400);
+  --color-graphit-600: var(--graphite-500);
   --color-linie-fein: var(--color-border-subtle);
   --color-linie-mittel: #ffffff1f;
   --color-linie-stark: var(--color-border-strong);
@@ -556,12 +556,12 @@ canvas {
 @font-face {
   font-family: Geist;
   src: url("/site-assets/29f88bff3ef32cae.woff2") format("woff2");
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: "Geist Mono";
   src: url("/site-assets/a978be7d3173a36e.woff2") format("woff2");
-  font-display: swap;
+  font-display: optional;
 }
 @font-face {
   font-family: Inter;
@@ -12955,7 +12955,7 @@ html[data-theme="light"] #atelier {
   min-width: 0px;
 }
 .identity-hero-photo {
-  border-radius: var(--radius-atelier, 30px);
+  border-radius: var(--radius-atelier, 20px);
   isolation: isolate;
   background: var(--gradient-home-media-rim);
   width: 100%;
