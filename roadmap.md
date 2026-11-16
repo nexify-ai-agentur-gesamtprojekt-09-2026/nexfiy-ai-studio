@@ -3,9 +3,10 @@
 - [x] Upload byteidentisch mit ops/references/nexify-project-chat-2026-11-16.md (SHA256 4bf9a383…301f3, 6893 Bytes); keine neuen Vorgaben, keine zweite Kopie
 - [x] Startverhalten: ORACLE-Prüfthread 11:30 UTC rückgelesen – weiterhin nur Ausgangsanfrage + Revision 2, keine Kanalnachricht danach; keine weitere Meldung gesendet (unbestätigter Kanal, keine blinde Wiederholung). Slack-Verbindungen unverändert drei persönliche, keine Workspace-Freigabe belegt
 - [x] Nächster autorisierter Auftrag: dringende Filmzeilen-Korrektur war nur in der Vorschau (live 0 neue Pfeilsymbole, Vorschau 2). 129 Tests bestanden, Vorschau 1280/390 px ohne Überlauf/Fehler; Veröffentlichung nach Arbeitsmodus „live bringen“
+- [x] Veröffentlicht 11:33 UTC, live ab 11:34:42 UTC nachgewiesen: Startseite/Leistungen/Unternehmen × 1280/390 px HTTP 200, Aufklappzeile 44 px (43,4 px nur durch gewollte 3D-Neigung der Startseitenfigur), Enter öffnet, kein Überlauf, keine Konsolenfehler. Basis-Sicherheitsprüfung ohne Befund; Slack-Empfangsadressen live 200, Challenge exakt, ohne Signaturgeheimnis weiterhin keine Verarbeitung
 ## Markierte Film-Aufklappzeilen korrigieren (16.11., 11:18 UTC)
 - [x] Gemeinsame Film-Fußzeile gegen konkurrierende Seitenregeln abgesichert: 16px-Symbol statt konkurrierender CSS-Pfeile, 44px-Aufklappzeile, Filmhinweis 12px/Transkript 14px mit identischen Einzügen. Texte, Filmzuordnung und abgenommenes Design erhalten
-- [x] 12 Filmseiten × 1280/390/2554px = 36 Ansichten geprüft; 24 Transkripte per Enter geöffnet/Space geschlossen, sichtbarer Tastaturfokus, keine Überläufe/Laufzeitfehler. 11 bestehende Filmtests bestanden, build OK 11:20:52 UTC. Gemeldeter Seitenfehler nicht reproduzierbar: aktuelle Aufrufe HTTP 200. Nur Vorschau korrigiert, nicht veröffentlicht
+- [x] 12 Filmseiten × 1280/390/2554px = 36 Ansichten geprüft; 24 Transkripte per Enter geöffnet/Space geschlossen, sichtbarer Tastaturfokus, keine Überläufe/Laufzeitfehler. 11 bestehende Filmtests bestanden, build OK 11:20:52 UTC. Gemeldeter Seitenfehler nicht reproduzierbar: aktuelle Aufrufe HTTP 200. Veröffentlicht 11:33 UTC, live nachgeprüft (siehe oben)
 
 ## Nötige Slack-Workspace-Freigabe (16.11., 11:18 UTC)
 - [x] Connector-Dialog ausdrücklich erneut geöffnet; Ergebnis erneut bestehendes persönliches „My Slack“, vorher/nachher dieselben drei Verbindungen. Nichts getrennt oder ersetzt
@@ -53,7 +54,7 @@
 - [x] Sechs Ablaufgruppen dokumentiert, Signatur-/Retry-/Ereignis-/Actor-/Thread-Schutz umgesetzt; Zustellbelege und bestehende Anfrageverweise additiv (Migration 0012), kein zweiter Taskstore
 - [x] Arbeitsplatz mit Simulation und echtem Transporttest: 10:25 UTC Slack-API-Zustellung und gespeicherten Beleg im echten Inhaberkonto nachgewiesen; erneutes Laden 10:27 UTC, Desktop/Handy ohne Fehler/Überlauf, 29 Tests bestanden
 - [x] Katalog-/Fotokopierabschluss und Servermeldungen mit Zustellbeleg angebunden; keine Nachtjobs gestartet, bestehende Zeitpläne unverändert
-- [ ] Veröffentlichung der vorbereiteten Empfangsadressen: wartet auf Veröffentlichung; derzeit nur Vorschau geprüft
+- [x] Veröffentlichung der vorbereiteten Empfangsadressen: mit Stand 16.11. 11:33 UTC veröffentlicht, alle drei Adressen live 200 (11:35 UTC); signierte Verarbeitung bleibt bis zum Signaturgeheimnis aus
 - [ ] Bestehende ORACLE-App-Konfiguration/Signing Secret und identischer Bot-Ausgang: Pascal/ORACLE-Verantwortlicher bestätigt bestehende Empfangsadresse und sicheren Connector; nichts überschreiben, keine zweite App provisioniert
 - [ ] Vollständiger ORACLE/Hermes/Reviewer-Roundtrip: ORACLE-ACK noch offen (zuletzt 10:26 UTC), führendes System/Writer/Lease und Rückschema fehlen; kein Dispatch gestartet. Details/Rückweg ops/slack-integration.md
 
