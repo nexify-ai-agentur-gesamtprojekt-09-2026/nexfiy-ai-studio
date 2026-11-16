@@ -30,7 +30,7 @@ function Index() {
               <span>Für Ihr Auto. </span>
               <span className={"identity-title-accent"}>Klar gefunden.</span>
             </h1>
-            <p className={"identity-body"}>Vom praktischen Zubehör bis zur Pflege: Entdecken Sie unser Sortiment. Mit Originalfotos, nachvollziehbaren Preisen und klaren Produktangaben.</p>
+            <p className={"identity-body"}>Bereiten Sie eine Teilefrage mit Fahrzeugdaten und einer vorhandenen Artikelnummer vor. Unsere Hinweise und der Reifenrechner helfen beim Einordnen. Ein Warenkatalog und Onlinekauf sind hier noch nicht angebunden.</p>
             <div className={"identity-links"}>
               <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="#sortiment">
                 <span>Sortiment entdecken</span>
@@ -50,16 +50,16 @@ function Index() {
         <div>
           <span>01</span>
           <p>
-            <strong>Preise inklusive MwSt.</strong>
+            <strong>Fahrzeug genau benennen</strong>
           </p>
-          <p className={"hc-caption"}>Versandkosten vor Bestellabschluss</p>
+          <p className={"hc-caption"}>Modell, Baujahr und Motor berücksichtigen</p>
         </div>
         <div>
           <span>02</span>
           <p>
-            <strong>Sichere Zahlungsseite</strong>
+            <strong>Angaben vergleichen</strong>
           </p>
-          <p className={"hc-caption"}>Bezahlung über Revolut</p>
+          <p className={"hc-caption"}>Hersteller- und Teilenummer bereithalten</p>
         </div>
         <div>
           <span>03</span>
@@ -75,7 +75,7 @@ function Index() {
           <h2>Artikel im Schaufenster</h2>
         </header>
         <div className={"tk-empty"} role="status">
-          <p>Das Schaufenster wird gerade neu bestückt. Bis dahin finden Sie hier die passende Werkstatt oder schreiben uns direkt, welches Teil Sie suchen.</p>
+          <p>Der Warenkatalog ist noch nicht angebunden. Artikel, Preise und Verfügbarkeiten können hier deshalb nicht abgerufen werden. Beschreiben Sie stattdessen das gesuchte Teil oder bereiten Sie eine Werkstattanfrage vor.</p>
           <div className={"identity-links"}>
             <a className={"nexify-control primary-button"} data-variant="primary" href="/teileklar/werkstatt">Werkstatt finden</a>
             <a className={"nexify-control secondary-button"} data-variant="secondary" href="/kontakt">Teil anfragen</a>
@@ -92,13 +92,13 @@ function Index() {
           </header>
           <div className={"hc-costs"}>
             <div>
-              <h3>So bestellen Sie</h3>
+              <h3>So bereiten Sie Ihre Anfrage vor</h3>
               <div className={"hc-service-body"}>
                 <ol>
-                  <li>Artikel auswählen und Angaben prüfen</li>
-                  <li>Menge festlegen und zum Warenkorb hinzufügen</li>
-                  <li>Lieferadresse, Versand und Gesamtpreis prüfen</li>
-                  <li>Bestellung bestätigen und sicher bezahlen</li>
+                  <li>Fahrzeug, Baujahr und Motor notieren</li>
+                  <li>Gesuchte Teileart und vorhandene Artikelnummer nennen</li>
+                  <li>Offene Frage zu Auswahl oder Einbau beschreiben</li>
+                  <li>Vorbereitete Anfrage selbst per E-Mail versenden</li>
                 </ol>
                 <a className={"hc-text-link"} href="/teileklar/rechtliches">Versand, Widerruf und Bedingungen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
               </div>

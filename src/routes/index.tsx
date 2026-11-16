@@ -33,7 +33,7 @@ function Index() {
                   <span className={"hc-kicker"}>Hier fängt die Arbeit an</span>
                   <h2 id="hc-intro-title">Wo hakt es gerade?</h2>
                 </div>
-                <p>Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet. Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.</p>
+                <div className="pc-section-body"><p>Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet. Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.</p><h3>Mit einem konkreten Fall beginnen</h3><p>Wer soll welche Information finden, welche Aufgabe erledigen oder welche Entscheidung treffen? Ein Beispiel aus Ihrem Alltag hilft, das richtige Ergebnis zu benennen. Daraus lässt sich unterscheiden, ob Sie einen neuen Auftritt, einen digitalen Ablauf oder ein eigenes KI-Werkzeug benötigen.</p></div>
               </section>
               <ImportedNavWoHaktEsGerade />
               <ImportedSectionWasKNnenWir />

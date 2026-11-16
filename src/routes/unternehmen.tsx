@@ -4,7 +4,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/unternehmen.css?url";
 
 export const Route = createFileRoute("/unternehmen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }, { name: "description", content: "NeXify AI: persönliche Projektbegleitung und ein Agententeam für digitale Vorhaben." }, { property: "og:title", content: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }, { property: "og:description", content: "NeXify AI: persönliche Projektbegleitung und ein Agententeam für digitale Vorhaben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeXify AI · Persönliche Projektbegleitung und KI" }, { name: "description", content: "Pascal Courbois begleitet digitale Vorhaben persönlich. Lernen Sie Agenturleistungen, KI-Unterstützung und die eigenständigen Produkte von NeXify AI kennen." }, { property: "og:title", content: "NeXify AI · Persönliche Projektbegleitung und KI" }, { property: "og:description", content: "Persönliche Verantwortung, KI-gestützte Ausarbeitung und klare Einstiege zu Agenturleistungen, Suite und API." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
