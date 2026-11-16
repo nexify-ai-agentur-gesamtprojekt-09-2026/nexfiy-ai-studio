@@ -9,6 +9,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./design-system/graphite/tokens.css";
+@import "./design-system/graphite/bridge.css";
 @import "./styles/site-shell.css";
 @import "./styles/oracle-advice.css";
 @import "./styles/site-film.css";
@@ -128,17 +129,13 @@
 /* site-import tokens: begin (generated; re-import replaces this block) */
 /* Imported clone roles use prefixed Tailwind utilities
    (bg-site-import-primary, text-site-import-foreground, …); edit the
-   --site-import-* variables to restyle the clone. Unprefixed roles theme new UI. */
+   --site-import-* variables to restyle the clone. Unprefixed roles come only from
+   design-system/graphite/tokens.css, so this block must not redefine them. */
 :root {
-  --background: oklch(0.23147 0.00488 173.96);
   --site-import-background: oklch(0.23147 0.00488 173.96);
-  --foreground: oklch(0.949 0.0051 145.54);
   --site-import-foreground: oklch(0.949 0.0051 145.54);
-  --primary: oklch(0.78602 0.12501 124.36);
-  --site-import-primary: oklch(0.78602 0.12501 124.36);
-  --primary-foreground: oklch(0.145 0 0);
-  --site-import-primary-foreground: oklch(0.145 0 0);
-  --accent: oklch(0.88607 0.20168 123.37);
+  --site-import-primary: var(--brand-signal);
+  --site-import-primary-foreground: var(--brand-signal-foreground);
   --site-import-accent: oklch(0.88607 0.20168 123.37);
 }
 /* Design tokens captured from the imported site, registered as Tailwind

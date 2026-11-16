@@ -936,3 +936,80 @@
     padding-inline: 16px;
   }
 }
+
+/* NX-DESIGN-01: eine Knopffamilie. Der Nebenknopf neben dem Hauptknopf ist ein gleich hoher Glas-Pill
+   statt nackter Text, damit beide als Paar lesbar sind; Verhalten und Ziele bleiben unverändert. */
+:root:root #atelier .identity-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+:root:root #atelier .identity-links :is(.secondary-button, .identity-secondary-link) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--glass-fill);
+  box-shadow: var(--glass-elevation);
+  color: var(--foreground);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 200ms var(--motion-ease-brand),
+    border-color 200ms var(--motion-ease-brand),
+    transform 200ms var(--motion-ease-brand);
+}
+:root:root #atelier .identity-links :is(.secondary-button, .identity-secondary-link):hover {
+  background: var(--glass-fill-hover);
+  border-color: color-mix(in oklab, var(--ring) 45%, var(--border-strong));
+}
+:root:root #atelier .identity-links :is(.secondary-button, .identity-secondary-link):active {
+  transform: translateY(1px);
+}
+:root:root #atelier .identity-links :is(a, button):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+/* Brotkrume als kleiner Rückweg über der Kennzeile, nicht als zweite Überschrift. */
+:root:root #atelier .pc-breadcrumb {
+  margin: 0 0 12px;
+}
+:root:root #atelier .pc-breadcrumb ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+:root:root #atelier .pc-breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--muted-foreground);
+  font-size: var(--type-detail);
+  text-decoration: none;
+  transition: color 200ms var(--motion-ease-brand);
+}
+:root:root #atelier .pc-breadcrumb a::before {
+  content: "←";
+  color: var(--signal-text);
+}
+:root:root #atelier .pc-breadcrumb a:hover {
+  color: var(--foreground);
+}
+:root:root #atelier .pc-breadcrumb a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier .identity-links :is(.secondary-button, .identity-secondary-link),
+  :root:root #atelier .pc-breadcrumb a {
+    transition: none;
+  }
+}

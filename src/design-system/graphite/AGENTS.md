@@ -1,0 +1,1 @@
+- `tokens.css` is the only source of unprefixed colour roles and the single accent scale (`--brand-signal*`); `bridge.css` maps the imported pages' per-page legacy lime variables onto that scale in dark view, so never redefine `--primary`/`--accent` elsewhere or reintroduce muted lime hex values.
