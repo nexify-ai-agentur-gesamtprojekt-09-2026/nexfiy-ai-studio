@@ -52,6 +52,7 @@
   --site-legacy-info: var(--color-status-info);
   --site-legacy-inverse: var(--color-text-inverse);
   --site-legacy-action-ink: var(--color-action-primary-ink);
+  --site-legacy-on-lime: var(--color-text-auf-lime);
   --site-legacy-lime-soft: var(--color-brand-lime-soft);
   --site-legacy-lime-light: var(--color-marke-lime-hell);
   --site-legacy-lime-dark: var(--color-marke-lime-dunkel);
@@ -68,6 +69,8 @@
   --color-status-info: var(--state-success);
   --color-text-inverse: var(--brand-signal-foreground);
   --color-action-primary-ink: var(--brand-signal-foreground);
+  /* Abgeleitete Altvariablen werden am :root berechnet; deshalb Schrift auf Lime erneut binden. */
+  --color-text-auf-lime: var(--brand-signal-foreground);
   --color-brand-lime-soft: var(--brand-signal-hover);
   --color-marke-lime-hell: var(--brand-signal-hover);
   --color-marke-lime-dunkel: var(--brand-signal-active);
@@ -84,6 +87,7 @@
   --color-status-info: var(--site-legacy-info);
   --color-text-inverse: var(--site-legacy-inverse);
   --color-action-primary-ink: var(--site-legacy-action-ink);
+  --color-text-auf-lime: var(--site-legacy-on-lime);
   --color-brand-lime-soft: var(--site-legacy-lime-soft);
   --color-marke-lime-hell: var(--site-legacy-lime-light);
   --color-marke-lime-dunkel: var(--site-legacy-lime-dark);
