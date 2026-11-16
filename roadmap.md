@@ -1,4 +1,9 @@
 # Roadmap
+## Hochgeladener Projektauftrag integrieren (16.11., 10:53 UTC)
+- [ ] Original vollständig lesen und unverändert mit Quellenbezug erhalten; Vorgaben im bestehenden Arbeitsstand anwenden, kein konkurrierendes Aufgabenregister
+- [ ] Tatsächliche Projekt-/Umgebungszuordnung und aktiven Writer gegen zugängliche Originale prüfen; fehlende externe Writer-/ORACLE-Nachweise offen lassen
+- [ ] Kompakte IST-/SOLL-Rückmeldung einmal im bestehenden privaten ORACLE-Prüfthread senden und Zustellung rücklesen; keine neue Aufgabe, kein Modellaufruf und keine Ablehnung umgehen
+
 ## ORACLE-Anbindung fortsetzen (16.11., 10:35 UTC)
 - [x] Slack-Verbindung und bestehende ORACLE-App-Zuordnung aktuell bestätigt, privater Ursprungskanal nicht extern geteilt; Thread vollständig ohne ACK, live Event-Handshake 200, keine zweite App/Modelländerung
 - [x] 22 betroffene Sicherheits-/Empfangstests bestanden (10:37 UTC); realer Request-waitUntil im Nitro-Adapter vorhanden, kein Fehler oder ungeprüfter Umbau
