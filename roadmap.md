@@ -209,3 +209,4 @@
 - [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
 - [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
+- [ ] Skill „Agentur-Designstandard für Kundenprojekte“: verbindliche Vorgaben aus dem Graphite-Agenturdesign ableiten, mit Projektdaten zusammenführen; als Text zum Kopieren an Pascal
