@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { webcrypto } from "node:crypto";
 import { draftAdmin, draftService } from "@/test/draft-clients";
+import { ISOLATED_DB_SKIP_REASON, isolatedTestDb, skipWithoutIsolatedDb } from "@/test/isolated-db";
 import { countInquiryWeek } from "@/lib/inquiry-metrics";
 import { INQUIRY_CONSENT_VERSION } from "@/lib/inquiry-consent";
 import { submitInquiry } from "@/lib/inquiry.functions";
@@ -23,7 +24,7 @@ vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: 
 vi.mock("@/lib/inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 vi.mock("@/lib/clipboard", () => ({ copyText: vi.fn() }));
 
-const service = draftService();
+const service = isolatedTestDb ? draftService() : (null as unknown as ReturnType<typeof draftService>);
 const runId = webcrypto.randomUUID();
 const email = `nx-lead-ui-${runId}@example.test`;
 let serial = 0;
@@ -46,7 +47,7 @@ function form(message: string) {
   fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
 }
 
-describe("NX-LEAD-01 vollständiger Formularablauf mit echter Entwurfsdatenbank und gemocktem Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 vollständiger Formularablauf mit echter Entwurfsdatenbank und gemocktem Slack", () => {
   it.each(["valid", "missing"])("speichert %s IP, Einwilligung, Wochenzahl +1; Dublette erzeugt keine zweite Zeile oder Slack-Meldung", async mode => {
     const admin = await draftAdmin();
     if (mode === "missing") state.ip = undefined;
