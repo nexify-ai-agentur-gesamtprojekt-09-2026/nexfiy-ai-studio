@@ -8,7 +8,7 @@ export type OracleResult =
 
 /** Public, bounded advisory RPC; has no account/database/MCP access. */
 export const adviseOracle = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => oracleInputSchema.parse(input))
+  .validator((input: unknown) => oracleInputSchema.parse(input))
   .handler(async ({ data }): Promise<OracleResult> => {
     setResponseHeader("Cache-Control", "no-store");
     const { generateResponse, GatewayError } = await import("@lovable.dev/ai-gateway");
