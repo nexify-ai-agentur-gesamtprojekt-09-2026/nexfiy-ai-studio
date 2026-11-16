@@ -133,3 +133,5 @@
 ## Interner Betriebsagent AIFly ORACLE (16.11.)
 - [ ] Zugang „nexify.login-aifly-oracle“ klären und einordnen
 - [ ] Umfang: Anfragen/Leads, TEILEKLAR, Kundenportal/Suite, Tagesbericht/Aufgaben
+- [ ] Bestehenden ORACLE-Zugang lesend klären (keine Betriebsänderung, kein neuer Agent)
+- [ ] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
