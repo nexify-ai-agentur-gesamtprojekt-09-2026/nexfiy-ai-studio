@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS teileklar_products_synced_at_idx ON public.teileklar_products (synced_at DESC);
