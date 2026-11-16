@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isServerWorker } from "@/lib/server-worker-auth";
 import { MAX_CUTOUT_BYTES, cutoutStoragePath, isWebpImage } from "@/lib/teileklar-cutout";
 
 const json = (status: number, body: Record<string, unknown>) =>
@@ -33,9 +34,35 @@ async function verifyAdmin(request: Request): Promise<boolean> {
 export const Route = createFileRoute("/api/public/shop/cutout")({
   server: {
     handlers: {
+      /** Liste aktiver Artikel mit Foto, aber ohne gültige Freistellung – nur für den Server-Auftrag. */
+      GET: async ({ request }) => {
+        try {
+          if (!(await isServerWorker(request))) return json(401, { error: "Nicht berechtigt" });
+          const { supabaseAdmin: admin } = await import("@/integrations/supabase/client.server");
+          const rows = await admin
+            .from("teileklar_products")
+            .select("id, image_path, image_cutout_of")
+            .is("archived_at", null)
+            .neq("image_path", "")
+            .order("id")
+            .limit(2000);
+          if (rows.error) throw new Error(rows.error.message);
+          const offen = (rows.data ?? [])
+            .filter((r) => r.image_cutout_of !== r.image_path)
+            .map((r) => ({ artikel: r.id, quelle: r.image_path }));
+          return json(200, { offen });
+        } catch (error) {
+          console.error(
+            "catalog cutout list failed",
+            error instanceof Error ? error.message : error,
+          );
+          return json(500, { error: "Liste fehlgeschlagen" });
+        }
+      },
       POST: async ({ request }) => {
         try {
-          if (!(await verifyAdmin(request))) return json(401, { error: "Nicht berechtigt" });
+          if (!(await isServerWorker(request)) && !(await verifyAdmin(request)))
+            return json(401, { error: "Nicht berechtigt" });
           const params = new URL(request.url).searchParams;
           const articleId = (params.get("artikel") ?? "").trim();
           const source = (params.get("quelle") ?? "").trim();
