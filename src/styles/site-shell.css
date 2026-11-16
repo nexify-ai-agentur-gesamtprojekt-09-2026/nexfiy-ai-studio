@@ -728,7 +728,7 @@
   :root:root #atelier.site-shared .site-header .nx-logo {
     --logo-h: 40px;
     min-width: 0;
-    gap: 8px;
+    gap: 12px;
   }
   :root:root #atelier.site-shared .site-header .nx-logo-wort {
     min-width: 0;
