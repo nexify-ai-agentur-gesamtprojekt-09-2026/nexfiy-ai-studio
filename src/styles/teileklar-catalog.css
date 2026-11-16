@@ -71,3 +71,6 @@
 }
 @media (prefers-reduced-motion: reduce) { :root:root:root #atelier.site-teileklar .tkc-card { transition: none; } :root:root:root #atelier.site-teileklar .tkc-card:hover { transform: none; } }
 :root:root:root #atelier.site-teileklar :is(.tkc-product-info, .tkc-empty, .tkc-related) .tk-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 0; }
+:root:root:root #atelier.site-teileklar .tkc-category-grid > li { display: flex; min-width: 0; }
+:root:root:root #atelier.site-teileklar .tkc-category-grid > li > a { flex: 1 1 auto; }
+:root:root:root #atelier.site-teileklar .tk-sortiment-actions { margin-top: 24px; }
