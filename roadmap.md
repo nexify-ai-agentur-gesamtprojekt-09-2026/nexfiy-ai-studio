@@ -1,4 +1,8 @@
 # Roadmap
+## Erneut hochgeladener Projektauftrag (16.11., 11:29 UTC)
+- [x] Upload byteidentisch mit ops/references/nexify-project-chat-2026-11-16.md (SHA256 4bf9a383…301f3, 6893 Bytes); keine neuen Vorgaben, keine zweite Kopie
+- [x] Startverhalten: ORACLE-Prüfthread 11:30 UTC rückgelesen – weiterhin nur Ausgangsanfrage + Revision 2, keine Kanalnachricht danach; keine weitere Meldung gesendet (unbestätigter Kanal, keine blinde Wiederholung). Slack-Verbindungen unverändert drei persönliche, keine Workspace-Freigabe belegt
+- [x] Nächster autorisierter Auftrag: dringende Filmzeilen-Korrektur war nur in der Vorschau (live 0 neue Pfeilsymbole, Vorschau 2). 129 Tests bestanden, Vorschau 1280/390 px ohne Überlauf/Fehler; Veröffentlichung nach Arbeitsmodus „live bringen“
 ## Markierte Film-Aufklappzeilen korrigieren (16.11., 11:18 UTC)
 - [x] Gemeinsame Film-Fußzeile gegen konkurrierende Seitenregeln abgesichert: 16px-Symbol statt konkurrierender CSS-Pfeile, 44px-Aufklappzeile, Filmhinweis 12px/Transkript 14px mit identischen Einzügen. Texte, Filmzuordnung und abgenommenes Design erhalten
 - [x] 12 Filmseiten × 1280/390/2554px = 36 Ansichten geprüft; 24 Transkripte per Enter geöffnet/Space geschlossen, sichtbarer Tastaturfokus, keine Überläufe/Laufzeitfehler. 11 bestehende Filmtests bestanden, build OK 11:20:52 UTC. Gemeldeter Seitenfehler nicht reproduzierbar: aktuelle Aufrufe HTTP 200. Nur Vorschau korrigiert, nicht veröffentlicht
