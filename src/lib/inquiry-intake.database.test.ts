@@ -61,7 +61,7 @@ function send(index: number, email = testEmail) {
   return submitInquiry({ data: { kind: "contact", name: "NX LEAD Prüfung", email, company: "", message: `NX-LEAD-01 ${runId} Prüfvorhaben Nummer ${index}.`, consent: true, website: "", sourcePath: "/kontakt" } });
 }
 
-describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack · ${ISOLATED_DB_SKIP_REASON}`, () => {
   it("nimmt exakt fünf an und lehnt die sechste innerhalb einer Stunde ab", async () => {
     await draftTest(async tx => {
       const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;

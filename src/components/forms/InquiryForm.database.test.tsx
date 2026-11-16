@@ -47,7 +47,7 @@ function form(message: string) {
   fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
 }
 
-describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 vollständiger Formularablauf mit echter Entwurfsdatenbank und gemocktem Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 vollständiger Formularablauf mit echter Entwurfsdatenbank und gemocktem Slack · ${ISOLATED_DB_SKIP_REASON}`, () => {
   it.each(["valid", "missing"])("speichert %s IP, Einwilligung, Wochenzahl +1; Dublette erzeugt keine zweite Zeile oder Slack-Meldung", async mode => {
     const admin = await draftAdmin();
     if (mode === "missing") state.ip = undefined;

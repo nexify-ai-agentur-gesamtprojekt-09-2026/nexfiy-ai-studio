@@ -17,7 +17,7 @@ vi.mock("@tanstack/react-start/server", () => ({ getRequest: () => new Request("
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: state.rpc } }));
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
-describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 Vorschau-Browser mit echter Speicherung und Test-Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 Vorschau-Browser mit echter Speicherung und Test-Slack · ${ISOLATED_DB_SKIP_REASON}`, () => {
   it("bestätigt Formular, Wochenzahl, Dublette, sechste Ablehnung und tatsächliche Admin-Statuspflege", async () => {
     const service = draftService();
     const runId = crypto.randomUUID();
