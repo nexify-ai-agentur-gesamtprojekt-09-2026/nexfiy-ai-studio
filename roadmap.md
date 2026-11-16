@@ -309,3 +309,4 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 
 ## Brain- und Wissensinventar (16.11., 12:17 UTC)
 - [ ] Brain (agentmemory, mcp-gateway, LightRAG, Wissensbasis) auf beiden Servern nur lesend per SSH inventarisieren; keine Geheimnisse, keine Änderungen
+- [ ] Repository nexify-ai-finales-agentur-gesamtprojekt-09-2026 als Quelle für Jeff- und ORACLE-Funktionen auswerten (nur lesend)
