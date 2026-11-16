@@ -23,7 +23,9 @@ export type Database = {
           kind: string
           message: string
           name: string
+          slack_channel_id: string | null
           slack_error: string | null
+          slack_message_ts: string | null
           slack_notified_at: string | null
           source_path: string
           status: string
@@ -37,7 +39,9 @@ export type Database = {
           kind: string
           message: string
           name: string
+          slack_channel_id?: string | null
           slack_error?: string | null
+          slack_message_ts?: string | null
           slack_notified_at?: string | null
           source_path?: string
           status?: string
@@ -51,10 +55,60 @@ export type Database = {
           kind?: string
           message?: string
           name?: string
+          slack_channel_id?: string | null
           slack_error?: string | null
+          slack_message_ts?: string | null
           slack_notified_at?: string | null
           source_path?: string
           status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      slack_delivery_receipts: {
+        Row: {
+          actor_id: string
+          channel_id: string
+          created_at: string
+          entity_id: string | null
+          entity_table: string | null
+          error_code: string | null
+          event_key: string
+          flow_id: string
+          id: string
+          outcome: string
+          team_id: string
+          thread_ts: string | null
+          updated_at: string
+        }
+        Insert: {
+          actor_id: string
+          channel_id: string
+          created_at?: string
+          entity_id?: string | null
+          entity_table?: string | null
+          error_code?: string | null
+          event_key: string
+          flow_id: string
+          id?: string
+          outcome?: string
+          team_id: string
+          thread_ts?: string | null
+          updated_at?: string
+        }
+        Update: {
+          actor_id?: string
+          channel_id?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_table?: string | null
+          error_code?: string | null
+          event_key?: string
+          flow_id?: string
+          id?: string
+          outcome?: string
+          team_id?: string
+          thread_ts?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -113,7 +167,9 @@ export type Database = {
           message: string
           name: string
           part: string
+          slack_channel_id: string | null
           slack_error: string | null
+          slack_message_ts: string | null
           slack_notified_at: string | null
           status: string
           updated_at: string
@@ -130,7 +186,9 @@ export type Database = {
           message?: string
           name: string
           part: string
+          slack_channel_id?: string | null
           slack_error?: string | null
+          slack_message_ts?: string | null
           slack_notified_at?: string | null
           status?: string
           updated_at?: string
@@ -147,7 +205,9 @@ export type Database = {
           message?: string
           name?: string
           part?: string
+          slack_channel_id?: string | null
           slack_error?: string | null
+          slack_message_ts?: string | null
           slack_notified_at?: string | null
           status?: string
           updated_at?: string
