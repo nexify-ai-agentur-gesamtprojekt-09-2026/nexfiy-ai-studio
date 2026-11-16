@@ -1,4 +1,8 @@
 # Roadmap
+## Markierte Film-Aufklappzeilen korrigieren (16.11., 11:18 UTC)
+- [ ] Gemeinsame Film-Fußzeile gegen konkurrierende Seitenregeln absichern; Texte, Filmzuordnung und abgenommenes Design erhalten
+- [ ] Aufklappen, Schließen, Tastaturfokus und Textabstände auf Desktop/Handy prüfen; gemeldeten Seitenfehler aktuell reproduzieren oder als nicht reproduzierbar abgrenzen
+
 ## Nötige Slack-Workspace-Freigabe (16.11., 11:18 UTC)
 - [x] Connector-Dialog ausdrücklich erneut geöffnet; Ergebnis erneut bestehendes persönliches „My Slack“, vorher/nachher dieselben drei Verbindungen. Nichts getrennt oder ersetzt
 - [x] Offizielle Anleitung geprüft: separater Weg Connectors → Slack → Your apps in Slack → Connect Slack workspace; persönliche Neuanlage allein ist keine Installationsfreigabe. Beleg ops/slack-integration.md
