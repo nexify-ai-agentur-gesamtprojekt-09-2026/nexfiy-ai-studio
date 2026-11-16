@@ -12,7 +12,6 @@ import {
   type InquiryKind,
   type InquiryMail,
 } from "@/lib/inquiry";
-import { copyText } from "@/lib/clipboard";
 
 /**
  * State for an inquiry form: validates on submit, re-checks edited fields after the first attempt,
@@ -47,10 +46,10 @@ export function useInquiryForm(kind: InquiryKind) {
         return;
       }
       const built = buildInquiryMail(kind, values);
-      if (built.shortened) void copyText(built.body);
       focusTarget.current = "handoff";
       setMail(built);
-      window.location.href = built.href;
+      // Lange Texte bleiben zunächst sichtbar, damit kein unvollständiger Entwurf unbemerkt versendet wird.
+      if (!built.shortened) window.location.href = built.href;
     },
     [kind],
   );
@@ -62,7 +61,13 @@ export function useInquiryForm(kind: InquiryKind) {
       const field = (event.target as HTMLInputElement).name as InquiryField;
       if (!INQUIRY_FIELD_ORDER.includes(field)) return;
       const message = validateInquiryField(kind, field, readInquiryForm(event.currentTarget));
-      setErrors((current) => (current[field] === message ? current : { ...current, [field]: message }));
+      setErrors((current) => {
+        if (current[field] === message) return current;
+        const next = { ...current };
+        if (message) next[field] = message;
+        else delete next[field];
+        return next;
+      });
     },
     [attempts, kind],
   );

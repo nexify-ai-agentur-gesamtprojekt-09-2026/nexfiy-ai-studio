@@ -14,6 +14,7 @@
 @import "./styles/site-typography.css";
 @import "./styles/product-presentation.css";
 @import "./styles/pwa-install.css";
+@import "./styles/site-forms.css";
 @source "../node_modules/streamdown/dist/*.js";
 
 @custom-variant dark (&:is(.dark *));

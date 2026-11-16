@@ -2,7 +2,7 @@
  * Inquiry forms (contact, TEILEKLAR partner): field rules, German error messages and the e-mail hand-off.
  * Pure functions only, so the rules are testable and the page markup stays a thin view.
  */
-export type InquiryKind = "contact" | "partner";
+export type InquiryKind = "contact" | "partner" | "appointment" | "voucher";
 
 export interface InquiryValues {
   name: string;
@@ -40,6 +40,18 @@ const PROFILES: Record<InquiryKind, InquiryProfile> = {
     subject: (values) => `TEILEKLAR Partneranfrage: ${values.company || values.name}`,
     intro: "Guten Tag,\n\nwir möchten TEILEKLAR-Partnerwerkstatt werden.",
   },
+  appointment: {
+    companyRequired: false,
+    companyLabel: "Unternehmen",
+    subject: (values) => `TEILEKLAR Terminwunsch von ${values.name}`,
+    intro: "Guten Tag,\n\nich möchte folgenden Werkstatt-Terminwunsch besprechen. Dies ist keine Buchung.",
+  },
+  voucher: {
+    companyRequired: false,
+    companyLabel: "Unternehmen",
+    subject: (values) => `TEILEKLAR Gutscheinfrage von ${values.name}`,
+    intro: "Guten Tag,\n\nich habe eine Frage zu einem Gutschein. Dies ist keine Einlösung.",
+  },
 };
 
 export function isInquiryFieldRequired(kind: InquiryKind, field: InquiryField): boolean {
@@ -47,6 +59,7 @@ export function isInquiryFieldRequired(kind: InquiryKind, field: InquiryField): 
 }
 
 export const MIN_MESSAGE_LENGTH = 10;
+export const INQUIRY_LIMITS = { name: 100, email: 160, company: 120, message: 4000 } as const;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function normalizeInquiry(raw: Partial<Record<InquiryField, unknown>>): InquiryValues {
@@ -72,6 +85,7 @@ export function readInquiryForm(form: HTMLFormElement): InquiryValues {
 }
 
 export function validateInquiryField(kind: InquiryKind, field: InquiryField, values: InquiryValues): string | undefined {
+  if (field !== "consent" && values[field].length > INQUIRY_LIMITS[field]) return `Bitte auf höchstens ${INQUIRY_LIMITS[field]} Zeichen kürzen.`;
   switch (field) {
     case "name":
       if (!values.name) return "Bitte geben Sie Ihren Namen an.";
@@ -108,7 +122,7 @@ export function firstInvalidField(errors: InquiryErrors): InquiryField | undefin
 }
 
 export function errorSummary(errors: InquiryErrors): string {
-  const count = Object.keys(errors).length;
+  const count = Object.values(errors).filter(Boolean).length;
   return count === 1 ? "Bitte prüfen Sie eine Angabe." : `Bitte prüfen Sie ${count} Angaben.`;
 }
 
@@ -138,7 +152,7 @@ export function buildInquiryMail(kind: InquiryKind, values: InquiryValues): Inqu
     `mailto:${INQUIRY_RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
   let href = link(body);
   if (href.length <= MAX_MAILTO_LENGTH) return { subject, body, href, shortened: false };
-  const note = "\n\n[Nachricht gekürzt – bitte den vollständigen Text aus der Zwischenablage einfügen.]";
+  const note = "\n\n[Nachricht gekürzt – bitte den vollständigen Text aus der Anfragevorbereitung einfügen.]";
   let cut = body.length;
   while (cut > 0 && link(body.slice(0, cut) + "…" + note).length > MAX_MAILTO_LENGTH) cut -= 50;
   href = link(body.slice(0, Math.max(0, cut)) + "…" + note);

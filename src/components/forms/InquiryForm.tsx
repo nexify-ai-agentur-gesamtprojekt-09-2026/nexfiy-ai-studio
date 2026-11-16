@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import formsCSS from "../../styles/site-forms.css?url";
 import { useInquiryForm } from "@/hooks/use-inquiry-form";
 import { CopyButton } from "@/components/system/CopyButton";
-import { INQUIRY_RECIPIENT, errorSummary, isInquiryFieldRequired, type InquiryField, type InquiryKind } from "@/lib/inquiry";
+import { INQUIRY_LIMITS, INQUIRY_RECIPIENT, errorSummary, isInquiryFieldRequired, type InquiryField, type InquiryKind } from "@/lib/inquiry";
 
 const ERROR_ICON = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" aria-hidden="true" focusable="false">
@@ -34,8 +34,8 @@ export function InquiryForm({
   companyLabel,
   privacyHref,
   messageLabel = "Ihr Anliegen",
-  submitLabel = "Anfrage senden",
-  successTitle = "Fast geschafft.",
+  submitLabel = "E-Mail vorbereiten",
+  successTitle = "Ihre Anfrage ist vorbereitet.",
   successBody,
   initialMessage = "",
 }: InquiryFormProps) {
@@ -83,28 +83,28 @@ export function InquiryForm({
         <div className="tk-form-grid">
           <div className="tk-field">
             {label("name", "Name")}
-            <input {...form.fieldProps("name")} autoComplete="name" maxLength={100} />
+            <input {...form.fieldProps("name")} required autoComplete="name" maxLength={INQUIRY_LIMITS.name} />
             {error("name")}
           </div>
           <div className="tk-field">
             {label("email", "E-Mail")}
-            <input {...form.fieldProps("email")} type="email" inputMode="email" autoComplete="email" maxLength={160} />
+            <input {...form.fieldProps("email")} required type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} maxLength={INQUIRY_LIMITS.email} />
             {error("email")}
           </div>
           <div className="tk-field">
             {label("company", companyLabel)}
-            <input {...form.fieldProps("company")} autoComplete="organization" maxLength={120} />
+            <input {...form.fieldProps("company")} required={isInquiryFieldRequired(kind, "company")} autoComplete="organization" maxLength={INQUIRY_LIMITS.company} />
             {error("company")}
           </div>
           <div className="tk-field is-wide">
             {label("message", messageLabel)}
-            <textarea {...form.fieldProps("message")} rows={5} maxLength={4000} defaultValue={initialMessage} />
+            <textarea {...form.fieldProps("message")} required rows={6} maxLength={INQUIRY_LIMITS.message} defaultValue={initialMessage} />
             {error("message")}
           </div>
         </div>
         <div className="tk-consent">
           <label className="tk-check">
-            <input {...form.fieldProps("consent")} type="checkbox" />
+            <input {...form.fieldProps("consent")} required type="checkbox" />
             <span>
               Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner E-Mail-Anfrage verwendet werden. Details in der{" "}
               <a href={privacyHref}>Datenschutzerklärung</a>. *
@@ -126,31 +126,29 @@ export function InquiryForm({
         <section className="tk-success inquiry-handoff" aria-labelledby={handoffTitleId}>
           <span className="inquiry-handoff-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" focusable="false">
-              <path d="m5 12.5 4.5 4.5L19 7.5" />
+              <path d="M4 5h16v14H4zM4 5l8 7 8-7" />
             </svg>
           </span>
           <h2 id={handoffTitleId} ref={form.handoffRef} tabIndex={-1}>
             {successTitle}
           </h2>
           <p>
-            {successBody ?? (
+            {form.mail.shortened ? "Kopieren Sie zuerst den vollständigen Text. Öffnen Sie anschließend die E-Mail und ersetzen Sie dort den gekürzten Inhalt." : successBody ?? (
               <>
-                Ihr E-Mail-Programm öffnet sich mit der fertigen Anfrage an {INQUIRY_RECIPIENT}. Bitte dort nur noch auf
-                „Senden“ tippen – wir melden uns persönlich.
+                Der Link zu Ihrem E-Mail-Programm wurde geöffnet. Prüfen und versenden Sie die Nachricht dort selbst.
               </>
             )}
           </p>
-          {form.mail.shortened ? (
-            <p className="tk-meta">
-              Ihre Nachricht war für den direkten Weg zu lang. Der vollständige Text liegt in Ihrer Zwischenablage – bitte in
-              die E-Mail einfügen.
-            </p>
-          ) : null}
-          <p className="tk-meta">Kein E-Mail-Programm zur Hand? Kopieren Sie den Text und senden Sie ihn an {INQUIRY_RECIPIENT}.</p>
+          <p className="tk-meta">Diese Website hat nichts versendet. Empfänger: {INQUIRY_RECIPIENT}.</p>
+          <details className="inquiry-preview" open={form.mail.shortened || undefined}>
+            <summary>Vollständigen E-Mail-Entwurf ansehen</summary>
+            <label htmlFor={`${titleId}-draft`}>Anfrageentwurf</label>
+            <textarea id={`${titleId}-draft`} readOnly rows={8} value={`An: ${INQUIRY_RECIPIENT}\nBetreff: ${form.mail.subject}\n\n${form.mail.body}`} onFocus={(event) => event.currentTarget.select()} />
+          </details>
           <div className="tk-actions">
-            <a className="nexify-control primary-button hc-finish-primary" data-variant="primary" href={form.mail.href}>
-              E-Mail erneut öffnen
-            </a>
+            <Button variant="brand" asChild><a className="nexify-control primary-button hc-finish-primary" data-variant="primary" href={form.mail.href}>
+              E-Mail öffnen
+            </a></Button>
             <CopyButton className="hc-text-link" text={`An: ${INQUIRY_RECIPIENT}\nBetreff: ${form.mail.subject}\n\n${form.mail.body}`} />
             <Button variant="ghost" type="button" className="hc-text-link" onClick={form.editAgain}>
               Angaben bearbeiten
