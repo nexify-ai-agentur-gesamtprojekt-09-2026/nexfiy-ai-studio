@@ -16,12 +16,12 @@
 - [x] TEILEKLAR und fünf Formularseiten: 66 Ansichten bei 1280/390/320px ohne Überlauf/Laufzeitfehler; aktuelle Teilefrage, externe Kartenadresse, Batterieübergabe und Reifenwahl im Browser geprüft
 
 ## Formulare technisch und visuell (16.11.)
-- [x] Reale Anfrage-/Kontoeingaben geprüft; Fehlerzählung, Eingabelimits, feldgenaue Kontofehler und klare Betreffzuordnung korrigiert
+- [x] Reale Anfrage-/Kontoeingaben geprüft; Fehlerzählung, Eingabelimits, feldgenaue Kontofehler und klare Betreffzuordnung korrigiert; ältere Shop-/Suite-Zusagen auf Anmeldung/Registrierung/Passwortseite berichtigt
 - [x] Gemeinsame Felder, Fokus, Abstände und Theme-Flächen vereinheitlicht; lange Entwürfe bleiben sichtbar, Kopierfehler werden ehrlich gezeigt und Angaben bleiben bearbeitbar
 - [x] Anfragevorbereitung, Kopierfehler und Rückbearbeitung im Browser geprüft; 57 Tests bestanden. Echte Kontotransaktion/Zustellung, Safari-Gerät und Passungsfreigabe nicht nachgewiesen
 
 ## Glasflächen nach Apple-Design-Prüfung (16.11.)
-- [x] Glasrollen für Navigation, Leseflächen und Menüs abgestimmt; helle/dunkle Ansicht geprüft, Fehlerfarbe im hellen Theme korrigiert. Frühere Pixel-Kontraststichprobe uneindeutig; keine vollständige WCAG-Kontrastfreigabe
+- [x] Glasrollen für Navigation, Leseflächen und Menüs abgestimmt; helle/dunkle Ansicht geprüft, Fehlerfarbe im hellen Theme korrigiert. Sechs isolierte Textkontraststichproben an Guide/Chat-Einstieg/Formularlabel: 6,78–8,68:1; keine vollständige WCAG-Kontrastfreigabe
 - [x] Final 7056 Geometriewerte in 28 Zuständen ohne Änderung gegenüber Ausgangsstand; Header oben/unten 8px, rechts bis 1280px 8px, bei 1705px vorhandene freie Flexfläche 198,72px ausdrücklich nicht als 8px behauptet
 - [x] Erhöhter Kontrast, reduzierte Transparenz/Bewegung, Menüs, Installationshinweise und reale mobile ORACLE-Antwort mit API-Link geprüft; keine Laufzeitfehler
 
