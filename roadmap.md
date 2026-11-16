@@ -2,6 +2,7 @@
 ## Hintergrund und Tiefenwirkung (16.11.)
 - [ ] Markierte Hintergrundlinie auf Leistungen reproduzieren und unbeabsichtigte Flächenkanten beseitigen
 - [ ] Bestehende Glasflächen und freigestellte Figuren mit abgestimmtem Licht, Farbe und Kontaktschatten vom Hintergrund abheben; Desktop/Handy prüfen
+- [ ] Inhaltskanten, Chat und Kopfbereich auf Desktop/Handy vermessen und Ausrichtung bestätigen
 
 ## Durchgängige Typografie (16.11.)
 - [x] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abgestimmt
