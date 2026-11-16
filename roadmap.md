@@ -12,6 +12,7 @@
 - [ ] Änderungen und verbleibende Fakten-/Freigabegrenzen prüfen
 - [ ] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung abgestimmt veredeln
 - [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
+- [ ] Aktuelle Leistungsseite vermessen: Breiten, Abstände, Überläufe und Ausrichtung auf Desktop und Handy
 
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
