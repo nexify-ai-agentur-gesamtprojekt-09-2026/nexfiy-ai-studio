@@ -58,7 +58,7 @@ function Index() {
             </svg>
           </a>
           <a href="#content-apps-portals-apps-portals-customer-2-1">
-            Verbunden mit dem, was Sie haben
+            Angebunden an Ihre vorhandenen Systeme
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ function Index() {
             <div>
               <span className={"hc-kicker"}>02 / 02</span>
               <h2 id="content-apps-portals-apps-portals-customer-2-1-title">
-                Verbunden mit dem, was Sie haben
+                Angebunden an Ihre vorhandenen Systeme
               </h2>
             </div>
             <div className={"pc-section-body"}>

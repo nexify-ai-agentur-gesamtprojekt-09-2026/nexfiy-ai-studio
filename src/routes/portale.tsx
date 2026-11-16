@@ -166,7 +166,7 @@ function Index() {
                 Partnerportal von TEILEKLAR, unserer eigenen Shop-Marke.
               </p>
 
-              <h3>Die Beschreibung ist noch kein freigeschalteter Bereich</h3>
+              <h3>Eine Beschreibung schaltet noch keinen Bereich frei</h3>
               <p>
                 Ein Kunden- oder Partnerbereich braucht eine tatsächlich angebundene Anwendung mit
                 passenden Inhalten. Die Anmeldung dieses Auftritts allein bestätigt weder einen
@@ -216,7 +216,7 @@ function Index() {
 
               <h3>Zugang und Inhalt getrennt beurteilen</h3>
               <p>
-                Ein Konto weist nicht automatisch Rechte für jede Anwendung nach. Welche Inhalte
+                Ein Konto bedeutet nicht automatisch Zugang zu jeder Anwendung. Welche Inhalte
                 zugänglich sind, bestimmt der tatsächlich freigeschaltete Bereich. Die
                 Beschreibungen dieser Seite sind keine Zusage, dass alle genannten Portalfunktionen
                 bereits in diesem Auftritt verfügbar sind.
