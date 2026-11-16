@@ -52,3 +52,7 @@ use the editor.
 - App installation uses the existing manifest and one root-level PwaInstallProvider to retain the browser's single-use prompt across routes; shared footer bars offer device-specific fallbacks without adding offline caching or service workers.
 - External design skills remain review aids with pinned source provenance and explicit web applicability; import documentation only and preserve the approved design system so native-platform guidance cannot silently replace application architecture or branding.
 - Glass uses shared semantic material/filter roles for navigation, reading surfaces and menus; accessibility fallbacks override those roles without changing geometry, and header controls do not stack blur over the header's existing glass layer.
+- Inquiry validation and mail profiles remain pure shared rules; long drafts require visible review and explicit copy/open actions, never an assumed clipboard or delivery success.
+- Auth input validation is field-specific and browser-local; provider failures remain form-level and never change hosted authentication settings.
+- TEILEKLAR search helpers preserve the current query and prepare explicit contact or external-map links; guidance selectors remain brand-scoped and cannot imply catalogue, booking or partner access.
+- Engineering skills preserve uploaded source provenance and project/platform boundaries; their checklists cannot activate infrastructure or imply verified production operations.
