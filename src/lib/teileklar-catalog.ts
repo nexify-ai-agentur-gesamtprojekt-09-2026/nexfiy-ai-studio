@@ -100,10 +100,14 @@ export function mapFeedItem(raw: unknown): CatalogRow | null {
   };
 }
 
-/** Eigene Bildadresse, damit Besucher keine Inhalte direkt vom Lieferanten laden. */
-export function catalogImageUrl(source: string): string | null {
-  const allowed = allowedImageSource(source);
-  return allowed ? `/api/public/shop/image?src=${encodeURIComponent(allowed)}` : null;
+/**
+ * Adresse der eigenen Bildkopie (private Ablage, ausgeliefert über /api/public/shop/image).
+ * Der Dateiname enthält eine Inhaltsprüfsumme und dient als Versionsparameter, damit geänderte Fotos nicht aus dem Cache kommen.
+ */
+export function catalogImageUrl(articleId: string, imagePath: string): string | null {
+  if (!articleId || !imagePath) return null;
+  const version = imagePath.split("/").pop()?.split(".")[0] ?? "";
+  return `/api/public/shop/image?artikel=${encodeURIComponent(articleId)}${version ? `&v=${encodeURIComponent(version)}` : ""}`;
 }
 
 const PRICE = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });

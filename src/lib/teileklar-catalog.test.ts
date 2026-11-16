@@ -28,7 +28,8 @@ describe("TEILEKLAR-Katalog", () => {
     expect(allowedImageSource("https://evil.example/cdnbigbuy.com/a.jpg")).toBeNull();
     expect(allowedImageSource("https://cdnbigbuy.com.evil.example/a.jpg")).toBeNull();
     expect(feedImageSource("/api/shop/image?src=https%3A%2F%2F169.254.169.254%2F")).toBe("");
-    expect(catalogImageUrl("https://cdnbigbuy.com/images/a.jpg")).toBe("/api/public/shop/image?src=https%3A%2F%2Fcdnbigbuy.com%2Fimages%2Fa.jpg");
+    expect(catalogImageUrl("V0103601", "V0103601/0a1b2c3d4e5f6789.jpg")).toBe("/api/public/shop/image?artikel=V0103601&v=0a1b2c3d4e5f6789");
+    expect(catalogImageUrl("V0103601", "")).toBeNull();
   });
   it("formatiert Preise in Euro nach deutscher Schreibweise", () => {
     expect(formatPrice(7.06)?.replace(/\s/g, " ")).toBe("7,06 €");
