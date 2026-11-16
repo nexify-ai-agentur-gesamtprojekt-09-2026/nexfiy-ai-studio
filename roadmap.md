@@ -139,3 +139,5 @@
 ## Offen (16.11.)
 - [ ] Datentabelle anlegen – wartet auf Angabe, welche Daten
 - [ ] Datei-Upload – wartet auf Angabe, wer was hochlädt
+- [ ] Shop füllen nach .cloud-Verbindung – Quelle der 3720 Produkte klären
+- [ ] ORACLE in Slack kontaktieren und befragen (Freigabe 16.11. erteilt)
