@@ -16,4 +16,29 @@
   --color-dunkel-lime-schein: var(--brand-signal-active);
   --color-dunkel-auf-lime: var(--brand-signal-foreground);
   --color-text-auf-lime: var(--brand-signal-foreground);
+
+  /* Grauskala: Seitenpaletten auf die Graphite-Rollen legen (Inhaberentscheidung 16.11.2026). */
+  --color-dunkel-grund: var(--background);
+  --color-dunkel-ebene: var(--card);
+  --color-dunkel-flaeche: var(--secondary);
+  --color-dunkel-tag-warm: var(--popover);
+  --color-dunkel-licht: var(--foreground);
+  --color-dunkel-schrift: var(--foreground);
+  --color-dunkel-schrift-neben: color-mix(in oklab, var(--foreground) 55%, var(--muted-foreground));
+  --color-dunkel-schrift-leise: var(--muted-foreground);
+  --color-graphit-900: var(--background);
+  --color-graphit-800: var(--background);
+  --color-graphit-850: var(--card);
+  --color-graphit-700: var(--card);
+  --color-graphit-650: var(--secondary);
+  --color-graphit-600: var(--popover);
+  --color-text-primaer: var(--foreground);
+  --color-text-sekundaer: color-mix(in oklab, var(--foreground) 55%, var(--muted-foreground));
+  --color-text-tertiaer: var(--muted-foreground);
+  --color-text-gedaempft: var(--muted-foreground);
+  --color-atelier-canvas: var(--background);
+  --color-atelier-surface: var(--card);
+  --color-atelier-raised: var(--secondary);
+  --color-atelier-ink: var(--foreground);
+  --color-atelier-muted: var(--muted-foreground);
 }

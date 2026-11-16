@@ -59,11 +59,17 @@
   --type-caption: 12px;
   --leading-editorial: 1.75;
   --leading-conversation: 1.75;
-  --measure-prose: 64ch;
+  --measure-prose: 68ch;
   --measure-lead: 55ch;
   --measure-heading: 24ch;
   --space-paragraph: 24px;
   --space-subheading: 32px;
+  --type-h4: 18px;
+  --type-eyebrow: 12px;
+  --radius-card: 24px;
+  --radius-media: 24px;
+  --section-space: 80px;
+  --section-space-compact: 48px;
   --glass-header-compact:
     linear-gradient(125deg, oklch(1 0 0 / 7%), transparent 42%, oklch(0.83 0.025 200 / 4%)),
     color-mix(in oklab, var(--background) 80%, transparent);
