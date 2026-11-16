@@ -13,6 +13,7 @@
 - [ ] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung abgestimmt veredeln
 - [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
 - [ ] Aktuelle Leistungsseite vermessen: Breiten, Abstände, Überläufe und Ausrichtung auf Desktop und Handy
+- [ ] Chatantworten mit gut lesbarer Typografie, klaren Absätzen und einheitlicher Darstellung formatieren und prüfen
 
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
