@@ -45,7 +45,10 @@ function escapeXml(value: string): string {
   return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-export function buildSitemapXml(paths: readonly string[] = SITEMAP_PATHS, origin = SITE_ORIGIN): string {
+export function buildSitemapXml(
+  paths: readonly string[] = SITEMAP_PATHS,
+  origin = SITE_ORIGIN,
+): string {
   const entries = paths
     .map((path) => `  <url><loc>${escapeXml(new URL(path, origin).href)}</loc></url>`)
     .join("\n");

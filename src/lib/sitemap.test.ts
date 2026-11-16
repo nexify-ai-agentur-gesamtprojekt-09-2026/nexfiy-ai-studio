@@ -10,7 +10,14 @@ describe("sitemap", () => {
   });
 
   it("keeps account, cart and checkout pages out", () => {
-    for (const hidden of ["/anmelden", "/registrieren", "/konto", "/arbeitsplatz", "/teileklar/kasse", "/teileklar/warenkorb"]) {
+    for (const hidden of [
+      "/anmelden",
+      "/registrieren",
+      "/konto",
+      "/arbeitsplatz",
+      "/teileklar/kasse",
+      "/teileklar/warenkorb",
+    ]) {
       expect(SITEMAP_PATHS as readonly string[]).not.toContain(hidden);
     }
   });

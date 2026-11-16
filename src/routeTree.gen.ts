@@ -28,6 +28,7 @@ import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergess
 import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TeileklarRouteImport } from './routes/teileklar'
 import { Route as UnternehmenRouteImport } from './routes/unternehmen'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
@@ -157,6 +158,11 @@ const PreiseAblaufRoute = PreiseAblaufRouteImport.update({
 const RegistrierenRoute = RegistrierenRouteImport.update({
   id: '/registrieren',
   path: '/registrieren',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeileklarRoute = TeileklarRouteImport.update({
@@ -362,6 +368,7 @@ export interface FileRoutesByFullPath {
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teileklar': typeof TeileklarRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -418,6 +425,7 @@ export interface FileRoutesByTo {
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teileklar': typeof TeileklarRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -475,6 +483,7 @@ export interface FileRoutesById {
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
   '/registrieren': typeof RegistrierenRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/teileklar': typeof TeileklarRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -533,6 +542,7 @@ export interface FileRouteTypes {
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
+    | '/sitemap.xml'
     | '/teileklar'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -589,6 +599,7 @@ export interface FileRouteTypes {
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
+    | '/sitemap.xml'
     | '/teileklar'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -645,6 +656,7 @@ export interface FileRouteTypes {
     | '/portale'
     | '/preise-ablauf'
     | '/registrieren'
+    | '/sitemap.xml'
     | '/teileklar'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -702,6 +714,7 @@ export interface RootRouteChildren {
   PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
   RegistrierenRoute: typeof RegistrierenRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TeileklarRoute: typeof TeileklarRoute
   UnternehmenRoute: typeof UnternehmenRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
@@ -872,6 +885,13 @@ declare module '@tanstack/react-router' {
       path: '/registrieren'
       fullPath: '/registrieren'
       preLoaderRoute: typeof RegistrierenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teileklar': {
@@ -1142,6 +1162,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
   RegistrierenRoute: RegistrierenRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TeileklarRoute: TeileklarRoute,
   UnternehmenRoute: UnternehmenRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
