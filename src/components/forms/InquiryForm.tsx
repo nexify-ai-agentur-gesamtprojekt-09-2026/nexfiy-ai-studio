@@ -1,6 +1,5 @@
 import { useId, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import formsCSS from "../../styles/site-forms.css?url";
 import { useInquiryForm } from "@/hooks/use-inquiry-form";
 import { CopyButton } from "@/components/system/CopyButton";
 import { INQUIRY_LIMITS, INQUIRY_RECIPIENT, errorSummary, isInquiryFieldRequired, type InquiryField, type InquiryKind } from "@/lib/inquiry";
@@ -59,7 +58,6 @@ export function InquiryForm({
 
   return (
     <>
-      <link rel="stylesheet" href={formsCSS} precedence="site-forms" />
       <form
         ref={form.formRef}
         onSubmit={form.onSubmit}
@@ -70,16 +68,14 @@ export function InquiryForm({
         aria-labelledby={titleId}
         hidden={form.mail !== null}
       >
-        <h2 id={titleId}>{title}</h2>
-        <p className="tk-meta">Pflichtfelder sind mit * markiert.</p>
-        <div role="status" aria-live="polite">
-          {form.hasErrors ? (
+        <header className="inquiry-form-heading"><h2 id={titleId}>{title}</h2>
+        <p className="tk-meta">Pflichtfelder sind mit * markiert.</p></header>
+        {form.hasErrors ? <div role="status" aria-live="polite">
             <p className="inquiry-summary">
               {ERROR_ICON}
               {errorSummary(form.errors)}
             </p>
-          ) : null}
-        </div>
+        </div> : null}
         <div className="tk-form-grid">
           <div className="tk-field">
             {label("name", "Name")}

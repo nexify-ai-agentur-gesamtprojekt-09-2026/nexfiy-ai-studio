@@ -4,7 +4,7 @@ import { CatalogUnavailable } from "@/components/site/CatalogUnavailable";
 import capturedCSS from "../styles/pages/teileklar.shop.css?url";
 
 export const Route = createFileRoute("/teileklar_/shop")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { name: "description", content: "Das TEILEKLAR-Schaufenster für Teile und Zubehör für Auto und Motorrad." }, { property: "og:title", content: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { property: "og:description", content: "Das TEILEKLAR-Schaufenster für Teile und Zubehör für Auto und Motorrad." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { name: "description", content: "Katalogstand und Vorbereitung einer Teilefrage. Aktuelle Artikel, Preise und Bestände sind nicht angebunden." }, { property: "og:title", content: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { property: "og:description", content: "Katalogstand und Vorbereitung einer Teilefrage. Aktuelle Artikel, Preise und Bestände sind nicht angebunden." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -22,12 +22,12 @@ function Index() {
                   <span aria-hidden="true">/</span>
                 </li>
                 <li>
-                  <span aria-current="page">Auto &amp; Motorrad. Klar ausgewählt.</span>
+                  <span aria-current="page">Ihre Teilefrage vorbereiten.</span>
                 </li>
               </ol>
             </nav>
             <span className={"hc-kicker"}>TEILEKLAR<span aria-hidden="true"> / </span>Shop</span>
-            <h1 id="shop-catalog-title">Auto &amp; Motorrad. Klar ausgewählt.</h1>
+            <h1 id="shop-catalog-title">Ihre Teilefrage vorbereiten.</h1>
           </div>
         </div>
       </section>

@@ -75,19 +75,19 @@ function Index() {
           </div>
         </section>
       </div>
-      <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
+      <section className={"hc-container pc-guide"} aria-label="TEILEKLAR · Fahrzeug, Werkstatt und Hinweise">
         <details className={"hc-service-detail"}>
           <summary>
             <span>
-              <strong className={"hc-service-name"}>Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE</strong>
+              <strong className={"hc-service-name"}>TEILEKLAR · Fahrzeug, Werkstatt und Hinweise</strong>
             </span>
             <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <path d="M5 12h14m-7-7v14" />
             </svg>
           </summary>
           <div className={"hc-service-body"}>
-            <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-            <GuideNavigation />
+            <p>Fahrzeugangaben, Werkstattsuche und Gutschein-Hinweise bleiben getrennte Themen.</p>
+            <GuideNavigation brand="teileklar" />
           </div>
         </details>
       </section>

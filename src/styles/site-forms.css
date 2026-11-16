@@ -5,6 +5,8 @@
 :root:root #atelier.site-shared .tk-form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
 :root:root #atelier.site-shared .tk-field { display: grid; gap: 8px; min-width: 0; }
 :root:root #atelier.site-shared .tk-field.is-wide { grid-column: 1 / -1; }
+:root:root #atelier.site-shared .home-concept .inquiry-form-heading { display: grid; gap: 12px; }
+:root:root #atelier.site-shared .home-concept .inquiry-form-heading :is(h2,p) { margin: 0; }
 :root:root #atelier.site-shared :is(.tk-form,.inquiry-preview) :is(input:not([type="checkbox"]),textarea) { width: 100%; min-width: 0; min-height: 48px; padding: 12px 16px; box-sizing: border-box; font: inherit; }
 :root:root #atelier.site-shared :is(.tk-form,.inquiry-preview) textarea { resize: vertical; min-height: 160px; }
 :root:root #atelier.site-shared :is(.tk-form,.inquiry-preview,.tk-search) :is(input,textarea,[role="combobox"]):focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
@@ -20,15 +22,15 @@
 :root:root #atelier .tk-form .tk-field > .tk-field-label { margin: 0; font-size: 14px; line-height: 21px; font-weight: 400; letter-spacing: normal; color: var(--color-text-sekundaer); }
 :root:root #atelier .tk-form .tk-field-error {
   display: flex; align-items: flex-start; gap: 6px; margin: 0;
-  font-size: 13px; line-height: 1.45; color: var(--color-semantik-fehler);
+  font-size: 14px; line-height: 1.5; color: var(--destructive);
   animation: inquiry-in .28s var(--ease-standard, ease) both;
 }
 :root:root #atelier .tk-form .tk-field-error svg { flex: 0 0 auto; width: 14px; height: 14px; margin-top: 2px; }
 :root:root #atelier .tk-form .tk-field :is(input, textarea)[aria-invalid="true"] {
-  border-color: var(--color-semantik-fehler);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-semantik-fehler) 55%, transparent);
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--destructive) 55%, transparent);
 }
-:root:root #atelier .tk-form .tk-check input[aria-invalid="true"] { outline: 2px solid var(--color-semantik-fehler); outline-offset: 2px; }
+:root:root #atelier .tk-form .tk-check input[aria-invalid="true"] { outline: 2px solid var(--destructive); outline-offset: 2px; }
 :root:root #atelier .tk-form .tk-consent { display: grid; gap: var(--space-2, 8px); }
 :root:root #atelier .tk-form .inquiry-summary {
   display: flex; align-items: center; gap: 10px; margin: 0; padding: 12px 16px;

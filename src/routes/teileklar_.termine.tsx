@@ -53,7 +53,10 @@ function Index() {
         <a href="#content-tk-appointments-tk-appointments-customer-2-1">Den Termin bestätigt der Betrieb<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
       </nav>
       <section className={"hc-container pc-supplement"}>
-        <InquiryForm kind="contact" title="Anfrage vorbereiten" companyLabel="Unternehmen" privacyHref="/teileklar/rechtliches" />
+        <InquiryForm kind="appointment" title="Terminwunsch vorbereiten" companyLabel="Unternehmen" privacyHref="/datenschutz" messageLabel="Fahrzeug, gewünschte Arbeit und Zeitraum" successTitle="Ihr Terminwunsch ist vorbereitet." initialMessage="Fahrzeug, Baujahr und Motor: 
+Gewünschte Arbeit: 
+Ort und möglicher Zeitraum: 
+Vorhandenes Teil und offene Fragen: " />
       </section>
       <div className={"pc-sections"}>
         <section className={"hc-intro hc-container pc-section"} id="content-tk-appointments-tk-appointments-customer-1-0" tabIndex={-1} aria-labelledby="content-tk-appointments-tk-appointments-customer-1-0-title">
@@ -85,19 +88,19 @@ function Index() {
 </div>
         </section>
       </div>
-      <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
+      <section className={"hc-container pc-guide"} aria-label="TEILEKLAR · Fahrzeug, Werkstatt und Hinweise">
         <details className={"hc-service-detail"}>
           <summary>
             <span>
-              <strong className={"hc-service-name"}>Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE</strong>
+              <strong className={"hc-service-name"}>TEILEKLAR · Fahrzeug, Werkstatt und Hinweise</strong>
             </span>
             <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <path d="M5 12h14m-7-7v14" />
             </svg>
           </summary>
           <div className={"hc-service-body"}>
-            <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-            <GuideNavigation />
+            <p>Fahrzeugangaben, Werkstattsuche und Gutschein-Hinweise bleiben getrennte Themen.</p>
+            <GuideNavigation brand="teileklar" />
           </div>
         </details>
       </section>
@@ -115,7 +118,7 @@ function Index() {
             <h3>
               <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Suchen Sie nach Postleitzahl oder Ort. Die Liste zeigt Betriebe aus einem Werkstattverzeichnis, sortiert nach Entfernung.</p>
+            <p>Bereiten Sie eine externe Kartensuche mit PLZ oder Ort vor. Ein eigenes Werkstattverzeichnis ist hier nicht angebunden.</p>
             <a aria-label="Eine Werkstatt in Ihrer Nähe. – Seite ansehen" className={"hc-text-link"} href="/teileklar/werkstatt">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
@@ -123,7 +126,7 @@ function Index() {
             <h3>
               <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Kunden kaufen das Teil bei TEILEKLAR und suchen jemanden für den Einbau. Stellen Sie Ihren Betrieb vor – wir besprechen, wie eine Zusammenarbeit aussieht.</p>
+            <p>Stellen Sie Ihren Betrieb und Ihre Leistungen vor, um eine mögliche Zusammenarbeit zu besprechen. Die Anfrage aktiviert keinen Partnerzugang und vermittelt keine Aufträge.</p>
             <a aria-label="Werkstatt? Werden Sie Partner. – Seite ansehen" className={"hc-text-link"} href="/teileklar/partner-werden">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
         </ol>

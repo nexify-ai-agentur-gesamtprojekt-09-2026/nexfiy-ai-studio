@@ -8,9 +8,9 @@ export const Route = createFileRoute("/teileklar_/werkstatt")({
     links: [{ rel: "stylesheet", href: capturedCSS }],
     meta: [
       { title: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
-      { name: "description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
+      { name: "description", content: "Eine externe Google-Maps-Suche nach PLZ oder Ort vorbereiten. Ein eigenes Werkstattverzeichnis und Buchungssystem sind nicht angebunden." },
       { property: "og:title", content: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
-      { property: "og:description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
+      { property: "og:description", content: "Eine externe Google-Maps-Suche nach PLZ oder Ort vorbereiten. Ein eigenes Werkstattverzeichnis und Buchungssystem sind nicht angebunden." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -38,7 +38,7 @@ function Index() {
             </nav>
             <span className={"hc-kicker"}>TEILEKLAR<span aria-hidden="true"> / </span>Werkstattsuche</span>
             <h1 id="workshop-search-title">Werkstatt in Ihrer Nähe</h1>
-            <p className={"identity-body"}>Suchen Sie nach PLZ oder Ort. Die Liste zeigt Betriebe aus einem Werkstattverzeichnis, sortiert nach Entfernung (Luftlinie).</p>
+            <p className={"identity-body"}>Nennen Sie PLZ oder Ort für eine externe Kartensuche. Diese Seite zeigt keine eigene Betriebsliste; einen Termin vereinbaren Sie direkt mit der gewählten Werkstatt.</p>
           </div>
         </div>
       </section>

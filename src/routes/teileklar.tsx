@@ -7,10 +7,10 @@ export const Route = createFileRoute("/teileklar")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }],
     meta: [
-      { title: "TEILEKLAR.shop – Zubehör für Auto & Motorrad" },
-      { name: "description", content: "Passende Teile und Zubehör für Auto und Motorrad – mit klaren Angaben zu Fahrzeug, Passung und Werkstatt." },
-      { property: "og:title", content: "TEILEKLAR.shop – Zubehör für Auto & Motorrad" },
-      { property: "og:description", content: "Passende Teile und Zubehör für Auto und Motorrad – mit klaren Angaben zu Fahrzeug, Passung und Werkstatt." },
+      { title: "TEILEKLAR.shop – Fahrzeug und Teilefragen" },
+      { name: "description", content: "Fahrzeug- und Teilehinweise, Reifenvergleich und Anfragevorbereitung. Kein Warenkatalog oder Onlinekauf in diesem Auftritt." },
+      { property: "og:title", content: "TEILEKLAR.shop – Fahrzeug und Teilefragen" },
+      { property: "og:description", content: "Fahrzeug- und Teilehinweise, Reifenvergleich und Anfragevorbereitung. Kein Warenkatalog oder Onlinekauf in diesem Auftritt." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -27,13 +27,13 @@ function Index() {
           <div className={"identity-copy"}>
             <span className={"hc-kicker"}>TEILEKLAR.shop<span aria-hidden="true"> / </span>AUTO &amp; MOTORRAD</span>
             <h1 id="storefront-title">
-              <span>Für Ihr Auto. </span>
-              <span className={"identity-title-accent"}>Klar gefunden.</span>
+              <span>TEILEKLAR. </span>
+              <span className={"identity-title-accent"}>Für Auto und Motorrad.</span>
             </h1>
             <p className={"identity-body"}>Bereiten Sie eine Teilefrage mit Fahrzeugdaten und einer vorhandenen Artikelnummer vor. Unsere Hinweise und der Reifenrechner helfen beim Einordnen. Ein Warenkatalog und Onlinekauf sind hier noch nicht angebunden.</p>
             <div className={"identity-links"}>
               <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="#sortiment">
-                <span>Sortiment entdecken</span>
+                <span>Prüfhinweise ansehen</span>
                 <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
               </a>
               <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/fahrzeug-und-passung">Passt der Artikel zu meinem Fahrzeug?</a>
@@ -64,20 +64,20 @@ function Index() {
         <div>
           <span>03</span>
           <p>
-            <strong>Erst prüfen, dann bestellen</strong>
+            <strong>Offene Fragen klären</strong>
           </p>
           <p className={"hc-caption"}>Keine ungeprüfte Passformzusage</p>
         </div>
       </section>
       <section className={"hc-section hc-container tk-window-selection"} id="sortiment">
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Aus dem Sortiment</span>
-          <h2>Artikel im Schaufenster</h2>
+          <span className={"hc-kicker"}>Teile und Fahrzeug</span>
+          <h2>Ihre nächsten Schritte</h2>
         </header>
         <div className={"tk-empty"} role="status">
           <p>Der Warenkatalog ist noch nicht angebunden. Artikel, Preise und Verfügbarkeiten können hier deshalb nicht abgerufen werden. Beschreiben Sie stattdessen das gesuchte Teil oder bereiten Sie eine Werkstattanfrage vor.</p>
           <div className={"identity-links"}>
-            <a className={"nexify-control primary-button"} data-variant="primary" href="/teileklar/werkstatt">Werkstatt finden</a>
+            <a className={"nexify-control primary-button"} data-variant="primary" href="/teileklar/fahrzeug-und-passung">Prüfhinweise ansehen</a>
             <a className={"nexify-control secondary-button"} data-variant="secondary" href="/kontakt">Teil anfragen</a>
           </div>
         </div>
@@ -100,14 +100,14 @@ function Index() {
                   <li>Offene Frage zu Auswahl oder Einbau beschreiben</li>
                   <li>Vorbereitete Anfrage selbst per E-Mail versenden</li>
                 </ol>
-                <a className={"hc-text-link"} href="/teileklar/rechtliches">Versand, Widerruf und Bedingungen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+                <a className={"hc-text-link"} href="/teileklar/rechtliches">Rechtliche Hinweise zum aktuellen Angebot<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
               </div>
             </div>
           </div>
         </div>
       </section>
       <details className={"hc-container tk-source-disclosure"}>
-        <summary>Datenstand und Lieferanteninformationen</summary>
+        <summary>Katalog- und Datenstand</summary><p>Waren- und Lieferantendaten sind hier noch nicht angebunden. Deshalb gibt es keine aktuellen Preise, Bestände oder Lieferzeiten.</p>
       </details>
     </div>
   </NexifyShell>;

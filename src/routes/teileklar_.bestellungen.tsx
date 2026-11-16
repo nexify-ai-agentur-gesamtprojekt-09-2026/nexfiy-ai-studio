@@ -3,7 +3,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/teileklar.bestellungen.css?url";
 
 export const Route = createFileRoute("/teileklar_/bestellungen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Bestellungen · TEILEKLAR" }, { name: "description", content: "Ihr Bestellbereich bei TEILEKLAR und Informationen zu Ihren Bestellungen." }, { property: "og:title", content: "Bestellungen · TEILEKLAR" }, { property: "og:description", content: "Ihr Bestellbereich bei TEILEKLAR und Informationen zu Ihren Bestellungen." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Bestellungen · TEILEKLAR" }, { name: "description", content: "Bestellverwaltung ist hier nicht angebunden. Eine Website-Anmeldung zeigt keine TEILEKLAR-Bestellungen an." }, { property: "og:title", content: "Bestellungen · TEILEKLAR" }, { property: "og:description", content: "Bestellverwaltung ist hier nicht angebunden. Eine Website-Anmeldung zeigt keine TEILEKLAR-Bestellungen an." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -26,7 +26,7 @@ function Index() {
               </ol>
             </nav>
             <span className={"hc-kicker"}>TEILEKLAR<span aria-hidden="true"> / </span>Kundenkonto</span>
-            <h1 id="shop-orders-title">Ihre Bestellungen</h1>
+            <h1 id="shop-orders-title">Bestellverwaltung: aktueller Stand</h1>
           </div>
         </div>
       </section>
