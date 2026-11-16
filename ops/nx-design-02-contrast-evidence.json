@@ -1,0 +1,3942 @@
+{
+  "utc": "2026-11-16T18:04:20.805233+00:00",
+  "results": [
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 283,
+      "backgroundRgb": [
+        70,
+        73,
+        70
+      ],
+      "backgroundSampleLocalXY": [
+        51,
+        6
+      ],
+      "ratio": 8.020885401606305,
+      "medianRatio": 8.541517884722033,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-header-0-text.png",
+      "backgroundScreenshot": "dark-1440-start-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 346,
+      "backgroundRgb": [
+        74,
+        79,
+        74
+      ],
+      "backgroundSampleLocalXY": [
+        55,
+        6
+      ],
+      "ratio": 7.360368116998148,
+      "medianRatio": 7.650621257938763,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-header-1-text.png",
+      "backgroundScreenshot": "dark-1440-start-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 625,
+      "backgroundRgb": [
+        51,
+        55,
+        53
+      ],
+      "backgroundSampleLocalXY": [
+        87,
+        5
+      ],
+      "ratio": 10.619231734017204,
+      "medianRatio": 10.778995447864643,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-header-2-text.png",
+      "backgroundScreenshot": "dark-1440-start-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 265,
+      "backgroundRgb": [
+        55,
+        58,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 10.13933356552202,
+      "medianRatio": 10.262370875312444,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-header-3-text.png",
+      "backgroundScreenshot": "dark-1440-start-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 448,
+      "backgroundRgb": [
+        55,
+        59,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        29,
+        6
+      ],
+      "ratio": 10.027199850855842,
+      "medianRatio": 10.13933356552202,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-0-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 358,
+      "backgroundRgb": [
+        56,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        50,
+        6
+      ],
+      "ratio": 9.885130428180624,
+      "medianRatio": 10.037339501634357,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-1-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 516,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 997,
+      "backgroundRgb": [
+        56,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        6
+      ],
+      "ratio": 9.885130428180624,
+      "medianRatio": 9.996224709488763,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-2-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 733,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 235,
+      "backgroundRgb": [
+        56,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        6,
+        6
+      ],
+      "ratio": 9.885130428180624,
+      "medianRatio": 9.996224709488763,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-3-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 941.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 491,
+      "backgroundRgb": [
+        52,
+        57,
+        51
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        6
+      ],
+      "ratio": 10.377953145080355,
+      "medianRatio": 10.545622142734,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-4-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 941.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 601,
+      "backgroundRgb": [
+        52,
+        58,
+        51
+      ],
+      "backgroundSampleLocalXY": [
+        79,
+        5
+      ],
+      "ratio": 10.262745676328846,
+      "medianRatio": 10.503871082008816,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-footer-5-text.png",
+      "backgroundScreenshot": "dark-1440-start-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 20,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 155,
+        "y": 1603.46875,
+        "width": 578.734375,
+        "height": 28
+      },
+      "label": "pwa",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 2114,
+      "backgroundRgb": [
+        47,
+        50,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        7
+      ],
+      "ratio": 11.386707812992707,
+      "medianRatio": 11.764964793939678,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-pwa-0-text.png",
+      "backgroundScreenshot": "dark-1440-start-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.783 0.0087 157.04)",
+      "fill": "oklch(0.783 0.0087 157.04)",
+      "rgba": [
+        180,
+        186,
+        182,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 1274.15625,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        38,
+        44,
+        39
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 7.228140112215006,
+      "medianRatio": 7.228140112215006,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-start-oracle-link-0-text.png",
+      "backgroundScreenshot": "dark-1440-start-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 283,
+      "backgroundRgb": [
+        61,
+        66,
+        63
+      ],
+      "backgroundSampleLocalXY": [
+        51,
+        6
+      ],
+      "ratio": 9.008654024999215,
+      "medianRatio": 9.409312712615638,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-header-0-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 346,
+      "backgroundRgb": [
+        74,
+        79,
+        74
+      ],
+      "backgroundSampleLocalXY": [
+        55,
+        6
+      ],
+      "ratio": 7.360368116998148,
+      "medianRatio": 7.650621257938763,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-header-1-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 625,
+      "backgroundRgb": [
+        54,
+        58,
+        56
+      ],
+      "backgroundSampleLocalXY": [
+        71,
+        5
+      ],
+      "ratio": 10.149113216727368,
+      "medianRatio": 10.304234820137417,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-header-2-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 265,
+      "backgroundRgb": [
+        55,
+        58,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 10.13933356552202,
+      "medianRatio": 10.262370875312444,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-header-3-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 449,
+      "backgroundRgb": [
+        54,
+        59,
+        53
+      ],
+      "backgroundSampleLocalXY": [
+        13,
+        9
+      ],
+      "ratio": 10.067941390635818,
+      "medianRatio": 10.211835471335368,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-0-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 359,
+      "backgroundRgb": [
+        55,
+        59,
+        53
+      ],
+      "backgroundSampleLocalXY": [
+        26,
+        9
+      ],
+      "ratio": 10.037339501634357,
+      "medianRatio": 10.191230249983754,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-1-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 516,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 997,
+      "backgroundRgb": [
+        55,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        95,
+        9
+      ],
+      "ratio": 9.915419860133941,
+      "medianRatio": 10.067941390635818,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-2-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 733,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 235,
+      "backgroundRgb": [
+        56,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        6,
+        9
+      ],
+      "ratio": 9.885130428180624,
+      "medianRatio": 10.037339501634357,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-3-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 941.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 491,
+      "backgroundRgb": [
+        51,
+        55,
+        50
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        7
+      ],
+      "ratio": 10.652011747899538,
+      "medianRatio": 10.683690839833464,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-4-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 941.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 601,
+      "backgroundRgb": [
+        51,
+        56,
+        51
+      ],
+      "backgroundSampleLocalXY": [
+        0,
+        7
+      ],
+      "ratio": 10.524863925040549,
+      "medianRatio": 10.652011747899538,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-footer-5-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 20,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 155,
+        "y": 1604.078125,
+        "width": 578.734375,
+        "height": 28
+      },
+      "label": "pwa",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 2114,
+      "backgroundRgb": [
+        47,
+        50,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        7
+      ],
+      "ratio": 11.386707812992707,
+      "medianRatio": 11.764964793939678,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-pwa-0-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.783 0.0087 157.04)",
+      "fill": "oklch(0.783 0.0087 157.04)",
+      "rgba": [
+        180,
+        186,
+        182,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 1274.15625,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "dark",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        36,
+        40,
+        38
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 7.564566076481952,
+      "medianRatio": 7.564566076481952,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-1440-kontakt-oracle-link-0-text.png",
+      "backgroundScreenshot": "dark-1440-kontakt-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 279,
+      "backgroundRgb": [
+        230,
+        232,
+        233
+      ],
+      "backgroundSampleLocalXY": [
+        52,
+        12
+      ],
+      "ratio": 13.706583235218062,
+      "medianRatio": 14.225993652087174,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-header-0-text.png",
+      "backgroundScreenshot": "light-1440-start-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 345,
+      "backgroundRgb": [
+        232,
+        233,
+        234
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        5
+      ],
+      "ratio": 13.85978176275684,
+      "medianRatio": 14.643940350204485,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-header-1-text.png",
+      "backgroundScreenshot": "light-1440-start-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 616,
+      "backgroundRgb": [
+        242,
+        244,
+        246
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        6
+      ],
+      "ratio": 15.281201888733886,
+      "medianRatio": 15.416386242296124,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-header-2-text.png",
+      "backgroundScreenshot": "light-1440-start-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 262,
+      "backgroundRgb": [
+        239,
+        240,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        45,
+        12
+      ],
+      "ratio": 14.766012253269144,
+      "medianRatio": 14.916921660034896,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-header-3-text.png",
+      "backgroundScreenshot": "light-1440-start-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 444,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 14.965629783243667,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-0-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 356,
+      "backgroundRgb": [
+        238,
+        241,
+        243
+      ],
+      "backgroundSampleLocalXY": [
+        19,
+        7
+      ],
+      "ratio": 14.852185082188623,
+      "medianRatio": 14.965629783243667,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-1-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 516,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 990,
+      "backgroundRgb": [
+        238,
+        241,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        136,
+        6
+      ],
+      "ratio": 14.832898970724674,
+      "medianRatio": 14.965629783243667,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-2-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 733,
+        "y": 1529.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 232,
+      "backgroundRgb": [
+        238,
+        241,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        6
+      ],
+      "ratio": 14.832898970724674,
+      "medianRatio": 14.965629783243667,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-3-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 941.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 481,
+      "backgroundRgb": [
+        236,
+        238,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        10
+      ],
+      "ratio": 14.466463505100151,
+      "medianRatio": 14.569621581959858,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-4-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 941.375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 590,
+      "backgroundRgb": [
+        236,
+        238,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        3,
+        10
+      ],
+      "ratio": 14.466463505100151,
+      "medianRatio": 14.597166181127747,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-footer-5-text.png",
+      "backgroundScreenshot": "light-1440-start-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 20,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 155,
+        "y": 1603.46875,
+        "width": 578.734375,
+        "height": 28
+      },
+      "label": "pwa",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 2092,
+      "backgroundRgb": [
+        239,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        257,
+        10
+      ],
+      "ratio": 14.98502143743517,
+      "medianRatio": 15.252884597512459,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-pwa-0-text.png",
+      "backgroundScreenshot": "light-1440-start-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.44 0.006 165)",
+      "fill": "oklch(0.44 0.006 165)",
+      "rgba": [
+        80,
+        84,
+        82,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 1274.15625,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "light",
+      "width": 1440,
+      "path": "/",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        232,
+        237,
+        240
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 6.518739043826453,
+      "medianRatio": 6.518739043826453,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-start-oracle-link-0-text.png",
+      "backgroundScreenshot": "light-1440-start-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 279,
+      "backgroundRgb": [
+        240,
+        242,
+        243
+      ],
+      "backgroundSampleLocalXY": [
+        56,
+        12
+      ],
+      "ratio": 15.003306685850056,
+      "medianRatio": 15.319555611953003,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-header-0-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 172,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 345,
+      "backgroundRgb": [
+        232,
+        233,
+        234
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        5
+      ],
+      "ratio": 13.85978176275684,
+      "medianRatio": 14.643940350204485,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-header-1-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 32,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 616,
+      "backgroundRgb": [
+        239,
+        240,
+        243
+      ],
+      "backgroundSampleLocalXY": [
+        122,
+        10
+      ],
+      "ratio": 14.785298364733093,
+      "medianRatio": 15.013028919199376,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-header-2-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 512,
+        "y": 387,
+        "width": 456,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 262,
+      "backgroundRgb": [
+        239,
+        240,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        45,
+        12
+      ],
+      "ratio": 14.766012253269144,
+      "medianRatio": 14.916921660034896,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-header-3-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 444,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        6
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 15.003306685850056,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-0-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 356,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        6
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 15.003306685850056,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-1-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 516,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 991,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        0,
+        6
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 14.975299204085852,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-2-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 733,
+        "y": 1529.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 232,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        8
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 15.003306685850056,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-3-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 82,
+        "y": 941.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 482,
+      "backgroundRgb": [
+        235,
+        238,
+        239
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        13
+      ],
+      "ratio": 14.448531704996306,
+      "medianRatio": 14.673352020064918,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-4-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 299,
+        "y": 941.984375,
+        "width": 185,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 592,
+      "backgroundRgb": [
+        236,
+        238,
+        239
+      ],
+      "backgroundSampleLocalXY": [
+        12,
+        6
+      ],
+      "ratio": 14.475922500717717,
+      "medianRatio": 14.673352020064918,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-footer-5-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 20,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 155,
+        "y": 1604.078125,
+        "width": 578.734375,
+        "height": 28
+      },
+      "label": "pwa",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 2092,
+      "backgroundRgb": [
+        239,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        257,
+        10
+      ],
+      "ratio": 14.98502143743517,
+      "medianRatio": 15.252884597512459,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-pwa-0-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.44 0.006 165)",
+      "fill": "oklch(0.44 0.006 165)",
+      "rgba": [
+        80,
+        84,
+        82,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 1274.15625,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "light",
+      "width": 1440,
+      "path": "/kontakt",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        227,
+        231,
+        234
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 6.1824440531669005,
+      "medianRatio": 6.1824440531669005,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-1440-kontakt-oracle-link-0-text.png",
+      "backgroundScreenshot": "light-1440-kontakt-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 156,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 283,
+      "backgroundRgb": [
+        79,
+        82,
+        76
+      ],
+      "backgroundSampleLocalXY": [
+        55,
+        6
+      ],
+      "ratio": 6.9837198228024775,
+      "medianRatio": 8.06330069539166,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-header-0-text.png",
+      "backgroundScreenshot": "dark-390-start-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 371,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 347,
+      "backgroundRgb": [
+        58,
+        62,
+        60
+      ],
+      "backgroundSampleLocalXY": [
+        61,
+        5
+      ],
+      "ratio": 9.545554007627624,
+      "medianRatio": 9.723542171628889,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-header-1-text.png",
+      "backgroundScreenshot": "dark-390-start-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 586,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 625,
+      "backgroundRgb": [
+        57,
+        61,
+        58
+      ],
+      "backgroundSampleLocalXY": [
+        3,
+        6
+      ],
+      "ratio": 9.704299585972311,
+      "medianRatio": 9.854459649723745,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-header-2-text.png",
+      "backgroundScreenshot": "dark-390-start-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 878,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 265,
+      "backgroundRgb": [
+        66,
+        79,
+        45
+      ],
+      "backgroundSampleLocalXY": [
+        52,
+        7
+      ],
+      "ratio": 7.731815377576751,
+      "medianRatio": 8.18516474875811,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-header-3-text.png",
+      "backgroundScreenshot": "dark-390-start-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1171.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 448,
+      "backgroundRgb": [
+        56,
+        61,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        55,
+        8
+      ],
+      "ratio": 9.774427097511564,
+      "medianRatio": 10.027199850855842,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-0-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1527.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 361,
+      "backgroundRgb": [
+        55,
+        60,
+        54
+      ],
+      "backgroundSampleLocalXY": [
+        51,
+        6
+      ],
+      "ratio": 9.915419860133941,
+      "medianRatio": 9.965044106285697,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-1-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 1002,
+      "backgroundRgb": [
+        53,
+        58,
+        51
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        6
+      ],
+      "ratio": 10.2322376975017,
+      "medianRatio": 10.493451232558735,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-2-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1290.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 237,
+      "backgroundRgb": [
+        53,
+        56,
+        51
+      ],
+      "backgroundSampleLocalXY": [
+        15,
+        9
+      ],
+      "ratio": 10.46155833492939,
+      "medianRatio": 10.514085603022197,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-3-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1471.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 491,
+      "backgroundRgb": [
+        52,
+        57,
+        50
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        6
+      ],
+      "ratio": 10.388144769523388,
+      "medianRatio": 10.555691661948915,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-4-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 601,
+      "backgroundRgb": [
+        51,
+        56,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        63,
+        11
+      ],
+      "ratio": 10.545622142734,
+      "medianRatio": 10.704613773164057,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-footer-5-text.png",
+      "backgroundScreenshot": "dark-390-start-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 16,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 101,
+        "y": 1435.609375,
+        "width": 244,
+        "height": 22.390625
+      },
+      "label": "pwa",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 1458,
+      "backgroundRgb": [
+        47,
+        50,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 11.386707812992707,
+      "medianRatio": 11.809629738555474,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-pwa-0-text.png",
+      "backgroundScreenshot": "dark-390-start-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.783 0.0087 157.04)",
+      "fill": "oklch(0.783 0.0087 157.04)",
+      "rgba": [
+        180,
+        186,
+        182,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 25,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "dark",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 316,
+      "backgroundRgb": [
+        36,
+        40,
+        38
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 7.564566076481952,
+      "medianRatio": 7.564566076481952,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-start-oracle-link-0-text.png",
+      "backgroundScreenshot": "dark-390-start-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 156,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 283,
+      "backgroundRgb": [
+        79,
+        82,
+        76
+      ],
+      "backgroundSampleLocalXY": [
+        55,
+        6
+      ],
+      "ratio": 6.9837198228024775,
+      "medianRatio": 8.06330069539166,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-header-0-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 371,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 347,
+      "backgroundRgb": [
+        58,
+        62,
+        60
+      ],
+      "backgroundSampleLocalXY": [
+        61,
+        5
+      ],
+      "ratio": 9.545554007627624,
+      "medianRatio": 9.704299585972311,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-header-1-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 586,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 625,
+      "backgroundRgb": [
+        64,
+        67,
+        64
+      ],
+      "backgroundSampleLocalXY": [
+        119,
+        10
+      ],
+      "ratio": 8.813374878035496,
+      "medianRatio": 9.092847101037911,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-header-2-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 878,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 265,
+      "backgroundRgb": [
+        50,
+        54,
+        52
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        5
+      ],
+      "ratio": 10.778995447864643,
+      "medianRatio": 10.79022993496597,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-header-3-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1171.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 449,
+      "backgroundRgb": [
+        54,
+        59,
+        53
+      ],
+      "backgroundSampleLocalXY": [
+        18,
+        5
+      ],
+      "ratio": 10.067941390635818,
+      "medianRatio": 10.211835471335368,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-0-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1527.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 361,
+      "backgroundRgb": [
+        53,
+        58,
+        52
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 10.222134555067614,
+      "medianRatio": 10.336426966583929,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-1-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 1002,
+      "backgroundRgb": [
+        52,
+        57,
+        50
+      ],
+      "backgroundSampleLocalXY": [
+        75,
+        6
+      ],
+      "ratio": 10.388144769523388,
+      "medianRatio": 10.535346283749405,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-2-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1290.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 237,
+      "backgroundRgb": [
+        51,
+        55,
+        50
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        5
+      ],
+      "ratio": 10.652011747899538,
+      "medianRatio": 10.735984972608442,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-3-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1471.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 491,
+      "backgroundRgb": [
+        51,
+        56,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        5
+      ],
+      "ratio": 10.545622142734,
+      "medianRatio": 10.69425826290133,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-4-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 601,
+      "backgroundRgb": [
+        50,
+        55,
+        48
+      ],
+      "backgroundSampleLocalXY": [
+        7,
+        8
+      ],
+      "ratio": 10.704613773164057,
+      "medianRatio": 10.865058620734668,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-footer-5-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.9558 0.0086 84.57)",
+      "fill": "oklch(0.9558 0.0086 84.57)",
+      "rgba": [
+        243,
+        240,
+        234,
+        255
+      ],
+      "fontSize": 16,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 101,
+        "y": 1435.375,
+        "width": 244,
+        "height": 22.390625
+      },
+      "label": "pwa",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 1458,
+      "backgroundRgb": [
+        47,
+        50,
+        49
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 11.386707812992707,
+      "medianRatio": 11.809629738555474,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-pwa-0-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.783 0.0087 157.04)",
+      "fill": "oklch(0.783 0.0087 157.04)",
+      "rgba": [
+        180,
+        186,
+        182,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 25,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "dark",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 316,
+      "backgroundRgb": [
+        36,
+        40,
+        38
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 7.564566076481952,
+      "medianRatio": 7.564566076481952,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "dark-390-kontakt-oracle-link-0-text.png",
+      "backgroundScreenshot": "dark-390-kontakt-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 156,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 278,
+      "backgroundRgb": [
+        227,
+        228,
+        225
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        10
+      ],
+      "ratio": 13.198644976261784,
+      "medianRatio": 13.696936346855374,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-header-0-text.png",
+      "backgroundScreenshot": "light-390-start-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 371,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 345,
+      "backgroundRgb": [
+        240,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        62,
+        6
+      ],
+      "ratio": 15.013028919199376,
+      "medianRatio": 15.156577931426114,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-header-1-text.png",
+      "backgroundScreenshot": "light-390-start-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 586,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 616,
+      "backgroundRgb": [
+        231,
+        233,
+        236
+      ],
+      "backgroundSampleLocalXY": [
+        6,
+        5
+      ],
+      "ratio": 13.851555658984118,
+      "medianRatio": 14.133849263093976,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-header-2-text.png",
+      "backgroundScreenshot": "light-390-start-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 878,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 264,
+      "backgroundRgb": [
+        224,
+        234,
+        215
+      ],
+      "backgroundSampleLocalXY": [
+        52,
+        7
+      ],
+      "ratio": 13.57497463550829,
+      "medianRatio": 13.869750771433036,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-header-3-text.png",
+      "backgroundScreenshot": "light-390-start-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1171.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 444,
+      "backgroundRgb": [
+        238,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        52,
+        16
+      ],
+      "ratio": 14.842515661346438,
+      "medianRatio": 14.870368604120598,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-0-text.png",
+      "backgroundScreenshot": "light-390-start-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1527.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 356,
+      "backgroundRgb": [
+        238,
+        240,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        6
+      ],
+      "ratio": 14.738159310494982,
+      "medianRatio": 14.832898970724674,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-1-text.png",
+      "backgroundScreenshot": "light-390-start-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 991,
+      "backgroundRgb": [
+        235,
+        239,
+        239
+      ],
+      "backgroundSampleLocalXY": [
+        76,
+        6
+      ],
+      "ratio": 14.542230786238447,
+      "medianRatio": 14.700896619232807,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-2-text.png",
+      "backgroundScreenshot": "light-390-start-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1290.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 232,
+      "backgroundRgb": [
+        235,
+        238,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        7
+      ],
+      "ratio": 14.43907270937874,
+      "medianRatio": 14.569621581959858,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-3-text.png",
+      "backgroundScreenshot": "light-390-start-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1471.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 482,
+      "backgroundRgb": [
+        235,
+        237,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        8,
+        12
+      ],
+      "ratio": 14.345892684345225,
+      "medianRatio": 14.475922500717717,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-4-text.png",
+      "backgroundScreenshot": "light-390-start-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.609375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 590,
+      "backgroundRgb": [
+        234,
+        236,
+        236
+      ],
+      "backgroundSampleLocalXY": [
+        4,
+        15
+      ],
+      "ratio": 14.207232774979776,
+      "medianRatio": 14.345892684345225,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-footer-5-text.png",
+      "backgroundScreenshot": "light-390-start-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 16,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 101,
+        "y": 1435.609375,
+        "width": 244,
+        "height": 22.390625
+      },
+      "label": "pwa",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 1435,
+      "backgroundRgb": [
+        239,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        183,
+        8
+      ],
+      "ratio": 14.98502143743517,
+      "medianRatio": 15.243056493054997,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-pwa-0-text.png",
+      "backgroundScreenshot": "light-390-start-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.44 0.006 165)",
+      "fill": "oklch(0.44 0.006 165)",
+      "rgba": [
+        80,
+        84,
+        82,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 25,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "light",
+      "width": 390,
+      "path": "/",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        231,
+        234,
+        237
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 6.367408760086478,
+      "medianRatio": 6.367408760086478,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-start-oracle-link-0-text.png",
+      "backgroundScreenshot": "light-390-start-oracle-link-0-background.png"
+    },
+    {
+      "text": "NeXify AI",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 156,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 278,
+      "backgroundRgb": [
+        227,
+        228,
+        225
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        10
+      ],
+      "ratio": 13.198644976261784,
+      "medianRatio": 13.696936346855374,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-header-0-text.png",
+      "backgroundScreenshot": "light-390-kontakt-header-0-background.png"
+    },
+    {
+      "text": "TEILEKLAR",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 371,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 345,
+      "backgroundRgb": [
+        240,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        52,
+        10
+      ],
+      "ratio": 15.013028919199376,
+      "medianRatio": 15.175067118190078,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-header-1-text.png",
+      "backgroundScreenshot": "light-390-kontakt-header-1-background.png"
+    },
+    {
+      "text": "Projekt & Wachstum",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 586,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 616,
+      "backgroundRgb": [
+        221,
+        223,
+        225
+      ],
+      "backgroundSampleLocalXY": [
+        120,
+        7
+      ],
+      "ratio": 12.609717729192294,
+      "medianRatio": 12.980931150752571,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-header-2-text.png",
+      "backgroundScreenshot": "light-390-kontakt-header-2-background.png"
+    },
+    {
+      "text": "Ihr Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 13,
+      "fontWeight": "500",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 24,
+        "y": 878,
+        "width": 342,
+        "height": 19.5
+      },
+      "label": "header",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 264,
+      "backgroundRgb": [
+        243,
+        245,
+        246
+      ],
+      "backgroundSampleLocalXY": [
+        4,
+        5
+      ],
+      "ratio": 15.406505079617842,
+      "medianRatio": 15.454948616883131,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-header-3-text.png",
+      "backgroundScreenshot": "light-390-kontakt-header-3-background.png"
+    },
+    {
+      "text": "Leistungen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1171.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 444,
+      "backgroundRgb": [
+        239,
+        241,
+        242
+      ],
+      "backgroundSampleLocalXY": [
+        8,
+        12
+      ],
+      "ratio": 14.870368604120598,
+      "medianRatio": 15.003306685850056,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-0-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-0-background.png"
+    },
+    {
+      "text": "Produkte",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1527.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 356,
+      "backgroundRgb": [
+        238,
+        240,
+        241
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        6
+      ],
+      "ratio": 14.738159310494982,
+      "medianRatio": 14.870368604120598,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-1-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-1-background.png"
+    },
+    {
+      "text": "Wissen und Unternehmen",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 989,
+      "backgroundRgb": [
+        237,
+        238,
+        240
+      ],
+      "backgroundSampleLocalXY": [
+        4,
+        14
+      ],
+      "ratio": 14.512978577700167,
+      "medianRatio": 14.606677658942308,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-2-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-2-background.png"
+    },
+    {
+      "text": "Konto",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1290.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 231,
+      "backgroundRgb": [
+        236,
+        238,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        8,
+        13
+      ],
+      "ratio": 14.466463505100151,
+      "medianRatio": 14.579133059774419,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-3-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-3-background.png"
+    },
+    {
+      "text": "Rechtliches",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 1471.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 481,
+      "backgroundRgb": [
+        236,
+        238,
+        238
+      ],
+      "backgroundSampleLocalXY": [
+        2,
+        6
+      ],
+      "ratio": 14.466463505100151,
+      "medianRatio": 14.542230786238447,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-4-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-4-background.png"
+    },
+    {
+      "text": "Weitere Seiten",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 14,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 56,
+        "y": 941.375,
+        "width": 278,
+        "height": 21
+      },
+      "label": "footer",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 590,
+      "backgroundRgb": [
+        233,
+        236,
+        236
+      ],
+      "backgroundSampleLocalXY": [
+        80,
+        13
+      ],
+      "ratio": 14.180148846485487,
+      "medianRatio": 14.309248849226226,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-footer-5-text.png",
+      "backgroundScreenshot": "light-390-kontakt-footer-5-background.png"
+    },
+    {
+      "text": "NeXify AI als App installieren",
+      "color": "oklch(0.23 0.006 165)",
+      "fill": "oklch(0.23 0.006 165)",
+      "rgba": [
+        26,
+        30,
+        28,
+        255
+      ],
+      "fontSize": 16,
+      "fontWeight": "600",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 101,
+        "y": 1435.375,
+        "width": 244,
+        "height": 22.390625
+      },
+      "label": "pwa",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 1435,
+      "backgroundRgb": [
+        239,
+        242,
+        244
+      ],
+      "backgroundSampleLocalXY": [
+        183,
+        7
+      ],
+      "ratio": 14.98502143743517,
+      "medianRatio": 15.243056493054997,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-pwa-0-text.png",
+      "backgroundScreenshot": "light-390-kontakt-pwa-0-background.png"
+    },
+    {
+      "text": "Datenschutz",
+      "color": "oklch(0.44 0.006 165)",
+      "fill": "oklch(0.44 0.006 165)",
+      "rgba": [
+        80,
+        84,
+        82,
+        255
+      ],
+      "fontSize": 12,
+      "fontWeight": "400",
+      "opacity": 1,
+      "decoration": "none",
+      "rect": {
+        "x": 25,
+        "y": 1765.8125,
+        "width": 69.984375,
+        "height": 16
+      },
+      "label": "oracle-link",
+      "theme": "light",
+      "width": 390,
+      "path": "/kontakt",
+      "glyphPixels": 319,
+      "backgroundRgb": [
+        227,
+        231,
+        234
+      ],
+      "backgroundSampleLocalXY": [
+        1,
+        4
+      ],
+      "ratio": 6.1824440531669005,
+      "medianRatio": 6.1824440531669005,
+      "threshold": 4.5,
+      "pass": true,
+      "textScreenshot": "light-390-kontakt-oracle-link-0-text.png",
+      "backgroundScreenshot": "light-390-kontakt-oracle-link-0-background.png"
+    }
+  ],
+  "errors": []
+}
