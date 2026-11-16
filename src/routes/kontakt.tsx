@@ -80,8 +80,8 @@ function Index() {
               </p>
               <div className={"identity-links"}>
                 <a
-                  className={"nexify-control primary-button identity-primary-link"}
-                  data-variant="primary"
+                  className={"nexify-control secondary-button identity-secondary-link"}
+                  data-variant="secondary"
                   href="/leistungsumfang"
                 >
                   <span>Pakete vergleichen</span>

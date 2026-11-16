@@ -162,7 +162,7 @@
   background: var(--secondary);
   color: var(--foreground);
   border: 1px solid var(--border-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px 12px;
   font-size: 16px;
 }
@@ -201,7 +201,7 @@
   list-style: none;
   cursor: pointer;
   border: 1px solid var(--border-strong);
-  border-radius: 6px;
+  border-radius: 8px;
 }
 :root:root #atelier .tk-mobile-nav > summary::-webkit-details-marker {
   display: none;
@@ -246,7 +246,7 @@
   display: grid;
   gap: 8px;
   padding: 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--border-strong);
   background: var(--secondary);
 }
@@ -328,7 +328,7 @@
   min-height: 44px;
   background: var(--secondary);
   border: 1px solid var(--border-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 10px 12px;
   font-size: 16px;
   color: var(--foreground);
@@ -1097,3 +1097,16 @@
 }
 /* Geist braucht keinen künstlich erweiterten Wortabstand; der alte Wert ließ Titel auseinanderfallen. */
 :root:root:root #atelier#atelier.site-shared :is(h1, h2, h3, h4) { word-spacing: normal; }
+:root:root #atelier.site-shared .oracle-ai-label {
+  margin-inline-start: 8px;
+  font-family: var(--font-brand-mono);
+  font-size: var(--type-caption);
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+/* Kartenraum: Innenraum 22–36 px, Abstand zwischen Karten 16 px. */
+:root:root #atelier.site-shared :is(.pc-module, .ws-card) { padding: 28px; }
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared :is(.pc-module, .ws-card) { padding: 22px; }
+}
+:root:root #atelier.site-shared :is(div, ul, section):has(> :is(.pc-module, .ws-card, .tkc-card) + :is(.pc-module, .ws-card, .tkc-card)) { gap: 16px; }
