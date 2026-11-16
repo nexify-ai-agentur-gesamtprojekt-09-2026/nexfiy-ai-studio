@@ -209,5 +209,6 @@
 - [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
 - [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
-- [ ] Skill „Agentur-Designstandard für Kundenprojekte“: verbindliche Vorgaben aus dem Graphite-Agenturdesign ableiten, mit Projektdaten zusammenführen; als Text zum Kopieren an Pascal
+- [x] Skill „NeXify-Kundendesign-Standard“ aktiv (mit Kontrastprüfung), Kopie + ZIP unter Dateien/skills (16.11.)
+- [x] Helle Ansicht: grüne Status-/Aktivschrift unter 4.5:1 → neue Rolle --signal-text (Shop „Auf Lager“ 2,55 → 5,26:1); Fokusrahmen Katalog über --ring
 - [ ] Produktdarstellung überall (NeXify-Produkte, Leistungen, TEILEKLAR) überarbeiten: Anthropic-Vorlagen für kleine Unternehmen als Prüfhilfe (Quelle festhalten), Textvorschläge über DeepSeek (deepseek-v4.1-flash-1017, Reasoning high) – ORACLE bleibt unverändert, keine erfundenen Fakten
