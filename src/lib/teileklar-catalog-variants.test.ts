@@ -3,6 +3,8 @@ import {
   formatPriceRange,
   groupAvailabilityLabel,
   normalizeCatalogSort,
+  orderVariants,
+  sizeRank,
   variantLabels,
 } from "./teileklar-catalog";
 
@@ -70,6 +72,26 @@ describe("Artikelgruppen im TEILEKLAR-Katalog", () => {
     expect(sizes.get("OMP-S")).toBe("S");
     expect(sizes.get("OMP-XXL")).toBe("XXL");
     expect(labels.size).toBe(3);
+  });
+
+  it("ordnet Größen von klein nach groß und lässt Nicht-Größen unverändert", () => {
+    expect(sizeRank("XS")! < sizeRank("M")!).toBe(true);
+    expect(sizeRank("XL")! < sizeRank("3XL")!).toBe(true);
+    expect(sizeRank("Größe 42")! < sizeRank("46")!).toBe(true);
+    expect(sizeRank("Art.-Nr. M1203136")).toBeNull();
+    const variants = [{ id: "a" }, { id: "b" }, { id: "c" }];
+    const sized = new Map([
+      ["a", "XL"],
+      ["b", "S"],
+      ["c", "M"],
+    ]);
+    expect(orderVariants(variants, sized).map((v) => v.id)).toEqual(["b", "c", "a"]);
+    const mixed = new Map([
+      ["a", "XL"],
+      ["b", "Art.-Nr. B"],
+      ["c", "M"],
+    ]);
+    expect(orderVariants(variants, mixed).map((v) => v.id)).toEqual(["a", "b", "c"]);
   });
 
   it("macht gleiche Merkmalsbezeichnungen über die Artikelnummer eindeutig", () => {

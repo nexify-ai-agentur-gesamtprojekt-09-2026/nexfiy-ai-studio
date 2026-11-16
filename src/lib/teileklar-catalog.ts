@@ -240,6 +240,33 @@ export function variantLabels(variants: CatalogVariantSource[]): Map<string, str
   return labels;
 }
 
+const LETTER_SIZES = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
+/** Rang einer Größenangabe (S < M < XL, 42 < 44); null, wenn die Bezeichnung keine Größe ist. */
+export function sizeRank(label: string): number | null {
+  const value = label.replace(/^Größe\s+/, "").trim();
+  const letter = LETTER_SIZES.indexOf(value);
+  if (letter >= 0) return letter;
+  const multi = /^([2-6])XL$/.exec(value);
+  if (multi) return LETTER_SIZES.indexOf("XL") + Number(multi[1]) - 1;
+  const number = /^(\d{1,2})(?:[,.](\d))?(?:-\d{1,2})?$/.exec(value);
+  if (number) return 100 + Number(number[1]) + Number(number[2] ?? 0) / 10;
+  return null;
+}
+
+/** Ausführungen nach Größe ordnen, wenn alle Bezeichnungen Größen sind; sonst Reihenfolge beibehalten. */
+export function orderVariants<T extends { id: string }>(
+  variants: T[],
+  labels: Map<string, string>,
+): T[] {
+  const ranks = variants.map((variant) => sizeRank(labels.get(variant.id) ?? ""));
+  if (ranks.some((rank) => rank === null)) return variants;
+  return variants
+    .map((variant, index) => ({ variant, rank: ranks[index] as number, index }))
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map((entry) => entry.variant);
+}
+
 /** Verfügbarkeit einer Artikelgruppe, ohne einzelnen Ausführungen Bestand zuzuschreiben. */
 export function groupAvailabilityLabel(item: {
   stock: number;

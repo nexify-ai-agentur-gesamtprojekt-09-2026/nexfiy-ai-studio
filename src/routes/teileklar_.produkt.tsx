@@ -8,6 +8,7 @@ import {
   catalogProductPath,
   formatPrice,
   germanDecimals,
+  orderVariants,
   variantLabels,
 } from "@/lib/teileklar-catalog";
 import type { CatalogProduct } from "@/lib/teileklar-catalog.functions";
@@ -204,7 +205,7 @@ function VariantPicker({ product }: { product: CatalogProduct }) {
         passende Ausführung mit Ihrer Anfrage.
       </p>
       <ul role="list">
-        {product.variants.map((variant) => {
+        {orderVariants(product.variants, labels).map((variant) => {
           const current = variant.id === product.id;
           const price = formatPrice(variant.price_value);
           return (
