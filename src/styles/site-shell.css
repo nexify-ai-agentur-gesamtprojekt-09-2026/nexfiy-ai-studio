@@ -143,6 +143,8 @@
 :root:root #atelier .site-header .main-navigation { gap: 20px; margin-left: auto; font-size: 13px; }
 :root:root #atelier .site-header :is(.product-navigation-menu,.mobile-navigation-panel) { background: var(--glass-menu-fill); backdrop-filter: var(--glass-menu-filter); box-shadow: var(--glass-lens-shadow); border-color: var(--border-strong); }
 :root:root #atelier .home-concept .hc-anchors { background: var(--glass-frosted); backdrop-filter: var(--glass-navigation-filter); box-shadow: var(--glass-lens-shadow); }
+:root:root #atelier.site-shared .home-concept .hc-anchors a { background: var(--as-fill-hover); color: var(--foreground); }
+:root:root #atelier.site-shared .home-concept .hc-anchors a:is(:hover,:focus-visible) { background: transparent; color: var(--foreground); }
 /* Der äußere Header übernimmt die Durchsicht; seine Bedienelemente brauchen
    keinen zweiten Unschärfefilter über derselben Hintergrundfläche. */
 :root:root #atelier .site-header :is(.theme-switch,.mobile-navigation > summary,.language-switch,.header-cta) { backdrop-filter: none; }
