@@ -1,4 +1,9 @@
 # Roadmap
+## SSH-Hostidentität vor BigBuy bestätigen (16.11., 10:29 UTC)
+- [x] Konsolenvergleich für Server 1 vorbereitet; 10:30 UTC Hostname/Hosting-IP liefern denselben öffentlichen ED25519-SHA256-Kandidaten, ausdrücklich unbestätigt. Anleitung/Abbruch/Rückweg: ops/server1/host-identity-2026-11-16.md; keine private Schlüsseldatei gelesen
+- [ ] Unabhängige Bestätigung durch Pascal über die bestehende VPS-Konsole: vollständiger SHA256-/ED25519-Vergleich und Zeitpunkt fehlen; kein known_hosts-Vertrauenseintrag, kein SSH-Login
+- [ ] BigBuy erst nach bestätigter Identität, geschütztem bestehenden Zugang und gedecktem Kostenrahmen einmal lesend prüfen; kein Importstart, keine Schlüsselsperrung, kein kostenpflichtiger Schritt
+
 ## Altbestand im Hintergrund der Startseite (16.11., 10:20 UTC)
 - [x] Markierten Bereich Fertigung & Handwerk geprüft: alte dunkle hc-art-Medienfläche unter aktuellem Film transparent gesetzt, keine Medien gelöscht. 1280/390 px angesehen, kein Überlauf; Hintergrund transparent in beiden Ansichten
 
