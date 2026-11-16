@@ -55,7 +55,7 @@ function Index() {
           <div className={"pc-section-body"}>
             <p>Maße, Befestigung und Lage der Pole müssen stimmen. Fahrzeuge mit Start-Stopp brauchen eine EFB- oder AGM-Batterie; eine Batterie mit falscher Technologie kann vorzeitig altern.</p>
             <div className={"hc-service-detail pc-module"}>
-              <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
+              <span className={"hc-caption"}>TEILEKLAR Hilfe<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
           </div>

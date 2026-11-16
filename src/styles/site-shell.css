@@ -39,6 +39,8 @@
 :root:root #atelier .tk-commerce-header a[aria-current="page"] { color: var(--primary); text-decoration: underline; text-underline-offset: 6px; }
 :root:root #atelier .tk-help-content { flex: 1 1 auto; align-content: start; }
 :root:root #atelier .tk-help-content .oracle-starters { align-content: start; }
+:root:root #atelier .tk-help-content .oracle-starter { min-height: 56px; }
+:root:root #atelier .tk-help-form { padding-bottom: max(0px, env(safe-area-inset-bottom)); }
 :root:root #atelier .oracle-heading > button { padding: 0; }
 :root:root #atelier .oracle-heading > button > svg { width: 18px; height: 18px; flex: 0 0 18px; }
 :root:root #atelier .tk-help-form label { color: var(--muted-foreground); }

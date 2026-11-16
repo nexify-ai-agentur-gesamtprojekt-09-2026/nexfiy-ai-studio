@@ -31,7 +31,7 @@ function Index() {
         </div>
       </section>
       <section className={"hc-container pc-supplement tk-shop-body"}>
-        <p role="alert" className={"tk-alert"}>Die Bestellungen konnten nicht geladen werden.</p>
+        <div className="tk-empty" role="status"><h2>Keine Bestellanbindung vorhanden</h2><p>Dieser Auftritt ist noch nicht mit einem Bestellsystem verbunden. Eine Anmeldung zeigt deshalb hier keine Bestellungen an.</p><a className="hc-text-link" href="/kontakt#anfrage">Frage zu einer Bestellung stellen</a></div>
       </section>
     </div>
   </NexifyShell>;

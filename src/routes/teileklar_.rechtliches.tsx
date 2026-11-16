@@ -88,6 +88,7 @@ function Index() {
       </section>
       <section className={"hc-container pc-supplement"}>
         <div className={"tk-legal"}>
+          <p className="tk-note" role="note">Die nachfolgenden Texte stammen aus dem importierten Auftritt und sind nicht als aktuelle Kaufbedingungen freigegeben. Anbieter-, Länder-, Adress- und Zahlungsangaben müssen vor einem Verkauf geprüft werden. Dieser Auftritt bietet keinen Onlinekauf.</p>
           <section id="agb" className={"tk-legal-doc"} aria-labelledby="agb-title">
             <h2 id="agb-title">Allgemeine Geschäftsbedingungen</h2>
             <p className={"tk-meta"}>Allgemeine Geschäftsbedingungen für den Verkauf über TEILEKLAR.</p>

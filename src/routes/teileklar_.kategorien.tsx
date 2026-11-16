@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
+import { FitmentChecklist } from "@/components/site/FitmentChecklist";
 import capturedCSS from "../styles/pages/teileklar.kategorien.css?url";
 
 export const Route = createFileRoute("/teileklar_/kategorien")({
@@ -35,7 +36,8 @@ function Index() {
         </div>
       </section>
       <section className={"hc-container pc-supplement tk-shop-body"}>
-        <p role="alert" className={"tk-alert"}>Die Kategorien konnten nicht geladen werden.</p>
+        <p className="tk-meta">Der Warenkatalog ist noch nicht angebunden. Wählen Sie eine Teileart, um die wichtigen Angaben für Ihre Anfrage vorzubereiten.</p>
+        <FitmentChecklist />
       </section>
     </div>
   </NexifyShell>;

@@ -35,7 +35,7 @@ function Index() {
         </div>
       </section>
       <section className={"hc-container pc-supplement tk-shop-body"}>
-        <div className={"tk-empty"} role="alert"><h2>Warenkorb derzeit nicht verfügbar</h2><p>Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an.</p><a className={"hc-text-link"} href="/teileklar/shop">Zum Shop<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a> · <a className={"hc-text-link"} href="/kontakt">Kontakt aufnehmen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a></div>
+        <div className="tk-empty" role="status"><h2>Warenkorb noch nicht angebunden</h2><p>In diesem Auftritt können noch keine Artikel in einen Warenkorb gelegt oder bestellt werden. Für eine Teilefrage nutzen Sie die Anfrage.</p><a className="hc-text-link" href="/teileklar/shop">Zum Schaufenster</a><a className="hc-text-link" href="/kontakt#anfrage">Teil anfragen</a></div>
       </section>
     </div>
   </NexifyShell>;
