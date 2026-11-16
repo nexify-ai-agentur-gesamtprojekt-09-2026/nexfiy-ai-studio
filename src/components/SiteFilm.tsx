@@ -35,7 +35,7 @@ export function SiteFilm({
             decoding="async"
           />
         </div>
-        <p className="hc-caption">Markeninszenierung · kein Kundenprojekt</p>
+        <p className="atelier-film-disclosure">Markeninszenierung · kein Kundenprojekt</p>
       </div>
     );
   }
@@ -179,7 +179,7 @@ export function SiteFilm({
         <summary>Gesprochener Text</summary>
         <p lang="de">{filmTranscript(data.captions)}</p>
       </details>
-      <p className="hc-caption">Markeninszenierung · kein Kundenprojekt oder Leistungsnachweis</p>
+      <p className="atelier-film-disclosure">Markeninszenierung · kein Kundenprojekt oder Leistungsnachweis</p>
     </div>
   );
 }
