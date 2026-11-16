@@ -1,4 +1,9 @@
 # Roadmap
+## Glas und Header-Veredelung (16.11.)
+- [ ] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinern
+- [ ] Header schmaler abstimmen; rechten Innenabstand zum oberen/unteren Buttonabstand exakt messen und angleichen
+- [ ] Lesbarkeit, Transparenz-Fallbacks, Mobile und reduzierte Bewegung erneut überprüfen
+
 ## Stabiler Seitenstart (16.11.)
 - [ ] Den mittig erscheinenden und nach rechts springenden Chat beim Laden reproduzieren und beseitigen
 - [ ] Gemeinsame Seiten-, Schrift- und Medienladeprobleme auf allen Inhaltsseiten prüfen und korrigieren
