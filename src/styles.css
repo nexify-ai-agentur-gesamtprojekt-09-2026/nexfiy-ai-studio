@@ -15,6 +15,7 @@
 @import "./styles/product-presentation.css";
 @import "./styles/pwa-install.css";
 @import "./styles/site-forms.css";
+@import "./design-system/graphite/tokens.css";
 @source "../node_modules/streamdown/dist/*.js";
 
 @custom-variant dark (&:is(.dark *));
@@ -95,96 +96,6 @@
 @font-face { font-family: "Geist Mono"; src: url("/site-assets/a978be7d3173a36e.woff2") format("woff2"); font-display: swap; }
 
 /* NeXify dark palette (graphite + lime) on the shadcn roles, so every new UI piece matches the pages. */
-:root {
-  --radius: 0.75rem;
-  --background: oklch(0.2315 0.0049 173.96);
-  --foreground: oklch(0.9558 0.0086 84.57);
-  --card: oklch(0.2803 0.0068 164.5);
-  --card-foreground: oklch(0.9558 0.0086 84.57);
-  --popover: oklch(0.3264 0.0089 173.77);
-  --popover-foreground: oklch(0.9558 0.0086 84.57);
-  --primary: oklch(0.786 0.125 124.36);
-  --primary-foreground: oklch(0.154 0.0092 264.28);
-  --secondary: oklch(0.2965 0.0067 164.54);
-  --secondary-foreground: oklch(0.9558 0.0086 84.57);
-  --muted: oklch(0.2965 0.0067 164.54);
-  --muted-foreground: oklch(0.783 0.0087 157.04);
-  --accent: oklch(0.3264 0.0089 173.77);
-  --accent-foreground: oklch(0.9558 0.0086 84.57);
-  --destructive: oklch(0.7582 0.1448 29.02);
-  --destructive-foreground: oklch(0.154 0.0092 264.28);
-  --success: oklch(0.8426 0.11 180.74);
-  --warning: oklch(0.8489 0.149 80.87);
-  --border: oklch(1 0 0 / 9%);
-  --border-strong: oklch(1 0 0 / 18%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.8861 0.2017 123.37);
-  --brand-signal: oklch(0.8861 0.2017 123.37);
-  --surface-raised: oklch(0.3264 0.0089 173.77);
-  --chart-1: oklch(0.786 0.125 124.36);
-  --chart-2: oklch(0.8426 0.11 180.74);
-  --chart-3: oklch(0.8489 0.149 80.87);
-  --chart-4: oklch(0.7949 0.0125 223.56);
-  --chart-5: oklch(0.7582 0.1448 29.02);
-  --sidebar: oklch(0.2803 0.0068 164.5);
-  --sidebar-foreground: oklch(0.9558 0.0086 84.57);
-  --sidebar-primary: oklch(0.786 0.125 124.36);
-  --sidebar-primary-foreground: oklch(0.154 0.0092 264.28);
-  --sidebar-accent: oklch(0.3264 0.0089 173.77);
-  --sidebar-accent-foreground: oklch(0.9558 0.0086 84.57);
-  --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.8861 0.2017 123.37);
-  --font-brand-text: Inter, "Segoe UI", system-ui, sans-serif;
-  --font-brand-display: "Plus Jakarta Sans", Inter, "Segoe UI", system-ui, sans-serif;
-  --font-brand-mono: "Geist Mono", ui-monospace, "Courier New", monospace;
-  --type-page-title: 48px;
-  --type-section-title: 30px;
-  --type-subheading: 20px;
-  --type-feature-title: 22px;
-  --type-body: 17px;
-  --type-lead: 18px;
-  --type-conversation: 16px;
-  --type-detail: 14px;
-  --type-caption: 12px;
-  --leading-editorial: 1.75;
-  --leading-conversation: 1.75;
-  --measure-prose: 64ch;
-  --measure-lead: 55ch;
-  --measure-heading: 24ch;
-  --space-paragraph: 24px;
-  --space-subheading: 32px;
-  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 7%), transparent 42%, oklch(0.83 0.025 200 / 4%)), color-mix(in oklab, var(--background) 80%, transparent);
-  --gradient-surface: linear-gradient(180deg, oklch(0.3264 0.0089 173.77) 0%, oklch(0.2803 0.0068 164.5) 100%);
-  --gradient-stage-glow: radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
-    radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
-  --elevation-card: inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%), 0 2px 6px oklch(0 0 0 / 30%);
-  --elevation-primary: inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%), 0 2px 0 oklch(0 0 0 / 30%);
-  --motion-ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
-  --surface-header-glass: color-mix(in oklab, var(--background) 86%, transparent);
-  --surface-media-glass: color-mix(in oklab, var(--background) 84%, transparent);
-  --elevation-header: inset 0 1px 0 var(--border-strong), 0 8px 24px -16px oklch(0 0 0 / 65%);
-  --elevation-media: inset 0 1px 0 var(--border), 0 8px 24px -8px oklch(0 0 0 / 40%);
-  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 8%), transparent 52%, oklch(0.82 0.025 190 / 4%)), color-mix(in oklab, var(--card) 82%, transparent);
-  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 12%), transparent 52%, oklch(0.82 0.025 190 / 6%)), color-mix(in oklab, var(--card) 88%, transparent);
-  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 28%), inset 1px 0 0 oklch(1 0 0 / 9%), inset 0 -1px 0 oklch(0 0 0 / 42%), 0 2px 4px oklch(0 0 0 / 18%), 0 8px 18px -10px oklch(0 0 0 / 62%);
-  --glass-content-fill: linear-gradient(145deg, oklch(1 0 0 / 5%), transparent 58%), color-mix(in oklab, var(--card) 92%, transparent);
-  --glass-menu-fill: linear-gradient(145deg, oklch(1 0 0 / 6%), transparent 58%), color-mix(in oklab, var(--popover) 94%, transparent);
-  --glass-control-filter: blur(16px) saturate(1.12);
-  --glass-content-filter: blur(16px) saturate(1.05);
-  --glass-navigation-filter: blur(24px) saturate(1.18);
-  --glass-scroll-filter: blur(28px) saturate(1.12);
-  --glass-menu-filter: blur(24px) saturate(1.08);
-  --glass-opaque: var(--card);
-  --glass-accessible-edge: color-mix(in oklab, var(--foreground) 65%, var(--background));
-  --figure-shadow: oklch(0 0 0 / 48%);
-  --figure-rim: oklch(0.86 0.08 160 / 20%);
-  --stage-light: linear-gradient(135deg, oklch(0.79 0.02 205 / 8%), transparent 45%, oklch(0.78 0.12 125 / 7%));
-  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 8%), transparent 42%, oklch(0.83 0.025 200 / 4%) 75%), color-mix(in oklab, var(--background) 70%, transparent);
-  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 6%), transparent 60%), color-mix(in oklab, var(--background) 86%, transparent);
-  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 34%), inset 1px 0 0 oklch(1 0 0 / 12%), inset 0 -1px 0 oklch(0 0 0 / 46%), 0 3px 6px -3px oklch(0 0 0 / 34%), 0 12px 26px -18px oklch(0 0 0 / 72%);
-  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 30%), inset 1px 0 0 oklch(0.84 0.025 200 / 12%), inset 0 -1px 1px oklch(0 0 0 / 48%), 0 3px 5px oklch(0 0 0 / 24%), 0 18px 30px -18px oklch(0 0 0 / 76%);
-  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 40%), inset 1px 0 0 oklch(0.84 0.025 200 / 16%), inset 0 -1px 1px oklch(0 0 0 / 48%), 0 4px 7px oklch(0 0 0 / 26%), 0 22px 36px -20px oklch(0 0 0 / 80%);
-}
 
 @layer base {
   * {
@@ -391,40 +302,6 @@
   --accent-foreground: oklch(0.9558 0.0086 84.57);
 }
 
-html[data-theme="light"] {
-  --background: oklch(0.925 0.006 240);
-  --foreground: oklch(0.23 0.006 165);
-  --card: oklch(0.96 0.004 240);
-  --card-foreground: var(--foreground);
-  --popover: oklch(0.98 0.002 240);
-  --popover-foreground: var(--foreground);
-  --secondary: oklch(0.885 0.006 240);
-  --secondary-foreground: var(--foreground);
-  --muted: var(--secondary);
-  --muted-foreground: oklch(0.44 0.006 165);
-  --destructive: oklch(0.5 0.18 29);
-  --accent: oklch(0.84 0.008 240);
-  --accent-foreground: var(--foreground);
-  --primary: oklch(0.66 0.11 125);
-  --primary-foreground: oklch(0.15 0.009 125);
-  --border: oklch(0.23 0.006 165 / 14%);
-  --border-strong: oklch(0.23 0.006 165 / 26%);
-  --input: var(--border-strong);
-  --ring: oklch(0.48 0.09 125);
-  --surface-raised: var(--card);
-  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 42%), transparent 52%, oklch(0.84 0.012 190 / 7%)), color-mix(in oklab, var(--card) 82%, transparent);
-  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 54%), transparent 52%, oklch(0.84 0.012 190 / 5%)), color-mix(in oklab, var(--card) 88%, transparent);
-  --glass-content-fill: linear-gradient(145deg, oklch(1 0 0 / 32%), transparent 58%), color-mix(in oklab, var(--card) 94%, transparent);
-  --glass-menu-fill: linear-gradient(145deg, oklch(1 0 0 / 28%), transparent 58%), color-mix(in oklab, var(--popover) 96%, transparent);
-  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 85%), inset 1px 0 0 oklch(1 0 0 / 46%), inset 0 -1px 0 oklch(0.23 0.006 165 / 18%), 0 2px 4px oklch(0.23 0.006 165 / 8%), 0 8px 18px -10px oklch(0.23 0.006 165 / 26%);
-  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 48%), transparent 42%, oklch(0.84 0.012 200 / 6%) 75%), color-mix(in oklab, var(--background) 72%, transparent);
-  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 38%), transparent 60%), color-mix(in oklab, var(--background) 88%, transparent);
-  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 38%), transparent 42%, oklch(0.84 0.012 200 / 5%)), color-mix(in oklab, var(--background) 84%, transparent);
-  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 88%), inset 1px 0 0 oklch(1 0 0 / 48%), inset 0 -1px 0 var(--border), 0 3px 6px -3px oklch(0.23 0.006 165 / 16%), 0 12px 26px -18px oklch(0.23 0.006 165 / 32%);
-  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 90%), inset 1px 0 0 oklch(1 0 0 / 52%), inset 0 -1px 0 var(--border), 0 3px 5px oklch(0.23 0.006 165 / 12%), 0 18px 30px -18px oklch(0.23 0.006 165 / 32%);
-  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 96%), inset 1px 0 0 oklch(1 0 0 / 60%), inset 0 -1px 0 var(--border), 0 4px 7px oklch(0.23 0.006 165 / 14%), 0 22px 36px -20px oklch(0.23 0.006 165 / 36%);
-  color-scheme: light;
-}
 
 @layer base {
   html { color-scheme: dark; }
@@ -440,45 +317,4 @@ html[data-theme="light"] {
 
 /* Material-Fallbacks ändern nur die Darstellung, niemals die gemessene Geometrie.
    Tokens erfassen auch fokussierte, aufgeklappte und gescrollte Glasflächen. */
-@supports not (backdrop-filter: blur(1px)) {
-  :root, html[data-theme="light"] {
-    --glass-fill: var(--glass-opaque);
-    --glass-fill-hover: var(--glass-opaque);
-    --glass-clear: var(--glass-opaque);
-    --glass-frosted: var(--glass-opaque);
-    --glass-header-compact: var(--glass-opaque);
-    --glass-content-fill: var(--glass-opaque);
-    --glass-menu-fill: var(--popover);
-  }
-}
-@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  :root, html[data-theme="light"] {
-    --glass-fill: var(--glass-opaque);
-    --glass-fill-hover: var(--glass-opaque);
-    --glass-clear: var(--glass-opaque);
-    --glass-frosted: var(--glass-opaque);
-    --glass-header-compact: var(--glass-opaque);
-    --glass-content-fill: var(--glass-opaque);
-    --glass-menu-fill: var(--popover);
-    --surface-media-glass: var(--glass-opaque);
-    --glass-control-filter: none;
-    --glass-content-filter: none;
-    --glass-navigation-filter: none;
-    --glass-scroll-filter: none;
-    --glass-menu-filter: none;
-  }
-  :root:root #atelier.site-shared :is(.reopen-chat,.atelier-film-controls,.pwa-install-bar,.hc-service-detail,.pc-module),
-  :root:root #atelier.site-shared .oracle-advice :is(.oracle-heading,.oracle-starter,[data-slot="input-group"]),
-  :root:root .pwa-install-overlay { backdrop-filter: none; }
-}
-@media (prefers-contrast: more) {
-  :root:root #atelier.site-shared :is(.hc-service-detail,.pc-module,.pwa-install-bar,.tk-commerce-header,.reopen-chat,.hc-anchors,.atelier-film-controls),
-  :root:root #atelier.site-shared .site-header::before,
-  :root:root #atelier.site-shared .site-header :is(.mobile-navigation-panel,.product-navigation-menu,.theme-switch,.mobile-navigation > summary,.header-cta),
-  :root:root #atelier.site-shared .oracle-advice :is(.oracle-heading,.oracle-starter,[data-slot="input-group"]),
-  :root:root .pwa-install-dialog { border-color: var(--glass-accessible-edge); }
-}
-@media (prefers-reduced-motion: reduce) {
-  :root:root #atelier.site-shared .oracle-advice .oracle-starter { transition: none; }
-}
 
