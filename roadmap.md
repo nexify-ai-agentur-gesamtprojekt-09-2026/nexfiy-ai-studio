@@ -1,8 +1,8 @@
 # Roadmap
 ## Hintergrund und Tiefenwirkung (16.11.)
-- [ ] Markierte Hintergrundlinie auf Leistungen reproduzieren und unbeabsichtigte Flächenkanten beseitigen
-- [ ] Bestehende Glasflächen und freigestellte Figuren mit abgestimmtem Licht, Farbe und Kontaktschatten vom Hintergrund abheben; Desktop/Handy prüfen
-- [ ] Inhaltskanten, Chat und Kopfbereich auf Desktop/Handy vermessen und Ausrichtung bestätigen
+- [x] Markierte Hintergrundlinie als vollbreiten Abschnittsrand reproduziert und entfernt; Datenzeilen behalten ihre Orientierungslinien
+- [x] Glasflächen, Chat-Einstiege und freigestellte Figuren mit abgestimmten Lichtkanten und Kontaktschatten verstärkt; Desktop/Handy ohne Überlauf geprüft
+- [x] Guide und Fließtext auf Leistungen exakt ausgerichtet: Desktop beide x=489,48px, Handy beide x=24px; Header-Randabstände zuvor in sieben Breiten gemessen
 
 ## Durchgängige Typografie (16.11.)
 - [x] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abgestimmt
