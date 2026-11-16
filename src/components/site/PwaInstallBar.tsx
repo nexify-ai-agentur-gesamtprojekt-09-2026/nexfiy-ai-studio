@@ -51,6 +51,7 @@ export function PwaInstallBar() {
             className="pwa-install-mark"
             src="/site-assets/9176c58a16ff634a.png"
             alt=""
+            aria-hidden="true"
             width="56"
             height="56"
             loading="lazy"

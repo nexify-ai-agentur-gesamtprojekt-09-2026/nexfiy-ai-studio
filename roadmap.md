@@ -202,3 +202,4 @@
 - [ ] SSH-Bereinigung: Plan liegt vor, wartet auf Freigabe
 - [x] Unbekannte SSH-Anmeldungen geprüft
 - [x] Arbeitsplatz-Sicherheitsprüfung
+- [ ] Fehlende alt-Attribute ergänzen (nur alt, keine Gestaltung)

@@ -43,6 +43,7 @@ export function NexifyFooter() {
                   <img
                     src="/site-assets/9176c58a16ff634a.png"
                     alt=""
+                    aria-hidden="true"
                     width="512"
                     height="512"
                     decoding="async"
