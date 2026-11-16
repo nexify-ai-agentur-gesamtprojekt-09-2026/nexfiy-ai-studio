@@ -314,7 +314,7 @@
   justify-content: space-between;
   gap: 12px;
   font-size: 12px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   transition: color 200ms ease;
 }
 :root:root #atelier .atelier-film .atelier-film-transcript summary::-webkit-details-marker {
@@ -324,6 +324,11 @@
   content: "";
   inline-size: 8px;
   block-size: 8px;
+  position: static;
+  inset: auto;
+  display: block;
+  flex: 0 0 8px;
+  margin: 0;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: translateY(-2px) rotate(45deg);
