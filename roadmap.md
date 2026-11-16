@@ -306,3 +306,7 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 
 ## Slack-Empfangsadresse auf nexifyai.de (16.11., 11:50 UTC)
 - [ ] Event-URL der App „NeXify Betriebsanbindung“ auf https://nexifyai.de/api/public/slack/events umstellen. BLOCKER: Das Einrichtungswerkzeug setzt die URL fest, und das Recht app_configurations fehlt. Lösung durch Pascal (Weiterleitung unter Domains) oder durch einen Slack-Admin.
+
+## Brain- und Wissensinventar (16.11., 12:17 UTC)
+- [ ] Brain (agentmemory, mcp-gateway, LightRAG, Wissensbasis) auf beiden Servern nur lesend per SSH inventarisieren; keine Geheimnisse, keine Änderungen
+- [ ] Repository nexify-ai-finales-agentur-gesamtprojekt-09-2026 als Quelle für Jeff- und ORACLE-Funktionen auswerten (nur lesend)

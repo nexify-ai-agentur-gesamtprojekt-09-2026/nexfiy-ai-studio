@@ -27,3 +27,9 @@ Stand 16.11.2026, 12:15 UTC. Quelle ist nur der lesende Befund von 12:11–12:16
 - BigBuy bleibt unverändert.
 - Kein zweiter Agent; die Website-Slack-App bleibt getrennt.
 - Ausführungen bleiben gesperrt, bis Phase 5 freigegeben ist.
+
+## Abgleich mit dem Repository (12:20 UTC, nur lesend)
+Quelle: Build-Checkout des Repositorys auf Server 2, Stand 04ec423 vom 30.09.2026. Bei GitHub selbst bekam ich keinen Zugriff (privat, keine Anmeldung). Neuere Stände: OFFEN.
+- `docs/JEFF-INTEGRATION.md`: Jeff ist ein Pflicht-Gate in der CI über `ai-router.nexifyai.cloud/v1/systemone`, Modell `openrouter/typesafe/jev-1.13`. Ohne `go` wird nicht gemergt. Exit 3 bedeutet Abbruch.
+- `docs/09-final/06-brain-…`: Das Brain ist eine Soll-Spezifikation mit KI-Team (Companion, Baumeister, Prüfer, Recherche, Triage, Angebot, Wissen, Orchestrator, Wächter), Modellstufen 0–2, vier Gedächtnisarten, Tool-Orakel mit Freigabestufen A/B/C und Wissenspflege im Nachtlauf. Laut Dokument selbst noch nicht vorhanden: Tool-Orakel, LoRA-Lauf; Rückstau bei LightRAG (NX-GR-019).
+- Brain auf Server 1: Dienste `mcp-gateway` und `agentmemory` laufen. Die lokalen Standardpfade von agentmemory auf :3111 lieferten leere Antworten; die eigentliche Schnittstelle ist OFFEN. In `/opt/nexifyai/zk` liegen 210 Dateien, in `/opt/verify-preise-2311/docs` 368 Dokumente.
