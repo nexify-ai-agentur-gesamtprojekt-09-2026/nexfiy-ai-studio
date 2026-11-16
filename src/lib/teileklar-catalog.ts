@@ -155,6 +155,83 @@ export function availabilityLabel(row: Pick<CatalogRow, "stock" | "delivery_note
   return "Verfügbarkeit auf Anfrage";
 }
 
+/** Sortierungen der Katalogliste; der Schlüssel steht so in der Adresse (?sortierung=). */
+export const CATALOG_SORTS = [
+  { key: "empfohlen", label: "Empfohlen" },
+  { key: "preis-auf", label: "Preis aufsteigend" },
+  { key: "preis-ab", label: "Preis absteigend" },
+  { key: "name", label: "Name A–Z" },
+] as const;
+export type CatalogSort = (typeof CATALOG_SORTS)[number]["key"];
+export const DEFAULT_CATALOG_SORT: CatalogSort = "empfohlen";
+
+export function normalizeCatalogSort(value: unknown): CatalogSort {
+  return CATALOG_SORTS.some((sort) => sort.key === value)
+    ? (value as CatalogSort)
+    : DEFAULT_CATALOG_SORT;
+}
+
+/** Preis einer Artikelgruppe: bei unterschiedlichen Ausführungspreisen „ab“ dem günstigsten. */
+export function formatPriceRange(min: number | null, max: number | null): string | null {
+  const low = formatPrice(min);
+  if (low === null) return formatPrice(max);
+  return max !== null && max > (min as number) ? `ab ${low}` : low;
+}
+
+/** Feed-Merkmale nutzen Dezimalpunkte („0.46 kg“); angezeigt wird deutsche Schreibweise. */
+export function germanDecimals(value: string): string {
+  return value.replace(/(\d)\.(\d)/g, "$1,$2");
+}
+
+export interface CatalogVariantSource {
+  id: string;
+  specs: CatalogSpec[];
+}
+
+const VARIANT_IGNORED_SPECS = new Set(["EAN", "Zustand"]);
+
+/**
+ * Bezeichnung je Ausführung: nur Merkmale, die sich zwischen den Ausführungen unterscheiden.
+ * Liefert der Katalog keinen Unterschied, bleibt nur die Artikelnummer – Größen werden nicht erfunden.
+ */
+export function variantLabels(variants: CatalogVariantSource[]): Map<string, string> {
+  const labels = new Map<string, string>();
+  const specLabels = [
+    ...new Set(variants.flatMap((variant) => variant.specs.map((spec) => spec.label))),
+  ].filter((label) => !VARIANT_IGNORED_SPECS.has(label));
+  const differing = specLabels.filter((label) => {
+    const values = new Set(
+      variants.map((variant) => variant.specs.find((spec) => spec.label === label)?.value ?? ""),
+    );
+    return values.size > 1;
+  });
+  for (const variant of variants) {
+    const parts = differing.flatMap((label) => {
+      const value = variant.specs.find((spec) => spec.label === label)?.value;
+      return value ? [`${label} ${germanDecimals(value)}`] : [];
+    });
+    labels.set(variant.id, parts.join(" · "));
+  }
+  const counts = new Map<string, number>();
+  for (const label of labels.values()) counts.set(label, (counts.get(label) ?? 0) + 1);
+  for (const [id, label] of labels) {
+    if (!label) labels.set(id, `Art.-Nr. ${id}`);
+    else if ((counts.get(label) ?? 0) > 1) labels.set(id, `${label} · Art.-Nr. ${id}`);
+  }
+  return labels;
+}
+
+/** Verfügbarkeit einer Artikelgruppe, ohne einzelnen Ausführungen Bestand zuzuschreiben. */
+export function groupAvailabilityLabel(item: {
+  stock: number;
+  delivery_note: string;
+  in_stock: boolean;
+  variant_count: number;
+}): string {
+  if (item.stock > 0 || item.variant_count <= 1) return availabilityLabel(item);
+  return item.in_stock ? "Einzelne Ausführungen vorrätig" : "Verfügbarkeit auf Anfrage";
+}
+
 export function catalogProductPath(id: string): string {
   return `/teileklar/produkt?artikel=${encodeURIComponent(id)}`;
 }
