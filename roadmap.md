@@ -1,4 +1,9 @@
 # Roadmap
+## SSH-Hostidentität vor BigBuy bestätigen (16.11., 10:29 UTC)
+- [ ] Konsolenvergleich für Server 1 vorbereiten und den öffentlichen ED25519-SHA256-Hostfingerabdruck als unbestätigten Netzwerkkandidaten ermitteln; keine private Schlüsseldatei lesen
+- [ ] Unabhängige Bestätigung durch Pascal über die bestehende VPS-Konsole: bis zum vollständigen Vergleich kein known_hosts-Vertrauenseintrag und kein SSH-Login
+- [ ] BigBuy erst nach bestätigter Identität, geschütztem bestehenden Zugang und gedecktem Kostenrahmen einmal lesend prüfen; kein Importstart, keine Schlüsselsperrung, kein kostenpflichtiger Schritt
+
 ## Altbestand im Hintergrund der Startseite (16.11., 10:20 UTC)
 - [x] Markierten Bereich Fertigung & Handwerk geprüft: alte dunkle hc-art-Medienfläche unter aktuellem Film transparent gesetzt, keine Medien gelöscht. 1280/390 px angesehen, kein Überlauf; Hintergrund transparent in beiden Ansichten
 
