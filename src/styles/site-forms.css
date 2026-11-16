@@ -95,7 +95,7 @@
 .page-contact .contact-step-index { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-weight: 700; }
 .page-contact .contact-note { color: var(--muted-foreground); font-size: 0.95em; }
 .home-concept.page-contact .pc-section-body .contact-checklist,
-.home-concept.page-contact .pc-section-body .contact-steps { padding-inline-start: 0; margin-inline: 0; }
+.home-concept.page-contact .pc-section-body .contact-steps { padding: 0 !important; margin-inline: 0; }
 .home-concept.page-contact .pc-section-body .contact-checklist { grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); }
 .home-concept.page-contact .pc-section-body .contact-checklist li,
 .home-concept.page-contact .pc-section-body .contact-steps li { margin: 0; background: color-mix(in oklab, var(--foreground) 5%, transparent); border-color: color-mix(in oklab, var(--foreground) 14%, transparent); }
