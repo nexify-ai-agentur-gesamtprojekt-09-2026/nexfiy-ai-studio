@@ -7,8 +7,13 @@
   --card-foreground: oklch(0.9558 0.0086 84.57);
   --popover: oklch(0.3264 0.0089 173.77);
   --popover-foreground: oklch(0.9558 0.0086 84.57);
-  --primary: oklch(0.786 0.125 124.36);
-  --primary-foreground: oklch(0.154 0.0092 264.28);
+  /* Ein Akzent: #C0EE38 mit abgeleiteten Zuständen. Alle Grün-Rollen verweisen hierauf. */
+  --brand-signal-hover: oklch(0.925 0.185 123.4);
+  --brand-signal-active: oklch(0.83 0.195 124.2);
+  --brand-signal-deep: oklch(0.62 0.15 127);
+  --brand-signal-foreground: oklch(0.17 0.03 128);
+  --primary: oklch(0.8861 0.2017 123.37);
+  --primary-foreground: var(--brand-signal-foreground);
   --secondary: oklch(0.2965 0.0067 164.54);
   --secondary-foreground: oklch(0.9558 0.0086 84.57);
   --muted: oklch(0.2965 0.0067 164.54);
@@ -27,15 +32,15 @@
   /* Grün als Schrift- oder Symbolfarbe (Status, aktive Links); in der hellen Ansicht dunkler, damit 4.5:1 erreicht wird. */
   --signal-text: var(--primary);
   --surface-raised: oklch(0.3264 0.0089 173.77);
-  --chart-1: oklch(0.786 0.125 124.36);
+  --chart-1: var(--primary);
   --chart-2: oklch(0.8426 0.11 180.74);
   --chart-3: oklch(0.8489 0.149 80.87);
   --chart-4: oklch(0.7949 0.0125 223.56);
   --chart-5: oklch(0.7582 0.1448 29.02);
   --sidebar: oklch(0.2803 0.0068 164.5);
   --sidebar-foreground: oklch(0.9558 0.0086 84.57);
-  --sidebar-primary: oklch(0.786 0.125 124.36);
-  --sidebar-primary-foreground: oklch(0.154 0.0092 264.28);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
   --sidebar-accent: oklch(0.3264 0.0089 173.77);
   --sidebar-accent-foreground: oklch(0.9558 0.0086 84.57);
   --sidebar-border: oklch(1 0 0 / 9%);
@@ -68,13 +73,13 @@
     oklch(0.2803 0.0068 164.5) 100%
   );
   --gradient-stage-glow:
-    radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
+    radial-gradient(60rem 36rem at 85% -10%, oklch(0.8861 0.2017 123.37 / 10%), transparent 60%),
     radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
   --elevation-card:
     inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%),
     0 2px 6px oklch(0 0 0 / 30%);
   --elevation-primary:
-    inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%),
+    inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.8861 0.2017 123.37 / 32%),
     0 2px 0 oklch(0 0 0 / 30%);
   --motion-ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
   --surface-header-glass: color-mix(in oklab, var(--background) 86%, transparent);

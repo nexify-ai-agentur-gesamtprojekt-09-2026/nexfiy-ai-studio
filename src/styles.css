@@ -9,6 +9,7 @@
 @source "../src";
 @import "tw-animate-css";
 @import "./design-system/graphite/tokens.css";
+@import "./design-system/graphite/bridge.css";
 @import "./styles/site-shell.css";
 @import "./styles/oracle-advice.css";
 @import "./styles/site-film.css";

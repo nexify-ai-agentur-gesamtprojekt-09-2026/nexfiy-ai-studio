@@ -1,0 +1,19 @@
+/*
+ * Graphite-Brücke: Die übernommenen Seitenstile bringen je Seite eine eigene Kopie der alten Palette mit
+ * (gedämpftes Lime #A8C76A/#9AB864). Hier werden diese Variablen in der dunklen Ansicht auf den einen
+ * Markenakzent #C0EE38 und seine Zustände aus tokens.css gelegt. Doppelte :root-Spezifität gewinnt gegen jede
+ * Seitenkopie, unabhängig von der Ladereihenfolge. Die helle Ansicht behält ihre geprüften dunkleren Grüntöne.
+ */
+:root:root:not([data-theme="light"]) {
+  --color-marke-lime: var(--brand-signal);
+  --color-marke-lime-signal: var(--brand-signal);
+  --color-marke-lime-hell: var(--brand-signal-hover);
+  --color-marke-lime-dunkel: var(--brand-signal-active);
+  --color-marke-lime-gruen: var(--brand-signal-deep);
+  --color-dunkel-tag-lime: var(--brand-signal);
+  --color-dunkel-lime-handlung: var(--brand-signal);
+  --color-dunkel-lime-handlung-hell: var(--brand-signal-hover);
+  --color-dunkel-lime-schein: var(--brand-signal-active);
+  --color-dunkel-auf-lime: var(--brand-signal-foreground);
+  --color-text-auf-lime: var(--brand-signal-foreground);
+}
