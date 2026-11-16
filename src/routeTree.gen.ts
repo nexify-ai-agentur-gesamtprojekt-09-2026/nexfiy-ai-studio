@@ -61,6 +61,7 @@ import { Route as TeileklarWarenkorbRouteImport } from './routes/teileklar_.ware
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as ApiPublicJobsServerAlertRouteImport } from './routes/api/public/jobs/server-alert'
 import { Route as ApiPublicJobsTeileklarCatalogSyncRouteImport } from './routes/api/public/jobs/teileklar-catalog-sync'
 import { Route as ApiPublicJobsTeileklarImageMirrorRouteImport } from './routes/api/public/jobs/teileklar-image-mirror'
 import { Route as ApiPublicShopCutoutRouteImport } from './routes/api/public/shop/cutout'
@@ -331,6 +332,12 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicJobsServerAlertRoute =
+  ApiPublicJobsServerAlertRouteImport.update({
+    id: '/api/public/jobs/server-alert',
+    path: '/api/public/jobs/server-alert',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicJobsTeileklarCatalogSyncRoute =
   ApiPublicJobsTeileklarCatalogSyncRouteImport.update({
     id: '/api/public/jobs/teileklar-catalog-sync',
@@ -407,6 +414,7 @@ export interface FileRoutesByFullPath {
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/server-alert': typeof ApiPublicJobsServerAlertRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
@@ -465,6 +473,7 @@ export interface FileRoutesByTo {
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/server-alert': typeof ApiPublicJobsServerAlertRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
@@ -524,6 +533,7 @@ export interface FileRoutesById {
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/server-alert': typeof ApiPublicJobsServerAlertRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
   '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/cutout': typeof ApiPublicShopCutoutRoute
@@ -584,6 +594,7 @@ export interface FileRouteTypes {
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/server-alert'
     | '/api/public/jobs/teileklar-catalog-sync'
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
@@ -642,6 +653,7 @@ export interface FileRouteTypes {
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/server-alert'
     | '/api/public/jobs/teileklar-catalog-sync'
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
@@ -700,6 +712,7 @@ export interface FileRouteTypes {
     | '/teileklar_/werkstatt'
     | '/wissen_/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/server-alert'
     | '/api/public/jobs/teileklar-catalog-sync'
     | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/cutout'
@@ -759,6 +772,7 @@ export interface RootRouteChildren {
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  ApiPublicJobsServerAlertRoute: typeof ApiPublicJobsServerAlertRoute
   ApiPublicJobsTeileklarCatalogSyncRoute: typeof ApiPublicJobsTeileklarCatalogSyncRoute
   ApiPublicJobsTeileklarImageMirrorRoute: typeof ApiPublicJobsTeileklarImageMirrorRoute
   ApiPublicShopCutoutRoute: typeof ApiPublicShopCutoutRoute
@@ -1131,6 +1145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/jobs/server-alert': {
+      id: '/api/public/jobs/server-alert'
+      path: '/api/public/jobs/server-alert'
+      fullPath: '/api/public/jobs/server-alert'
+      preLoaderRoute: typeof ApiPublicJobsServerAlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/jobs/teileklar-catalog-sync': {
       id: '/api/public/jobs/teileklar-catalog-sync'
       path: '/api/public/jobs/teileklar-catalog-sync'
@@ -1216,6 +1237,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
   WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  ApiPublicJobsServerAlertRoute: ApiPublicJobsServerAlertRoute,
   ApiPublicJobsTeileklarCatalogSyncRoute:
     ApiPublicJobsTeileklarCatalogSyncRoute,
   ApiPublicJobsTeileklarImageMirrorRoute:
