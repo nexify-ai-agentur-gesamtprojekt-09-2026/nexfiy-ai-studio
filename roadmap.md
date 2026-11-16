@@ -1,4 +1,8 @@
 # Roadmap
+## Bestehende Verbindungen eigenständig klären (16.11., 10:53 UTC)
+- [ ] Zugängliche Verbindungen und vorhandene ORACLE-Funktionen selbst prüfen; keine zweite App, kein Secret-Transfer und keine Umgehung des abgelehnten Dialogs
+- [ ] Bestehenden zulässigen Konfigurations-/Rückmeldeweg aus Originalquellen ermitteln, funktionsfähige Schritte prüfen und tatsächliche externe Zugangsgrenzen mit Verantwortlichem dokumentieren
+
 ## Hochgeladener Projektauftrag integrieren (16.11., 10:53 UTC)
 - [ ] Original vollständig lesen und unverändert mit Quellenbezug erhalten; Vorgaben im bestehenden Arbeitsstand anwenden, kein konkurrierendes Aufgabenregister
 - [ ] Tatsächliche Projekt-/Umgebungszuordnung und aktiven Writer gegen zugängliche Originale prüfen; fehlende externe Writer-/ORACLE-Nachweise offen lassen
