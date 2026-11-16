@@ -18,7 +18,8 @@ describe("catalogArea", () => {
 
   it("liest „Black“ nicht als Lack und Öl nur als eigenes Wort", () => {
     expect(catalogArea("Bremsbeläge Black Diamond BDKBD1385G12")).toBe("Bremsen");
-    expect(catalogArea("Ausgabegerät Bensontools Öl 250 ml")).toBe("Werkstatt & Pannenhilfe".length ? catalogArea("Ausgabegerät Bensontools Öl 250 ml") : "");
+    expect(catalogArea("Ausgabegerät Bensontools Öl 250 ml")).toBe("Öle & Additive");
+    expect(catalogArea("Ölfilter K&N HP-2006")).toBe("Filter & Ansaugung");
     expect(catalogArea("Motoröl Castrol GTX Diesel 5W30 C4 5 L")).toBe("Öle & Additive");
   });
 
