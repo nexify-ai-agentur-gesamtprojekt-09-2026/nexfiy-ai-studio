@@ -72,11 +72,14 @@ function Index() {
                     <h2 id="content-contact-contact-customer-1-0-title">Das genügt für den Anfang</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Was bietet Ihr Unternehmen an, wen wollen Sie erreichen, und was soll sich ändern? Sie können auch einfach beschreiben, wo es heute hakt.</p>
-                    <p>Ein ungefährer Zeit- und Budgetrahmen und vorhandene Unterlagen helfen, sind aber kein Muss. Was fehlt, klären wir im Gespräch.</p>
-                    
-<h3>Ein konkretes Beispiel hilft mehr als eine lange Wunschliste</h3>
-<p>Beschreiben Sie einen typischen Vorgang: Wer benötigt welche Information, was dauert zu lange und welches Ergebnis wäre hilfreich? Bei einer Website können Sie Ihr Angebot, die Zielgruppe und den gewünschten Kontaktweg nennen. Zugangsdaten oder vertrauliche Unterlagen gehören nicht in das öffentliche Formular.</p>
+                    <p>Sie brauchen kein fertiges Konzept. Diese vier Angaben reichen, damit das erste Gespräch konkret wird:</p>
+<ul className={"contact-checklist"} role="list">
+  <li><strong>Ihr Angebot</strong><span>Was Ihr Unternehmen anbietet und für wen.</span></li>
+  <li><strong>Der Engpass</strong><span>Wo es heute hakt oder Zeit verloren geht.</span></li>
+  <li><strong>Das Ziel</strong><span>Was sich danach spürbar ändern soll.</span></li>
+  <li><strong>Rahmen, falls bekannt</strong><span>Ungefährer Zeitpunkt, Budget, vorhandene Unterlagen.</span></li>
+</ul>
+<p className={"contact-note"}>Ein typischer Vorgang hilft mehr als eine lange Wunschliste. Zugangsdaten oder vertrauliche Unterlagen gehören nicht in das öffentliche Formular.</p>
 <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -89,11 +92,12 @@ function Index() {
                     <h2 id="content-contact-contact-customer-2-1-title">Was nach Ihrer Anfrage passiert</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Wir klären offene Punkte und den passenden Umfang. Dann erhalten Sie ein Angebot mit Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</p>
-                    <p>Nach dem Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie können uns auch direkt schreiben.</p>
-                  
-<h3>Sie behalten den Versand in der Hand</h3>
-<p>Das Formular prüft Ihre Angaben und öffnet eine vorbereitete Nachricht im E-Mail-Programm. Erst Ihr Versand dort stellt die Anfrage zu. Ist kein E-Mail-Programm eingerichtet, können Sie die Nachricht kopieren und selbst versenden; eine sichtbare Vorbereitung ist noch keine Zustellbestätigung.</p>
+                    <ol className={"contact-steps"} role="list">
+  <li><span className={"contact-step-index"} aria-hidden="true">1</span><div><strong>Sie senden die vorbereitete E-Mail</strong><span>Das Formular prüft Ihre Angaben und öffnet die Nachricht in Ihrem E-Mail-Programm. Erst Ihr Versand dort stellt sie zu.</span></div></li>
+  <li><span className={"contact-step-index"} aria-hidden="true">2</span><div><strong>Pascal klärt offene Punkte</strong><span>Persönlich, per E-Mail oder im Gespräch – mit Blick auf den passenden Umfang.</span></div></li>
+  <li><span className={"contact-step-index"} aria-hidden="true">3</span><div><strong>Sie erhalten ein Angebot</strong><span>Mit benannten Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</span></div></li>
+</ol>
+<p className={"contact-note"}>Ohne eingerichtetes E-Mail-Programm können Sie den Entwurf kopieren und selbst versenden. Eine sichtbare Vorbereitung ist noch keine Zustellbestätigung.</p>
 </div>
                 </section>
               </div>
@@ -106,6 +110,7 @@ function Index() {
                   <div className={"hc-costs"}>
                     <div className={"pc-channel"}>
                       <h3>E-Mail schreiben</h3>
+                      <p className={"contact-note"}>Lieber ohne Formular? Schreiben Sie direkt an Pascal Courbois, NeXify AI in Venlo.</p>
                       <a href="mailto:mail@nexifyai.cloud">mail@nexifyai.cloud<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
                   </div>
