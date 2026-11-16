@@ -152,7 +152,7 @@
   --measure-heading: 24ch;
   --space-paragraph: 24px;
   --space-subheading: 32px;
-  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 15%), transparent 42%, oklch(0.83 0.025 200 / 6%)), color-mix(in oklab, var(--background) 62%, transparent);
+  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 7%), transparent 42%, oklch(0.83 0.025 200 / 4%)), color-mix(in oklab, var(--background) 80%, transparent);
   --gradient-surface: linear-gradient(180deg, oklch(0.3264 0.0089 173.77) 0%, oklch(0.2803 0.0068 164.5) 100%);
   --gradient-stage-glow: radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
     radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
@@ -163,17 +163,26 @@
   --surface-media-glass: color-mix(in oklab, var(--background) 84%, transparent);
   --elevation-header: inset 0 1px 0 var(--border-strong), 0 8px 24px -16px oklch(0 0 0 / 65%);
   --elevation-media: inset 0 1px 0 var(--border), 0 8px 24px -8px oklch(0 0 0 / 40%);
-  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 15%), oklch(1 0 0 / 3%) 48%, oklch(0.82 0.04 190 / 7%)), color-mix(in oklab, var(--background) 78%, transparent);
-  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 23%), oklch(1 0 0 / 6%) 48%, oklch(0.82 0.04 190 / 12%)), color-mix(in oklab, var(--background) 72%, transparent);
-  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 40%), inset 1px 0 0 oklch(1 0 0 / 14%), inset 0 -1px 0 oklch(0 0 0 / 40%), 0 6px 16px -8px oklch(0 0 0 / 65%);
+  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 8%), transparent 52%, oklch(0.82 0.025 190 / 4%)), color-mix(in oklab, var(--card) 82%, transparent);
+  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 12%), transparent 52%, oklch(0.82 0.025 190 / 6%)), color-mix(in oklab, var(--card) 88%, transparent);
+  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 28%), inset 1px 0 0 oklch(1 0 0 / 9%), inset 0 -1px 0 oklch(0 0 0 / 42%), 0 2px 4px oklch(0 0 0 / 18%), 0 8px 18px -10px oklch(0 0 0 / 62%);
+  --glass-content-fill: linear-gradient(145deg, oklch(1 0 0 / 5%), transparent 58%), color-mix(in oklab, var(--card) 92%, transparent);
+  --glass-menu-fill: linear-gradient(145deg, oklch(1 0 0 / 6%), transparent 58%), color-mix(in oklab, var(--popover) 94%, transparent);
+  --glass-control-filter: blur(16px) saturate(1.12);
+  --glass-content-filter: blur(16px) saturate(1.05);
+  --glass-navigation-filter: blur(24px) saturate(1.18);
+  --glass-scroll-filter: blur(28px) saturate(1.12);
+  --glass-menu-filter: blur(24px) saturate(1.08);
+  --glass-opaque: var(--card);
+  --glass-accessible-edge: color-mix(in oklab, var(--foreground) 65%, var(--background));
   --figure-shadow: oklch(0 0 0 / 48%);
   --figure-rim: oklch(0.86 0.08 160 / 20%);
   --stage-light: linear-gradient(135deg, oklch(0.79 0.02 205 / 8%), transparent 45%, oklch(0.78 0.12 125 / 7%));
-  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 18%), transparent 35%, oklch(0.83 0.025 200 / 8%) 70%, oklch(1 0 0 / 10%)), color-mix(in oklab, var(--background) 48%, transparent);
-  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 12%), oklch(1 0 0 / 2%) 60%), color-mix(in oklab, var(--background) 72%, transparent);
-  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 48%), inset 1px 0 0 oklch(1 0 0 / 16%), inset 0 -1px 0 oklch(0 0 0 / 35%), 0 10px 28px -18px oklch(0 0 0 / 60%);
-  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 52%), inset 1px 0 0 oklch(0.84 0.035 200 / 18%), inset 0 -1px 1px oklch(0 0 0 / 48%), 0 3px 5px oklch(0 0 0 / 22%), 0 18px 30px -18px oklch(0 0 0 / 78%);
-  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 62%), inset 1px 0 0 oklch(0.84 0.035 200 / 24%), 0 5px 8px oklch(0 0 0 / 26%), 0 24px 40px -20px oklch(0 0 0 / 82%);
+  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 8%), transparent 42%, oklch(0.83 0.025 200 / 4%) 75%), color-mix(in oklab, var(--background) 70%, transparent);
+  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 6%), transparent 60%), color-mix(in oklab, var(--background) 86%, transparent);
+  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 34%), inset 1px 0 0 oklch(1 0 0 / 12%), inset 0 -1px 0 oklch(0 0 0 / 46%), 0 3px 6px -3px oklch(0 0 0 / 34%), 0 12px 26px -18px oklch(0 0 0 / 72%);
+  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 30%), inset 1px 0 0 oklch(0.84 0.025 200 / 12%), inset 0 -1px 1px oklch(0 0 0 / 48%), 0 3px 5px oklch(0 0 0 / 24%), 0 18px 30px -18px oklch(0 0 0 / 76%);
+  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 40%), inset 1px 0 0 oklch(0.84 0.025 200 / 16%), inset 0 -1px 1px oklch(0 0 0 / 48%), 0 4px 7px oklch(0 0 0 / 26%), 0 22px 36px -20px oklch(0 0 0 / 80%);
 }
 
 @layer base {
@@ -401,15 +410,17 @@ html[data-theme="light"] {
   --input: var(--border-strong);
   --ring: oklch(0.48 0.09 125);
   --surface-raised: var(--card);
-  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 80%), oklch(1 0 0 / 32%) 48%, oklch(0.84 0.02 190 / 20%)), color-mix(in oklab, var(--background) 78%, transparent);
-  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 92%), oklch(1 0 0 / 52%) 48%, oklch(0.84 0.02 190 / 28%)), color-mix(in oklab, var(--background) 72%, transparent);
-  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 90%), inset 1px 0 0 oklch(1 0 0 / 60%), inset 0 -1px 0 oklch(0.23 0.006 165 / 14%), 0 6px 16px -8px oklch(0.23 0.006 165 / 24%);
-  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 80%), transparent 45%, oklch(0.84 0.02 200 / 14%)), color-mix(in oklab, var(--background) 48%, transparent);
-  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 80%), oklch(1 0 0 / 25%) 60%), color-mix(in oklab, var(--background) 76%, transparent);
-  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 76%), transparent 42%, oklch(0.84 0.02 200 / 12%)), color-mix(in oklab, var(--background) 66%, transparent);
-  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 95%), inset 1px 0 0 oklch(1 0 0 / 75%), inset 0 -1px 0 var(--border), 0 10px 28px -18px oklch(0.23 0.006 165 / 30%);
-  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 96%), inset 1px 0 0 oklch(1 0 0 / 72%), inset 0 -1px 0 var(--border), 0 3px 5px oklch(0.23 0.006 165 / 10%), 0 18px 30px -18px oklch(0.23 0.006 165 / 34%);
-  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 100%), inset 1px 0 0 oklch(1 0 0 / 80%), 0 5px 8px oklch(0.23 0.006 165 / 12%), 0 24px 40px -20px oklch(0.23 0.006 165 / 38%);
+  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 42%), transparent 52%, oklch(0.84 0.012 190 / 7%)), color-mix(in oklab, var(--card) 82%, transparent);
+  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 54%), transparent 52%, oklch(0.84 0.012 190 / 5%)), color-mix(in oklab, var(--card) 88%, transparent);
+  --glass-content-fill: linear-gradient(145deg, oklch(1 0 0 / 32%), transparent 58%), color-mix(in oklab, var(--card) 94%, transparent);
+  --glass-menu-fill: linear-gradient(145deg, oklch(1 0 0 / 28%), transparent 58%), color-mix(in oklab, var(--popover) 96%, transparent);
+  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 85%), inset 1px 0 0 oklch(1 0 0 / 46%), inset 0 -1px 0 oklch(0.23 0.006 165 / 18%), 0 2px 4px oklch(0.23 0.006 165 / 8%), 0 8px 18px -10px oklch(0.23 0.006 165 / 26%);
+  --glass-clear: linear-gradient(125deg, oklch(1 0 0 / 48%), transparent 42%, oklch(0.84 0.012 200 / 6%) 75%), color-mix(in oklab, var(--background) 72%, transparent);
+  --glass-frosted: linear-gradient(145deg, oklch(1 0 0 / 38%), transparent 60%), color-mix(in oklab, var(--background) 88%, transparent);
+  --glass-header-compact: linear-gradient(125deg, oklch(1 0 0 / 38%), transparent 42%, oklch(0.84 0.012 200 / 5%)), color-mix(in oklab, var(--background) 84%, transparent);
+  --glass-lens-shadow: inset 0 1px 0 oklch(1 0 0 / 88%), inset 1px 0 0 oklch(1 0 0 / 48%), inset 0 -1px 0 var(--border), 0 3px 6px -3px oklch(0.23 0.006 165 / 16%), 0 12px 26px -18px oklch(0.23 0.006 165 / 32%);
+  --elevation-glass-lift: inset 0 1px 0 oklch(1 0 0 / 90%), inset 1px 0 0 oklch(1 0 0 / 52%), inset 0 -1px 0 var(--border), 0 3px 5px oklch(0.23 0.006 165 / 12%), 0 18px 30px -18px oklch(0.23 0.006 165 / 32%);
+  --elevation-glass-hover: inset 0 1px 0 oklch(1 0 0 / 96%), inset 1px 0 0 oklch(1 0 0 / 60%), inset 0 -1px 0 var(--border), 0 4px 7px oklch(0.23 0.006 165 / 14%), 0 22px 36px -20px oklch(0.23 0.006 165 / 36%);
   color-scheme: light;
 }
 
