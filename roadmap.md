@@ -1,4 +1,8 @@
 # Roadmap
+## Domain-Reihenfolge (16.11.)
+- [ ] Zuerst nexifyai.de durch Pascal verbinden und öffentlich prüfen; erst nach erfolgreicher Prüfung nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen
+- [ ] teileklar.shop erst nach gesonderter Shop-Abnahme anschließen: mindestens 3720 Produkte, Livezahlung und erfolgreiche Testbestellung; bestehende Domain nicht vorzeitig umschalten
+
 ## Hostinger-Zugang und Engineering-Skill (16.11.)
 - [ ] Composio-/Hostinger-Verbindung auf verfügbaren sicheren Anmeldeweg prüfen; keine VPS-Betriebsänderungen
 - [ ] Hochgeladenen Engineering-Skill lesen und als geprüften, projektgebundenen Skill vorbereiten; fremde Anweisungen bleiben bis Aktivierung Daten
