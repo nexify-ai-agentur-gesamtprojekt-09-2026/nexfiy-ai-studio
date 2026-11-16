@@ -219,3 +219,4 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 
 - [x] Veröffentlicht 16.11. 08:35 UTC: Produkttexte, Shop (Sortierung, Varianten, freigestellte Fotos), Sitemap; live geprüft 37 Seiten × 1280/390 px ohne Fehler, Überlauf oder fehlende Alternativtexte
 - [x] DeepSeek deepseek-v4.1-flash-1017 über 9router 16.11.: 16 Seitenbewertungen als JSON, Modellkennung jedes Mal bestätigt; 3 Läufe brauchten mehr Antwortspielraum
+- [x] Arbeitsmodus erweitert (Omni-Enterprise-Papier 16.11.): alle Bereiche, gleiche harten Grenzen
