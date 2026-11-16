@@ -145,6 +145,7 @@
 - [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertigstellen und Vergleich Startseite, Kontakt, Produktseite (hell gegen aktuell) zeigen; bestehende Website und TEILEKLAR unverändert lassen
 
 ## Gesamtfertigstellung (16.11.)
+- [ ] Skill hinzufügen („npx skills add <owner/repo>“) – wartet auf konkretes Repository von Pascal; Übernahme dann nur als geprüfte Dokumentation mit Herkunftsangabe
 - [ ] Studienkolleg-Aachen-Projekt lesend auswerten: übertragbare Best Practices (Technik, Qualität, Abläufe) agenturweit übernehmen – ohne Kundeninhalte, -namen oder -daten (Kundenschutz, Mandantentrennung)
 - [ ] Sprachumschaltung (i18n) fehlerhaft – Ursache finden und beheben (Hinweis Pascal, Startseite)
 - [ ] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigieren (Hinweis Pascal, /kontakt)
