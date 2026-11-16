@@ -4,7 +4,7 @@
 
 ## Domain-Reihenfolge (16.11.)
 - [x] nexifyai.de veröffentlicht (05:51 UTC) und geprüft: Start, Kontakt, Shop 200, www leitet auf nexifyai.de, Shop-Bild 200, MCP ohne Anmeldung 401
-- [ ] nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen (Pascal, Domain-Einstellungen)
+- [x] nexifyai.cloud als Weiterleitung ergänzt (16.11. 07:47 UTC)
 - [ ] teileklar.shop erst nach gesonderter Shop-Abnahme anschließen: mindestens 3720 Produkte, Livezahlung und erfolgreiche Testbestellung; bestehende Domain nicht vorzeitig umschalten
 
 ## Hostinger-Zugang und Engineering-Skill (16.11.)
@@ -197,15 +197,15 @@
 
 - [x] Server 1: BigBuy-Schlüssel in OpenBao/Starteinstellungen nur per Metadaten prüfen
 - [ ] Eigenen MCP-Server (nexifyai.de/mcp) als Verbindung hier einbinden; Anleitung Claude Code/ChatGPT
-- [ ] Arbeitsplatz absichern (Zugriff nur admin) prüfen
+- [x] Arbeitsplatz geprüft: Lesen/Ändern nur Admin per Datenbankregel, Rollenprüfung nur eigenes Konto, Scan ohne Befund (16.11.)
 - [x] SSH-Schlüsselübersicht mit Markierungen (nichts löschen)
 - [ ] SSH-Bereinigung: Plan liegt vor, wartet auf Freigabe
 - [x] Unbekannte SSH-Anmeldungen geprüft
 - [x] Arbeitsplatz-Sicherheitsprüfung
-- [ ] Fehlende alt-Attribute ergänzen (nur alt, keine Gestaltung)
+- [x] Alt-Texte: alle Bilder haben alt; 6 dekorative Markenzeichen zusätzlich aria-hidden (ORACLE ausgenommen)
 - [ ] MCP lokal in der Desktop-App: Einrichtung durch Pascal (Einstellungen → Connectors → Local MCP servers); hier Verbindung zu nexifyai.de/mcp per Karte
-- [ ] Nächtliche Aufträge: Zeitlimit 5 s beim Aufruf – prüfen, ob Schritte trotzdem durchlaufen
-- [ ] nexifyai.cloud (nur Hauptadresse + www) auf nexifyai.de weiterleiten, Subdomains wie brain.nexifyai.cloud unverändert
+- [x] Nächtliche Aufträge 16.11. 07:33 UTC testweise ausgelöst: beide 200 mit Anmeldung; erster Kaltstart lief in 5-s-Zeitlimit (07:30), Zeitplan danach zurückgesetzt. Erster echter Nachtlauf 17.11. 02:00 UTC prüfen
+- [x] nexifyai.cloud + www leiten seit 16.11. 07:47 UTC über Tunnel (Server 1, eigener Port 8913) dauerhaft auf nexifyai.de, Pfad bleibt; Unteradressen/MX unverändert; Rückweg /root/nexifyai-cloud-weiterleitung-rueckweg.md. Hinweis: Hauptadresse geht per vorhandener Cloudflare-Regel erst auf www (2 Sprünge) – Regel nicht änderbar mit vorhandenem Zugang
 - [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
 - [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
