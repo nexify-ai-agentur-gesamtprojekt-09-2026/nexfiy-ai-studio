@@ -203,3 +203,5 @@
 - [x] Unbekannte SSH-Anmeldungen geprüft
 - [x] Arbeitsplatz-Sicherheitsprüfung
 - [ ] Fehlende alt-Attribute ergänzen (nur alt, keine Gestaltung)
+- [ ] MCP lokal in der Desktop-App: Einrichtung durch Pascal (Einstellungen → Connectors → Local MCP servers); hier Verbindung zu nexifyai.de/mcp per Karte
+- [ ] Nächtliche Aufträge: Zeitlimit 5 s beim Aufruf – prüfen, ob Schritte trotzdem durchlaufen
