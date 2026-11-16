@@ -1,14 +1,14 @@
 # Roadmap
 ## Durchgängige Typografie (16.11.)
-- [ ] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abstimmen
-- [ ] Chat-Einstieg, Antworten, Listen und Eingabe mit derselben typografischen Hierarchie vereinheitlichen
-- [ ] Desktop, Handy, verschobene Chatbreiten und reale Beratung prüfen; Inhalte und Berechtigungen unverändert lassen
-- [ ] Mitgehenden Glasheader auf schmalen Bildschirmen mit bedienbarer Navigation, abgestimmter Durchsicht und gemessenen Randabständen prüfen und verfeinern
+- [x] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abgestimmt
+- [x] Chat-Einstieg, Antworten, Listen und Eingabe vereinheitlicht; echte Antwort mit H3-Zwischenüberschriften, 16px Schrift, 28px Zeilenhöhe und 24px Absatzrhythmus geprüft
+- [x] 46 öffentliche Seiten bei 1280/390px ohne Überlauf geprüft; reale API-Beratung und Einstiegslink auch am Handy erfolgreich, Berechtigungen unverändert
+- [x] Glasheader bei 320/390/600/768/900/1280/1705px vor und nach Scrollen geprüft: rechts/oben/unten je 8px zwischen Glas und rechtem Bedienelement; mobile Navigation und Escape funktionieren
 
 ## Produktdarstellung und zugeordnete Rechtstexte (16.11.)
-- [ ] Suite, API und Agenturleistungen inhaltlich und visuell als unterschiedliche Einstiege präzisieren, ohne neue Preise oder Fähigkeiten zu erfinden
-- [ ] Datenschutz, KI-Hinweise, Cookies und Vertragsgrundlagen mit den tatsächlichen öffentlichen Funktionen und Produktgrenzen abgleichen
-- [ ] Produktinformationen, Beratungsgrundlage und Metadaten auf Konsistenz prüfen; fehlende Anbieter-/Verarbeitungsangaben als Freigabegrenze erhalten
+- [x] Sechs Produktseiten und Agenturleistungen mit vergleichbaren Kurzprofilen, Voraussetzungen, Kostenprinzip, Beispiel und passenden Links ausgearbeitet; keine neuen Preise oder Fähigkeiten erfunden
+- [x] Datenschutz, KI-Hinweise, Cookies, Vertragsgrundlagen und TEILEKLAR den vorhandenen Funktionen zugeordnet; wirkungslose importierte Diagnose-Auswahl nicht mehr als wirksame Einwilligung dargestellt
+- [x] Beratungsgrundlage aktualisiert, irreführende Vorgangsnummer-Zusage auf bearbeiteten Seiten entfernt; Produkt-/Rechtsseiten bei 1280/390px und importiertes Rechtsarchiv geprüft; fehlende Anbieter-/Verarbeitungsangaben bleiben Freigabegrenze
 
 ## Glas und Header-Veredelung (16.11.)
 - [x] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinert
