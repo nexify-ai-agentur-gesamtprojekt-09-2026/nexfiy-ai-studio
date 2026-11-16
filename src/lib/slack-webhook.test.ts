@@ -43,3 +43,9 @@ it("weist JSON-null und zu große Nachrichten ohne Verarbeitung zurück", async 
   expect((await receiveSlack(new Request("https://example.invalid", { method: "POST", body: "null" }), "events")).status).toBe(400);
   expect((await receiveSlack(new Request("https://example.invalid", { method: "POST", body: "x".repeat(65537) }), "events")).status).toBe(413);
 });
+it("verarbeitet signierte Nachrichten ohne echten Hintergrund-Hook nicht stillschweigend", async () => {
+  vi.stubEnv("SLACK_ORACLE_SIGNING_SECRET", secret);
+  const request = await signedRequest(JSON.stringify({ api_app_id: SLACK_WORKSPACE.oracleApp, team_id: SLACK_WORKSPACE.team,
+    event_id: "evt-no-runtime", event: { type: "message", user: SLACK_WORKSPACE.owner, channel: SLACK_WORKSPACE.inbox, ts: "1.2", text: "status" } }));
+  expect((await receiveSlack(request,"events")).status).toBe(503);
+});

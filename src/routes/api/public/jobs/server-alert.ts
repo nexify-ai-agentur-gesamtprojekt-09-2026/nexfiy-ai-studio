@@ -14,8 +14,9 @@ export const Route = createFileRoute("/api/public/jobs/server-alert")({
         const titel = quelle === "ueberwachung" ? "Überwachung nexifyai.de" : "Foto-Freistellung";
         const zeichen = stand === "fehler" ? "🔴" : stand === "bericht" ? "📋" : "🟢";
         try {
-          const { postSlackNotice } = await import("@/lib/inquiry-delivery.server");
-          await postSlackNotice(`${zeichen} ${titel}: ${detail}`);
+          const { deliverJobNotice } = await import("@/lib/slack-job-notice.server");
+          await deliverJobNotice(`server:${quelle}:${stand}:${crypto.randomUUID()}`,
+            quelle === "ueberwachung" ? "monitoring" : "images", `${zeichen} ${titel}: ${detail}`);
           return Response.json({ ok: true });
         } catch (error) {
           console.error("server alert failed", error instanceof Error ? error.message : error);

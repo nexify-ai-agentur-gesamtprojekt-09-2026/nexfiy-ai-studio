@@ -48,6 +48,8 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
   const parsed = slackInputSchema.safeParse(candidate);
   if (!parsed.success) return new Response("Invalid event", { status: 400 });
   const runtimeRequest = request as RuntimeRequest;
+  const { decideSlackInput } = await import("./slack-flows");
+  if (decideSlackInput(parsed.data).kind === "ignore") return new Response(null, { status: 200 });
   if (typeof runtimeRequest.waitUntil !== "function")
     return Response.json({ ok: false, error: "background_delivery_unavailable" }, { status: 503 });
   // Keine Arbeit oder KI vor ACK starten: realer Runtime-Kontext hält den nachgelagerten Prozess am Leben.
