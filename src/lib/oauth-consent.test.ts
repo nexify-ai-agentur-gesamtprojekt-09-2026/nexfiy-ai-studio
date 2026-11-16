@@ -14,22 +14,22 @@ describe("NX-MCP-01 consent", () => {
     expect((await loadOAuthConsent(provider(), "request-1")).redirect_uri).toBe("https://claude.ai/api/mcp/auth_callback");
   });
   it("does not imply profile access when only identity and email were requested", () => {
-    expect(identityPermissions("openid email")).toEqual(["Ihre Kontoidentität bestätigen", "Ihre E-Mail-Adresse teilen"]);
+    expect(identityPermissions("openid email").map((entry) => entry.scope)).toEqual(["openid", "email"]);
   });
   it("does not invent identity permissions for an empty scope", () => {
     expect(identityPermissions(undefined)).toEqual([]);
   });
   it("retains unknown permissions instead of hiding them", () => {
-    expect(identityPermissions("custom.read")).toEqual(["Zusätzliche Berechtigung angefordert: custom.read"]);
+    expect(identityPermissions("custom.read").map((entry) => entry.scope)).toEqual(["custom.read"]);
   });
   it("distinguishes an untrusted origin from expired authorization", async () => {
     const oauth = provider();
     vi.mocked(oauth.getAuthorizationDetails).mockResolvedValue({ data: null, error: { message: "unauthorized request origin" } });
-    await expect(loadOAuthConsent(oauth, "request-1")).rejects.toThrow("Website-Adresse");
+    await expect(loadOAuthConsent(oauth, "request-1")).rejects.toMatchObject({ kind: "origin" });
   });
   it("rejects a missing authorization without a provider call", async () => {
     const oauth = provider();
-    await expect(loadOAuthConsent(oauth, "")).rejects.toThrow("Kennung");
+    await expect(loadOAuthConsent(oauth, "")).rejects.toMatchObject({ kind: "missing_id" });
     expect(oauth.getAuthorizationDetails).not.toHaveBeenCalled();
   });
   it("approves only through the provider approval method", async () => {
@@ -48,12 +48,12 @@ describe("NX-MCP-01 consent", () => {
     it(`surfaces network failure for ${approve ? "approval" : "denial"}`, async () => {
       const oauth = provider();
       vi.mocked(approve ? oauth.approveAuthorization : oauth.denyAuthorization).mockRejectedValue(new TypeError("Failed to fetch"));
-      await expect(decideOAuthConsent(oauth, "request-1", approve)).rejects.toThrow("Internetverbindung");
+      await expect(decideOAuthConsent(oauth, "request-1", approve)).rejects.toMatchObject({ kind: "provider" });
     });
   }
   it("never navigates when the provider returned no callback", async () => {
     const oauth = provider();
     vi.mocked(oauth.approveAuthorization).mockResolvedValue({ data: {}, error: null });
-    await expect(decideOAuthConsent(oauth, "request-1", true)).rejects.toThrow("Rückleitungsadresse");
+    await expect(decideOAuthConsent(oauth, "request-1", true)).rejects.toMatchObject({ kind: "missing_callback" });
   });
 });
