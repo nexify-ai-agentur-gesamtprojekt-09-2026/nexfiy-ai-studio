@@ -57,7 +57,7 @@ async function finalizeRun(admin: Admin, runDate: string, startedAt: string, rep
  * Ein Schritt des täglichen Abgleichs: verarbeitet einige Feed-Seiten und setzt den Fortschritt im Tagesprotokoll fort.
  * Nach der letzten Seite werden nur bei vollständigem Abgleich nicht mehr gelieferte Artikel ausgeblendet (nie gelöscht).
  */
-export async function syncTeileklarCatalogStep(now = new Date()): Promise<CatalogSyncStep> {
+export async function syncTeileklarCatalogStep(now = new Date(), options: { restart?: boolean } = {}): Promise<CatalogSyncStep> {
   const started = Date.now();
   const runDate = now.toISOString().slice(0, 10);
   const { supabaseAdmin: admin } = await import("@/integrations/supabase/client.server");
@@ -71,6 +71,14 @@ export async function syncTeileklarCatalogStep(now = new Date()): Promise<Catalo
     const created = await admin.from("teileklar_catalog_sync_runs").insert({ run_date: runDate, reported_total: firstPage.total }).select("*").single();
     if (created.error) throw new Error(`Abgleich konnte nicht begonnen werden: ${created.error.message}`);
     run = created.data;
+  }
+  if (run.finished_at && options.restart) {
+    // Erneuter Lauf am selben Tag (z. B. nach geänderter Abbildung): Tagesprotokoll zurücksetzen, Artikel bleiben unverändert sichtbar.
+    const restarted = await admin.from("teileklar_catalog_sync_runs").update({
+      started_at: new Date().toISOString(), next_offset: 0, received: 0, rejected: 0, archived: 0, complete: null, finished_at: null, last_error: null, updated_at: new Date().toISOString(),
+    }).eq("run_date", runDate).select("*").single();
+    if (restarted.error) throw new Error(`Abgleich konnte nicht neu begonnen werden: ${restarted.error.message}`);
+    run = restarted.data;
   }
   if (run.finished_at) {
     return { runDate, state: "bereits_abgeschlossen", reportedTotal: run.reported_total, nextOffset: run.next_offset, stored: run.received, rejected: run.rejected, archived: run.archived, complete: run.complete, durationMs: Date.now() - started };

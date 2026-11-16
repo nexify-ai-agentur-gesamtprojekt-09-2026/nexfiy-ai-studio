@@ -8,9 +8,15 @@ export const Route = createFileRoute("/api/public/jobs/teileklar-catalog-sync")(
       POST: async ({ request }) => {
         const authFailure = await authenticateCronRequest(request);
         if (authFailure) return authFailure;
+        let restart = false;
+        try {
+          restart = ((await request.json()) as { restart?: unknown }).restart === true;
+        } catch {
+          restart = false;
+        }
         try {
           const { syncTeileklarCatalogStep } = await import("@/lib/teileklar-catalog-sync.server");
-          const result = await syncTeileklarCatalogStep();
+          const result = await syncTeileklarCatalogStep(new Date(), { restart });
           console.info("teileklar catalog sync step", result);
           return Response.json({ success: result.complete !== false, ...result });
         } catch (error) {
