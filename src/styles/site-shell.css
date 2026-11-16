@@ -60,6 +60,11 @@
 :root:root #atelier .tk-search-row { display: flex; gap: 12px; }
 :root:root #atelier .tk-search-row input { min-width: 0; flex: 1; min-height: 44px; background: var(--secondary); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; color: var(--foreground); }
 :root:root #atelier .tk-empty { max-width: 65ch; display: grid; justify-items: start; gap: 16px; }
+:root:root #atelier.site-shared .home-concept .pc-supplement .tk-empty { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; }
+:root:root #atelier.site-shared .tk-partner-journey { display: grid; gap: 32px; }
+:root:root #atelier.site-shared .home-concept .pc-supplement :is(.tk-partner-intro,.tk-portal-preview) { padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+:root:root #atelier.site-shared :is(.tk-partner-steps li,.tk-portal-grid article) { border-radius: 8px; background: var(--glass-content-fill); border: 1px solid var(--border); color: var(--foreground); }
+:root:root #atelier.site-shared :is(.tk-partner-steps,.tk-portal-grid) p { color: var(--muted-foreground); }
 @container website (max-width: 600px) {
   :root:root #atelier .tk-commerce-header { padding: 12px 16px; display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px 12px; }
   :root:root #atelier .tk-service-strip { display: none; }

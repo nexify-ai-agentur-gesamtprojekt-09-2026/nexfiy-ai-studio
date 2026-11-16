@@ -19,10 +19,10 @@ describe("inquiry preparation", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     fireEvent.click(screen.getByRole("button",{name:"E-Mail vorbereiten"}));
     const draft=screen.getByRole("textbox",{name:"Anfrageentwurf"});
-    expect(draft).toHaveValue(expect.stringContaining(message.trim()));
+    expect(draft instanceof HTMLTextAreaElement ? draft.value : "").toContain(message.trim());
     fireEvent.click(screen.getByRole("button",{name:"Text kopieren"}));
     expect(await screen.findByRole("button",{name:"Kopieren nicht möglich"})).toBeEnabled();
-    expect(draft).toHaveValue(expect.stringContaining("TEILEKLAR Terminwunsch von Erika Muster"));
+    expect(draft instanceof HTMLTextAreaElement ? draft.value : "").toContain("TEILEKLAR Terminwunsch von Erika Muster");
     fireEvent.click(screen.getByRole("button",{name:"Angaben bearbeiten"}));
     expect(screen.getByLabelText("Ihr Anliegen *")).toHaveValue(message);
   });
