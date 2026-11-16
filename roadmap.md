@@ -1,19 +1,20 @@
 # Roadmap
 ## Bestehende Verbindungen eigenständig klären (16.11., 10:53 UTC)
-- [ ] Zugängliche Verbindungen und vorhandene ORACLE-Funktionen selbst prüfen; keine zweite App, kein Secret-Transfer und keine Umgehung des abgelehnten Dialogs
-- [ ] Bestehenden zulässigen Konfigurations-/Rückmeldeweg aus Originalquellen ermitteln, funktionsfähige Schritte prüfen und tatsächliche externe Zugangsgrenzen mit Verantwortlichem dokumentieren
+- [x] Zugängliche Verbindungsliste und ORACLE-Zuordnung selbst geprüft; My Slack funktioniert, App-Manifestexport konkret missing_scope/app_configurations:read; Umfang nicht grantbar. Keine zweite App/Secret-Transfer/Dialogumgehung
+- [x] Zwei begrenzte Slack-Suchseiten (40 Treffer) auf Verbindungsbelege ausgewertet, historische getrennte MCP-/HTTP-Wege nicht als aktuell bestätigt. Bestehender Prüfthread für einmalige Statusrevision genutzt und rückgelesen
+- [ ] Aktuelle App-Konfiguration/konfigurationsberechtigten bestehenden Weg und externen Writer bestätigen: ORACLE-App-/Betriebsverantwortlicher, kein passendes zugängliches ORACLE-Health-/Writer-Werkzeug gefunden. Belege ops/project-context-2026-11-16.md
 
 ## Hochgeladener Projektauftrag integrieren (16.11., 10:53 UTC)
-- [ ] Original vollständig lesen und unverändert mit Quellenbezug erhalten; Vorgaben im bestehenden Arbeitsstand anwenden, kein konkurrierendes Aufgabenregister
-- [ ] Tatsächliche Projekt-/Umgebungszuordnung und aktiven Writer gegen zugängliche Originale prüfen; fehlende externe Writer-/ORACLE-Nachweise offen lassen
-- [ ] Kompakte IST-/SOLL-Rückmeldung einmal im bestehenden privaten ORACLE-Prüfthread senden und Zustellung rücklesen; keine neue Aufgabe, kein Modellaufruf und keine Ablehnung umgehen
+- [x] Original vollständig gelesen, unverändert unter ops/references/nexify-project-chat-2026-11-16.md erhalten und byteverglichen; Vorgaben berücksichtigt, kein zweites Aufgabenregister
+- [x] Tatsächliches TanStack-Projekt, lokale Quellen, aktuelle URLs und Versionsmomentaufnahme belegt; formeller externer Writer/Lease bleibt ausdrücklich offen, kein zweiter Agent gestartet
+- [x] Einmalige Revision 2 im bestehenden privaten Prüfthread angenommen und 10:56 UTC rückgelesen; genau eine Rückmeldung, null ORACLE-/Hermes-Antworten, keine neue Aufgabe/Modellaufruf. Zustellung ist kein ACK
 
 ## ORACLE-Anbindung fortsetzen (16.11., 10:35 UTC)
 - [x] Slack-Verbindung und bestehende ORACLE-App-Zuordnung aktuell bestätigt, privater Ursprungskanal nicht extern geteilt; Thread vollständig ohne ACK, live Event-Handshake 200, keine zweite App/Modelländerung
 - [x] 22 betroffene Sicherheits-/Empfangstests bestanden (10:37 UTC); realer Request-waitUntil im Nitro-Adapter vorhanden, kein Fehler oder ungeprüfter Umbau
 - [ ] Signaturgeheimnis der bestehenden App: sicherer Dialog von Pascal abgelehnt, weiterhin nicht gesetzt; Empfang verarbeitet keine Ereignisse
 - [ ] Bestehende App-Konfiguration und identischen ORACLE-Ausgang abstimmen: Pascal/App-Verantwortlicher; keine vorhandene Request-URL überschreiben, keine Verbindung ersetzen
-- [ ] Vollständiger Roundtrip: wartet auf bestätigte Konfiguration/Zugang, tatsächlichen ACK und Rückschema; keine weitere Nachricht/kein Betriebsauftrag ausgelöst. Belege ops/slack-integration.md
+- [ ] Vollständiger Roundtrip: wartet auf bestätigte Konfiguration/Zugang, tatsächlichen ACK und Rückschema; Statusrevision 2 10:56 UTC zugestellt/rückgelesen, kein Betriebsauftrag. Belege ops/slack-integration.md
 
 ## SSH-Hostidentität vor BigBuy bestätigen (16.11., 10:29 UTC)
 - [x] Konsolenvergleich für Server 1 vorbereitet; 10:30 UTC Hostname/Hosting-IP liefern denselben öffentlichen ED25519-SHA256-Kandidaten, ausdrücklich unbestätigt. Anleitung/Abbruch/Rückweg: ops/server1/host-identity-2026-11-16.md; keine private Schlüsseldatei gelesen
