@@ -1143,3 +1143,12 @@
   }
   :root:root #atelier.site-nexify :is(section[aria-labelledby="home-headline"], section[aria-labelledby="page-title-contact"]) .identity-copy { order: -1; }
 }
+/* NX-MOBILE-02 (Vorschlag): Auf /kontakt ist das Formular der Hauptweg. Auf dem Handy
+   entfallen dort Kennenlern-Film und Sprunglinks (Film bleibt auf Startseite und Desktop),
+   damit das erste Eingabefeld ohne lange Vorstrecke erreichbar ist. */
+@container website (max-width: 600px) {
+  :root:root #atelier.site-nexify .page-contact section[aria-labelledby="page-title-contact"] .identity-media,
+  :root:root #atelier.site-nexify .page-contact > .hc-anchors {
+    display: none;
+  }
+}
