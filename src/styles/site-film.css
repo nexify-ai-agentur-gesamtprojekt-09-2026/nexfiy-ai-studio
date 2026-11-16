@@ -30,8 +30,11 @@
   object-fit: cover;
   border-radius: inherit;
 }
-:root:root #atelier .atelier-film.atelier-film > p.atelier-film-disclosure {
+:root:root #atelier.site-shared .atelier-film.atelier-film > p.atelier-film-disclosure {
   margin: 8px 20px 12px;
+  padding: 0;
+  max-width: none;
+  font-family: var(--font-brand-text);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0;
@@ -203,18 +206,6 @@
   transform-origin: 0 50%;
   background: var(--primary);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript {
-  padding: 16px 20px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--muted-foreground);
-}
-:root:root #atelier .atelier-film .atelier-film-transcript summary {
-  cursor: pointer;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
 :root:root #atelier .atelier-film .atelier-film-picture {
   container-type: inline-size;
 }
@@ -319,58 +310,77 @@
   }
 }
 
-/* Transkript als ruhige Aufklappzeile: Pfeil zeigt den Zustand, Text bleibt in der Fußzeile des Films. */
-:root:root #atelier .atelier-film .atelier-film-transcript {
+/* Die Film-Fußzeile bleibt unabhängig von geerbten Seiten- und Kartenregeln. */
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
   padding: 0 20px;
   border-top: 1px solid var(--border);
   border-radius: 0 0 var(--radius) var(--radius);
+  font-family: var(--font-brand-text);
+  color: var(--muted-foreground);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript summary {
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 0;
   list-style: none;
-  justify-content: space-between;
   gap: 12px;
   font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
   letter-spacing: 0;
-  transition: color 200ms ease;
+  color: var(--muted-foreground);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: color 200ms var(--motion-ease-brand);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript summary::-webkit-details-marker {
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary::-webkit-details-marker {
   display: none;
 }
-:root:root #atelier .atelier-film .atelier-film-transcript summary::after {
-  content: "";
-  inline-size: 8px;
-  block-size: 8px;
-  position: static;
-  inset: auto;
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary::after {
+  content: none;
+}
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-transcript-chevron {
   display: block;
-  flex: 0 0 8px;
+  width: 16px;
+  height: 16px;
   margin: 0;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 200ms ease;
+  transform: none;
+  transition: transform 200ms var(--motion-ease-brand);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript[open] summary::after {
-  transform: translateY(2px) rotate(-135deg);
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript[open] .atelier-transcript-chevron {
+  transform: rotate(180deg);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript summary:hover {
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary:is(:hover, :active) {
   color: var(--foreground);
 }
-:root:root #atelier .atelier-film .atelier-film-transcript summary:focus-visible {
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: -2px;
   border-radius: 4px;
 }
-:root:root #atelier .atelier-film .atelier-film-transcript p {
-  margin: 0 0 16px;
-  max-inline-size: 64ch;
+:root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > p {
+  margin: 4px 0 16px;
+  padding: 0;
+  max-width: 64ch;
+  font-family: var(--font-brand-text);
   font-size: 14px;
   line-height: 1.6;
   color: var(--muted-foreground);
 }
 @media (prefers-reduced-motion: reduce) {
-  :root:root #atelier .atelier-film .atelier-film-transcript summary,
-  :root:root #atelier .atelier-film .atelier-film-transcript summary::after {
+  :root:root #atelier.site-shared .atelier-film.atelier-film .atelier-film-transcript > summary,
+  :root:root #atelier.site-shared .atelier-film.atelier-film .atelier-transcript-chevron {
     transition: none;
   }
 }

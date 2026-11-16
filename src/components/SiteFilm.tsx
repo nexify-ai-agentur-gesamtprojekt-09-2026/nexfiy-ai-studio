@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { ChevronDown } from "lucide-react";
 import filmCSS from "../styles/site-film.css?url";
 import { SITE_FILMS, type SiteFilmId } from "../lib/site-films";
 import { isPublicPlaybackFilm } from "../lib/site-film-policy";
@@ -176,8 +177,11 @@ export function SiteFilm({
         <p className="atelier-film-status" role="status" hidden />
       </div>
       <details className="atelier-film-transcript">
-        <summary>Gesprochener Text</summary>
-        <p lang="de">{filmTranscript(data.captions)}</p>
+        <summary aria-controls={`${volumeId}-transcript`}>
+          <span>Gesprochener Text</span>
+          <ChevronDown className="atelier-transcript-chevron" size={16} aria-hidden="true" />
+        </summary>
+        <p id={`${volumeId}-transcript`} lang="de">{filmTranscript(data.captions)}</p>
       </details>
       <p className="atelier-film-disclosure">Markeninszenierung · kein Kundenprojekt oder Leistungsnachweis</p>
     </div>
