@@ -1,7 +1,13 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { assertValidCues, filmCaptionsPath, filmTranscript, formatVttTime, toWebVtt } from "./film-captions";
+import {
+  assertValidCues,
+  filmCaptionsPath,
+  filmTranscript,
+  formatVttTime,
+  toWebVtt,
+} from "./film-captions";
 import { SITE_FILMS } from "./site-films";
 
 const publicDir = join(__dirname, "../../public");
@@ -12,7 +18,8 @@ describe("brand film captions", () => {
   });
 
   it("keeps every cue ordered, non-overlapping and inside the film", () => {
-    for (const film of Object.values(SITE_FILMS)) expect(() => assertValidCues(film.captions, film.duration)).not.toThrow();
+    for (const film of Object.values(SITE_FILMS))
+      expect(() => assertValidCues(film.captions, film.duration)).not.toThrow();
   });
 
   it("serves caption files identical to the cue definitions", () => {
@@ -35,7 +42,15 @@ describe("brand film captions", () => {
   });
 
   it("rejects overlapping, empty or overlong cues", () => {
-    expect(() => assertValidCues([{ start: 0, end: 2, text: "a" }, { start: 1.5, end: 3, text: "b" }], 10)).toThrow();
+    expect(() =>
+      assertValidCues(
+        [
+          { start: 0, end: 2, text: "a" },
+          { start: 1.5, end: 3, text: "b" },
+        ],
+        10,
+      ),
+    ).toThrow();
     expect(() => assertValidCues([{ start: 0, end: 2, text: " " }], 10)).toThrow();
     expect(() => assertValidCues([{ start: 9, end: 11, text: "a" }], 10)).toThrow();
     expect(() => assertValidCues([], 10)).toThrow();

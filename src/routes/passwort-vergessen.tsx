@@ -5,17 +5,38 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/passwort-vergessen.css?url";
 
 export const Route = createFileRoute("/passwort-vergessen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Passwort vergessen · NeXify AI" }, { name: "description", content: "Fordern Sie einen Link zum Zurücksetzen Ihres NeXify-Passworts an." }, { property: "og:title", content: "Passwort vergessen · NeXify AI" }, { property: "og:description", content: "Fordern Sie einen Link zum Zurücksetzen Ihres NeXify-Passworts an." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  head: () => ({
+    links: [{ rel: "stylesheet", href: capturedCSS }],
+    meta: [
+      { title: "Passwort vergessen · NeXify AI" },
+      {
+        name: "description",
+        content: "Fordern Sie einen Link zum Zurücksetzen Ihres NeXify-Passworts an.",
+      },
+      { property: "og:title", content: "Passwort vergessen · NeXify AI" },
+      {
+        property: "og:description",
+        content: "Fordern Sie einen Link zum Zurücksetzen Ihres NeXify-Passworts an.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   component: Index,
 });
 
 function Index() {
   return (
     <NexifyShell>
-            <div className={"home-concept page-concept tk-shop nx-konto"}>
-              <ImportedSectionPasswortVergessen />
-            </div>
+      <div className={"home-concept page-concept tk-shop nx-konto"}>
+        <ImportedSectionPasswortVergessen />
+      </div>
     </NexifyShell>
   );
 }
@@ -36,7 +57,10 @@ function ImportedSectionPasswortVergessen() {
           </ol>
         </nav>
         <h1 id="auth-forgot-title">Passwort vergessen</h1>
-        <p className={"nx-konto-lead"}>Ihr NeXify-Websitekonto. Suite, Partnerportal und Shop-Bestellungen sind damit nicht automatisch verfügbar.</p>
+        <p className={"nx-konto-lead"}>
+          Ihr NeXify-Websitekonto. Suite, Partnerportal und Shop-Bestellungen sind damit nicht
+          automatisch verfügbar.
+        </p>
         <AuthForm mode="forgot" />
       </div>
       <aside className={"nx-konto-szene"} aria-labelledby="auth-forgot-szene">
@@ -46,11 +70,64 @@ function ImportedSectionPasswortVergessen() {
           </figure>
         </div>
         <div className={"nx-konto-nutzen"}>
-          <span className={"hc-kicker"} id="auth-forgot-szene">NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto</span>
+          <span className={"hc-kicker"} id="auth-forgot-szene">
+            NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto
+          </span>
           <ul>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" /></svg>Websitekonto</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 7.5v10h17v-8h-8l-2-2z" /></svg>Kontoverwaltung</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" /></svg>Produkte separat klären</li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" />
+              </svg>
+              Websitekonto
+            </li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M3.5 7.5v10h17v-8h-8l-2-2z" />
+              </svg>
+              Kontoverwaltung
+            </li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+              </svg>
+              Produkte separat klären
+            </li>
           </ul>
           <p>Ein Konto bestätigt keine Produkt-, Partner- oder Shopfreischaltung.</p>
         </div>
@@ -110,4 +187,3 @@ function ImportedNavSeitenBersicht() {
     </nav>
   );
 }
-

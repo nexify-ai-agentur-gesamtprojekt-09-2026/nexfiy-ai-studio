@@ -29,7 +29,9 @@ describe("inquiry rules", () => {
   });
 
   it("requires the workshop name on the partner form", () => {
-    expect(validateInquiry("partner", valid).company).toBe("Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.");
+    expect(validateInquiry("partner", valid).company).toBe(
+      "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.",
+    );
   });
 
   it("rejects an e-mail address without a domain", () => {
@@ -38,7 +40,9 @@ describe("inquiry rules", () => {
 
   it("asks for at least ten characters of message", () => {
     expect(validateInquiry("contact", { ...valid, message: "Hallo" }).message).toBeDefined();
-    expect(validateInquiry("contact", { ...valid, message: "Neue Website" }).message).toBeUndefined();
+    expect(
+      validateInquiry("contact", { ...valid, message: "Neue Website" }).message,
+    ).toBeUndefined();
   });
 
   it("focuses fields in form order", () => {
@@ -49,11 +53,26 @@ describe("inquiry rules", () => {
     expect(errorSummary({ name: "a" })).toBe("Bitte prüfen Sie eine Angabe.");
     expect(errorSummary({ name: "a", email: "b" })).toBe("Bitte prüfen Sie 2 Angaben.");
   });
-  it("does not count corrected fields", () => { expect(errorSummary({ name: undefined, email: "invalid", message: undefined })).toBe("Bitte prüfen Sie eine Angabe."); });
-  it.each(["name","email","company","message"] as const)("enforces the %s limit beyond DOM attributes", (field) => { expect(validateInquiry("contact",{...valid,[field]:"a".repeat(INQUIRY_LIMITS[field]+1)})[field]).toBeDefined(); });
+  it("does not count corrected fields", () => {
+    expect(errorSummary({ name: undefined, email: "invalid", message: undefined })).toBe(
+      "Bitte prüfen Sie eine Angabe.",
+    );
+  });
+  it.each(["name", "email", "company", "message"] as const)(
+    "enforces the %s limit beyond DOM attributes",
+    (field) => {
+      expect(
+        validateInquiry("contact", { ...valid, [field]: "a".repeat(INQUIRY_LIMITS[field] + 1) })[
+          field
+        ],
+      ).toBeDefined();
+    },
+  );
 
   it("trims input and reads the consent checkbox", () => {
-    expect(normalizeInquiry({ name: "  Erika   Muster ", email: " ERIKA@FIRMA.DE ", consent: "on" })).toMatchObject({
+    expect(
+      normalizeInquiry({ name: "  Erika   Muster ", email: " ERIKA@FIRMA.DE ", consent: "on" }),
+    ).toMatchObject({
       name: "Erika Muster",
       email: "erika@firma.de",
       consent: true,
@@ -71,10 +90,20 @@ describe("inquiry e-mail hand-off", () => {
   });
 
   it("names the workshop in partner requests", () => {
-    expect(buildInquiryMail("partner", { ...valid, company: "KFZ Berger" }).subject).toBe("TEILEKLAR Partneranfrage: KFZ Berger");
+    expect(buildInquiryMail("partner", { ...valid, company: "KFZ Berger" }).subject).toBe(
+      "TEILEKLAR Partneranfrage: KFZ Berger",
+    );
   });
-  it("keeps appointment mail separate from project inquiries", () => { const mail = buildInquiryMail("appointment",valid); expect(mail.subject).toBe("TEILEKLAR Terminwunsch von Erika Muster"); expect(mail.body).toContain("keine Buchung"); });
-  it("keeps voucher questions separate from redemption", () => { const mail = buildInquiryMail("voucher",valid); expect(mail.subject).toBe("TEILEKLAR Gutscheinfrage von Erika Muster"); expect(mail.body).toContain("keine Einlösung"); });
+  it("keeps appointment mail separate from project inquiries", () => {
+    const mail = buildInquiryMail("appointment", valid);
+    expect(mail.subject).toBe("TEILEKLAR Terminwunsch von Erika Muster");
+    expect(mail.body).toContain("keine Buchung");
+  });
+  it("keeps voucher questions separate from redemption", () => {
+    const mail = buildInquiryMail("voucher", valid);
+    expect(mail.subject).toBe("TEILEKLAR Gutscheinfrage von Erika Muster");
+    expect(mail.body).toContain("keine Einlösung");
+  });
 
   it("keeps very long messages within the mail-link limit", () => {
     const mail = buildInquiryMail("contact", { ...valid, message: "Ä ".repeat(2000) });

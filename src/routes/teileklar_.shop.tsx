@@ -6,24 +6,56 @@ import { catalogCategoriesQuery, catalogListQuery } from "@/lib/teileklar-catalo
 import { normalizeCatalogQuery, normalizePage } from "@/lib/teileklar-catalog";
 import capturedCSS from "../styles/pages/teileklar.shop.css?url";
 
-interface ShopSearch { q?: string; kategorie?: string; seite?: number }
+interface ShopSearch {
+  q?: string;
+  kategorie?: string;
+  seite?: number;
+}
 
 const TITLE = "Katalog Auto & Motorrad · TEILEKLAR.shop";
-const DESCRIPTION = "Aktueller TEILEKLAR-Katalog: Artikel nach Name, Marke, Artikelnummer oder EAN finden, nach Kategorie filtern und unverbindlich anfragen.";
+const DESCRIPTION =
+  "Aktueller TEILEKLAR-Katalog: Artikel nach Name, Marke, Artikelnummer oder EAN finden, nach Kategorie filtern und unverbindlich anfragen.";
 
 export const Route = createFileRoute("/teileklar_/shop")({
   validateSearch: (search: Record<string, unknown>): ShopSearch => {
     const q = normalizeCatalogQuery(search["q"]);
-    const kategorie = typeof search["kategorie"] === "string" ? search["kategorie"].slice(0, 120) : "";
+    const kategorie =
+      typeof search["kategorie"] === "string" ? search["kategorie"].slice(0, 120) : "";
     const seite = normalizePage(search["seite"]);
-    return { ...(q ? { q } : {}), ...(kategorie ? { kategorie } : {}), ...(seite > 1 ? { seite } : {}) };
+    return {
+      ...(q ? { q } : {}),
+      ...(kategorie ? { kategorie } : {}),
+      ...(seite > 1 ? { seite } : {}),
+    };
   },
-  loaderDeps: ({ search }) => ({ q: search.q ?? "", category: search.kategorie ?? "", page: search.seite ?? 1 }),
+  loaderDeps: ({ search }) => ({
+    q: search.q ?? "",
+    category: search.kategorie ?? "",
+    page: search.seite ?? 1,
+  }),
   loader: async ({ context, deps }) => {
-    await Promise.all([context.queryClient.ensureQueryData(catalogListQuery(deps)), context.queryClient.ensureQueryData(catalogCategoriesQuery())]);
+    await Promise.all([
+      context.queryClient.ensureQueryData(catalogListQuery(deps)),
+      context.queryClient.ensureQueryData(catalogCategoriesQuery()),
+    ]);
   },
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: TITLE }, { name: "description", content: DESCRIPTION }, { property: "og:title", content: TITLE }, { property: "og:description", content: DESCRIPTION }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  head: () => ({
+    links: [{ rel: "stylesheet", href: capturedCSS }],
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   errorComponent: CatalogError,
   component: Index,
 });
@@ -38,14 +70,25 @@ function Hero({ total, syncedAt }: { total?: number; syncedAt?: string | null })
         <div className={"identity-copy"}>
           <nav className={"pc-breadcrumb"} aria-label="Brotkrumennavigation">
             <ol>
-              <li><a href="/teileklar">TEILEKLAR.shop</a><span aria-hidden="true">/</span></li>
-              <li><span aria-current="page">Katalog</span></li>
+              <li>
+                <a href="/teileklar">TEILEKLAR.shop</a>
+                <span aria-hidden="true">/</span>
+              </li>
+              <li>
+                <span aria-current="page">Katalog</span>
+              </li>
             </ol>
           </nav>
-          <span className={"hc-kicker"}>TEILEKLAR<span aria-hidden="true"> / </span>Katalog</span>
+          <span className={"hc-kicker"}>
+            TEILEKLAR<span aria-hidden="true"> / </span>Katalog
+          </span>
           <h1 id="shop-catalog-title">Artikel finden. Klar angefragt.</h1>
           {total ? (
-            <p className="identity-body">{COUNT.format(total)} Artikel im aktuellen Katalog{syncedAt ? `, Stand ${DATE.format(new Date(syncedAt))}` : ""}. Suchen Sie nach Name, Marke, Artikelnummer oder EAN und fragen Sie einen Artikel unverbindlich an.</p>
+            <p className="identity-body">
+              {COUNT.format(total)} Artikel im aktuellen Katalog
+              {syncedAt ? `, Stand ${DATE.format(new Date(syncedAt))}` : ""}. Suchen Sie nach Name,
+              Marke, Artikelnummer oder EAN und fragen Sie einen Artikel unverbindlich an.
+            </p>
           ) : null}
         </div>
       </div>
@@ -57,30 +100,46 @@ function Index() {
   const deps = Route.useLoaderDeps();
   const { data: result } = useSuspenseQuery(catalogListQuery(deps));
   const { data: overview } = useSuspenseQuery(catalogCategoriesQuery());
-  return <NexifyShell brand="teileklar">
-    <div className={"home-concept page-concept tk-shop"}>
-      <Hero total={overview.total} syncedAt={overview.syncedAt} />
-      <CatalogBrowser result={result} categories={overview.categories} />
-    </div>
-  </NexifyShell>;
+  return (
+    <NexifyShell brand="teileklar">
+      <div className={"home-concept page-concept tk-shop"}>
+        <Hero total={overview.total} syncedAt={overview.syncedAt} />
+        <CatalogBrowser result={result} categories={overview.categories} />
+      </div>
+    </NexifyShell>
+  );
 }
 
 function CatalogError({ error, reset }: ErrorComponentProps) {
   // Technische Details gehören ins Protokoll, nicht vor Besucher.
   console.error("teileklar catalog unavailable", error);
-  return <NexifyShell brand="teileklar">
-    <div className={"home-concept page-concept tk-shop"}>
-      <Hero />
-      <section className="hc-container tkc-browser">
-        <div className="tkc-empty" role="alert">
-          <h2>Der Katalog ist gerade nicht erreichbar.</h2>
-          <p>Bitte laden Sie die Seite in einem Moment erneut. Ein gesuchtes Teil können Sie jederzeit direkt anfragen.</p>
-          <div className="tk-actions">
-            <button type="button" className="nexify-control primary-button" data-variant="primary" onClick={reset}>Erneut laden</button>
-            <a className="hc-text-link" href="/teileklar/suche#teilefrage">Teil direkt anfragen</a>
+  return (
+    <NexifyShell brand="teileklar">
+      <div className={"home-concept page-concept tk-shop"}>
+        <Hero />
+        <section className="hc-container tkc-browser">
+          <div className="tkc-empty" role="alert">
+            <h2>Der Katalog ist gerade nicht erreichbar.</h2>
+            <p>
+              Bitte laden Sie die Seite in einem Moment erneut. Ein gesuchtes Teil können Sie
+              jederzeit direkt anfragen.
+            </p>
+            <div className="tk-actions">
+              <button
+                type="button"
+                className="nexify-control primary-button"
+                data-variant="primary"
+                onClick={reset}
+              >
+                Erneut laden
+              </button>
+              <a className="hc-text-link" href="/teileklar/suche#teilefrage">
+                Teil direkt anfragen
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  </NexifyShell>;
+        </section>
+      </div>
+    </NexifyShell>
+  );
 }

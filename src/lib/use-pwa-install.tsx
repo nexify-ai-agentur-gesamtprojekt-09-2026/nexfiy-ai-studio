@@ -1,5 +1,19 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { consumeInstallPrompt, installDevice, isAppInstalled, type InstallDevice, type InstallPromptEvent } from "./pwa-install";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  consumeInstallPrompt,
+  installDevice,
+  isAppInstalled,
+  type InstallDevice,
+  type InstallPromptEvent,
+} from "./pwa-install";
 
 interface InstallState {
   device: InstallDevice;
@@ -26,9 +40,19 @@ export function PwaInstallProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setDevice(installDevice(navigator.userAgent, navigator.maxTouchPoints));
-    try { setDismissed(sessionStorage.getItem(dismissalKey) === "true"); } catch { /* Optional preference only. */ }
+    try {
+      setDismissed(sessionStorage.getItem(dismissalKey) === "true");
+    } catch {
+      /* Optional preference only. */
+    }
     const display = window.matchMedia("(display-mode: standalone)");
-    const syncInstalled = () => setInstalled(isAppInstalled(display.matches, (navigator as Navigator & { standalone?: boolean }).standalone));
+    const syncInstalled = () =>
+      setInstalled(
+        isAppInstalled(
+          display.matches,
+          (navigator as Navigator & { standalone?: boolean }).standalone,
+        ),
+      );
     syncInstalled();
     const onPrompt = (event: Event) => {
       if (!("prompt" in event) || !("userChoice" in event)) return;
@@ -60,16 +84,38 @@ export function PwaInstallProvider({ children }: { children: ReactNode }) {
     try {
       // prompt() is reached synchronously from the user's click, before any await.
       return await consumeInstallPrompt(event);
-    } catch { return "error" as const; }
-    finally { setInstalling(false); }
+    } catch {
+      return "error" as const;
+    } finally {
+      setInstalling(false);
+    }
   }, []);
 
   const updateDismissed = (value: boolean) => {
     setDismissed(value);
-    try { sessionStorage.setItem(dismissalKey, String(value)); } catch { /* Works without storage. */ }
+    try {
+      sessionStorage.setItem(dismissalKey, String(value));
+    } catch {
+      /* Works without storage. */
+    }
   };
 
-  return <InstallContext.Provider value={{ device, installed, canPrompt, installing, dismissed, install, dismiss: () => updateDismissed(true), restore: () => updateDismissed(false) }}>{children}</InstallContext.Provider>;
+  return (
+    <InstallContext.Provider
+      value={{
+        device,
+        installed,
+        canPrompt,
+        installing,
+        dismissed,
+        install,
+        dismiss: () => updateDismissed(true),
+        restore: () => updateDismissed(false),
+      }}
+    >
+      {children}
+    </InstallContext.Provider>
+  );
 }
 
 export function usePwaInstall() {

@@ -181,7 +181,7 @@
 - [x] Plattform-Hinweis „Edit with Lovable“: bereits ausgeblendet (Einstellung gelesen 06:06 UTC); Live-Seiten ohne „Lovable“ im Seitentext
 - [ ] Anmelde-E-Mails (Registrierung, Passwort) kommen noch mit Standard-Absender der Plattform – eigene Absenderdomain nexifyai.de einrichten (Dialog + DNS, Pascal)
 - [x] Abschlussprüfung: 91 Tests, Typprüfung und Build ohne Fehler, Sicherheits-Schnellprüfung ohne Befund, 47 Seiten bei 1280/390px; erneute Veröffentlichung 06:08 UTC angestoßen
-- [ ] Formatierung: 6.394 reine Formatierungsmeldungen und 550 „any“-Meldungen der Code-Prüfung abbauen (ohne generierte Dateien)
+- [x] Formatierung vereinheitlicht (Prettier über src); verbleibend „any“-Hinweise, ohne Funktionsänderung
 
 ## Zurückgestellt (Pascal, 16.11.)
 - Modellwechsel KI, Skill-Import, Veröffentlichung

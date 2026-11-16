@@ -5,7 +5,13 @@ export interface ShellChat {
   openChat: () => void;
   closeChat: () => void;
 }
-import { useAtelierFilms, useChatPanel, useImportedMobile, useLoopingVideos, useShellSignals } from "@/lib/imported-site";
+import {
+  useAtelierFilms,
+  useChatPanel,
+  useImportedMobile,
+  useLoopingVideos,
+  useShellSignals,
+} from "@/lib/imported-site";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
@@ -33,7 +39,8 @@ export function NexifyShell({
 }) {
   const isMobile = useImportedMobile();
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
-  const { scrolled, heroActionVisible, footerVisible, viewportHeight } = useShellSignals(heroActionSelector);
+  const { scrolled, heroActionVisible, footerVisible, viewportHeight } =
+    useShellSignals(heroActionSelector);
   useAtelierFilms();
   useLoopingVideos();
   useMobilePanelFocus(chatOpen, isMobile);
@@ -50,18 +57,39 @@ export function NexifyShell({
       data-mobile-chat={isMobile && chatOpen ? "true" : undefined}
     >
       <GlassLensFilters />
-      <PageSplit open={chatOpen} mobile={isMobile} page={<div className="website">
-        <a className="skip-link" href="#page-content">
-          Zum Inhalt
-        </a>
-        {isTeileklar ? <TeileklarHeader /> : <NexifyHeader />}
-        <main id="page-content" tabIndex={-1}>
-          {typeof children === "function" ? children({ chatOpen, openChat, closeChat }) : children}
-        </main>
-        {isTeileklar ? <TeileklarFooter /> : <NexifyFooter />}
-      </div>} chat={isTeileklar ? <TeileklarHelp open={chatOpen} mobile={isMobile} onClose={closeChat} /> : <OracleAside open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />} />
+      <PageSplit
+        open={chatOpen}
+        mobile={isMobile}
+        page={
+          <div className="website">
+            <a className="skip-link" href="#page-content">
+              Zum Inhalt
+            </a>
+            {isTeileklar ? <TeileklarHeader /> : <NexifyHeader />}
+            <main id="page-content" tabIndex={-1}>
+              {typeof children === "function"
+                ? children({ chatOpen, openChat, closeChat })
+                : children}
+            </main>
+            {isTeileklar ? <TeileklarFooter /> : <NexifyFooter />}
+          </div>
+        }
+        chat={
+          isTeileklar ? (
+            <TeileklarHelp open={chatOpen} mobile={isMobile} onClose={closeChat} />
+          ) : (
+            <OracleAside
+              open={chatOpen}
+              isMobile={isMobile}
+              viewportHeight={viewportHeight}
+              onClose={closeChat}
+            />
+          )
+        }
+      />
       {!chatOpen && (
-        <Button variant="glass"
+        <Button
+          variant="glass"
           ref={reopenRef}
           aria-expanded="false"
           aria-controls="aifly-panel"
@@ -71,7 +99,13 @@ export function NexifyShell({
           onClick={openChat}
         >
           <span className="aifly-symbol oracle-companion" data-state="idle" aria-hidden="true">
-            <img alt="" width="34" height="34" decoding="async" src="/site-assets/9176c58a16ff634a.png" />
+            <img
+              alt=""
+              width="34"
+              height="34"
+              decoding="async"
+              src="/site-assets/9176c58a16ff634a.png"
+            />
           </span>
           {isTeileklar ? "TEILEKLAR Hilfe" : "Ihr Projekt mit NeXify"}
         </Button>

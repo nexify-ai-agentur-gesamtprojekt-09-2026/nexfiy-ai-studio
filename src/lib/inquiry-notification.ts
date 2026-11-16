@@ -31,7 +31,11 @@ export interface InquiryNoticeInput {
 
 /** Slack-mrkdwn: Steuerzeichen aus Besucherangaben entfernen, damit keine Erwähnungen oder Links entstehen. */
 export function slackSafe(value: string): string {
-  return value.replace(/[<>&*_~`|]/g, " ").replace(/\s+/g, " ").trim().slice(0, 120);
+  return value
+    .replace(/[<>&*_~`|]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 120);
 }
 
 export function buildInquiryNotice(input: InquiryNoticeInput): string {

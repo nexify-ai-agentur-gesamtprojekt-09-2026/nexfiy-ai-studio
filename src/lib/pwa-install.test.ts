@@ -1,5 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { consumeInstallPrompt, installDevice, isAppInstalled, type InstallPromptEvent } from "./pwa-install";
+import {
+  consumeInstallPrompt,
+  installDevice,
+  isAppInstalled,
+  type InstallPromptEvent,
+} from "./pwa-install";
 
 describe("device-specific app installation", () => {
   it("offers the iPhone and iPad home-screen path, including desktop-mode iPad", () => {
@@ -20,7 +25,8 @@ describe("device-specific app installation", () => {
   it("actually invokes the browser prompt and returns an accepted choice", async () => {
     const prompt = vi.fn().mockResolvedValue(undefined);
     const event = Object.assign(new Event("beforeinstallprompt"), {
-      prompt, userChoice: Promise.resolve({ outcome: "accepted" as const, platform: "web" }),
+      prompt,
+      userChoice: Promise.resolve({ outcome: "accepted" as const, platform: "web" }),
     });
     expect(await consumeInstallPrompt(event as InstallPromptEvent)).toBe("accepted");
     expect(prompt).toHaveBeenCalledTimes(1);

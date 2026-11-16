@@ -10,13 +10,21 @@ export const Route = createFileRoute("/passwort-neu")({
       { title: "Neues Passwort festlegen · NeXify AI" },
       { name: "description", content: "Legen Sie ein neues Passwort für Ihr NeXify-Konto fest." },
       { property: "og:title", content: "Neues Passwort festlegen · NeXify AI" },
-      { property: "og:description", content: "Legen Sie ein neues Passwort für Ihr NeXify-Konto fest." },
+      {
+        property: "og:description",
+        content: "Legen Sie ein neues Passwort für Ihr NeXify-Konto fest.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
   }),
-  staticData: { importedDocument: { html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties }, body: {} } },
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   component: Page,
 });
 

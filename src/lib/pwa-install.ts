@@ -6,7 +6,8 @@ export interface InstallPromptEvent extends Event {
 }
 
 export function installDevice(userAgent: string, maxTouchPoints = 0): InstallDevice {
-  if (/iPad|iPhone|iPod/i.test(userAgent) || (/Macintosh/i.test(userAgent) && maxTouchPoints > 1)) return "ios";
+  if (/iPad|iPhone|iPod/i.test(userAgent) || (/Macintosh/i.test(userAgent) && maxTouchPoints > 1))
+    return "ios";
   return /Android/i.test(userAgent) ? "android" : "desktop";
 }
 
@@ -15,7 +16,9 @@ export function isAppInstalled(standaloneDisplay: boolean, iosStandalone?: boole
 }
 
 /** A browser prompt is single-use, even when the visitor declines it. */
-export async function consumeInstallPrompt(event: InstallPromptEvent): Promise<"accepted" | "dismissed"> {
+export async function consumeInstallPrompt(
+  event: InstallPromptEvent,
+): Promise<"accepted" | "dismissed"> {
   await event.prompt();
   return (await event.userChoice).outcome;
 }

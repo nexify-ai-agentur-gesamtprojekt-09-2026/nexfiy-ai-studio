@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type MouseEvent,
+  type RefObject,
+} from "react";
 import { mayAutoplayFilm, normalizeVolume } from "./media-policy";
 import { contactDraftPath } from "./site-navigation";
 
@@ -17,13 +24,19 @@ function subscribePhone(onChange: () => void) {
 
 /** True on phone widths (the breakpoint the imported pages switch their chat panel to a dialog). False during SSR. */
 export function useImportedMobile() {
-  return useSyncExternalStore(subscribePhone, () => matchMedia(PHONE_QUERY).matches, () => false);
+  return useSyncExternalStore(
+    subscribePhone,
+    () => matchMedia(PHONE_QUERY).matches,
+    () => false,
+  );
 }
 
 /** Imported decorative loops must not bypass the hero-only playback policy. */
 export function useLoopingVideos() {
   useEffect(() => {
-    const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([controls])"))
+    const loopingVideos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("video[loop]:not([controls])"),
+    )
       .filter((video) => video.muted && !video.closest("[data-site-import-carousel-store]"))
       .slice(0, 32);
     loopingVideos.forEach((video) => {
@@ -58,13 +71,17 @@ export function useShellSignals(heroActionSelector?: string) {
     const observers: IntersectionObserver[] = [];
     const heroAction = heroActionSelector ? document.querySelector(heroActionSelector) : null;
     if (heroAction) {
-      const observer = new IntersectionObserver((entries) => setHeroActionVisible(entries.at(-1)?.isIntersecting ?? true));
+      const observer = new IntersectionObserver((entries) =>
+        setHeroActionVisible(entries.at(-1)?.isIntersecting ?? true),
+      );
       observer.observe(heroAction);
       observers.push(observer);
     }
     const footer = document.querySelector("#atelier footer");
     if (footer) {
-      const observer = new IntersectionObserver((entries) => setFooterVisible(entries.at(-1)?.isIntersecting ?? false));
+      const observer = new IntersectionObserver((entries) =>
+        setFooterVisible(entries.at(-1)?.isIntersecting ?? false),
+      );
       observer.observe(footer);
       observers.push(observer);
     }
@@ -101,7 +118,12 @@ export function useChatPanel(defaultOpen: boolean) {
   useEffect(() => {
     if (!chatOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !event.defaultPrevented && !document.querySelector('[role="dialog"], .site-header details[open], .tk-mobile-nav[open]')) closeChat();
+      if (
+        event.key === "Escape" &&
+        !event.defaultPrevented &&
+        !document.querySelector('[role="dialog"], .site-header details[open], .tk-mobile-nav[open]')
+      )
+        closeChat();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -122,19 +144,44 @@ export function useMobilePanelFocus(open: boolean, mobile: boolean) {
     const overflow = document.body.style.overflow;
     website.inert = true;
     document.body.style.overflow = "hidden";
-    const focusable = () => Array.from(panel.querySelectorAll<HTMLElement>('button:not([disabled]),a[href],textarea:not([disabled]),input:not([disabled]),[tabindex="0"]')).filter((element) => element.getClientRects().length > 0);
-    const frame = requestAnimationFrame(() => (panel.querySelector<HTMLElement>("#orientation-message") ?? focusable()[0])?.focus({ preventScroll: true }));
+    const focusable = () =>
+      Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'button:not([disabled]),a[href],textarea:not([disabled]),input:not([disabled]),[tabindex="0"]',
+        ),
+      ).filter((element) => element.getClientRects().length > 0);
+    const frame = requestAnimationFrame(() =>
+      (panel.querySelector<HTMLElement>("#orientation-message") ?? focusable()[0])?.focus({
+        preventScroll: true,
+      }),
+    );
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Tab") return;
       const items = focusable();
       const first = items[0];
       const last = items.at(-1);
       if (!first || !last) return;
-      if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && (document.activeElement === last || !panel.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+      if (
+        event.shiftKey &&
+        (document.activeElement === first || !panel.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        last.focus();
+      } else if (
+        !event.shiftKey &&
+        (document.activeElement === last || !panel.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     panel.addEventListener("keydown", onKey);
-    return () => { cancelAnimationFrame(frame); panel.removeEventListener("keydown", onKey); website.inert = previousInert; document.body.style.overflow = overflow; };
+    return () => {
+      cancelAnimationFrame(frame);
+      panel.removeEventListener("keydown", onKey);
+      website.inert = previousInert;
+      document.body.style.overflow = overflow;
+    };
   }, [open, mobile]);
 }
 
@@ -142,7 +189,10 @@ export function useMobilePanelFocus(open: boolean, mobile: boolean) {
 export function useImportedActions() {
   useEffect(() => {
     const onClick = (event: globalThis.MouseEvent) => {
-      const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>("#page-content button[type='button']") : null;
+      const button =
+        event.target instanceof Element
+          ? event.target.closest<HTMLButtonElement>("#page-content button[type='button']")
+          : null;
       if (!button || button.disabled) return;
       const text = button.textContent?.trim().replace(/\s+/g, " ") ?? "";
       const drafts: Record<string, string> = {
@@ -225,7 +275,9 @@ export function useComposerFit(open: boolean, ...deps: unknown[]) {
   // Like the original, a panel that is open on page load starts scrolled to its latest entry.
   const openOnLoad = useRef(open);
   useEffect(() => {
-    const log = composerRef.current?.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
+    const log = composerRef.current
+      ?.closest(".public-orientation")
+      ?.querySelector<HTMLElement>(".orientation-content");
     if (!openOnLoad.current || !log) return;
     const toLatest = () => {
       log.scrollTop = log.scrollHeight;
@@ -262,10 +314,16 @@ export function useAtelierFilms() {
       if (!video) continue;
       video.muted = true;
       videos.push(video);
-      const buttons = Array.from(film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"));
+      const buttons = Array.from(
+        film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"),
+      );
       const playButton = buttons[0];
-      const soundButton = buttons.find((button) => /Ton/.test(button.getAttribute("aria-label") || ""));
-      const captionsButton = buttons.find((button) => button.getAttribute("aria-label") === "Untertitel");
+      const soundButton = buttons.find((button) =>
+        /Ton/.test(button.getAttribute("aria-label") || ""),
+      );
+      const captionsButton = buttons.find(
+        (button) => button.getAttribute("aria-label") === "Untertitel",
+      );
       const fallback = film.querySelector<HTMLImageElement>(".atelier-film-fallback");
       const bar = film.querySelector<HTMLElement>(".atelier-film-progress span");
       const volume = film.querySelector<HTMLInputElement>('.atelier-volume input[type="range"]');
@@ -287,28 +345,43 @@ export function useAtelierFilms() {
       };
       const sync = () => {
         if (playButton) {
-          playButton.setAttribute("aria-label", video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren");
+          playButton.setAttribute(
+            "aria-label",
+            video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren",
+          );
           playButton.title = playButton.getAttribute("aria-label") ?? "Film abspielen";
           const label = playButton.querySelector("span");
           if (label) label.textContent = video.paused ? "Abspielen" : "Pausieren";
-          playButton.querySelector("path")?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
+          playButton
+            .querySelector("path")
+            ?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
         }
         if (soundButton) {
           const muted = video.muted || video.volume === 0;
           soundButton.setAttribute("aria-label", muted ? "Ton einschalten" : "Ton ausschalten");
           soundButton.title = soundButton.getAttribute("aria-label") ?? "Ton einschalten";
-          soundButton.querySelector(".atelier-sound-state")?.setAttribute("d", muted ? "m17 9 5 6m0-6-5 6" : "M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14");
+          soundButton
+            .querySelector(".atelier-sound-state")
+            ?.setAttribute(
+              "d",
+              muted ? "m17 9 5 6m0-6-5 6" : "M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14",
+            );
           const label = soundButton.querySelector("span");
           if (label) label.textContent = muted ? "Ton an" : "Ton aus";
         }
         if (volume) {
           volume.value = String(video.volume);
-          volume.setAttribute("aria-valuetext", `${video.muted ? 0 : Math.round(video.volume * 100)} Prozent`);
+          volume.setAttribute(
+            "aria-valuetext",
+            `${video.muted ? 0 : Math.round(video.volume * 100)} Prozent`,
+          );
         }
         if (fallback && !video.paused) fallback.hidden = true;
-        if (bar && video.duration > 0) bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
+        if (bar && video.duration > 0)
+          bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
       };
-      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"]) listen(video, type, sync);
+      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"])
+        listen(video, type, sync);
       listen(video, "waiting", () => {
         if (!video.paused) film.setAttribute("data-loading", "true");
       });
@@ -374,9 +447,12 @@ export function useAtelierFilms() {
         }
       }
       if (volumeDetails) {
-        listen(volumeDetails, "toggle", () => volumeSummary?.setAttribute("aria-expanded", String(volumeDetails.open)));
+        listen(volumeDetails, "toggle", () =>
+          volumeSummary?.setAttribute("aria-expanded", String(volumeDetails.open)),
+        );
         listen(document, "pointerdown", (event) => {
-          if (event.target instanceof Node && !volumeDetails.contains(event.target)) volumeDetails.open = false;
+          if (event.target instanceof Node && !volumeDetails.contains(event.target))
+            volumeDetails.open = false;
         });
         listen(volumeDetails, "keydown", (event) => {
           if ((event as KeyboardEvent).key !== "Escape") return;
@@ -398,7 +474,12 @@ export function useAtelierFilms() {
           video.pause();
         } else if (entry.isIntersecting && autoPaused.has(video)) {
           autoPaused.delete(video);
-          if (mayAutoplayFilm(Boolean(video.closest(".identity-hero")), matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+          if (
+            mayAutoplayFilm(
+              Boolean(video.closest(".identity-hero")),
+              matchMedia("(prefers-reduced-motion: reduce)").matches,
+            )
+          ) {
             void video.play().catch(() => {});
           }
         }
@@ -406,7 +487,10 @@ export function useAtelierFilms() {
     });
     videos.forEach((video) => observer.observe(video));
     const heroVideo = document.querySelector<HTMLVideoElement>(".identity-hero video");
-    if (heroVideo && mayAutoplayFilm(true, matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+    if (
+      heroVideo &&
+      mayAutoplayFilm(true, matchMedia("(prefers-reduced-motion: reduce)").matches)
+    ) {
       heroVideo.muted = true;
       void heroVideo.play().catch(() => {});
     }

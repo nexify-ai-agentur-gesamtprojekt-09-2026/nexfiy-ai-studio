@@ -1,17 +1,53 @@
 import { describe, expect, it } from "vitest";
-import { allowedImageSource, availabilityLabel, catalogImageUrl, feedImageSource, formatPrice, mapFeedItem, normalizeCatalogQuery, normalizePage } from "./teileklar-catalog";
+import {
+  allowedImageSource,
+  availabilityLabel,
+  catalogImageUrl,
+  feedImageSource,
+  formatPrice,
+  mapFeedItem,
+  normalizeCatalogQuery,
+  normalizePage,
+} from "./teileklar-catalog";
 
 const feedItem = {
-  id: "V0103601", name: "3 in 1 Teleskop-Eiskratzer Removice InnovaGoods", maker: "InnovaGoods", category: "Autozubehör",
-  price: "7.06 €", value: 7.06, sku: "V0103601", image: "/api/shop/image?src=https%3A%2F%2Fcdnbigbuy.com%2Fimages%2FV0103601_000_MKT5.jpg",
-  alt: "3 in 1 Teleskop-Eiskratzer", brand: "InnovaGoods", oe: null, ean: "8435527823900", condition: "NEW", status_label: "Katalog-Artikel",
-  delivery_short: "", source: "BigBuy", specs: [{ label: "Gewicht", value: "0.46 kg" }, { label: "", value: "leer" }], created_at: "2026-10-11T16:29:45.547923+00:00", stock: 0,
+  id: "V0103601",
+  name: "3 in 1 Teleskop-Eiskratzer Removice InnovaGoods",
+  maker: "InnovaGoods",
+  category: "Autozubehör",
+  price: "7.06 €",
+  value: 7.06,
+  sku: "V0103601",
+  image: "/api/shop/image?src=https%3A%2F%2Fcdnbigbuy.com%2Fimages%2FV0103601_000_MKT5.jpg",
+  alt: "3 in 1 Teleskop-Eiskratzer",
+  brand: "InnovaGoods",
+  oe: null,
+  ean: "8435527823900",
+  condition: "NEW",
+  status_label: "Katalog-Artikel",
+  delivery_short: "",
+  source: "BigBuy",
+  specs: [
+    { label: "Gewicht", value: "0.46 kg" },
+    { label: "", value: "leer" },
+  ],
+  created_at: "2026-10-11T16:29:45.547923+00:00",
+  stock: 0,
 };
 
 describe("TEILEKLAR-Katalog", () => {
   it("bildet einen Feed-Artikel vollständig ab", () => {
     const row = mapFeedItem(feedItem);
-    expect(row).toMatchObject({ id: "V0103601", brand: "InnovaGoods", category: "Karosserie & Sicht", source_category: "Autozubehör", price_value: 7.06, ean: "8435527823900", oe_number: "", stock: 0 });
+    expect(row).toMatchObject({
+      id: "V0103601",
+      brand: "InnovaGoods",
+      category: "Karosserie & Sicht",
+      source_category: "Autozubehör",
+      price_value: 7.06,
+      ean: "8435527823900",
+      oe_number: "",
+      stock: 0,
+    });
     expect(row?.image_src).toBe("https://cdnbigbuy.com/images/V0103601_000_MKT5.jpg");
     expect(row?.specs).toEqual([{ label: "Gewicht", value: "0.46 kg" }]);
   });
@@ -23,12 +59,16 @@ describe("TEILEKLAR-Katalog", () => {
     expect(mapFeedItem({ ...feedItem, value: 0 })?.price_value).toBeNull();
   });
   it("lässt nur HTTPS-Bilder des Lieferanten-CDN zu", () => {
-    expect(allowedImageSource("https://cdnbigbuy.com/images/a.jpg")).toBe("https://cdnbigbuy.com/images/a.jpg");
+    expect(allowedImageSource("https://cdnbigbuy.com/images/a.jpg")).toBe(
+      "https://cdnbigbuy.com/images/a.jpg",
+    );
     expect(allowedImageSource("http://cdnbigbuy.com/images/a.jpg")).toBeNull();
     expect(allowedImageSource("https://evil.example/cdnbigbuy.com/a.jpg")).toBeNull();
     expect(allowedImageSource("https://cdnbigbuy.com.evil.example/a.jpg")).toBeNull();
     expect(feedImageSource("/api/shop/image?src=https%3A%2F%2F169.254.169.254%2F")).toBe("");
-    expect(catalogImageUrl("V0103601", "V0103601/0a1b2c3d4e5f6789.jpg")).toBe("/api/public/shop/image?artikel=V0103601&v=0a1b2c3d4e5f6789");
+    expect(catalogImageUrl("V0103601", "V0103601/0a1b2c3d4e5f6789.jpg")).toBe(
+      "/api/public/shop/image?artikel=V0103601&v=0a1b2c3d4e5f6789",
+    );
     expect(catalogImageUrl("V0103601", "")).toBeNull();
   });
   it("formatiert Preise in Euro nach deutscher Schreibweise", () => {
@@ -45,7 +85,9 @@ describe("TEILEKLAR-Katalog", () => {
     expect(normalizePage("abc")).toBe(1);
   });
   it("behauptet ohne Bestand keine Lieferbarkeit", () => {
-    expect(availabilityLabel({ stock: 0, delivery_note: "Auf Lager" })).toBe("Verfügbarkeit auf Anfrage");
+    expect(availabilityLabel({ stock: 0, delivery_note: "Auf Lager" })).toBe(
+      "Verfügbarkeit auf Anfrage",
+    );
     expect(availabilityLabel({ stock: 17, delivery_note: "Auf Lager" })).toBe("Auf Lager");
   });
 });

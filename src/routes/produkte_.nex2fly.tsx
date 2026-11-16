@@ -5,154 +5,515 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex2fly.css?url";
 
 export const Route = createFileRoute("/produkte_/nex2fly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }, { name: "description", content: "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich." }, { property: "og:title", content: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }, { property: "og:description", content: "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  head: () => ({
+    links: [{ rel: "stylesheet", href: capturedCSS }],
+    meta: [
+      { title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" },
+      {
+        name: "description",
+        content:
+          "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich.",
+      },
+      { property: "og:title", content: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" },
+      {
+        property: "og:description",
+        content:
+          "NeX AIFly Suite bündelt Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem eigenen Arbeitsbereich.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   component: Index,
 });
 
 function Index() {
   return (
     <NexifyShell>
-            <div className={"home-concept page-concept page-nex2fly layout-product context-nexify"}>
-              <section className={"identity-hero"} aria-labelledby="page-title-nex2fly">
-                <div className={"identity-scene"}>
-                  <div className={"identity-copy"}>
-                    <nav className={"pc-breadcrumb"} aria-label="Sie sind hier">
-                      <ol>
-                        <li>
-                          <a href="/">Startseite</a>
-                        </li>
-                        <li className={"visually-hidden"}>
-                          <span aria-current="page">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</span>
-                        </li>
-                      </ol>
-                    </nav>
-                    <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen</span>
-                    <h1 id="page-title-nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</h1>
-                    <p className={"identity-body"}>Arbeiten Sie mit KI in Ihrem eigenen Bereich: Gespräche, Aufgaben, Dokumente und Projektwissen bleiben zusammen. Den 24-Stunden-Test starten Sie nach der Aktivierung selbst – ohne Agenturauftrag.</p>
-                    <div className={"identity-links"}>
-                      <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/registrieren">
-                        <span>Konto erstellen</span>
-                        <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
-                      </a>
-                      <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/produkte/api">Mit der API vergleichen</a>
-                    </div>
-                  </div>
-                  <div className={"identity-media"}>
-                    <figure className={"identity-hero-photo"}>
-                      <img sizes="(max-width: 820px) 100vw, 60vw" alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie" width="2000" height="1125" loading="eager" fetchPriority="high" decoding="async" srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w" src="/site-assets/4b45951db0b51136.webp" />
-                    </figure>
-                  </div>
-                </div>
-              </section>
-              <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
-                <a href="#content-nex2fly-nex2fly-customer-1-0">Alles an einem Ort<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-nex2fly-nex2fly-customer-2-1">Arbeit, die ein Ergebnis hat<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-nex2fly-nex2fly-customer-3-2">24 Stunden testen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-nex2fly-nex2fly-customer-4-3">Ihr Zugang, Ihr Bereich<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
+      <div className={"home-concept page-concept page-nex2fly layout-product context-nexify"}>
+        <section className={"identity-hero"} aria-labelledby="page-title-nex2fly">
+          <div className={"identity-scene"}>
+            <div className={"identity-copy"}>
+              <nav className={"pc-breadcrumb"} aria-label="Sie sind hier">
+                <ol>
+                  <li>
+                    <a href="/">Startseite</a>
+                  </li>
+                  <li className={"visually-hidden"}>
+                    <span aria-current="page">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</span>
+                  </li>
+                </ol>
               </nav>
-              
-              <ProductOverview id="suite" label="Eigenständig arbeiten" title="Ihr Arbeitsbereich, nicht Ihr Agenturauftrag." summary="Die Suite bündelt KI-Gespräche und Arbeitsmaterial. Für die Auswahl zählt, ob Sie selbst in einer Oberfläche arbeiten möchten." facts={[{"label": "Passt zu", "content": "Menschen und Teams, die Gespräche, Aufgaben, Dokumente und Projektwissen gemeinsam organisieren möchten."}, {"label": "Voraussetzung", "content": "Konto, bestätigter Arbeitsbereich und Produktaktivierung. Die Anmeldung allein schaltet den Arbeitsbereich nicht frei."}, {"label": "Kostenprinzip", "content": "Produkttarif und KI-Modellbudget sind getrennt zu betrachten. Die Tarife stehen noch zur Freigabe."}, {"label": "Heute hier", "content": "Konto erstellen und Produktinformationen vergleichen. Den beschriebenen 24-Stunden-Test starten Sie erst nach Aktivierung selbst."}]} example="Sie möchten aus vorhandenen Notizen einen prüfbaren Projektentwurf erarbeiten. Die Suite passt, wenn Sie Gespräch, Quellen und Aufgabe gemeinsam bearbeiten möchten; prüfen Sie zunächst die für Ihren Zugang aktivierten Werkzeuge." links={[{"label": "Konto erstellen", "href": "/registrieren"}, {"label": "API vergleichen", "href": "/produkte/api"}, {"label": "Datenhinweise", "href": "/datenschutz"}]} />
-              <div className={"pc-sections"}>
-                <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-1-0" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-1-0-title">
-                  <div>
-                    <span className={"hc-kicker"}>01 / 04</span>
-                    <h2 id="content-nex2fly-nex2fly-customer-1-0-title">Alles an einem Ort</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen nicht bei jeder Frage von vorn an.</p>
-                    <p>Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.</p>
-                    
-<h3>Für Menschen, die selbst mit KI arbeiten möchten</h3>
-<p>Die Suite ist der Einstieg, wenn Gespräch, Aufgabe und Projektwissen gemeinsam bearbeitet werden sollen. Sie ist kein Agenturpaket für eine beauftragte Website. Für Ihre Entscheidung zählt, welche Funktionen und Werkzeuge für Ihren Zugang tatsächlich aktiviert sind.</p>
-<div className={"hc-service-detail pc-module"}>
-                      <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-                      <a className={"hc-text-link"} href="/registrieren">NeX AIFly Suite. In Ruhe testen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    </div>
-                  </div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-2-1" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-2-1-title">
-                  <div>
-                    <span className={"hc-kicker"}>02 / 04</span>
-                    <h2 id="content-nex2fly-nex2fly-customer-2-1-title">Arbeit, die ein Ergebnis hat</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.</p>
-                    <p>Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.</p>
-                    
-<h3>Quellen und Ergebnis bewusst trennen</h3>
-<p>Nennen Sie der KI, worauf sie sich stützen soll, und prüfen Sie das Ergebnis vor der Weiterverwendung. Ein erstellter Text ist noch keine versendete Nachricht. Kalender oder Versand sind nur nutzbar, wenn das entsprechende Werkzeug im Zugang freigeschaltet ist.</p>
-<div className={"hc-service-detail pc-module"}>
-                      <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-                      <a className={"hc-text-link"} href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    </div>
-                  </div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-3-2" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-3-2-title">
-                  <div>
-                    <span className={"hc-kicker"}>03 / 04</span>
-                    <h2 id="content-nex2fly-nex2fly-customer-3-2-title">24 Stunden testen</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.</p>
-                    <p>Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen.</p>
-                  
-<h3>Den Test an einer echten Aufgabe ausrichten</h3>
-<p>Wählen Sie einen überschaubaren Fall, etwa Informationen ordnen oder einen Entwurf vorbereiten. Prüfen Sie, ob das Ergebnis für Ihren Alltag brauchbar ist. Testdauer und Modellbudget sind getrennte Angaben; aus dem Test folgt keine Zusage unbegrenzter KI-Nutzung.</p>
-</div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-4-3" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-4-3-title">
-                  <div>
-                    <span className={"hc-kicker"}>04 / 04</span>
-                    <h2 id="content-nex2fly-nex2fly-customer-4-3-title">Ihr Zugang, Ihr Bereich</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen mitarbeiten.</p>
-                    <p>Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung aktiviert.</p>
-                  
-<h3>Anmeldung und Produktaktivierung sind nicht dasselbe</h3>
-<p>Die Anmeldung dieses Auftritts bestätigt Ihr Konto. Einen vollständig freigeschalteten Suite-Arbeitsbereich belegt sie allein nicht. Die Aktivierung und die für Ihren Zugang verfügbaren Funktionen müssen am jeweiligen Produkteinstieg nachvollziehbar sein.</p>
-</div>
-                </section>
+              <span className={"hc-kicker"}>
+                NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen
+              </span>
+              <h1 id="page-title-nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</h1>
+              <p className={"identity-body"}>
+                Arbeiten Sie mit KI in Ihrem eigenen Bereich: Gespräche, Aufgaben, Dokumente und
+                Projektwissen bleiben zusammen. Den 24-Stunden-Test starten Sie nach der Aktivierung
+                selbst – ohne Agenturauftrag.
+              </p>
+              <div className={"identity-links"}>
+                <a
+                  className={"nexify-control primary-button identity-primary-link"}
+                  data-variant="primary"
+                  href="/registrieren"
+                >
+                  <span>Konto erstellen</span>
+                  <span aria-hidden="true" className={"identity-primary-arrow"}>
+                    →
+                  </span>
+                </a>
+                <a
+                  className={"nexify-control secondary-button identity-secondary-link"}
+                  data-variant="secondary"
+                  href="/produkte/api"
+                >
+                  Mit der API vergleichen
+                </a>
               </div>
-              <ImportedSectionDieFACTORYEntdeckenMit />
-              <ImportedSectionKlarheitVorDemErsten />
-              <ImportedSectionPassendeThemen />
-              <section className={"hc-section hc-finish hc-container"} aria-labelledby="finish-title-nex2fly">
-                <div className={"hc-finish-heading"}>
-                  <span className={"hc-kicker"}>Im Detail</span>
-                  <h2 id="finish-title-nex2fly">Wie möchten Sie fortfahren?</h2>
-                </div>
-                <div className={"hc-finish-next"}>
-                  <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
-                  <div className={"hc-finish-actions"}>
-                    <a className={"hc-finish-primary"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    <a className={"hc-text-link"} href="/registrieren">Konto erstellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    <a className={"hc-text-link"} href="/anmelden">Anmelden<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    <a className={"hc-text-link"} href="/produkte/one">NeX und AIFly ORACLE ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    <a className={"hc-text-link"} href="/produkte/api">NeXify API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                  </div>
-                </div>
-              </section>
             </div>
+            <div className={"identity-media"}>
+              <figure className={"identity-hero-photo"}>
+                <img
+                  sizes="(max-width: 820px) 100vw, 60vw"
+                  alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
+                  width="2000"
+                  height="1125"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w"
+                  src="/site-assets/4b45951db0b51136.webp"
+                />
+              </figure>
+            </div>
+          </div>
+        </section>
+        <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
+          <a href="#content-nex2fly-nex2fly-customer-1-0">
+            Alles an einem Ort
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M12 4v16M5 13l7 7 7-7" />
+            </svg>
+          </a>
+          <a href="#content-nex2fly-nex2fly-customer-2-1">
+            Arbeit, die ein Ergebnis hat
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M12 4v16M5 13l7 7 7-7" />
+            </svg>
+          </a>
+          <a href="#content-nex2fly-nex2fly-customer-3-2">
+            24 Stunden testen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M12 4v16M5 13l7 7 7-7" />
+            </svg>
+          </a>
+          <a href="#content-nex2fly-nex2fly-customer-4-3">
+            Ihr Zugang, Ihr Bereich
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M12 4v16M5 13l7 7 7-7" />
+            </svg>
+          </a>
+        </nav>
+
+        <ProductOverview
+          id="suite"
+          label="Eigenständig arbeiten"
+          title="Ihr Arbeitsbereich, nicht Ihr Agenturauftrag."
+          summary="Die Suite bündelt KI-Gespräche und Arbeitsmaterial. Für die Auswahl zählt, ob Sie selbst in einer Oberfläche arbeiten möchten."
+          facts={[
+            {
+              label: "Passt zu",
+              content:
+                "Menschen und Teams, die Gespräche, Aufgaben, Dokumente und Projektwissen gemeinsam organisieren möchten.",
+            },
+            {
+              label: "Voraussetzung",
+              content:
+                "Konto, bestätigter Arbeitsbereich und Produktaktivierung. Die Anmeldung allein schaltet den Arbeitsbereich nicht frei.",
+            },
+            {
+              label: "Kostenprinzip",
+              content:
+                "Produkttarif und KI-Modellbudget sind getrennt zu betrachten. Die Tarife stehen noch zur Freigabe.",
+            },
+            {
+              label: "Heute hier",
+              content:
+                "Konto erstellen und Produktinformationen vergleichen. Den beschriebenen 24-Stunden-Test starten Sie erst nach Aktivierung selbst.",
+            },
+          ]}
+          example="Sie möchten aus vorhandenen Notizen einen prüfbaren Projektentwurf erarbeiten. Die Suite passt, wenn Sie Gespräch, Quellen und Aufgabe gemeinsam bearbeiten möchten; prüfen Sie zunächst die für Ihren Zugang aktivierten Werkzeuge."
+          links={[
+            { label: "Konto erstellen", href: "/registrieren" },
+            { label: "API vergleichen", href: "/produkte/api" },
+            { label: "Datenhinweise", href: "/datenschutz" },
+          ]}
+        />
+        <div className={"pc-sections"}>
+          <section
+            className={"hc-intro hc-container pc-section"}
+            id="content-nex2fly-nex2fly-customer-1-0"
+            tabIndex={-1}
+            aria-labelledby="content-nex2fly-nex2fly-customer-1-0-title"
+          >
+            <div>
+              <span className={"hc-kicker"}>01 / 04</span>
+              <h2 id="content-nex2fly-nex2fly-customer-1-0-title">Alles an einem Ort</h2>
+            </div>
+            <div className={"pc-section-body"}>
+              <p>
+                In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI,
+                die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen
+                nicht bei jeder Frage von vorn an.
+              </p>
+              <p>
+                Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.
+              </p>
+
+              <h3>Für Menschen, die selbst mit KI arbeiten möchten</h3>
+              <p>
+                Die Suite ist der Einstieg, wenn Gespräch, Aufgabe und Projektwissen gemeinsam
+                bearbeitet werden sollen. Sie ist kein Agenturpaket für eine beauftragte Website.
+                Für Ihre Entscheidung zählt, welche Funktionen und Werkzeuge für Ihren Zugang
+                tatsächlich aktiviert sind.
+              </p>
+              <div className={"hc-service-detail pc-module"}>
+                <span className={"hc-caption"}>
+                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
+                </span>
+                <a className={"hc-text-link"} href="/registrieren">
+                  NeX AIFly Suite. In Ruhe testen.
+                  <svg
+                    className={"hc-arrow"}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    {...({ focusable: "false" } as any)}
+                  >
+                    <path d="M4 12h16M13 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </section>
+          <section
+            className={"hc-intro hc-container pc-section"}
+            id="content-nex2fly-nex2fly-customer-2-1"
+            tabIndex={-1}
+            aria-labelledby="content-nex2fly-nex2fly-customer-2-1-title"
+          >
+            <div>
+              <span className={"hc-kicker"}>02 / 04</span>
+              <h2 id="content-nex2fly-nex2fly-customer-2-1-title">Arbeit, die ein Ergebnis hat</h2>
+            </div>
+            <div className={"pc-section-body"}>
+              <p>
+                Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie
+                weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem
+                Bereich mitarbeitet.
+              </p>
+              <p>
+                Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders –
+                werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.
+              </p>
+
+              <h3>Quellen und Ergebnis bewusst trennen</h3>
+              <p>
+                Nennen Sie der KI, worauf sie sich stützen soll, und prüfen Sie das Ergebnis vor der
+                Weiterverwendung. Ein erstellter Text ist noch keine versendete Nachricht. Kalender
+                oder Versand sind nur nutzbar, wenn das entsprechende Werkzeug im Zugang
+                freigeschaltet ist.
+              </p>
+              <div className={"hc-service-detail pc-module"}>
+                <span className={"hc-caption"}>
+                  NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
+                </span>
+                <a className={"hc-text-link"} href="/produkte/one">
+                  Zwei Agenten. Eine klare Aufgabe.
+                  <svg
+                    className={"hc-arrow"}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    {...({ focusable: "false" } as any)}
+                  >
+                    <path d="M4 12h16M13 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </section>
+          <section
+            className={"hc-intro hc-container pc-section"}
+            id="content-nex2fly-nex2fly-customer-3-2"
+            tabIndex={-1}
+            aria-labelledby="content-nex2fly-nex2fly-customer-3-2-title"
+          >
+            <div>
+              <span className={"hc-kicker"}>03 / 04</span>
+              <h2 id="content-nex2fly-nex2fly-customer-3-2-title">24 Stunden testen</h2>
+            </div>
+            <div className={"pc-section-body"}>
+              <p>
+                Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung
+                selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.
+              </p>
+              <p>
+                Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für
+                Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen.
+              </p>
+
+              <h3>Den Test an einer echten Aufgabe ausrichten</h3>
+              <p>
+                Wählen Sie einen überschaubaren Fall, etwa Informationen ordnen oder einen Entwurf
+                vorbereiten. Prüfen Sie, ob das Ergebnis für Ihren Alltag brauchbar ist. Testdauer
+                und Modellbudget sind getrennte Angaben; aus dem Test folgt keine Zusage
+                unbegrenzter KI-Nutzung.
+              </p>
+            </div>
+          </section>
+          <section
+            className={"hc-intro hc-container pc-section"}
+            id="content-nex2fly-nex2fly-customer-4-3"
+            tabIndex={-1}
+            aria-labelledby="content-nex2fly-nex2fly-customer-4-3-title"
+          >
+            <div>
+              <span className={"hc-kicker"}>04 / 04</span>
+              <h2 id="content-nex2fly-nex2fly-customer-4-3-title">Ihr Zugang, Ihr Bereich</h2>
+            </div>
+            <div className={"pc-section-body"}>
+              <p>
+                Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte
+                anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen
+                mitarbeiten.
+              </p>
+              <p>
+                Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung
+                aktiviert.
+              </p>
+
+              <h3>Anmeldung und Produktaktivierung sind nicht dasselbe</h3>
+              <p>
+                Die Anmeldung dieses Auftritts bestätigt Ihr Konto. Einen vollständig
+                freigeschalteten Suite-Arbeitsbereich belegt sie allein nicht. Die Aktivierung und
+                die für Ihren Zugang verfügbaren Funktionen müssen am jeweiligen Produkteinstieg
+                nachvollziehbar sein.
+              </p>
+            </div>
+          </section>
+        </div>
+        <ImportedSectionDieFACTORYEntdeckenMit />
+        <ImportedSectionKlarheitVorDemErsten />
+        <ImportedSectionPassendeThemen />
+        <section
+          className={"hc-section hc-finish hc-container"}
+          aria-labelledby="finish-title-nex2fly"
+        >
+          <div className={"hc-finish-heading"}>
+            <span className={"hc-kicker"}>Im Detail</span>
+            <h2 id="finish-title-nex2fly">Wie möchten Sie fortfahren?</h2>
+          </div>
+          <div className={"hc-finish-next"}>
+            <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+            <div className={"hc-finish-actions"}>
+              <a className={"hc-finish-primary"} href="/kontakt">
+                Vorhaben schildern
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  {...({ focusable: "false" } as any)}
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a className={"hc-text-link"} href="/registrieren">
+                Konto erstellen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  {...({ focusable: "false" } as any)}
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a className={"hc-text-link"} href="/anmelden">
+                Anmelden
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  {...({ focusable: "false" } as any)}
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a className={"hc-text-link"} href="/produkte/one">
+                NeX und AIFly ORACLE ansehen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  {...({ focusable: "false" } as any)}
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a className={"hc-text-link"} href="/produkte/api">
+                NeXify API ansehen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  {...({ focusable: "false" } as any)}
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
     </NexifyShell>
   );
 }
 
 function ImportedSectionDieFACTORYEntdeckenMit() {
   return (
-    <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
+    <section
+      className={"hc-container pc-guide"}
+      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
+    >
       <details className={"hc-service-detail"}>
         <summary>
           <span>
-            <strong className={"hc-service-name"}>Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE</strong>
+            <strong className={"hc-service-name"}>
+              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
+            </strong>
           </span>
-          <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+          <svg
+            className={"hc-disclosure-icon"}
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            aria-hidden="true"
+          >
             <path d="M5 12h14m-7-7v14" />
           </svg>
         </summary>
         <div className={"hc-service-body"}>
-          <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
+          <p>
+            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
+            jeden Bereich auch direkt öffnen.
+          </p>
           <GuideNavigation initial="nex2fly-trial" />
         </div>
       </details>
@@ -162,13 +523,36 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
 
 function ImportedSectionKlarheitVorDemErsten() {
   return (
-    <section className={"hc-section hc-container hc-service-story"} aria-labelledby="page-questions-title">
+    <section
+      className={"hc-section hc-container hc-service-story"}
+      aria-labelledby="page-questions-title"
+    >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher einordnen können.</p>
-          <a className={"hc-text-link"} href="/kontakt">Vorhaben beschreiben<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
+          <a className={"hc-text-link"} href="/kontakt">
+            Vorhaben beschreiben
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
@@ -176,12 +560,24 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Was ist es?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.</p>
+              <p>
+                Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
+                Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -189,12 +585,24 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Für Menschen und Teams, die KI-gestützte Arbeit in einer eigenen, zugeordneten Arbeitsumgebung organisieren möchten.</p>
+              <p>
+                Für Menschen und Teams, die KI-gestützte Arbeit in einer eigenen, zugeordneten
+                Arbeitsumgebung organisieren möchten.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -202,12 +610,25 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Welchen Nutzen haben Sie?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Gespräche, Aufgaben und Projektwissen erhalten einen gemeinsamen Kontext. Sie fangen nicht bei jeder Frage von vorn an. Welche Werkzeuge bereitstehen, zeigt Ihr Arbeitsbereich.</p>
+              <p>
+                Gespräche, Aufgaben und Projektwissen erhalten einen gemeinsamen Kontext. Sie fangen
+                nicht bei jeder Frage von vorn an. Welche Werkzeuge bereitstehen, zeigt Ihr
+                Arbeitsbereich.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -215,12 +636,25 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Was gehört dazu?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Gespräche mit KI, Aufgaben, Dokumente und Projektwissen in einem eigenen Arbeitsbereich. Sie wählen Ihre Quellen und die Personen, die mitarbeiten. Welche zusätzlichen Werkzeuge verfügbar sind, zeigt Ihr Zugang.</p>
+              <p>
+                Gespräche mit KI, Aufgaben, Dokumente und Projektwissen in einem eigenen
+                Arbeitsbereich. Sie wählen Ihre Quellen und die Personen, die mitarbeiten. Welche
+                zusätzlichen Werkzeuge verfügbar sind, zeigt Ihr Zugang.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -228,12 +662,25 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Wie läuft es ab?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Erstellen Sie ein Konto und bestätigen Sie Ihren Arbeitsbereich. Nach der Aktivierung starten Sie den 24-Stunden-Test selbst. Ein Agenturauftrag ist dafür nicht nötig.</p>
+              <p>
+                Erstellen Sie ein Konto und bestätigen Sie Ihren Arbeitsbereich. Nach der
+                Aktivierung starten Sie den 24-Stunden-Test selbst. Ein Agenturauftrag ist dafür
+                nicht nötig.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -241,25 +688,53 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Was kostet es?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Die KI-Modellnutzung hat ein eigenes Budget. Die für Ihren Zugang geltenden Modelle und Kosten werden vor der Nutzung angezeigt. Die Produkttarife stehen noch zur Freigabe; individuelle Integrationsarbeit wird gesondert angeboten.</p>
+              <p>
+                Die KI-Modellnutzung hat ein eigenes Budget. Die für Ihren Zugang geltenden Modelle
+                und Kosten werden vor der Nutzung angezeigt. Die Produkttarife stehen noch zur
+                Freigabe; individuelle Integrationsarbeit wird gesondert angeboten.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
             <summary>
               <span>
-                <strong className={"hc-service-name"}>Welche Voraussetzungen und Grenzen gelten?</strong>
+                <strong className={"hc-service-name"}>
+                  Welche Voraussetzungen und Grenzen gelten?
+                </strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Ein Konto allein aktiviert noch keinen Produktzugang. Testphase, KI-Budget und berechtigte Verbindungen werden separat bestätigt. Fremde Projekte und interne Agenturrollen bleiben ausgeschlossen.</p>
+              <p>
+                Ein Konto allein aktiviert noch keinen Produktzugang. Testphase, KI-Budget und
+                berechtigte Verbindungen werden separat bestätigt. Fremde Projekte und interne
+                Agenturrollen bleiben ausgeschlossen.
+              </p>
             </div>
           </details>
           <details className={"hc-service-detail"}>
@@ -267,12 +742,25 @@ function ImportedSectionKlarheitVorDemErsten() {
               <span>
                 <strong className={"hc-service-name"}>Was können Sie jetzt tun?</strong>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p><a href="/registrieren">Erstellen Sie ein Konto</a> oder vergleichen Sie die Suite mit der <a href="/produkte/api">NeXify API</a>. Für offene Produktfragen steht Ihnen ORACLE zur Seite.</p>
+              <p>
+                <a href="/registrieren">Erstellen Sie ein Konto</a> oder vergleichen Sie die Suite
+                mit der <a href="/produkte/api">NeXify API</a>. Für offene Produktfragen steht Ihnen
+                ORACLE zur Seite.
+              </p>
             </div>
           </details>
         </div>
@@ -283,7 +771,10 @@ function ImportedSectionKlarheitVorDemErsten() {
 
 function ImportedSectionPassendeThemen() {
   return (
-    <section className={"hc-section hc-container hc-process pc-related"} aria-labelledby="related-title-nex2fly">
+    <section
+      className={"hc-section hc-container hc-process pc-related"}
+      aria-labelledby="related-title-nex2fly"
+    >
       <header className={"hc-section-heading hc-process-heading"}>
         <div>
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
@@ -295,37 +786,201 @@ function ImportedSectionPassendeThemen() {
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/kontakt">Schildern Sie Ihr Vorhaben.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+            <a href="/kontakt">
+              Schildern Sie Ihr Vorhaben.
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M5 19 19 5M5 5h14v14" />
+              </svg>
+            </a>
           </h3>
-          <p>Eine neue Website, ein Shop, ein Ablauf, der Zeit kostet, oder eine Kampagne: Ein paar Sätze genügen. Pascal Courbois klärt mit Ihnen, was Sie brauchen und wie der nächste Schritt aussieht.</p>
-          <a aria-label="Schildern Sie Ihr Vorhaben. – Seite ansehen" className={"hc-text-link"} href="/kontakt">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            Eine neue Website, ein Shop, ein Ablauf, der Zeit kostet, oder eine Kampagne: Ein paar
+            Sätze genügen. Pascal Courbois klärt mit Ihnen, was Sie brauchen und wie der nächste
+            Schritt aussieht.
+          </p>
+          <a
+            aria-label="Schildern Sie Ihr Vorhaben. – Seite ansehen"
+            className={"hc-text-link"}
+            href="/kontakt"
+          >
+            Seite ansehen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </li>
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+            <a href="/registrieren">
+              NeX AIFly Suite. In Ruhe testen.
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M5 19 19 5M5 5h14v14" />
+              </svg>
+            </a>
           </h3>
-          <p>Erstellen Sie Ihr Konto und lernen Sie Ihren eigenen KI-Arbeitsbereich kennen. Der Test über 24 Stunden beginnt erst, wenn Sie ihn starten.</p>
-          <a aria-label="NeX AIFly Suite. In Ruhe testen. – Seite ansehen" className={"hc-text-link"} href="/registrieren">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            Erstellen Sie Ihr Konto und lernen Sie Ihren eigenen KI-Arbeitsbereich kennen. Der Test
+            über 24 Stunden beginnt erst, wenn Sie ihn starten.
+          </p>
+          <a
+            aria-label="NeX AIFly Suite. In Ruhe testen. – Seite ansehen"
+            className={"hc-text-link"}
+            href="/registrieren"
+          >
+            Seite ansehen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </li>
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/anmelden">Anmelden und weiterarbeiten.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+            <a href="/anmelden">
+              Anmelden und weiterarbeiten.
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M5 19 19 5M5 5h14v14" />
+              </svg>
+            </a>
           </h3>
-          <p>Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder Partnerbereich.</p>
-          <a aria-label="Anmelden und weiterarbeiten. – Seite ansehen" className={"hc-text-link"} href="/anmelden">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder
+            Partnerbereich.
+          </p>
+          <a
+            aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
+            className={"hc-text-link"}
+            href="/anmelden"
+          >
+            Seite ansehen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </li>
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+            <a href="/produkte/one">
+              Zwei Agenten. Eine klare Aufgabe.
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                {...({ focusable: "false" } as any)}
+              >
+                <path d="M5 19 19 5M5 5h14v14" />
+              </svg>
+            </a>
           </h3>
-          <p>AIFly ORACLE ordnet, NeX führt aus: Zusammen übernehmen sie in Ihrem Auftrag benannte Arbeitsschritte – von der Recherche bis zum geprüften Entwurf.</p>
-          <a aria-label="Zwei Agenten. Eine klare Aufgabe. – Seite ansehen" className={"hc-text-link"} href="/produkte/one">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            AIFly ORACLE ordnet, NeX führt aus: Zusammen übernehmen sie in Ihrem Auftrag benannte
+            Arbeitsschritte – von der Recherche bis zum geprüften Entwurf.
+          </p>
+          <a
+            aria-label="Zwei Agenten. Eine klare Aufgabe. – Seite ansehen"
+            className={"hc-text-link"}
+            href="/produkte/one"
+          >
+            Seite ansehen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              {...({ focusable: "false" } as any)}
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </li>
       </ol>
     </section>
   );
 }
-

@@ -64,7 +64,12 @@ export function useInquiryForm(kind: InquiryKind) {
       try {
         const trap = new FormData(form).get("website");
         const result = await send({
-          data: { kind, ...values, sourcePath: window.location.pathname, website: typeof trap === "string" ? trap : "" },
+          data: {
+            kind,
+            ...values,
+            sourcePath: window.location.pathname,
+            website: typeof trap === "string" ? trap : "",
+          },
         });
         if (result.ok) {
           setReference(result.reference);
@@ -109,7 +114,8 @@ export function useInquiryForm(kind: InquiryKind) {
 
   /** Explicit alternative after a failed submission: the visitor sends the prepared e-mail themselves. */
   const prepareMail = useCallback(() => {
-    const values = lastValues.current ?? (formRef.current ? readInquiryForm(formRef.current) : null);
+    const values =
+      lastValues.current ?? (formRef.current ? readInquiryForm(formRef.current) : null);
     if (!values) return;
     const built = buildInquiryMail(kind, values);
     focusTarget.current = "handoff";

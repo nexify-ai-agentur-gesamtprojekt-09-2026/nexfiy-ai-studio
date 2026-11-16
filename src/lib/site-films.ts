@@ -39,7 +39,11 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     duration: 10,
     captions: [
       { start: 0.4, end: 2.25, text: "Guten Tag, ich bin Pascal." },
-      { start: 2.3, end: 6.1, text: "Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität" },
+      {
+        start: 2.3,
+        end: 6.1,
+        text: "Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität",
+      },
       { start: 6.15, end: 7.9, text: "und zu einem fairen Preis." },
       { start: 7.95, end: 9.95, text: "Erzählen Sie mir, woran Sie gerade arbeiten." },
     ],
