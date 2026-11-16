@@ -1,6 +1,6 @@
 # Lieferung: Filmzuordnung und verbleibende Arbeiten
 
-Stand: 16.11.2026, 09:46 UTC. Skill: Omni-Enterprise Orchestrator.
+Stand: 16.11.2026, 09:47 UTC. Skill: Omni-Enterprise Orchestrator.
 
 ## IST
 - Fünf vorhandene Filmtranskripte durch lesenden Fachagenten geprüft. Keine Kundendaten übernommen, Originalfilme erhalten.
@@ -18,7 +18,7 @@ Stand: 16.11.2026, 09:46 UTC. Skill: Omni-Enterprise Orchestrator.
 - Kein neuer Schlüssel, keine zusätzliche kostenpflichtige Verpflichtung, keine Server-Rechteänderung. Lokale Schlüsselverwendung ausdrücklich freigegeben; geschützte lokale Datei eingesetzt, Inhalte nie ausgegeben. Bestehende authorized_keys unverändert.
 
 ## Veröffentlichung
-Veröffentlichung für nexifyai.de angefordert. Erste Nachprüfung 09:46 UTC zeigt noch das alte Filmangebot. Daher neue Filmzuordnung nur in der Vorschau bestätigt; Live-Ergebnis nicht behaupten. Frühere gemeldete Versionskennung ist nicht Beleg für dieses Paket.
+Veröffentlichung für nexifyai.de angefordert. Erste Nachprüfung 09:46 UTC zeigte noch das alte Filmangebot; Nachprüfung 09:47 UTC bestätigt die neue Ausgabe auf Startseite, Kontakt, Automatisierung, TEILEKLAR und Anmelden bei 1280/390 px: erwartete Zuschnitte und Standbilder, 12px Kennzeichnung, keine Überläufe oder Laufzeitfehler. Alle 37 Seiten wurden nur in der Vorschau erneut geprüft, nicht alle live. Frühere gemeldete Versionskennung ist nicht Beleg für dieses Paket.
 
 ## OFFEN mit Verantwortlichem
 - Pascal: BigBuy-Zugangsgültigkeit im Lieferantenkonto bestätigen. Gesuchter Variablenfehler in untersuchten Programmen nicht reproduziert; vorhandener Resolver akzeptiert BIGBUY_API_KEY. Dokumentierter 401 vom 09.11. ist HISTORIE, kein aktueller Authentifizierungsbeweis. Pausierter Alt-Bestandssync nicht gestartet.
@@ -28,7 +28,7 @@ Veröffentlichung für nexifyai.de angefordert. Erste Nachprüfung 09:46 UTC zei
 - Zeitabhängig: Nachtlauf und erster neuer Foto-Upload nach 17.11. prüfen. Dieser Chat wird nicht selbstständig neu gestartet.
 - Produktfotoanfrage liegt als bestehender Entwurf vor, nicht versendet; Empfänger und Nutzungsrechte fehlen.
 - Hosting: Antwortzeiten schwanken, Ursachen nicht allein anhand dieser Messung festgelegt. Server 1 um 09:41 UTC: Load15 4,65, Platte 88 % mit 48 GB frei; nichts gelöscht oder zusätzliche Agentenschleifen gestartet.
-- Plattform: Veröffentlichung bis zur erneuten erfolgreichen Live-Nachprüfung offen.
+- Live-Grenze: zehn Ansichten an fünf repräsentativen Seiten geprüft, nicht sämtliche Seiten erneut live.
 
 ## Rückweg
 - Serverdateien gesichert unter /opt/nexify-worker/backups/20261116T094051Z/. Vorherige Überwachung und Lagebericht zurückkopieren; Timer unverändert.

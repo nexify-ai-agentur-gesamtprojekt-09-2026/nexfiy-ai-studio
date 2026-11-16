@@ -10,7 +10,7 @@
 - [x] Vorhandenen Produktfoto-Entwurf geprüft, nicht versendet; keine ungeklärten Bildrechte übernehmen
 - [ ] Echter Nachtlauf/erster neuer Foto-Upload erst nach 17.11. messbar; echtes iPhone bei Pascal. Keine automatische Nachprüfung aus diesem Chat behaupten
 - [x] Nachweise, 111 Projekttests/sechs Servertests, 74 Seitenansichten, Rückweg und Inhaberaufgaben dokumentiert (.lovable/delivery-2026-11-16-filme-betrieb.md); Sicherheits-Schnellprüfung ohne Befund
-- [ ] Veröffentlichung angefordert, erste Live-Nachprüfung 09:46 UTC noch alter Filmstand; Abschluss wartet auf Auslieferung, kein Live-Erfolg behauptet
+- [x] Veröffentlichung live nachgewiesen 09:47 UTC: Start/Kontakt/Automatisierung/TEILEKLAR/Anmelden × 1280/390 px, neue Zuschnitte/Standbilder, 12px Kennzeichnung, kein Überlauf oder Laufzeitfehler
 
 ## Kommentar Kontaktseite (16.11.)
 - [x] Kommentar 80c95bd2-dd43-44d0-b80a-a305a4faee35 gelesen: Standard-/Hover-Füllungen für Abschnittslinks getauscht; sechs Breiten-/Theme-Zustände ohne Geometrieänderung geprüft und im Thread beantwortet, nicht aufgelöst
