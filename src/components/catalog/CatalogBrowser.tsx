@@ -156,7 +156,10 @@ export function CatalogBrowser({
       {pages > 1 ? (
         <nav className="tkc-pagination" aria-label="Seiten">
           {page > 1 ? (
-            <a href={shopHref({ q, kategorie: category, sortierung: sort, seite: page - 1 })} rel="prev">
+            <a
+              href={shopHref({ q, kategorie: category, sortierung: sort, seite: page - 1 })}
+              rel="prev"
+            >
               Zurück
             </a>
           ) : (
@@ -166,7 +169,10 @@ export function CatalogBrowser({
             Seite {page} von {pages}
           </span>
           {page < pages ? (
-            <a href={shopHref({ q, kategorie: category, sortierung: sort, seite: page + 1 })} rel="next">
+            <a
+              href={shopHref({ q, kategorie: category, sortierung: sort, seite: page + 1 })}
+              rel="next"
+            >
               Weiter
             </a>
           ) : (

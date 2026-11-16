@@ -155,8 +155,7 @@ export const getCatalogProduct = createServerFn({ method: "GET" })
       .order("price_value", { ascending: true, nullsFirst: false })
       .order("id", { ascending: true })
       .limit(VARIANT_LIMIT);
-    if (variants.error)
-      throw new Error(`Ausführungen nicht abrufbar: ${variants.error.message}`);
+    if (variants.error) throw new Error(`Ausführungen nicht abrufbar: ${variants.error.message}`);
     const toSpecs = (value: unknown) =>
       Array.isArray(value) ? (value as unknown as CatalogSpec[]) : [];
     const variantRows = (variants.data ?? []).map((row) => ({ ...row, specs: toSpecs(row.specs) }));
