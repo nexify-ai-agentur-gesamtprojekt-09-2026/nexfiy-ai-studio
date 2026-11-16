@@ -1,4 +1,10 @@
 # Roadmap
+## Schriftbild und Informationskonzept (16.11.)
+- [ ] Alle Texte mit klarerer typografischer Hierarchie, gegliederten Überschriften und lesbaren Textmaßen gestalten
+- [ ] Informationsgehalt und längere, konkret gegliederte Inhalte auf allen Inhaltsseiten erweitern, beginnend mit Unternehmen
+- [ ] Faktengebunden bleiben: keine zusätzlichen Leistungs-, Preis- oder Rechtsversprechen erfinden
+- [ ] Darstellung auf Desktop und Handy sowie vorhandene Abläufe nach der Erweiterung prüfen
+
 ## Technische Nacharbeit (16.11.)
 - [ ] TEILEKLAR-Seiten an einen gemeinsamen Rahmen mit funktionierender Hilfe, Navigation und Suchübergabe anschließen
 - [ ] Wirkungslose Angebots-/Termin- und Begleitungsaktionen an vorhandene echte Einstiege anschließen
