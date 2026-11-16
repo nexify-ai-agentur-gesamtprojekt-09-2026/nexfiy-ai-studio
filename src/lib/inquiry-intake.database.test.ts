@@ -5,9 +5,10 @@ import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
 import { submitInquiry } from "./inquiry.functions";
 import { deliverInquiryNotice, workspaceUrl } from "./inquiry-delivery.server";
+import { draftAdmin } from "@/test/draft-clients";
 
 const state = vi.hoisted(() => ({
-  ip: "192.0.2.80",
+  ip: "192.0.2.80" as string | undefined,
   rpc: vi.fn(),
   deliver: vi.fn().mockResolvedValue(true),
 }));
@@ -92,6 +93,44 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
       expect(new Date(rows[0]?.["consent_at"]).getTime()).toBe(new Date(rows[0]?.["created_at"]).getTime());
     });
   });
+  it.each([undefined, "invalid"])("speichert bei fehlender/ungültiger IP %s, meldet Slack einmal und verhindert die Dublette", async (ip) => {
+    await draftTest(async tx => {
+      state.ip = ip;
+      const log = vi.spyOn(console, "warn").mockImplementation(() => {});
+      try {
+        const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
+        const index = ip === undefined ? 301 : 302;
+        expect((await send(index)).ok).toBe(true);
+        expect(await send(index)).toMatchObject({ ok: false, reason: "duplicate" });
+        const after = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
+        expect(after[0]?.["count"] - before[0]?.["count"]).toBe(1);
+        expect(state.deliver).toHaveBeenCalledTimes(1);
+        expect(log.mock.calls).toEqual([["rate_guard_ip_missing"], ["rate_guard_ip_missing"]]);
+        expect(state.rpc.mock.calls.filter(call => call[0] === "accept_guarded_inquiry").every(call => call[1]?.p_ip_hash === "")).toBe(true);
+      } finally { log.mockRestore(); }
+    });
+  });
+  it("teilt fehlende IPs nicht in einen Ersatz-IP-Limit-Eimer ein", async () => {
+    await draftTest(async () => {
+      state.ip = undefined;
+      const log = vi.spyOn(console, "warn").mockImplementation(() => {});
+      try {
+        for (let i = 401; i <= 406; i++) expect((await send(i)).ok).toBe(true);
+        expect(state.deliver).toHaveBeenCalledTimes(6);
+      } finally { log.mockRestore(); }
+    });
+  });
+  it("prüft ohne IP weiterhin Honeypot, Validierung und Einwilligung vor dem Schreiben", async () => {
+    await draftTest(async () => {
+      state.ip = undefined;
+      const input = { kind: "contact", name: "NX LEAD Prüfung", email: testEmail, message: "Ein vollständig geprüftes Vorhaben.", consent: true };
+      expect(await submitInquiry({ data: { ...input, website: "trap" } })).toMatchObject({ ok: false });
+      expect(await submitInquiry({ data: { ...input, email: "invalid" } })).toMatchObject({ ok: false, errors: { email: expect.any(String) } });
+      expect(await submitInquiry({ data: { ...input, consent: false } })).toMatchObject({ ok: false, errors: { consent: expect.any(String) } });
+      expect(state.rpc).not.toHaveBeenCalled();
+      expect(state.deliver).not.toHaveBeenCalled();
+    });
+  });
   it("lässt nach Ablauf der rollierenden Stunde wieder eine Anfrage zu", async () => {
     await draftTest(async () => {
       for (let i = 31; i <= 35; i++) await send(i);
@@ -136,6 +175,8 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     const functions = await db`SELECT r.rolname,p.proname,has_function_privilege(r.rolname,p.oid,'EXECUTE') AS access FROM pg_roles r CROSS JOIN pg_proc p WHERE r.rolname IN ('anon','authenticated') AND p.proname IN ('get_inquiry_guard_salt','accept_guarded_inquiry')`;
     expect(functions).toHaveLength(4);
     expect(functions.every(row => row["access"] === false)).toBe(true);
+    const columns = await db`SELECT r.rolname,a.attname,has_column_privilege(r.rolname,'public.inquiries',a.attname,'UPDATE') AS access FROM pg_roles r CROSS JOIN pg_attribute a WHERE r.rolname IN ('anon','authenticated') AND a.attrelid='public.inquiries'::regclass AND a.attnum>0 AND NOT a.attisdropped`;
+    expect(columns.filter(row => row["access"] === true).map(row => `${row["rolname"]}:${row["attname"]}`).sort()).toEqual(["authenticated:status", "authenticated:updated_at"]);
   });
   it("begrenzt zwölf parallele unterschiedliche Nachrichten derselben IP auf fünf", async () => {
     await draftTest(async () => {
@@ -158,6 +199,38 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
       expect(results.filter(row => row.data?.[0]?.outcome === "accepted")).toHaveLength(1);
       expect(results.filter(row => row.data?.[0]?.outcome === "duplicate")).toHaveLength(9);
     });
+  });
+  it("speichert parallele Dubletten mit und ohne IP atomar genau einmal", async () => {
+    await draftTest(async () => {
+      const { acceptInquiry } = await import("./inquiry-intake.server");
+      const results = await Promise.all(Array.from({ length: 10 }, (_, index) => acceptInquiry(service, index % 2 ? null : `2001:db8:${idPart.toString(16)}::${index + 200}`, "contact", "/kontakt", { name: "NX LEAD Parallel", email: testEmail, company: "", message: `Mixed parallel ${runId}`, consent: true })));
+      expect(results.filter(row => row.outcome === "accepted")).toHaveLength(1);
+      expect(results.filter(row => row.outcome === "duplicate")).toHaveLength(9);
+    });
+  });
+  it("erlaubt Admin-Statuspflege, verweigert andere Spalten und Nicht-Admin-Statuspflege", async () => {
+    const admin = await draftAdmin();
+    const created = await service.from("inquiries").insert({ kind: "contact", name: "NX LEAD Statustest", email: testEmail, message: "Statusprüfung ausschließlich im Entwurf." }).select("id,message").single();
+    if (created.error || !created.data) throw new Error("Status-Testvorgang fehlt.");
+    const id = created.data.id;
+    const updated = await admin.from("inquiries").update({ status: "in_bearbeitung", updated_at: new Date().toISOString() }, { count: "exact" }).eq("id", id);
+    expect(updated.error).toBeNull();
+    expect(updated.count).toBe(1);
+    const forbidden = await admin.from("inquiries").update({ message: "Unzulässige Änderung" }).eq("id", id);
+    expect(forbidden.error?.code).toBe("42501");
+    const link = await service.auth.admin.generateLink({ type: "magiclink", email: "viktor@example.com" });
+    if (link.error || !link.data.properties.hashed_token) throw new Error("Nicht-Admin-Testzugang fehlt.");
+    const publicKey = process.env["SUPABASE_PUBLISHABLE_KEY"];
+    if (!publicKey) throw new Error("Isolierter Testzugang fehlt.");
+    const member = createClient(url, publicKey, { auth: { persistSession: false, autoRefreshToken: false } });
+    const login = await member.auth.verifyOtp({ token_hash: link.data.properties.hashed_token, type: "magiclink" });
+    if (login.error || !login.data.user) throw new Error("Nicht-Admin-Testanmeldung fehlt.");
+    expect((await member.rpc("has_role", { _user_id: login.data.user.id, _role: "admin" })).data).toBe(false);
+    const denied = await member.from("inquiries").update({ status: "erledigt", updated_at: new Date().toISOString() }, { count: "exact" }).eq("id", id);
+    expect(denied.error).toBeNull();
+    expect(denied.count).toBe(0);
+    const readback = await service.from("inquiries").select("status,message").eq("id", id).single();
+    expect(readback.data).toMatchObject({ status: "in_bearbeitung", message: created.data.message });
   });
   it("zählt reale Datenbankzeitgrenzen exakt unter der bestehenden Admin-RLS", async () => {
     const { readFile } = await import("node:fs/promises");
