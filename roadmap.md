@@ -1,5 +1,9 @@
 # Roadmap
 ## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
+- [ ] Nachauftrag 15:16 UTC: fehlende/ungültige vertrauenswürdige IP überspringt ausschließlich Ratenbegrenzung; anonymer rate_guard_ip_missing, Cloudflare bevorzugt, kein XFF
+- [ ] Vollständiger Formular→echte Entwurfsdatenbank→Bestätigung/Fehler-Test mit gemocktem Slack: Einwilligung, Wochenzahl +1, Dublette einmal, sechste IP-Anfrage abgewiesen/Eingaben erhalten
+- [ ] Additive Status-Spaltenrechte für authenticated ausschließlich unter bestehender Admin-UPDATE-RLS; Admin/Nicht-Admin/fremde Spalten prüfen
+- [ ] Abschließende Tests und automatische Typ-/Buildprüfung, Bericht abnahmebereit ja/nein; keine Veröffentlichung
 - [x] Ausgangsrechte lesend bestätigt: anon ohne Tabellenrechte; authenticated SELECT unter Admin-RLS, kein INSERT/UPDATE/DELETE. Bestehendes SELECT bleibt erhalten; keine Rechteausweitung
 - [x] Plan unverändert freigegeben; Trade-off eigene Datenbankbegrenzung bestätigt
 - [x] Migration 0013 nur im Entwurf: servergeschütztes Salz, atomare rollierende 5/Stunde-Grenze, 10-Minuten-Dublettensperre, consent_at/version; keine Klartext-IP und keine zusätzliche Slack-Meldung bei Dubletten
