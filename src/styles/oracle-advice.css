@@ -279,6 +279,74 @@
   font-size: 13px;
   color: var(--foreground);
 }
+/* Explicit handoff of the visitor's own statements into the contact form. */
+:root:root #atelier .oracle-advice .oracle-handoff {
+  display: grid;
+  gap: 12px;
+  max-width: min(100%, var(--measure-prose, 64ch));
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--glass-content-fill);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--glass-elevation);
+  backdrop-filter: var(--glass-content-filter);
+}
+:root:root #atelier .oracle-advice .oracle-handoff :is(h3, p) {
+  margin: 0;
+}
+:root:root #atelier .oracle-advice .oracle-handoff h3 {
+  font-size: var(--type-subheading, 17px);
+  line-height: 1.4;
+}
+:root:root #atelier .oracle-advice .oracle-handoff h3:focus {
+  outline: none;
+}
+:root:root #atelier .oracle-advice .oracle-handoff p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  text-wrap: pretty;
+}
+:root:root #atelier .oracle-advice .oracle-handoff .oracle-handoff-meta {
+  font-size: 12px;
+  line-height: 1.5;
+}
+:root:root #atelier .oracle-advice .oracle-handoff-preview {
+  max-height: 208px;
+  overflow-y: auto;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+:root:root #atelier .oracle-advice .oracle-handoff-preview:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+:root:root #atelier .oracle-advice .oracle-handoff-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+:root:root #atelier .oracle-advice .oracle-handoff :is(.oracle-handoff-action, .oracle-handoff-actions > *) {
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+}
+:root:root #atelier .oracle-advice .oracle-handoff .oracle-handoff-action {
+  justify-self: start;
+  color: var(--foreground);
+}
+:root:root #atelier .oracle-advice .oracle-handoff .oracle-handoff-confirm {
+  padding-inline: 20px;
+}
 :root:root #atelier .oracle-advice .oracle-pending {
   font-size: 14px;
   line-height: 1.5;
@@ -381,7 +449,7 @@
   :root:root
     #atelier
     .oracle-advice
-    :is(.oracle-heading, .oracle-starter, [data-slot="input-group"]) {
+    :is(.oracle-heading, .oracle-starter, .oracle-handoff, [data-slot="input-group"]) {
     background: var(--secondary);
   }
 }
@@ -389,7 +457,7 @@
   :root:root
     #atelier
     .oracle-advice
-    :is(.oracle-heading, .oracle-starter, [data-slot="input-group"]) {
+    :is(.oracle-heading, .oracle-starter, .oracle-handoff, [data-slot="input-group"]) {
     background: var(--secondary);
     backdrop-filter: none;
   }

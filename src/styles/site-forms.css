@@ -404,3 +404,35 @@
 .home-concept.page-contact .pc-section-body li::marker {
   content: none;
 }
+
+/* Hinweis nach einer Übergabe aus Chat oder Hilfe: Herkunft sichtbar, Absenden bleibt beim Besucher. */
+.page-contact .contact-handoff-status:empty {
+  display: none;
+}
+.page-contact .contact-handoff-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  max-width: var(--measure-prose, 68ch);
+  border: 1px solid color-mix(in oklab, var(--ring) 45%, transparent);
+  border-left: 3px solid var(--ring);
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--ring) 8%, transparent);
+  color: var(--foreground);
+  font-size: 15px;
+  line-height: 1.55;
+  animation: inquiry-in 0.28s var(--ease-standard, ease) both;
+}
+.page-contact .contact-handoff-notice svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--signal-text);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-contact .contact-handoff-notice {
+    animation: none;
+  }
+}
+
