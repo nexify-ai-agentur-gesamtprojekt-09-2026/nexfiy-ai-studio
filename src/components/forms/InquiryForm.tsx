@@ -106,7 +106,7 @@ export function InquiryForm({
           <label className="tk-check">
             <input {...form.fieldProps("consent")} type="checkbox" />
             <span>
-              Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage gespeichert werden. Details in der{" "}
+              Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner E-Mail-Anfrage verwendet werden. Details in der{" "}
               <a href={privacyHref}>Datenschutzerklärung</a>. *
             </span>
           </label>

@@ -1,4 +1,4 @@
-import { Search, Sun, Moon } from "lucide-react";
+import { Search, Sun, Moon, Menu, UserRound, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentPage } from "@/hooks/use-current-page";
 import { useSiteTheme } from "@/lib/use-site-theme";
@@ -6,6 +6,9 @@ import { useSiteTheme } from "@/lib/use-site-theme";
 export function TeileklarHeader() {
   const here = useCurrentPage();
   const { light, toggleTheme } = useSiteTheme();
+  const navigation = <nav className="tk-commerce-nav" aria-label="Shopnavigation">{[
+    ["/teileklar", "Schaufenster"], ["/teileklar/shop", "Alle Artikel"], ["/teileklar/kategorien", "Kategorien"], ["/teileklar/fahrzeug-und-passung", "Fahrzeugpassung"], ["/teileklar/werkstatt", "Werkstätten"], ["/teileklar/bestellungen", "Meine Bestellungen"],
+  ].map(([path, title]) => path && <a key={path} href={path} {...here(path)}>{title}</a>)}</nav>;
   return <header className="tk-commerce-header">
     <div className="tk-service-strip"><span>Auto &amp; Motorrad</span><a href="/teileklar/rechtliches">Versand &amp; Rückgabe</a><a href="/kontakt">Persönlicher Kontakt</a></div>
     <div className="tk-commerce-main">
@@ -15,10 +18,9 @@ export function TeileklarHeader() {
         <input id="store-search" maxLength={120} placeholder="Artikel, Marke oder Artikelnummer" type="search" name="q" />
         <Button variant="brand" size="icon" type="submit" aria-label="Artikel suchen" title="Artikel suchen"><Search aria-hidden="true" /></Button>
       </form>
-      <div className="tk-header-account"><a href="/konto">Mein Konto</a><a className="tk-header-cart" href="/teileklar/warenkorb">Warenkorb</a><Button className="theme-switch" variant="ghost" size="icon" role="switch" aria-checked={light} aria-label="Helle Ansicht" title={light ? "Dunkle Ansicht" : "Helle Ansicht"} onClick={toggleTheme}>{light ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}</Button></div>
+      <div className="tk-header-account"><Button asChild variant="ghost" size="icon"><a href="/konto" aria-label="Mein Konto" title="Mein Konto"><UserRound aria-hidden="true" /></a></Button><Button asChild variant="ghost" size="icon"><a href="/teileklar/warenkorb" aria-label="Warenkorb" title="Warenkorb"><ShoppingBag aria-hidden="true" /></a></Button><Button className="theme-switch" variant="ghost" size="icon" role="switch" aria-checked={light} aria-label="Helle Ansicht" title={light ? "Dunkle Ansicht" : "Helle Ansicht"} onClick={toggleTheme}>{light ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}</Button></div>
     </div>
-    <nav className="tk-commerce-nav" aria-label="Shopnavigation">{[
-      ["/teileklar", "Schaufenster"], ["/teileklar/shop", "Alle Artikel"], ["/teileklar/kategorien", "Kategorien"], ["/teileklar/fahrzeug-und-passung", "Fahrzeugpassung"], ["/teileklar/werkstatt", "Werkstätten"], ["/teileklar/bestellungen", "Meine Bestellungen"],
-    ].map(([path, title]) => path && <a key={path} href={path} {...here(path)}>{title}</a>)}</nav>
+    <div className="tk-desktop-nav">{navigation}</div>
+    <details className="tk-mobile-nav"><summary aria-label="Shopmenü" title="Shopmenü"><Menu aria-hidden="true" /></summary>{navigation}</details>
   </header>;
 }

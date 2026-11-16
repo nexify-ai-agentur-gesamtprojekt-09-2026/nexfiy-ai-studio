@@ -21,22 +21,32 @@
 :root:root #atelier .tk-commerce-header { position: relative; z-index: 8; padding: 16px 24px; border-bottom: 1px solid var(--border); }
 :root:root #atelier .tk-service-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 12px; color: var(--muted-foreground); }
 :root:root #atelier .tk-service-strip a { display: inline-flex; align-items: center; }
-:root:root #atelier .tk-commerce-main { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(180px, 2fr); gap: 16px 24px; align-items: center; margin-block: 12px; }
+:root:root #atelier .tk-commerce-main { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(180px, 2fr); gap: 8px 24px; align-items: center; margin-block: 8px; padding: 0; }
 :root:root #atelier .tk-wordmark { font-size: 24px; font-weight: 750; line-height: 1.2; text-decoration: none; color: var(--foreground); }
 :root:root #atelier .tk-wordmark span { color: var(--primary); }
 :root:root #atelier .tk-wordmark small { display: block; font-size: 12px; font-weight: 400; margin-top: 6px; color: var(--muted-foreground); }
-:root:root #atelier .tk-header-search { display: flex; min-width: 0; gap: 8px; }
+:root:root #atelier .tk-header-search { display: flex; min-width: 0; gap: 8px; grid-area: auto; }
 :root:root #atelier .tk-header-search input { min-width: 0; width: 100%; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; }
-:root:root #atelier .tk-header-account { grid-column: 1/-1; display: flex; justify-content: flex-end; align-items: center; gap: 20px; font-size: 14px; }
+:root:root #atelier .tk-header-account { grid-column: 1/-1; display: flex; justify-content: flex-end; align-items: center; gap: 8px; font-size: 14px; }
+:root:root #atelier .tk-header-account > a { display: inline-flex; }
+:root:root #atelier .tk-commerce-header :is(button,.tk-header-account > a) { flex: 0 0 44px; width: 44px; height: 44px; min-width: 44px; padding: 0; }
+:root:root #atelier .tk-commerce-header :is(button,a,summary) > svg { width: 18px; height: 18px; flex: 0 0 18px; }
+:root:root #atelier .tk-mobile-nav { display: none; }
+:root:root #atelier .tk-mobile-nav > summary { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; list-style: none; cursor: pointer; border: 1px solid var(--border-strong); border-radius: 6px; }
+:root:root #atelier .tk-mobile-nav > summary::-webkit-details-marker { display: none; }
+:root:root #atelier .tk-mobile-nav > nav { padding: 16px 0 4px; }
 :root:root #atelier .tk-commerce-nav a { display: inline-flex; align-items: center; font-size: 14px; color: var(--foreground); text-decoration: none; }
 :root:root #atelier .tk-commerce-header a[aria-current="page"] { color: var(--primary); text-decoration: underline; text-underline-offset: 6px; }
-:root:root #atelier .tk-help-content { flex: 1 1 auto; }
+:root:root #atelier .tk-help-content { flex: 1 1 auto; align-content: start; }
+:root:root #atelier .tk-help-content .oracle-starters { align-content: start; }
+:root:root #atelier .oracle-heading > button { padding: 0; }
+:root:root #atelier .oracle-heading > button > svg { width: 18px; height: 18px; flex: 0 0 18px; }
 :root:root #atelier .tk-help-form label { color: var(--muted-foreground); }
 :root:root #atelier .tk-tyre-size { border: 0; padding: 0; margin: 24px 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
 :root:root #atelier .tk-tyre-size legend { margin-bottom: 16px; color: var(--foreground); font-weight: 600; }
-:root:root #atelier .tk-tyre-size [data-slot="select-trigger"] { width: 100%; min-height: 44px; font-size: 16px; }
-:root:root #atelier .tk-tyre-results { display: grid; gap: 12px; margin: 24px 0; }
-:root:root #atelier .tk-tyre-results > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+:root:root #atelier .tk-tyre-size [role="combobox"] { width: 100%; min-height: 44px; font-size: 16px; }
+:root:root #atelier .tk-tyre-results { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin: 24px 0; }
+:root:root #atelier .tk-tyre-results > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; background: none; border-radius: 0; border: 0; border-bottom: 1px solid var(--border); padding: 0 0 12px; }
 :root:root #atelier .tk-tyre-results dt { color: var(--muted-foreground); }
 :root:root #atelier .tk-tyre-results dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 :root:root #atelier .tk-checklist { list-style: disc; padding-left: 20px; margin-block: 16px; display: grid; gap: 12px; }
@@ -45,9 +55,17 @@
 :root:root #atelier .tk-search-row input { min-width: 0; flex: 1; min-height: 44px; background: var(--secondary); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; color: var(--foreground); }
 :root:root #atelier .tk-empty { max-width: 65ch; display: grid; justify-items: start; gap: 16px; }
 @container website (max-width: 600px) {
-  :root:root #atelier .tk-commerce-header { padding: 12px 16px; }
-  :root:root #atelier .tk-commerce-main { grid-template-columns: minmax(0,1fr); }
-  :root:root #atelier .tk-header-account { justify-content: flex-start; flex-wrap: wrap; }
+  :root:root #atelier .tk-commerce-header { padding: 12px 16px; display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px 12px; }
+  :root:root #atelier .tk-service-strip { display: none; }
+  :root:root #atelier .tk-commerce-main { display: contents; }
+  :root:root #atelier .tk-wordmark { grid-column: 1; grid-row: 1; }
+  :root:root #atelier .tk-wordmark small { display: none; }
+  :root:root #atelier .tk-header-search { grid-column: 1/-1; grid-row: 3; }
+  :root:root #atelier .tk-header-account { justify-content: flex-start; grid-column: 1; grid-row: 2; }
+  :root:root #atelier .tk-desktop-nav { display: none; }
+  :root:root #atelier .tk-mobile-nav { display: block; grid-column: 2; grid-row: 1/3; align-self: start; }
+  :root:root #atelier .tk-mobile-nav[open] { grid-column: 1/-1; z-index: 1; background: var(--background); }
+  :root:root #atelier .tk-mobile-nav[open] > summary { margin-left: auto; }
   :root:root #atelier .tk-search-row { flex-wrap: wrap; }
   :root:root #atelier .tk-search-row input { flex-basis: 100%; }
 }
