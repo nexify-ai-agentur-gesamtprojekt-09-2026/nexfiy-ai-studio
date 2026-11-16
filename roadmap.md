@@ -212,7 +212,7 @@
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
 - [x] Skill „NeXify-Kundendesign-Standard“ aktiv (mit Kontrastprüfung), Kopie + ZIP unter Dateien/skills (16.11.)
 - [x] Helle Ansicht: grüne Status-/Aktivschrift unter 4.5:1 → neue Rolle --signal-text (Shop „Auf Lager“ 2,55 → 5,26:1); Fokusrahmen Katalog über --ring
-- [x] Produktdarstellung: 16 Seiten mit Anthropic-Prüfregeln (knowledge-work-plugins e91a134) durch DeepSeek bewertet, 26 geprüfte Textverbesserungen auf 26 Dateien übernommen, Bericht unter Dateien/produktdarstellung (16.11.)
+- [x] Produktdarstellung: 16 Seiten mit Anthropic-Prüfregeln (knowledge-work-plugins e91a134) durch DeepSeek bewertet, 20 geprüfte Textverbesserungen in 26 Dateien übernommen, Bericht unter Dateien/produktdarstellung (16.11.)
 - [ ] Gesprochene Filmtexte enthalten Du-Form und unbelegte Superlative („Effizienter geht es wirklich nicht“, „höchste Qualität“), auf TEILEKLAR eine nicht belegte Kundenstimme – Untertitel folgen dem Ton, Änderung nur durch neue Aufnahme oder andere Filmzuordnung (Entscheidung Pascal)
 - [ ] Produktnamen vereinheitlichen? („NeX AIFly Suite“, „NeX Agentic AIFly“, „NeX“, „FACTORY“ ohne Erklärung) – Markenentscheidung Pascal
 - [ ] Arbeitsmodus laut „Autonomous Finisher Protocol“ (16.11.): Lücken selbst finden und schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten)
