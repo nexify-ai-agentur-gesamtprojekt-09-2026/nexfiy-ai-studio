@@ -3,15 +3,20 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { CatalogImage } from "@/components/catalog/CatalogCard";
 import { catalogProductQuery } from "@/lib/teileklar-catalog.queries";
-import { availabilityLabel, formatPrice } from "@/lib/teileklar-catalog";
+import {
+  availabilityLabel,
+  catalogProductPath,
+  formatPrice,
+  germanDecimals,
+  variantLabels,
+} from "@/lib/teileklar-catalog";
+import type { CatalogProduct } from "@/lib/teileklar-catalog.functions";
 import capturedCSS from "../styles/pages/teileklar.shop.css?url";
 
 interface ProductSearch {
   artikel?: string;
 }
 
-/** Feed-Merkmale nutzen Dezimalpunkte („0.46 kg“); angezeigt wird deutsche Schreibweise. */
-const germanDecimals = (value: string) => value.replace(/(\d)\.(\d)/g, "$1,$2");
 const DATE = new Intl.DateTimeFormat("de-DE", { dateStyle: "long", timeZone: "Europe/Berlin" });
 const CONDITION: Record<string, string> = {
   NEW: "Neu",
@@ -151,6 +156,7 @@ function ProductDetail({ id }: { id: string }) {
             <li>{availabilityLabel(product)}</li>
             {product.status_label ? <li>{product.status_label}</li> : null}
           </ul>
+          {product.variants.length > 1 ? <VariantPicker product={product} /> : null}
           <div className="tk-actions">
             <a className="nexify-control primary-button" data-variant="primary" href={inquiry}>
               Diesen Artikel anfragen
@@ -180,6 +186,43 @@ function ProductDetail({ id }: { id: string }) {
         </div>
       </section>
     </>
+  );
+}
+
+const COUNT = new Intl.NumberFormat("de-DE");
+
+/** Ausführungen desselben Artikels; jede hat eine eigene Artikelseite, damit die Auswahl teilbar bleibt. */
+function VariantPicker({ product }: { product: CatalogProduct }) {
+  const labels = variantLabels(product.variants);
+  return (
+    <section className="tkc-variants" aria-labelledby="tkc-variants-title">
+      <h2 id="tkc-variants-title">
+        {COUNT.format(product.variants.length)} Ausführungen dieses Artikels
+      </h2>
+      <p>
+        Jede Ausführung hat eine eigene Artikelnummer. Nennt der Katalog keine Größe, klären wir die
+        passende Ausführung mit Ihrer Anfrage.
+      </p>
+      <ul role="list">
+        {product.variants.map((variant) => {
+          const current = variant.id === product.id;
+          const price = formatPrice(variant.price_value);
+          return (
+            <li key={variant.id}>
+              <a
+                href={catalogProductPath(variant.id)}
+                aria-current={current ? "page" : undefined}
+                data-available={variant.stock > 0 || undefined}
+              >
+                <span className="tkc-variant-label">{labels.get(variant.id)}</span>
+                <span className="tkc-variant-price">{price ?? "Preis auf Anfrage"}</span>
+                <span className="tkc-variant-stock">{availabilityLabel(variant)}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
