@@ -21,6 +21,16 @@ function fillValid(message = "Wir möchten Anfragen automatisch vorsortieren.") 
 }
 
 describe("inquiry submission", () => {
+  it.each(["rate_limited", "duplicate"])("behält Eingaben nach %s und bietet keinen Ausweichversand", async (reason) => {
+    submitInquiry.mockResolvedValue({ ok: false, reason, error: "Die Anfrage wurde nicht erneut angenommen." });
+    render(<InquiryForm kind="contact" title="Anfrage" companyLabel="Unternehmen" privacyHref="/datenschutz" />);
+    fillValid();
+    fireEvent.click(screen.getByRole("button", { name: "Anfrage senden" }));
+    await screen.findByRole("alert");
+    expect(screen.getByLabelText("Ihr Anliegen *")).toHaveValue("Wir möchten Anfragen automatisch vorsortieren.");
+    expect(screen.queryByRole("button", { name: /Stattdessen als E-Mail/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("checkbox")).toBeChecked();
+  });
   it("updates only remaining errors after corrections and sends nothing while invalid", () => {
     render(
       <InquiryForm

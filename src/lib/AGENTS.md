@@ -1,3 +1,6 @@
 - Slack transport, signature verification, pure decisions and server-side workflow execution stay separate so the simulator and production share the same authorization rules.
 - Slack receipts record delivery metadata only; existing inquiry rows and existing external orchestration remain the authoritative task state, preventing duplicate schedulers or task stores.
 - Slack authorization uses the verified workspace, application and stable actor IDs; status writes require the original inquiry thread, and externally shared channels never receive private workflow data.
+- Inquiry intake uses one service-only atomic operation for rolling limits, cross-IP deduplication and consent evidence; raw IPs and keyed hashes never enter browser-visible rows or logs, preventing concurrent duplicates without widening user grants.
+- Weekly inquiry metrics use authenticated admin checks and the caller's existing RLS with exact head counts, never the service client or truncated inbox lists, preserving access boundaries and complete totals.
+- Intake accepts native request IPs or runtime-attested Cloudflare headers only; localhost development headers are test-only and missing trusted identity fails closed, preventing spoofed proxy headers from bypassing protection.

@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
 import { inquiryGuardHashes } from "./inquiry-guard.server";
@@ -19,10 +20,6 @@ export async function acceptInquiry(client: SupabaseClient<Database>, ip: string
   if (!row) throw new Error("Anfrage konnte nicht sicher angenommen werden.");
   if (row.outcome === "duplicate") return { outcome: "duplicate" as const };
   if (row.outcome === "rate_limited") return { outcome: "rate_limited" as const, retryAfterSeconds: row.retry_after_seconds };
-  if (row.outcome !== "accepted" || !zId(row.inquiry_id)) throw new Error("Anfrage konnte nicht sicher angenommen werden.");
+  if (row.outcome !== "accepted" || !z.uuid().safeParse(row.inquiry_id).success) throw new Error("Anfrage konnte nicht sicher angenommen werden.");
   return { outcome: "accepted" as const, id: row.inquiry_id };
-}
-
-function zId(value: unknown): value is string {
-  return typeof value === "string" && /^[0-9a-f-]{36}$/i.test(value);
 }
