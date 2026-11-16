@@ -135,3 +135,7 @@
 - [ ] Umfang: Anfragen/Leads, TEILEKLAR, Kundenportal/Suite, Tagesbericht/Aufgaben
 - [ ] Bestehenden ORACLE-Zugang lesend klären (keine Betriebsänderung, kein neuer Agent)
 - [ ] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
+
+## Offen (16.11.)
+- [ ] Datentabelle anlegen – wartet auf Angabe, welche Daten
+- [ ] Datei-Upload – wartet auf Angabe, wer was hochlädt
