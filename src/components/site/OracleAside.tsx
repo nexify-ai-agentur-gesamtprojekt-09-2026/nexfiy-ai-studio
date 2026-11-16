@@ -6,7 +6,6 @@ import { Message, MessageContent, MessageResponse } from "@/components/ai-elemen
 import { PromptInput, PromptInputTextarea, PromptInputFooter, PromptInputSubmit } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { useOracleAdvice } from "@/lib/use-oracle-advice";
-import oracleCSS from "../../styles/oracle-advice.css?url";
 import { fitComposer, useComposerFit } from "@/lib/imported-site";
 
 /** AIFly ORACLE side panel of the NeXify pages (desktop column, phone dialog). */
@@ -25,7 +24,6 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
   }, [busy, messages.length, open, composerRef]);
   return (
     <aside id="aifly-panel" className={"aifly-panel oracle-advice"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} aria-modal={isMobile && open ? true : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
-      <link rel="stylesheet" href={oracleCSS} precedence="oracle-advice" />
       <div className="oracle-heading">
         <div className="oracle-heading-copy">
           <div className="oracle-identity">
