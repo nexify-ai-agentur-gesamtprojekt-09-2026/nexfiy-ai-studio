@@ -199,6 +199,9 @@ export function OracleAside({
                           />
                         )}
                         <span>{message.role === "user" ? "Sie" : "AIFly ORACLE"}</span>
+                        {message.role === "assistant" && (
+                          <span className="oracle-ai-label">Als KI-Antwort gekennzeichnet</span>
+                        )}
                       </span>
                       {message.role === "assistant" ? (
                         <MessageResponse
@@ -304,7 +307,7 @@ export function OracleAside({
             </PromptInputFooter>
           </PromptInput>
           <p className="oracle-note">
-            KI-Beratung · Angaben bitte auf der Produktseite prüfen. Keine vertraulichen Daten
+            Als KI-Antwort gekennzeichnet · Angaben bitte auf der Produktseite prüfen. Keine vertraulichen Daten
             eingeben. <a href="/datenschutz">Datenschutz</a>
           </p>
         </section>
