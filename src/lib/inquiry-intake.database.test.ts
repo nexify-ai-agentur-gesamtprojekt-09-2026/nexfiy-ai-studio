@@ -43,6 +43,11 @@ async function rollbackTest(check: (tx: postgres.TransactionSql) => Promise<void
   await db.begin(async tx => { await check(tx); });
 }
 
+async function serviceUpdate(table: string, values: Record<string, unknown>, column: string, value: string) {
+  const result = await service.from(table).update(values).eq(column, value);
+  if (result.error) throw new Error("Testdaten konnten nicht vorbereitet werden.");
+}
+
 function send(index: number, email = testEmail) {
   return submitInquiry({ data: { kind: "contact", name: "NX LEAD Prüfung", email, company: "", message: `NX-LEAD-01 ${runId} Prüfvorhaben Nummer ${index}.`, consent: true, website: "", sourcePath: "/kontakt" } });
 }
@@ -81,11 +86,11 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     });
   });
   it("lässt nach Ablauf der rollierenden Stunde wieder eine Anfrage zu", async () => {
-    await rollbackTest(async tx => {
+    await rollbackTest(async () => {
       for (let i = 31; i <= 35; i++) await send(i);
       const hash = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1]?.p_ip_hash;
       expect(typeof hash).toBe("string");
-      await tx`UPDATE public.inquiry_rate_guards SET accepted_at=ARRAY[clock_timestamp()-interval '1 hour 1 second'] WHERE ip_hash=${hash}`;
+      await serviceUpdate("inquiry_rate_guards", { accepted_at: [new Date(Date.now() - 3601000).toISOString()] }, "ip_hash", hash);
       expect((await send(36)).ok).toBe(true);
       expect(state.deliver).toHaveBeenCalledTimes(6);
     });
@@ -94,8 +99,11 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     await rollbackTest(async tx => {
       await send(41);
       const args = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1];
-      await db`UPDATE public.inquiry_duplicate_guards SET accepted_at=clock_timestamp()-interval '10 minutes 1 second' WHERE fingerprint=${args?.p_fingerprint}`;
-      await db`UPDATE public.inquiries SET created_at=clock_timestamp()-interval '10 minutes 1 second' WHERE id=(SELECT inquiry_id FROM public.inquiry_duplicate_guards WHERE fingerprint=${args?.p_fingerprint})`;
+      const accepted = await service.from("inquiry_duplicate_guards").select("inquiry_id").eq("fingerprint", args?.p_fingerprint).single();
+      if (accepted.error || !accepted.data) throw new Error("Testvorgang fehlt");
+      const expired = new Date(Date.now() - 601000).toISOString();
+      await serviceUpdate("inquiry_duplicate_guards", { accepted_at: expired }, "fingerprint", args?.p_fingerprint);
+      await serviceUpdate("inquiries", { created_at: expired }, "id", accepted.data["inquiry_id"]);
       expect((await send(41)).ok).toBe(true);
       expect(state.deliver).toHaveBeenCalledTimes(2);
     });
