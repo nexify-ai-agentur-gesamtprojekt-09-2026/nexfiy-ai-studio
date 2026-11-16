@@ -92,6 +92,7 @@
 :root:root #atelier.site-shared .home-concept .pc-section { border-block: 0; }
 :root:root #atelier.site-shared .home-concept .product-overview { border-block: 0; }
 :root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-top: 24px; }
+:root:root #atelier.site-shared .home-concept .pc-guide p { color: var(--muted-foreground); }
 :root:root #atelier.site-shared .home-concept :is(.pc-guide > .hc-service-detail,.hc-service-list > .hc-service-detail,.pc-module) { background: var(--glass-content-fill); box-shadow: var(--elevation-glass-lift); backdrop-filter: var(--glass-content-filter); border: 1px solid var(--border); }
 :root:root #atelier.site-shared .oracle-advice .oracle-starter { box-shadow: var(--elevation-glass-lift); }
 :root:root #atelier.site-shared .oracle-advice .oracle-starter:is(:hover,:focus-visible) { box-shadow: var(--elevation-glass-hover); }
