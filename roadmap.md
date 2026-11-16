@@ -1,4 +1,9 @@
 # Roadmap
+## ORACLE-App-Einstellungen und echter Slack-Auslöser (16.11., 11:00 UTC)
+- [ ] Einstellungen für die bestehende App vorbereiten, aktuelle Empfangsadressen prüfen und nur echte Inhaberzugriffe benennen; vorhandene Flows/Empfänger erhalten
+- [ ] Sichere Eingabe für SLACK_ORACLE_SIGNING_SECRET auf Pascals ausdrücklichen neuen Auftrag erneut öffnen; keine Geheimnisse lesen oder im Chat ausgeben
+- [ ] Vollständigen kostenfreien Slack-Auslöser mit tatsächlicher Empfängerantwort und gespeichertem Beleg prüfen; kein Modellaufruf, keine künstliche Empfängerantwort und keine zweite App
+
 ## Bestehende Verbindungen eigenständig klären (16.11., 10:53 UTC)
 - [x] Zugängliche Verbindungsliste und ORACLE-Zuordnung selbst geprüft; My Slack funktioniert, App-Manifestexport konkret missing_scope/app_configurations:read; Umfang nicht grantbar. Keine zweite App/Secret-Transfer/Dialogumgehung
 - [x] Zwei begrenzte Slack-Suchseiten (40 Treffer) auf Verbindungsbelege ausgewertet, historische getrennte MCP-/HTTP-Wege nicht als aktuell bestätigt. Bestehender Prüfthread für einmalige Statusrevision genutzt und rückgelesen
