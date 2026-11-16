@@ -220,3 +220,6 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 - [x] Veröffentlicht 16.11. 08:35 UTC: Produkttexte, Shop (Sortierung, Varianten, freigestellte Fotos), Sitemap; live geprüft 37 Seiten × 1280/390 px ohne Fehler, Überlauf oder fehlende Alternativtexte
 - [x] DeepSeek deepseek-v4.1-flash-1017 über 9router 16.11.: 16 Seitenbewertungen als JSON, Modellkennung jedes Mal bestätigt; 3 Läufe brauchten mehr Antwortspielraum
 - [x] Arbeitsmodus erweitert (Omni-Enterprise-Papier 16.11.): alle Bereiche, gleiche harten Grenzen
+- [ ] Antwortzeiten messen und Ursachen beheben (Start 2,6 s, Shop 2,8 s am 16.11. 09:00 UTC)
+- [ ] Server 1: nächtliche automatische Freistellung neuer Produktfotos (Rechte, Abbruch, Rückweg dokumentiert)
+- [ ] Server 1: Überwachung nexifyai.de alle 5 Min mit Slack-Meldung (Rechte, Abbruch, Rückweg dokumentiert)
