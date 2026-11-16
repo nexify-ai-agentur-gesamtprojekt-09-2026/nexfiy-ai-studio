@@ -4,7 +4,7 @@ const FEED_LIMIT = 500;
 /** Überlappende Seiten fangen die nicht stabile Reihenfolge des Feeds ab (gemessen: ohne Überlappung fehlt ein Artikel). */
 const FEED_STEP = 450;
 /** Seiten je Aufruf: hält jeden Aufruf deutlich unter der Zeitgrenze des Zeitplans. */
-const PAGES_PER_CALL = 3;
+const PAGES_PER_CALL = 1;
 
 interface FeedPage { items: unknown[]; total: number }
 
@@ -46,11 +46,11 @@ async function finalizeRun(admin: Admin, runDate: string, startedAt: string, rep
     archived = archive.count ?? 0;
   }
   const done = await admin.from("teileklar_catalog_sync_runs").update({
-    complete, archived, finished_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+    complete, archived, received: seenCount, finished_at: new Date().toISOString(), updated_at: new Date().toISOString(),
     last_error: complete ? null : `Unvollständig: ${seenCount} von ${reportedTotal} Artikeln geliefert; nichts ausgeblendet.`,
   }).eq("run_date", runDate);
   if (done.error) throw new Error(`Abgleich konnte nicht abgeschlossen werden: ${done.error.message}`);
-  return { complete, archived };
+  return { complete, archived, seenCount };
 }
 
 /**
@@ -107,7 +107,7 @@ export async function syncTeileklarCatalogStep(now = new Date()): Promise<Catalo
 
   if (nextOffset >= run.reported_total) {
     const result = await finalizeRun(admin, runDate, run.started_at, run.reported_total);
-    return { runDate, state: "abgeschlossen", reportedTotal: run.reported_total, nextOffset, stored: run.received + rows.size, rejected: run.rejected + rejected, archived: result.archived, complete: result.complete, durationMs: Date.now() - started };
+    return { runDate, state: "abgeschlossen", reportedTotal: run.reported_total, nextOffset, stored: result.seenCount, rejected: run.rejected + rejected, archived: result.archived, complete: result.complete, durationMs: Date.now() - started };
   }
   return { runDate, state: "fortgesetzt", reportedTotal: run.reported_total, nextOffset, stored: run.received + rows.size, rejected: run.rejected + rejected, archived: 0, complete: null, durationMs: Date.now() - started };
 }
