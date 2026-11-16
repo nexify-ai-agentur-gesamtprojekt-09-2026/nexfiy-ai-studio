@@ -82,6 +82,19 @@
 :root:root #atelier .site-header::before { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.3); }
 :root:root #atelier .home-concept .pc-section { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-block: 56px; border-bottom: 1px solid var(--border); }
 :root:root #atelier .home-concept .pc-module { background: var(--glass-frosted); box-shadow: var(--glass-lens-shadow); backdrop-filter: blur(20px); margin-block: 24px; padding: 20px; border-radius: 8px; }
+/* Section borders were painting a full-width line behind the guide. Keep the
+   page continuous; data rows and actual framed controls retain their borders. */
+:root:root #atelier.site-shared .home-concept .pc-section { border-block: 0; }
+:root:root #atelier.site-shared .home-concept .product-overview { border-block: 0; }
+:root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 48px; padding-top: 24px; }
+:root:root #atelier.site-shared .home-concept :is(.pc-guide > .hc-service-detail,.hc-service-list > .hc-service-detail,.pc-module) { background: var(--glass-frosted); box-shadow: var(--elevation-glass-lift); backdrop-filter: blur(24px) saturate(1.2); border: 1px solid var(--border); }
+:root:root #atelier.site-shared .oracle-advice .oracle-starter { box-shadow: var(--elevation-glass-lift); }
+:root:root #atelier.site-shared .oracle-advice .oracle-starter:is(:hover,:focus-visible) { box-shadow: var(--elevation-glass-hover); }
+:root:root #atelier.site-shared :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 10px 8px var(--figure-shadow)) drop-shadow(0 3px 2px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.1); }
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared .home-concept .pc-guide { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  :root:root #atelier.site-shared .home-concept .pc-guide > details { grid-column: 1; }
+}
 @container website (max-width: 1000px) {
   :root:root #atelier .site-header .main-navigation { display: none; }
   :root:root #atelier .site-header .mobile-navigation { display: block; }
