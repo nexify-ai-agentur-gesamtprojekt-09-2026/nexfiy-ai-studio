@@ -1018,7 +1018,7 @@
 @media (max-width: 768px) {
   :root { --section-space: 56px; --section-space-compact: 40px; }
 }
-:root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form, .ws-card, .tkc-card) {
+:root:root #atelier.site-shared :is(.hc-service-detail, .pc-module, .tk-form.tk-form, .ws-card, .tkc-card) {
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
   background: var(--glass-content-fill, var(--card));
@@ -1038,8 +1038,9 @@
 /* Kopfknöpfe: nebeneinander, sonst sauber gestapelt mit gleicher Breite (Chatbreite bleibt unberührt). */
 :root:root #atelier.site-shared .identity-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 12px;
+  width: 100%;
   max-width: 30rem;
   align-items: stretch;
 }
