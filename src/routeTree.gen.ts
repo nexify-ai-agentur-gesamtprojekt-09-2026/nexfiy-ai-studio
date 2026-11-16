@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnmeldenRouteImport } from './routes/anmelden'
+import { Route as ArbeitsplatzRouteImport } from './routes/arbeitsplatz'
 import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
@@ -68,6 +69,11 @@ const IndexRoute = IndexRouteImport.update({
 const AnmeldenRoute = AnmeldenRouteImport.update({
   id: '/anmelden',
   path: '/anmelden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArbeitsplatzRoute = ArbeitsplatzRouteImport.update({
+  id: '/arbeitsplatz',
+  path: '/arbeitsplatz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BarrierefreiheitRoute = BarrierefreiheitRouteImport.update({
@@ -319,6 +325,7 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -371,6 +378,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -424,6 +432,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -478,6 +487,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -530,6 +540,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -582,6 +593,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -635,6 +647,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnmeldenRoute: typeof AnmeldenRoute
+  ArbeitsplatzRoute: typeof ArbeitsplatzRoute
   BarrierefreiheitRoute: typeof BarrierefreiheitRoute
   CookiesRoute: typeof CookiesRoute
   DatenschutzRoute: typeof DatenschutzRoute
@@ -699,6 +712,13 @@ declare module '@tanstack/react-router' {
       path: '/anmelden'
       fullPath: '/anmelden'
       preLoaderRoute: typeof AnmeldenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arbeitsplatz': {
+      id: '/arbeitsplatz'
+      path: '/arbeitsplatz'
+      fullPath: '/arbeitsplatz'
+      preLoaderRoute: typeof ArbeitsplatzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/barrierefreiheit': {
@@ -1043,6 +1063,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnmeldenRoute: AnmeldenRoute,
+  ArbeitsplatzRoute: ArbeitsplatzRoute,
   BarrierefreiheitRoute: BarrierefreiheitRoute,
   CookiesRoute: CookiesRoute,
   DatenschutzRoute: DatenschutzRoute,
