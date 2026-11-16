@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { NexifyShell } from "@/components/site/NexifyShell";
-import { Button } from "@/components/ui/button";
 import { CatalogImage } from "@/components/catalog/CatalogCard";
 import { catalogProductQuery } from "@/lib/teileklar-catalog.queries";
 import { availabilityLabel, formatPrice } from "@/lib/teileklar-catalog";
@@ -9,6 +8,8 @@ import capturedCSS from "../styles/pages/teileklar.shop.css?url";
 
 interface ProductSearch { artikel?: string }
 
+/** Feed-Merkmale nutzen Dezimalpunkte („0.46 kg“); angezeigt wird deutsche Schreibweise. */
+const germanDecimals = (value: string) => value.replace(/(\d)\.(\d)/g, "$1,$2");
 const DATE = new Intl.DateTimeFormat("de-DE", { dateStyle: "long", timeZone: "Europe/Berlin" });
 const CONDITION: Record<string, string> = { NEW: "Neu", USED: "Gebraucht", REFURBISHED: "Aufbereitet" };
 
@@ -61,7 +62,7 @@ function ProductDetail({ id }: { id: string }) {
     ...(product.oe_number ? [{ label: "OE-Nummer", value: product.oe_number }] : []),
     ...(product.brand ? [{ label: "Marke", value: product.brand }] : []),
     ...(product.category ? [{ label: "Kategorie", value: product.category }] : []),
-    ...product.specs.filter((spec) => spec.label !== "EAN" && spec.label !== "Zustand"),
+    ...product.specs.filter((spec) => spec.label !== "EAN" && spec.label !== "Zustand").map((spec) => ({ label: spec.label, value: germanDecimals(spec.value) })),
     ...(product.condition ? [{ label: "Zustand", value: CONDITION[product.condition] ?? product.condition }] : []),
   ];
   const inquiry = `/teileklar/suche?q=${encodeURIComponent(`${product.name} (Artikel ${product.id})`)}#teilefrage`;

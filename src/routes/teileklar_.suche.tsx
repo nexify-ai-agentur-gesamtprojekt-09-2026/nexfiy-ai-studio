@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { catalogListQuery } from "@/lib/teileklar-catalog.queries";
 import { normalizeCatalogQuery } from "@/lib/teileklar-catalog";
