@@ -913,3 +913,21 @@
     align-items: center;
   }
 }
+
+/* Luft über und unter dem Logo innerhalb der Glasleiste: mindestens 12px auf jeder Seite. */
+:root:root #atelier.site-shared .site-header {
+  min-height: 104px;
+  align-items: center;
+}
+@container website (max-width: 1000px) {
+  :root:root #atelier.site-shared .site-header,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header {
+    min-height: 88px;
+  }
+}
+@media (max-width: 767px) {
+  :root:root #atelier.site-shared .site-header,
+  :root:root #atelier.site-shared[data-scrolled="true"] .site-header {
+    min-height: 76px;
+  }
+}
