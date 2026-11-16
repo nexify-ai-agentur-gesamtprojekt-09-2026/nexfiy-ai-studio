@@ -164,13 +164,18 @@ export type Database = {
           delivery_note: string
           ean: string
           feed_created_at: string | null
+          has_image: boolean | null
           id: string
           image_alt: string
+          image_checked_at: string | null
+          image_checked_src: string
+          image_path: string
           image_src: string
           name: string
           oe_number: string
           price_value: number | null
           source: string
+          source_category: string
           specs: Json
           status_label: string
           stock: number
@@ -184,13 +189,18 @@ export type Database = {
           delivery_note?: string
           ean?: string
           feed_created_at?: string | null
+          has_image?: boolean | null
           id: string
           image_alt?: string
+          image_checked_at?: string | null
+          image_checked_src?: string
+          image_path?: string
           image_src?: string
           name: string
           oe_number?: string
           price_value?: number | null
           source?: string
+          source_category?: string
           specs?: Json
           status_label?: string
           stock?: number
@@ -204,13 +214,18 @@ export type Database = {
           delivery_note?: string
           ean?: string
           feed_created_at?: string | null
+          has_image?: boolean | null
           id?: string
           image_alt?: string
+          image_checked_at?: string | null
+          image_checked_src?: string
+          image_path?: string
           image_src?: string
           name?: string
           oe_number?: string
           price_value?: number | null
           source?: string
+          source_category?: string
           specs?: Json
           status_label?: string
           stock?: number
