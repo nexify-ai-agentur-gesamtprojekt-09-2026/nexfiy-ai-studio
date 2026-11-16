@@ -140,8 +140,8 @@ function Index() {
           </ul>
           <div className={"identity-links tk-sortiment-actions"}>
             <a
-              className={"nexify-control primary-button"}
-              data-variant="primary"
+              className={"nexify-control secondary-button"}
+              data-variant="secondary"
               href="/teileklar/shop"
             >
               Gesamten Katalog durchsuchen
