@@ -1,7 +1,7 @@
 /* NeXify Graphite – Design-Grundwerte (abgenommen). Einzige Quelle; Kundenprojekte überschreiben nur über eigene Token-Datei. */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.2315 0.0049 173.96);
+  --background: #242826;
   --foreground: oklch(0.9558 0.0086 84.57);
   --card: oklch(0.2803 0.0068 164.5);
   --card-foreground: oklch(0.9558 0.0086 84.57);
@@ -11,7 +11,7 @@
   --brand-signal-hover: oklch(0.925 0.185 123.4);
   --brand-signal-active: oklch(0.83 0.195 124.2);
   --brand-signal-deep: oklch(0.62 0.15 127);
-  --brand-signal-foreground: oklch(0.17 0.03 128);
+  --brand-signal-foreground: #111312;
   --primary: oklch(0.8861 0.2017 123.37);
   --primary-foreground: var(--brand-signal-foreground);
   --secondary: oklch(0.2965 0.0067 164.54);
@@ -163,6 +163,10 @@
     0 22px 36px -20px oklch(0 0 0 / 80%);
 }
 html[data-theme="light"] {
+  --card-fill: var(--card);
+  --card-edge: inset 0 1px 0 rgb(255 255 255 / 60%);
+  --card-shadow: 0 20px 40px -28px rgb(0 0 0 / 25%);
+  --line-strong: oklch(0.23 0.006 165 / 28%);
   --background: oklch(0.925 0.006 240);
   --foreground: oklch(0.23 0.006 165);
   --card: oklch(0.96 0.004 240);
