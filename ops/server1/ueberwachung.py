@@ -49,23 +49,6 @@ def update_state(s, res, notify):
                 s["gemeldet"] = False
     return bad
 
-def daily_report(s, res, notify, now):
-    day = now.date().isoformat()
-    # 09:00 UTC = 10:00 Amsterdam im Winter; höchstens sieben Versuche, kein neuer Timer.
-    if not (now.hour == 9 and now.minute <= 30) or s.get("bericht_tag") == day:
-        return
-    if s.get("bericht_versuch_tag") != day:
-        s["bericht_versuch_tag"] = day
-        s["bericht_versuche"] = 0
-    if s.get("bericht_versuche", 0) >= 7:
-        return
-    s["bericht_versuche"] += 1
-    results = ", ".join(f"{p}: {res[p][0] or 'keine Antwort'}/{res[p][1]}s" for p, _ in CHECKS)
-    detail = f"IST {now:%Y-%m-%d %H:%M} UTC | {results}. Owner: Server 1. Kosten nicht gemessen. Nachtlauf/Foto-Upload und iPhone noch unbestätigt."
-    if notify("bericht", detail[:300]):
-        s["bericht_tag"] = day
-        s["bericht_zugestellt_utc"] = now.isoformat()
-
 def main():
     STATE.parent.mkdir(parents=True, exist_ok=True)
     s = json.loads(STATE.read_text()) if STATE.exists() else {"fehlfolge": 0, "gemeldet": False}
@@ -75,7 +58,6 @@ def main():
     now = datetime.now(timezone.utc)
     s["letzte_pruefung_utc"] = now.isoformat()
     s["ergebnis"] = res
-    daily_report(s, res, alert, now)
     print(json.dumps({"ergebnis": res, "fehler": bad}))
     STATE.write_text(json.dumps(s))
 

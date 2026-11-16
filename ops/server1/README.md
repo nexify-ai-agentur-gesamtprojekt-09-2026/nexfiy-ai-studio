@@ -6,6 +6,7 @@ Eingerichtet 16.11.2026 als systemd-Timer unter dem Dienstbenutzer `nexifyworker
 | --- | --- | --- |
 | Freistellung neuer Produktfotos | täglich 06:15 UTC (nach der Fotokopie) | `freistellung.py` |
 | Überwachung nexifyai.de | alle 5 Minuten | `ueberwachung.py` |
+| Website-Status im bestehenden Lagebericht | vorhandener täglicher Timer `nexify-lagebericht.timer`, 06:45 UTC | `status_report.py` |
 
 ## Zugriffsrechte
 - Schlüssel `/etc/nexify-worker/token` (root:nexifyworker, 640), auf dem Server erzeugt. Die App kennt nur den SHA-256-Wert (`SERVER_WORKER_TOKEN_SHA256`); kein Geheimnis wurde übertragen.
@@ -16,6 +17,11 @@ Eingerichtet 16.11.2026 als systemd-Timer unter dem Dienstbenutzer `nexifyworker
 - Freistellung: Schlüssel abgelehnt (401/403), 5 Fehler in Folge, höchstens 300 Fotos pro Lauf, Laufzeit max. 60 Min. Fotos ohne weißen Rand werden ausgelassen und gemerkt (nicht erneut versucht, solange das Original gleich bleibt).
 - Überwachung: Meldung erst nach 2 Fehlläufen in Folge, einmal; Entwarnung bei Wiederherstellung. Laufzeit max. 60 s.
 - Grenze: Ist nexifyai.de vollständig aus, scheitert auch die Slack-Meldung (sie läuft über die Website). Der Ausfall steht dann nur in `journalctl -u nexify-ueberwachung`.
+- Der vorhandene Lagebericht nutzt den bereits vorhandenen unabhängigen Slack-Helfer des Servers; seine Website-Ergänzung liest ausschließlich Statuscodes, Antwortzeiten und Messzeitpunkt. Keine zusätzlichen Schlüssel, kein zusätzlicher Zeitplan. Eine Messung älter als 15 Minuten wird als OFFEN gemeldet, nicht als gesund.
+- Überwachung: vier Abrufe parallel mit je 10 s Grenze; Meldung höchstens 8 s. Fehlgeschlagene Entwarnung bleibt offen und wird erneut versucht.
+
+## Rückweg dieser Ergänzung
+Vor Austausch liegen Zeitstempel-Sicherungen von `ueberwachung.py` und `/usr/local/bin/nexify-lagebericht.sh` in `/opt/nexify-worker/backups/`. Alte Dateien zurückkopieren; die unveränderten Timer bleiben bestehen. Kein Schlüssel und keine Daten werden gelöscht.
 
 ## Rückweg
 ```
@@ -25,3 +31,4 @@ Schlüssel sperren: Projekt-Geheimnis `SERVER_WORKER_TOKEN_SHA256` ändern – d
 
 ## Installation / Aktualisierung
 Aus dem Projekt: `scripts/teileklar_cutout.py` und dieses Verzeichnis auf den Server kopieren, `bash install.sh` als root.
+`status_report.py` wird vom bestehenden Lagebericht über `/opt/nexify-worker/venv/bin/python /opt/nexify-worker/status_report.py` aufgerufen. Der Bericht ist ein Aggregat, keine Abnahme, keine Umsatz- oder Kostenmessung. Erster neuer Freistellungs-Upload und echtes iPhone bleiben unbestätigt.

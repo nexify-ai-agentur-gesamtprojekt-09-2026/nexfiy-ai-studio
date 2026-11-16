@@ -1,7 +1,6 @@
 """Konkrete Betriebsregeln ohne Netzwerk oder Zugangsdaten prüfen."""
 import unittest
-from datetime import datetime, timezone
-from ueberwachung import CHECKS, update_state, daily_report
+from ueberwachung import CHECKS, update_state
 
 class MonitoringRules(unittest.TestCase):
     def setUp(self):
@@ -26,25 +25,12 @@ class MonitoringRules(unittest.TestCase):
         update_state(state, self.good, lambda *_: True)
         self.assertFalse(state["gemeldet"])
 
-    def test_daily_report_only_after_nine_and_once_per_day(self):
-        calls = []
-        notify = lambda *args: calls.append(args) or True
-        state = {}
-        daily_report(state, self.good, notify, datetime(2026, 11, 16, 8, 55, tzinfo=timezone.utc))
-        self.assertEqual(calls, [])
-        daily_report(state, self.good, notify, datetime(2026, 11, 16, 9, 0, tzinfo=timezone.utc))
-        daily_report(state, self.good, notify, datetime(2026, 11, 16, 9, 5, tzinfo=timezone.utc))
-        self.assertEqual(len(calls), 1)
-        self.assertEqual(state["bericht_tag"], "2026-11-16")
-
-    def test_failed_daily_delivery_is_bounded_and_never_claimed(self):
-        state = {}
-        calls = []
-        notify = lambda *args: calls.append(args) and False
-        for _ in range(10):
-            daily_report(state, self.good, notify, datetime(2026, 11, 16, 9, 0, tzinfo=timezone.utc))
-        self.assertEqual(len(calls), 7)
-        self.assertNotIn("bericht_tag", state)
+    def test_failed_alert_is_retried(self):
+        state = {"fehlfolge": 1}
+        update_state(state, self.bad, lambda *_: False)
+        self.assertFalse(state["gemeldet"])
+        update_state(state, self.bad, lambda *_: True)
+        self.assertTrue(state["gemeldet"])
 
 if __name__ == "__main__":
     unittest.main()
