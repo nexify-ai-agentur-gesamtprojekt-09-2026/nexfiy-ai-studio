@@ -1,4 +1,9 @@
 # Roadmap
+## App-Installation unter dem Footer (16.11.)
+- [ ] Gemeinsame, designgerechte Installationsleiste mit Browser-Installation und gerätespezifischer Anleitung ergänzen
+- [ ] Generierten App-Worker nur auf der veröffentlichten Website aktivieren; Vorschau, private Seiten und Schnittstellen nicht zwischenspeichern
+- [ ] Installation, Abbrechen, Anleitung und bereits installierte Ansicht auf Desktop/Handy prüfen; echte Geräteinstallation benötigt Veröffentlichung
+
 ## Hintergrund und Tiefenwirkung (16.11.)
 - [x] Markierte Hintergrundlinie als vollbreiten Abschnittsrand reproduziert und entfernt; Datenzeilen behalten ihre Orientierungslinien
 - [x] Glasflächen, Chat-Einstiege und freigestellte Figuren mit abgestimmten Lichtkanten und Kontaktschatten verstärkt; Desktop/Handy ohne Überlauf geprüft
