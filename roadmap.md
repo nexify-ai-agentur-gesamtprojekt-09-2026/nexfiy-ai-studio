@@ -1,4 +1,9 @@
 # Roadmap
+## Glasflächen nach Apple-Design-Prüfung (16.11.)
+- [ ] Kontrast, Durchsicht und Lichtkanten bestehender Flächen in heller/dunkler Ansicht messen und ausschließlich Materialwerte verfeinern
+- [ ] Unveränderte Header-Innenabstände, Seiten-/Chat-Geometrie und Footer-Ausrichtung vor/nach Änderung vergleichen
+- [ ] Menüs, Chat-Eingabe und Installationshinweise mit erhöhtem Kontrast, reduzierter Transparenz/Bewegung und vorhandenen Tests prüfen
+
 ## App-Installation unter dem Footer (16.11.)
 - [x] Gemeinsame Glas-Installationsleiste mit Browser-Installation und Anleitungen für iPhone/iPad, Android und Computer ergänzt; exakt mit Rechtslinks ausgerichtet (beide x=59,28px bei 1705px)
 - [x] Gemäß Geräteauswahl nur Installation mit Internet umgesetzt; kein Offline-Worker und keine Zwischenspeicherung hinzugefügt, Manifest und vier App-Symbole erreichbar
