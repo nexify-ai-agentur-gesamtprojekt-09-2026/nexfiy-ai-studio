@@ -15,13 +15,15 @@ REQUIRED = [
     "muted-foreground", "accent", "accent-foreground", "destructive", "border", "border-strong",
     "input", "ring", "signal-text", "radius", "font-brand-text", "font-brand-display",
 ]
-# (Text, Fläche, Mindestkontrast) – 4.5 für Fließtext, 3.0 für Bedienelemente und Fokus
+# (Text, Fläche, Mindestkontrast[, nur Hinweis]) – 4.5 für Text, 3.0 für Fokus und Indikatoren ohne Text.
+# primary auf background ist nur ein Hinweis: Schaltflächen tragen Text; als Rahmen, Fokus oder Schrift
+# dann --ring bzw. --signal-text verwenden.
 PAIRS = [
     ("foreground", "background", 4.5), ("card-foreground", "card", 4.5),
     ("popover-foreground", "popover", 4.5), ("primary-foreground", "primary", 4.5),
     ("secondary-foreground", "secondary", 4.5), ("muted-foreground", "background", 4.5),
     ("muted-foreground", "card", 4.5), ("accent-foreground", "accent", 4.5),
-    ("primary", "background", 3.0), ("ring", "background", 3.0),
+    ("primary", "background", 3.0, True), ("ring", "background", 3.0),
     ("signal-text", "background", 4.5), ("signal-text", "card", 4.5),
 ]
 
@@ -101,7 +103,7 @@ def main(paths):
                 print("HINWEIS keine helle Ansicht definiert – nur zulässig, wenn das Projekt sie bewusst nicht anbietet")
                 continue
             tokens.update(merged["light"])
-        for fg_name, bg_name, minimum in PAIRS:
+        for fg_name, bg_name, minimum, *soft in PAIRS:
             fg = to_rgb(resolve(tokens, tokens.get(fg_name, "")))
             bg = to_rgb(resolve(tokens, tokens.get(bg_name, "")))
             if fg is None or bg is None:
@@ -109,8 +111,9 @@ def main(paths):
                 continue
             ratio = contrast(fg, bg)
             ok = ratio >= minimum
-            failures += 0 if ok else 1
-            print(f"{'OK     ' if ok else 'ZU NIEDRIG'} {theme:5} {fg_name} auf {bg_name}: {ratio:.2f} (min. {minimum})")
+            label = "OK     " if ok else ("HINWEIS" if soft else "ZU NIEDRIG")
+            failures += 0 if ok or soft else 1
+            print(f"{label} {theme:5} {fg_name} auf {bg_name}: {ratio:.2f} (min. {minimum})")
     print("Ergebnis:", "bestanden" if failures == 0 else f"{failures} Mängel")
     return 1 if failures else 0
 
