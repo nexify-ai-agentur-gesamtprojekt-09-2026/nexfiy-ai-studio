@@ -1,0 +1,71 @@
+/* TEILEKLAR-Katalog: Suche, Kategorien, Artikelkarten, Artikelseite. Nur semantische Rollen; Bilder auf heller Fläche wie im bestehenden Shop. */
+:root:root #atelier .site-teileklar .tkc-browser { display: grid; gap: 24px; padding-block: clamp(24px, 4vw, 48px); scroll-margin-top: 96px; }
+:root:root #atelier .site-teileklar .tkc-search { display: grid; gap: 8px; max-width: 760px; }
+:root:root #atelier .site-teileklar .tkc-search label { font-size: 14px; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-search-row { display: flex; gap: 8px; min-width: 0; }
+:root:root #atelier .site-teileklar .tkc-search-row input { flex: 1 1 auto; min-width: 0; min-height: 48px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--secondary); color: var(--foreground); font: inherit; font-size: 16px; }
+:root:root #atelier .site-teileklar .tkc-search-row input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+:root:root #atelier .site-teileklar .tkc-search-row button { min-height: 48px; flex: 0 0 auto; }
+:root:root #atelier .site-teileklar .tkc-categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+:root:root #atelier .site-teileklar .tkc-categories a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--glass-content-fill); color: var(--foreground); font-size: 14px; text-decoration: none; white-space: nowrap; }
+:root:root #atelier .site-teileklar .tkc-categories a span { font-size: 12px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+:root:root #atelier .site-teileklar .tkc-categories a[aria-current="true"] { background: var(--primary); color: var(--primary-foreground); border-color: transparent; font-weight: 650; }
+:root:root #atelier .site-teileklar .tkc-categories a[aria-current="true"] span { color: inherit; opacity: .75; }
+:root:root #atelier .site-teileklar .tkc-categories a:focus-visible, :root:root #atelier .site-teileklar .tkc-card-link:focus-visible, :root:root #atelier .site-teileklar .tkc-pagination a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+:root:root #atelier .site-teileklar .tkc-results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; }
+:root:root #atelier .site-teileklar .tkc-results-head h2 { margin: 0; font-size: clamp(22px, 2.4vw, 30px); overflow-wrap: anywhere; }
+:root:root #atelier .site-teileklar .tkc-results-count { margin: 0; font-size: 14px; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-results-count a { color: var(--foreground); text-underline-offset: 4px; }
+:root:root #atelier .site-teileklar .tkc-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+:root:root #atelier .site-teileklar .tkc-grid > li { min-width: 0; display: flex; }
+:root:root #atelier .site-teileklar .tkc-card { flex: 1 1 auto; display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-bottom: 16px; border-radius: var(--radius-xl, 16px); border: 1px solid var(--border); background: var(--glass-content-fill); box-shadow: var(--glass-elevation); overflow: hidden; transition: transform .18s, border-color .18s; }
+:root:root #atelier .site-teileklar .tkc-card:hover { border-color: color-mix(in oklab, var(--primary) 60%, transparent); transform: translateY(-2px); }
+:root:root #atelier .site-teileklar .tkc-card-link { display: flex; flex-direction: column; gap: 8px; color: var(--foreground); text-decoration: none; border-radius: inherit; }
+:root:root #atelier .site-teileklar .tkc-image { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 16px; background: oklch(0.985 0 0); }
+:root:root #atelier .site-teileklar .tkc-image img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+:root:root #atelier .site-teileklar .tkc-image.is-empty { background: var(--secondary); color: var(--muted-foreground); font-size: 13px; }
+:root:root #atelier .site-teileklar .tkc-card-brand { padding-inline: 16px; font-family: var(--font-label); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); overflow-wrap: anywhere; }
+:root:root #atelier .site-teileklar .tkc-card-name { margin: 0; padding-inline: 16px; font-size: 15px; font-weight: 600; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: calc(1.45em * 2); }
+:root:root #atelier .site-teileklar .tkc-card-price { margin: auto 0 0; padding-inline: 16px; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; }
+:root:root #atelier .site-teileklar .tkc-card-price small { display: block; margin-top: 2px; font-size: 11px; font-weight: 400; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-card-stock { margin: 0; padding-inline: 16px; font-size: 12px; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-card-stock[data-available] { color: var(--primary); }
+:root:root #atelier .site-teileklar .tkc-empty { display: grid; gap: 12px; padding: clamp(20px, 4vw, 32px); border-radius: 16px; border: 1px dashed var(--border-strong); }
+:root:root #atelier .site-teileklar .tkc-empty h3 { margin: 0; font-size: 20px; overflow-wrap: anywhere; }
+:root:root #atelier .site-teileklar .tkc-empty p { margin: 0; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-pagination { display: flex; justify-content: center; align-items: center; gap: 16px; }
+:root:root #atelier .site-teileklar .tkc-pagination :is(a, span[aria-disabled]) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--foreground); text-decoration: none; font-size: 14px; }
+:root:root #atelier .site-teileklar .tkc-pagination span[aria-disabled] { opacity: .4; }
+:root:root #atelier .site-teileklar .tkc-page-status { font-size: 14px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+:root:root #atelier .site-teileklar .tkc-legal { margin: 0; max-width: 72ch; font-size: 13px; line-height: 1.6; color: var(--muted-foreground); }
+
+/* Artikelseite */
+:root:root #atelier .site-teileklar .tkc-product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; padding-block: clamp(24px, 4vw, 48px); }
+:root:root #atelier .site-teileklar .tkc-product .tkc-image { border-radius: var(--radius-xl, 16px); padding: clamp(16px, 4vw, 40px); box-shadow: var(--glass-elevation); }
+:root:root #atelier .site-teileklar .tkc-product-info { display: grid; gap: 16px; min-width: 0; }
+:root:root #atelier .site-teileklar .tkc-product-info h1 { margin: 0; font-size: clamp(26px, 3vw, 40px); line-height: 1.15; overflow-wrap: anywhere; }
+:root:root #atelier .site-teileklar .tkc-product-price { margin: 0; font-size: clamp(28px, 3vw, 36px); font-weight: 700; font-variant-numeric: tabular-nums; }
+:root:root #atelier .site-teileklar .tkc-product-price small { display: block; font-size: 13px; font-weight: 400; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+:root:root #atelier .site-teileklar .tkc-badges li { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border-strong); font-size: 12px; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-specs { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0; margin: 0; border-top: 1px solid var(--border); }
+:root:root #atelier .site-teileklar .tkc-specs :is(dt, dd) { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+:root:root #atelier .site-teileklar .tkc-specs dt { padding-right: 24px; color: var(--muted-foreground); }
+:root:root #atelier .site-teileklar .tkc-specs dd { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+:root:root #atelier .site-teileklar .tkc-notice { margin: 0; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-strong); background: var(--glass-content-fill); font-size: 14px; line-height: 1.6; }
+:root:root #atelier .site-teileklar .tkc-related { padding-bottom: clamp(24px, 4vw, 48px); display: grid; gap: 16px; }
+:root:root #atelier .site-teileklar .tkc-related h2 { margin: 0; font-size: 22px; }
+:root:root #atelier .site-teileklar .tkc-category-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+:root:root #atelier .site-teileklar .tkc-category-grid a { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 64px; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--border); background: var(--glass-content-fill); box-shadow: var(--glass-elevation); color: var(--foreground); text-decoration: none; font-weight: 600; }
+:root:root #atelier .site-teileklar .tkc-category-grid a:hover { border-color: color-mix(in oklab, var(--primary) 60%, transparent); }
+:root:root #atelier .site-teileklar .tkc-category-grid a span { font-weight: 400; font-size: 13px; color: var(--muted-foreground); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 760px) {
+  :root:root #atelier .site-teileklar .tkc-product { grid-template-columns: 1fr; }
+  :root:root #atelier .site-teileklar .tkc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  :root:root #atelier .site-teileklar .tkc-card-name { padding-inline: 12px; font-size: 14px; }
+  :root:root #atelier .site-teileklar :is(.tkc-card-brand, .tkc-card-price, .tkc-card-stock) { padding-inline: 12px; }
+  :root:root #atelier .site-teileklar .tkc-card-price { font-size: 18px; }
+  :root:root #atelier .site-teileklar .tkc-image { padding: 10px; }
+  :root:root #atelier .site-teileklar .tkc-search-row button { padding-inline: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { :root:root #atelier .site-teileklar .tkc-card { transition: none; } :root:root #atelier .site-teileklar .tkc-card:hover { transform: none; } }
