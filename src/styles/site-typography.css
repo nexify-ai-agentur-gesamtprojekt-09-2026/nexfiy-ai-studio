@@ -338,7 +338,7 @@
 }
 
 .site-system-page {
-  --type-page-title: 48px;
+  --type-page-title: 80px;
 }
 .site-system-page .status-kicker {
   font-family: var(--font-brand-mono);
@@ -380,13 +380,13 @@
 }
 @container website (max-width: 1000px) {
   :root:root #atelier.site-shared .home-concept {
-    --type-page-title: 40px;
+    --type-page-title: 52px;
   }
 }
 @container website (max-width: 600px) {
   :root:root #atelier.site-shared :is(.home-concept, .site-footer) {
-    --type-page-title: 32px;
-    --type-section-title: 27px;
+    --type-page-title: 38px;
+    --type-section-title: 30px;
   }
   :root:root #atelier.site-shared .home-concept .pc-section h2 {
     margin-top: 12px;
@@ -399,11 +399,11 @@
 }
 @media (max-width: 1000px) {
   .site-system-page {
-    --type-page-title: 40px;
+    --type-page-title: 52px;
   }
 }
 @media (max-width: 600px) {
   .site-system-page {
-    --type-page-title: 32px;
+    --type-page-title: 38px;
   }
 }
