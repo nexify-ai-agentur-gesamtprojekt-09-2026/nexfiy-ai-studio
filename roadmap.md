@@ -206,10 +206,13 @@
 - [ ] MCP lokal in der Desktop-App: Einrichtung durch Pascal (Einstellungen → Connectors → Local MCP servers); hier Verbindung zu nexifyai.de/mcp per Karte
 - [x] Nächtliche Aufträge 16.11. 07:33 UTC testweise ausgelöst: beide 200 mit Anmeldung; erster Kaltstart lief in 5-s-Zeitlimit (07:30), Zeitplan danach zurückgesetzt. Erster echter Nachtlauf 17.11. 02:00 UTC prüfen
 - [x] nexifyai.cloud + www leiten seit 16.11. 07:47 UTC über Tunnel (Server 1, eigener Port 8913) dauerhaft auf nexifyai.de, Pfad bleibt; Unteradressen/MX unverändert; Rückweg /root/nexifyai-cloud-weiterleitung-rueckweg.md. Hinweis: Hauptadresse geht per vorhandener Cloudflare-Regel erst auf www (2 Sprünge) – Regel nicht änderbar mit vorhandenem Zugang
-- [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
-- [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
+- [x] Shop: Sortierung (empfohlen, Preis auf/ab, Name) und Varianten als ein Artikel mit Größenauswahl – 3.720 Artikel → 3.349 Kacheln (16.11.)
+- [x] Shop: 397 von 410 Produktfotos freigestellt (13 bewusst ausgelassen: Rand nicht weiß), Originale erhalten; Werkzeug scripts/teileklar_cutout.py
+- [ ] Neue Produktfotos aus dem Nachtlauf werden nicht automatisch freigestellt – Werkzeug bei Bedarf erneut ausführen
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
 - [x] Skill „NeXify-Kundendesign-Standard“ aktiv (mit Kontrastprüfung), Kopie + ZIP unter Dateien/skills (16.11.)
 - [x] Helle Ansicht: grüne Status-/Aktivschrift unter 4.5:1 → neue Rolle --signal-text (Shop „Auf Lager“ 2,55 → 5,26:1); Fokusrahmen Katalog über --ring
-- [ ] Produktdarstellung überall (NeXify-Produkte, Leistungen, TEILEKLAR) überarbeiten: Anthropic-Vorlagen für kleine Unternehmen als Prüfhilfe (Quelle festhalten), Textvorschläge über DeepSeek (deepseek-v4.1-flash-1017, Reasoning high) – ORACLE bleibt unverändert, keine erfundenen Fakten
+- [x] Produktdarstellung: 16 Seiten mit Anthropic-Prüfregeln (knowledge-work-plugins e91a134) durch DeepSeek bewertet, 26 geprüfte Textverbesserungen auf 26 Dateien übernommen, Bericht unter Dateien/produktdarstellung (16.11.)
+- [ ] Gesprochene Filmtexte enthalten Du-Form und unbelegte Superlative („Effizienter geht es wirklich nicht“, „höchste Qualität“), auf TEILEKLAR eine nicht belegte Kundenstimme – Untertitel folgen dem Ton, Änderung nur durch neue Aufnahme oder andere Filmzuordnung (Entscheidung Pascal)
+- [ ] Produktnamen vereinheitlichen? („NeX AIFly Suite“, „NeX Agentic AIFly“, „NeX“, „FACTORY“ ohne Erklärung) – Markenentscheidung Pascal
 - [ ] Arbeitsmodus laut „Autonomous Finisher Protocol“ (16.11.): Lücken selbst finden und schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten)
