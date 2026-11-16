@@ -142,12 +142,16 @@
 - [ ] Shop füllen nach .de-Verbindung – Quelle der 3720 Produkte klären
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
 - [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
-- [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertig (Build OK) – wartet auf Pascals Vergleich und Annahme/Ablehnung
+- [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertigstellen und Vergleich Startseite, Kontakt, Produktseite (hell gegen aktuell) zeigen; bestehende Website und TEILEKLAR unverändert lassen
 
 ## Gesamtfertigstellung (16.11.)
 - [ ] Anfragen echt speichern + Slack-Meldung (Kontakt, Partner, Termin, Gutschein, Teilefrage)
 - [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
 - [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
+  - [x] Import, Liste, Suche, Kategorien, Artikelseite, Seitenwechsel
+  - [ ] Sortimentsbereiche statt fehlerhafter Lieferantenkategorien (Luftfilter unter „Sicherheitswesten“)
+  - [ ] Eigene Bildkopien: Lieferanten-CDN liefert nur 275 von 3713 Bildern, alter Shop 408 – Rest als „Kein Bild“
+  - [ ] Zeitplan läuft erst nach Veröffentlichung gegen die echte Adresse – Lauf prüfen
 - [ ] Texte zu Formular/Datenschutz an echtes Absenden anpassen
 - [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
 - [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
