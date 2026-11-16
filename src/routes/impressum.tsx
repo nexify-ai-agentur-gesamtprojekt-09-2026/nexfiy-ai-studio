@@ -290,8 +290,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
         </div>

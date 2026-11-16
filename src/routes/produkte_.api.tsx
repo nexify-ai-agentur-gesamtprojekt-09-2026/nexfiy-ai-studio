@@ -396,8 +396,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-api" />
         </div>
@@ -461,8 +461,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-                Schnittstelle nach Ihrem Datenfluss; die Nutzung läuft über ein Guthaben, das Sie vorab
-                aufladen.
+                Schnittstelle nach Ihrem Datenfluss; die Nutzung läuft über ein Guthaben, das Sie
+                vorab aufladen.
               </p>
             </div>
           </details>

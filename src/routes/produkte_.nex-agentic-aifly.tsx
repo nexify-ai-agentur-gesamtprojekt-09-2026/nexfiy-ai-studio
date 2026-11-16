@@ -232,8 +232,8 @@ function Index() {
               <h3>Ein Arbeitsbeispiel als Ausgangspunkt</h3>
               <p>
                 Beschreiben Sie einen wiederkehrenden Fall und die beteiligten Systeme. Daraus
-                leiten wir Aufgabe, Grenzen und Prüfung ab. Private Dokumente und
-                Zugangsdaten werden nicht über den öffentlichen Website-Chat übergeben.
+                leiten wir Aufgabe, Grenzen und Prüfung ab. Private Dokumente und Zugangsdaten
+                werden nicht über den öffentlichen Website-Chat übergeben.
               </p>
             </div>
           </section>
@@ -412,8 +412,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
         </div>
