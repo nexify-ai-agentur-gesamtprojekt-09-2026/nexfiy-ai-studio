@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -50,6 +51,8 @@ function Index() {
                 <a href="#content-nex2fly-nex2fly-customer-3-2">24 Stunden testen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-nex2fly-nex2fly-customer-4-3">Ihr Zugang, Ihr Bereich<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="suite" label="Eigenständig arbeiten" title="Ihr Arbeitsbereich, nicht Ihr Agenturauftrag." summary="Die Suite bündelt KI-Gespräche und Arbeitsmaterial. Für die Auswahl zählt, ob Sie selbst in einer Oberfläche arbeiten möchten." facts={[{"label": "Passt zu", "content": "Menschen und Teams, die Gespräche, Aufgaben, Dokumente und Projektwissen gemeinsam organisieren möchten."}, {"label": "Voraussetzung", "content": "Konto, bestätigter Arbeitsbereich und Produktaktivierung. Die Anmeldung allein schaltet den Arbeitsbereich nicht frei."}, {"label": "Kostenprinzip", "content": "Produkttarif und KI-Modellbudget sind getrennt zu betrachten. Die Tarife stehen noch zur Freigabe."}, {"label": "Heute hier", "content": "Konto erstellen und Produktinformationen vergleichen. Den beschriebenen 24-Stunden-Test starten Sie erst nach Aktivierung selbst."}]} example="Sie möchten aus vorhandenen Notizen einen prüfbaren Projektentwurf erarbeiten. Die Suite passt, wenn Sie Gespräch, Quellen und Aufgabe gemeinsam bearbeiten möchten; prüfen Sie zunächst die für Ihren Zugang aktivierten Werkzeuge." links={[{"label": "Konto erstellen", "href": "/registrieren"}, {"label": "API vergleichen", "href": "/produkte/api"}, {"label": "Datenhinweise", "href": "/datenschutz"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-1-0" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-1-0-title">
                   <div>

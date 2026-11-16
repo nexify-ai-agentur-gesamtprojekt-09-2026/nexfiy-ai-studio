@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
@@ -49,6 +50,8 @@ function Index() {
                 <a href="#content-aifly-oracle-oracle-2-1">Wer entscheidet was<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-aifly-oracle-oracle-3-2">Was Sie heute auf der Website erleben<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="oracle" label="Öffentliche Produktberatung" title="Suite oder API? Mit einer konkreten Frage beginnen." summary="Im Website-Chat hilft ORACLE bei der Produktauswahl. Diese Beratung ist von einer individuell vereinbarten Agentenlösung zu unterscheiden." facts={[{"label": "Heute nutzbar", "content": "Vorhaben allgemein beschreiben, Suite und API vergleichen und den passenden öffentlichen Einstieg öffnen."}, {"label": "Grundlage", "content": "Ein begrenzter Katalog öffentlicher Produktinformationen, keine Kontodaten oder privaten Projektunterlagen."}, {"label": "Grenzen", "content": "Keine Verträge, Zahlungen, Terminbuchungen, Guthabenprüfung oder Produktfreischaltung."}, {"label": "Für Ihr Vorhaben", "content": "Arbeitsoberfläche und Teamwissen sprechen für die Suite; KI innerhalb eigener Software spricht für die API."}]} example="Sie möchten KI im Team einsetzen, wissen aber noch nicht, ob eine eigene Anwendung nötig ist. Beschreiben Sie das gewünschte Ergebnis ohne vertrauliche Angaben; ORACLE erklärt die beiden Wege." links={[{"label": "Suite ansehen", "href": "/produkte/nex2fly"}, {"label": "API ansehen", "href": "/produkte/api"}, {"label": "Datenhinweise", "href": "/datenschutz"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-aifly-oracle-oracle-1-0" tabIndex={-1} aria-labelledby="content-aifly-oracle-oracle-1-0-title">
                   <div>

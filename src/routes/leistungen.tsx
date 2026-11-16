@@ -1,3 +1,4 @@
+import { ProductOverview } from "@/components/site/ProductOverview";
 import { GuideNavigation } from "@/components/site/GuideNavigation";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
@@ -60,6 +61,8 @@ function Index() {
                 <a href="#content-services-services-customer-2-1">Systeme &amp; KI<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-services-services-customer-3-2">Wachstum &amp; Kampagnen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
+              
+              <ProductOverview id="services" label="Persönlich begleiteter Auftrag" title="Ein Ergebnis beauftragen. Produkte getrennt wählen." summary="Agenturleistungen werden für Ihr Vorhaben entwickelt. Suite und API sind eigene Produktwege, nicht automatisch Bestandteil jedes Auftrags." facts={[{"label": "Leistungsfelder", "content": "Marke und Website, Apps und Automatisierung sowie Kampagnen mit passender Zielseite."}, {"label": "Umfang", "content": "Das Angebot benennt Ergebnisse, benötigte Materialien, Mitwirkung und Prüfung."}, {"label": "Kostenprinzip", "content": "Einmalige Umsetzung, optionale Betreuung und externe beziehungsweise verbrauchsabhängige Kosten getrennt."}, {"label": "Ihr Einstieg", "content": "Konkreten Fall schildern oder die Pakete vergleichen. Eine Anfrage ist keine Beauftragung."}]} example="Ihre Kunden fragen immer wieder nach denselben Informationen. Der erste Auftrag kann eine verständliche Website sein; eine KI-Anbindung wird nur ergänzt, wenn sie zum vereinbarten Ziel gehört." links={[{"label": "Pakete vergleichen", "href": "/leistungsumfang"}, {"label": "Vorhaben schildern", "href": "/kontakt"}, {"label": "Vertragsgrundlagen", "href": "/vertragsgrundlagen"}]} />
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-services-services-customer-1-0" tabIndex={-1} aria-labelledby="content-services-services-customer-1-0-title">
                   <div>
@@ -312,7 +315,7 @@ function ImportedSectionKlarheitVorDemErsten() {
               </svg>
             </summary>
             <div className={"hc-service-body"}>
-              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist noch keine Beauftragung.</p>
+              <p>Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene Systeme und Ihre wichtigste Frage. Das Formular bereitet eine E-Mail vor, die Sie selbst versenden. Die Anfrage ist noch keine Beauftragung.</p>
             </div>
           </details>
         </div>
