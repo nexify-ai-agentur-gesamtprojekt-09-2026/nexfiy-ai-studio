@@ -208,3 +208,4 @@
 - [ ] nexifyai.cloud (nur Hauptadresse + www) auf nexifyai.de weiterleiten, Subdomains wie brain.nexifyai.cloud unverändert
 - [ ] Shop: Artikel sinnvoll sortieren, Größen-/Varianten als ein Artikel mit Auswahl statt mehrfacher Kacheln
 - [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
+- [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
