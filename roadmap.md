@@ -1,4 +1,9 @@
 # Roadmap
+## Durchgängige Typografie (16.11.)
+- [ ] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abstimmen
+- [ ] Chat-Einstieg, Antworten, Listen und Eingabe mit derselben typografischen Hierarchie vereinheitlichen
+- [ ] Desktop, Handy, verschobene Chatbreiten und reale Beratung prüfen; Inhalte und Berechtigungen unverändert lassen
+
 ## Glas und Header-Veredelung (16.11.)
 - [x] Durchsichtige und milchige Glasflächen mit kohärenten Lichtkanten, Verläufen und Tiefenwirkung verfeinert
 - [x] Header schmaler: rechts/oben/unten exakt 8px Innenabstand gemessen, 84px Gesamthöhe auf Desktop
