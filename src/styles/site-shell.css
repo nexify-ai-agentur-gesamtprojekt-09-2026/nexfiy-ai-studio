@@ -1104,3 +1104,9 @@
   color: var(--muted-foreground);
   font-weight: 400;
 }
+/* Kartenraum: Innenraum 22–36 px, Abstand zwischen Karten 16 px. */
+:root:root #atelier.site-shared :is(.pc-module, .ws-card) { padding: 28px; }
+@container website (max-width: 600px) {
+  :root:root #atelier.site-shared :is(.pc-module, .ws-card) { padding: 22px; }
+}
+:root:root #atelier.site-shared :is(div, ul, section):has(> :is(.pc-module, .ws-card, .tkc-card) + :is(.pc-module, .ws-card, .tkc-card)) { gap: 16px; }
