@@ -170,6 +170,7 @@ export type Database = {
           image_checked_at: string | null
           image_checked_src: string
           image_path: string
+          image_pending: boolean | null
           image_src: string
           name: string
           oe_number: string
@@ -195,6 +196,7 @@ export type Database = {
           image_checked_at?: string | null
           image_checked_src?: string
           image_path?: string
+          image_pending?: boolean | null
           image_src?: string
           name: string
           oe_number?: string
@@ -220,6 +222,7 @@ export type Database = {
           image_checked_at?: string | null
           image_checked_src?: string
           image_path?: string
+          image_pending?: boolean | null
           image_src?: string
           name?: string
           oe_number?: string
