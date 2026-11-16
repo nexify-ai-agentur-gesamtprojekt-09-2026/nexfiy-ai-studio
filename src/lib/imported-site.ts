@@ -101,7 +101,7 @@ export function useChatPanel(defaultOpen: boolean) {
   useEffect(() => {
     if (!chatOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open], .tk-mobile-nav[open]")) closeChat();
+      if (event.key === "Escape" && !event.defaultPrevented && !document.querySelector('[role="dialog"], .site-header details[open], .tk-mobile-nav[open]')) closeChat();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);

@@ -1,5 +1,5 @@
 /* The final footer band follows the same inner grid as the legal links above. */
-:root:root #atelier.site-shared .pwa-install-band { width: 100%; max-width: var(--layout-home-wide-max); box-sizing: border-box; padding: 0 var(--layout-page-padding) max(32px,env(safe-area-inset-bottom)); margin-inline: auto; color: var(--foreground); font-family: var(--font-brand-text); }
+:root:root #atelier.site-shared .pwa-install-band { width: 100%; max-width: var(--layout-home-wide-max); box-sizing: border-box; padding: 0 var(--layout-page-padding) calc(80px + env(safe-area-inset-bottom)); margin-inline: auto; color: var(--foreground); font-family: var(--font-brand-text); }
 :root:root #atelier.site-shared .pwa-install-bar { display: grid; grid-template-columns: 56px minmax(0,1fr) auto; align-items: center; gap: 24px; padding: 24px; background: var(--glass-frosted); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); backdrop-filter: blur(24px) saturate(1.2); }
 :root:root #atelier.site-shared .pwa-install-mark { width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 8px 6px var(--figure-shadow)) drop-shadow(0 -1px 1px var(--figure-rim)); }
 :root:root #atelier.site-shared .pwa-install-copy { min-width: 0; }
@@ -11,9 +11,13 @@
 :root:root #atelier.site-shared .pwa-install-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
 :root:root #atelier.site-shared .pwa-install-actions button { min-height: 44px; font-size: var(--type-detail); letter-spacing: 0; }
 :root:root #atelier.site-shared .pwa-install-actions button:first-child { min-height: 48px; padding-inline: 20px; }
-:root:root #atelier.site-shared .pwa-install-secondary { color: var(--muted-foreground); }
-:root:root #atelier.site-shared .pwa-install-secondary:hover { color: var(--foreground); }
-:root:root #atelier.site-shared .pwa-install-collapsed { display: flex; align-items: center; justify-content: flex-end; }
+:root:root #atelier.site-shared .pwa-install-actions button:first-child { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); border-radius: 999px; box-shadow: var(--elevation-primary); }
+:root:root #atelier.site-shared .pwa-install-actions button:first-child:hover { background: color-mix(in oklab,var(--primary) 90%,var(--foreground)); }
+:root:root #atelier.site-shared .pwa-install-secondary { color: var(--muted-foreground); background: transparent; border-color: transparent; box-shadow: none; }
+:root:root #atelier.site-shared .pwa-install-secondary:hover { color: var(--foreground); background: var(--accent); }
+:root:root #atelier.site-shared .pwa-install-band button:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+:root:root #atelier.site-shared .pwa-install-band button:active { transform: translateY(1px); }
+:root:root #atelier.site-shared .pwa-install-collapsed { display: flex; align-items: center; justify-content: flex-start; }
 :root:root #atelier.site-shared .pwa-install-collapsed button { min-height: 44px; }
 :root:root .pwa-install-overlay { z-index: 100; background: var(--surface-media-glass); backdrop-filter: blur(8px); }
 :root:root .pwa-install-dialog { position: fixed; z-index: 101; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(560px,calc(100% - 32px)); max-height: calc(100dvh - 48px); overflow-y: auto; box-sizing: border-box; padding: 32px; background: var(--popover); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); font-family: var(--font-brand-text); letter-spacing: 0; }
@@ -21,9 +25,13 @@
 .pwa-install-dialog-header > div { min-width: 0; }
 :root:root .pwa-install-dialog h2 { margin: 0 0 8px; font: 600 var(--type-subheading)/1.4 var(--font-brand-display); letter-spacing: 0; }
 .pwa-install-dialog-header p { margin: 0; font-size: var(--type-detail); line-height: 1.7; color: var(--muted-foreground); }
-:root:root .pwa-install-close { flex: 0 0 44px; width: 44px; height: 44px; }
-:root:root .pwa-install-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width: 100%; height: auto; gap: 4px; border-radius: 6px; }
-:root:root .pwa-install-tabs button { min-width: 0; min-height: 44px; padding: 8px; white-space: normal; font-size: var(--type-detail); line-height: 1.4; letter-spacing: 0; }
+:root:root .pwa-install-close { flex: 0 0 44px; width: 44px; height: 44px; background: transparent; border-color: transparent; color: var(--foreground); }
+:root:root .pwa-install-close:hover { background: var(--accent); }
+:root:root .pwa-install-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width: 100%; height: auto; gap: 4px; border-radius: 6px; background: var(--muted); }
+:root:root .pwa-install-tabs button { min-width: 0; min-height: 44px; padding: 8px; white-space: normal; font-size: var(--type-detail); line-height: 1.4; letter-spacing: 0; background: transparent; color: var(--muted-foreground); border-color: transparent; border-radius: 4px; box-shadow: none; }
+:root:root .pwa-install-tabs button[data-state="active"] { background: var(--surface-raised); color: var(--foreground); border-color: var(--border-strong); box-shadow: var(--elevation-media); }
+:root:root .pwa-install-tabs button:hover { color: var(--foreground); }
+:root:root .pwa-install-dialog button:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 .pwa-install-steps { display: grid; gap: 16px; margin: 24px 0; padding-left: 24px; list-style: decimal; font-size: var(--type-conversation); line-height: 1.7; }
 .pwa-install-steps li { padding-left: 8px; }
 .pwa-install-note { margin: 16px 0 0; font-size: var(--type-detail); line-height: 1.7; color: var(--muted-foreground); }

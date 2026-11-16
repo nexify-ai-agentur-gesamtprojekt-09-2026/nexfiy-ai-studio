@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Download, Monitor, Smartphone, Tablet, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { usePwaInstall } from "@/lib/use-pwa-install";
 export function PwaInstallBar() {
   const { device, installed, installing, canPrompt, dismissed, install, dismiss, restore } = usePwaInstall();
   const [helpOpen, setHelpOpen] = useState(false);
+  const installButtonRef = useRef<HTMLButtonElement>(null);
   const [notice, setNotice] = useState<"accepted" | "dismissed" | "error" | null>(null);
 
   const startInstall = async () => {
@@ -30,10 +31,10 @@ export function PwaInstallBar() {
         <div className="pwa-install-devices" aria-label="Geräte"><span><Smartphone aria-hidden="true" />Smartphone</span><span><Tablet aria-hidden="true" />Tablet</span><span><Monitor aria-hidden="true" />Computer</span></div>
         {notice && <p className="pwa-install-note" role="status" data-tone={notice === "error" ? "error" : undefined}>{notice === "accepted" ? "Installation im Browser bestätigt." : notice === "dismissed" ? "Installation abgebrochen. Sie können es später über das Browsermenü erneut versuchen." : "Die Installation konnte nicht geöffnet werden. Nutzen Sie die Hinweise für Ihr Gerät."}</p>}
       </div>
-      <div className="pwa-install-actions"><Button variant="brand" size="xl" onClick={startInstall} disabled={installing}><Download aria-hidden="true" />{installing ? "Browser geöffnet …" : canPrompt ? "Installieren" : device === "ios" ? "Zum Startbildschirm" : "App installieren"}</Button><Button variant="ghost" className="pwa-install-secondary" onClick={dismiss}>Nicht jetzt</Button></div>
+      <div className="pwa-install-actions"><Button ref={installButtonRef} variant="brand" size="xl" onClick={startInstall} disabled={installing}><Download aria-hidden="true" />{installing ? "Browser geöffnet …" : canPrompt ? "Installieren" : device === "ios" ? "Zum Startbildschirm" : "App installieren"}</Button><Button variant="ghost" className="pwa-install-secondary" onClick={dismiss}>Nicht jetzt</Button></div>
     </div>}
     <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
-      <DialogPortal><DialogOverlay className="pwa-install-overlay" /><DialogPrimitive.Content className="pwa-install-dialog">
+      <DialogPortal><DialogOverlay className="pwa-install-overlay" /><DialogPrimitive.Content className="pwa-install-dialog" onCloseAutoFocus={(event) => { event.preventDefault(); installButtonRef.current?.focus({ preventScroll: true }); }}>
         <div className="pwa-install-dialog-header"><div><DialogTitle>NeXify auf Ihrem Gerät</DialogTitle><DialogDescription>Installation und Verfügbarkeit hängen von Ihrem Browser ab.</DialogDescription></div><DialogClose asChild><Button variant="ghost" size="icon" className="pwa-install-close" aria-label="Installationshinweise schließen" title="Schließen"><X aria-hidden="true" /></Button></DialogClose></div>
         <Tabs defaultValue={device}>
           <TabsList className="pwa-install-tabs" aria-label="Gerät auswählen"><TabsTrigger value="ios">iPhone / iPad</TabsTrigger><TabsTrigger value="android">Android</TabsTrigger><TabsTrigger value="desktop">Computer</TabsTrigger></TabsList>
