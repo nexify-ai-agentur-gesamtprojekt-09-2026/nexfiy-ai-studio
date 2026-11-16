@@ -1,4 +1,9 @@
 # Roadmap
+## Stabiler Seitenstart (16.11.)
+- [ ] Den mittig erscheinenden und nach rechts springenden Chat beim Laden reproduzieren und beseitigen
+- [ ] Gemeinsame Seiten-, Schrift- und Medienladeprobleme auf allen Inhaltsseiten prüfen und korrigieren
+- [ ] Kalte Seitenaufrufe und Seitenwechsel auf Desktop/Handy mit Layout-Verschiebungsmessung überprüfen
+
 ## Schriftbild und Informationskonzept (16.11.)
 - [ ] Alle Texte mit klarerer typografischer Hierarchie, gegliederten Überschriften und lesbaren Textmaßen gestalten
 - [ ] Informationsgehalt und längere, konkret gegliederte Inhalte auf allen Inhaltsseiten erweitern, beginnend mit Unternehmen
