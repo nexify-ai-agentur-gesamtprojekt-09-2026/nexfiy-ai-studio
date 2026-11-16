@@ -1,4 +1,9 @@
 # Roadmap
+## Shop- und Werkstattseiten (16.11.)
+- [ ] Alle TEILEKLAR-Seiten auf gemeinsame Darstellung, klare nächste Schritte und widersprüchliche Waren-/Werkstattzusagen prüfen
+- [ ] Shop, Werkstatt, Fahrzeug/Passung und begleitende Seiten im bestehenden Design schärfen; fehlende reale Anbindungen nicht simulieren
+- [ ] Alle TEILEKLAR-Seiten am Desktop/Handy sowie Suche, Anfrageübergabe und Werkzeugwege prüfen
+
 ## Formulare technisch und visuell (16.11.)
 - [ ] Fahrzeug-/Passungsseite und übrige echte Formulare auf Eingabe, Validierung, Zustände, Barrierefreiheit und Darstellung prüfen
 - [ ] Gemeinsame Formularqualität verbessern, ohne erfundene Passung, Zustellung oder Commerce-Funktionen
