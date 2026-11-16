@@ -48,8 +48,8 @@ function ProductDetail({ id }: { id: string }) {
         <h1>Dieser Artikel ist nicht im aktuellen Katalog.</h1>
         <p>Die Artikelnummer „{id}“ wurde nicht gefunden oder wird nicht mehr geführt. Suchen Sie im Katalog oder fragen Sie das Teil direkt an.</p>
         <div className="tk-actions">
-          <Button variant="brand" asChild><a href={`/teileklar/shop?q=${encodeURIComponent(id)}#katalog`}>Im Katalog suchen</a></Button>
-          <Button variant="glass" asChild><a href={`/teileklar/suche?q=${encodeURIComponent(id)}#teilefrage`}>Teil anfragen</a></Button>
+          <a className="nexify-control primary-button" data-variant="primary" href={`/teileklar/shop?q=${encodeURIComponent(id)}#katalog`}>Im Katalog suchen</a>
+          <a className="nexify-control secondary-button" data-variant="secondary" href={`/teileklar/suche?q=${encodeURIComponent(id)}#teilefrage`}>Teil anfragen</a>
         </div>
       </div>
     </section>;
@@ -78,8 +78,8 @@ function ProductDetail({ id }: { id: string }) {
           {product.status_label ? <li>{product.status_label}</li> : null}
         </ul>
         <div className="tk-actions">
-          <Button variant="brand" asChild><a href={inquiry}>Diesen Artikel anfragen</a></Button>
-          <Button variant="glass" asChild><a href="/teileklar/shop#katalog">Zurück zum Katalog</a></Button>
+          <a className="nexify-control primary-button" data-variant="primary" href={inquiry}>Diesen Artikel anfragen</a>
+          <a className="nexify-control secondary-button" data-variant="secondary" href="/teileklar/shop#katalog">Zurück zum Katalog</a>
         </div>
         <p className="tkc-notice">Bestellung und Bezahlung sind auf dieser Seite noch nicht freigeschaltet. Mit einer Anfrage klären wir Verfügbarkeit, Lieferzeit und Gesamtpreis. Ob der Artikel zu Ihrem Fahrzeug passt, bestätigt der Katalog nicht – nennen Sie dafür Ihre Fahrzeugdaten.</p>
         <h2 className="visually-hidden">Artikelmerkmale</h2>
@@ -90,5 +90,5 @@ function ProductDetail({ id }: { id: string }) {
 }
 
 function ProductInformation() {
-  return <><section className="identity-hero is-text-only"><div className="identity-scene"><div className="identity-copy"><span className="hc-kicker">TEILEKLAR / Artikel</span><h1>Welchen Artikel suchen Sie?</h1><p className="identity-body">Wählen Sie einen Artikel im Katalog, um Preis, Artikelnummer, EAN und Merkmale zu sehen. Ein Teil, das Sie dort nicht finden, können Sie direkt anfragen.</p></div></div></section><section className="hc-container pc-supplement tk-shop-body"><h2>Angaben für Ihre Teilefrage</h2><ul className="tk-checklist"><li>Hersteller- oder Artikelnummer, sofern vorhanden</li><li>Fahrzeugmodell, Motor, Baujahr und Schlüsselnummern</li><li>Die benötigte Teileart und Ihre offene Frage</li></ul><div className="tk-actions"><Button variant="brand" asChild><a href="/teileklar/shop#katalog">Zum Katalog</a></Button><Button variant="glass" asChild><a href="/teileklar/suche#teilefrage">Teil anfragen</a></Button></div></section></>;
+  return <><section className="identity-hero is-text-only"><div className="identity-scene"><div className="identity-copy"><span className="hc-kicker">TEILEKLAR / Artikel</span><h1>Welchen Artikel suchen Sie?</h1><p className="identity-body">Wählen Sie einen Artikel im Katalog, um Preis, Artikelnummer, EAN und Merkmale zu sehen. Ein Teil, das Sie dort nicht finden, können Sie direkt anfragen.</p></div></div></section><section className="hc-container pc-supplement tk-shop-body"><h2>Angaben für Ihre Teilefrage</h2><ul className="tk-checklist"><li>Hersteller- oder Artikelnummer, sofern vorhanden</li><li>Fahrzeugmodell, Motor, Baujahr und Schlüsselnummern</li><li>Die benötigte Teileart und Ihre offene Frage</li></ul><div className="tk-actions"><a className="nexify-control primary-button" data-variant="primary" href="/teileklar/shop#katalog">Zum Katalog</a><a className="nexify-control secondary-button" data-variant="secondary" href="/teileklar/suche#teilefrage">Teil anfragen</a></div></section></>;
 }

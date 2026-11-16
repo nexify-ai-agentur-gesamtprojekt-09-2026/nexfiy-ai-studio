@@ -27,7 +27,7 @@ function CatalogMatches({ q }: { q: string }) {
   return <section className="hc-container tkc-browser tkc-related" aria-labelledby="tkc-matches-title">
     <header className="tkc-results-head"><h2 id="tkc-matches-title">Passende Artikel im Katalog</h2><p className="tkc-results-count" role="status">{data.total === 0 ? <>Kein Katalogtreffer für „{q}“ – fragen Sie das Teil unten direkt an.</> : <>{COUNT.format(data.total)} Treffer für „{q}“</>}</p></header>
     {data.items.length ? <ul className="tkc-grid" role="list">{data.items.slice(0, 8).map((item) => <li key={item.id}><CatalogCard item={item} /></li>)}</ul> : null}
-    {data.total > 8 ? <div className="tk-actions"><Button variant="glass" asChild><a href={`/teileklar/shop?q=${encodeURIComponent(q)}#katalog`}>Alle {COUNT.format(data.total)} Treffer ansehen</a></Button></div> : null}
+    {data.total > 8 ? <div className="tk-actions"><a className="nexify-control secondary-button" data-variant="secondary" href={`/teileklar/shop?q=${encodeURIComponent(q)}#katalog`}>Alle {COUNT.format(data.total)} Treffer ansehen</a></div> : null}
   </section>;
 }
 

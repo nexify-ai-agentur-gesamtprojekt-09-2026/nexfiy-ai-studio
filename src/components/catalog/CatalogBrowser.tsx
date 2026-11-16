@@ -55,8 +55,8 @@ export function CatalogBrowser({ result, categories }: { result: CatalogListResu
           <h3>{q ? <>Für „{q}“ gibt es im aktuellen Katalog keinen Treffer.</> : "In dieser Auswahl gibt es keine Artikel."}</h3>
           <p>Prüfen Sie die Schreibweise oder suchen Sie nach Artikelnummer oder EAN. Ein gesuchtes Teil können Sie auch direkt anfragen.</p>
           <div className="tk-actions">
-            <Button variant="brand" asChild><a href={`/teileklar/suche?q=${encodeURIComponent(q)}#teilefrage`}>Teil anfragen</a></Button>
-            <Button variant="glass" asChild><a href={partInquiryPath(q)}>Persönlich nachfragen</a></Button>
+            <a className="nexify-control primary-button" data-variant="primary" href={`/teileklar/suche?q=${encodeURIComponent(q)}#teilefrage`}>Teil anfragen</a>
+            <a className="nexify-control secondary-button" data-variant="secondary" href={partInquiryPath(q)}>Persönlich nachfragen</a>
           </div>
         </div>
       ) : (
