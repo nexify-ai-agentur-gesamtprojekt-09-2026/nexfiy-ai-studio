@@ -217,7 +217,7 @@
   text-decoration: none;
 }
 :root:root #atelier .tk-commerce-header a[aria-current="page"] {
-  color: var(--primary);
+  color: var(--signal-text);
   text-decoration: underline;
   text-underline-offset: 6px;
 }

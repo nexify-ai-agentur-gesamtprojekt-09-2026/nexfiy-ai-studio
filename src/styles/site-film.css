@@ -98,7 +98,7 @@
 }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] {
   background: var(--accent);
-  color: var(--primary);
+  color: var(--signal-text);
 }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:active,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary:active {

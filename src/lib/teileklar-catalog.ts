@@ -155,6 +155,131 @@ export function availabilityLabel(row: Pick<CatalogRow, "stock" | "delivery_note
   return "Verfügbarkeit auf Anfrage";
 }
 
+/** Sortierungen der Katalogliste; der Schlüssel steht so in der Adresse (?sortierung=). */
+export const CATALOG_SORTS = [
+  { key: "empfohlen", label: "Empfohlen" },
+  { key: "preis-auf", label: "Preis aufsteigend" },
+  { key: "preis-ab", label: "Preis absteigend" },
+  { key: "name", label: "Name A–Z" },
+] as const;
+export type CatalogSort = (typeof CATALOG_SORTS)[number]["key"];
+export const DEFAULT_CATALOG_SORT: CatalogSort = "empfohlen";
+
+export function normalizeCatalogSort(value: unknown): CatalogSort {
+  return CATALOG_SORTS.some((sort) => sort.key === value)
+    ? (value as CatalogSort)
+    : DEFAULT_CATALOG_SORT;
+}
+
+/** Preis einer Artikelgruppe: bei unterschiedlichen Ausführungspreisen „ab“ dem günstigsten. */
+export function formatPriceRange(min: number | null, max: number | null): string | null {
+  const low = formatPrice(min);
+  if (low === null) return formatPrice(max);
+  return max !== null && max > (min as number) ? `ab ${low}` : low;
+}
+
+/** Feed-Merkmale nutzen Dezimalpunkte („0.46 kg“); angezeigt wird deutsche Schreibweise. */
+export function germanDecimals(value: string): string {
+  return value.replace(/(\d)\.(\d)/g, "$1,$2");
+}
+
+export interface CatalogVariantSource {
+  id: string;
+  name?: string;
+  specs: CatalogSpec[];
+}
+
+/** Namensteil, in dem sich die Ausführungen unterscheiden (z. B. die Größe „XL“ am Namensende). */
+function nameSuffixes(variants: CatalogVariantSource[]): Map<string, string> | null {
+  const words = variants.map((variant) => (variant.name ?? "").split(" ").filter(Boolean));
+  if (new Set(words.map((list) => list.join(" "))).size < 2) return null;
+  let common = 0;
+  while (words.every((list) => list.length > common && list[common] === words[0]![common]))
+    common++;
+  return new Map(
+    variants.map((variant, index) => [variant.id, words[index]!.slice(common).join(" ")]),
+  );
+}
+
+const VARIANT_IGNORED_SPECS = new Set(["EAN", "Zustand"]);
+
+/**
+ * Bezeichnung je Ausführung: nur Merkmale, die sich zwischen den Ausführungen unterscheiden.
+ * Liefert der Katalog keinen Unterschied, bleibt nur die Artikelnummer – Größen werden nicht erfunden.
+ */
+export function variantLabels(variants: CatalogVariantSource[]): Map<string, string> {
+  const labels = new Map<string, string>();
+  const specLabels = [
+    ...new Set(variants.flatMap((variant) => variant.specs.map((spec) => spec.label))),
+  ].filter((label) => !VARIANT_IGNORED_SPECS.has(label));
+  const differing = specLabels.filter((label) => {
+    const values = new Set(
+      variants.map((variant) => variant.specs.find((spec) => spec.label === label)?.value ?? ""),
+    );
+    return values.size > 1;
+  });
+  const suffixes = nameSuffixes(variants);
+  for (const variant of variants) {
+    const suffix = suffixes?.get(variant.id);
+    if (suffix) {
+      labels.set(variant.id, suffix);
+      continue;
+    }
+    const parts = differing.flatMap((label) => {
+      const value = variant.specs.find((spec) => spec.label === label)?.value;
+      return value ? [`${label} ${germanDecimals(value)}`] : [];
+    });
+    labels.set(variant.id, parts.join(" · "));
+  }
+  const counts = new Map<string, number>();
+  for (const label of labels.values()) counts.set(label, (counts.get(label) ?? 0) + 1);
+  for (const [id, label] of labels) {
+    if (!label) labels.set(id, `Art.-Nr. ${id}`);
+    else if ((counts.get(label) ?? 0) > 1) labels.set(id, `${label} · Art.-Nr. ${id}`);
+  }
+  return labels;
+}
+
+const LETTER_SIZES = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
+/** Rang einer Größenangabe (Kinder 140 < S < M < XL, 42 < 44); null, wenn die Bezeichnung keine Größe ist. */
+export function sizeRank(label: string): number | null {
+  const value = label.replace(/^Größe\s+/, "").trim();
+  const child = /^Kinder\s+(\d{2,3})$/.exec(value);
+  if (child) return -1 + Number(child[1]) / 1000;
+  const letter = LETTER_SIZES.indexOf(value);
+  if (letter >= 0) return letter;
+  const multi = /^([2-6])XL$/.exec(value);
+  if (multi) return LETTER_SIZES.indexOf("XL") + Number(multi[1]) - 1;
+  const number = /^(\d{1,2})(?:[,.](\d))?(?:-\d{1,2})?$/.exec(value);
+  if (number) return 100 + Number(number[1]) + Number(number[2] ?? 0) / 10;
+  return null;
+}
+
+/** Ausführungen nach Größe ordnen, wenn alle Bezeichnungen Größen sind; sonst Reihenfolge beibehalten. */
+export function orderVariants<T extends { id: string }>(
+  variants: T[],
+  labels: Map<string, string>,
+): T[] {
+  const ranks = variants.map((variant) => sizeRank(labels.get(variant.id) ?? ""));
+  if (ranks.some((rank) => rank === null)) return variants;
+  return variants
+    .map((variant, index) => ({ variant, rank: ranks[index] as number, index }))
+    .sort((a, b) => a.rank - b.rank || a.index - b.index)
+    .map((entry) => entry.variant);
+}
+
+/** Verfügbarkeit einer Artikelgruppe, ohne einzelnen Ausführungen Bestand zuzuschreiben. */
+export function groupAvailabilityLabel(item: {
+  stock: number;
+  delivery_note: string;
+  in_stock: boolean;
+  variant_count: number;
+}): string {
+  if (item.stock > 0 || item.variant_count <= 1) return availabilityLabel(item);
+  return item.in_stock ? "Einzelne Ausführungen vorrätig" : "Verfügbarkeit auf Anfrage";
+}
+
 export function catalogProductPath(id: string): string {
   return `/teileklar/produkt?artikel=${encodeURIComponent(id)}`;
 }

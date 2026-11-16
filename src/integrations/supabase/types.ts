@@ -169,6 +169,8 @@ export type Database = {
           image_alt: string
           image_checked_at: string | null
           image_checked_src: string
+          image_cutout_of: string
+          image_cutout_path: string
           image_path: string
           image_pending: boolean | null
           image_src: string
@@ -181,6 +183,7 @@ export type Database = {
           status_label: string
           stock: number
           synced_at: string
+          variant_group: string | null
         }
         Insert: {
           archived_at?: string | null
@@ -195,6 +198,8 @@ export type Database = {
           image_alt?: string
           image_checked_at?: string | null
           image_checked_src?: string
+          image_cutout_of?: string
+          image_cutout_path?: string
           image_path?: string
           image_pending?: boolean | null
           image_src?: string
@@ -207,6 +212,7 @@ export type Database = {
           status_label?: string
           stock?: number
           synced_at?: string
+          variant_group?: string | null
         }
         Update: {
           archived_at?: string | null
@@ -221,6 +227,8 @@ export type Database = {
           image_alt?: string
           image_checked_at?: string | null
           image_checked_src?: string
+          image_cutout_of?: string
+          image_cutout_path?: string
           image_path?: string
           image_pending?: boolean | null
           image_src?: string
@@ -233,6 +241,7 @@ export type Database = {
           status_label?: string
           stock?: number
           synced_at?: string
+          variant_group?: string | null
         }
         Relationships: []
       }
@@ -266,6 +275,28 @@ export type Database = {
         }
         Relationships: []
       }
+      teileklar_product_groups: {
+        Row: {
+          brand: string | null
+          category: string | null
+          delivery_note: string | null
+          has_image: boolean | null
+          id: string | null
+          image_alt: string | null
+          image_cutout: string | null
+          image_path: string | null
+          in_stock: boolean | null
+          max_price: number | null
+          min_price: number | null
+          name: string | null
+          price_value: number | null
+          search_keys: string | null
+          stock: number | null
+          variant_count: number | null
+          variant_group: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       has_role: {
@@ -275,6 +306,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      teileklar_base_name: { Args: { _name: string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "user"

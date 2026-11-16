@@ -24,6 +24,8 @@
   --input: oklch(1 0 0 / 14%);
   --ring: oklch(0.8861 0.2017 123.37);
   --brand-signal: oklch(0.8861 0.2017 123.37);
+  /* Grün als Schrift- oder Symbolfarbe (Status, aktive Links); in der hellen Ansicht dunkler, damit 4.5:1 erreicht wird. */
+  --signal-text: var(--primary);
   --surface-raised: oklch(0.3264 0.0089 173.77);
   --chart-1: oklch(0.786 0.125 124.36);
   --chart-2: oklch(0.8426 0.11 180.74);
@@ -149,6 +151,7 @@ html[data-theme="light"] {
   --border-strong: oklch(0.23 0.006 165 / 26%);
   --input: var(--border-strong);
   --ring: oklch(0.48 0.09 125);
+  --signal-text: var(--ring);
   --surface-raised: var(--card);
   --glass-fill:
     linear-gradient(145deg, oklch(1 0 0 / 42%), transparent 52%, oklch(0.84 0.012 190 / 7%)),
