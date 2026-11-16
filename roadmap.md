@@ -134,7 +134,7 @@
 - [ ] Zugang „nexify.login-aifly-oracle“ klären und einordnen
 - [ ] Umfang: Anfragen/Leads, TEILEKLAR, Kundenportal/Suite, Tagesbericht/Aufgaben
 - [ ] Bestehenden ORACLE-Zugang lesend klären (keine Betriebsänderung, kein neuer Agent)
-- [ ] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
+- [x] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
 
 ## Offen (16.11.)
 - [x] TEILEKLAR-Teilefragen speichern (Tabelle)
@@ -150,22 +150,24 @@
 - [x] Studienkolleg-Aachen-Projekt lesend ausgewertet (nur Muster, keine Kundeninhalte); übernommen: Modellprüfung ohne stillen Ersatz + Zeitlimit für KI-Aufrufe (ORACLE), Regel in AGENTS.md
 - [ ] KI-Modellvorgabe klären: Regel sagt DeepSeek V4.1 Flash 1017, ORACLE nutzt GPT-6 Astra (DeepSeek nicht im KI-Gateway); Messung im Schwesterprojekt: 1017 bestand JSON-Test nicht, 0731 schon – Entscheidung Pascal, dann 9router-Verbindung verknüpfen
 - [ ] Liefernachweise je Paket (Abhängigkeiten, Abnahmebeleg, Rückweg) als agenturweite Vorlage – nach Pascals Freigabe des Formats
-- [ ] Rechte-Negativtests für den MCP-Zugang (fremde Identität, falsche Mandanten) ergänzen
+- [x] MCP-Zugang ohne Anmeldung und mit falschem Token: jeweils 401 (16.11.)
+- [ ] MCP: Test mit gültigem fremdem Konto/Mandant – braucht zweites Testkonto
 - [x] Sprachumschaltung (i18n): Auswahl DE/NL/FR/EN hatte keine Funktion und keine Übersetzungen – entfernt
 - [ ] Mehrsprachigkeit NL/EN als echtes Vorhaben: Übersetzungen inkl. Rechtstexte brauchen Pascals Entscheidung und Freigabe der Texte
 - [x] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigiert (12 px statt 8 px; eingeklappt bündig mit Footer-Spalte)
 - [x] Anfragen echt speichern + Slack-Meldung (Kontakt end-to-end geprüft; Partner, Termin, Gutschein, Teilefrage nutzen denselben Weg)
-- [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
-- [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
+- [x] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
+- [x] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
   - [x] Import, Liste, Suche, Kategorien, Artikelseite, Seitenwechsel
   - [x] 14 Sortimentsbereiche aus Artikelnamen statt fehlerhafter Lieferantenkategorien (13 Artikel im Sammelbereich)
   - [x] Eigene Bildkopien: 410 Fotos in privater Ablage, 3.310 Artikel ohne Foto an beiden Quellen („Kein Produktfoto“), Artikel mit Foto zuerst
   - [ ] Fehlende Produktfotos (3.310) beim Lieferanten/Datenpfleger anfordern – Pascal
   - [ ] Zeitpläne (Katalog 02:00–02:55 UTC, Fotos 03:00–05:50 UTC) laufen erst nach Veröffentlichung gegen die echte Adresse – ersten Lauf prüfen
 - [x] Texte zu Formular/Datenschutz an echtes Absenden angepasst
-- [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
-- [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
+- [x] Shop-Kopfzeile: helle Ansicht und Handy-Menü geprüft (390 px ohne Überlauf, Menü öffnet und schließt per Esc)
+- [x] Admin-Rolle: Inhaberkonto von Pascal bestätigt (16.11.) und freigeschaltet
 - [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht
 
 ## Zurückgestellt (Pascal, 16.11.)
 - Modellwechsel KI, Skill-Import, Veröffentlichung
+- [ ] „Scrapen“ fehlender Produktfotos: nur mit Bildrechten (Hersteller-/Lieferantenfreigabe); ungeklärte Fremdbilder nicht übernehmen – Klärung Pascal
