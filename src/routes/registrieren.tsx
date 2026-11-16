@@ -5,7 +5,7 @@ import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/registrieren.css?url";
 
 export const Route = createFileRoute("/registrieren")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }, { name: "description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:title", content: "NeX AIFly Suite. In Ruhe testen. · NeXify AI" }, { property: "og:description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeXify-Websitekonto erstellen. · NeXify AI" }, { name: "description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:title", content: "NeXify-Websitekonto erstellen. · NeXify AI" }, { property: "og:description", content: "Erstellen Sie Ihr NeXify-Konto und bestätigen Sie Ihre E-Mail-Adresse." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   validateSearch: (s: Record<string, unknown>): { next?: string } => (typeof s["next"] === "string" ? { next: s["next"] } : {}),
   component: Index,
@@ -37,7 +37,7 @@ function ImportedSectionKontoErstellen() {
           </ol>
         </nav>
         <h1 id="auth-register-title">Konto erstellen</h1>
-        <p className={"nx-konto-lead"}>Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.</p>
+        <p className={"nx-konto-lead"}>Ihr NeXify-Websitekonto. Suite, Partnerportal und Shop-Bestellungen sind damit nicht automatisch verfügbar.</p>
         <AuthForm mode="signup" />
       </div>
       <aside className={"nx-konto-szene"} aria-labelledby="auth-register-szene">
@@ -49,11 +49,11 @@ function ImportedSectionKontoErstellen() {
         <div className={"nx-konto-nutzen"}>
           <span className={"hc-kicker"} id="auth-register-szene">NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto</span>
           <ul>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" /></svg>Persönliche Vorgänge</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 7.5v10h17v-8h-8l-2-2z" /></svg>Unterlagen</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" /></svg>Shop-Bestellungen</li>
+            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" /></svg>Websitekonto</li>
+            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M3.5 7.5v10h17v-8h-8l-2-2z" /></svg>Kontoverwaltung</li>
+            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" /></svg>Produkte separat klären</li>
           </ul>
-          <p>Zusätzliche Produkt- und Partnerberechtigungen werden separat freigeschaltet.</p>
+          <p>Ein Konto bestätigt keine Produkt-, Partner- oder Shopfreischaltung.</p>
         </div>
       </aside>
     </section>
@@ -93,7 +93,7 @@ function ImportedNavSeitenBersicht() {
       <div className={"footer-overview-group"}>
         <h3>Konto</h3>
         <a href="/anmelden">Anmelden und weiterarbeiten.</a>
-        <a href="/registrieren" aria-current="page">NeX AIFly Suite. In Ruhe testen.</a>
+        <a href="/registrieren" aria-current="page">NeXify-Websitekonto erstellen.</a>
       </div>
       <div className={"footer-overview-group"}>
         <h3>Rechtliches</h3>
