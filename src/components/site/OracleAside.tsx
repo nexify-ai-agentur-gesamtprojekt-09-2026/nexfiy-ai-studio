@@ -24,7 +24,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
     composerRef.current?.focus({ preventScroll: true });
   }, [busy, messages.length, open, composerRef]);
   return (
-    <aside id="aifly-panel" className={"aifly-panel oracle-advice"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
+    <aside id="aifly-panel" className={"aifly-panel oracle-advice"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} aria-modal={isMobile && open ? true : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <link rel="stylesheet" href={oracleCSS} precedence="oracle-advice" />
       <div className="oracle-heading">
         <div className="oracle-heading-copy">
