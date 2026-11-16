@@ -1055,8 +1055,8 @@
 }
 
 /* Projektplan-Typografie und Zustände (NX-DESIGN-01 Zusatz). */
-:root:root #atelier.site-shared main h1 { line-height: 0.98; letter-spacing: -0.04em; text-wrap: balance; }
-:root:root #atelier.site-shared main h2 { line-height: 1.12; text-wrap: balance; }
+:root:root:root #atelier#atelier.site-shared main h1 { line-height: 0.98; letter-spacing: -0.04em; text-wrap: balance; }
+:root:root:root #atelier#atelier.site-shared main h2 { line-height: 1.12; text-wrap: balance; }
 :root:root #atelier.site-shared main :is(p, li, dd) { text-wrap: pretty; }
 :root:root #atelier.site-shared :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
   outline: 2px solid var(--ring);
