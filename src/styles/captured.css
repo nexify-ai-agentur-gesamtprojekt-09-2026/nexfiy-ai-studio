@@ -16445,3 +16445,8 @@ html[data-theme="light"] #atelier {
     transform: none !important;
   }
 }
+
+/* Der aktuelle Film bringt seine eigene Fläche mit; die frühere Medienfläche bleibt nicht darunter sichtbar. */
+#atelier .home-concept .hc-gallery-card .hc-art-1 {
+  background: transparent;
+}

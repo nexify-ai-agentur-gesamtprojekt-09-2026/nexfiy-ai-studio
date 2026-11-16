@@ -1,0 +1,3 @@
+- Slack transport, signature verification, pure decisions and server-side workflow execution stay separate so the simulator and production share the same authorization rules.
+- Slack receipts record delivery metadata only; existing inquiry rows and existing external orchestration remain the authoritative task state, preventing duplicate schedulers or task stores.
+- Slack authorization uses the verified workspace, application and stable actor IDs; status writes require the original inquiry thread, and externally shared channels never receive private workflow data.
