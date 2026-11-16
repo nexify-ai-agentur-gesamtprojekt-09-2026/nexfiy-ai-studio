@@ -1,4 +1,7 @@
 # Roadmap
+## Kommentar Kontaktseite (16.11.)
+- [ ] Live-Kommentar am Link „Was nach Ihrer Anfrage passiert“ lesen, zugehörige Nacharbeit prüfen und im Thread belegen; nicht eigenmächtig auflösen
+
 ## Domain-Reihenfolge (16.11.)
 - [ ] Zuerst nexifyai.de durch Pascal verbinden und öffentlich prüfen; erst nach erfolgreicher Prüfung nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen
 - [ ] teileklar.shop erst nach gesonderter Shop-Abnahme anschließen: mindestens 3720 Produkte, Livezahlung und erfolgreiche Testbestellung; bestehende Domain nicht vorzeitig umschalten

@@ -13,7 +13,7 @@ export interface InquiryValues {
 }
 
 export type InquiryField = keyof InquiryValues;
-export type InquiryErrors = Partial<Record<InquiryField, string>>;
+export type InquiryErrors = Partial<Record<InquiryField, string | undefined>>;
 
 /** Order in which fields appear in the form; the first invalid one receives focus. */
 export const INQUIRY_FIELD_ORDER: InquiryField[] = ["name", "email", "company", "message", "consent"];
