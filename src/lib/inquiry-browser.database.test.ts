@@ -4,6 +4,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { describe, expect, it, vi } from "vitest";
 import { draftService } from "@/test/draft-clients";
+import { ISOLATED_DB_SKIP_REASON, isolatedTestDb, skipWithoutIsolatedDb } from "@/test/isolated-db";
 import { submitInquiry } from "./inquiry.functions";
 import { deliverInquiryNotice } from "./inquiry-delivery.server";
 import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
@@ -16,7 +17,7 @@ vi.mock("@tanstack/react-start/server", () => ({ getRequest: () => new Request("
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: state.rpc } }));
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
-describe("NX-LEAD-01 Vorschau-Browser mit echter Speicherung und Test-Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 Vorschau-Browser mit echter Speicherung und Test-Slack · ${ISOLATED_DB_SKIP_REASON}`, () => {
   it("bestätigt Formular, Wochenzahl, Dublette, sechste Ablehnung und tatsächliche Admin-Statuspflege", async () => {
     const service = draftService();
     const runId = crypto.randomUUID();

@@ -6,6 +6,7 @@ import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
 import { submitInquiry } from "./inquiry.functions";
 import { deliverInquiryNotice, workspaceUrl } from "./inquiry-delivery.server";
 import { draftAdmin } from "@/test/draft-clients";
+import { ISOLATED_DB_SKIP_REASON, isolatedTestDb, skipWithoutIsolatedDb } from "@/test/isolated-db";
 
 const state = vi.hoisted(() => ({
   ip: "192.0.2.80" as string | undefined,
@@ -28,15 +29,18 @@ vi.mock("@tanstack/react-start/server", () => ({
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: state.rpc } }));
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
-const db = postgres({ host: process.env["PGHOST"], port: Number(process.env["PGPORT"] || 5432), database: process.env["PGDATABASE"], username: process.env["PGUSER"], password: process.env["PGPASSWORD"], max: 1 });
-const url = process.env["SUPABASE_URL"];
-const key = process.env["SUPABASE_SERVICE_ROLE_KEY"];
-if (!url || !key) throw new Error("Isolierter Datenbank-Testzugang fehlt.");
+const db = isolatedTestDb ? postgres({ host: process.env["PGHOST"], port: Number(process.env["PGPORT"] || 5432), database: process.env["PGDATABASE"], username: process.env["PGUSER"], password: process.env["PGPASSWORD"], max: 1 }) : (null as unknown as postgres.Sql);
+const rawUrl = process.env["SUPABASE_URL"];
+const rawKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+if (isolatedTestDb && (!rawUrl || !rawKey)) throw new Error("Isolierter Datenbank-Testzugang fehlt.");
+// Ohne isolierte Datenbank wird nichts ausgeführt; die lokalen Ersatzwerte erreichen nie einen echten Dienst.
+const url = rawUrl ?? "http://127.0.0.1";
+const key = rawKey ?? "unused";
 const service = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 const runId = crypto.randomUUID();
 const testEmail = `nx-lead-${runId}@example.test`;
 const idPart = parseInt(runId.slice(0, 4), 16);
-afterAll(async () => { await db.end(); });
+afterAll(async () => { if (isolatedTestDb) await db.end(); });
 beforeEach(() => { state.ip = `2001:db8:${idPart.toString(16)}:${Math.floor(Math.random()*65535).toString(16)}::1`; state.deliver.mockClear(); state.rpc.mockReset(); });
 beforeEach(() => {
   expect(vi.isMockFunction(deliverInquiryNotice)).toBe(true);
@@ -60,7 +64,7 @@ function send(index: number, email = testEmail) {
   return submitInquiry({ data: { kind: "contact", name: "NX LEAD Prüfung", email, company: "", message: `NX-LEAD-01 ${runId} Prüfvorhaben Nummer ${index}.`, consent: true, website: "", sourcePath: "/kontakt" } });
 }
 
-describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
+describe.skipIf(skipWithoutIsolatedDb)(`NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack · ${ISOLATED_DB_SKIP_REASON}`, () => {
   it("nimmt exakt fünf an und lehnt die sechste innerhalb einer Stunde ab", async () => {
     await draftTest(async tx => {
       const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
