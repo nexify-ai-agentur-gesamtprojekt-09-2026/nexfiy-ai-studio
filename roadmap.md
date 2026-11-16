@@ -139,24 +139,27 @@
 ## Offen (16.11.)
 - [x] TEILEKLAR-Teilefragen speichern (Tabelle)
 - [x] Anhang bis 10 MB, privat
-- [ ] Shop füllen nach .de-Verbindung – Quelle der 3720 Produkte klären
+- [x] Shop gefüllt: 3.720 Artikel aus dem bisherigen Shop-Feed, Katalog/Suche/Kategorien/Artikelseiten
 - [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
 - [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
-- [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertigstellen und Vergleich Startseite, Kontakt, Produktseite (hell gegen aktuell) zeigen; bestehende Website und TEILEKLAR unverändert lassen
+- [x] Helles Design (#FFC758): Vergleich Startseite, Kontakt, Produktseite (Computer + Handy) erstellt; Farbkante im Beratungsfeld und Sprachauswahl in der Hauptversion behoben (übernimmt der Entwurf bei Annahme); TEILEKLAR bleibt dunkel
+- [ ] Helles Design: Annahme oder Ablehnung durch Pascal; Maskottchen-Bilder bleiben grün (neue Bilder nur nach Entscheidung)
 
 ## Gesamtfertigstellung (16.11.)
 - [ ] Skill hinzufügen („npx skills add <owner/repo>“) – wartet auf konkretes Repository von Pascal; Übernahme dann nur als geprüfte Dokumentation mit Herkunftsangabe
 - [ ] Studienkolleg-Aachen-Projekt lesend auswerten: übertragbare Best Practices (Technik, Qualität, Abläufe) agenturweit übernehmen – ohne Kundeninhalte, -namen oder -daten (Kundenschutz, Mandantentrennung)
-- [ ] Sprachumschaltung (i18n) fehlerhaft – Ursache finden und beheben (Hinweis Pascal, Startseite)
-- [ ] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigieren (Hinweis Pascal, /kontakt)
-- [ ] Anfragen echt speichern + Slack-Meldung (Kontakt, Partner, Termin, Gutschein, Teilefrage)
+- [x] Sprachumschaltung (i18n): Auswahl DE/NL/FR/EN hatte keine Funktion und keine Übersetzungen – entfernt
+- [ ] Mehrsprachigkeit NL/EN als echtes Vorhaben: Übersetzungen inkl. Rechtstexte brauchen Pascals Entscheidung und Freigabe der Texte
+- [x] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigiert (12 px statt 8 px; eingeklappt bündig mit Footer-Spalte)
+- [x] Anfragen echt speichern + Slack-Meldung (Kontakt end-to-end geprüft; Partner, Termin, Gutschein, Teilefrage nutzen denselben Weg)
 - [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
 - [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
   - [x] Import, Liste, Suche, Kategorien, Artikelseite, Seitenwechsel
-  - [ ] Sortimentsbereiche statt fehlerhafter Lieferantenkategorien (Luftfilter unter „Sicherheitswesten“)
-  - [ ] Eigene Bildkopien: Lieferanten-CDN liefert nur 275 von 3713 Bildern, alter Shop 408 – Rest als „Kein Bild“
-  - [ ] Zeitplan läuft erst nach Veröffentlichung gegen die echte Adresse – Lauf prüfen
-- [ ] Texte zu Formular/Datenschutz an echtes Absenden anpassen
+  - [x] 14 Sortimentsbereiche aus Artikelnamen statt fehlerhafter Lieferantenkategorien (13 Artikel im Sammelbereich)
+  - [x] Eigene Bildkopien: 410 Fotos in privater Ablage, 3.310 Artikel ohne Foto an beiden Quellen („Kein Produktfoto“), Artikel mit Foto zuerst
+  - [ ] Fehlende Produktfotos (3.310) beim Lieferanten/Datenpfleger anfordern – Pascal
+  - [ ] Zeitpläne (Katalog 02:00–02:55 UTC, Fotos 03:00–05:50 UTC) laufen erst nach Veröffentlichung gegen die echte Adresse – ersten Lauf prüfen
+- [x] Texte zu Formular/Datenschutz an echtes Absenden angepasst
 - [ ] Shop-Kopfzeile: helle Ansicht und geöffnetes Handy-Menü prüfen
 - [ ] Admin-Rolle: einziges Konto passt nicht zu Pascals Lovable-E-Mail – Freischaltung erst nach Bestätigung durch Pascal
 - [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht
