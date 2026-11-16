@@ -18,6 +18,39 @@
 :root:root #atelier .tk-commerce-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 :root:root #atelier .tk-commerce-header :is(a,button,input) { min-height: 44px; }
 :root:root #atelier .tk-commerce-header { background: var(--glass-fill); color: var(--foreground); backdrop-filter: blur(20px); }
+:root:root #atelier .tk-commerce-header { position: relative; z-index: 8; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+:root:root #atelier .tk-service-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 12px; color: var(--muted-foreground); }
+:root:root #atelier .tk-service-strip a { display: inline-flex; align-items: center; }
+:root:root #atelier .tk-commerce-main { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(180px, 2fr); gap: 16px 24px; align-items: center; margin-block: 12px; }
+:root:root #atelier .tk-wordmark { font-size: 24px; font-weight: 750; line-height: 1.2; text-decoration: none; color: var(--foreground); }
+:root:root #atelier .tk-wordmark span { color: var(--primary); }
+:root:root #atelier .tk-wordmark small { display: block; font-size: 12px; font-weight: 400; margin-top: 6px; color: var(--muted-foreground); }
+:root:root #atelier .tk-header-search { display: flex; min-width: 0; gap: 8px; }
+:root:root #atelier .tk-header-search input { min-width: 0; width: 100%; background: var(--secondary); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; }
+:root:root #atelier .tk-header-account { grid-column: 1/-1; display: flex; justify-content: flex-end; align-items: center; gap: 20px; font-size: 14px; }
+:root:root #atelier .tk-commerce-nav a { display: inline-flex; align-items: center; font-size: 14px; color: var(--foreground); text-decoration: none; }
+:root:root #atelier .tk-commerce-header a[aria-current="page"] { color: var(--primary); text-decoration: underline; text-underline-offset: 6px; }
+:root:root #atelier .tk-help-content { flex: 1 1 auto; }
+:root:root #atelier .tk-help-form label { color: var(--muted-foreground); }
+:root:root #atelier .tk-tyre-size { border: 0; padding: 0; margin: 24px 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+:root:root #atelier .tk-tyre-size legend { margin-bottom: 16px; color: var(--foreground); font-weight: 600; }
+:root:root #atelier .tk-tyre-size [data-slot="select-trigger"] { width: 100%; min-height: 44px; font-size: 16px; }
+:root:root #atelier .tk-tyre-results { display: grid; gap: 12px; margin: 24px 0; }
+:root:root #atelier .tk-tyre-results > div { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+:root:root #atelier .tk-tyre-results dt { color: var(--muted-foreground); }
+:root:root #atelier .tk-tyre-results dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+:root:root #atelier .tk-checklist { list-style: disc; padding-left: 20px; margin-block: 16px; display: grid; gap: 12px; }
+:root:root #atelier .tk-search { display: grid; gap: 12px; max-width: 640px; margin-bottom: 32px; }
+:root:root #atelier .tk-search-row { display: flex; gap: 12px; }
+:root:root #atelier .tk-search-row input { min-width: 0; flex: 1; min-height: 44px; background: var(--secondary); border: 1px solid var(--border-strong); border-radius: 6px; padding: 10px 12px; font-size: 16px; color: var(--foreground); }
+:root:root #atelier .tk-empty { max-width: 65ch; display: grid; justify-items: start; gap: 16px; }
+@container website (max-width: 600px) {
+  :root:root #atelier .tk-commerce-header { padding: 12px 16px; }
+  :root:root #atelier .tk-commerce-main { grid-template-columns: minmax(0,1fr); }
+  :root:root #atelier .tk-header-account { justify-content: flex-start; flex-wrap: wrap; }
+  :root:root #atelier .tk-search-row { flex-wrap: wrap; }
+  :root:root #atelier .tk-search-row input { flex-basis: 100%; }
+}
 :root:root #atelier .website { background-image: var(--stage-light); }
 :root:root #atelier :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 8px 8px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.06); }
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.35); }
