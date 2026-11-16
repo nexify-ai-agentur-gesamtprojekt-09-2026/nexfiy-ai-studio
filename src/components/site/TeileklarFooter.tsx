@@ -55,7 +55,7 @@ export function TeileklarFooter() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span className="footer-claim">TEILEKLAR — Na KLAR!</span>
+          <span className="footer-claim">TEILEKLAR. Na KLAR!</span>
           <a className="footer-crosslink" href="/">
             NeXify AI →
           </a>

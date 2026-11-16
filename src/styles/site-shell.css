@@ -1069,3 +1069,31 @@
 :root:root #atelier.site-shared :is(main p, main label, main li, form) a:not([class]) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 /* Die übernommenen Seitenstile entfernen Unterstreichungen global mit !important; Fließtext-Links brauchen sie (WCAG 1.4.1). */
 :root:root:root #atelier#atelier.site-shared :is(.tk-check, .tk-consent, main p, main li) a:not([class]) { text-decoration-line: underline !important; text-underline-offset: 3px; }
+
+/* NX-DESIGN-01 · KI-Merkmale reduzieren: ruhige Vollfarb-Überschriften, ein Kicker je Seite (Hero),
+   Akkordeons ohne Vollrahmen, Glühen nur am Primärknopf. */
+:root:root:root #atelier#atelier.site-shared main :is(h2, h3, h4),
+:root:root:root #atelier#atelier.site-shared main :is(h2, h3, h4) * {
+  background-image: none !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--foreground);
+}
+:root:root:root #atelier#atelier.site-shared main .hc-kicker { display: none; }
+:root:root:root #atelier#atelier.site-shared main .identity-copy .hc-kicker { display: revert; }
+:root:root:root #atelier#atelier.site-shared main details.hc-service-detail {
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+:root:root:root #atelier#atelier.site-shared main details.hc-service-detail:last-of-type { border-bottom: 1px solid var(--border); }
+:root:root:root #atelier#atelier.site-shared main details.hc-service-detail:hover { box-shadow: none; border-color: var(--line-strong); }
+/* Keine Rahmen in Karten: Unterelemente einer Karte bleiben randlos. */
+:root:root:root #atelier#atelier.site-shared main :is(.pc-module, .ws-card, .tkc-card) :is(.pc-module, .hc-service-detail, figure, ul, li) {
+  border: 0;
+  box-shadow: none;
+}
+/* Geist braucht keinen künstlich erweiterten Wortabstand; der alte Wert ließ Titel auseinanderfallen. */
+:root:root:root #atelier#atelier.site-shared :is(h1, h2, h3, h4) { word-spacing: normal; }
