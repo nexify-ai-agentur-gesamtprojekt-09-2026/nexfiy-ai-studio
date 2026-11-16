@@ -145,6 +145,7 @@
 - [ ] Helles Design (#FFC758): Entwurf „Helles Design #FFC758“ fertigstellen und Vergleich Startseite, Kontakt, Produktseite (hell gegen aktuell) zeigen; bestehende Website und TEILEKLAR unverändert lassen
 
 ## Gesamtfertigstellung (16.11.)
+- [ ] App-Leiste unter dem Footer: Abstand am Knopf „Nicht jetzt“ korrigieren (Hinweis Pascal, /kontakt)
 - [ ] Anfragen echt speichern + Slack-Meldung (Kontakt, Partner, Termin, Gutschein, Teilefrage)
 - [ ] Geschützter Arbeitsplatz für Anfragen (Admin-Rolle, Status, Anhänge)
 - [ ] TEILEKLAR-Katalog (3720 Artikel) importieren, Liste/Suche/Kategorien/Artikelseite, Bildweiterleitung, täglicher Abgleich
