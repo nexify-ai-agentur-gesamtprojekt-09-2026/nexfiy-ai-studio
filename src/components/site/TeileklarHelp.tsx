@@ -4,11 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { CopyButton } from "@/components/system/CopyButton";
-import {
-  CONTACT_FORM_ANCHOR,
-  CONTACT_FORM_PATH,
-  writeContactHandoff,
-} from "@/lib/contact-handoff";
+import { CONTACT_FORM_ANCHOR, CONTACT_FORM_PATH, writeContactHandoff } from "@/lib/contact-handoff";
 
 /** Public topic navigation and an explicit contact handoff, not a parts-matching AI. */
 export function TeileklarHelp({
@@ -120,8 +116,8 @@ export function TeileklarHelp({
             {handoffFailed ? (
               <div className="tk-help-failure" role="alert">
                 <p>
-                  Ihr Browser lässt die Übergabe an das Formular hier nicht zu. Kopieren Sie den Text
-                  und fügen Sie ihn im Kontaktformular ein.
+                  Ihr Browser lässt die Übergabe an das Formular hier nicht zu. Kopieren Sie den
+                  Text und fügen Sie ihn im Kontaktformular ein.
                 </p>
                 <CopyButton text={draft.trim()} label="Text kopieren" />
                 <a href={`${CONTACT_FORM_PATH}#${CONTACT_FORM_ANCHOR}`}>Zum Kontaktformular</a>

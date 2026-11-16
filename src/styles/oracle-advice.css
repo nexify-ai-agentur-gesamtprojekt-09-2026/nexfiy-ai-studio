@@ -335,7 +335,11 @@
   gap: 8px;
 }
 /* Labels may wrap in the narrow column, so height follows the text instead of a fixed button size. */
-:root:root #atelier .oracle-advice .oracle-handoff :is(.oracle-handoff-action, .oracle-handoff-actions > *) {
+:root:root
+  #atelier
+  .oracle-advice
+  .oracle-handoff
+  :is(.oracle-handoff-action, .oracle-handoff-actions > *) {
   height: auto;
   min-height: 44px;
   max-width: 100%;
@@ -345,7 +349,11 @@
   font-size: 14px;
   line-height: 1.4;
 }
-:root:root #atelier .oracle-advice .oracle-handoff :is(.oracle-handoff-action, .oracle-handoff-confirm) {
+:root:root
+  #atelier
+  .oracle-advice
+  .oracle-handoff
+  :is(.oracle-handoff-action, .oracle-handoff-confirm) {
   width: 100%;
   justify-content: space-between;
 }
