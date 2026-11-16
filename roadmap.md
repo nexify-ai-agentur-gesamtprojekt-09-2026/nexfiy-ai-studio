@@ -1,10 +1,16 @@
 # Roadmap
+## BigBuy-Prüfung und SSH-Stilllegung vorbereiten (16.11., 10:08 UTC)
+- [ ] BigBuy: authentifizierter Statusabruf blockiert – strikte SSH-Hostprüfung Exit 255, bestätigter Server-Vertrauensnachweis fehlt; Kostenrahmen des GET offen. Öffentliche API-Referenz 10:12 UTC HTTP 200; kein Import oder Auth-Aufruf
+- [x] SSH-Stilllegung mit Sicherung, Einzelbestätigung, Ersatz-/Notfalltest und Rückweg vorbereitet; historischen Plan zum Auftrennen korrigiert (mögliche neue Schlüsselaktivierung), keine Sperrung
+- [ ] Frische SSH-Inventur/Nutzung und serverseitige Sicherungen: warten auf bestätigten Hostschlüssel und geschützten Zugang; beide VPS beim Hosting-Leseabruf 10:10 UTC running
+- [x] Inhaberfreigaben, Belege und Kostenstatus dokumentiert: ops/server1/access-review-2026-11-16.md; Historie erhalten, keine Betriebs-/Rechteänderung
+
 ## Folgeauftrag Filme und verbleibende Arbeiten (16.11., 09:23 UTC)
 - [x] Filme: zwei lokale Zuschnitte ohne unbelegte Leistungs-/Kundenaussagen; sonst gekennzeichnete Standbilder, Originale erhalten. 24 Filmansichten 1280/390 px, Ton und beide Untertitel geprüft
 - [x] Pfeil der Transkriptzeile in beiden Zuständen ausgerichtet und angesehen, ohne Gestaltungswechsel
 - [x] Vorhandene Produktnamen erklärt: NeX Agentic AIFly (kurz NeX), kombinierte Navigation NeX + AIFly ORACLE; FACTORY als Arbeitsweise auf Unternehmensseite erklärt, Rechtsnamen unverändert
 - [x] Server 1: bestehende Überwachung und Freistellung aktiv; täglichen Lagebericht statt Doppelauftrag ergänzt. Zustellnachweis 09:41:29 UTC, sechs Servertests bestanden, Rückweg ops/server1/README.md
-- [ ] BigBuy: Variablenfehler in untersuchten Programmen nicht reproduzierbar; aktueller Zugang ungeklärt, HISTORIE 09.11. 401. Owner Pascal: Gültigkeit im Lieferantenkonto bestätigen; pausierten Bestandssync nicht aktivieren
+- [ ] BigBuy: Variablenfehler historisch nicht reproduzierbar; aktuelle Gültigkeit 10:13 UTC weiterhin OFFEN, Statusabruf durch fehlenden SSH-Vertrauensnachweis blockiert. HISTORIE 09.11. 401; pausierten Bestandssync nicht aktivieren
 - [x] SSH: lokale geschützte Verwendung nach ausdrücklicher Antwort Pascal; keine Serverrechte oder authorized_keys geändert, vorhandener Stilllegungsplan bleibt Einzelentscheidung
 - [ ] Mailabsender: keine Domain konfiguriert (Tool 16.11.); Einrichtungsdialog angeboten, Owner Pascal. ORACLE-Karte erneut abgebrochen, Autorisierung nur durch Pascal möglich
 - [x] Vorhandenen Produktfoto-Entwurf geprüft, nicht versendet; keine ungeklärten Bildrechte übernehmen
