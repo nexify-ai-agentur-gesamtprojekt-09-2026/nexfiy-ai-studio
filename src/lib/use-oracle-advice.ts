@@ -1,12 +1,14 @@
 import { useCallback, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { adviseOracle } from "./oracle.functions";
-import type { OracleInput } from "./oracle-products";
+import type { OracleAnswer, OracleInput } from "./oracle-products";
 
 export interface OracleMessage {
   role: "user" | "assistant";
   content: string;
   links?: { label: string; path: string }[];
+  /** Validated catalog classification of an answer; drives the entry links and the contact handoff. */
+  recommendation?: OracleAnswer["recommendation"];
 }
 
 export function useOracleAdvice() {
@@ -41,7 +43,12 @@ export function useOracleAdvice() {
         }
         setMessages([
           ...next,
-          { role: "assistant", content: result.advice.answer, links: result.links },
+          {
+            role: "assistant",
+            content: result.advice.answer,
+            links: result.links,
+            recommendation: result.advice.recommendation,
+          },
         ]);
       } catch {
         setError(

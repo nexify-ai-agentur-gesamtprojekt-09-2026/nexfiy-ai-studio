@@ -242,6 +242,23 @@
   height: 18px;
   flex: 0 0 18px;
 }
+:root:root #atelier .tk-help-failure {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--secondary);
+}
+:root:root #atelier .tk-help-failure p {
+  margin: 0;
+}
+:root:root #atelier .tk-help-failure :is(a, button) {
+  min-height: 44px;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+}
 :root:root #atelier .tk-help-form label {
   color: var(--muted-foreground);
 }

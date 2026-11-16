@@ -15,6 +15,7 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { useOracleAdvice } from "@/lib/use-oracle-advice";
+import { OracleHandoff } from "./OracleHandoff";
 import { fitComposer, useComposerFit } from "@/lib/imported-site";
 
 /** AIFly ORACLE side panel of the NeXify pages (desktop column, phone dialog). */
@@ -248,6 +249,13 @@ export function OracleAside({
                   </div>
                 )}
               </div>
+              {!busy && messages.at(-1)?.role === "assistant" && (
+                <OracleHandoff
+                  key={messages.length}
+                  messages={messages}
+                  onTransferred={isMobile ? onClose : undefined}
+                />
+              )}
               {error && (
                 <div className="oracle-error" role="alert">
                   <p>{error}</p>

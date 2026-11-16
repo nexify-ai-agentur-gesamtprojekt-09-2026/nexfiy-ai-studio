@@ -318,3 +318,11 @@ Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbs
 ## Brain- und Wissensinventar (16.11., 12:17 UTC)
 - [ ] Brain (agentmemory, mcp-gateway, LightRAG, Wissensbasis) auf beiden Servern nur lesend per SSH inventarisieren; keine Geheimnisse, keine Änderungen
 - [ ] Repository nexify-ai-finales-agentur-gesamtprojekt-09-2026 als Quelle für Jeff- und ORACLE-Funktionen auswerten (nur lesend)
+
+## NX-LEAD-02 · Chat-Übergabe ins Kontaktformular (Leitstern Schritt 2, 16.11., 15:25 UTC)
+- [x] ORACLE-Beratung: Karte „Mit Pascal weitersprechen“ nach jeder Antwort; Vorschau zeigt exakt den Entwurf (nur eigene Besuchernachrichten plus katalogeigener Einstieg, keine Modellantwort), erst „In Kontaktformular übernehmen“ speichert ihn im Browserfenster. Kein automatischer Versand, nichts in der Adresse
+- [x] TEILEKLAR Hilfe: frei eingegebener Text geht nicht mehr über ?anliegen, sondern über dieselbe einmalige Übergabe; Fehlweg mit Kopieren und Formularlink statt stillem Ersatz
+- [x] Kontaktseite übernimmt einmalig (≤30 Minuten), ergänzt bereits Getipptes statt es zu ersetzen, zeigt Herkunft sichtbar und setzt den Fokus aufs erste leere Kontaktfeld; Neuladen übernimmt nichts erneut
+- [x] 173/173 Tests in 36 Dateien (21 neu), Typprüfung 0 Fehler, build OK 15:38:30 UTC. Browser: echte Beratung 1280/390 px → Vorschau → Übernahme → /kontakt#anfrage, Text identisch, kein Überlauf, keine Fehler; helle Ansicht geprüft. Anfragen in der Datenbank vorher/nachher 1 (nichts abgesendet). Keine Veröffentlichung. Bericht ops/nx-lead-02-2026-11-16.md
+- [ ] Herkunftsmerkmal „Formular/Chat-Übergabe“ als eigene Spalte: bereit nach abgeschlossener Übernahme des Entwurfs NX-LEAD-01 (gleiche Tabelle und Migrationsfolge); bis dahin trägt der übernommene Text die sichtbare Kopfzeile „Aus meiner Beratung mit AIFly ORACLE:“
+- [ ] Nach Übernahme NX-LEAD-01 (im Entwurf abnahmebereit gemeldet 15:27 UTC, 185 Tests; Übernahme läuft seit 15:40 UTC) im Hauptstand gemeinsam mit NX-LEAD-02 prüfen: vollständige Testsuite, Build, Kontaktformular 1280/390 px, Wochenzahl im Arbeitsplatz
