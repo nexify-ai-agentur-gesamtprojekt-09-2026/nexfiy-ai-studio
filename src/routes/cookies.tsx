@@ -7,12 +7,12 @@ export const Route = createFileRoute("/cookies")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }],
     meta: [
-      { title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" },
+      { title: "Cookies und lokale Speicherung · NeXify AI" },
       {
         name: "description",
         content: "Informationen zu Cookies und zusätzlichen Diensten auf der NeXify-Website.",
       },
-      { property: "og:title", content: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" },
+      { property: "og:title", content: "Cookies und lokale Speicherung · NeXify AI" },
       {
         property: "og:description",
         content: "Informationen zu Cookies und zusätzlichen Diensten auf der NeXify-Website.",
@@ -43,14 +43,14 @@ function Index() {
                     <a href="/">Startseite</a>
                   </li>
                   <li className={"visually-hidden"}>
-                    <span aria-current="page">Sie wählen, was zusätzlich aktiv wird.</span>
+                    <span aria-current="page">Cookies und lokale Speicherung</span>
                   </li>
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
                 NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht
               </span>
-              <h1 id="page-title-cookies">Sie wählen, was zusätzlich aktiv wird.</h1>
+              <h1 id="page-title-cookies">Cookies und lokale Speicherung</h1>
               <p className={"identity-body"}>
                 Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben.
                 Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die

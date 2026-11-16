@@ -78,7 +78,7 @@ export function NexifyFooter() {
                 NeX AIFly Suite
               </a>
               <a href="/produkte/one" {...here("/produkte/one")}>
-                NeX Agentic AI
+                NeX + AIFly ORACLE
               </a>
               <a href="/produkte/api" {...here("/produkte/api")}>
                 NeXify API

@@ -329,7 +329,7 @@ function ImportedSectionPortaleUndAppsF() {
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="arbeitsbereich" eager />
+            <SiteFilm film="kennenlernen" eager />
           </figure>
         </div>
       </div>

@@ -302,7 +302,7 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="studio" eager />
+            <SiteFilm film="kennenlernen" eager />
           </figure>
         </div>
       </div>
@@ -316,7 +316,7 @@ function ImportedNavWoHaktEsGerade() {
       <article className={"hc-gallery-card is-in"}>
         <div className={"identity-media hc-art hc-art-0"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="angebot" />
+            <SiteFilm film="angebot" still />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/websites">
@@ -369,7 +369,7 @@ function ImportedNavWoHaktEsGerade() {
       <article className={"hc-gallery-card is-in"}>
         <div className={"identity-media hc-art hc-art-1"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="fertigung" />
+            <SiteFilm film="zusammenarbeit" />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/agenten-automatisierung">
@@ -427,7 +427,7 @@ function ImportedNavWoHaktEsGerade() {
       >
         <div className={"identity-media hc-art hc-art-2"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="teileklar" />
+            <SiteFilm film="teileklar" still />
           </figure>
         </div>
         <a className={"hc-gallery-link"} href="/teileklar">

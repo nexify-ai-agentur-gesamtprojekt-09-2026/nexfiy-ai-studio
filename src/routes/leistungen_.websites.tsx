@@ -328,7 +328,7 @@ function ImportedSectionEineWebsiteDieIhr() {
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="angebot" eager />
+            <SiteFilm film="kennenlernen" eager />
           </figure>
         </div>
       </div>

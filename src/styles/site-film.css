@@ -22,6 +22,22 @@
   aspect-ratio: 16 / 9;
   border-radius: inherit;
 }
+:root:root #atelier .atelier-film .atelier-film-still {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: inherit;
+}
+:root:root #atelier .atelier-film.atelier-film > p.atelier-film-disclosure {
+  margin: 8px 20px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
 :root:root #atelier .atelier-film.atelier-film .atelier-film-fallback {
   position: absolute;
   inset: 0;

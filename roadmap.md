@@ -1,13 +1,16 @@
 # Roadmap
 ## Folgeauftrag Filme und verbleibende Arbeiten (16.11., 09:23 UTC)
-- [ ] Filmzuordnung nach gesprochenem Inhalt korrigieren; unbelegte Kunden-/Leistungsbehauptungen nicht öffentlich abspielen, Originale erhalten; Desktop/Handy und Untertitel prüfen
-- [ ] Pfeil der Transkriptzeile in beiden Zuständen ausrichten, ohne Gestaltungswechsel
-- [ ] Produktbezeichnungen mit vorhandenen Fakten konsistent darstellen; FACTORY als Arbeitsweise erklären, keine neuen Leistungen zusagen
-- [ ] Server-1-Aufträge und Zugriffsgrenzen aktuell nachmessen; Tagesbericht mit vorhandener Slack-Meldung ergänzen, Zustellung nachweisen; keine neuen Kosten oder Rechte
-- [ ] BigBuy-Importprogramm eng begrenzt nach Prüfung korrigieren; SSH-Schlüssel nur inventarisieren, nichts löschen oder Berechtigungen eigenmächtig ändern
-- [ ] Eigenen Anmelde-Mailabsender und ORACLE-Verbindungsweg mit verfügbaren Dialogen prüfen; notwendige Inhaberbestätigungen offen ausweisen
-- [ ] Fehlende Produktfotos als Rechte-/Lieferantenanfrage vorbereiten; echten Nachtlauf und echtes iPhone als noch nicht messbare Grenzen führen
-- [ ] Nachweise, Tests, Rückweg und verbleibende Inhaberaufgaben dokumentieren; veröffentlichte Änderung getrennt nachmessen
+- [x] Filme: zwei lokale Zuschnitte ohne unbelegte Leistungs-/Kundenaussagen; sonst gekennzeichnete Standbilder, Originale erhalten. 24 Filmansichten 1280/390 px, Ton und beide Untertitel geprüft
+- [x] Pfeil der Transkriptzeile in beiden Zuständen ausgerichtet und angesehen, ohne Gestaltungswechsel
+- [x] Vorhandene Produktnamen erklärt: NeX Agentic AIFly (kurz NeX), kombinierte Navigation NeX + AIFly ORACLE; FACTORY als Arbeitsweise auf Unternehmensseite erklärt, Rechtsnamen unverändert
+- [x] Server 1: bestehende Überwachung und Freistellung aktiv; täglichen Lagebericht statt Doppelauftrag ergänzt. Zustellnachweis 09:41:29 UTC, sechs Servertests bestanden, Rückweg ops/server1/README.md
+- [ ] BigBuy: Variablenfehler in untersuchten Programmen nicht reproduzierbar; aktueller Zugang ungeklärt, HISTORIE 09.11. 401. Owner Pascal: Gültigkeit im Lieferantenkonto bestätigen; pausierten Bestandssync nicht aktivieren
+- [x] SSH: lokale geschützte Verwendung nach ausdrücklicher Antwort Pascal; keine Serverrechte oder authorized_keys geändert, vorhandener Stilllegungsplan bleibt Einzelentscheidung
+- [ ] Mailabsender: keine Domain konfiguriert (Tool 16.11.); Einrichtungsdialog angeboten, Owner Pascal. ORACLE-Karte erneut abgebrochen, Autorisierung nur durch Pascal möglich
+- [x] Vorhandenen Produktfoto-Entwurf geprüft, nicht versendet; keine ungeklärten Bildrechte übernehmen
+- [ ] Echter Nachtlauf/erster neuer Foto-Upload erst nach 17.11. messbar; echtes iPhone bei Pascal. Keine automatische Nachprüfung aus diesem Chat behaupten
+- [x] Nachweise, 111 Projekttests/sechs Servertests, 74 Seitenansichten, Rückweg und Inhaberaufgaben dokumentiert (.lovable/delivery-2026-11-16-filme-betrieb.md); Sicherheits-Schnellprüfung ohne Befund
+- [x] Veröffentlichung live nachgewiesen 09:47 UTC: Start/Kontakt/Automatisierung/TEILEKLAR/Anmelden × 1280/390 px, neue Zuschnitte/Standbilder, 12px Kennzeichnung, kein Überlauf oder Laufzeitfehler
 
 ## Kommentar Kontaktseite (16.11.)
 - [x] Kommentar 80c95bd2-dd43-44d0-b80a-a305a4faee35 gelesen: Standard-/Hover-Füllungen für Abschnittslinks getauscht; sechs Breiten-/Theme-Zustände ohne Geometrieänderung geprüft und im Thread beantwortet, nicht aufgelöst
@@ -218,13 +221,13 @@
 - [x] nexifyai.cloud + www leiten seit 16.11. 07:47 UTC über Tunnel (Server 1, eigener Port 8913) dauerhaft auf nexifyai.de, Pfad bleibt; Unteradressen/MX unverändert; Rückweg /root/nexifyai-cloud-weiterleitung-rueckweg.md. Hinweis: Hauptadresse geht per vorhandener Cloudflare-Regel erst auf www (2 Sprünge) – Regel nicht änderbar mit vorhandenem Zugang
 - [x] Shop: Sortierung (empfohlen, Preis auf/ab, Name) und Varianten als ein Artikel mit Größenauswahl – 3.720 Artikel → 3.349 Kacheln (16.11.)
 - [x] Shop: 397 von 410 Produktfotos freigestellt (13 bewusst ausgelassen: Rand nicht weiß), Originale erhalten; Werkzeug scripts/teileklar_cutout.py
-- [ ] Neue Produktfotos aus dem Nachtlauf werden nicht automatisch freigestellt – Werkzeug bei Bedarf erneut ausführen
+- [x] HISTORIE korrigiert: neue Produktfotos werden seit 16.11. über Server 1 täglich 06:15 UTC freigestellt; erster echter neuer Upload bleibt offen
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
 - [x] Skill „NeXify-Kundendesign-Standard“ aktiv (mit Kontrastprüfung), Kopie + ZIP unter Dateien/skills (16.11.)
 - [x] Helle Ansicht: grüne Status-/Aktivschrift unter 4.5:1 → neue Rolle --signal-text (Shop „Auf Lager“ 2,55 → 5,26:1); Fokusrahmen Katalog über --ring
 - [x] Produktdarstellung: 16 Seiten mit Anthropic-Prüfregeln (knowledge-work-plugins e91a134) durch DeepSeek bewertet, 20 geprüfte Textverbesserungen in 26 Dateien übernommen, Bericht unter Dateien/produktdarstellung (16.11.)
-- [ ] Gesprochene Filmtexte enthalten Du-Form und unbelegte Superlative („Effizienter geht es wirklich nicht“, „höchste Qualität“), auf TEILEKLAR eine nicht belegte Kundenstimme – Untertitel folgen dem Ton, Änderung nur durch neue Aufnahme oder andere Filmzuordnung (Entscheidung Pascal)
-- [ ] Produktnamen vereinheitlichen? („NeX AIFly Suite“, „NeX Agentic AIFly“, „NeX“, „FACTORY“ ohne Erklärung) – Markenentscheidung Pascal
+- [x] Filmtexte: nach Auftrag 09:23 UTC auf geprüfte Zuschnitte/Standbilder umgestellt; Originale unverändert, Untertitel folgen Ton, keine erfundene Referenz
+- [x] Produktnamen mit vorhandenen Fakten konsistent erklärt; FACTORY kein zusätzliches Produkt/Zugang, Rechtsarchive unverändert
 Arbeitsmodus (Pascal, 16.11., „Autonomous Finisher Protocol“): Lücken selbst finden, schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten).
 
 - [x] Veröffentlicht 16.11. 08:35 UTC: Produkttexte, Shop (Sortierung, Varianten, freigestellte Fotos), Sitemap; live geprüft 37 Seiten × 1280/390 px ohne Fehler, Überlauf oder fehlende Alternativtexte

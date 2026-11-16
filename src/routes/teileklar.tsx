@@ -95,7 +95,7 @@ function Index() {
             </div>
             <div className={"identity-media"}>
               <figure className={"identity-hero-photo"}>
-                <SiteFilm film="teileklar" eager />
+                <SiteFilm film="teileklar" eager still />
               </figure>
             </div>
           </div>
@@ -162,7 +162,7 @@ function Index() {
               <h2>
                 Gut informiert.
                 <br />
-                Klar entschieden.
+                Klar einordnen. Gezielt anfragen.
               </h2>
               <p>
                 Vergleichen Sie Artikelnummer und Herstellerangaben. Ein Produktfoto allein

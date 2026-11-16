@@ -100,7 +100,7 @@ function Index() {
           id="nex"
           label="Freigegebene Arbeitsschritte"
           title="Ein Auftrag mit einem überprüfbaren Ende."
-          summary="NeX ist für die Bearbeitung benannter Aufgaben vorgesehen. Der konkrete Einsatz hängt von erlaubten Werkzeugen, Quellen und Freigaben ab."
+          summary="NeX Agentic AIFly (kurz: NeX) ist für die Bearbeitung benannter Aufgaben vorgesehen. Der konkrete Einsatz hängt von erlaubten Werkzeugen, Quellen und Freigaben ab."
           facts={[
             {
               label: "Passt zu",
@@ -376,7 +376,7 @@ function ImportedSectionNeXAgenticAIFlyDer() {
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="fertigung" eager />
+            <SiteFilm film="zusammenarbeit" eager />
           </figure>
         </div>
       </div>

@@ -328,7 +328,7 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="fertigung" eager />
+            <SiteFilm film="zusammenarbeit" eager />
           </figure>
         </div>
       </div>

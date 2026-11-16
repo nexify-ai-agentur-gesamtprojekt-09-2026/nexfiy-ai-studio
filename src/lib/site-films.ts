@@ -1,7 +1,14 @@
 import type { FilmCue } from "./film-captions";
 
 /** Every brand film of the site, defined once and reused by each page that shows it. */
-export type SiteFilmId = "studio" | "angebot" | "fertigung" | "teileklar" | "arbeitsbereich";
+export type SiteFilmId =
+  | "studio"
+  | "angebot"
+  | "fertigung"
+  | "teileklar"
+  | "arbeitsbereich"
+  | "kennenlernen"
+  | "zusammenarbeit";
 
 export interface SiteFilmData {
   src: string;
@@ -18,6 +25,28 @@ export interface SiteFilmData {
 }
 
 export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
+  kennenlernen: {
+    src: "/site-assets/kennenlernen-geprueft.mp4",
+    poster: "/site-assets/05c51cdebbdd2aa6.webp",
+    label: "Pascal kennenlernen",
+    alt: "Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes",
+    duration: 4.383,
+    captions: [
+      { start: 0.4, end: 2.25, text: "Guten Tag, ich bin Pascal." },
+      { start: 2.3, end: 4.3, text: "Erzählen Sie mir, woran Sie gerade arbeiten." },
+    ],
+  },
+  zusammenarbeit: {
+    src: "/site-assets/zusammenarbeit-geprueft.mp4",
+    poster: "/site-assets/15fa9607b63661b1.webp",
+    label: "Technologie und Teamarbeit",
+    alt: "Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage",
+    duration: 4.85,
+    captions: [
+      { start: 0.45, end: 2.45, text: "Bei NeXify gehen wir neue Wege." },
+      { start: 2.5, end: 4.45, text: "Willkommen in der Zukunft." },
+    ],
+  },
   arbeitsbereich: {
     src: "/site-assets/b82843cf77d572df.mp4",
     poster: "/site-assets/4b45951db0b51136.webp",
