@@ -38,6 +38,11 @@
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:hover,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary:hover,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume[open] > summary { background: var(--accent); }
+:root:root #atelier .atelier-film.atelier-film .atelier-film-controls button[aria-pressed="true"] { background: var(--accent); color: var(--primary); }
+:root:root #atelier .atelier-film .atelier-film-picture > video::cue {
+  font-family: var(--font-text, inherit); font-size: clamp(13px, 1.6cqi, 20px); line-height: 1.4;
+  color: var(--foreground); background: color-mix(in srgb, var(--background) 82%, transparent);
+}
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:active,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary:active { background: var(--secondary); }
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button:focus-visible,

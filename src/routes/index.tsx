@@ -74,7 +74,7 @@ function Index() {
                     <span className={"hc-kicker"}>Kosten und Umfang</span>
                     <h2 id="hc-budget-title">Sie wissen vor dem Start, was enthalten ist.</h2>
                     <p>Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Sie entscheiden, was jetzt entsteht und was später folgt.</p>
-                    <div className={"hc-rate is-in"} aria-label="Individuell nach vereinbartem Umfang" data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":5832}}"}>
+                    <div className={"hc-rate is-in"} role="group" aria-label="Individuell nach vereinbartem Umfang" data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":5832}}"}>
                       <span>Klare Kalkulationsbasis</span>
                       <strong>Individuell</strong>
                       <small>nach vereinbartem Umfang</small>

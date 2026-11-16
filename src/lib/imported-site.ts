@@ -342,6 +342,7 @@ export function useAtelierFilms() {
         listen(captionsButton, "click", () => {
           const pressed = captionsButton.getAttribute("aria-pressed") !== "true";
           captionsButton.setAttribute("aria-pressed", String(pressed));
+          captionsButton.title = pressed ? "Untertitel ausblenden" : "Untertitel einblenden";
           const track = video.textTracks[0];
           if (track) track.mode = pressed ? "showing" : "hidden";
         });

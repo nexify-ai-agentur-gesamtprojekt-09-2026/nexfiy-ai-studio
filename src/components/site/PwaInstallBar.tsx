@@ -28,7 +28,7 @@ export function PwaInstallBar() {
       <div className="pwa-install-copy">
         <h2>NeXify AI als App installieren</h2>
         <p>Direkt vom Startbildschirm öffnen. Die Nutzung benötigt eine Internetverbindung.</p>
-        <div className="pwa-install-devices" aria-label="Geräte"><span><Smartphone aria-hidden="true" />Smartphone</span><span><Tablet aria-hidden="true" />Tablet</span><span><Monitor aria-hidden="true" />Computer</span></div>
+        <div className="pwa-install-devices" role="group" aria-label="Geräte"><span><Smartphone aria-hidden="true" />Smartphone</span><span><Tablet aria-hidden="true" />Tablet</span><span><Monitor aria-hidden="true" />Computer</span></div>
         {notice && <p className="pwa-install-note" role="status" data-tone={notice === "error" ? "error" : undefined}>{notice === "accepted" ? "Installation im Browser bestätigt." : notice === "dismissed" ? "Installation abgebrochen. Sie können es später über das Browsermenü erneut versuchen." : "Die Installation konnte nicht geöffnet werden. Nutzen Sie die Hinweise für Ihr Gerät."}</p>}
       </div>
       <div className="pwa-install-actions"><Button ref={installButtonRef} variant="brand" size="xl" onClick={startInstall} disabled={installing}><Download aria-hidden="true" />{installing ? "Browser geöffnet …" : canPrompt ? "Installieren" : device === "ios" ? "Zum Startbildschirm" : "App installieren"}</Button><Button variant="ghost" className="pwa-install-secondary" onClick={dismiss}>Nicht jetzt</Button></div>
