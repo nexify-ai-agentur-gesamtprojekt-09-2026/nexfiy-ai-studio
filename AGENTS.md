@@ -64,3 +64,7 @@ use the editor.
 - The site is German-only: no language selector is shown until real translated routes exist, because a non-functional control reads as a defect.
 - Managed AI calls fail closed: they bound waiting with `PUBLIC_AI_TIMEOUT_MS`, never auto-replay, and accept a result only if `isRequestedModel` confirms the reported response model, so a provider cannot silently substitute another model.
 - Brand-film captions are timed cues in `site-films.ts`; served WebVTT files must equal `toWebVtt` output (tested) and render in the shared overlay, so captions and transcript never diverge and look identical in every browser.
+- Catalogue variants are grouped in database views by a shared base name and recognised size suffix (`teileklar_base_name`); a representative is chosen by photo, stock, then price, and sizes are never guessed, so one article appears once with its real variants.
+- Photo cutouts are separate WebP files bound to the current original path, created by `scripts/teileklar_cutout.py` and uploaded only through the admin-checked cutout route; originals stay untouched and a stale cutout is ignored.
+- Brand-coloured text and indicators use `--signal-text`/`--ring`, never `--primary`, because the light primary falls below 4.5:1 on light surfaces.
+- Copy reviews by external checklists or the managed model are suggestions that must quote existing page text and add no facts; changes are applied by hand after checking, and film captions always follow the recorded audio.
