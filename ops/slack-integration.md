@@ -1,5 +1,10 @@
 # Slack und AIFly ORACLE – vorhandene Lösung erweitern
 
+## Rücklesen beim erneuten Projektstart (16.11.2026, 11:30 UTC)
+- **IST:** Prüfthread im privaten ORACLE-Kanal vollständig gelesen: Ausgangsanfrage plus Statusrevision 2, `reply_count:1`, keine ORACLE-/Hermes-Antwort; Kanalverlauf nach Revision 2 leer (`has_more:false`). Keine weitere Meldung gesendet, da der Kanal ohne Empfangsbestätigung nicht bestätigt ist und unveränderte Warnungen nicht wiederholt werden.
+- **IST:** Slack-Verbindungen unverändert drei persönliche Verbindungen; keine Bot-/Workspace-Freigabe belegt, keine erneute Provisionierung versucht.
+- **IST:** Veröffentlichung 11:33 UTC; `https://nexifyai.de/api/public/slack/events` beantwortet die Challenge 11:35 UTC exakt (HTTP 200), `/commands` und `/interactions` HTTP 200. Ohne Signaturgeheimnis werden Ereignisse weiterhin nicht verarbeitet.
+
 ## Workspace-Freigabe gezielt klären (16.11.2026, 11:18 UTC)
 **SOLL:** Den benötigten Slack-Freigabedialog zugänglich machen, vorhandene Verbindungen erhalten und die Einrichtung erst nach bestätigter Workspace-Autorisierung fortsetzen. Keine Geheimnisse im Chat und keine kostenpflichtigen Schritte.
 
