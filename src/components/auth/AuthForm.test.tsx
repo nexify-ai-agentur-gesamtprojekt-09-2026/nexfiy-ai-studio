@@ -10,7 +10,7 @@ describe("authentication feedback",()=>{
     render(<AuthForm mode="login" />);
     fireEvent.change(screen.getByLabelText("E-Mail-Adresse"),{target:{value:"person@example.test"}});
     fireEvent.change(screen.getByLabelText("Passwort",{exact:true}),{target:{value:"test-only"}});
-    fireEvent.click(screen.getByRole("button",{name:"Anmelden",exact:true}));
+    fireEvent.click(screen.getByRole("button",{name:"Anmelden"}));
     await waitFor(()=>expect(auth.signInWithPassword).toHaveBeenCalledTimes(1));
     expect(await screen.findByRole("alert")).toBeVisible();
     expect(screen.getByLabelText("E-Mail-Adresse")).toHaveAttribute("aria-invalid","false");

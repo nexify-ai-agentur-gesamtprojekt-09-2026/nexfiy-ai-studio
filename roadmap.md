@@ -1,29 +1,29 @@
 # Roadmap
 ## Kommentar Kontaktseite (16.11.)
-- [ ] Live-Kommentar am Link „Was nach Ihrer Anfrage passiert“ lesen, zugehörige Nacharbeit prüfen und im Thread belegen; nicht eigenmächtig auflösen
+- [x] Kommentar 80c95bd2-dd43-44d0-b80a-a305a4faee35 gelesen: Standard-/Hover-Füllungen für Abschnittslinks getauscht; sechs Breiten-/Theme-Zustände ohne Geometrieänderung geprüft und im Thread beantwortet, nicht aufgelöst
 
 ## Domain-Reihenfolge (16.11.)
 - [ ] Zuerst nexifyai.de durch Pascal verbinden und öffentlich prüfen; erst nach erfolgreicher Prüfung nexifyai.cloud als Weiterleitung ergänzen, bestehende Subdomains unverändert lassen
 - [ ] teileklar.shop erst nach gesonderter Shop-Abnahme anschließen: mindestens 3720 Produkte, Livezahlung und erfolgreiche Testbestellung; bestehende Domain nicht vorzeitig umschalten
 
 ## Hostinger-Zugang und Engineering-Skill (16.11.)
-- [ ] Composio-/Hostinger-Verbindung auf verfügbaren sicheren Anmeldeweg prüfen; keine VPS-Betriebsänderungen
-- [ ] Hochgeladenen Engineering-Skill lesen und als geprüften, projektgebundenen Skill vorbereiten; fremde Anweisungen bleiben bis Aktivierung Daten
+- [x] Privates Composio-OAuth eingerichtet; Hostinger-Leseabruf bestätigt am 16.11. 02:51 UTC zwei laufende KVM-8-VPS, keine Betriebs- oder Rechteänderungen; Shell-Zugriff nicht geprüft
+- [x] Hochgeladenen Engineering-Skill nach Auswahl aktiviert, unveränderte Quelle erhalten und Plattform-/Projekt-/Freigabegrenzen ergänzt
 
 ## Shop- und Werkstattseiten (16.11.)
-- [ ] Alle TEILEKLAR-Seiten auf gemeinsame Darstellung, klare nächste Schritte und widersprüchliche Waren-/Werkstattzusagen prüfen
-- [ ] Shop, Werkstatt, Fahrzeug/Passung und begleitende Seiten im bestehenden Design schärfen; fehlende reale Anbindungen nicht simulieren
-- [ ] Alle TEILEKLAR-Seiten am Desktop/Handy sowie Suche, Anfrageübergabe und Werkzeugwege prüfen
+- [x] 17 TEILEKLAR-Seiten geprüft; wiederholte Preis-/Bestands-/Werkstattverzeichnis-/Portalzusagen und Metadaten korrigiert, vorhandenes Rechtsarchiv unverändert erhalten
+- [x] Shop-Einstiege, externe Werkstattsuche, Teileartenwahl, Termin-/Gutscheinformulare und Partnerdarstellung im bestehenden Design geschärft; keine Waren-, Zahlungs-, Buchungs- oder Partneranbindung simuliert
+- [x] TEILEKLAR und fünf Formularseiten: 66 Ansichten bei 1280/390/320px ohne Überlauf/Laufzeitfehler; aktuelle Teilefrage, externe Kartenadresse, Batterieübergabe und Reifenwahl im Browser geprüft
 
 ## Formulare technisch und visuell (16.11.)
-- [ ] Fahrzeug-/Passungsseite und übrige echte Formulare auf Eingabe, Validierung, Zustände, Barrierefreiheit und Darstellung prüfen
-- [ ] Gemeinsame Formularqualität verbessern, ohne erfundene Passung, Zustellung oder Commerce-Funktionen
-- [ ] Reale Formularwege am Desktop/Handy und vorhandene Tests prüfen; externe Zustellung/Passungsfreigabe bleiben ausdrücklich getrennt
+- [x] Reale Anfrage-/Kontoeingaben geprüft; Fehlerzählung, Eingabelimits, feldgenaue Kontofehler und klare Betreffzuordnung korrigiert
+- [x] Gemeinsame Felder, Fokus, Abstände und Theme-Flächen vereinheitlicht; lange Entwürfe bleiben sichtbar, Kopierfehler werden ehrlich gezeigt und Angaben bleiben bearbeitbar
+- [x] Anfragevorbereitung, Kopierfehler und Rückbearbeitung im Browser geprüft; 57 Tests bestanden. Echte Kontotransaktion/Zustellung, Safari-Gerät und Passungsfreigabe nicht nachgewiesen
 
 ## Glasflächen nach Apple-Design-Prüfung (16.11.)
-- [ ] Kontrast, Durchsicht und Lichtkanten bestehender Flächen in heller/dunkler Ansicht messen und ausschließlich Materialwerte verfeinern
-- [ ] Unveränderte Header-Innenabstände, Seiten-/Chat-Geometrie und Footer-Ausrichtung vor/nach Änderung vergleichen
-- [ ] Menüs, Chat-Eingabe und Installationshinweise mit erhöhtem Kontrast, reduzierter Transparenz/Bewegung und vorhandenen Tests prüfen
+- [x] Glasrollen für Navigation, Leseflächen und Menüs abgestimmt; helle/dunkle Ansicht geprüft, Fehlerfarbe im hellen Theme korrigiert. Frühere Pixel-Kontraststichprobe uneindeutig; keine vollständige WCAG-Kontrastfreigabe
+- [x] Final 7056 Geometriewerte in 28 Zuständen ohne Änderung gegenüber Ausgangsstand; Header oben/unten 8px, rechts bis 1280px 8px, bei 1705px vorhandene freie Flexfläche 198,72px ausdrücklich nicht als 8px behauptet
+- [x] Erhöhter Kontrast, reduzierte Transparenz/Bewegung, Menüs, Installationshinweise und reale mobile ORACLE-Antwort mit API-Link geprüft; keine Laufzeitfehler
 
 ## App-Installation unter dem Footer (16.11.)
 - [x] Gemeinsame Glas-Installationsleiste mit Browser-Installation und Anleitungen für iPhone/iPad, Android und Computer ergänzt; exakt mit Rechtslinks ausgerichtet (beide x=59,28px bei 1705px)
