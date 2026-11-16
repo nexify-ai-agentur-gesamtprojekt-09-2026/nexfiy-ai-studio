@@ -1,6 +1,6 @@
 /* Shared page shell (NeXify and TEILEKLAR): phone sizing of the chat panel. Previously repeated per page
    as generated [data-site-import-responsive] rules; one semantic copy now serves every page. */
-:root:root #atelier.site-nexify { display: block; }
+:root:root #atelier.site-shared { display: block; }
 :root:root #atelier .site-page-split { height: auto; min-height: 100dvh; align-items: stretch; overflow: visible !important; }
 :root:root #atelier :is(.site-page-pane,.site-oracle-pane) { overflow: visible !important; min-width: 0; }
 :root:root #atelier .site-oracle-pane { position: relative; }
@@ -12,6 +12,12 @@
 :root:root #atelier .site-page-divider svg { display: none; }
 :root:root #atelier .site-page-divider:is(:hover,:focus-visible) > div { background: var(--primary); }
 :root:root #atelier .website { min-width: 0; }
+:root:root #atelier .tk-help-content { display: grid; gap: 24px; flex: 1; min-height: 0; overflow-y: auto; }
+:root:root #atelier .tk-help-form { display: grid; gap: 12px; flex-shrink: 0; font-size: 14px; }
+:root:root #atelier .tk-help-form textarea { min-height: 96px; font-size: 16px; line-height: 1.5; background: var(--secondary); color: var(--foreground); }
+:root:root #atelier .tk-commerce-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+:root:root #atelier .tk-commerce-header :is(a,button,input) { min-height: 44px; }
+:root:root #atelier .tk-commerce-header { background: var(--glass-fill); color: var(--foreground); backdrop-filter: blur(20px); }
 :root:root #atelier .website { background-image: var(--stage-light); }
 :root:root #atelier :is(.nx-logo-figur,.oracle-companion img,.orientation-host-figure img) { filter: drop-shadow(0 8px 8px var(--figure-shadow)) drop-shadow(0 -1px 2px var(--figure-rim)) saturate(1.06); }
 :root:root #atelier :is(.site-header .theme-switch,.site-header .mobile-navigation > summary,.site-header .language-switch,.site-header .header-cta,.reopen-chat) { background: var(--glass-fill); box-shadow: var(--glass-elevation); backdrop-filter: blur(20px) saturate(1.35); }
