@@ -17,7 +17,7 @@ export const Route = createFileRoute("/kontakt")({
     ],
   }),
   staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
-  validateSearch: (search: Record<string, unknown>) => ({ anliegen: typeof search["anliegen"] === "string" ? search["anliegen"].slice(0, 1000) : "" }),
+  validateSearch: (search: Record<string, unknown>): { anliegen?: string } => typeof search["anliegen"] === "string" ? { anliegen: search["anliegen"].slice(0, 1000) } : {},
   component: Index,
 });
 
@@ -62,7 +62,7 @@ function Index() {
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
               <section className={"hc-container pc-supplement"} id="anfrage" tabIndex={-1}>
-                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" initialMessage={anliegen} />
+                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" initialMessage={anliegen ?? ""} />
               </section>
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-contact-contact-customer-1-0" tabIndex={-1} aria-labelledby="content-contact-contact-customer-1-0-title">
