@@ -338,13 +338,27 @@ export function useAtelierFilms() {
             video.muted = false;
           } else video.muted = true;
         });
-      if (captionsButton)
+      const track = video.textTracks[0];
+      const captionBox = film.querySelector<HTMLElement>(".atelier-film-caption");
+      if (captionsButton && track && captionBox) {
+        // The track stays "hidden" so the browser loads cues without its own rendering;
+        // the overlay keeps captions above the controls and identical in every browser.
+        let captionsOn = false;
+        const renderCaption = () => {
+          const cue = captionsOn ? track.activeCues?.[0] : undefined;
+          const text = cue && "text" in cue ? String(cue.text) : "";
+          captionBox.textContent = text;
+          captionBox.hidden = !text;
+        };
+        listen(track, "cuechange", renderCaption);
         listen(captionsButton, "click", () => {
-          const pressed = captionsButton.getAttribute("aria-pressed") !== "true";
-          captionsButton.setAttribute("aria-pressed", String(pressed));
-          const track = video.textTracks[0];
-          if (track) track.mode = pressed ? "showing" : "hidden";
+          captionsOn = !captionsOn;
+          if (track.mode === "disabled") track.mode = "hidden";
+          captionsButton.setAttribute("aria-pressed", String(captionsOn));
+          captionsButton.title = captionsOn ? "Untertitel ausblenden" : "Untertitel einblenden";
+          renderCaption();
         });
+      }
       if (volume) {
         listen(volume, "input", () => {
           video.volume = normalizeVolume(Number(volume.value));

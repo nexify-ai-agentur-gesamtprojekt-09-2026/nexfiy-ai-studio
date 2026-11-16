@@ -1,5 +1,5 @@
 import { useRef, useState, type FormEvent } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { oauthReturnPath } from "@/lib/oauth-return-path";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,8 @@ function germanError(message: string) {
 export function AuthForm({ mode }: { mode: AuthMode }) {
   const returnTo = () => { const n = typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("next"); return n ? oauthReturnPath(n) : null; };
   const navigate = useNavigate();
+  // Router state is identical on server and client, so the switch links keep "next" without a hydration mismatch.
+  const searchStr = useRouterState({ select: (state) => state.location.searchStr });
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -116,8 +118,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         {pending ? "Einen Moment …" : LABELS[mode]}
       </Button>
       <div className="tk-actions">
-        {mode !== "login" && <p><a href={"/anmelden" + (typeof window !== "undefined" ? window.location.search : "")}>Ich habe schon ein Konto</a></p>}
-        {mode !== "signup" && <p><a href={"/registrieren" + (typeof window !== "undefined" ? window.location.search : "")}>Neues Konto erstellen</a></p>}
+        {mode !== "login" && <p><a href={"/anmelden" + searchStr}>Ich habe schon ein Konto</a></p>}
+        {mode !== "signup" && <p><a href={"/registrieren" + searchStr}>Neues Konto erstellen</a></p>}
         {mode === "login" && <p><a href="/passwort-vergessen">Passwort vergessen?</a></p>}
         <p className="nx-konto-hinweis"><a href="/datenschutz">Datenschutz</a></p>
       </div>
