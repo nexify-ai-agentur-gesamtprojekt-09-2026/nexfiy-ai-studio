@@ -57,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Zuerst klären wir Zielgruppe, Angebot und die gewünschte Wirkung. Daraus folgen Gestaltung, Inhalte, Funktionen und der Umfang.</p>
                     <p>Ein Beispiel: Soll Ihre Website mehr passende Anfragen bringen, beginnen wir beim Angebot und der Zielgruppe, dann kommen Seitenführung und Kontaktweg. So wissen Sie bei jedem Teil des Projekts, warum es ihn gibt.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die erste Frage ist die wichtigste</h3>
+<p>Beginnen Sie nicht mit einer Liste von Werkzeugen, sondern mit einem konkreten Problem. Wer ist betroffen, was passiert heute und welches Ergebnis würde helfen? So lassen sich Inhalte und Funktionen an einer Aufgabe beurteilen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -71,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Am Ende erhalten Sie das geprüfte Ergebnis mit den Dateien, der Dokumentation und der Einweisung, die im Angebot stehen. Offene Punkte und nächste Schritte halten wir schriftlich fest.</p>
                     <p>Pflege und Aktualisierung übernehmen Sie selbst oder vereinbaren sie mit NeXify Care.</p>
-                  </div>
+                  
+<h3>Den nächsten Betriebsschritt mitdenken</h3>
+<p>Zur Übergabe gehört die Frage, wer Inhalte pflegt und wer bei Änderungen entscheidet. Welche Dokumentation, Einweisung und Betreuung enthalten sind, wird im Angebot benannt. Ein fertiger Auftritt ist kein Versprechen, dass spätere Pflege automatisch übernommen wird.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

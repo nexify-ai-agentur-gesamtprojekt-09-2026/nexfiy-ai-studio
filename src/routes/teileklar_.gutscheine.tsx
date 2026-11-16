@@ -63,7 +63,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Zu jedem Gutschein gehören Leistung, Gültigkeit und Einlösebedingungen. Ein Code ohne diese Angaben ist kein Anspruch.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Diese Angaben vor der Nutzung klären</h3>
+<p>Wer stellt den Gutschein aus? Für welche Leistung gilt er, bis wann und mit welchen Ausschlüssen? Lassen Sie unklare Angaben beim Aussteller bestätigen. Auf dieser Seite wird weder ein Guthaben geführt noch ein Gutscheinverkauf ausgelöst.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>TEILEKLAR Hilfe<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/rechtliches">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -76,7 +79,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Ob ein Gutschein gültig oder schon eingelöst ist, weiß sein Aussteller. Diese Seite zeigt keinen Stand zu einem Guthaben.</p>
-          </div>
+          
+<h3>Eine Frage zum Gutschein vorbereiten</h3>
+<p>Nennen Sie Aussteller, Leistung und Ihre offene Frage. Vollständige Zahlungsdaten oder andere vertrauliche Angaben sind dafür nicht nötig. Die Anfrage wird als E-Mail vorbereitet; sie löst keine Einlösung oder Buchung aus.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">

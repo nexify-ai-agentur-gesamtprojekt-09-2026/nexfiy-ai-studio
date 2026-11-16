@@ -52,7 +52,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Für eine Anfrage genügen Ihr Vorhaben und eine Kontaktmöglichkeit. Geben Sie in öffentliche Felder keine Passwörter, API-Schlüssel, Zahlungsdaten oder vertraulichen Kundendaten ein. Für Projektunterlagen vereinbaren wir einen eigenen Übergabeweg.</p>
                     <p>Für die ORACLE-Produktberatung werden Ihre Nachricht und der begrenzte Gesprächsverlauf über AI Gateway an ein KI-Modell übermittelt. Die Beratung verwendet die öffentlichen Produktinformationen, nicht Ihre Kontodaten. Der Gesprächsverlauf wird in dieser App nur während der geöffneten Seite gehalten; ein Neuladen setzt ihn zurück. Diese Aussage betrifft nicht die gesonderte Verarbeitung durch die beteiligten Dienste.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Anfrage und Beratung sind unterschiedliche Wege</h3>
+<p>Das Anfrageformular bereitet eine E-Mail vor. Sie versenden sie anschließend selbst in Ihrem E-Mail-Programm. Die ORACLE-Beratung dagegen verarbeitet Ihre eingegebene Frage über einen KI-Dienst. Nutzen Sie für beide Wege nur die Angaben, die für Ihr Anliegen erforderlich sind.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/cookies">Sie wählen, was zusätzlich aktiv wird.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -65,7 +68,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Der konkrete Dienst bestimmt die jeweilige Verarbeitung. Verantwortliche, Empfänger, Rechtsgrundlage und Fristen gehören in die geprüften Informationen dieses Dienstes; diese Übersicht ersetzt sie nicht.</p>
-                  </div>
+                  
+<h3>Der Umfang dieser Information</h3>
+<p>Eine vollständige Datenschutzerklärung muss die Verantwortlichen und die tatsächlich eingesetzten Dienste benennen. Diese Übersicht erläutert einzelne Abläufe, bestätigt aber keine vollständige rechtliche Prüfung und legt keine zusätzlichen Speicherfristen fest.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

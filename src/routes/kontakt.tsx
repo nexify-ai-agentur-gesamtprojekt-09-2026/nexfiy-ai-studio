@@ -74,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Was bietet Ihr Unternehmen an, wen wollen Sie erreichen, und was soll sich ändern? Sie können auch einfach beschreiben, wo es heute hakt.</p>
                     <p>Ein ungefährer Zeit- und Budgetrahmen und vorhandene Unterlagen helfen, sind aber kein Muss. Was fehlt, klären wir im Gespräch.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein konkretes Beispiel hilft mehr als eine lange Wunschliste</h3>
+<p>Beschreiben Sie einen typischen Vorgang: Wer benötigt welche Information, was dauert zu lange und welches Ergebnis wäre hilfreich? Bei einer Website können Sie Ihr Angebot, die Zielgruppe und den gewünschten Kontaktweg nennen. Zugangsdaten oder vertrauliche Unterlagen gehören nicht in das öffentliche Formular.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -88,7 +91,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wir klären offene Punkte und den passenden Umfang. Dann erhalten Sie ein Angebot mit Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.</p>
                     <p>Nach dem Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie können uns auch direkt schreiben.</p>
-                  </div>
+                  
+<h3>Sie behalten den Versand in der Hand</h3>
+<p>Das Formular prüft Ihre Angaben und öffnet eine vorbereitete Nachricht im E-Mail-Programm. Erst Ihr Versand dort stellt die Anfrage zu. Ist kein E-Mail-Programm eingerichtet, können Sie die Nachricht kopieren und selbst versenden; eine sichtbare Vorbereitung ist noch keine Zustellbestätigung.</p>
+</div>
                 </section>
               </div>
               <section className={"hc-section hc-container hc-budget"} aria-labelledby="contact-title-contact">

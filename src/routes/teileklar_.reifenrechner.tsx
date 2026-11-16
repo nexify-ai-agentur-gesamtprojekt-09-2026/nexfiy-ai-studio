@@ -56,7 +56,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Breite und Querschnitt bestimmen die Höhe der Flanke, der Felgendurchmesser die Größe. Ändern Sie eine Zahl, ändert sich der Abrollumfang – das ist mehr als eine Frage der Optik.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Nennmaße verständlich vergleichen</h3>
+<p>Die Breite wird in Millimetern, der Querschnitt als Prozent der Breite und die Felge in Zoll angegeben. Daraus errechnet sich ein theoretischer Durchmesser. Die angezeigten Werte sind Geometrie, keine Messung am montierten Reifen.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>TEILEKLAR Hilfe<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -69,7 +72,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Der Rechner vergleicht Größen; er erteilt keine Freigabe. Welche Größen Sie fahren dürfen, steht in den Fahrzeugpapieren. Den Rechner finden Sie bei der Passungsprüfung.</p>
-          </div>
+          
+<h3>Eine kleine Abweichung ist keine Freigabe</h3>
+<p>Auch bei ähnlichem Umfang müssen Felge, Tragfähigkeit, Geschwindigkeitsindex und Freigängigkeit geprüft werden. Fahrzeugunterlagen und fachkundige Prüfung sind dafür maßgeblich. Der Rechner ersetzt diese Prüfung nicht.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">

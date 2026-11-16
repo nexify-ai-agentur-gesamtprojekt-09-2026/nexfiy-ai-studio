@@ -51,7 +51,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Klare Hierarchien, sichtbarer Fokus und verständliche Beschriftungen gehören zum Gestaltungsanspruch. Medien unterstützen die Botschaft; wichtige Informationen dürfen nicht allein von Bewegung oder Farbe abhängen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Information bleibt unabhängig von Effekten</h3>
+<p>Eine Überschrift soll den folgenden Abschnitt verständlich benennen. Fehlermeldungen müssen den betroffenen Schritt nennen, statt nur eine Farbe zu ändern. Das gilt gleichermaßen für die Seitennavigation, eine Anfrage und die Produktberatung.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -64,7 +67,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Beschreiben Sie eine Barriere mit Seite, betroffener Funktion und Gerät. Über den Kontaktweg erreicht Ihr Hinweis das Projektteam. Übermitteln Sie dabei keine Zugangsdaten oder vertraulichen Inhalte.</p>
-                  </div>
+                  
+<h3>Eine hilfreiche Rückmeldung</h3>
+<p>Nennen Sie die Seitenadresse, was Sie tun wollten und was tatsächlich passiert ist. Gerät, Browser und eine Beschreibung der betroffenen Stelle helfen bei der Eingrenzung. Eine umfassende Prüfung aller Hilfsmittel und Geräte steht weiterhin aus.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

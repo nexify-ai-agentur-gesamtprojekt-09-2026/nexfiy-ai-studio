@@ -58,7 +58,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wie wird eine Anfrage strukturiert, wie ein Ergebnis geprüft? Ein Skill hält das einmal fest, damit ein Agent es jedes Mal gleich macht. Vor dem Einsatz prüfen wir Herkunft, Eignung und Version.</p>
                     <p>Die fachliche Verantwortung bleibt bei Ihnen, Ihre Daten bleiben in Ihrem Projekt.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein Skill beschreibt die Methode</h3>
+<p>Eine wiederverwendbare Vorgehensweise hilft, dieselbe Art von Aufgabe konsistent zu bearbeiten. Sie erteilt aber keine zusätzlichen Datenrechte. Methode, verwendete Quellen und Freigaben müssen für den jeweiligen Einsatz zusammenpassen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/api">NeXify API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -72,7 +75,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Über das Model Context Protocol (MCP) nutzt ein Agent zugelassene Werkzeuge und Fachsysteme auf einem einheitlichen Weg. Für jede Verbindung steht fest, wer sie betreibt, wozu sie dient und was sie darf.</p>
                     <p>Welche Verbindungen wir für Ihr Projekt einrichten, hängt von Ihren Systemen ab und steht im Angebot.</p>
-                  </div>
+                  
+<h3>MCP beschreibt den Werkzeugzugang</h3>
+<p>Eine Verbindung kann einem Agenten klar benannte Werkzeuge zugänglich machen. Das sagt noch nichts darüber aus, welche Daten er sehen oder welche Änderungen er ausführen darf. Identität und bestehende Rechte müssen auch bei einer standardisierten Verbindung erhalten bleiben.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-skills-mcp-skills-3-2" tabIndex={-1} aria-labelledby="content-skills-mcp-skills-3-2-title">
                   <div>
@@ -82,7 +88,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Beschreiben Sie das System und die Aufgabe. Wir sehen uns die vorhandene Schnittstelle, die nötigen Rechte und den Nutzen an.</p>
                     <p>Danach erhalten Sie ein Angebot mit Aufwand und nächstem Schritt.</p>
-                  </div>
+                  
+<h3>Für eine Prüfung benötigte Angaben</h3>
+<p>Hilfreich sind der Name des Systems, die wiederkehrende Aufgabe und das gewünschte Ergebnis. Zugangsdaten oder Tokens gehören nicht in die öffentliche Anfrage. Welche Verbindung eingerichtet werden kann, hängt von verfügbaren Schnittstellen und Berechtigungen ab.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

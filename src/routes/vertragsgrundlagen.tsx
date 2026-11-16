@@ -51,7 +51,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Ein Angebot beschreibt Leistungen, Ergebnisse, Mitwirkung und Abnahme. Änderungen werden ausdrücklich abgestimmt. Ein Gespräch oder ein vom Assistenten vorbereiteter Entwurf ist noch keine bestätigte Beauftragung.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein Angebot muss die Entscheidung erleichtern</h3>
+<p>Prüfen Sie, welches Ergebnis enthalten ist, welche Materialien Sie bereitstellen und was als eigener Posten hinzukommt. Abnahme und Änderungen müssen zum vereinbarten Auftrag passen. Diese Übersicht erteilt keine zusätzliche Vertrags- oder Rechtsfreigabe.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -65,7 +68,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Umsetzung, optionale NeXify Care und variabler Modellverbrauch werden getrennt vereinbart. Maßgeblich sind die freigegebenen Konditionen Ihres Angebots; Beispielpakete und Chattexte setzen keine eigenen Preise oder Garantien.</p>
                     <p>Für eigenständige Produkte gelten die jeweils freigegebenen Produktbedingungen. Diese Übersicht legt keine zusätzlichen Suite- oder API-Tarife fest.</p>
-                  </div>
+                  
+<h3>Produktbedingungen bleiben eigenständig</h3>
+<p>Ein Agenturauftrag, die Nutzung einer Suite und API-Aufrufe haben unterschiedliche Voraussetzungen. Die freigegebenen Bedingungen des konkreten Angebots sind maßgeblich. Öffentlich beschriebene Beispielpakete ersetzen weder ein Angebot noch einen bestätigten Produkttarif.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

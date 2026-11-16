@@ -65,7 +65,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Halten Sie HSN und TSN aus dem Fahrzeugschein bereit, oder Modell, Motor und Baujahr. Eine Herstellernummer vom alten Teil hilft zusätzlich.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Ähnliche Modellnamen reichen nicht</h3>
+<p>Motorisierung, Bauzeitraum und Ausführung können unterschiedliche Teile benötigen. Eine Nummer am vorhandenen Bauteil hilft beim Vergleich, muss aber ebenfalls zum Fahrzeug passen. Die Checkliste strukturiert Ihre Angaben und bestätigt keine Kompatibilität.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>TEILEKLAR Hilfe<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/suche">Teil, Marke oder Nummer suchen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -78,7 +81,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Sie zeigt je Teileart, welche Angaben entscheiden und wo der häufigste Irrtum liegt. Eine automatische Prüfung gegen einen Fahrzeugkatalog gibt es noch nicht; im Zweifel fragen Sie eine Werkstatt.</p>
-          </div>
+          
+<h3>Was der Rechner berechnet</h3>
+<p>Der Reifenrechner vergleicht Nennmaße und zeigt Durchmesser, Umfang und Größenänderung. Er prüft weder Tragfähigkeit noch Freigängigkeit oder Zulässigkeit. Die geometrische Rechnung und die Prüfung am konkreten Fahrzeug bleiben getrennte Schritte.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">

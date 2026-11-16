@@ -54,7 +54,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Maße, Befestigung und Lage der Pole müssen stimmen. Fahrzeuge mit Start-Stopp brauchen eine EFB- oder AGM-Batterie; eine Batterie mit falscher Technologie kann vorzeitig altern.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Vor dem Vergleich die vorhandenen Angaben prüfen</h3>
+<p>Notieren Sie die Daten der vorhandenen Batterie und die Fahrzeugausführung. Kapazität allein reicht nicht: Bauform, Pole und Technologie müssen zusammenpassen. Die Hinweise dieser Seite ersetzen keine fahrzeugspezifische Herstellerfreigabe.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>TEILEKLAR Hilfe<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -67,7 +70,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Bei manchen Fahrzeugen muss die neue Batterie angemeldet werden. Klären Sie das mit einer Werkstatt, bevor Sie bestellen. Einen Batterie-Berater gibt es bei TEILEKLAR noch nicht; die Checkliste zur Passung zeigt, welche Angaben zählen.</p>
-          </div>
+          
+<h3>Einbau und Anmeldung getrennt klären</h3>
+<p>Ob eine neue Batterie am Fahrzeug angemeldet werden muss, hängt von der konkreten Ausführung ab. Beschreiben Sie Fahrzeug und Batterie in Ihrer Werkstattanfrage. Eine automatische Batterieauswahl steht hier nicht bereit.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">

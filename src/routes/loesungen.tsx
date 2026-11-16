@@ -57,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Kampagnenkonzept, Texte, Bild- oder Videomotive und die Zielseite. Am Anfang stehen Ihr Angebot, Ihre Zielgruppe und die Reaktion, die Sie erreichen wollen – etwa mehr passende Anfragen.</p>
                     <p>Der Auftrag nennt Kanäle, Formate und Lieferumfang. Weitere Varianten sind Optionen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Vom Angebot zur passenden Reaktion</h3>
+<p>Soll ein Interessent eine Frage stellen, einen Terminwunsch nennen oder Informationen anfordern? Diese Entscheidung prägt Texte, Motiv und Kontaktweg. Ein klarer Schwerpunkt ist hilfreicher als mehrere konkurrierende Aufforderungen auf derselben Zielseite.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -71,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Medienbudget, Gestaltung und Kampagnenbetreuung vereinbaren Sie getrennt, damit Sie sehen, wohin Ihr Geld geht. Anzeigen starten erst nach Ihrer Freigabe.</p>
                     <p>Welche Messung zulässig und sinnvoll ist, legen wir vor dem Start fest. Ergebnisse hängen von Angebot, Zielgruppe, Wettbewerb und Budget ab; einen bestimmten Erfolg sagen wir nicht zu.</p>
-                  </div>
+                  
+<h3>Ergebnisse im richtigen Zusammenhang lesen</h3>
+<p>Anzeigenwerte allein zeigen nicht, ob eine Anfrage zu Ihrem Angebot passt. Angebot, Zielgruppe, Kanal und Budget beeinflussen das Ergebnis gemeinsam. Welche Daten erhoben und wie sie beurteilt werden, muss zum vereinbarten und zulässigen Messumfang passen.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

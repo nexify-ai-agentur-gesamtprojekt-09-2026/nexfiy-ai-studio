@@ -57,7 +57,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Am Anfang steht eine konkrete Aufgabe, etwa: Informationen für ein Projekt ordnen oder einen Entwurf vorbereiten. Wir beschreiben, was hineingeht, welche Werkzeuge erlaubt sind und was herauskommen soll.</p>
                     <p>Recherche, Entwurf, Prüfung und Ausführung sind getrennte Schritte. Welche davon die Agenten für Sie übernehmen, steht im Angebot.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Zwei Rollen, ein nachvollziehbarer Ablauf</h3>
+<p>ORACLE ordnet die Aufgabe und ihre Abhängigkeiten. NeX ist für die Ausarbeitung freigegebener Schritte vorgesehen. Für den konkreten Einsatz zählen die erlaubten Quellen und Werkzeuge, nicht allein die Namen der Agenten.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/api">NeXify API. KI in Ihrer Anwendung.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -71,7 +74,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>AIFly ORACLE ist dafür da, Zuständigkeiten und Abhängigkeiten zu ordnen. Ein Arbeitsstand zeigt, ob etwas vorbereitet, geprüft oder ausgeführt ist.</p>
                     <p>Veröffentlichen und Versenden bleiben Ihre Entscheidung. Ein Entwurf ist noch kein versendetes Ergebnis.</p>
-                  </div>
+                  
+<h3>Ein Arbeitsstand muss eine Bedeutung haben</h3>
+<p>Vorbereitet, geprüft und ausgeführt bezeichnen unterschiedliche Zustände. Halten Sie fest, welches Ergebnis zu jedem Schritt gehört und wer es bestätigt. Dadurch bleibt erkennbar, ob noch eine Entscheidung fehlt oder der freigegebene Vorgang abgeschlossen ist.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

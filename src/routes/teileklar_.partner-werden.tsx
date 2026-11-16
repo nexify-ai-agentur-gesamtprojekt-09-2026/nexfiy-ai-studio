@@ -135,7 +135,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Leistungen, Standort und Ansprechpartner zeigen Kunden, wofür Sie stehen. Partner wird Ihr Betrieb mit einer Vereinbarung, nicht schon durch einen Eintrag im Verzeichnis.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Eine Anfrage ist noch kein Partnervertrag</h3>
+<p>Beschreiben Sie Betrieb, Standort und die Leistungen, über die Sie sprechen möchten. Daraus lässt sich eine Zusammenarbeit besprechen. Ein Eintrag, die Anfrage oder ein Konto bestätigt für sich noch keine freigeschalteten Partnerfunktionen.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -148,7 +151,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Wie Anfragen ankommen, wie Sie zusagen und was abgerechnet wird, legen wir vor dem ersten Auftrag gemeinsam fest. Ihre Anfrage ist der Anfang dieses Gesprächs.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Betriebliche Voraussetzungen vorab klären</h3>
+<p>Welche Anfragen passen zu Ihrem Betrieb und wer übernimmt die Rückmeldung? Diese Fragen gehören vor den ersten Auftrag. Das Werkstattverzeichnis und ein operativer Partnerablauf sind in diesem Auftritt noch nicht angebunden.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/anmelden">Anmelden und weiterarbeiten.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>

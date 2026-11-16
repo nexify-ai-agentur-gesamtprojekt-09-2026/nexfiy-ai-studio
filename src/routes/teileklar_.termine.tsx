@@ -63,7 +63,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Welche Arbeit, welches Fahrzeug, welcher Zeitraum? Nennen Sie auch das Teil, wenn Sie es schon haben. Je genauer die Anfrage, desto weniger Rückfragen.</p>
-            <div className={"hc-service-detail pc-module"}>
+            
+<h3>Die Anfrage möglichst eindeutig vorbereiten</h3>
+<p>Nennen Sie Fahrzeug, gewünschte Arbeit und einen Zeitraum. Teilen Sie mit, ob Sie bereits ein Ersatzteil haben und welche Frage vor dem Termin offen ist. Das Formular bereitet eine Nachricht vor; es reserviert keinen Werkstatttermin.</p>
+<div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
@@ -76,7 +79,10 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>Umfang, Preis und Termin vereinbaren Sie mit der Werkstatt. Verbindlich ist ihre Zusage.</p>
-          </div>
+          
+<h3>Was verbindlich werden muss</h3>
+<p>Werkstatt, Leistungsumfang, Preis und Zeitpunkt müssen vom Betrieb bestätigt werden. Die vorbereitete E-Mail ist keine Terminbestätigung. Ein Werkstattverzeichnis ist hier noch nicht angebunden; die Suche kann Ihnen stattdessen den Weg zu einer externen Kartensuche öffnen.</p>
+</div>
         </section>
       </div>
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">

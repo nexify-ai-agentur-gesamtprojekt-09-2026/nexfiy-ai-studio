@@ -58,7 +58,10 @@ function Index() {
                     <p><strong>Einmalige Umsetzung.</strong> Konzept, Texte, Gestaltung und Technik für das Ergebnis, das Sie beauftragen.</p>
                     <p><strong>Betreuung nach der Übergabe.</strong> Pflege und Weiterentwicklung können Sie gesondert vereinbaren.</p>
                     <p><strong>Externe und verbrauchsabhängige Kosten.</strong> Hosting, Software, KI-Nutzung und Werbebudget werden separat ausgewiesen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Was ein verständlicher Kostenrahmen beantwortet</h3>
+<p>Welche Ergebnisse sind enthalten, was liefern Sie selbst und was wird separat berechnet? Welche Posten sind einmalig, welche wiederkehrend und welche abhängig von der Nutzung? Erst diese Aufteilung macht unterschiedliche Angebote sinnvoll vergleichbar.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -73,7 +76,10 @@ function Index() {
                     <p>Sind Budget oder Zeit begrenzt, legen wir gemeinsam fest, welches Ergebnis Sie zuerst brauchen. Daraus wird ein abgegrenzter Einstieg; alles Weitere steht als Option daneben.</p>
                     <p>Sie entscheiden auf Grundlage des Angebots. Zusätzliche Arbeit stimmen wir mit Ihnen ab, bevor sie entsteht.</p>
                     <p>Suite und API sind davon getrennte Produkte. Die Suite weist KI-Nutzung mit einem eigenen Budget aus; die API nutzt Prepaid-Guthaben. Die Produkttarife stehen noch zur Freigabe. Einzelheiten finden Sie auf den <a href="/produkte/nex2fly">Suite-</a> und <a href="/produkte/api">API-Seiten</a>.</p>
-                  </div>
+                  
+<h3>Klein beginnen, ohne spätere Arbeit zu verbergen</h3>
+<p>Ein begrenzter Einstieg benötigt ein klar benanntes Ergebnis. Weitere Inhalte, Funktionen und Betreuung bleiben separat sichtbar. Für Suite und API müssen die freigegebenen Produkttarife geprüft werden; hier werden keine zusätzlichen Preise oder kostenlosen Leistungen zugesagt.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

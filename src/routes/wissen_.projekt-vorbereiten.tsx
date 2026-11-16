@@ -64,7 +64,10 @@ function Index() {
                     <p>3. Was funktioniert heute gut, und wo springen Kunden ab?</p>
                     <p>4. Welche Unterlagen, Inhalte und Beispiele gibt es schon?</p>
                     <p>5. Welchen Rahmen haben Sie für Budget und Termin?</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein kurzes Beispiel genügt</h3>
+<p>Beschreiben Sie einen typischen Kunden oder einen wiederkehrenden Arbeitsfall. Nennen Sie die Stelle, an der Zeit verloren geht oder eine Entscheidung schwierig wird. Ein konkretes Beispiel macht die fünf Fragen leichter beantwortbar als eine allgemeine Funktionsliste.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -78,7 +81,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Nennen Sie die Systeme, die Sie nutzen – Website, Shopsoftware, Schnittstellen – und die Personen, die mitentscheiden. Schreiben Sie dazu, welche Aufgabe künftig leichter werden soll.</p>
                     <p>Zugangsdaten gehören nicht in die Anfrage. Dafür vereinbaren wir einen sicheren Weg.</p>
-                  </div>
+                  
+<h3>Systeme nennen, Geheimnisse weglassen</h3>
+<p>Für das erste Gespräch genügt, welche Software beteiligt ist und welche Informationen fließen sollen. Passwörter, Schlüssel und vertrauliche Kundendaten sind dafür nicht erforderlich. Eine tatsächliche Verbindung braucht eine gesonderte Prüfung und Freigabe.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

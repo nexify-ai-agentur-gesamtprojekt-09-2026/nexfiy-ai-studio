@@ -69,7 +69,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wir strukturieren Angebot und Kontaktweg so, dass Ihre Kunden sich leichter orientieren. Positionierung, Gestaltung, Texte und Website entstehen zusammen.</p>
                     <p>Das Paket Markenstart bündelt die Markenbasis und den Webauftritt. Weitere Seiten, Inhalte und Sprachen kommen als Optionen dazu.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Der Kontaktweg gehört zum Auftritt</h3>
+<p>Eine verständliche Website beantwortet die Fragen vor einer Anfrage: Was bieten Sie an, für wen passt es und was folgt danach? Seitenstruktur, Texte und Kontaktweg müssen deshalb denselben Schwerpunkt haben. Zusätzliche Inhalte und Funktionen werden im Umfang getrennt benannt.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -83,7 +86,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wiederkehrende Arbeit kostet Zeit: Anfragen sortieren, Unterlagen zusammensuchen, Stände nachfragen. Wir bauen Apps, Portale und Schnittstellen und setzen KI dort ein, wo sie einen benannten Schritt übernimmt.</p>
                     <p>Das Paket KI im Betrieb beginnt mit einem Ablauf – mit den Quellen und Rechten, die Sie dafür zulassen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Vom Einzelfall zur wiederholbaren Arbeit</h3>
+<p>Ein guter Ausgangspunkt ist ein Vorgang, der häufig wiederkehrt und ein überprüfbares Ergebnis hat. Eingaben, Datenquellen und Entscheidungen werden dafür getrennt betrachtet. Eine umfassende Automatisierung entsteht nicht dadurch, dass möglichst viele Werkzeuge gleichzeitig verbunden werden.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -97,7 +103,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Anzeige und Zielseite sollten dasselbe versprechen. Das Paket Wachstum verbindet Kampagnenidee, Werbemittel und Zielseite in einem Plan.</p>
                     <p>Medienbudget und Kanäle legen Sie gesondert fest. Welche Auswertung möglich ist, steht im Angebot.</p>
-                  </div>
+                  
+<h3>Versprechen und Zielseite abgleichen</h3>
+<p>Was eine Anzeige ankündigt, muss die Zielseite konkret erklären. Klären Sie vor dem Start Zielgruppe, Angebot und gewünschte Reaktion. Medienbudget und Auswertung sind eigene Entscheidungen; mehr Sichtbarkeit ist nicht automatisch eine passende Anfrage.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

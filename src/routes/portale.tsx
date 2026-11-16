@@ -57,7 +57,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Der Kundenbereich ist für Projektstand, Dokumente und Anfragen gedacht. Der Partnerbereich richtet sich an Partner von NeXify AI. Werkstätten arbeiten im Partnerportal von TEILEKLAR, unserer eigenen Shop-Marke.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die Beschreibung ist noch kein freigeschalteter Bereich</h3>
+<p>Ein Kunden- oder Partnerbereich braucht eine tatsächlich angebundene Anwendung mit passenden Inhalten. Die Anmeldung dieses Auftritts allein bestätigt weder einen Projektzugang noch ein angeschlossenes Werkstattportal. Fragen Sie nach dem für Ihr Vorhaben vorgesehenen Einstieg.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/anmelden">Anmelden<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -70,7 +73,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Jeder Bereich hat eigene Rollen und Rechte. Eine Anmeldung gilt für Ihren Bereich, nicht für einen anderen. Private Inhalte sehen Sie erst nach der Anmeldung.</p>
-                  </div>
+                  
+<h3>Zugang und Inhalt getrennt beurteilen</h3>
+<p>Ein Konto weist nicht automatisch Rechte für jede Anwendung nach. Welche Inhalte zugänglich sind, bestimmt der tatsächlich freigeschaltete Bereich. Die Beschreibungen dieser Seite sind keine Zusage, dass alle genannten Portalfunktionen bereits in diesem Auftritt verfügbar sind.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-portals-portals-3-2" tabIndex={-1} aria-labelledby="content-portals-portals-3-2-title">
                   <div>
@@ -79,7 +85,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Die Bereiche richten wir je Kunde und Partner ein; nicht jeder Bereich steht jedem Konto offen. Beschreiben Sie, wofür Sie einen Zugang brauchen. Wir nennen Ihnen den passenden Bereich und den nächsten Schritt.</p>
-                  </div>
+                  
+<h3>Wofür Sie einen Zugang benötigen</h3>
+<p>Nennen Sie Projekt oder Zusammenarbeit und die gewünschte Aufgabe. So lässt sich der passende Einstieg klären, ohne Zugangsdaten in einer öffentlichen Anfrage zu übermitteln.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

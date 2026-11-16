@@ -59,7 +59,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI, die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen nicht bei jeder Frage von vorn an.</p>
                     <p>Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Für Menschen, die selbst mit KI arbeiten möchten</h3>
+<p>Die Suite ist der Einstieg, wenn Gespräch, Aufgabe und Projektwissen gemeinsam bearbeitet werden sollen. Sie ist kein Agenturpaket für eine beauftragte Website. Für Ihre Entscheidung zählt, welche Funktionen und Werkzeuge für Ihren Zugang tatsächlich aktiviert sind.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/registrieren">NeX AIFly Suite. In Ruhe testen.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -73,7 +76,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Aus einem Gespräch wird eine Aufgabe, aus der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet.</p>
                     <p>Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Quellen und Ergebnis bewusst trennen</h3>
+<p>Nennen Sie der KI, worauf sie sich stützen soll, und prüfen Sie das Ergebnis vor der Weiterverwendung. Ein erstellter Text ist noch keine versendete Nachricht. Kalender oder Versand sind nur nutzbar, wenn das entsprechende Werkzeug im Zugang freigeschaltet ist.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -87,7 +93,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.</p>
                     <p>Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor Sie sie nutzen.</p>
-                  </div>
+                  
+<h3>Den Test an einer echten Aufgabe ausrichten</h3>
+<p>Wählen Sie einen überschaubaren Fall, etwa Informationen ordnen oder einen Entwurf vorbereiten. Prüfen Sie, ob das Ergebnis für Ihren Alltag brauchbar ist. Testdauer und Modellbudget sind getrennte Angaben; aus dem Test folgt keine Zusage unbegrenzter KI-Nutzung.</p>
+</div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-nex2fly-nex2fly-customer-4-3" tabIndex={-1} aria-labelledby="content-nex2fly-nex2fly-customer-4-3-title">
                   <div>
@@ -97,7 +106,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei Ihnen mitarbeiten.</p>
                     <p>Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach Ihrer Bestätigung aktiviert.</p>
-                  </div>
+                  
+<h3>Anmeldung und Produktaktivierung sind nicht dasselbe</h3>
+<p>Die Anmeldung dieses Auftritts bestätigt Ihr Konto. Einen vollständig freigeschalteten Suite-Arbeitsbereich belegt sie allein nicht. Die Aktivierung und die für Ihren Zugang verfügbaren Funktionen müssen am jeweiligen Produkteinstieg nachvollziehbar sein.</p>
+</div>
                 </section>
               </div>
               <ImportedSectionDieFACTORYEntdeckenMit />

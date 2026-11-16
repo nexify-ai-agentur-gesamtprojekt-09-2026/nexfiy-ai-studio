@@ -28,7 +28,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Wer gibt etwas ein, wer prüft, und was ist der nächste Schritt? Aus diesen Fragen wird ein Ablauf, in dem Eingaben, Dokumente und der Stand zusammenstehen.</p>
                     <p>Daraus entstehen die Ansichten für Ihre Nutzergruppen. Gestaltung und Technik planen wir zusammen und prüfen sie an den Fällen, die bei Ihnen wirklich vorkommen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ansichten nach Aufgaben statt nach Abteilungen</h3>
+<p>Ein Nutzer muss erkennen, was offen ist, welche Angaben fehlen und was er als Nächstes entscheiden kann. Dabei werden normale Vorgänge und Ausnahmen gemeinsam betrachtet. Die benötigten Ansichten ergeben sich aus diesen Aufgaben, nicht aus einer möglichst großen Liste von Funktionen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -42,7 +45,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Soll die Anwendung mit vorhandenen Systemen arbeiten, legen wir für jede Verbindung Zweck, Daten und Rechte fest. Rollen bestimmen, wer was sieht und entscheidet.</p>
                     <p>Datenübernahme, externe Dienste, Betrieb und spätere Erweiterungen sind eigene Posten im Angebot – mit Voraussetzungen und Kosten, bevor wir sie umsetzen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Die Verbindung vor der Umsetzung klären</h3>
+<p>Nennen Sie vorhandene Systeme und die Daten, die übernommen oder zurückgeschrieben werden sollen. Zuständigkeit, Schnittstellenzugang und Rechte beeinflussen den Aufwand. Eine gewünschte Anbindung ist erst nach Prüfung ihrer Voraussetzungen Teil eines bestätigten Umfangs.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>

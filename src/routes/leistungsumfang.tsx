@@ -62,7 +62,10 @@ function Index() {
                     <p>Markenstart baut Ihren Marken- und Webauftritt. KI im Betrieb entlastet einen ausgewählten Ablauf. Wachstum verbindet Kampagne und Zielseite.</p>
                     <p>Im Gespräch klären wir, welcher Einstieg zu Ihrer Lage passt und was schon vorhanden ist. Das Angebot nennt Ergebnisse, Ihre Mitwirkung, den Zeitrahmen und die Kosten, bevor Sie entscheiden.</p>
                     <p>Sie möchten KI selbst nutzen? Die <a href="/produkte/nex2fly">Suite</a> und die <a href="/produkte/api">API</a> sind eigene Produkte, keine dieser Agenturpakete.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Ein Ergebnis je Einstieg</h3>
+<p>Markenstart betrifft den Auftritt, KI im Betrieb einen benannten Ablauf und Wachstum eine Kampagne mit Zielseite. Die Auswahl richtet sich nach dem wichtigsten Ergebnis, nicht nach dem größten Funktionsumfang. Die konkrete Leistung steht im Angebot, nicht allein im Paketnamen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -75,7 +78,10 @@ function Index() {
                   </div>
                   <div className={"pc-section-body"}>
                     <p>Zusätzliche Inhalte, Sprachen, Anbindungen, Anzeigen und die Betreuung mit NeXify Care stehen als eigene Posten im Angebot. So sehen Sie, was zum Start gehört und was Sie später ergänzen können – samt laufender Kosten.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Optionen mit ihren Folgekosten betrachten</h3>
+<p>Bei zusätzlichen Inhalten geht es auch um Pflege, bei Anbindungen um den Betrieb und bei Kampagnen um das Medienbudget. Vergleichen Sie daher nicht nur den einmaligen Aufwand. Welche laufenden Kosten hinzukommen, muss vor Ihrer Entscheidung verständlich ausgewiesen sein.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>

@@ -28,7 +28,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Eine Seitenstruktur, die den Fragen Ihrer Kunden folgt. Texte, die Ihr Angebot in klaren Sätzen sagen. Eine Gestaltung, die eigens für Ihr Unternehmen entworfen wird, und ein Kontaktweg ohne Umwege.</p>
                     <p>Im Angebot steht, welche Seiten und Inhalte entstehen, wer welches Material liefert und wie wir die Darstellung auf Telefon und Bildschirm prüfen und übergeben.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Was Ihre Kunden zuerst wissen möchten</h3>
+<p>Welche Leistung löst welches Problem? Was benötigen Sie für eine Anfrage? Welche Informationen erleichtern die Entscheidung? Aus diesen Fragen entsteht eine Seitenfolge, die Orientierung gibt, statt nur Unternehmensbegriffe zu wiederholen.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
@@ -42,7 +45,10 @@ function Index() {
                   <div className={"pc-section-body"}>
                     <p>Weitere Sprachen, Foto und Video, ein Shop oder eigene Zielseiten für Kampagnen. Jede Erweiterung hat ihren eigenen Umfang, damit Sie sehen, was zum Start gehört und was später folgt.</p>
                     <p>Nach der Übergabe können Sie Betreuung und Weiterentwicklung mit NeXify Care ergänzen.</p>
-                    <div className={"hc-service-detail pc-module"}>
+                    
+<h3>Startumfang und spätere Entwicklung unterscheiden</h3>
+<p>Ein Shop, eine weitere Sprache oder eine Kampagnenseite braucht eigene Inhalte und Abläufe. Deshalb wird jede Erweiterung getrennt betrachtet. So bleibt nachvollziehbar, was im ersten Auftrag enthalten ist und welche Voraussetzungen eine spätere Ergänzung hat.</p>
+<div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     </div>
