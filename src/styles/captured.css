@@ -11811,7 +11811,7 @@ html:has(#atelier)::-webkit-scrollbar-corner {
 #atelier .nx-logo {
   --logo-h: var(--atelier-system-logo-m);
   align-items: center;
-  gap: calc(var(--logo-h) * 0.32);
+  gap: calc(var(--logo-h) * 0.2);
   color: var(--as-ink);
   -webkit-text-fill-color: currentcolor;
   display: inline-flex;
