@@ -1,11 +1,11 @@
 # Roadmap
 ## NX-DESIGN-02 · Restverlauf und Fremdfarben (16.11.2026, 17:37 UTC)
-- [ ] Restnachweise 17:59 UTC: genannte Menütitel, Footer-/PWA-Titel und vorgemerkten ORACLE-Link per Bildschirm-Pixeln messen; keine Gestaltungsänderung, separaten Typprüfungsnachweis nur über erlaubte vorhandene Signale prüfen
+- [x] Restnachweise 17:59 UTC: 96 echte Pixelmessungen der sichtbaren Menü-/Footer-/PWA-Titel und des ORACLE-Links bei 1440/390 dunkel/hell; Minimum 6,18:1, 0 Unterschreitungen, keine Gestaltungs-/Farbänderung; Einzelbelege ops/nx-design-02-contrast-evidence.json
 - [x] NeXify-Überschriften inklusive Kopf, Fuß, Installation und ORACLE in Vollfarbe: 0 Verlaufstexte je geprüfter Seite (inklusive geschlossener Menüs); H1-Schlüsselwort bleibt Akzent
 - [x] Fremdfarben durch Graphite-/Zustands-/Akzentrollen ersetzt; 0 Ziel-Farbtreffer in 11 dunklen Seiten und Start/Kontakt hell; TEILEKLAR-Referenzseiten identisch zur Ausgangsmessung
 - [x] 11 Seiten × 1440/390 px, Start/Kontakt zusätzlich hell; 31 axe-A/AA-Läufe mit 0 Verstößen; 11 Seiten und offene Menüs/ORACLE bei 320 px mit 0 Überlauf; Selektorenliste im Bericht
 - [x] 186 Tests bestanden, 20 isolationsbedingt übersprungen, 0 fehlgeschlagen; automatisches build OK 17:55:08 UTC; Bericht ops/nx-design-02-2026-11-16.md, geprüfter Code 0e2a867; nichts veröffentlicht
-- [ ] Abnahme: separate Typprüfung nicht als eigener Messwert verfügbar; axe-Kontrastbewertungen auf bestehenden Glasflächen teilweise unvollständig (Inhaberreview erforderlich), keine vollständige WCAG-AA-Abnahme behauptet
+- [ ] Abnahme: eigenständige Typprüfung ohne vorhandenes zulässiges Signal offen; manuelle Projekt-Typprüfung hier durch Plattformvorgabe gesperrt, Exit/Fehleranzahl nicht erhoben; verlangte manuelle Textkontraste bestanden, keine vollständige WCAG-AA-Zertifizierung behauptet
 
 ## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
 - [x] Nachauftrag 15:16 UTC: fehlende/ungültige vertrauenswürdige IP überspringt ausschließlich Ratenbegrenzung; anonymer rate_guard_ip_missing, attestierte Cloudflare-IP bevorzugt, kein XFF
