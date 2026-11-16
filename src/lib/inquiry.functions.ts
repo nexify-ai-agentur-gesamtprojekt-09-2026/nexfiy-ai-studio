@@ -38,7 +38,6 @@ export const submitInquiry = createServerFn({ method: "POST" })
     if (Object.values(errors).some(Boolean)) return { ok: false, errors };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { buildInquiryNotice, inquiryReference } = await import("./inquiry-notification");
-    const { deliverInquiryNotice, workspaceUrl } = await import("./inquiry-delivery.server");
     const { resolveInquiryIp } = await import("./inquiry-guard.server");
     const { acceptInquiry } = await import("./inquiry-intake.server");
     const ip = resolveInquiryIp(getRequest(), getRequestIP(), import.meta.env.DEV);
@@ -54,6 +53,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
     if (accepted.outcome === "rate_limited") return { ok: false, reason: "rate_limited", retryAfterSeconds: accepted.retryAfterSeconds, error: "Über diesen Internetanschluss sind bereits fünf Anfragen innerhalb einer Stunde eingegangen. Bitte warten Sie vor einer weiteren Anfrage. Ihre Angaben bleiben im Formular." };
     const id = accepted.id;
     const row = data.values;
+    const { deliverInquiryNotice, workspaceUrl } = await import("./inquiry-delivery.server");
     await deliverInquiryNotice(
       "inquiries",
       id,

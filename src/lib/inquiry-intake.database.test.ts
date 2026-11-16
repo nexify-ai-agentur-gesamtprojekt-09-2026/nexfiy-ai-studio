@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
 import { submitInquiry } from "./inquiry.functions";
+import { deliverInquiryNotice, workspaceUrl } from "./inquiry-delivery.server";
 
 const state = vi.hoisted(() => ({
   ip: "192.0.2.80",
@@ -36,6 +37,10 @@ const testEmail = `nx-lead-${runId}@example.test`;
 const idPart = parseInt(runId.slice(0, 4), 16);
 afterAll(async () => { await db.end(); });
 beforeEach(() => { state.ip = `2001:db8:${idPart.toString(16)}:${Math.floor(Math.random()*65535).toString(16)}::1`; state.deliver.mockClear(); state.rpc.mockReset(); });
+beforeEach(() => {
+  expect(vi.isMockFunction(deliverInquiryNotice)).toBe(true);
+  expect(typeof workspaceUrl).toBe("function");
+});
 
 type Args = { p_ip_hash: string; p_fingerprint: string; p_kind: string; p_name: string; p_email: string; p_company: string; p_message: string; p_source_path: string; p_consent: boolean; p_consent_version: string };
 
