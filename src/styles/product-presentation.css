@@ -1,0 +1,30 @@
+/* An unframed product brief: comparable facts, not a second marketing hero. */
+:root:root #atelier.site-shared .product-overview { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 24px 48px; padding-block: 48px; border-block: 1px solid var(--border); }
+:root:root #atelier.site-shared .product-overview-heading { min-width: 0; }
+:root:root #atelier.site-shared .product-overview-heading h2 { margin-top: 16px; }
+:root:root #atelier.site-shared .product-overview-heading p { color: var(--muted-foreground); margin: 0; }
+:root:root #atelier.site-shared .product-overview-facts { margin: 0; min-width: 0; }
+:root:root #atelier.site-shared .product-overview-facts > div { display: grid; grid-template-columns: minmax(100px,.4fr) minmax(0,1fr); gap: 16px; padding-block: 16px; border-bottom: 1px solid var(--border); }
+:root:root #atelier.site-shared .product-overview-facts > div:first-child { padding-top: 0; }
+:root:root #atelier.site-shared .product-overview-facts dt { font-family: var(--font-brand-display); font-size: var(--type-detail); line-height: 1.6; font-weight: 600; color: var(--foreground); }
+:root:root #atelier.site-shared .product-overview-facts dd { margin: 0; min-width: 0; max-width: var(--measure-prose); font-size: var(--type-conversation); line-height: var(--leading-editorial); color: var(--muted-foreground); overflow-wrap: anywhere; }
+:root:root #atelier.site-shared .product-overview-example { grid-column: 2; padding-inline-start: 24px; border-inline-start: 2px solid var(--primary); min-width: 0; }
+:root:root #atelier.site-shared .home-concept .product-overview-example h3 { margin: 0 0 12px; }
+:root:root #atelier.site-shared .product-overview-example p { margin: 0; font-size: var(--type-conversation); color: var(--muted-foreground); }
+:root:root #atelier.site-shared .product-overview-links { grid-column: 2; display: flex; flex-wrap: wrap; gap: 12px; min-width: 0; }
+:root:root #atelier.site-shared .product-overview-links a { min-height: 44px; max-width: 100%; height: auto; white-space: normal; line-height: 1.5; text-align: left; }
+:root:root #atelier.site-shared .legal-scope-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-block: 24px; }
+:root:root #atelier.site-shared .legal-scope-links a { min-height: 44px; display: inline-flex; align-items: center; color: var(--foreground); text-decoration: underline; text-underline-offset: 4px; }
+:root:root #atelier.site-shared .legal-archive { border-top: 1px solid var(--border); padding-top: 24px; }
+:root:root #atelier.site-shared .legal-archive > summary { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center; min-height: 44px; cursor: pointer; font-family: var(--font-brand-display); font-weight: 600; line-height: 1.5; }
+:root:root #atelier.site-shared .legal-archive > summary::after { content: "+"; font-size: 24px; }
+:root:root #atelier.site-shared .legal-archive[open] > summary::after { content: "−"; }
+:root:root #atelier.site-shared .legal-archive > summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+:root:root #atelier.site-shared .home-concept .tk-legal-section p + p { margin-top: var(--space-paragraph); }
+@container website (max-width: 760px) {
+  :root:root #atelier.site-shared .product-overview { grid-template-columns: minmax(0,1fr); gap: 32px; padding-block: 40px; }
+  :root:root #atelier.site-shared :is(.product-overview-example,.product-overview-links) { grid-column: 1; }
+}
+@container website (max-width: 420px) {
+  :root:root #atelier.site-shared .product-overview-facts > div { grid-template-columns: minmax(0,1fr); gap: 8px; }
+}
