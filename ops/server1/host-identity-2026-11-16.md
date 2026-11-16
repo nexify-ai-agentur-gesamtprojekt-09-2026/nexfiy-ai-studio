@@ -70,3 +70,4 @@ Für die später freigegebene Verwendung gilt: zweckgebundene Vertrauensdatei be
 - Server 1 `srv1243952`: Hostinger-Webkonsole meldet `SHA256:q0fUJEDnyPaw+Wc1ScvgeT3i2JD9grbvJjRlyipIPvU` (ED25519). Stimmt zeichengenau mit dem Scan von 10:30 UTC überein.
 - Server 2 `srv1941843`: `SHA256:PXxrPlrlJkT58ZC+CjDE0DmRtgI7Ax12Qrf4TMWf4h8` (ED25519). Das ist ein anderer Host und keine Abweichung. Für Server 2 liegt noch kein Netzscan zum Vergleich vor.
 - Die BigBuy-Prüfung wartet auf die ausdrückliche Freigabe durch Pascal.
+- 11:42 UTC: Pascal stellt die BigBuy-Prüfung zurück. Beide Server bleiben unverändert: kein Login, kein Neustart, kein Abruf.
