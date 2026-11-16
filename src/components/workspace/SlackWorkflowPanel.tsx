@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { RefreshCw, Play } from "lucide-react";
+import { RefreshCw, Play, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getSlackDeliveryStatus } from "@/lib/slack-admin.functions";
+import { getSlackDeliveryStatus, sendSlackDeliveryTest } from "@/lib/slack-admin.functions";
 import { SLACK_FLOWS, SLACK_WORKSPACE, decideSlackInput, type SlackDecision } from "@/lib/slack-flows";
 
 export function SlackWorkflowPanel() {
   const getStatus = useServerFn(getSlackDeliveryStatus);
+  const sendTest = useServerFn(sendSlackDeliveryTest);
   const status = useQuery({ queryKey: ["slack-delivery-status"], queryFn: () => getStatus() });
+  const deliveryTest = useMutation({ mutationFn: () => sendTest(), onSuccess: () => status.refetch() });
   const [text, setText] = useState("status");
   const [actor, setActor] = useState<string>(SLACK_WORKSPACE.owner);
   const [result, setResult] = useState<SlackDecision | null>(null);
@@ -39,6 +41,9 @@ export function SlackWorkflowPanel() {
     </div>
     <header className="ws-slack-receipt-heading"><h3>Zustell- und Rückmeldebelege</h3>
       <Button variant="ghost" size="icon" className="min-h-11 min-w-11" aria-label="Slack-Belege aktualisieren" title="Belege aktualisieren" onClick={() => status.refetch()} disabled={status.isFetching}><RefreshCw aria-hidden="true" /></Button></header>
+    <div><Button variant="glass" size="xl" onClick={() => deliveryTest.mutate()} disabled={deliveryTest.isPending}><Send aria-hidden="true" />{deliveryTest.isPending ? "Sendet …" : "Testmeldung senden"}</Button></div>
+    {deliveryTest.isSuccess ? <p role="status">Slack hat die Testmeldung angenommen. Zustellbeleg gespeichert; ORACLE-Empfang bleibt separat.</p> : null}
+    {deliveryTest.isError ? <p role="alert" className="ws-alert">{deliveryTest.error.message}</p> : null}
     {status.data?.receipts.length ? <ol className="ws-slack-receipts">{status.data.receipts.map(row => <li key={row.id}>
       <time dateTime={row.created_at}>{new Date(row.created_at).toLocaleString("de-DE", { timeZone: "Europe/Amsterdam" })}</time>
       <span>{SLACK_FLOWS.find(flow => flow.id === row.flow_id)?.label ?? row.flow_id}</span>

@@ -39,7 +39,7 @@ export async function processSlackInput(input: SlackInput): Promise<void> {
       const origin = await admin.from("slack_delivery_receipts").select("id").eq("channel_id", input.channel).eq("thread_ts", input.thread ?? "").neq("id", receiptId).limit(1);
       if (origin.error || !origin.data?.length) throw new Error("slack_unknown_origin");
     }
-    if (reply) await postSlackNotice(reply, { channel: input.channel, threadTs: input.thread });
+    if (reply) await postSlackNotice(reply, { channel: input.channel, ...(input.thread ? { threadTs: input.thread } : {}) });
     const done = await admin.from("slack_delivery_receipts").update({
       outcome: decision.kind === "ack" ? "ack" : decision.kind === "blocked" ? "ignored" : "result",
       entity_id: entityId, entity_table: entityTable, updated_at: new Date().toISOString(),

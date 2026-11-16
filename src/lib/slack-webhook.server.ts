@@ -15,6 +15,7 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
       payload = transport === "interactions" ? JSON.parse(params.get("payload") ?? "{}") : Object.fromEntries(params);
     }
   } catch { return new Response("Invalid body", { status: 400 }); }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return new Response("Invalid body", { status: 400 });
   if (transport === "events" && payload["type"] === "url_verification" && typeof payload["challenge"] === "string")
     return Response.json({ challenge: payload["challenge"] });
   if (request.headers.has("x-slack-retry-num")) return new Response(null, { status: 200 });
@@ -26,7 +27,7 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
   let candidate: unknown;
   if (transport === "events") {
     const event = payload["event"] as Record<string, unknown> | undefined;
-    if (!event || !["app_mention", "message"].includes(String(event["type"]))) return new Response(null, { status: 200 });
+    if (!event || typeof event !== "object" || !["app_mention", "message"].includes(String(event["type"]))) return new Response(null, { status: 200 });
     if (event["subtype"] && event["subtype"] !== "bot_message") return new Response(null, { status: 200 });
     candidate = { key: payload["event_id"], team: payload["team_id"], actor: event["user"], channel: event["channel"],
       thread: event["thread_ts"] ?? event["ts"], text: event["text"], bot: Boolean(event["bot_id"]), kind: "message" };
@@ -38,7 +39,8 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
     const team = payload["team"] as Record<string, unknown> | undefined;
     const channel = payload["channel"] as Record<string, unknown> | undefined;
     const message = payload["message"] as Record<string, unknown> | undefined;
-    const action = (payload["actions"] as Record<string, unknown>[] | undefined)?.[0];
+    const actions = payload["actions"];
+    const action = Array.isArray(actions) ? actions[0] as Record<string, unknown> | undefined : undefined;
     if (payload["type"] !== "block_actions" || action?.["action_id"] !== "nexify_inquiry_status") return new Response(null, { status: 200 });
     let value: unknown; try { value = JSON.parse(String(action["value"])); } catch { return new Response("Invalid action", { status: 400 }); }
     candidate = { key: payload["trigger_id"], team: team?.["id"], actor: user?.["id"], channel: channel?.["id"], thread: message?.["ts"], text: "", bot: false, kind: "interaction", action: value };
@@ -46,8 +48,11 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
   const parsed = slackInputSchema.safeParse(candidate);
   if (!parsed.success) return new Response("Invalid event", { status: 400 });
   const runtimeRequest = request as RuntimeRequest;
+  const { decideSlackInput } = await import("./slack-flows");
+  if (decideSlackInput(parsed.data).kind === "ignore") return new Response(null, { status: 200 });
   if (typeof runtimeRequest.waitUntil !== "function")
-    return Response.json({ ok: false, error: "background_delivery_unavailable" }, { status: 503 });
+    return Response.json({ ok: false, error: "background_delivery_unavailable", response_type: "ephemeral",
+      text: "Nicht verarbeitet: Der sichere Rückmeldeweg ist in dieser Laufzeit nicht verfügbar. Es wurde keine Aktion ausgelöst." });
   // Keine Arbeit oder KI vor ACK starten: realer Runtime-Kontext hält den nachgelagerten Prozess am Leben.
   const input: SlackInput = parsed.data;
   runtimeRequest.waitUntil(Promise.resolve().then(async () => {
