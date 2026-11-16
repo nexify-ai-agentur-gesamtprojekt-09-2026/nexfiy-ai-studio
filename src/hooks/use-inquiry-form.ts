@@ -35,6 +35,7 @@ export function useInquiryForm(kind: InquiryKind) {
   const [phase, setPhase] = useState<InquiryPhase>("editing");
   const [reference, setReference] = useState<string | null>(null);
   const [failure, setFailure] = useState<string | null>(null);
+  const [allowMailFallback, setAllowMailFallback] = useState(true);
   const [mail, setMail] = useState<InquiryMail | null>(null);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ export function useInquiryForm(kind: InquiryKind) {
       setAttempts((count) => count + 1);
       setErrors(next);
       setFailure(null);
+      setAllowMailFallback(true);
       const first = firstInvalidField(next);
       if (first) {
         focusTarget.current = first;
@@ -83,6 +85,7 @@ export function useInquiryForm(kind: InquiryKind) {
           focusTarget.current = firstInvalidField(result.errors) ?? null;
           return;
         }
+        setAllowMailFallback(result.reason !== "duplicate" && result.reason !== "rate_limited");
         setFailure(result.error ?? "Ihre Anfrage konnte nicht gespeichert werden.");
       } catch (error) {
         console.error("inquiry submit failed", error);
@@ -157,6 +160,7 @@ export function useInquiryForm(kind: InquiryKind) {
     phase,
     reference,
     failure,
+    allowMailFallback,
     mail,
     submittedEmail: lastValues.current?.email ?? "",
     onSubmit,

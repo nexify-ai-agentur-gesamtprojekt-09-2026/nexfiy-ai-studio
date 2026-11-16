@@ -1,6 +1,7 @@
 import { useId, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { useInquiryForm } from "@/hooks/use-inquiry-form";
+import { INQUIRY_CONSENT_TEXT } from "@/lib/inquiry-consent";
 import { CopyButton } from "@/components/system/CopyButton";
 import {
   INQUIRY_LIMITS,
@@ -193,8 +194,7 @@ export function InquiryForm({
           <label className="tk-check">
             <input {...form.fieldProps("consent")} required type="checkbox" />
             <span>
-              Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert
-              und verwendet werden. Details in der <a href={privacyHref}>Datenschutzerklärung</a>. *
+              {INQUIRY_CONSENT_TEXT} <a href={privacyHref}>Datenschutzerklärung</a>. *
             </span>
           </label>
           {error("consent")}
@@ -205,14 +205,14 @@ export function InquiryForm({
               {ERROR_ICON}
               {form.failure}
             </p>
-            <Button
+            {form.allowMailFallback ? <Button
               variant="ghost"
               type="button"
               className="hc-text-link"
               onClick={form.prepareMail}
             >
               Stattdessen als E-Mail an {INQUIRY_RECIPIENT} vorbereiten
-            </Button>
+            </Button> : null}
           </div>
         ) : null}
         <div className="tk-actions">

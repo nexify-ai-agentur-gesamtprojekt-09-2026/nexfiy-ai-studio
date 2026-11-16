@@ -94,7 +94,7 @@ export function InquiryInbox() {
           type="button"
           className="nexify-control secondary-button"
           data-variant="secondary"
-          onClick={() => inbox.refetch()}
+          onClick={() => { void inbox.refetch(); void queryClient.invalidateQueries({ queryKey: ["workspace-inquiry-week"] }); }}
         >
           Erneut laden
         </button>

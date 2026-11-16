@@ -1,4 +1,11 @@
 /* Arbeitsplatz-Posteingang: nur semantische Rollen der Graphite-Bibliothek, keine festen Farben. */
+#atelier .ws-week { display: grid; gap: 16px; padding-block: 24px; border-block: 1px solid var(--border); }
+#atelier .ws-week-heading { display: flex; gap: 16px; justify-content: space-between; align-items: center; }
+#atelier .ws-week-heading h2 { margin: 0; font-size: 20px; }
+#atelier .ws-week-counts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 0; }
+#atelier .ws-week-counts dt { color: var(--muted-foreground); }
+#atelier .ws-week-counts dd { margin: 8px 0 0; font-size: 32px; font-weight: 650; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { #atelier .ws-week-counts { grid-template-columns: minmax(0, 1fr); } }
 #atelier .ws-slack-workflows { display: grid; gap: 24px; padding-block: 32px; border-top: 1px solid var(--border); }
 #atelier .ws-slack-flow-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 0; }
 #atelier .ws-slack-flow-list > div { padding-block: 12px; border-bottom: 1px solid var(--border); }

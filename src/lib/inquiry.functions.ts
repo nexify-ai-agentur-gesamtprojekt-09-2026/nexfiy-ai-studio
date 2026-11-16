@@ -1,10 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest, getRequestIP, setResponseHeader } from "@tanstack/react-start/server";
 import { normalizeInquiry, validateInquiry, type InquiryErrors, type InquiryKind } from "./inquiry";
 
 const KINDS: InquiryKind[] = ["contact", "partner", "appointment", "voucher"];
 
 export type InquirySubmitResult =
-  { ok: true; reference: string } | { ok: false; errors?: InquiryErrors; error?: string };
+  { ok: true; reference: string } | { ok: false; errors?: InquiryErrors; error?: string; reason?: "duplicate" | "rate_limited" | "unavailable"; retryAfterSeconds?: number };
 
 /** Öffentlicher Eingang: prüft serverseitig, speichert mit Dienstrolle und meldet in Slack. Besucher lesen nie gespeicherte Daten. */
 export const submitInquiry = createServerFn({ method: "POST" })
@@ -31,25 +32,28 @@ export const submitInquiry = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }): Promise<InquirySubmitResult> => {
+    setResponseHeader("Cache-Control", "no-store");
     if (data.trap) return { ok: false, error: "Die Anfrage konnte nicht angenommen werden." };
     const errors = validateInquiry(data.kind, data.values);
     if (Object.values(errors).some(Boolean)) return { ok: false, errors };
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { buildInquiryNotice, inquiryReference } = await import("./inquiry-notification");
     const { deliverInquiryNotice, workspaceUrl } = await import("./inquiry-delivery.server");
-    const id = crypto.randomUUID();
-    const { consent: _consent, ...row } = data.values;
-    const insert = await supabaseAdmin
-      .from("inquiries")
-      .insert({ id, kind: data.kind, source_path: data.sourcePath, ...row });
-    if (insert.error) {
-      console.error("inquiry insert failed", insert.error);
-      return {
-        ok: false,
-        error:
-          "Ihre Anfrage konnte nicht gespeichert werden. Bitte versuchen Sie es erneut oder senden Sie sie per E-Mail.",
-      };
+    const { resolveInquiryIp } = await import("./inquiry-guard.server");
+    const { acceptInquiry } = await import("./inquiry-intake.server");
+    const ip = resolveInquiryIp(getRequest(), getRequestIP(), import.meta.env.DEV);
+    if (!ip) return { ok: false, reason: "unavailable", error: "Ihre Anfrage konnte nicht sicher angenommen werden. Ihre Angaben bleiben im Formular. Bitte versuchen Sie es später erneut." };
+    let accepted;
+    try {
+      accepted = await acceptInquiry(supabaseAdmin, ip, data.kind, data.sourcePath, data.values);
+    } catch {
+      console.error("inquiry guarded intake unavailable");
+      return { ok: false, reason: "unavailable", error: "Ihre Anfrage konnte nicht sicher gespeichert werden. Ihre Angaben bleiben im Formular. Bitte versuchen Sie es später erneut." };
     }
+    if (accepted.outcome === "duplicate") return { ok: false, reason: "duplicate", error: "Eine Anfrage mit derselben E-Mail-Adresse und Nachricht ist bereits eingegangen. Sie wurde nicht erneut gespeichert oder gemeldet. Ihre Angaben bleiben im Formular." };
+    if (accepted.outcome === "rate_limited") return { ok: false, reason: "rate_limited", retryAfterSeconds: accepted.retryAfterSeconds, error: "Über diesen Internetanschluss sind bereits fünf Anfragen innerhalb einer Stunde eingegangen. Bitte warten Sie vor einer weiteren Anfrage. Ihre Angaben bleiben im Formular." };
+    const id = accepted.id;
+    const row = data.values;
     await deliverInquiryNotice(
       "inquiries",
       id,
