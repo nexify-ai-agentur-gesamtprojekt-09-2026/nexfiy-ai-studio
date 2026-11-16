@@ -1095,3 +1095,5 @@
   border: 0;
   box-shadow: none;
 }
+/* Geist braucht keinen künstlich erweiterten Wortabstand; der alte Wert ließ Titel auseinanderfallen. */
+:root:root:root #atelier#atelier.site-shared :is(h1, h2, h3, h4) { word-spacing: normal; }
