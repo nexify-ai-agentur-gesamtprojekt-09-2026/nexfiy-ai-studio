@@ -19,6 +19,7 @@ import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
 import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { PwaInstallProvider } from "@/lib/use-pwa-install";
 
 function useDocumentTitle(title: string) {
   useEffect(() => {
@@ -192,8 +193,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <PwaInstallProvider>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      </PwaInstallProvider>
     </QueryClientProvider>
   );
 }

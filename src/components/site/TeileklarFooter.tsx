@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { PwaInstallBar } from "./PwaInstallBar";
 
 export function TeileklarFooter() {
   return <footer className="site-footer structured-footer footer-refined">
@@ -13,5 +14,6 @@ export function TeileklarFooter() {
       <div className="footer-bottom"><span className="footer-claim">TEILEKLAR — Na KLAR!</span><a className="footer-crosslink" href="/">NeXify AI →</a></div>
       <div className="footer-legal"><p>Vollständige Anbieter-, Datenschutz- und Kaufunterlagen stehen noch zur Prüfung und Freigabe.</p></div>
     </div>
+    <PwaInstallBar />
   </footer>;
 }
