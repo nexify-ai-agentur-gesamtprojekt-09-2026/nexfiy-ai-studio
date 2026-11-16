@@ -2,7 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import {
   CATALOG_PAGE_SIZE,
   normalizeCatalogQuery,
+  normalizeCatalogSort,
   normalizePage,
+  type CatalogSort,
   type CatalogSpec,
 } from "./teileklar-catalog";
 
@@ -17,6 +19,21 @@ export interface CatalogListItem {
   stock: number;
   delivery_note: string;
 }
+/** Ein Katalogeintrag je Artikel; Ausführungen (gleicher Name, gleiche Marke) sind zusammengefasst. */
+export interface CatalogGroupItem extends CatalogListItem {
+  variant_count: number;
+  min_price: number | null;
+  max_price: number | null;
+  in_stock: boolean;
+}
+export interface CatalogVariant {
+  id: string;
+  price_value: number | null;
+  ean: string;
+  specs: CatalogSpec[];
+  stock: number;
+  delivery_note: string;
+}
 export interface CatalogProduct extends CatalogListItem {
   ean: string;
   oe_number: string;
@@ -24,14 +41,17 @@ export interface CatalogProduct extends CatalogListItem {
   specs: CatalogSpec[];
   status_label: string;
   synced_at: string;
+  /** Alle Ausführungen dieses Artikels einschließlich des angezeigten; leer, wenn es nur eine gibt. */
+  variants: CatalogVariant[];
 }
 export interface CatalogListResult {
-  items: CatalogListItem[];
+  items: CatalogGroupItem[];
   total: number;
   page: number;
   pages: number;
   q: string;
   category: string;
+  sort: CatalogSort;
 }
 export interface CatalogCategory {
   category: string;
@@ -40,6 +60,9 @@ export interface CatalogCategory {
 
 const LIST_COLUMNS =
   "id, name, brand, category, price_value, image_path, image_alt, stock, delivery_note";
+const GROUP_COLUMNS = `${LIST_COLUMNS}, variant_count, min_price, max_price, in_stock`;
+/** Obergrenze je Artikel; die größte Gruppe im Katalog hat derzeit 69 Ausführungen. */
+const VARIANT_LIMIT = 120;
 
 /** Öffentlicher Lesezugriff mit Publishable-Key; die Datenbank gibt nur aktive Katalogartikel frei. */
 async function catalogClient() {
@@ -68,20 +91,27 @@ export const listCatalogProducts = createServerFn({ method: "GET" })
       q: normalizeCatalogQuery(raw["q"]),
       category: typeof raw["category"] === "string" ? raw["category"].slice(0, 120) : "",
       page: normalizePage(raw["page"]),
+      sort: normalizeCatalogSort(raw["sort"]),
     };
   })
   .handler(async ({ data }): Promise<CatalogListResult> => {
     const client = await catalogClient();
-    let query = client.from("teileklar_products").select(LIST_COLUMNS, { count: "exact" });
+    let query = client.from("teileklar_product_groups").select(GROUP_COLUMNS, { count: "exact" });
     if (data.category) query = query.eq("category", data.category);
+    // search_keys enthält Artikelnummern, EAN und OE-Nummern aller Ausführungen einer Gruppe.
     for (const term of data.q.split(" ").filter(Boolean).slice(0, 5)) {
-      query = query.or(
-        `name.ilike.%${term}%,brand.ilike.%${term}%,id.ilike.%${term}%,ean.ilike.%${term}%,oe_number.ilike.%${term}%`,
-      );
+      query = query.or(`name.ilike.%${term}%,brand.ilike.%${term}%,search_keys.ilike.%${term}%`);
     }
+    if (data.sort === "preis-auf")
+      query = query.order("min_price", { ascending: true, nullsFirst: false });
+    else if (data.sort === "preis-ab")
+      query = query.order("max_price", { ascending: false, nullsFirst: false });
+    else if (data.sort === "empfohlen")
+      query = query
+        .order("has_image", { ascending: false })
+        .order("in_stock", { ascending: false });
     const from = (data.page - 1) * CATALOG_PAGE_SIZE;
     const result = await query
-      .order("has_image", { ascending: false })
       .order("name", { ascending: true })
       .order("id", { ascending: true })
       .range(from, from + CATALOG_PAGE_SIZE - 1);
@@ -89,12 +119,13 @@ export const listCatalogProducts = createServerFn({ method: "GET" })
       throw new Error(`Katalog nicht abrufbar: ${result.error.message}`);
     const total = result.count ?? 0;
     return {
-      items: (result.data ?? []) as CatalogListItem[],
+      items: (result.data ?? []) as CatalogGroupItem[],
       total,
       page: data.page,
       pages: Math.max(1, Math.ceil(total / CATALOG_PAGE_SIZE)),
       q: data.q,
       category: data.category,
+      sort: data.sort,
     };
   });
 
@@ -109,16 +140,30 @@ export const getCatalogProduct = createServerFn({ method: "GET" })
     const client = await catalogClient();
     const result = await client
       .from("teileklar_products")
-      .select(`${LIST_COLUMNS}, ean, oe_number, condition, specs, status_label, synced_at`)
+      .select(
+        `${LIST_COLUMNS}, ean, oe_number, condition, specs, status_label, synced_at, variant_group`,
+      )
       .eq("id", data.id)
       .maybeSingle();
     if (result.error) throw new Error(`Artikel nicht abrufbar: ${result.error.message}`);
     if (!result.data) return null;
+    const { variant_group: variantGroup, ...product } = result.data;
+    const variants = await client
+      .from("teileklar_products")
+      .select("id, price_value, ean, specs, stock, delivery_note")
+      .eq("variant_group", variantGroup)
+      .order("price_value", { ascending: true, nullsFirst: false })
+      .order("id", { ascending: true })
+      .limit(VARIANT_LIMIT);
+    if (variants.error)
+      throw new Error(`Ausführungen nicht abrufbar: ${variants.error.message}`);
+    const toSpecs = (value: unknown) =>
+      Array.isArray(value) ? (value as unknown as CatalogSpec[]) : [];
+    const variantRows = (variants.data ?? []).map((row) => ({ ...row, specs: toSpecs(row.specs) }));
     return {
-      ...result.data,
-      specs: Array.isArray(result.data.specs)
-        ? (result.data.specs as unknown as CatalogSpec[])
-        : [],
+      ...product,
+      specs: toSpecs(product.specs),
+      variants: variantRows.length > 1 ? variantRows : [],
     } as CatalogProduct;
   });
 

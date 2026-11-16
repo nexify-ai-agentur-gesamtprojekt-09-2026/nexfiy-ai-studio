@@ -4,8 +4,14 @@ import {
   listCatalogCategories,
   listCatalogProducts,
 } from "./teileklar-catalog.functions";
+import type { CatalogSort } from "./teileklar-catalog";
 
-export const catalogListQuery = (params: { q: string; category: string; page: number }) =>
+export const catalogListQuery = (params: {
+  q: string;
+  category: string;
+  page: number;
+  sort?: CatalogSort;
+}) =>
   queryOptions({
     queryKey: ["teileklar-catalog", "list", params],
     queryFn: () => listCatalogProducts({ data: params }),
