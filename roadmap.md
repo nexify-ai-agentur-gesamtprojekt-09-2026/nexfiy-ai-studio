@@ -1,4 +1,10 @@
 # Roadmap
+## NX-DESIGN-02 · Restverlauf und Fremdfarben (16.11.2026, 17:37 UTC)
+- [ ] NeXify-Überschriften seitenweit inklusive Kopf, Fuß, Installation und ORACLE in Vollfarbe; höchstens ein H1-Hero-Schlüsselwort mit Verlauf
+- [ ] Fremdblau/-violett und abweichende Grüns durch Graphite-/Zustands-/Akzentrollen ersetzen; TEILEKLAR-Seiten und .tk-/.tkc-Bereiche unverändert
+- [ ] 11 Seiten bei 1440/390 px mit axe A/AA, Start/Kontakt zusätzlich hell, 320 px ohne Überlauf; seitenweite Verlaufszählung und Selektorenliste
+- [ ] Tests und automatische Typ-/Buildprüfung belegen; Bericht mit Version und Rückweg, keine Veröffentlichung
+
 ## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
 - [x] Nachauftrag 15:16 UTC: fehlende/ungültige vertrauenswürdige IP überspringt ausschließlich Ratenbegrenzung; anonymer rate_guard_ip_missing, attestierte Cloudflare-IP bevorzugt, kein XFF
 - [x] Vollständiger Formular→echte Entwurfsdatenbank→Bestätigung/Fehler-Test mit gemocktem Slack: Einwilligung, Wochenzahl +1, Dublette einmal, sechste IP-Anfrage abgewiesen/Eingaben erhalten; Playwright 1280/390px und Statusrücklesen bestanden
