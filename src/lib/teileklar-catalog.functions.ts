@@ -7,6 +7,7 @@ import {
   type CatalogSort,
   type CatalogSpec,
 } from "./teileklar-catalog";
+import { activeCutout } from "./teileklar-cutout";
 
 export interface CatalogListItem {
   id: string;
@@ -21,6 +22,8 @@ export interface CatalogListItem {
 }
 /** Ein Katalogeintrag je Artikel; Ausführungen (gleicher Name, gleiche Marke) sind zusammengefasst. */
 export interface CatalogGroupItem extends CatalogListItem {
+  /** Freigestellte Fassung des Fotos; leer, wenn nur das Original vorliegt. */
+  image_cutout: string;
   variant_count: number;
   min_price: number | null;
   max_price: number | null;
@@ -36,6 +39,7 @@ export interface CatalogVariant {
   delivery_note: string;
 }
 export interface CatalogProduct extends CatalogListItem {
+  image_cutout: string;
   ean: string;
   oe_number: string;
   condition: string;
@@ -61,7 +65,7 @@ export interface CatalogCategory {
 
 const LIST_COLUMNS =
   "id, name, brand, category, price_value, image_path, image_alt, stock, delivery_note";
-const GROUP_COLUMNS = `${LIST_COLUMNS}, variant_count, min_price, max_price, in_stock`;
+const GROUP_COLUMNS = `${LIST_COLUMNS}, variant_count, min_price, max_price, in_stock, image_cutout`;
 /** Obergrenze je Artikel; die größte Gruppe im Katalog hat derzeit 69 Ausführungen. */
 const VARIANT_LIMIT = 120;
 
@@ -142,13 +146,18 @@ export const getCatalogProduct = createServerFn({ method: "GET" })
     const result = await client
       .from("teileklar_products")
       .select(
-        `${LIST_COLUMNS}, ean, oe_number, condition, specs, status_label, synced_at, variant_group`,
+        `${LIST_COLUMNS}, ean, oe_number, condition, specs, status_label, synced_at, variant_group, image_cutout_path, image_cutout_of`,
       )
       .eq("id", data.id)
       .maybeSingle();
     if (result.error) throw new Error(`Artikel nicht abrufbar: ${result.error.message}`);
     if (!result.data) return null;
-    const { variant_group: variantGroup, ...product } = result.data;
+    const {
+      variant_group: variantGroup,
+      image_cutout_path: cutoutPath,
+      image_cutout_of: cutoutOf,
+      ...product
+    } = result.data;
     const variants = await client
       .from("teileklar_products")
       .select("id, name, price_value, ean, specs, stock, delivery_note")
@@ -162,6 +171,11 @@ export const getCatalogProduct = createServerFn({ method: "GET" })
     const variantRows = (variants.data ?? []).map((row) => ({ ...row, specs: toSpecs(row.specs) }));
     return {
       ...product,
+      image_cutout: activeCutout({
+        image_path: product.image_path,
+        image_cutout_path: cutoutPath,
+        image_cutout_of: cutoutOf,
+      }),
       specs: toSpecs(product.specs),
       variants: variantRows.length > 1 ? variantRows : [],
     } as CatalogProduct;

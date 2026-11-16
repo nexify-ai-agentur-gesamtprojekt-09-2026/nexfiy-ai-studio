@@ -136,7 +136,13 @@ function ProductDetail({ id }: { id: string }) {
     <>
       <Breadcrumb current={product.name} />
       <section className="hc-container tkc-product" aria-labelledby="tkc-product-title">
-        <CatalogImage id={product.id} path={product.image_path} alt={product.image_alt} eager />
+        <CatalogImage
+          id={product.id}
+          path={product.image_path}
+          cutout={product.image_cutout}
+          alt={product.image_alt}
+          eager
+        />
         <div className="tkc-product-info">
           <span className="hc-kicker">
             {product.brand || "TEILEKLAR"}

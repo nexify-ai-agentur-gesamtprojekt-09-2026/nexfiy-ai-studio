@@ -1,4 +1,5 @@
 import { allowedImageSource } from "./teileklar-catalog";
+import { activeCutout } from "./teileklar-cutout";
 
 export const CATALOG_IMAGE_BUCKET = "teileklar-product-images";
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
@@ -155,15 +156,17 @@ export async function readCatalogImage(
   const { supabaseAdmin: admin } = await import("@/integrations/supabase/client.server");
   const row = await admin
     .from("teileklar_products")
-    .select("image_path")
+    .select("image_path, image_cutout_path, image_cutout_of")
     .eq("id", articleId)
     .is("archived_at", null)
     .neq("image_path", "")
     .maybeSingle();
   if (row.error) throw new Error(`Bild nicht lesbar: ${row.error.message}`);
   if (!row.data) return null;
-  const file = await admin.storage.from(CATALOG_IMAGE_BUCKET).download(row.data.image_path);
+  // Freigestellte Fassung bevorzugen, solange sie zum aktuellen Original gehört.
+  const path = activeCutout(row.data) || row.data.image_path;
+  const file = await admin.storage.from(CATALOG_IMAGE_BUCKET).download(path);
   if (file.error || !file.data)
     throw new Error(`Bilddatei nicht lesbar: ${file.error?.message ?? "leer"}`);
-  return { body: file.data, path: row.data.image_path };
+  return { body: file.data, path };
 }
