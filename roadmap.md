@@ -1,4 +1,8 @@
 # Roadmap
+## Hintergrund und Tiefenwirkung (16.11.)
+- [ ] Markierte Hintergrundlinie auf Leistungen reproduzieren und unbeabsichtigte Flächenkanten beseitigen
+- [ ] Bestehende Glasflächen und freigestellte Figuren mit abgestimmtem Licht, Farbe und Kontaktschatten vom Hintergrund abheben; Desktop/Handy prüfen
+
 ## Durchgängige Typografie (16.11.)
 - [x] Verbleibende Inhalts-, Konto-, Hilfe- und Systemseiten auf gemeinsame Überschriften, Textmaße und Absatzrhythmen abgestimmt
 - [x] Chat-Einstieg, Antworten, Listen und Eingabe vereinheitlicht; echte Antwort mit H3-Zwischenüberschriften, 16px Schrift, 28px Zeilenhöhe und 24px Absatzrhythmus geprüft
