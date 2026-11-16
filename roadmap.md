@@ -1,13 +1,13 @@
 # Roadmap
 ## Eigenständige Slack-Einrichtung von Grund auf (16.11., 11:03 UTC)
-- [ ] Verwaltete App-Einrichtung für dieses Projekt ausführen; ursprünglichen ORACLE-Bot und bestehenden Nachrichtenausgang erhalten, keine kostenpflichtige Agenten-/Modellfunktion
-- [ ] Tatsächlich zurückgemeldete App-/Team-/Secret-Zuordnung verdrahten; signierten Empfang und Antworten über dieselbe neue Projekt-App absichern, keine Secret-Werte lesen
-- [ ] Veröffentlichung/Einrichtungsfreigaben und echten Slack-Auslöser mit Empfängerantwort und Rücklesebeleg prüfen; neue Projekt-App nicht als ursprünglichen ORACLE-Bot ausgeben
+- [x] Verwaltete Einrichtung versucht: zulässige Scopes/Mention+DM festgelegt; groups:history vom Tool nicht erlaubt. Ursprünglichen ORACLE-Bot und Nachrichtenausgang unverändert erhalten
+- [ ] App-Erstellung blockiert: Provisionierungsdienst meldet auch nach abgeschlossenem Verbindungsdialog „No Slack workspace is connected“; Dialog wählte bestehendes persönliches My Slack. Pascal/Lovable-Workspace-Verantwortlicher muss Slack-Workspace für verwaltete App-Installation autorisieren
+- [ ] Verdrahtung und vollständiger Slack-Auslöser warten auf erfolgreiche App-Erstellung und tatsächliche App-/Secret-Zuordnung; kein signierter Empfang/Empfängerantwort behauptet, keine Geheimnisse kopiert, kein Modellaufruf oder Deployment
 
 ## ORACLE-App-Einstellungen und echter Slack-Auslöser (16.11., 11:00 UTC)
 - [x] Bestehende App-Einstellungen und Rückweg vorbereitet (ops/slack-oracle-settings-2026-11-16.md), alle drei Empfangsadressen live 200, 18 Tests bestanden, ORACLE im privaten Testkanal Mitglied
 - [x] Sicheren Dialog erneut geöffnet; durch neue Nachricht vor Ausführung abgebrochen, keine Speicherung. Neuer Auftrag 11:03 UTC: verwaltete Einrichtung statt manueller Suche
-- [ ] Vollständigen kostenfreien Slack-Auslöser mit tatsächlicher Empfängerantwort und gespeichertem Beleg prüfen; kein Modellaufruf, keine künstliche Empfängerantwort und keine zweite App
+- [ ] Vollständiger Slack-Auslöser wartet nach neuer Entscheidung 11:03 UTC auf verwaltete App-Erstellung; tatsächliche Gebühren bestehender Verträge nicht gemessen, keine neue kostenpflichtige Verpflichtung
 
 ## Bestehende Verbindungen eigenständig klären (16.11., 10:53 UTC)
 - [x] Zugängliche Verbindungsliste und ORACLE-Zuordnung selbst geprüft; My Slack funktioniert, App-Manifestexport konkret missing_scope/app_configurations:read; Umfang nicht grantbar. Keine zweite App/Secret-Transfer/Dialogumgehung

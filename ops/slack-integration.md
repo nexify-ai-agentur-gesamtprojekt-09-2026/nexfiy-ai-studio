@@ -1,5 +1,18 @@
 # Slack und AIFly ORACLE – vorhandene Lösung erweitern
 
+## Neuer Auftrag 16.11.2026, 11:03 UTC: Einrichtung von Grund auf
+**SOLL:** Pascal findet die vorhandene App-Verwaltung nicht und beauftragt ausdrücklich die eigenständige Einrichtung von Grund auf. Für diesen Auftrag ist eine getrennte verwaltete Website-App zulässig; der ursprüngliche ORACLE-Bot bleibt unverändert. Das ersetzt die frühere Grenze „keine zweite App“ nur für dieses Einrichtungspaket, nicht die Trennung vom öffentlichen KI-Berater und nicht die Kosten-/Zugangsgrenzen.
+
+**IST:** Die vorhandene Projektveröffentlichung und alle drei Empfangsadressen waren erreichbar. 18 betroffene Tests bestanden 11:02 UTC. Sichere manuelle Signing-Secret-Eingabe war auf neuen Auftrag erneut geöffnet, wurde jedoch durch Pascals Nachricht vor Ausführung abgebrochen; keine Speicherung.
+
+**IST:** Verwaltete Einrichtung mit Name „NeXify Betriebsanbindung“ begonnen. `groups:history` wurde vom Provisionierungswerkzeug ausdrücklich abgelehnt; zugelassen sind nur `chat:write`, `app_mentions:read`, `im:history`, `im:write`. Danach ausschließlich `app_mention` und `message.im` mit diesen vier Rechten angefordert. Keine privaten Thread-History-/Slash-Command-/Interaktionsrechte daraus ableiten.
+
+**OFFEN – konkreter Blocker:** Der Provisionierungsdienst meldet „No Slack workspace is connected for this Lovable workspace“. Der daraufhin einmal geöffnete Verbindungsdialog wurde abgeschlossen, wählte aber die bestehende persönliche Verbindung `My Slack`; erneute Provisionierung blieb mit derselben Meldung blockiert. Aktueller Konfigurationsabruf bestätigt `token_type=personal`. Persönlicher Slack-Lese-/Sendezugriff ist damit belegt, aber kein autorisierter Installations-Workspace für die verwaltete Projekt-App. Kein weiterer Dialog-/Provisionierungsloop.
+
+**Nur nötiger Inhaberzugriff:** Pascal bzw. Lovable-Workspace-Verantwortlicher autorisiert die Slack-Workspace-/Bot-Installation unter [Lovable → Connectors → Slack](https://lovable.dev/dashboard?connectors=&subtab=connector-detail&connector=slack), nicht erneut nur die vorhandene persönliche Verbindung auswählen. Die bestehende Verbindung nicht löschen, trennen oder überschreiben. Der Installationsdialog entscheidet über tatsächliche Workspace-Rechte; ohne dessen Abschluss kann der Assistent keine App erzeugen oder Signaturgeheimnisse erhalten. Keine Tokens im Chat anfordern.
+
+**IST / nicht ausgeführt:** Keine App angelegt, keine neuen Secret-Namen zurückgemeldet, keine Verdrahtung vorgenommen, kein Slash-/Mention-Auslöser gestartet und keine Empfängerantwort erzeugt. Kein Modellaufruf, Paketkauf, Rechteumgehung oder Deployment. Die spätere App muss anhand der echten Provisionierungsantwort konfiguriert und signiert getestet werden; nicht als ursprünglicher ORACLE-Bot präsentieren. Dokumentation und Aufgabenliste ergänzen, bestehende App/Server/Verbindungen unverändert; daher kein Server-Restore notwendig.
+
 ## Fortsetzung: aktuelle Prüfung 16.11.2026, 10:53 UTC
 - **IST:** Die bestehende Verbindung „My Slack“ ist weiter projektverknüpft, zugänglich und persönlich; ihre Metadaten bestätigen Lesezugriff auf den privaten Ursprungskanal und `chat:write`. Sie ist kein nachgewiesener ORACLE-Bot-Ausgang.
 - **IST:** Slack `users.info` bestätigt den bestehenden Bot `nexify.login-aifly-oracle` und die bekannte App-Zuordnung. `conversations.info` bestätigt `#oracle-agent-inbox` als privat, nicht archiviert und nicht extern geteilt. Keine neue App provisioniert und keine Verbindung getrennt.
