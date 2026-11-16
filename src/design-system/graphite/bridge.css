@@ -42,3 +42,54 @@
   --color-atelier-ink: var(--foreground);
   --color-atelier-muted: var(--muted-foreground);
 }
+
+/* NX-DESIGN-02: Altrollen nur im NeXify-Rahmen auf die geprüften Markenrollen legen.
+   Die am Dokument aufgelösten Kopien bewahren eingebettete TEILEKLAR-Bereiche unverändert. */
+:root {
+  --site-legacy-cyan: var(--color-marke-cyan);
+  --site-legacy-brand-cyan: var(--color-brand-cyan);
+  --site-legacy-light: var(--color-semantik-licht);
+  --site-legacy-info: var(--color-status-info);
+  --site-legacy-inverse: var(--color-text-inverse);
+  --site-legacy-action-ink: var(--color-action-primary-ink);
+  --site-legacy-lime-soft: var(--color-brand-lime-soft);
+  --site-legacy-lime-light: var(--color-marke-lime-hell);
+  --site-legacy-lime-dark: var(--color-marke-lime-dunkel);
+  --site-legacy-lime-deep: var(--color-marke-lime-gruen);
+  --site-legacy-page-gradient: var(--gradient-seitengrund);
+  --site-legacy-band-gradient: var(--gradient-band);
+  --site-legacy-secondary-text: var(--color-text-secondary);
+  --site-legacy-muted-text: var(--color-text-muted);
+}
+:root:root #atelier.site-nexify {
+  --color-marke-cyan: var(--muted-foreground);
+  --color-brand-cyan: var(--muted-foreground);
+  --color-semantik-licht: var(--foreground);
+  --color-status-info: var(--state-success);
+  --color-text-inverse: var(--brand-signal-foreground);
+  --color-action-primary-ink: var(--brand-signal-foreground);
+  --color-brand-lime-soft: var(--brand-signal-hover);
+  --color-marke-lime-hell: var(--brand-signal-hover);
+  --color-marke-lime-dunkel: var(--brand-signal-active);
+  --color-marke-lime-gruen: var(--brand-signal-deep);
+  --color-text-secondary: var(--muted-foreground);
+  --color-text-muted: var(--muted-foreground);
+  --gradient-seitengrund: var(--background);
+  --gradient-band: var(--gradient-surface);
+}
+:root:root #atelier.site-nexify :where([class*="tk-"], [class*="tkc-"]) {
+  --color-marke-cyan: var(--site-legacy-cyan);
+  --color-brand-cyan: var(--site-legacy-brand-cyan);
+  --color-semantik-licht: var(--site-legacy-light);
+  --color-status-info: var(--site-legacy-info);
+  --color-text-inverse: var(--site-legacy-inverse);
+  --color-action-primary-ink: var(--site-legacy-action-ink);
+  --color-brand-lime-soft: var(--site-legacy-lime-soft);
+  --color-marke-lime-hell: var(--site-legacy-lime-light);
+  --color-marke-lime-dunkel: var(--site-legacy-lime-dark);
+  --color-marke-lime-gruen: var(--site-legacy-lime-deep);
+  --color-text-secondary: var(--site-legacy-secondary-text);
+  --color-text-muted: var(--site-legacy-muted-text);
+  --gradient-seitengrund: var(--site-legacy-page-gradient);
+  --gradient-band: var(--site-legacy-band-gradient);
+}

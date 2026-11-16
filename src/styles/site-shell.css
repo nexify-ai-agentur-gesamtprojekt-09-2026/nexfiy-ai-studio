@@ -1072,12 +1072,28 @@
 
 /* NX-DESIGN-01 · KI-Merkmale reduzieren: ruhige Vollfarb-Überschriften, ein Kicker je Seite (Hero),
    Akkordeons ohne Vollrahmen, Glühen nur am Primärknopf. */
-:root:root:root #atelier#atelier.site-shared main :is(h2, h3, h4),
-:root:root:root #atelier#atelier.site-shared main :is(h2, h3, h4) * {
+/* NX-DESIGN-02: auch Menüs, Footer, App-Leiste und ORACLE; TEILEKLAR einschließlich
+   eingebetteter .tk-/.tkc-Bereiche bleibt außen vor. Das bestehende H1-Schlüsselwort ist die einzige Ausnahme. */
+:root:root:root #atelier#atelier.site-nexify :is(h1, h2, h3, h4):not(:where([class*="tk-"], [class*="tkc-"]) *),
+:root:root:root #atelier#atelier.site-nexify :is(h1, h2, h3, h4) :not(.identity-title-accent):not(:where([class*="tk-"], [class*="tkc-"]) *) {
   background-image: none !important;
   background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
   -webkit-text-fill-color: currentColor !important;
-  color: var(--foreground);
+  color: var(--foreground) !important;
+}
+:root:root:root #atelier#atelier.site-nexify .identity-copy h1 .identity-title-accent {
+  color: var(--signal-text) !important;
+}
+:root:root #atelier.site-nexify .panel-status[data-state="connecting"] .connection-indicator {
+  background: var(--state-open);
+}
+@media (forced-colors: active) {
+  :root:root:root #atelier#atelier.site-nexify :is(h1, h2, h3, h4),
+  :root:root:root #atelier#atelier.site-nexify :is(h1, h2, h3, h4) * {
+    color: CanvasText !important;
+    -webkit-text-fill-color: currentColor !important;
+  }
 }
 :root:root:root #atelier#atelier.site-shared main .hc-kicker { display: none; }
 :root:root:root #atelier#atelier.site-shared main .identity-copy .hc-kicker { display: revert; }
