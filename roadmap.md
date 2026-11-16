@@ -168,6 +168,15 @@
 - [x] Admin-Rolle: Inhaberkonto von Pascal bestätigt (16.11.) und freigeschaltet
 - [ ] Eigener privater Slack-Kanal: Slack-Verbindung braucht Recht groups:write – bis dahin Meldung in Pascals Slack-Direktnachricht
 
+## Autopilot (16.11., 05:46 UTC)
+- [x] Sicherheit: Schnellprüfung ohne Befund, 0 bekannte Schwachstellen in 64 Abhängigkeiten; tiefe Prüfung zuletzt 14.11. (nicht neu gestartet)
+- [x] ORACLE-Antwort in #oracle-agent-inbox lesend geprüft: 05:48 UTC weiterhin keine Antwort
+- [x] 47 Seiten bei 1280px: 0 Laufzeitfehler, 0 Überlauf, 0 automatisch erkannte WCAG-A/AA-Verstöße (axe 4.10); 97 interne Links alle 200
+- [ ] Filme: alle fünf Markenfilme enthalten Sprache, nur einer hat Text – Untertitel (WebVTT) und „Gesprochener Text“ für alle fünf ergänzen, Untertitel-Knopf in der gemeinsamen Filmbedienung
+- [ ] aria-label auf zwei rollenlosen Containern (Kostenhinweis Startseite, Geräteliste App-Leiste) korrigieren
+- [ ] Handy-Durchlauf (390px) aller Seiten auf Überlauf/Laufzeitfehler
+- [ ] Formatierung: 6.394 reine Formatierungsmeldungen und 550 „any“-Meldungen der Code-Prüfung abbauen (ohne generierte Dateien)
+
 ## Zurückgestellt (Pascal, 16.11.)
 - Modellwechsel KI, Skill-Import, Veröffentlichung
 - [ ] „Scrapen“ fehlender Produktfotos: nur mit Bildrechten (Hersteller-/Lieferantenfreigabe); ungeklärte Fremdbilder nicht übernehmen – Klärung Pascal
