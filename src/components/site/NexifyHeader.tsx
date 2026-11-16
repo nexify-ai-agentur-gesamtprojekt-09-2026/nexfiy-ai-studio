@@ -51,9 +51,9 @@ export function NexifyHeader() {
           </summary>
           <div className={"product-navigation-menu"} id={`${id}-products`}>
             <div className={"megamenu-heading"}>
-              <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
+              <p>Marke, Systeme und KI-Abläufe – persönlich begleitet von NeXify AI.</p>
               <a href="/leistungen" {...here("/leistungen")}>
-                Leistungen der FACTORY
+                Agenturleistungen
                 <svg
                   className={"nx-zeichen"}
                   viewBox="0 0 24 24"

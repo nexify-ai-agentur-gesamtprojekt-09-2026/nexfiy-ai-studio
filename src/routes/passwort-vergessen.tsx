@@ -66,7 +66,7 @@ function ImportedSectionPasswortVergessen() {
       <aside className={"nx-konto-szene"} aria-labelledby="auth-forgot-szene">
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <SiteFilm film="arbeitsbereich" eager />
+            <SiteFilm film="arbeitsbereich" eager still />
           </figure>
         </div>
         <div className={"nx-konto-nutzen"}>

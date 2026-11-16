@@ -15,13 +15,13 @@ export const Route = createFileRoute("/teileklar_/suche")({
       {
         name: "description",
         content:
-          "Passende Artikel im TEILEKLAR-Katalog sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen.",
+          "Katalogtreffer bei TEILEKLAR sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen. Ein Treffer bestätigt keine Fahrzeugpassung.",
       },
       { property: "og:title", content: "Teil anfragen · TEILEKLAR.shop" },
       {
         property: "og:description",
         content:
-          "Passende Artikel im TEILEKLAR-Katalog sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen.",
+          "Katalogtreffer bei TEILEKLAR sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen. Ein Treffer bestätigt keine Fahrzeugpassung.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -52,7 +52,7 @@ function CatalogMatches({ q }: { q: string }) {
   return (
     <section className="hc-container tkc-browser tkc-related" aria-labelledby="tkc-matches-title">
       <header className="tkc-results-head">
-        <h2 id="tkc-matches-title">Passende Artikel im Katalog</h2>
+        <h2 id="tkc-matches-title">Treffer im Katalog</h2>
         <p className="tkc-results-count" role="status">
           {data.total === 0 ? (
             <>Kein Katalogtreffer für „{q}“ – fragen Sie das Teil unten direkt an.</>

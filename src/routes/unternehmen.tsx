@@ -210,7 +210,7 @@ function Index() {
               <p>
                 NeXify AI steht für die Agenturarbeit: Websites, Shops, Portale, Apps und
                 KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich,
-                die Agenten NeX und AIFly ORACLE, die NeXify API.
+                NeX Agentic AIFly (kurz: NeX) und AIFly ORACLE sowie die NeXify API.
               </p>
               <p>
                 Die Suite lässt sich ohne Agenturauftrag nutzen; für die API gelten die auf ihrer
@@ -218,6 +218,11 @@ function Index() {
                 Marke für Auto und Motorrad.
               </p>
               <h3>Auftrag oder eigener Arbeitsbereich?</h3>
+              <p>
+                FACTORY bezeichnet unsere Arbeitsweise: Gestaltung, technische Umsetzung und
+                KI-gestützte Arbeit werden in einem abgestimmten Auftrag zusammengeführt.
+                Es ist kein zusätzliches Produkt und kein gesonderter Zugang.
+              </p>
               <p>
                 Wenn ein Ergebnis für Ihr Unternehmen konzipiert und umgesetzt werden soll, führt
                 der Weg zu den Agenturleistungen. Wenn Sie selbst mit KI arbeiten möchten, steht die

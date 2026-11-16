@@ -95,7 +95,7 @@ function Index() {
             </div>
             <div className={"identity-media"}>
               <figure className={"identity-hero-photo"}>
-                <SiteFilm film="teileklar" eager />
+                <SiteFilm film="teileklar" eager still />
               </figure>
             </div>
           </div>

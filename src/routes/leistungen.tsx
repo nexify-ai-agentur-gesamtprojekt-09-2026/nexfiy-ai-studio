@@ -12,7 +12,7 @@ export const Route = createFileRoute("/leistungen")({
       {
         rel: "preload",
         as: "image",
-        href: "/site-assets/5c592a5dc791fcc3.webp",
+        href: "/site-assets/05c51cdebbdd2aa6.webp",
         fetchPriority: "high",
       },
     ],
@@ -97,7 +97,7 @@ function Index() {
             </div>
             <div className={"identity-media"}>
               <figure className={"identity-hero-photo"}>
-                <SiteFilm film="angebot" eager />
+                <SiteFilm film="kennenlernen" eager />
               </figure>
             </div>
           </div>
