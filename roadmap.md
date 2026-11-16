@@ -1,4 +1,18 @@
 # Roadmap
+## ORACLE-Produktberatung (15.11.)
+- [x] Öffentliche Suite/API-Produktinformationen als begrenzte Beratungsgrundlage hinterlegt
+- [x] AI-Gateway-Beratung mit geprüften lokalen Einstiegslinks im gemeinsamen ORACLE ergänzt
+- [x] Echte Suite/API-Antworten, Folgefrage, Einstiegslink und erhaltene Eingabe bei Fehler am Handy geprüft (25 Tests bestanden)
+
+## Anpassbare Seiten und Textkonzept (15.11.)
+- [ ] Automatisch abgestimmte Chatbreite und verschiebbare Grenze mit Maus/Tastatur ergänzen
+- [ ] Ausrichtung, Schrift und Chat-Inhalt auf schmalen/breiten Ansichten prüfen
+- [ ] Gesamtkonzept für menschliche, informative Produkt-, Angebots-, Preis- und Rechtstexte aus öffentlichen Fakten umsetzen
+- [ ] UI/UX-Skill um das Textkonzept erweitern, sofern ein aktiver Skill vorhanden ist
+- [ ] Änderungen und verbleibende Fakten-/Freigabegrenzen prüfen
+- [ ] Freigestellte Markenfiguren, Glasflächen sowie Farb- und Lichtwirkung abgestimmt veredeln
+- [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
+
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
 - [x] Kopfbereich beim Scrollen: bestehende Glasfläche, Menü-Fokus und mobile Bedienung vereinheitlicht

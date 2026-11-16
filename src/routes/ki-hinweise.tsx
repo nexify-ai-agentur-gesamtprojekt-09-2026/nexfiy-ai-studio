@@ -49,7 +49,8 @@ function Index() {
                     <h2 id="content-ai-notice-ueberblick-0-title">Der Assistent auf dieser Website</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>AIFly ORACLE führt im öffentlichen Chat derzeit durch Leistungen und Seiten, ohne Live-KI-Modell. Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Verbindliche Schritte werden gesondert bestätigt.</p>
+                    <p>AIFly ORACLE beantwortet Fragen zu Suite und API mit einem KI-Modell über AI Gateway. Grundlage sind die öffentlichen Produktinformationen. Die Beratung greift nicht auf Ihr Konto, Kundenprojekte oder private Dokumente zu. Antworten können Fehler enthalten; maßgeblich sind die Angaben auf den verlinkten Produktseiten.</p>
+                    <p>Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Verbindliche Schritte werden gesondert bestätigt.</p>
                     <div className={"hc-service-detail pc-module"}>
                       <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
                       <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>

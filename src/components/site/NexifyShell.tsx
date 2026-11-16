@@ -11,6 +11,7 @@ import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
 import { OracleAside } from "./OracleAside";
+import { PageSplit } from "./PageSplit";
 
 /**
  * Page frame of every NeXify page: header, footer, AIFly ORACLE panel and the scroll/footer signals the
@@ -40,7 +41,7 @@ export function NexifyShell({
     >
       <link rel="stylesheet" href={shellCSS} precedence="site-shell" />
       <GlassLensFilters />
-      <div className="website">
+      <PageSplit open={chatOpen} mobile={isMobile} page={<div className="website">
         <a className="skip-link" href="#page-content">
           Zum Inhalt
         </a>
@@ -49,7 +50,7 @@ export function NexifyShell({
           {typeof children === "function" ? children({ chatOpen, openChat, closeChat }) : children}
         </main>
         <NexifyFooter />
-      </div>
+      </div>} chat={<OracleAside open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />} />
       {!chatOpen && (
         <button
           ref={reopenRef}
@@ -66,7 +67,6 @@ export function NexifyShell({
           Ihr Projekt mit NeXify
         </button>
       )}
-      <OracleAside open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />
     </div>
   );
 }
