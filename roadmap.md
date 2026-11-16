@@ -129,3 +129,7 @@
 - [x] Konto: /anmelden, /registrieren mit echter Anmeldung vorhanden
 - [x] Alle genannten TEILEKLAR-Seiten vorhanden; Produkt-/Kategorieziel ergänzt, fehlende Commerce-Anbindung transparent
 - [x] Neue Seiten an gemeinsame Bausteine angeschlossen; 46 öffentliche Inhaltsseiten mit 200-Antwort und einem Inhaltsrahmen geprüft
+
+## Interner Betriebsagent AIFly ORACLE (16.11.)
+- [ ] Zugang „nexify.login-aifly-oracle“ klären und einordnen
+- [ ] Umfang: Anfragen/Leads, TEILEKLAR, Kundenportal/Suite, Tagesbericht/Aufgaben
