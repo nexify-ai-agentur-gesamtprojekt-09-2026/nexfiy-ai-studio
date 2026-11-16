@@ -8,7 +8,7 @@
 :root:root #atelier.site-shared .pwa-install-devices { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; font-size: var(--type-caption); line-height: 1.5; color: var(--muted-foreground); }
 :root:root #atelier.site-shared .pwa-install-devices span { display: inline-flex; align-items: center; gap: 6px; }
 :root:root #atelier.site-shared .pwa-install-devices svg { width: 14px; height: 14px; }
-:root:root #atelier.site-shared .pwa-install-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+:root:root #atelier.site-shared .pwa-install-actions { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
 :root:root #atelier.site-shared .pwa-install-actions button { min-height: 44px; font-size: var(--type-detail); letter-spacing: 0; }
 :root:root #atelier.site-shared .pwa-install-actions button:first-child { min-height: 48px; padding-inline: 20px; }
 :root:root #atelier.site-shared .pwa-install-actions button:first-child { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); border-radius: 999px; box-shadow: var(--elevation-primary); }
@@ -18,7 +18,9 @@
 :root:root #atelier.site-shared .pwa-install-band button:focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
 :root:root #atelier.site-shared .pwa-install-band button:active { transform: translateY(1px); }
 :root:root #atelier.site-shared .pwa-install-collapsed { display: flex; align-items: center; justify-content: flex-start; }
-:root:root #atelier.site-shared .pwa-install-collapsed button { min-height: 44px; }
+:root:root #atelier.site-shared .pwa-install-collapsed button { min-height: 44px; padding-inline: 12px; }
+/* Eingeklappt: Symbol und Text bündig mit der Footer-Spalte; die Klickfläche bleibt 44 px hoch. */
+:root:root #atelier.site-shared .pwa-install-collapsed .pwa-install-secondary { margin-inline-start: -12px; }
 :root:root .pwa-install-overlay { z-index: 100; background: var(--surface-media-glass); backdrop-filter: blur(8px); }
 :root:root .pwa-install-dialog { position: fixed; z-index: 101; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(560px,calc(100% - 32px)); max-height: calc(100dvh - 48px); overflow-y: auto; box-sizing: border-box; padding: 32px; background: var(--popover); color: var(--foreground); border: 1px solid var(--border-strong); border-radius: 8px; box-shadow: var(--elevation-glass-lift); font-family: var(--font-brand-text); letter-spacing: 0; }
 .pwa-install-dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
@@ -40,7 +42,7 @@
 @container website (max-width: 900px) {
   :root:root #atelier.site-shared .pwa-install-bar { grid-template-columns: 48px minmax(0,1fr); gap: 16px; }
   :root:root #atelier.site-shared .pwa-install-mark { width: 48px; height: 48px; align-self: start; }
-  :root:root #atelier.site-shared .pwa-install-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; }
+  :root:root #atelier.site-shared .pwa-install-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
 }
 @container website (max-width: 480px) {
   :root:root #atelier.site-shared .pwa-install-bar { grid-template-columns: 40px minmax(0,1fr); gap: 16px; padding: 20px; }
