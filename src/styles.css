@@ -139,6 +139,12 @@
   --surface-media-glass: color-mix(in oklab, var(--background) 84%, transparent);
   --elevation-header: inset 0 1px 0 var(--border-strong), 0 8px 24px -16px oklch(0 0 0 / 65%);
   --elevation-media: inset 0 1px 0 var(--border), 0 8px 24px -8px oklch(0 0 0 / 40%);
+  --glass-fill: linear-gradient(145deg, oklch(1 0 0 / 15%), oklch(1 0 0 / 3%) 48%, oklch(0.82 0.04 190 / 7%)), color-mix(in oklab, var(--background) 78%, transparent);
+  --glass-fill-hover: linear-gradient(145deg, oklch(1 0 0 / 23%), oklch(1 0 0 / 6%) 48%, oklch(0.82 0.04 190 / 12%)), color-mix(in oklab, var(--background) 72%, transparent);
+  --glass-elevation: inset 0 1px 0 oklch(1 0 0 / 40%), inset 1px 0 0 oklch(1 0 0 / 14%), inset 0 -1px 0 oklch(0 0 0 / 40%), 0 6px 16px -8px oklch(0 0 0 / 65%);
+  --figure-shadow: oklch(0 0 0 / 48%);
+  --figure-rim: oklch(0.86 0.08 160 / 20%);
+  --stage-light: linear-gradient(135deg, oklch(0.79 0.02 205 / 8%), transparent 45%, oklch(0.78 0.12 125 / 7%));
 }
 
 @layer base {

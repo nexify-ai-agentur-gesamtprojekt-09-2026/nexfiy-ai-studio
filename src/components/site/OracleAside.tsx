@@ -26,13 +26,13 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
   return (
     <aside id="aifly-panel" className={"aifly-panel oracle-advice"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
       <link rel="stylesheet" href={oracleCSS} precedence="oracle-advice" />
-      <div className={"panel-heading"}>
-        <div className={"panel-heading-copy"}>
-          <div className={"panel-identity"}>
+      <div className="oracle-heading">
+        <div className="oracle-heading-copy">
+          <div className="oracle-identity">
             <span className={"aifly-symbol oracle-companion"} data-state="idle" aria-hidden="true">
               <img src="/site-assets/9176c58a16ff634a.png" alt="" width="34" height="34" decoding="async" />
             </span>
-            <h2 className={"nx-oracle-name panel-brandline"}><strong>AIFly ORACLE</strong> <span className={"panel-identity-subtitle"}>Produktberatung · NeXify AI</span></h2>
+            <h2><strong>AIFly ORACLE</strong><span>Produktberatung · NeXify AI</span></h2>
           </div>
         </div>
         {messages.length > 0 && <Button variant="ghost" size="icon" aria-label="Neue Beratung" title="Neue Beratung" disabled={busy} onClick={reset}><RotateCcw aria-hidden="true" /></Button>}
@@ -41,16 +41,15 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
       <div className={"sdk-orientation-view"}>
         <section className={"public-orientation"} aria-label="Was planen Sie?">
           <Conversation className="oracle-conversation" initial="instant" resize="instant" aria-label="Produktberatung" aria-live="polite" aria-relevant="additions" aria-busy={busy}>
-          <ConversationContent className="orientation-content">
-            {messages.length === 0 && <div className={"orientation-intro"}>
-              <div className={"orientation-host"}>
+          <ConversationContent className="oracle-scroll">
+            {messages.length === 0 && <div className="oracle-intro">
+              <div className="oracle-host">
                 <span className={"orientation-host-figure"} aria-hidden="true">
                   <img src="/site-assets/9176c58a16ff634a.png" alt="" width="512" height="512" decoding="async" />
                 </span>
-                <p className={"nx-oracle-name orientation-host-name"}><strong>AIFly ORACLE</strong> <span className={"panel-identity-subtitle"}>Ihr Einstieg in Suite und API</span></p>
               </div>
               <h3>Suite oder API?</h3>
-              <p className={"orientation-intro-body"}>Was möchten Sie umsetzen? Ich ordne Ihr Vorhaben anhand unserer öffentlichen Produktinformationen ein und zeige Ihnen den passenden Einstieg.</p>
+              <p>Was möchten Sie umsetzen? Ich ordne Ihr Vorhaben anhand unserer öffentlichen Produktinformationen ein und zeige Ihnen den passenden Einstieg.</p>
             </div>}
             {messages.length === 0 && <div className="orientation-starters" role="group" aria-label="Vorhaben auswählen">
               {[
@@ -78,11 +77,11 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
           <ConversationScrollButton aria-label="Zur neuesten Antwort" />
           </Conversation>
           <label htmlFor="orientation-message" className="visually-hidden">Ihr Vorhaben</label>
-          <PromptInput onSubmit={() => { void send(draft); }} className={"orientation-composer"} maxFiles={0}>
+          <PromptInput onSubmit={() => { void send(draft); }} className="oracle-composer" maxFiles={0}>
             <PromptInputTextarea ref={composerRef} value={draft} onChange={(event) => setDraft(event.target.value)} id="orientation-message" maxLength={1000} rows={1} placeholder="Was möchten Sie mit KI umsetzen?" aria-describedby="orientation-keys" required enterKeyHint="send" readOnly={busy} />
             <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
-            <PromptInputFooter className="orientation-composer-actions justify-end">
-              <PromptInputSubmit className="primary-button" status={busy ? "submitted" : "ready"} disabled={busy || !draft.trim()} aria-label="Nachricht senden" />
+            <PromptInputFooter className="oracle-composer-actions justify-end">
+              <PromptInputSubmit className="oracle-submit" status={busy ? "submitted" : "ready"} disabled={busy || !draft.trim()} aria-label="Nachricht senden" />
             </PromptInputFooter>
           </PromptInput>
           <p className={"connection-note"}>KI-Beratung · Angaben bitte auf der Produktseite prüfen. Keine vertraulichen Daten eingeben. <a href="/datenschutz">Datenschutz</a></p>

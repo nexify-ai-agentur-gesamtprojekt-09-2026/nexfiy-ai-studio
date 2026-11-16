@@ -17,7 +17,8 @@ export function PageSplit({ page, chat, open, mobile }: { page: ReactNode; chat:
     return () => window.removeEventListener("resize", sync);
   }, []);
   useEffect(() => {
-    if (mobile || !open) return;
+    if (mobile) return;
+    if (!open) { panelRef.current?.collapse(); return; }
     adjusting.current = true;
     panelRef.current?.resize(Math.min(bounds.max, Math.max(bounds.min, preference.current === null ? bounds.preferred : width * preference.current)));
     const frame = requestAnimationFrame(() => { adjusting.current = false; });
@@ -29,11 +30,11 @@ export function PageSplit({ page, chat, open, mobile }: { page: ReactNode; chat:
     panelRef.current?.resize(bounds.preferred);
     requestAnimationFrame(() => { adjusting.current = false; });
   };
-  if (mobile || !open) return <>{page}{chat}</>;
+  if (mobile) return <>{page}{chat}</>;
   return <ResizablePanelGroup className="site-page-split" orientation="horizontal">
     <ResizablePanel id="website-pane" minSize={440} className="site-page-pane">{page}</ResizablePanel>
-    <ResizableHandle className="site-page-divider" aria-label="Chatbreite anpassen" title="Chatbreite anpassen" onDoubleClick={reset} withHandle />
-    <ResizablePanel id="oracle-pane" panelRef={panelRef} defaultSize={bounds.preferred} minSize={bounds.min} maxSize={bounds.max} className="site-oracle-pane" onResize={(size, _id, previous) => {
+    <ResizableHandle className={open ? "site-page-divider" : "site-page-divider is-hidden"} disabled={!open} aria-label="Chatbreite anpassen" title="Chatbreite anpassen" disableDoubleClick onDoubleClick={reset} withHandle />
+    <ResizablePanel id="oracle-pane" panelRef={panelRef} collapsible collapsedSize={0} defaultSize={open ? bounds.preferred : 0} minSize={bounds.min} maxSize={bounds.max} className="site-oracle-pane" onResize={(size, _id, previous) => {
       if (previous && !adjusting.current) preference.current = size.asPercentage / 100;
     }}>{chat}</ResizablePanel>
   </ResizablePanelGroup>;
