@@ -9,7 +9,7 @@ import { PartInquiryForm } from "@/components/forms/PartInquiryForm";
 import capturedCSS from "../styles/pages/teileklar.suche.css?url";
 
 export const Route = createFileRoute("/teileklar_/suche")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Teil, Marke oder Nummer benennen. · TEILEKLAR.shop" }, { name: "description", content: "Teil, Marke oder Artikelnummer für eine Anfrage benennen. Hier werden keine Katalogtreffer oder Verfügbarkeiten abgerufen." }, { property: "og:title", content: "Teil, Marke oder Nummer benennen. · TEILEKLAR.shop" }, { property: "og:description", content: "Teil, Marke oder Artikelnummer für eine Anfrage benennen. Hier werden keine Katalogtreffer oder Verfügbarkeiten abgerufen." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Teil anfragen · TEILEKLAR.shop" }, { name: "description", content: "Passende Artikel im TEILEKLAR-Katalog sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen." }, { property: "og:title", content: "Teil anfragen · TEILEKLAR.shop" }, { property: "og:description", content: "Passende Artikel im TEILEKLAR-Katalog sehen und ein Teil mit Fahrzeugdaten und optionalem Foto unverbindlich anfragen." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   validateSearch: (search: Record<string, unknown>): { q?: string } => {
     const q = normalizeCatalogQuery(search["q"]);
