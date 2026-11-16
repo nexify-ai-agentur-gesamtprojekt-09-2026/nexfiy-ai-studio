@@ -1,9 +1,11 @@
 # Roadmap
 ## NX-MCP-01 · Verbindung über nexifyai.de (16.11., 13:10 UTC)
 - [x] Lesende Konfigurationsprüfung: OAuth und dynamische Registrierung aktiv, Zustimmungsadresse /.lovable/oauth/consent, Site URL nexifyai.de; keine Einstellungsänderung nötig (13:11 UTC)
-- [ ] Vorhandene Zustimmungs-/Anmelderückwege, Fehlerprotokolle und vorhandene vier Lese-Werkzeuge prüfen; belegte Fehler minimal korrigieren
-- [ ] Registrierung → Zustimmung → Token → initialize/tools/list prüfen; Konfiguration, lokale Tests und veröffentlichte Nachweise getrennt dokumentieren
-- [ ] Rückweg und ggf. Pascal-Anmeldung benennen; NX-ORA-02, Server, BigBuy und Nutzerrechte unberührt lassen
+- [x] Vier vorhandene Lese-Werkzeuge/SDK-Seiten bestätigt; Rückadresse lag tatsächlich oben in redirect_uri statt client.redirect_uri. Anzeige, konkrete Scopes, angemeldetes Konto, Ereignisfehler und Signup-Rückweg korrigiert; keine Rollen-/Konfigurationsänderung
+- [x] Live 13:14 UTC: Registrierung 201 → Autorisierung 302 → Zustimmung 200 → Token 200 → initialize/tools/list 200; vier Tools. 13:18 UTC drei Leseaufrufe 200 ohne isError; Claude-Callback akzeptiert, 13:20 UTC echter Ablehnen-Rückweg access_denied ohne Code; bereits autorisierte sofortige Rückleitung ebenfalls belegt
+- [x] Lokale Desktop-/Handyprüfung 1280/390 px, je 44px Buttons, kein Überlauf; simulierte Zulassen-/Ablehnenfehler und echte localhost-Origin-Ablehnung sichtbar. 149 Projekttests bestanden 13:21 UTC; Manifest vier unveränderte Tools, build OK. Bericht ops/nx-mcp-01-2026-11-16.md
+- [x] Rückweg dokumentiert; NX-ORA-02, Server, BigBuy, bestehende Nutzerrechte unverändert. Keine neuen Dienste, keine Kostenverpflichtung; Diagnoseregistrierungen erhalten, keine Löschung
+- [ ] Neue Zustimmungsanzeige erneut veröffentlichen und live prüfen: benötigt Veröffentlichung durch Pascal. Ursache von Pascals konkretem Client-Abbruch bleibt ohne Client/Fehlerbeschreibung offen; kanonischer Serverfluss ist live vollständig nachgewiesen
 
 ## Erneut hochgeladener Projektauftrag (16.11., 11:29 UTC)
 - [x] Upload byteidentisch mit ops/references/nexify-project-chat-2026-11-16.md (SHA256 4bf9a383…301f3, 6893 Bytes); keine neuen Vorgaben, keine zweite Kopie

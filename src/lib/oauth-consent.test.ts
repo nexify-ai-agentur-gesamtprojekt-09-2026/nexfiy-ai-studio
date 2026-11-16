@@ -27,6 +27,11 @@ describe("NX-MCP-01 consent", () => {
     vi.mocked(oauth.getAuthorizationDetails).mockResolvedValue({ data: null, error: { message: "unauthorized request origin" } });
     await expect(loadOAuthConsent(oauth, "request-1")).rejects.toMatchObject({ kind: "origin" });
   });
+  it("distinguishes expired authorization from provider availability", async () => {
+    const oauth = provider();
+    vi.mocked(oauth.getAuthorizationDetails).mockResolvedValue({ data: null, error: { message: "authorization request expired" } });
+    await expect(loadOAuthConsent(oauth, "expired-request")).rejects.toMatchObject({ kind: "expired" });
+  });
   it("rejects a missing authorization without a provider call", async () => {
     const oauth = provider();
     await expect(loadOAuthConsent(oauth, "")).rejects.toMatchObject({ kind: "missing_id" });
@@ -45,6 +50,11 @@ describe("NX-MCP-01 consent", () => {
     expect(oauth.approveAuthorization).not.toHaveBeenCalled();
   });
   for (const approve of [true, false]) {
+    it(`surfaces returned provider errors for ${approve ? "approval" : "denial"}`, async () => {
+      const oauth = provider();
+      vi.mocked(approve ? oauth.approveAuthorization : oauth.denyAuthorization).mockResolvedValue({ data: null, error: { message: "provider unavailable" } });
+      await expect(decideOAuthConsent(oauth, "request-1", approve)).rejects.toMatchObject({ kind: "provider" });
+    });
     it(`surfaces network failure for ${approve ? "approval" : "denial"}`, async () => {
       const oauth = provider();
       vi.mocked(approve ? oauth.approveAuthorization : oauth.denyAuthorization).mockRejectedValue(new TypeError("Failed to fetch"));
