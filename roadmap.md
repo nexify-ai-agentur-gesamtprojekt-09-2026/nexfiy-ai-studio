@@ -14,6 +14,7 @@
 - [ ] Realistische Glaswirkung konsistent in gemeinsame Flächen und Bedienelemente integrieren
 - [ ] Aktuelle Leistungsseite vermessen: Breiten, Abstände, Überläufe und Ausrichtung auf Desktop und Handy
 - [ ] Chatantworten mit gut lesbarer Typografie, klaren Absätzen und einheitlicher Darstellung formatieren und prüfen
+- [ ] Alle bisherigen Umsetzungen seit Task 01 auf Abweichungen von Anforderungen, gemeinsamen Bausteinen und tatsächlichem Verhalten prüfen
 
 ## UI/UX-Vorgaben (15.11.)
 - [x] Gemeinsame Video-Bedienung: getrennte 44px-Touch-Zonen, Lautstärke, Tastatur und Fehlerzustände verfeinert
