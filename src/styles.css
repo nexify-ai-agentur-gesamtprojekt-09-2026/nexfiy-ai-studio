@@ -436,3 +436,47 @@ html[data-theme="light"] {
   @media (prefers-reduced-motion: reduce) { animation: none; }
 }
 
+/* Material-Fallbacks ändern nur die Darstellung, niemals die gemessene Geometrie.
+   Tokens erfassen auch fokussierte, aufgeklappte und gescrollte Glasflächen. */
+@supports not (backdrop-filter: blur(1px)) {
+  :root, html[data-theme="light"] {
+    --glass-fill: var(--glass-opaque);
+    --glass-fill-hover: var(--glass-opaque);
+    --glass-clear: var(--glass-opaque);
+    --glass-frosted: var(--glass-opaque);
+    --glass-header-compact: var(--glass-opaque);
+    --glass-content-fill: var(--glass-opaque);
+    --glass-menu-fill: var(--popover);
+  }
+}
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  :root, html[data-theme="light"] {
+    --glass-fill: var(--glass-opaque);
+    --glass-fill-hover: var(--glass-opaque);
+    --glass-clear: var(--glass-opaque);
+    --glass-frosted: var(--glass-opaque);
+    --glass-header-compact: var(--glass-opaque);
+    --glass-content-fill: var(--glass-opaque);
+    --glass-menu-fill: var(--popover);
+    --surface-media-glass: var(--glass-opaque);
+    --glass-control-filter: none;
+    --glass-content-filter: none;
+    --glass-navigation-filter: none;
+    --glass-scroll-filter: none;
+    --glass-menu-filter: none;
+  }
+  :root:root #atelier.site-shared :is(.reopen-chat,.atelier-film-controls,.pwa-install-bar,.hc-service-detail,.pc-module),
+  :root:root #atelier.site-shared .oracle-advice :is(.oracle-heading,.oracle-starter,[data-slot="input-group"]),
+  :root:root .pwa-install-overlay { backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  :root:root #atelier.site-shared :is(.hc-service-detail,.pc-module,.pwa-install-bar,.tk-commerce-header,.reopen-chat,.hc-anchors,.atelier-film-controls),
+  :root:root #atelier.site-shared .site-header::before,
+  :root:root #atelier.site-shared .site-header :is(.mobile-navigation-panel,.product-navigation-menu,.theme-switch,.mobile-navigation > summary,.header-cta),
+  :root:root #atelier.site-shared .oracle-advice :is(.oracle-heading,.oracle-starter,[data-slot="input-group"]),
+  :root:root .pwa-install-dialog { border-color: var(--glass-accessible-edge); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:root #atelier.site-shared .oracle-advice .oracle-starter { transition: none; }
+}
+
