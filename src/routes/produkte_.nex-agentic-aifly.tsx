@@ -123,7 +123,7 @@ function Index() {
                 "Aufgabe und beteiligte Systeme beschreiben; Umfang und Kosten werden im Angebot abgegrenzt.",
             },
           ]}
-          example="Ein wiederkehrender Vorgang soll nicht jedes Mal neu vorbereitet werden. Benennen Sie zuerst Eingaben, erlaubte Systeme und das gewünschte Ergebnis, bevor eine Ausführung vereinbart wird."
+          example="Ein wiederkehrender Vorgang soll nicht jedes Mal neu vorbereitet werden. Benennen Sie zuerst Eingaben, erlaubte Systeme und das gewünschte Ergebnis. Erst dann vereinbaren wir eine Ausführung."
           links={[
             { label: "Aufgabe beschreiben", href: "/kontakt" },
             { label: "Werkzeuge und Methoden", href: "/produkte/skills-mcp" },
@@ -232,8 +232,8 @@ function Index() {
               <h3>Ein Arbeitsbeispiel als Ausgangspunkt</h3>
               <p>
                 Beschreiben Sie einen wiederkehrenden Fall und die beteiligten Systeme. Daraus
-                können Aufgabe, Grenzen und Prüfung abgeleitet werden. Private Dokumente und
-                Zugangsdaten werden nicht über den öffentlichen Website-Chat übergeben.
+                leiten wir Aufgabe, Grenzen und Prüfung ab. Private Dokumente und Zugangsdaten
+                werden nicht über den öffentlichen Website-Chat übergeben.
               </p>
             </div>
           </section>
@@ -412,8 +412,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
         </div>

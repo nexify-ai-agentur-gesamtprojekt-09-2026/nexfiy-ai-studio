@@ -166,7 +166,7 @@ function Index() {
                 Partnerportal von TEILEKLAR, unserer eigenen Shop-Marke.
               </p>
 
-              <h3>Die Beschreibung ist noch kein freigeschalteter Bereich</h3>
+              <h3>Eine Beschreibung schaltet noch keinen Bereich frei</h3>
               <p>
                 Ein Kunden- oder Partnerbereich braucht eine tatsächlich angebundene Anwendung mit
                 passenden Inhalten. Die Anmeldung dieses Auftritts allein bestätigt weder einen
@@ -216,7 +216,7 @@ function Index() {
 
               <h3>Zugang und Inhalt getrennt beurteilen</h3>
               <p>
-                Ein Konto weist nicht automatisch Rechte für jede Anwendung nach. Welche Inhalte
+                Ein Konto bedeutet nicht automatisch Zugang zu jeder Anwendung. Welche Inhalte
                 zugänglich sind, bestimmt der tatsächlich freigeschaltete Bereich. Die
                 Beschreibungen dieser Seite sind keine Zusage, dass alle genannten Portalfunktionen
                 bereits in diesem Auftritt verfügbar sind.
@@ -388,8 +388,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
         </div>
@@ -583,7 +583,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+            Bereich. Testen Sie die Suite 24 Stunden lang.
           </p>
           <a
             aria-label="NeX AIFly Suite. Ihr KI-Arbeitsbereich. – Seite ansehen"

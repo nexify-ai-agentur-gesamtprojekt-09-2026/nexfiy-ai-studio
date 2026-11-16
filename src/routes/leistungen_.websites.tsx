@@ -152,7 +152,7 @@ function Index() {
                 ergänzen.
               </p>
 
-              <h3>Startumfang und spätere Entwicklung unterscheiden</h3>
+              <h3>Was zum Start gehört und was später folgt</h3>
               <p>
                 Ein Shop, eine weitere Sprache oder eine Kampagnenseite braucht eigene Inhalte und
                 Abläufe. Deshalb wird jede Erweiterung getrennt betrachtet. So bleibt
@@ -364,8 +364,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-website" />
         </div>
@@ -560,8 +560,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
-                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
+                Aufwand und Kosten legen wir für Ihr Vorhaben im Angebot fest. Hosting, Software,
+                KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>

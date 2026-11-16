@@ -79,7 +79,7 @@ function Index() {
                   data-variant="primary"
                   href="/teileklar/shop"
                 >
-                  <span>Zum Katalog</span>
+                  <span>Katalog durchsuchen</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>

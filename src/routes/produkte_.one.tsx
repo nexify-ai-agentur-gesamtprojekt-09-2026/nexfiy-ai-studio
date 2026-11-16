@@ -158,7 +158,7 @@ function Index() {
             {
               label: "Umfang und Kosten",
               content:
-                "Werkzeuge, Datenzugriffe, Budget und Integration werden für den Einsatz vereinbart. Kein allgemeiner Autopilotzugang durch die Anmeldung.",
+                "Werkzeuge, Datenzugriffe, Budget und Integration werden für den Einsatz vereinbart. Die Anmeldung schaltet keinen allgemeinen Autopiloten frei.",
             },
           ]}
           example="Aus verstreuten Projektinformationen soll ein Entwurf entstehen. Zuerst werden Quellen und Ziel geklärt, anschließend wird der Entwurf ausgearbeitet und geprüft. Ein Versand folgt daraus nicht automatisch."
@@ -240,7 +240,7 @@ function Index() {
                 versendetes Ergebnis.
               </p>
 
-              <h3>Ein Arbeitsstand muss eine Bedeutung haben</h3>
+              <h3>Sie erkennen, welcher Schritt noch fehlt</h3>
               <p>
                 Vorbereitet, geprüft und ausgeführt bezeichnen unterschiedliche Zustände. Halten Sie
                 fest, welches Ergebnis zu jedem Schritt gehört und wer es bestätigt. Dadurch bleibt
@@ -387,8 +387,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-api" />
         </div>
@@ -737,7 +737,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+            Bereich. Testen Sie die Suite 24 Stunden lang.
           </p>
           <a
             aria-label="NeX AIFly Suite. Ihr KI-Arbeitsbereich. – Seite ansehen"
@@ -786,7 +786,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-            Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab
+            Schnittstelle nach Ihrem Datenfluss; die Nutzung läuft über ein Guthaben, das Sie vorab
             aufladen.
           </p>
           <a

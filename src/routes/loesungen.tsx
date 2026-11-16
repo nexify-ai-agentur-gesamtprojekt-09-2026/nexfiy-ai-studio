@@ -209,7 +209,7 @@ function Index() {
                 sagen wir nicht zu.
               </p>
 
-              <h3>Ergebnisse im richtigen Zusammenhang lesen</h3>
+              <h3>Was Anzeigenwerte zeigen – und was nicht</h3>
               <p>
                 Anzeigenwerte allein zeigen nicht, ob eine Anfrage zu Ihrem Angebot passt. Angebot,
                 Zielgruppe, Kanal und Budget beeinflussen das Ergebnis gemeinsam. Welche Daten
@@ -306,8 +306,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-growth" />
         </div>
@@ -366,7 +366,7 @@ function ImportedSectionDerPassendeEinstieg() {
           </h3>
           <p>
             Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+            Bereich. Testen Sie die Suite 24 Stunden lang.
           </p>
           <span className={"hc-text-link"}>
             Mehr erfahren
@@ -474,7 +474,7 @@ function ImportedSectionDerPassendeEinstieg() {
           </h3>
           <p>
             Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-            Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab
+            Schnittstelle nach Ihrem Datenfluss; die Nutzung läuft über ein Guthaben, das Sie vorab
             aufladen.
           </p>
           <span className={"hc-text-link"}>
@@ -606,8 +606,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Botschaft, Werbemittel und Zielseite erzählen dieselbe Geschichte. Gestaltung,
-                Betreuung und Medienbudget bleiben dabei getrennt nachvollziehbar.
+                Botschaft, Werbemittel und Zielseite passen zusammen. Gestaltung, Betreuung und
+                Medienbudget bleiben dabei getrennt nachvollziehbar.
               </p>
             </div>
           </details>
@@ -688,8 +688,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
-                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
+                Aufwand und Kosten legen wir für Ihr Vorhaben im Angebot fest. Hosting, Software,
+                KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
@@ -890,7 +890,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+            Bereich. Testen Sie die Suite 24 Stunden lang.
           </p>
           <a
             aria-label="NeX AIFly Suite. Ihr KI-Arbeitsbereich. – Seite ansehen"

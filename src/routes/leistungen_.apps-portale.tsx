@@ -58,7 +58,7 @@ function Index() {
             </svg>
           </a>
           <a href="#content-apps-portals-apps-portals-customer-2-1">
-            Verbunden mit dem, was Sie haben
+            Angebunden an Ihre vorhandenen Systeme
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ function Index() {
             <div>
               <span className={"hc-kicker"}>02 / 02</span>
               <h2 id="content-apps-portals-apps-portals-customer-2-1-title">
-                Verbunden mit dem, was Sie haben
+                Angebunden an Ihre vorhandenen Systeme
               </h2>
             </div>
             <div className={"pc-section-body"}>
@@ -365,8 +365,8 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
+            Hier finden Sie unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich
+            auch direkt öffnen.
           </p>
           <GuideNavigation initial="business-apps" />
         </div>
@@ -561,8 +561,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
-                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
+                Aufwand und Kosten legen wir für Ihr Vorhaben im Angebot fest. Hosting, Software,
+                KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
