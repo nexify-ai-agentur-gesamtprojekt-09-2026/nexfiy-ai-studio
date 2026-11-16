@@ -51,7 +51,8 @@ export async function receiveSlack(request: Request, transport: "events" | "comm
   const { decideSlackInput } = await import("./slack-flows");
   if (decideSlackInput(parsed.data).kind === "ignore") return new Response(null, { status: 200 });
   if (typeof runtimeRequest.waitUntil !== "function")
-    return Response.json({ ok: false, error: "background_delivery_unavailable" }, { status: 503 });
+    return Response.json({ ok: false, error: "background_delivery_unavailable", response_type: "ephemeral",
+      text: "Nicht verarbeitet: Der sichere Rückmeldeweg ist in dieser Laufzeit nicht verfügbar. Es wurde keine Aktion ausgelöst." });
   // Keine Arbeit oder KI vor ACK starten: realer Runtime-Kontext hält den nachgelagerten Prozess am Leben.
   const input: SlackInput = parsed.data;
   runtimeRequest.waitUntil(Promise.resolve().then(async () => {

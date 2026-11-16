@@ -47,5 +47,7 @@ it("verarbeitet signierte Nachrichten ohne echten Hintergrund-Hook nicht stillsc
   vi.stubEnv("SLACK_ORACLE_SIGNING_SECRET", secret);
   const request = await signedRequest(JSON.stringify({ api_app_id: SLACK_WORKSPACE.oracleApp, team_id: SLACK_WORKSPACE.team,
     event_id: "evt-no-runtime", event: { type: "message", user: SLACK_WORKSPACE.owner, channel: SLACK_WORKSPACE.inbox, ts: "1.2", text: "status" } }));
-  expect((await receiveSlack(request,"events")).status).toBe(503);
+  const response = await receiveSlack(request,"events");
+  expect(response.status).toBe(200);
+  expect(await response.json()).toEqual(expect.objectContaining({ ok: false, error: "background_delivery_unavailable" }));
 });

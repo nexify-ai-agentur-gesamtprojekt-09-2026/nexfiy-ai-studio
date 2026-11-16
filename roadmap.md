@@ -1,11 +1,15 @@
 # Roadmap
 ## Altbestand im Hintergrund der Startseite (16.11., 10:20 UTC)
-- [ ] Markierten Bereich Fertigung & Handwerk auf überlagerte alte Hintergrundelemente prüfen; Altbestand erhalten, freigegebenes Design nicht umgestalten
+- [x] Markierten Bereich Fertigung & Handwerk geprüft: alte dunkle hc-art-Medienfläche unter aktuellem Film transparent gesetzt, keine Medien gelöscht. 1280/390 px angesehen, kein Überlauf; Hintergrund transparent in beiden Ansichten
 
 ## Gesamte Slack-Lösung und AIFly ORACLE (16.11., 10:14 UTC)
-- [ ] Ziel `@nexify.login-aifly-oracle` und vorhandene Slack-Abläufe eindeutig auflösen; öffentliche Beratung von Betriebsdaten getrennt halten
-- [ ] Nachrichten, Auslöser und Rückmeldungen sowie Freigabegrenzen anhand bestehender Abläufe planen; keine zusätzliche kostenpflichtige Verpflichtung
-- [ ] Bidirektionale Anbindung erst nach bestätigtem Ziel/umfang und realen Rückmeldewegen integrieren und prüfen; keine laufende Integration ersetzen
+- [x] Ziel als bestehender ORACLE-Slack-Bot eindeutig aufgelöst, vorhandene acht Kanäle vollständig gelesen; öffentliche Beratung bleibt getrennt, extern geteilter Relay gesperrt
+- [x] Sechs Ablaufgruppen dokumentiert, Signatur-/Retry-/Ereignis-/Actor-/Thread-Schutz umgesetzt; Zustellbelege und bestehende Anfrageverweise additiv (Migration 0012), kein zweiter Taskstore
+- [x] Arbeitsplatz mit Simulation und echtem Transporttest: 10:25 UTC Slack-API-Zustellung und gespeicherten Beleg im echten Inhaberkonto nachgewiesen; erneutes Laden 10:27 UTC, Desktop/Handy ohne Fehler/Überlauf, 29 Tests bestanden
+- [x] Katalog-/Fotokopierabschluss und Servermeldungen mit Zustellbeleg angebunden; keine Nachtjobs gestartet, bestehende Zeitpläne unverändert
+- [ ] Veröffentlichung der vorbereiteten Empfangsadressen: wartet auf Veröffentlichung; derzeit nur Vorschau geprüft
+- [ ] Bestehende ORACLE-App-Konfiguration/Signing Secret und identischer Bot-Ausgang: Pascal/ORACLE-Verantwortlicher bestätigt bestehende Empfangsadresse und sicheren Connector; nichts überschreiben, keine zweite App provisioniert
+- [ ] Vollständiger ORACLE/Hermes/Reviewer-Roundtrip: ORACLE-ACK noch offen (zuletzt 10:26 UTC), führendes System/Writer/Lease und Rückschema fehlen; kein Dispatch gestartet. Details/Rückweg ops/slack-integration.md
 
 ## BigBuy-Prüfung und SSH-Stilllegung vorbereiten (16.11., 10:08 UTC)
 - [ ] BigBuy: authentifizierter Statusabruf blockiert – strikte SSH-Hostprüfung Exit 255, bestätigter Server-Vertrauensnachweis fehlt; Kostenrahmen des GET offen. Öffentliche API-Referenz 10:12 UTC HTTP 200; kein Import oder Auth-Aufruf
