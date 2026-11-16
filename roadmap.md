@@ -175,6 +175,8 @@
 - [ ] Filme: alle fünf Markenfilme enthalten Sprache, nur einer hat Text – Untertitel (WebVTT) und „Gesprochener Text“ für alle fünf ergänzen, Untertitel-Knopf in der gemeinsamen Filmbedienung
 - [ ] aria-label auf zwei rollenlosen Containern (Kostenhinweis Startseite, Geräteliste App-Leiste) korrigieren
 - [ ] Handy-Durchlauf (390px) aller Seiten auf Überlauf/Laufzeitfehler
+- [ ] „Lovable“ überall entfernen: Favicon/App-Symbole, sichtbare Texte, Metadaten, Plattform-Hinweis auf der veröffentlichten Seite (Pascal 16.11. 06:00)
+- [ ] Abschlussprüfung vor Veröffentlichung (Build, Tests, Sicherheit, Seitenrundgang) und Veröffentlichung auf Pascals Wunsch
 - [ ] Formatierung: 6.394 reine Formatierungsmeldungen und 550 „any“-Meldungen der Code-Prüfung abbauen (ohne generierte Dateien)
 
 ## Zurückgestellt (Pascal, 16.11.)
