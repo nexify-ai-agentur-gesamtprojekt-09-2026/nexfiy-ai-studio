@@ -196,3 +196,6 @@
 - [x] Shopbilder: helle Studiofläche + Abschneide-Fehler behoben (Bild 218px in 190px-Feld → passt)
 
 - [ ] Server 1: BigBuy-Schlüssel in OpenBao/Starteinstellungen nur per Metadaten prüfen
+- [ ] Eigenen MCP-Server (nexifyai.de/mcp) als Verbindung hier einbinden; Anleitung Claude Code/ChatGPT
+- [ ] Arbeitsplatz absichern (Zugriff nur admin) prüfen
+- [ ] SSH-Schlüsselübersicht mit Markierungen (nichts löschen)
