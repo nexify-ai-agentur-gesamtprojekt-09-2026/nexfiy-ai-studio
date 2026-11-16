@@ -1,4 +1,9 @@
 # Roadmap
+## Formulare technisch und visuell (16.11.)
+- [ ] Fahrzeug-/Passungsseite und übrige echte Formulare auf Eingabe, Validierung, Zustände, Barrierefreiheit und Darstellung prüfen
+- [ ] Gemeinsame Formularqualität verbessern, ohne erfundene Passung, Zustellung oder Commerce-Funktionen
+- [ ] Reale Formularwege am Desktop/Handy und vorhandene Tests prüfen; externe Zustellung/Passungsfreigabe bleiben ausdrücklich getrennt
+
 ## Glasflächen nach Apple-Design-Prüfung (16.11.)
 - [ ] Kontrast, Durchsicht und Lichtkanten bestehender Flächen in heller/dunkler Ansicht messen und ausschließlich Materialwerte verfeinern
 - [ ] Unveränderte Header-Innenabstände, Seiten-/Chat-Geometrie und Footer-Ausrichtung vor/nach Änderung vergleichen
