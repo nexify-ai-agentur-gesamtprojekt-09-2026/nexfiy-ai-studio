@@ -1,4 +1,7 @@
 # Roadmap
+## Altbestand im Hintergrund der Startseite (16.11., 10:20 UTC)
+- [ ] Markierten Bereich Fertigung & Handwerk auf überlagerte alte Hintergrundelemente prüfen; Altbestand erhalten, freigegebenes Design nicht umgestalten
+
 ## Gesamte Slack-Lösung und AIFly ORACLE (16.11., 10:14 UTC)
 - [ ] Ziel `@nexify.login-aifly-oracle` und vorhandene Slack-Abläufe eindeutig auflösen; öffentliche Beratung von Betriebsdaten getrennt halten
 - [ ] Nachrichten, Auslöser und Rückmeldungen sowie Freigabegrenzen anhand bestehender Abläufe planen; keine zusätzliche kostenpflichtige Verpflichtung

@@ -3,6 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { InquiryInbox } from "@/components/workspace/InquiryInbox";
+import { SlackWorkflowPanel } from "@/components/workspace/SlackWorkflowPanel";
 import accountCSS from "../styles/pages/anmelden.css?url";
 import workspaceCSS from "../styles/pages/arbeitsplatz.css?url";
 
@@ -121,7 +122,7 @@ function Page() {
               </p>
             </div>
           ) : null}
-          {access.state === "admin" ? <InquiryInbox /> : null}
+          {access.state === "admin" ? <><InquiryInbox /><SlackWorkflowPanel /></> : null}
         </section>
       </div>
     </NexifyShell>
