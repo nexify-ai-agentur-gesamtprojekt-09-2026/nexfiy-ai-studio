@@ -1067,4 +1067,5 @@
 :root:root #atelier.site-shared :is(input, select, textarea)[aria-invalid="true"] { border-color: var(--state-error); }
 /* Links im Fließtext nicht nur über Farbe erkennbar (WCAG 1.4.1). */
 :root:root #atelier.site-shared :is(main p, main label, main li, form) a:not([class]) { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-:root:root:root #atelier#atelier.site-shared :is(.tk-check, .tk-consent) a { text-decoration-line: underline; text-underline-offset: 3px; }
+/* Die übernommenen Seitenstile entfernen Unterstreichungen global mit !important; Fließtext-Links brauchen sie (WCAG 1.4.1). */
+:root:root:root #atelier#atelier.site-shared :is(.tk-check, .tk-consent, main p, main li) a:not([class]) { text-decoration-line: underline !important; text-underline-offset: 3px; }
