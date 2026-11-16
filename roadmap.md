@@ -1,4 +1,9 @@
 # Roadmap
+## Gesamte Slack-Lösung und AIFly ORACLE (16.11., 10:14 UTC)
+- [ ] Ziel `@nexify.login-aifly-oracle` und vorhandene Slack-Abläufe eindeutig auflösen; öffentliche Beratung von Betriebsdaten getrennt halten
+- [ ] Nachrichten, Auslöser und Rückmeldungen sowie Freigabegrenzen anhand bestehender Abläufe planen; keine zusätzliche kostenpflichtige Verpflichtung
+- [ ] Bidirektionale Anbindung erst nach bestätigtem Ziel/umfang und realen Rückmeldewegen integrieren und prüfen; keine laufende Integration ersetzen
+
 ## BigBuy-Prüfung und SSH-Stilllegung vorbereiten (16.11., 10:08 UTC)
 - [ ] BigBuy: authentifizierter Statusabruf blockiert – strikte SSH-Hostprüfung Exit 255, bestätigter Server-Vertrauensnachweis fehlt; Kostenrahmen des GET offen. Öffentliche API-Referenz 10:12 UTC HTTP 200; kein Import oder Auth-Aufruf
 - [x] SSH-Stilllegung mit Sicherung, Einzelbestätigung, Ersatz-/Notfalltest und Rückweg vorbereitet; historischen Plan zum Auftrennen korrigiert (mögliche neue Schlüsselaktivierung), keine Sperrung
