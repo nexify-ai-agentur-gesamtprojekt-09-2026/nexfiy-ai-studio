@@ -212,3 +212,4 @@
 - [x] Skill „NeXify-Kundendesign-Standard“ aktiv (mit Kontrastprüfung), Kopie + ZIP unter Dateien/skills (16.11.)
 - [x] Helle Ansicht: grüne Status-/Aktivschrift unter 4.5:1 → neue Rolle --signal-text (Shop „Auf Lager“ 2,55 → 5,26:1); Fokusrahmen Katalog über --ring
 - [ ] Produktdarstellung überall (NeXify-Produkte, Leistungen, TEILEKLAR) überarbeiten: Anthropic-Vorlagen für kleine Unternehmen als Prüfhilfe (Quelle festhalten), Textvorschläge über DeepSeek (deepseek-v4.1-flash-1017, Reasoning high) – ORACLE bleibt unverändert, keine erfundenen Fakten
+- [ ] Arbeitsmodus laut „Autonomous Finisher Protocol“ (16.11.): Lücken selbst finden und schließen, prüfen, live bringen – innerhalb der harten Grenzen (keine Platzhalter/Mocks in Produktion, keine umgangenen Freigaben, keine Kosten)
