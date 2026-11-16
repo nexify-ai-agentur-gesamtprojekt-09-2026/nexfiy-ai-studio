@@ -59,6 +59,48 @@ export type Database = {
         }
         Relationships: []
       }
+      teileklar_catalog_sync_runs: {
+        Row: {
+          archived: number
+          complete: boolean | null
+          finished_at: string | null
+          last_error: string | null
+          next_offset: number
+          received: number
+          rejected: number
+          reported_total: number
+          run_date: string
+          started_at: string
+          updated_at: string
+        }
+        Insert: {
+          archived?: number
+          complete?: boolean | null
+          finished_at?: string | null
+          last_error?: string | null
+          next_offset?: number
+          received?: number
+          rejected?: number
+          reported_total: number
+          run_date: string
+          started_at?: string
+          updated_at?: string
+        }
+        Update: {
+          archived?: number
+          complete?: boolean | null
+          finished_at?: string | null
+          last_error?: string | null
+          next_offset?: number
+          received?: number
+          rejected?: number
+          reported_total?: number
+          run_date?: string
+          started_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       teileklar_part_inquiries: {
         Row: {
           attachment_name: string | null

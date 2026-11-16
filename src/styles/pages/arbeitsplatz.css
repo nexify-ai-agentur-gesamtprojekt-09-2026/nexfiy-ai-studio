@@ -1,0 +1,43 @@
+/* Arbeitsplatz-Posteingang: nur semantische Rollen der Graphite-Bibliothek, keine festen Farben. */
+#atelier .ws-page .ws-stage { display: grid; gap: var(--space-6, 24px); padding-block: clamp(32px, 6vw, 72px); }
+#atelier .ws-page .ws-heading { display: grid; gap: 8px; }
+#atelier .ws-page .ws-heading h1 { margin: 0; }
+#atelier .ws-filter { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+#atelier .ws-filter-option, #atelier .ws-refresh { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--glass-content-fill); color: var(--foreground); font: inherit; font-size: 14px; cursor: pointer; }
+#atelier .ws-filter-option[aria-pressed="true"] { background: var(--primary); color: var(--primary-foreground); border-color: transparent; font-weight: 650; }
+#atelier .ws-filter-count { min-width: 24px; padding: 0 6px; border-radius: 999px; background: color-mix(in oklab, currentColor 14%, transparent); text-align: center; font-variant-numeric: tabular-nums; }
+#atelier .ws-refresh { margin-left: auto; background: transparent; }
+#atelier .ws-refresh:disabled { opacity: .6; cursor: progress; }
+#atelier :is(.ws-filter-option, .ws-refresh, .ws-status select):focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+#atelier .ws-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+#atelier .ws-card { display: grid; gap: 16px; padding: clamp(16px, 3vw, 28px); border-radius: var(--radius-xl, 16px); border: 1px solid var(--border); background: var(--glass-content-fill); box-shadow: var(--glass-elevation); backdrop-filter: var(--glass-content-filter); }
+#atelier .ws-card[data-status="neu"] { border-color: color-mix(in oklab, var(--primary) 55%, transparent); }
+#atelier .ws-card[data-status="archiviert"] { opacity: .72; }
+#atelier .ws-card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; align-items: flex-start; }
+#atelier .ws-card-head h2 { margin: 4px 0 0; font-size: 20px; line-height: 1.3; overflow-wrap: anywhere; }
+#atelier .ws-kind { font-family: var(--font-label); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--primary); }
+#atelier .ws-meta { margin: 4px 0 0; font-size: 13px; color: var(--muted-foreground); }
+#atelier .ws-status { display: grid; gap: 4px; font-size: 12px; color: var(--muted-foreground); }
+#atelier .ws-status select { min-height: 44px; min-width: 170px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--secondary); color: var(--foreground); font: inherit; font-size: 14px; }
+#atelier .ws-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; margin: 0; }
+#atelier .ws-details div { min-width: 0; }
+#atelier .ws-details dt { font-size: 12px; color: var(--muted-foreground); }
+#atelier .ws-details dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+#atelier .ws-details a { color: var(--foreground); text-underline-offset: 4px; }
+#atelier .ws-message { margin: 0; padding: 16px; border-radius: 10px; background: color-mix(in oklab, var(--secondary) 70%, transparent); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+#atelier .ws-message.is-empty { color: var(--muted-foreground); font-style: italic; }
+#atelier .ws-card-foot { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+#atelier .ws-card-foot > a { display: inline-flex; align-items: center; min-height: 44px; }
+#atelier .ws-attachment { display: inline-grid; gap: 4px; }
+#atelier .ws-attachment button { min-height: 44px; max-width: 100%; overflow-wrap: anywhere; text-align: left; }
+#atelier .ws-slack { margin-left: auto; font-size: 13px; color: var(--muted-foreground); }
+#atelier .ws-slack.is-fehler, #atelier .ws-alert, #atelier .ws-alert-inline { color: var(--destructive); }
+#atelier .ws-alert { display: grid; gap: 12px; justify-items: start; margin: 0; }
+#atelier .ws-empty { margin: 0; padding: 24px; border-radius: 12px; border: 1px dashed var(--border-strong); color: var(--muted-foreground); }
+#atelier .ws-denied { display: grid; gap: 8px; }
+@media (max-width: 640px) {
+  #atelier .ws-refresh { margin-left: 0; }
+  #atelier .ws-slack { margin-left: 0; flex-basis: 100%; }
+  #atelier .ws-status, #atelier .ws-status select { width: 100%; }
+  #atelier .ws-card-head > div { flex: 1 1 100%; }
+}

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnmeldenRouteImport } from './routes/anmelden'
+import { Route as ArbeitsplatzRouteImport } from './routes/arbeitsplatz'
 import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
@@ -59,6 +60,8 @@ import { Route as TeileklarWarenkorbRouteImport } from './routes/teileklar_.ware
 import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werkstatt'
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as ApiPublicJobsTeileklarCatalogSyncRouteImport } from './routes/api/public/jobs/teileklar-catalog-sync'
+import { Route as ApiPublicShopImageRouteImport } from './routes/api/public/shop/image'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -68,6 +71,11 @@ const IndexRoute = IndexRouteImport.update({
 const AnmeldenRoute = AnmeldenRouteImport.update({
   id: '/anmelden',
   path: '/anmelden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArbeitsplatzRoute = ArbeitsplatzRouteImport.update({
+  id: '/arbeitsplatz',
+  path: '/arbeitsplatz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BarrierefreiheitRoute = BarrierefreiheitRouteImport.update({
@@ -315,10 +323,22 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicJobsTeileklarCatalogSyncRoute =
+  ApiPublicJobsTeileklarCatalogSyncRouteImport.update({
+    id: '/api/public/jobs/teileklar-catalog-sync',
+    path: '/api/public/jobs/teileklar-catalog-sync',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicShopImageRoute = ApiPublicShopImageRouteImport.update({
+  id: '/api/public/shop/image',
+  path: '/api/public/shop/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -367,10 +387,13 @@ export interface FileRoutesByFullPath {
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -419,11 +442,14 @@ export interface FileRoutesByTo {
   '/teileklar/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/anmelden': typeof AnmeldenRoute
+  '/arbeitsplatz': typeof ArbeitsplatzRoute
   '/barrierefreiheit': typeof BarrierefreiheitRoute
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
@@ -472,12 +498,15 @@ export interface FileRoutesById {
   '/teileklar_/werkstatt': typeof TeileklarWerkstattRoute
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -526,10 +555,13 @@ export interface FileRouteTypes {
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/shop/image'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -578,10 +610,13 @@ export interface FileRouteTypes {
     | '/teileklar/werkstatt'
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/shop/image'
   id:
     | '__root__'
     | '/'
     | '/anmelden'
+    | '/arbeitsplatz'
     | '/barrierefreiheit'
     | '/cookies'
     | '/datenschutz'
@@ -630,11 +665,14 @@ export interface FileRouteTypes {
     | '/teileklar_/werkstatt'
     | '/wissen_/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
+    | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/shop/image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnmeldenRoute: typeof AnmeldenRoute
+  ArbeitsplatzRoute: typeof ArbeitsplatzRoute
   BarrierefreiheitRoute: typeof BarrierefreiheitRoute
   CookiesRoute: typeof CookiesRoute
   DatenschutzRoute: typeof DatenschutzRoute
@@ -683,6 +721,8 @@ export interface RootRouteChildren {
   TeileklarWerkstattRoute: typeof TeileklarWerkstattRoute
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  ApiPublicJobsTeileklarCatalogSyncRoute: typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  ApiPublicShopImageRoute: typeof ApiPublicShopImageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -699,6 +739,13 @@ declare module '@tanstack/react-router' {
       path: '/anmelden'
       fullPath: '/anmelden'
       preLoaderRoute: typeof AnmeldenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arbeitsplatz': {
+      id: '/arbeitsplatz'
+      path: '/arbeitsplatz'
+      fullPath: '/arbeitsplatz'
+      preLoaderRoute: typeof ArbeitsplatzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/barrierefreiheit': {
@@ -1037,12 +1084,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/jobs/teileklar-catalog-sync': {
+      id: '/api/public/jobs/teileklar-catalog-sync'
+      path: '/api/public/jobs/teileklar-catalog-sync'
+      fullPath: '/api/public/jobs/teileklar-catalog-sync'
+      preLoaderRoute: typeof ApiPublicJobsTeileklarCatalogSyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/shop/image': {
+      id: '/api/public/shop/image'
+      path: '/api/public/shop/image'
+      fullPath: '/api/public/shop/image'
+      preLoaderRoute: typeof ApiPublicShopImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnmeldenRoute: AnmeldenRoute,
+  ArbeitsplatzRoute: ArbeitsplatzRoute,
   BarrierefreiheitRoute: BarrierefreiheitRoute,
   CookiesRoute: CookiesRoute,
   DatenschutzRoute: DatenschutzRoute,
@@ -1092,6 +1154,9 @@ const rootRouteChildren: RootRouteChildren = {
   TeileklarWerkstattRoute: TeileklarWerkstattRoute,
   WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  ApiPublicJobsTeileklarCatalogSyncRoute:
+    ApiPublicJobsTeileklarCatalogSyncRoute,
+  ApiPublicShopImageRoute: ApiPublicShopImageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
