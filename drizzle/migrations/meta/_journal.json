@@ -43,6 +43,13 @@
       "when": 1794803897073,
       "tag": "0005_catalog_image_pending_flag",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794812632740,
+      "tag": "0006_restrict_has_role_to_self",
+      "breakpoints": true
     }
   ]
 }
