@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { setResponseHeader } from "@tanstack/react-start/server";
+import { isRequestedModel, PUBLIC_AI_TIMEOUT_MS } from "./ai-model-guard";
 import { buildOracleInstructions, oracleAnswerSchema, oracleEntryLinks, oracleInputSchema, type OracleAnswer } from "./oracle-products";
+
+const ORACLE_MODEL = "openai/gpt-6-astra";
 
 export type OracleResult =
   | { ok: true; advice: OracleAnswer; links: ReturnType<typeof oracleEntryLinks> }
@@ -14,7 +17,7 @@ export const adviseOracle = createServerFn({ method: "POST" })
     const { generateResponse, GatewayError } = await import("@lovable.dev/ai-gateway");
     try {
       const response = await generateResponse({
-        model: "openai/gpt-6-astra",
+        model: ORACLE_MODEL,
         instructions: buildOracleInstructions(),
         input: data.messages.map(({ role, content }) => ({ role, content })),
         reasoning: { effort: "low" },
@@ -35,13 +38,17 @@ export const adviseOracle = createServerFn({ method: "POST" })
             },
           },
         },
-      });
+      }, { signal: AbortSignal.timeout(PUBLIC_AI_TIMEOUT_MS) });
       const parts = response.output.flatMap((item) => item.type === "message" ? item.content : []);
       if (parts.some((part) => part.type === "refusal")) {
         return { ok: false, error: "Diese Anfrage kann ORACLE nicht beantworten. Beschreiben Sie bitte Ihr Vorhaben mit Suite oder API." };
       }
       if (response.status !== "completed") {
         return { ok: false, error: "Die Beratung konnte nicht abgeschlossen werden. Ihre Eingabe bleibt erhalten." };
+      }
+      if (!isRequestedModel(ORACLE_MODEL, response.model)) {
+        console.error("ORACLE model mismatch", { requested: ORACLE_MODEL, reported: response.model });
+        return { ok: false, error: "Die Beratung konnte nicht geprüft abgeschlossen werden. Ihre Eingabe bleibt erhalten." };
       }
       const text = parts.flatMap((part) => part.type === "output_text" ? [part.text] : []).join("");
       const advice = oracleAnswerSchema.parse(JSON.parse(text));

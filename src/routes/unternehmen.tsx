@@ -78,7 +78,7 @@ function Index() {
                     <h3>Auftrag oder eigener Arbeitsbereich?</h3>
                     <p>Wenn ein Ergebnis für Ihr Unternehmen konzipiert und umgesetzt werden soll, führt der Weg zu den Agenturleistungen. Wenn Sie selbst mit KI arbeiten möchten, steht die Suite als eigenständiges Produkt daneben. Die API richtet sich an Vorhaben, bei denen eine eigene Anwendung KI-Aufrufe verarbeitet. Die jeweiligen Einstiegsseiten beschreiben Voraussetzungen und Kostenmechanismus.</p>
                     <h3>TEILEKLAR bleibt ein eigener Themenbereich</h3>
-                    <p>Fahrzeugdaten, Teilefragen und Werkstattkontakte gehören zu TEILEKLAR. Die dortige Hilfe bereitet eine Anfrage vor; sie bestätigt keine Fahrzeugpassung. Warenkatalog, Onlinekauf und Werkstattverzeichnis sind in diesem Auftritt noch nicht angebunden. Diese Grenzen bleiben sichtbar, auch wenn Gestaltung und Bedienung die gemeinsame Marke tragen.</p>
+                    <p>Fahrzeugdaten, Teilefragen und Werkstattkontakte gehören zu TEILEKLAR. Die dortige Hilfe bereitet eine Anfrage vor; sie bestätigt keine Fahrzeugpassung. Der Artikelkatalog ist durchsuchbar; Onlinekauf und Werkstattverzeichnis sind in diesem Auftritt noch nicht angebunden. Diese Grenzen bleiben sichtbar, auch wenn Gestaltung und Bedienung die gemeinsame Marke tragen.</p>
                   </div>
                 </section>
               </div>

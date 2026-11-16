@@ -8,5 +8,5 @@ export const Route = createFileRoute("/teileklar_/kategorie")({
   component: CategoryInformation,
 });
 function CategoryInformation() {
-  return <NexifyShell brand="teileklar"><div className="home-concept page-concept tk-shop"><section className="identity-hero is-text-only"><div className="identity-scene"><div className="identity-copy"><span className="hc-kicker">TEILEKLAR / Teilearten</span><h1>Ähnliche Teile unterscheiden.</h1><p className="identity-body">Wählen Sie die Teileart für passende Prüfhinweise. Eine Artikelliste wird erst mit einem angebundenen Warenkatalog verfügbar.</p></div></div></section><section className="hc-container pc-supplement"><FitmentChecklist /></section></div></NexifyShell>;
+  return <NexifyShell brand="teileklar"><div className="home-concept page-concept tk-shop"><section className="identity-hero is-text-only"><div className="identity-scene"><div className="identity-copy"><span className="hc-kicker">TEILEKLAR / Teilearten</span><h1>Ähnliche Teile unterscheiden.</h1><p className="identity-body">Wählen Sie die Teileart für passende Prüfhinweise. Artikel nach Kategorie finden Sie im <a href="/teileklar/kategorien">Katalog</a>.</p></div></div></section><section className="hc-container pc-supplement"><FitmentChecklist /></section></div></NexifyShell>;
 }

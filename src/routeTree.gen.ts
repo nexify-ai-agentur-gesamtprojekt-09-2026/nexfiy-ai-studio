@@ -61,6 +61,7 @@ import { Route as TeileklarWerkstattRouteImport } from './routes/teileklar_.werk
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as ApiPublicJobsTeileklarCatalogSyncRouteImport } from './routes/api/public/jobs/teileklar-catalog-sync'
+import { Route as ApiPublicJobsTeileklarImageMirrorRouteImport } from './routes/api/public/jobs/teileklar-image-mirror'
 import { Route as ApiPublicShopImageRouteImport } from './routes/api/public/shop/image'
 
 const IndexRoute = IndexRouteImport.update({
@@ -329,6 +330,12 @@ const ApiPublicJobsTeileklarCatalogSyncRoute =
     path: '/api/public/jobs/teileklar-catalog-sync',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicJobsTeileklarImageMirrorRoute =
+  ApiPublicJobsTeileklarImageMirrorRouteImport.update({
+    id: '/api/public/jobs/teileklar-image-mirror',
+    path: '/api/public/jobs/teileklar-image-mirror',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicShopImageRoute = ApiPublicShopImageRouteImport.update({
   id: '/api/public/shop/image',
   path: '/api/public/shop/image',
@@ -388,6 +395,7 @@ export interface FileRoutesByFullPath {
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRoutesByTo {
@@ -443,6 +451,7 @@ export interface FileRoutesByTo {
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRoutesById {
@@ -499,6 +508,7 @@ export interface FileRoutesById {
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/api/public/jobs/teileklar-catalog-sync': typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  '/api/public/jobs/teileklar-image-mirror': typeof ApiPublicJobsTeileklarImageMirrorRoute
   '/api/public/shop/image': typeof ApiPublicShopImageRoute
 }
 export interface FileRouteTypes {
@@ -556,6 +566,7 @@ export interface FileRouteTypes {
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
     | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/image'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -611,6 +622,7 @@ export interface FileRouteTypes {
     | '/wissen/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
     | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/image'
   id:
     | '__root__'
@@ -666,6 +678,7 @@ export interface FileRouteTypes {
     | '/wissen_/projekt-vorbereiten'
     | '/.lovable/oauth/consent'
     | '/api/public/jobs/teileklar-catalog-sync'
+    | '/api/public/jobs/teileklar-image-mirror'
     | '/api/public/shop/image'
   fileRoutesById: FileRoutesById
 }
@@ -722,6 +735,7 @@ export interface RootRouteChildren {
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   ApiPublicJobsTeileklarCatalogSyncRoute: typeof ApiPublicJobsTeileklarCatalogSyncRoute
+  ApiPublicJobsTeileklarImageMirrorRoute: typeof ApiPublicJobsTeileklarImageMirrorRoute
   ApiPublicShopImageRoute: typeof ApiPublicShopImageRoute
 }
 
@@ -1091,6 +1105,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicJobsTeileklarCatalogSyncRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/jobs/teileklar-image-mirror': {
+      id: '/api/public/jobs/teileklar-image-mirror'
+      path: '/api/public/jobs/teileklar-image-mirror'
+      fullPath: '/api/public/jobs/teileklar-image-mirror'
+      preLoaderRoute: typeof ApiPublicJobsTeileklarImageMirrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/shop/image': {
       id: '/api/public/shop/image'
       path: '/api/public/shop/image'
@@ -1156,6 +1177,8 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   ApiPublicJobsTeileklarCatalogSyncRoute:
     ApiPublicJobsTeileklarCatalogSyncRoute,
+  ApiPublicJobsTeileklarImageMirrorRoute:
+    ApiPublicJobsTeileklarImageMirrorRoute,
   ApiPublicShopImageRoute: ApiPublicShopImageRoute,
 }
 export const routeTree = rootRouteImport

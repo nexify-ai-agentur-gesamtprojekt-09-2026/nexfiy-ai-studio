@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { CATALOG_PAGE_SIZE, normalizeCatalogQuery, normalizePage, type CatalogSpec } from "./teileklar-catalog";
 
 export interface CatalogListItem {
-  id: string; name: string; brand: string; category: string; price_value: number | null; image_src: string; image_alt: string; stock: number; delivery_note: string;
+  id: string; name: string; brand: string; category: string; price_value: number | null; image_path: string; image_alt: string; stock: number; delivery_note: string;
 }
 export interface CatalogProduct extends CatalogListItem {
   ean: string; oe_number: string; condition: string; specs: CatalogSpec[]; status_label: string; synced_at: string;
@@ -10,7 +10,7 @@ export interface CatalogProduct extends CatalogListItem {
 export interface CatalogListResult { items: CatalogListItem[]; total: number; page: number; pages: number; q: string; category: string }
 export interface CatalogCategory { category: string; product_count: number }
 
-const LIST_COLUMNS = "id, name, brand, category, price_value, image_src, image_alt, stock, delivery_note";
+const LIST_COLUMNS = "id, name, brand, category, price_value, image_path, image_alt, stock, delivery_note";
 
 /** Öffentlicher Lesezugriff mit Publishable-Key; die Datenbank gibt nur aktive Katalogartikel frei. */
 async function catalogClient() {
@@ -44,7 +44,7 @@ export const listCatalogProducts = createServerFn({ method: "GET" })
       query = query.or(`name.ilike.%${term}%,brand.ilike.%${term}%,id.ilike.%${term}%,ean.ilike.%${term}%,oe_number.ilike.%${term}%`);
     }
     const from = (data.page - 1) * CATALOG_PAGE_SIZE;
-    const result = await query.order("name", { ascending: true }).order("id", { ascending: true }).range(from, from + CATALOG_PAGE_SIZE - 1);
+    const result = await query.order("has_image", { ascending: false }).order("name", { ascending: true }).order("id", { ascending: true }).range(from, from + CATALOG_PAGE_SIZE - 1);
     if (result.error && result.error.code !== "PGRST103") throw new Error(`Katalog nicht abrufbar: ${result.error.message}`);
     const total = result.count ?? 0;
     return { items: (result.data ?? []) as CatalogListItem[], total, page: data.page, pages: Math.max(1, Math.ceil(total / CATALOG_PAGE_SIZE)), q: data.q, category: data.category };

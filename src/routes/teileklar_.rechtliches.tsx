@@ -68,7 +68,7 @@ function Index() {
           <div className={"pc-section-body"}>
             <p>TEILEKLAR bleibt ein eigenständiger Handels- und Werkstattbereich im NeXify-Markenauftritt. Historische Einzelunternehmensdaten werden nicht auf NeXify AI FACTORY übertragen. Die konkrete Anbieterzuordnung muss vor einem Kauf bestätigt sein.</p>
             <h3>Was dieser Auftritt tatsächlich ermöglicht</h3>
-            <p>Themeninformationen, ein nominaler Reifenvergleich und die Vorbereitung einer E-Mail-Anfrage sind vorhanden. Ein Warenkatalog, Onlinezahlung und bestätigte Werkstattbuchung sind nicht angeschlossen. Es werden keine aktuellen Versand-, Kauf- oder Rückgabekonditionen aus diesen Funktionen abgeleitet.</p>
+            <p>Ein Artikelkatalog mit Preisangaben, Themeninformationen, ein nominaler Reifenvergleich und eine Teileanfrage sind vorhanden. Bestellung, Onlinezahlung und bestätigte Werkstattbuchung sind nicht angeschlossen; Katalogpreise sind keine Bestellbestätigung. Es werden keine aktuellen Versand-, Kauf- oder Rückgabekonditionen aus diesen Funktionen abgeleitet.</p>
             <h3>Fahrzeugangaben und Terminwünsche</h3>
             <p>Fahrzeugdaten und Teilenummern helfen bei einer Anfrage, bestätigen aber keine Passung. Der Reifenrechner vergleicht rechnerische Nennmaße und erteilt keine Zulassungs- oder Fahrzeugfreigabe. Ein versendeter Terminwunsch ist erst nach gesonderter Bestätigung ein vereinbarter Termin.</p>
             <nav className="legal-scope-links" aria-label="Hinweise zu den vorhandenen Funktionen"><a href="/teileklar/fahrzeug-und-passung">Fahrzeugprüfung</a><a href="/teileklar/termine">Terminanfrage</a><a href="/datenschutz">Datenhinweise zu Anfragen</a></nav>
@@ -185,7 +185,7 @@ function Index() {
             <h3>
               <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Informationen zu Fahrzeug, Teilen und Anfragen. Artikelkatalog und Onlinekauf sind in diesem Auftritt noch nicht angebunden.</p>
+            <p>Katalog, Informationen zu Fahrzeug und Teilen sowie Teileanfragen. Bestellung und Bezahlung sind in diesem Auftritt noch nicht freigeschaltet.</p>
             <a aria-label="TEILEKLAR. Für Auto und Motorrad. – Seite ansehen" className={"hc-text-link"} href="/teileklar">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
