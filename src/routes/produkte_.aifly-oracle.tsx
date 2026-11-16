@@ -27,7 +27,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen</span>
                     <h1 id="page-title-aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</h1>
-                    <p className={"identity-body"}>AIFly ORACLE ist das KI-System, das Aufgaben ordnet und Ihnen im Chat dieser Website antwortet. Schildern Sie Ihr Vorhaben – es zeigt Ihnen den passenden nächsten Schritt.</p>
+                    <p className={"identity-body"}>Suite oder API: AIFly ORACLE hilft Ihnen, Ihr Vorhaben einzuordnen. Die Beratung nutzt öffentliche Produktinformationen und verweist auf die passende Einstiegsseite.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/ki-hinweise">
                         <span>KI-Hinweise lesen</span>
@@ -79,7 +79,7 @@ function Index() {
                     <h2 id="content-aifly-oracle-oracle-3-2-title">Was Sie heute auf der Website erleben</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>Im Chat hilft Ihnen AIFly ORACLE, Leistungen und passende Seiten zu finden und Ihre Anfrage vorzubereiten. Es ist ein KI-System, kein Mensch, und kann sich irren.</p>
+                    <p>Im Chat vergleicht ORACLE Suite und API anhand Ihres Vorhabens. Es hat keinen Zugriff auf Konten oder private Projekte und führt keine Aktionen aus. Es ist ein KI-System und kann sich irren; prüfen Sie wichtige Angaben auf der Produktseite.</p>
                     <p>Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Ihre Anfrage senden Sie selbst ab.</p>
                   </div>
                 </section>

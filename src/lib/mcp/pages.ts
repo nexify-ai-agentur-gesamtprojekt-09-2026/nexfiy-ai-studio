@@ -27,7 +27,7 @@ export const SITE_PAGES = [
   },
   {
     "path": "/",
-    "title": "Ein Gespräch. Ein Projekt, das passt. · NeXify AI",
+    "title": "Websites, Apps und KI-Automatisierung · NeXify AI",
     "brand": "NeXify AI"
   },
   {
@@ -42,7 +42,7 @@ export const SITE_PAGES = [
   },
   {
     "path": "/leistungen",
-    "title": "Website, System, Kampagne. Aus einer Hand. · NeXify AI",
+    "title": "Agenturleistungen: Websites, Systeme und Kampagnen · NeXify AI",
     "brand": "NeXify AI"
   },
   {

@@ -8,9 +8,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
     meta: [
-      { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
+      { title: "Websites, Apps und KI-Automatisierung · NeXify AI" },
       { name: "description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
-      { property: "og:title", content: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
+      { property: "og:title", content: "Websites, Apps und KI-Automatisierung · NeXify AI" },
       { property: "og:description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -282,9 +282,9 @@ function ImportedSectionEigeneWerkzeugeFR() {
       <header className={"hc-section-heading is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":3888}}"}>
         <div>
           <span className={"hc-kicker"}>Produkte von NeXify</span>
-          <h2 id="hc-products-title">Eigene Werkzeuge für konkrete Arbeit.</h2>
+          <h2 id="hc-products-title">Eigene Produkte. Ihr eigener Weg.</h2>
         </div>
-        <p>Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.</p>
+        <p>Mit der Suite arbeiten Sie direkt in einem eigenen KI-Bereich. Mit der API integrieren Sie KI in Ihre Software. Beides sind eigene Produkte neben unseren Agenturleistungen. TEILEKLAR ist unsere Marke für Auto und Motorrad.</p>
       </header>
       <div className={"hc-products"}>
         <a className={"hc-product is-in"} href="/produkte/nex2fly">
@@ -293,7 +293,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           </figure>
           <div>
             <h3>NeX AIFly Suite</h3>
-            <p>Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.</p>
+            <p>Gespräche, Aufgaben, Dokumente und Projektwissen in Ihrem KI-Arbeitsbereich – ohne Agenturauftrag.</p>
             <span className={"hc-text-link"}>Suite kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
           </div>
         </a>

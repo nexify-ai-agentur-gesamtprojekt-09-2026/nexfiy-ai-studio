@@ -36,6 +36,7 @@
 :root:root #atelier .oracle-advice .oracle-user-text { white-space: pre-wrap; }
 :root:root #atelier .oracle-advice .oracle-response { height: auto; min-width: 0; max-width: 64ch; font-size: 16px; line-height: 1.65; font-weight: 400; letter-spacing: 0; overflow-wrap: anywhere; }
 :root:root #atelier .oracle-advice .oracle-response > * + * { margin-top: 16px; }
+:root:root #atelier .oracle-advice .oracle-message .oracle-response p + p { margin-top: 16px; }
 :root:root #atelier .oracle-advice .oracle-response :is(h3,h4) { font-family: var(--font-brand-display); font-size: 17px; line-height: 1.4; font-weight: 600; margin-bottom: 8px; letter-spacing: 0; }
 :root:root #atelier .oracle-advice .oracle-response :is(ul,ol) { padding-inline-start: 24px; margin-bottom: 0; }
 :root:root #atelier .oracle-advice .oracle-response ul { list-style: disc; }
