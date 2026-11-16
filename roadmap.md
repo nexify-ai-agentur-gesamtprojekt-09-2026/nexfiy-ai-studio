@@ -1,4 +1,14 @@
 # Roadmap
+## Folgeauftrag Filme und verbleibende Arbeiten (16.11., 09:23 UTC)
+- [ ] Filmzuordnung nach gesprochenem Inhalt korrigieren; unbelegte Kunden-/Leistungsbehauptungen nicht öffentlich abspielen, Originale erhalten; Desktop/Handy und Untertitel prüfen
+- [ ] Pfeil der Transkriptzeile in beiden Zuständen ausrichten, ohne Gestaltungswechsel
+- [ ] Produktbezeichnungen mit vorhandenen Fakten konsistent darstellen; FACTORY als Arbeitsweise erklären, keine neuen Leistungen zusagen
+- [ ] Server-1-Aufträge und Zugriffsgrenzen aktuell nachmessen; Tagesbericht mit vorhandener Slack-Meldung ergänzen, Zustellung nachweisen; keine neuen Kosten oder Rechte
+- [ ] BigBuy-Importprogramm eng begrenzt nach Prüfung korrigieren; SSH-Schlüssel nur inventarisieren, nichts löschen oder Berechtigungen eigenmächtig ändern
+- [ ] Eigenen Anmelde-Mailabsender und ORACLE-Verbindungsweg mit verfügbaren Dialogen prüfen; notwendige Inhaberbestätigungen offen ausweisen
+- [ ] Fehlende Produktfotos als Rechte-/Lieferantenanfrage vorbereiten; echten Nachtlauf und echtes iPhone als noch nicht messbare Grenzen führen
+- [ ] Nachweise, Tests, Rückweg und verbleibende Inhaberaufgaben dokumentieren; veröffentlichte Änderung getrennt nachmessen
+
 ## Kommentar Kontaktseite (16.11.)
 - [x] Kommentar 80c95bd2-dd43-44d0-b80a-a305a4faee35 gelesen: Standard-/Hover-Füllungen für Abschnittslinks getauscht; sechs Breiten-/Theme-Zustände ohne Geometrieänderung geprüft und im Thread beantwortet, nicht aufgelöst
 
