@@ -30,10 +30,13 @@ vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: 
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
 const db = isolatedTestDb ? postgres({ host: process.env["PGHOST"], port: Number(process.env["PGPORT"] || 5432), database: process.env["PGDATABASE"], username: process.env["PGUSER"], password: process.env["PGPASSWORD"], max: 1 }) : (null as unknown as postgres.Sql);
-const url = process.env["SUPABASE_URL"];
-const key = process.env["SUPABASE_SERVICE_ROLE_KEY"];
-if (isolatedTestDb && (!url || !key)) throw new Error("Isolierter Datenbank-Testzugang fehlt.");
-const service = createClient(url ?? "http://127.0.0.1", key ?? "unused", { auth: { persistSession: false, autoRefreshToken: false } });
+const rawUrl = process.env["SUPABASE_URL"];
+const rawKey = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+if (isolatedTestDb && (!rawUrl || !rawKey)) throw new Error("Isolierter Datenbank-Testzugang fehlt.");
+// Ohne isolierte Datenbank wird nichts ausgeführt; die lokalen Ersatzwerte erreichen nie einen echten Dienst.
+const url = rawUrl ?? "http://127.0.0.1";
+const key = rawKey ?? "unused";
+const service = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 const runId = crypto.randomUUID();
 const testEmail = `nx-lead-${runId}@example.test`;
 const idPart = parseInt(runId.slice(0, 4), 16);
