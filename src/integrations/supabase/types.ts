@@ -299,6 +299,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      teileklar_base_name: { Args: { _name: string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "user"
