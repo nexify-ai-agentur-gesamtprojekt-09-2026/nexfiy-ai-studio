@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { contactDraftPath } from "@/lib/site-navigation";
 
 const CHECKS = {
   Bremsen: ["Fahrzeug, Motor und Baujahr", "Herstellernummer und Maße des vorhandenen Teils", "Einbau und Prüfung durch eine fachkundige Werkstatt"],
@@ -11,5 +13,6 @@ const CHECKS = {
 } as const;
 export function FitmentChecklist() {
   const [category, setCategory] = useState<keyof typeof CHECKS>("Bremsen");
-  return <section className="tk-form" aria-labelledby="fit-title"><h2 id="fit-title">Passung prüfen: Worauf es ankommt</h2><p className="tk-meta">Keine automatische Prüfung gegen einen Fahrzeugkatalog. Im Zweifel Hersteller oder Werkstatt fragen.</p><div className="tk-actions" role="group" aria-label="Kategorie wählen">{(Object.keys(CHECKS) as (keyof typeof CHECKS)[]).map((value) => <Button key={value} variant={value === category ? "brand" : "glass"} aria-pressed={value === category} onClick={() => setCategory(value)}>{value}</Button>)}</div><div aria-live="polite"><h3>{category}</h3><ul className="tk-checklist">{CHECKS[category].map((check) => <li key={check}>{check}</li>)}</ul></div></section>;
+  const id = useId();
+  return <section className="tk-form" aria-labelledby={`${id}-title`}><h2 id={`${id}-title`}>Passung: Angaben vorbereiten</h2><p className="tk-meta">Keine automatische Fahrzeugprüfung. Im Zweifel Hersteller oder Werkstatt fragen.</p><div className="tk-field"><label htmlFor={`${id}-category`}>Teileart</label><Select value={category} onValueChange={(value) => { if (value in CHECKS) setCategory(value as keyof typeof CHECKS); }}><SelectTrigger id={`${id}-category`} aria-label="Teileart"><SelectValue /></SelectTrigger><SelectContent>{Object.keys(CHECKS).map((value) => <SelectItem key={value} value={value}>{value}</SelectItem>)}</SelectContent></Select></div><div aria-live="polite"><h3>{category}</h3><ul className="tk-checklist">{CHECKS[category].map((check) => <li key={check}>{check}</li>)}</ul></div><div className="tk-actions"><Button variant="glass" asChild><a href={contactDraftPath(`Meine Frage zu ${category}: \nFahrzeug, Baujahr und Motor: \nVorhandene Teilenummer: `)}>Frage zu {category} vorbereiten</a></Button></div></section>;
 }
