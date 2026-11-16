@@ -19,6 +19,8 @@ vi.mock("@tanstack/react-start", () => ({
 vi.mock("@tanstack/react-start/server", () => ({
   getRequest: () => new Request("http://localhost:8080/kontakt"),
   getRequestIP: () => state.ip,
+  getRequestHost: () => "localhost:8080",
+  getRequestProtocol: () => "http",
   setResponseHeader: vi.fn(),
 }));
 vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: state.rpc } }));
@@ -161,9 +163,9 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
     const client = createClient<import("@/integrations/supabase/types").Database>(url, publicKey, { global: { headers: { Authorization: `Bearer ${session.session.access_token}` } }, auth: { persistSession: false } });
     const end = new Date("2026-01-08T00:00:00Z");
     const rows = await service.from("inquiries").insert([
-      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze innerhalb des Fensters.", created_at: "2026-01-01T00:00:00Z" },
-      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze vor dem Fenster.", created_at: "2025-12-31T23:59:59Z" },
-      { kind: "contact", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze am Ende ausgeschlossen.", created_at: end.toISOString() },
+      { kind: "contact", company: "", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze innerhalb des Fensters.", created_at: "2026-01-01T00:00:00Z" },
+      { kind: "contact", company: "", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze vor dem Fenster.", created_at: "2025-12-31T23:59:59Z" },
+      { kind: "contact", company: "", name: "NX LEAD Grenze", email: testEmail, message: "Zeitgrenze am Ende ausgeschlossen.", created_at: end.toISOString() },
       { kind: "partner", name: "NX LEAD Grenze", email: testEmail, company: "Testbetrieb", message: "Partnerfrage innerhalb des Fensters.", created_at: "2026-01-04T12:00:00Z" },
     ]);
     if (rows.error) throw new Error("Testfenster konnte nicht vorbereitet werden");
