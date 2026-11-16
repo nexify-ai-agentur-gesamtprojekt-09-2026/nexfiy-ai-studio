@@ -101,6 +101,7 @@ export function NexifyShell({
           <span className="aifly-symbol oracle-companion" data-state="idle" aria-hidden="true">
             <img
               alt=""
+              aria-hidden="true"
               width="34"
               height="34"
               decoding="async"

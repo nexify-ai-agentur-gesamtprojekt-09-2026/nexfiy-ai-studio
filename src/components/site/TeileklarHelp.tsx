@@ -28,7 +28,13 @@ export function TeileklarHelp({
         <div className="oracle-heading-copy">
           <div className="oracle-identity">
             <span className="oracle-companion">
-              <img src="/site-assets/9176c58a16ff634a.png" alt="" width="40" height="40" />
+              <img
+                src="/site-assets/9176c58a16ff634a.png"
+                alt=""
+                aria-hidden="true"
+                width="40"
+                height="40"
+              />
             </span>
             <h2>
               <strong>TEILEKLAR Hilfe</strong>
