@@ -5,7 +5,11 @@ const auth = vi.hoisted(() => ({
   signInWithPassword: vi.fn().mockResolvedValue({ error: new Error("network unavailable") }),
 }));
 vi.mock("@/integrations/supabase/client", () => ({ supabase: { auth } }));
-vi.mock("@tanstack/react-router", () => ({ useNavigate: () => vi.fn() }));
+vi.mock("@tanstack/react-router", () => ({
+  useNavigate: () => vi.fn(),
+  useRouterState: ({ select }: { select: (s: { location: { searchStr: string } }) => string }) =>
+    select({ location: { searchStr: "" } }),
+}));
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
