@@ -1,4 +1,9 @@
 # Roadmap
+## BigBuy-Prüfung und SSH-Stilllegung vorbereiten (16.11., 10:08 UTC)
+- [ ] BigBuy: bestehende Authentifizierung durch begrenzten Leseabruf prüfen; kein Import, keine Bestellung, keine Secret-Ausgabe
+- [ ] SSH: aktuelle Einträge und Nutzung nur lesend inventarisieren; Ersatz-/Notfallzugang und Rückweg dokumentieren; keine Sperrung oder Rechteänderung
+- [ ] Noch benötigte Inhaberfreigaben mit Belegen, Kostenstatus und nächsten Schritten dokumentieren
+
 ## Folgeauftrag Filme und verbleibende Arbeiten (16.11., 09:23 UTC)
 - [x] Filme: zwei lokale Zuschnitte ohne unbelegte Leistungs-/Kundenaussagen; sonst gekennzeichnete Standbilder, Originale erhalten. 24 Filmansichten 1280/390 px, Ton und beide Untertitel geprüft
 - [x] Pfeil der Transkriptzeile in beiden Zuständen ausgerichtet und angesehen, ohne Gestaltungswechsel
