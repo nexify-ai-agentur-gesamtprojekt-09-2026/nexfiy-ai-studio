@@ -1,7 +1,12 @@
 # Roadmap
+## Eigenständige Slack-Einrichtung von Grund auf (16.11., 11:03 UTC)
+- [ ] Verwaltete App-Einrichtung für dieses Projekt ausführen; ursprünglichen ORACLE-Bot und bestehenden Nachrichtenausgang erhalten, keine kostenpflichtige Agenten-/Modellfunktion
+- [ ] Tatsächlich zurückgemeldete App-/Team-/Secret-Zuordnung verdrahten; signierten Empfang und Antworten über dieselbe neue Projekt-App absichern, keine Secret-Werte lesen
+- [ ] Veröffentlichung/Einrichtungsfreigaben und echten Slack-Auslöser mit Empfängerantwort und Rücklesebeleg prüfen; neue Projekt-App nicht als ursprünglichen ORACLE-Bot ausgeben
+
 ## ORACLE-App-Einstellungen und echter Slack-Auslöser (16.11., 11:00 UTC)
-- [ ] Einstellungen für die bestehende App vorbereiten, aktuelle Empfangsadressen prüfen und nur echte Inhaberzugriffe benennen; vorhandene Flows/Empfänger erhalten
-- [ ] Sichere Eingabe für SLACK_ORACLE_SIGNING_SECRET auf Pascals ausdrücklichen neuen Auftrag erneut öffnen; keine Geheimnisse lesen oder im Chat ausgeben
+- [x] Bestehende App-Einstellungen und Rückweg vorbereitet (ops/slack-oracle-settings-2026-11-16.md), alle drei Empfangsadressen live 200, 18 Tests bestanden, ORACLE im privaten Testkanal Mitglied
+- [x] Sicheren Dialog erneut geöffnet; durch neue Nachricht vor Ausführung abgebrochen, keine Speicherung. Neuer Auftrag 11:03 UTC: verwaltete Einrichtung statt manueller Suche
 - [ ] Vollständigen kostenfreien Slack-Auslöser mit tatsächlicher Empfängerantwort und gespeichertem Beleg prüfen; kein Modellaufruf, keine künstliche Empfängerantwort und keine zweite App
 
 ## Bestehende Verbindungen eigenständig klären (16.11., 10:53 UTC)
