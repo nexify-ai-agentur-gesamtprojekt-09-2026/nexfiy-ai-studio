@@ -57,6 +57,13 @@
       "when": 1794815233280,
       "tag": "0007_catalog_variant_groups",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1794815500671,
+      "tag": "0008_catalog_variant_groups_sizes",
+      "breakpoints": true
     }
   ]
 }
