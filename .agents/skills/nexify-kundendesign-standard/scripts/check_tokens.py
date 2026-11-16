@@ -13,7 +13,7 @@ REQUIRED = [
     "background", "foreground", "card", "card-foreground", "popover", "popover-foreground",
     "primary", "primary-foreground", "secondary", "secondary-foreground", "muted",
     "muted-foreground", "accent", "accent-foreground", "destructive", "border", "border-strong",
-    "input", "ring", "radius", "font-brand-text", "font-brand-display",
+    "input", "ring", "signal-text", "radius", "font-brand-text", "font-brand-display",
 ]
 # (Text, Fläche, Mindestkontrast) – 4.5 für Fließtext, 3.0 für Bedienelemente und Fokus
 PAIRS = [
@@ -22,6 +22,7 @@ PAIRS = [
     ("secondary-foreground", "secondary", 4.5), ("muted-foreground", "background", 4.5),
     ("muted-foreground", "card", 4.5), ("accent-foreground", "accent", 4.5),
     ("primary", "background", 3.0), ("ring", "background", 3.0),
+    ("signal-text", "background", 4.5), ("signal-text", "card", 4.5),
 ]
 
 

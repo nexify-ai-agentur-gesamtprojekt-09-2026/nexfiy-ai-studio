@@ -255,7 +255,7 @@
   color: var(--muted-foreground);
 }
 :root:root:root #atelier.site-teileklar .tkc-card-stock[data-available] {
-  color: var(--primary);
+  color: var(--signal-text);
 }
 :root:root:root #atelier.site-teileklar .tkc-empty {
   display: grid;
@@ -538,7 +538,7 @@
   color: var(--muted-foreground);
 }
 :root:root:root #atelier.site-teileklar .tkc-variants a[data-available] .tkc-variant-stock {
-  color: var(--primary);
+  color: var(--signal-text);
 }
 @media (max-width: 760px) {
   :root:root:root #atelier.site-teileklar .tkc-product {
