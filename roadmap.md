@@ -137,7 +137,8 @@
 - [ ] Pausiert auf Wunsch: Kontaktformular echt absenden + Slack-Meldung (Slack bereits verbunden)
 
 ## Offen (16.11.)
-- [ ] Datentabelle anlegen – wartet auf Angabe, welche Daten
-- [ ] Datei-Upload – wartet auf Angabe, wer was hochlädt
+- [x] TEILEKLAR-Teilefragen speichern (Tabelle)
+- [x] Anhang bis 10 MB, privat
 - [ ] Shop füllen nach .de-Verbindung – Quelle der 3720 Produkte klären
-- [ ] ORACLE in Slack kontaktieren und befragen (Freigabe 16.11. erteilt)
+- [ ] ORACLE: Nachricht 16.11. 03:41 in #oracle-agent-inbox gesendet – Antwort offen
+- [ ] Veröffentlichen: nexifyai.de verbunden, zeigt aber 404 bis zur Veröffentlichung (Pascal)
