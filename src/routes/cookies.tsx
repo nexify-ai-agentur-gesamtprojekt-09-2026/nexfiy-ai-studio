@@ -54,6 +54,9 @@ function Index() {
             
 <h3>Website, Konto und verbundene Dienste unterscheiden</h3>
 <p>Die Wahl zwischen heller und dunkler Ansicht wird im Browser gespeichert. Anmeldung und verbundene Dienste haben andere Aufgaben und müssen gesondert beschrieben werden. Eine allgemeine Aussage über Cookies ersetzt diese Unterscheidung nicht.</p>
+<h3>Gesprächsverlauf und Anmeldung</h3>
+<p>Der ORACLE-Verlauf wird in dieser App während der geöffneten Seite gehalten und beim Neuladen zurückgesetzt. Das ist keine Aussage zu Protokollen oder Aufbewahrung beim KI-Dienst. Eine angemeldete Sitzung hat einen anderen Zweck: Sie ermöglicht den Kontozugang und die gesonderte Autorisierung einer Agentenverbindung.</p>
+<p>Ein Produktzugang kann eigene Speicher- und Verarbeitungsregeln haben. Die Nutzung dieses Auftritts aktiviert weder Suite-Werkzeuge noch eine API-Verbindung und überträgt keine allgemeine Einwilligung auf solche Dienste.</p>
 <div className={"hc-service-detail pc-module"}>
               <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
               <a className={"hc-text-link"} href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
@@ -66,10 +69,11 @@ function Index() {
             <h2 id="content-cookies-einstellungen-1-title">Eine Entscheidung bleibt änderbar</h2>
           </div>
           <div className={"pc-section-body"}>
-            <p>Diese Seite stellt noch keine Cookie-Einstellungen bereit. Welche optionalen Dienste eingesetzt werden und wie eine Entscheidung geändert werden kann, muss in der vollständigen, geprüften Beschreibung ergänzt werden.</p>
+            <p>Diese Seite stellt keine allgemeine Cookie-Verwaltung bereit. Welche optionalen Dienste tatsächlich eingesetzt werden und wie eine Entscheidung geändert werden kann, muss in der vollständigen, geprüften Beschreibung ergänzt werden.</p>
           
 <h3>Was diese Seite noch nicht anbietet</h3>
-<p>Es gibt hier noch keinen Schalter für optionale Analyse- oder Marketingdienste. Aus dem Besuch dieser Seite lässt sich daher keine Auswahl solcher Dienste ableiten. Die endgültigen Angaben müssen den tatsächlich eingesetzten Diensten entsprechen.</p>
+<p>Die im übernommenen Seitenfuß beschriebenen Fehlerdiagnose-Einstellungen sind in dieser Kopie nicht an eine wirksame Einwilligungsverwaltung angeschlossen. Sie bestätigen deshalb keine Aktivierung oder Deaktivierung eines Dienstes. Aus dem Besuch dieser Seite lässt sich keine Auswahl optionaler Analyse- oder Marketingdienste ableiten.</p>
+<p>Darstellungseinstellung, Anmeldung, KI-Anfragen und optionale Messung müssen getrennt beschrieben werden. Die endgültige Aufstellung muss die tatsächlich genutzten Speicherarten und Dienste benennen; eine pauschale Aussage „nur notwendige Cookies“ wird hier nicht zugesagt.</p>
 </div>
         </section>
       </div>

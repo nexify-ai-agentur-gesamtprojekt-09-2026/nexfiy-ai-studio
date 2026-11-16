@@ -4,7 +4,7 @@ import { GuideNavigation } from "@/components/site/GuideNavigation";
 import capturedCSS from "../styles/pages/teileklar.rechtliches.css?url";
 
 export const Route = createFileRoute("/teileklar_/rechtliches")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { name: "description", content: "Informationen zu Bedingungen, Versand und Rückgabe bei TEILEKLAR." }, { property: "og:title", content: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { property: "og:description", content: "Informationen zu Bedingungen, Versand und Rückgabe bei TEILEKLAR." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { name: "description", content: "Hinweise zu TEILEKLAR-Anfragen, Fahrzeugprüfung und Anbieterzuordnung. Kein Onlinekauf; importierte Kauftexte sind nicht freigegeben." }, { property: "og:title", content: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { property: "og:description", content: "Hinweise zu TEILEKLAR-Anfragen, Fahrzeugprüfung und Anbieterzuordnung. Kein Onlinekauf; importierte Kauftexte sind nicht freigegeben." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -67,6 +67,11 @@ function Index() {
           </div>
           <div className={"pc-section-body"}>
             <p>TEILEKLAR bleibt ein eigenständiger Handels- und Werkstattbereich im NeXify-Markenauftritt. Historische Einzelunternehmensdaten werden nicht auf NeXify AI FACTORY übertragen. Die konkrete Anbieterzuordnung muss vor einem Kauf bestätigt sein.</p>
+            <h3>Was dieser Auftritt tatsächlich ermöglicht</h3>
+            <p>Themeninformationen, ein nominaler Reifenvergleich und die Vorbereitung einer E-Mail-Anfrage sind vorhanden. Ein Warenkatalog, Onlinezahlung und bestätigte Werkstattbuchung sind nicht angeschlossen. Es werden keine aktuellen Versand-, Kauf- oder Rückgabekonditionen aus diesen Funktionen abgeleitet.</p>
+            <h3>Fahrzeugangaben und Terminwünsche</h3>
+            <p>Fahrzeugdaten und Teilenummern helfen bei einer Anfrage, bestätigen aber keine Passung. Der Reifenrechner vergleicht rechnerische Nennmaße und erteilt keine Zulassungs- oder Fahrzeugfreigabe. Ein versendeter Terminwunsch ist erst nach gesonderter Bestätigung ein vereinbarter Termin.</p>
+            <nav className="legal-scope-links" aria-label="Hinweise zu den vorhandenen Funktionen"><a href="/teileklar/fahrzeug-und-passung">Fahrzeugprüfung</a><a href="/teileklar/termine">Terminanfrage</a><a href="/datenschutz">Datenhinweise zu Anfragen</a></nav>
           </div>
         </section>
       </div>
@@ -89,6 +94,8 @@ function Index() {
       <section className={"hc-container pc-supplement"}>
         <div className={"tk-legal"}>
           <p className="tk-note" role="note">Die nachfolgenden Texte stammen aus dem importierten Auftritt und sind nicht als aktuelle Kaufbedingungen freigegeben. Anbieter-, Länder-, Adress- und Zahlungsangaben müssen vor einem Verkauf geprüft werden. Dieser Auftritt bietet keinen Onlinekauf.</p>
+          <details className="legal-archive">
+          <summary>Importierte Kauftexte · nicht freigegeben</summary>
           <section id="agb" className={"tk-legal-doc"} aria-labelledby="agb-title">
             <h2 id="agb-title">Allgemeine Geschäftsbedingungen</h2>
             <p className={"tk-meta"}>Allgemeine Geschäftsbedingungen für den Verkauf über TEILEKLAR.</p>
@@ -161,6 +168,7 @@ function Index() {
               <p>Datum, Unterschrift (bei Mitteilung auf Papier)</p>
             </div>
           </section>
+          </details>
         </div>
       </section>
       <section className={"hc-section hc-container hc-process pc-related"} aria-labelledby="related-title-tk-legal">
@@ -177,7 +185,7 @@ function Index() {
             <h3>
               <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Zubehör und Teile mit klaren Angaben: Originalfotos des Lieferanten, Preise inklusive Mehrwertsteuer und Versandkosten, die Sie vor dem Kauf sehen.</p>
+            <p>Informationen zu Fahrzeug, Teilen und Anfragen. Artikelkatalog und Onlinekauf sind in diesem Auftritt noch nicht angebunden.</p>
             <a aria-label="TEILEKLAR. Für Auto und Motorrad. – Seite ansehen" className={"hc-text-link"} href="/teileklar">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>

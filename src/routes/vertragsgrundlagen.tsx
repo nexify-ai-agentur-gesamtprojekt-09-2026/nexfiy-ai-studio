@@ -71,6 +71,17 @@ function Index() {
                   
 <h3>Produktbedingungen bleiben eigenständig</h3>
 <p>Ein Agenturauftrag, die Nutzung einer Suite und API-Aufrufe haben unterschiedliche Voraussetzungen. Die freigegebenen Bedingungen des konkreten Angebots sind maßgeblich. Öffentlich beschriebene Beispielpakete ersetzen weder ein Angebot noch einen bestätigten Produkttarif.</p>
+<h3>Agenturleistung: Ergebnis und Mitwirkung</h3>
+<p>Bei Websites, Apps, Portalen, Automatisierungen und Kampagnen sind Lieferumfang, bereitgestellte Materialien, Zugriffe, Prüfschritte und Übergabe dem Auftrag zuzuordnen. Optionale Betreuung, Hosting, Fremdsoftware, Modellverbrauch und Medienbudget sind keine automatisch enthaltenen Leistungen.</p>
+<h3>Suite: Arbeitsbereich und Produktbedingungen</h3>
+<p>Die Suite ist unabhängig von einem Agenturauftrag. Die öffentliche Beschreibung nennt einen selbst gestarteten 24-Stunden-Test nach Aktivierung sowie ein getrenntes Modellbudget. Ein Website-Konto bestätigt diese Aktivierung nicht. Tarif, verfügbare Werkzeuge und verbindliche Nutzungsbedingungen müssen vor der Produktnutzung feststehen; diese Übersicht setzt keine Laufzeit, Kündigungsfrist oder automatische Verlängerung fest.</p>
+<h3>API: Aufrufverbrauch und Integrationsarbeit</h3>
+<p>Die API ist für KI innerhalb eigener Software beschrieben. Prepaid-Guthaben betrifft Aufrufe; die individuelle Einrichtung einer Verbindung ist davon getrennt. Der Zugang wird derzeit im Rahmen eines Projekts eingerichtet, eine direkte Freischaltung fehlt auf diesem Auftritt. Nutzbare Endpunkte, Limits und freigegebene Tarife sind vor dem Einsatz zu klären. Es werden hier keine Guthabenerstattung, Verfügbarkeit oder Servicegarantie zugesagt.</p>
+<h3>Agenten und angebundene Werkzeuge</h3>
+<p>Ein Agentenauftrag benennt Quellen, erlaubte Werkzeuge und überprüfbare Ergebnisse. Recherche, Entwurf und tatsächliche Ausführung bleiben getrennte Schritte. Ein Kontozugang, ein Skill oder eine MCP-Verbindung ersetzt keine auftragsbezogene Freigabe für Datenzugriffe oder Handlungen.</p>
+<h3>TEILEKLAR und noch nicht freigegebene Unterlagen</h3>
+<p>Teilehandel und Werkstattleistungen benötigen eine eigene Anbieter- und Vertragszuordnung. Dieser Auftritt bietet derzeit keinen Onlinekauf. Anfrageentwürfe sind keine Bestellung, bestätigten Termine oder Passungszusage. Die importierten Kauftexte sind nicht als aktuelle Verkaufsbedingungen freigegeben.</p>
+<nav className="legal-scope-links" aria-label="Zum jeweiligen Angebot"><a href="/leistungen">Agenturleistungen</a><a href="/produkte/nex2fly">Suite</a><a href="/produkte/api">API</a><a href="/teileklar/rechtliches">TEILEKLAR-Unterlagen</a></nav>
 </div>
                 </section>
               </div>
