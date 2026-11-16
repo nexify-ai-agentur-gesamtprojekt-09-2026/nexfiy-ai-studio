@@ -2,6 +2,8 @@
  * TEILEKLAR-Katalog: Abbildung des bestehenden Shop-Feeds auf eigene Datensätze, Bildquellen-Freigabe und Anzeigeformate.
  * Rein und testbar; Abgleich, Abfragen und Bildweiterleitung nutzen nur diese Regeln.
  */
+import { catalogArea } from "./teileklar-areas";
+
 export const CATALOG_FEED_URL = "https://teileklar.shop/api/shop/products";
 export const CATALOG_PAGE_SIZE = 24;
 export const CATALOG_QUERY_MAX = 80;
@@ -16,7 +18,10 @@ export interface CatalogRow {
   id: string;
   name: string;
   brand: string;
+  /** Sortimentsbereich, aus dem Artikelnamen abgeleitet (siehe teileklar-areas.ts). */
   category: string;
+  /** Unveränderte Kategorie des Lieferanten-Feeds, nur zur Nachvollziehbarkeit. */
+  source_category: string;
   price_value: number | null;
   ean: string;
   oe_number: string;
@@ -78,7 +83,8 @@ export function mapFeedItem(raw: unknown): CatalogRow | null {
     id,
     name,
     brand: text(item["brand"], 120) || text(item["maker"], 120),
-    category: text(item["category"], 120),
+    category: catalogArea(name),
+    source_category: text(item["category"], 120),
     price_value: value,
     ean: text(item["ean"], 20).replace(/[^0-9]/g, ""),
     oe_number: text(item["oe"], 80),
