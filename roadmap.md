@@ -210,3 +210,4 @@
 - [ ] Shop: Produktfotos per Stapelverarbeitung freistellen (weißer Hintergrund → passende Fläche), Originale erhalten
 - [ ] Fehlende Produktfotos: kein Scraping fremder Seiten (Bildrechte); BigBuy-Zugang als Lieferantenquelle per EAN prüfen
 - [ ] Skill „Agentur-Designstandard für Kundenprojekte“: verbindliche Vorgaben aus dem Graphite-Agenturdesign ableiten, mit Projektdaten zusammenführen; als Text zum Kopieren an Pascal
+- [ ] Produktdarstellung überall (NeXify-Produkte, Leistungen, TEILEKLAR) überarbeiten: Anthropic-Vorlagen für kleine Unternehmen als Prüfhilfe (Quelle festhalten), Textvorschläge über DeepSeek (deepseek-v4.1-flash-1017, Reasoning high) – ORACLE bleibt unverändert, keine erfundenen Fakten
