@@ -1,4 +1,9 @@
 # Roadmap
+## ORACLE-Anbindung fortsetzen (16.11., 10:35 UTC)
+- [ ] Bestehenden Slack-Ausgang, App-Konfiguration, ORACLE-Antworten und veröffentlichte Empfangsadressen aktuell prüfen; keine zweite App, kein Modellwechsel
+- [ ] Nachgewiesene Empfangs-/Rückmeldegrenzen innerhalb des bestehenden Sicherheitsmodells beheben und betroffene Tests ausführen
+- [ ] Sichere Einrichtung fehlender bestehender App-Zugänge vorbereiten; vollständigen Roundtrip nur bei bestätigter App-Zuordnung und echten Empfangsbelegen melden
+
 ## SSH-Hostidentität vor BigBuy bestätigen (16.11., 10:29 UTC)
 - [x] Konsolenvergleich für Server 1 vorbereitet; 10:30 UTC Hostname/Hosting-IP liefern denselben öffentlichen ED25519-SHA256-Kandidaten, ausdrücklich unbestätigt. Anleitung/Abbruch/Rückweg: ops/server1/host-identity-2026-11-16.md; keine private Schlüsseldatei gelesen
 - [ ] Unabhängige Bestätigung durch Pascal über die bestehende VPS-Konsole: vollständiger SHA256-/ED25519-Vergleich und Zeitpunkt fehlen; kein known_hosts-Vertrauenseintrag, kein SSH-Login
