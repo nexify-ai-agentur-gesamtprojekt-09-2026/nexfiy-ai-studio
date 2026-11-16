@@ -7,16 +7,13 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
-  __InternalSupabase: {
-    PostgrestVersion: "14.18"
-  }
   public: {
     Tables: {
       inquiries: {
         Row: {
           company: string
+          consent_at: string | null
+          consent_version: string | null
           created_at: string
           email: string
           id: string
@@ -33,6 +30,8 @@ export type Database = {
         }
         Insert: {
           company?: string
+          consent_at?: string | null
+          consent_version?: string | null
           created_at?: string
           email: string
           id?: string
@@ -49,6 +48,8 @@ export type Database = {
         }
         Update: {
           company?: string
+          consent_at?: string | null
+          consent_version?: string | null
           created_at?: string
           email?: string
           id?: string
@@ -62,6 +63,62 @@ export type Database = {
           source_path?: string
           status?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      inquiry_duplicate_guards: {
+        Row: {
+          accepted_at: string
+          fingerprint: string
+          inquiry_id: string
+        }
+        Insert: {
+          accepted_at: string
+          fingerprint: string
+          inquiry_id: string
+        }
+        Update: {
+          accepted_at?: string
+          fingerprint?: string
+          inquiry_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiry_duplicate_guards_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      inquiry_guard_secret: {
+        Row: {
+          salt: string
+          singleton: boolean
+        }
+        Insert: {
+          salt: string
+          singleton?: boolean
+        }
+        Update: {
+          salt?: string
+          singleton?: boolean
+        }
+        Relationships: []
+      }
+      inquiry_rate_guards: {
+        Row: {
+          accepted_at: string[]
+          ip_hash: string
+        }
+        Insert: {
+          accepted_at?: string[]
+          ip_hash: string
+        }
+        Update: {
+          accepted_at?: string[]
+          ip_hash?: string
         }
         Relationships: []
       }
@@ -359,6 +416,26 @@ export type Database = {
       }
     }
     Functions: {
+      accept_guarded_inquiry: {
+        Args: {
+          p_company: string
+          p_consent: boolean
+          p_consent_version: string
+          p_email: string
+          p_fingerprint: string
+          p_ip_hash: string
+          p_kind: string
+          p_message: string
+          p_name: string
+          p_source_path: string
+        }
+        Returns: {
+          inquiry_id: string
+          outcome: string
+          retry_after_seconds: number
+        }[]
+      }
+      get_inquiry_guard_salt: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -501,3 +578,4 @@ export const Constants = {
     },
   },
 } as const
+
