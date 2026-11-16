@@ -1,5 +1,6 @@
 // @vitest-environment node
 import postgres from "postgres";
+import { createClient } from "@supabase/supabase-js";
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { INQUIRY_CONSENT_VERSION } from "./inquiry-consent";
 import { submitInquiry } from "./inquiry.functions";
@@ -24,35 +25,26 @@ vi.mock("@/integrations/supabase/client.server", () => ({ supabaseAdmin: { rpc: 
 vi.mock("./inquiry-delivery.server", () => ({ deliverInquiryNotice: state.deliver, workspaceUrl: async () => "http://localhost:8080/arbeitsplatz" }));
 
 const db = postgres({ host: process.env["PGHOST"], port: Number(process.env["PGPORT"] || 5432), database: process.env["PGDATABASE"], username: process.env["PGUSER"], password: process.env["PGPASSWORD"], max: 1 });
+const url = process.env["SUPABASE_URL"];
+const key = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+if (!url || !key) throw new Error("Isolierter Datenbank-Testzugang fehlt.");
+const service = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+const runId = crypto.randomUUID();
+const testEmail = `nx-lead-${runId}@example.test`;
+const idPart = parseInt(runId.slice(0, 4), 16);
 afterAll(async () => { await db.end(); });
-beforeEach(() => { state.ip = "192.0.2.80"; state.deliver.mockClear(); state.rpc.mockReset(); });
+beforeEach(() => { state.ip = `2001:db8:${idPart.toString(16)}:${Math.floor(Math.random()*65535).toString(16)}::1`; state.deliver.mockClear(); state.rpc.mockReset(); });
 
 type Args = { p_ip_hash: string; p_fingerprint: string; p_kind: string; p_name: string; p_email: string; p_company: string; p_message: string; p_source_path: string; p_consent: boolean; p_consent_version: string };
 
 async function rollbackTest(check: (tx: postgres.TransactionSql) => Promise<void>) {
-  const rollback = new Error("NX_LEAD_TEST_ROLLBACK");
-  try {
-    await db.begin(async tx => {
-      await tx`SET LOCAL ROLE service_role`;
-      state.rpc.mockImplementation(async (name: string, args?: Args) => {
-        if (name === "get_inquiry_guard_salt") {
-          const rows = await tx`SELECT public.get_inquiry_guard_salt() AS salt`;
-          return { data: rows[0]?.["salt"], error: null };
-        }
-        if (!args) throw new Error("Testparameter fehlen");
-        try {
-          const rows = await tx`SELECT * FROM public.accept_guarded_inquiry(${args.p_ip_hash},${args.p_fingerprint},${args.p_kind},${args.p_name},${args.p_email},${args.p_company},${args.p_message},${args.p_source_path},${args.p_consent},${args.p_consent_version})`;
-          return { data: rows, error: null };
-        } catch { return { data: null, error: { message: "Speichern abgewiesen" } }; }
-      });
-      await check(tx);
-      throw rollback;
-    });
-  } catch (error) { if (error !== rollback) throw error; }
+  // Nur isolierte Entwurfsdaten: keine Rechteänderung, kein Löschen; Testzeilen bleiben nachvollziehbar.
+  state.rpc.mockImplementation((name: string, args?: Args) => service.rpc(name, args));
+  await db.begin(async tx => { await check(tx); });
 }
 
-function send(index: number, email = "nx-lead-01-test@example.test") {
-  return submitInquiry({ data: { kind: "contact", name: "NX LEAD Prüfung", email, company: "", message: `NX-LEAD-01 Prüfvorhaben Nummer ${index}.`, consent: true, website: "", sourcePath: "/kontakt" } });
+function send(index: number, email = testEmail) {
+  return submitInquiry({ data: { kind: "contact", name: "NX LEAD Prüfung", email, company: "", message: `NX-LEAD-01 ${runId} Prüfvorhaben Nummer ${index}.`, consent: true, website: "", sourcePath: "/kontakt" } });
 }
 
 describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
@@ -69,9 +61,9 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
   it("speichert gleiche E-Mail und Nachricht innerhalb von zehn Minuten nur einmal und meldet einmal", async () => {
     await rollbackTest(async tx => {
       const before = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
-      expect((await send(1, "NX-LEAD-01-TEST@EXAMPLE.TEST")).ok).toBe(true);
+      expect((await send(11, testEmail.toUpperCase())).ok).toBe(true);
       state.ip = "192.0.2.81";
-      expect(await send(1, " nx-lead-01-test@example.test ")).toMatchObject({ ok: false, reason: "duplicate" });
+      expect(await send(11, ` ${testEmail} `)).toMatchObject({ ok: false, reason: "duplicate" });
       const after = await tx`SELECT count(*)::integer AS count FROM public.inquiries`;
       expect(after[0]?.["count"] - before[0]?.["count"]).toBe(1);
       expect(state.deliver).toHaveBeenCalledTimes(1);
@@ -80,8 +72,8 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
   it("setzt Einwilligungszeit und exakte Version serverseitig bei neuer Speicherung", async () => {
     await rollbackTest(async tx => {
       const before = Date.now();
-      expect((await send(1)).ok).toBe(true);
-      const rows = await tx`SELECT consent_version,consent_at,created_at FROM public.inquiries WHERE email='nx-lead-01-test@example.test' ORDER BY created_at DESC LIMIT 1`;
+      expect((await send(21)).ok).toBe(true);
+      const rows = await tx`SELECT consent_version,consent_at,created_at FROM public.inquiries WHERE email=${testEmail} ORDER BY created_at DESC LIMIT 1`;
       expect(rows[0]?.["consent_version"]).toBe("inquiry-storage-2026-11-16-v1");
       expect(rows[0]?.["consent_version"]).toBe(INQUIRY_CONSENT_VERSION);
       expect(new Date(rows[0]?.["consent_at"]).getTime()).toBeGreaterThanOrEqual(before - 1000);
@@ -90,21 +82,21 @@ describe("NX-LEAD-01 echter Eingang mit Datenbank und gemocktem Slack", () => {
   });
   it("lässt nach Ablauf der rollierenden Stunde wieder eine Anfrage zu", async () => {
     await rollbackTest(async tx => {
-      for (let i = 1; i <= 5; i++) await send(i);
+      for (let i = 31; i <= 35; i++) await send(i);
       const hash = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1]?.p_ip_hash;
       expect(typeof hash).toBe("string");
       await tx`UPDATE public.inquiry_rate_guards SET accepted_at=ARRAY[clock_timestamp()-interval '1 hour 1 second'] WHERE ip_hash=${hash}`;
-      expect((await send(6)).ok).toBe(true);
+      expect((await send(36)).ok).toBe(true);
       expect(state.deliver).toHaveBeenCalledTimes(6);
     });
   });
   it("lässt dieselbe Nachricht nach zehn Minuten wieder zu", async () => {
     await rollbackTest(async tx => {
-      await send(1);
+      await send(41);
       const args = state.rpc.mock.calls.find(call => call[0] === "accept_guarded_inquiry")?.[1];
-      await tx`UPDATE public.inquiry_duplicate_guards SET accepted_at=clock_timestamp()-interval '10 minutes 1 second' WHERE fingerprint=${args?.p_fingerprint}`;
-      await tx`UPDATE public.inquiries SET created_at=clock_timestamp()-interval '10 minutes 1 second' WHERE id=(SELECT inquiry_id FROM public.inquiry_duplicate_guards WHERE fingerprint=${args?.p_fingerprint})`;
-      expect((await send(1)).ok).toBe(true);
+      await db`UPDATE public.inquiry_duplicate_guards SET accepted_at=clock_timestamp()-interval '10 minutes 1 second' WHERE fingerprint=${args?.p_fingerprint}`;
+      await db`UPDATE public.inquiries SET created_at=clock_timestamp()-interval '10 minutes 1 second' WHERE id=(SELECT inquiry_id FROM public.inquiry_duplicate_guards WHERE fingerprint=${args?.p_fingerprint})`;
+      expect((await send(41)).ok).toBe(true);
       expect(state.deliver).toHaveBeenCalledTimes(2);
     });
   });
