@@ -66,3 +66,7 @@ Für die später freigegebene Verwendung gilt: zweckgebundene Vertrauensdatei be
 | OFFEN | BigBuy-Gültigkeit: nicht geprüft, kein authentifizierter BigBuy-Aufruf | Assistent erst nach erfüllten Voraussetzungen |
 
 **Prüfgrenzen:** Keine VPS-Konsole geöffnet, kein Host-Vertrauen bestätigt, kein SSH-Login, kein BigBuy-Statusabruf. Keine neue kostenpflichtige Verpflichtung ausgelöst; Gebühren bestehender Verträge sind nicht gemessen. Erstes lokales Scannerkommando scheiterte an einem Werkzeugparameter vor Netzwerkzugriff; korrigierte öffentliche Scans waren erfolgreich. Keine Anwendungsdatei geändert und kein Website-Funktionstest, Deployment oder Sicherheitsnachweis für die gesamte Website behauptet. Die verlangten Monorepo-Werkzeuge fehlen weiterhin in diesem TanStack-Projekt; kein Ersatztest als deren Erfolg ausgegeben.
+## Konsolenvergleich 16.11.2026, 11:41 UTC (IST)
+- Server 1 `srv1243952`: Hostinger-Webkonsole meldet `SHA256:q0fUJEDnyPaw+Wc1ScvgeT3i2JD9grbvJjRlyipIPvU` (ED25519). Stimmt zeichengenau mit dem Scan von 10:30 UTC überein.
+- Server 2 `srv1941843`: `SHA256:PXxrPlrlJkT58ZC+CjDE0DmRtgI7Ax12Qrf4TMWf4h8` (ED25519). Das ist ein anderer Host und keine Abweichung. Für Server 2 liegt noch kein Netzscan zum Vergleich vor.
+- Die BigBuy-Prüfung wartet auf die ausdrückliche Freigabe durch Pascal.
