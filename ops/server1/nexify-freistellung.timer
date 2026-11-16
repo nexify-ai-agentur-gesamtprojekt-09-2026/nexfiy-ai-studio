@@ -1,0 +1,7 @@
+[Unit]
+Description=NeXify freistellung Zeitplan
+[Timer]
+OnCalendar=*-*-* 06:15:00 UTC
+Persistent=true
+[Install]
+WantedBy=timers.target

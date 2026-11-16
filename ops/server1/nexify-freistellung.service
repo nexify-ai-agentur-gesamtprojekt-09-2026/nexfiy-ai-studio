@@ -1,0 +1,12 @@
+[Unit]
+Description=NeXify freistellung
+[Service]
+Type=oneshot
+User=nexifyworker
+ExecStart=/opt/nexify-worker/venv/bin/python /opt/nexify-worker/freistellung.py
+TimeoutStartSec=3600
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/nexify-worker/state /tmp
+PrivateTmp=yes
