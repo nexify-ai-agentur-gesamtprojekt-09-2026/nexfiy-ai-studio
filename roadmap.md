@@ -172,10 +172,12 @@
 - [x] Sicherheit: Schnellprüfung ohne Befund, 0 bekannte Schwachstellen in 64 Abhängigkeiten; tiefe Prüfung zuletzt 14.11. (nicht neu gestartet)
 - [x] ORACLE-Antwort in #oracle-agent-inbox lesend geprüft: 05:48 UTC weiterhin keine Antwort
 - [x] 47 Seiten bei 1280px: 0 Laufzeitfehler, 0 Überlauf, 0 automatisch erkannte WCAG-A/AA-Verstöße (axe 4.10); 97 interne Links alle 200
-- [ ] Filme: alle fünf Markenfilme enthalten Sprache, nur einer hat Text – Untertitel (WebVTT) und „Gesprochener Text“ für alle fünf ergänzen, Untertitel-Knopf in der gemeinsamen Filmbedienung
-- [ ] aria-label auf zwei rollenlosen Containern (Kostenhinweis Startseite, Geräteliste App-Leiste) korrigieren
+- [x] Filme: alle fünf Markenfilme enthalten Sprache (lokal erkannt), nur einer hatte Text – Untertitel und „Gesprochener Text“ für alle fünf ergänzt, Untertitel-Knopf in der gemeinsamen Filmbedienung; 12 Filmseiten bei 1280/390px ohne Größenänderung, Untertitel bei 1280/390/320px im Browser geprüft. ANNAHME: Wortlaut automatisch erkannt, Markennamen von Hand gesetzt – Pascal bitte gegenlesen
+- [x] aria-label auf zwei rollenlosen Containern (Kostenhinweis Startseite, Geräteliste App-Leiste) korrigieren
 - [ ] Handy-Durchlauf (390px) aller Seiten auf Überlauf/Laufzeitfehler
-- [ ] „Lovable“ überall entfernen: Favicon/App-Symbole, sichtbare Texte, Metadaten, Plattform-Hinweis auf der veröffentlichten Seite (Pascal 16.11. 06:00)
+- [x] „Lovable“ entfernen: Favicon (Lovable-Herz) durch NeXify-Figur ersetzt (PNG + ICO 16/32/48); App-Symbole und Manifest waren bereits NeXify; ausgelieferte Seiten ohne „Lovable“
+- [ ] Plattform-Hinweis „Edit with Lovable“ auf der veröffentlichten Seite ausblenden (Freigabe Pascal im Dialog)
+- [ ] Anmelde-E-Mails (Registrierung, Passwort) kommen noch mit Standard-Absender der Plattform – eigene Absenderdomain nexifyai.de einrichten (Dialog + DNS, Pascal)
 - [ ] Abschlussprüfung vor Veröffentlichung (Build, Tests, Sicherheit, Seitenrundgang) und Veröffentlichung auf Pascals Wunsch
 - [ ] Formatierung: 6.394 reine Formatierungsmeldungen und 550 „any“-Meldungen der Code-Prüfung abbauen (ohne generierte Dateien)
 
