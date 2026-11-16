@@ -334,15 +334,25 @@
   align-items: center;
   gap: 8px;
 }
+/* Labels may wrap in the narrow column, so height follows the text instead of a fixed button size. */
 :root:root #atelier .oracle-advice .oracle-handoff :is(.oracle-handoff-action, .oracle-handoff-actions > *) {
+  height: auto;
   min-height: 44px;
   max-width: 100%;
+  padding-block: 10px;
   white-space: normal;
   text-align: left;
+  font-size: 14px;
+  line-height: 1.4;
+}
+:root:root #atelier .oracle-advice .oracle-handoff :is(.oracle-handoff-action, .oracle-handoff-confirm) {
+  width: 100%;
+  justify-content: space-between;
 }
 :root:root #atelier .oracle-advice .oracle-handoff .oracle-handoff-action {
-  justify-self: start;
   color: var(--foreground);
+  border-color: var(--border-strong);
+  background: var(--secondary);
 }
 :root:root #atelier .oracle-advice .oracle-handoff .oracle-handoff-confirm {
   padding-inline: 20px;

@@ -415,7 +415,6 @@
   gap: 12px;
   margin: 0 0 24px;
   padding: 14px 16px;
-  max-width: var(--measure-prose, 68ch);
   border: 1px solid color-mix(in oklab, var(--ring) 45%, transparent);
   border-left: 3px solid var(--ring);
   border-radius: 6px;
