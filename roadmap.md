@@ -1,18 +1,18 @@
 # Roadmap
 ## NX-LEAD-01 · Anfrageeingang und Wochenzahl (Entwurf, 16.11., 14:08 UTC)
-- [ ] Nachauftrag 15:16 UTC: fehlende/ungültige vertrauenswürdige IP überspringt ausschließlich Ratenbegrenzung; anonymer rate_guard_ip_missing, Cloudflare bevorzugt, kein XFF
-- [ ] Vollständiger Formular→echte Entwurfsdatenbank→Bestätigung/Fehler-Test mit gemocktem Slack: Einwilligung, Wochenzahl +1, Dublette einmal, sechste IP-Anfrage abgewiesen/Eingaben erhalten
-- [ ] Additive Status-Spaltenrechte für authenticated ausschließlich unter bestehender Admin-UPDATE-RLS; Admin/Nicht-Admin/fremde Spalten prüfen
-- [ ] Abschließende Tests und automatische Typ-/Buildprüfung, Bericht abnahmebereit ja/nein; keine Veröffentlichung
+- [x] Nachauftrag 15:16 UTC: fehlende/ungültige vertrauenswürdige IP überspringt ausschließlich Ratenbegrenzung; anonymer rate_guard_ip_missing, attestierte Cloudflare-IP bevorzugt, kein XFF
+- [x] Vollständiger Formular→echte Entwurfsdatenbank→Bestätigung/Fehler-Test mit gemocktem Slack: Einwilligung, Wochenzahl +1, Dublette einmal, sechste IP-Anfrage abgewiesen/Eingaben erhalten; Playwright 1280/390px und Statusrücklesen bestanden
+- [x] Additive Migration 0014; Status-Spaltenrechte status/updated_at ausschließlich unter unveränderter Admin-UPDATE-RLS bestätigt; Admin erlaubt, Nicht-Admin 0 Änderungen, fremde Spalten 42501. Spaltenrechte waren bereits in 0002 vorgesehen, idempotent bestätigt; kein Tabellen-UPDATE
+- [x] 185/185 Tests, 38/38 Dateien 15:25:21–15:26:15 UTC; automatische Typ-/Buildprüfung OK 15:24:09 UTC, lesende Zweitprüfung sub_k2k3jkzc PASS. Abnahmebereit JA im beauftragten Entwurf, keine Veröffentlichung
 - [x] Ausgangsrechte lesend bestätigt: anon ohne Tabellenrechte; authenticated SELECT unter Admin-RLS, kein INSERT/UPDATE/DELETE. Bestehendes SELECT bleibt erhalten; keine Rechteausweitung
 - [x] Plan unverändert freigegeben; Trade-off eigene Datenbankbegrenzung bestätigt
 - [x] Migration 0013 nur im Entwurf: servergeschütztes Salz, atomare rollierende 5/Stunde-Grenze, 10-Minuten-Dublettensperre, consent_at/version; keine Klartext-IP und keine zusätzliche Slack-Meldung bei Dubletten
 - [x] Exakte rollierende 7-Tage-Zahlen im Admin-Arbeitsplatz, Kontakt getrennt von TEILEKLAR; bestehendes Admin-RLS, keine neue Nutzerberechtigung
 - [x] 172/172 Tests in 36 Dateien, davon 10 echte Datenbanktests mit gemocktem Slack einschließlich 12 parallelen Eingängen (5 angenommen) und 10 Cross-IP-Dubletten (1 angenommen); automatische Typ-/Buildprüfung OK 15:13:53 UTC
 - [x] Echter Entwurfs-Admin 1280/390px: Wochenzahl/Zeitraum sichtbar, kein Überlauf/Laufzeitfehler; serverseitiger Honeypot abgelehnt, Eingaben erhalten und Wochenzahl unverändert zurückgelesen
-- [x] Keine Veröffentlichung; UPDATE-Recht, Chat-Modell und Datenschutzinhalt unverändert. Testdaten nur im Entwurf erhalten; keine Entwurfsdaten in der App. Bericht ops/nx-lead-01-2026-11-16.md
-- [ ] Produktivabnahme OFFEN: verlässliche native/Edge-IP im tatsächlichen Hosting nachweisen (Owner: Hosting-Prüfung im Folgeauftrag); kein Publish in NX-LEAD-01. Fehlende Provenienz scheitert geschlossen; deshalb abnahmebereit für Produktivübernahme NEIN
-- [ ] Vollständiger positiver Formular-UI-Speicherweg mit transportseitig blockiertem/gemocktem Slack OFFEN; echter Service-Speicherweg und UI-Ablehnung separat belegt, nicht als vollständiger Ende-zu-Ende-Nachweis ausgegeben
+- [x] Keine Veröffentlichung; Chat-Modell und Datenschutzinhalt unverändert. Nachauftrag bestätigt ausschließlich Status-Spaltenrechte; keine Nutzerrolle/Policy geändert. Testdaten nur im Entwurf erhalten; keine Entwurfsdaten in der App. Bericht ops/nx-lead-01-2026-11-16.md
+- [x] Frühere Abnahmegrenze durch Inhaberentscheidung ersetzt: fehlende IP blockiert keine echte Anfrage; tatsächliche Hosting-Attestierung bleibt ungemessen, aber kein Abnahmeblocker des jetzt freigegebenen Verhaltens
+- [x] Vollständiger positiver Formular-UI-Speicherweg über testisolierte Aufrufgrenze mit echter Datenbank/gemocktem Slack bestätigt; kein Produktions-RPC-/Slack-Zustellnachweis behauptet
 
 ## NX-MCP-01 · Verbindung über nexifyai.de (16.11., 13:10 UTC)
 - [x] Lesende Konfigurationsprüfung: OAuth und dynamische Registrierung aktiv, Zustimmungsadresse /.lovable/oauth/consent, Site URL nexifyai.de; keine Einstellungsänderung nötig (13:11 UTC)
