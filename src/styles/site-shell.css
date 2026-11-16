@@ -113,6 +113,8 @@
   :root:root #atelier .home-concept .hc-section-heading h2 { font-size: 28px; }
 }
 @media (max-width: 767px) {
+  :root:root #atelier.is-open .site-page-split[data-split-ready="false"] > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
+  :root:root #atelier.is-open .site-page-split[data-split-ready="false"] > :has(> .site-page-pane) { flex: 1 1 0px !important; }
   :root:root #atelier .site-oracle-pane { flex: 0 0 0px !important; width: 0; }
   :root:root #atelier .site-page-pane { flex-grow: 1 !important; }
   :root:root #atelier .site-page-split > :has(> .site-oracle-pane) { flex: 0 0 0px !important; width: 0; }
