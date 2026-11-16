@@ -50,4 +50,15 @@ it("verarbeitet signierte Nachrichten ohne echten Hintergrund-Hook nicht stillsc
   const response = await receiveSlack(request,"events");
   expect(response.status).toBe(200);
   expect(await response.json()).toEqual(expect.objectContaining({ ok: false, error: "background_delivery_unavailable" }));
+});it("akzeptiert die verwaltete Betriebsanbindung nur mit ihrem eigenen Signaturgeheimnis", async () => {
+  vi.stubEnv("SLACK_ORACLE_SIGNING_SECRET", "");
+  vi.stubEnv(`SLACK_SIGNING_SECRET_${SLACK_WORKSPACE.team}`, secret);
+  const request = await signedRequest(JSON.stringify({ api_app_id: "AOPERATIONS", team_id: SLACK_WORKSPACE.team,
+    event_id: "evt-ops", event: { type: "app_mention", user: SLACK_WORKSPACE.owner, channel: SLACK_WORKSPACE.inbox, ts: "1.3", text: "status" } }));
+  const tasks: Promise<unknown>[] = [];
+  Object.assign(request, { waitUntil: (task: Promise<unknown>) => tasks.push(task) });
+  expect((await receiveSlack(request, "events")).status).toBe(200);
+  expect(tasks.length).toBe(1);
+  vi.stubEnv(`SLACK_SIGNING_SECRET_${SLACK_WORKSPACE.team}`, "anderes-geheimnis");
+  expect((await receiveSlack(await signedRequest('{"api_app_id":"AOPERATIONS"}'), "events")).status).toBe(401);
 });

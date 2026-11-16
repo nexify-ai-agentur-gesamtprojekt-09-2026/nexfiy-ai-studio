@@ -10,7 +10,7 @@ export const getSlackDeliveryStatus = createServerFn({ method: "GET" })
       .select("id, created_at, flow_id, outcome, error_code, entity_id")
       .order("created_at", { ascending: false }).limit(30);
     if (receipts.error) throw new Error("Slack-Belege konnten nicht geladen werden.");
-    return { receipts: receipts.data, inboundConfigured: Boolean(process.env["SLACK_ORACLE_SIGNING_SECRET"]),
+    return { receipts: receipts.data, inboundConfigured: Boolean(process.env["SLACK_ORACLE_SIGNING_SECRET"] || process.env["SLACK_SIGNING_SECRET_T0AR7LG3V7U"]),
       oracleConfirmed: receipts.data.some((row) => row.flow_id === "oracle" && row.outcome === "ack") };
   });
 
