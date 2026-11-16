@@ -66,13 +66,15 @@ function Index() {
 }
 
 function CatalogError({ error, reset }: ErrorComponentProps) {
+  // Technische Details gehören ins Protokoll, nicht vor Besucher.
+  console.error("teileklar catalog unavailable", error);
   return <NexifyShell brand="teileklar">
     <div className={"home-concept page-concept tk-shop"}>
       <Hero />
       <section className="hc-container tkc-browser">
         <div className="tkc-empty" role="alert">
           <h2>Der Katalog ist gerade nicht erreichbar.</h2>
-          <p>{error.message}</p>
+          <p>Bitte laden Sie die Seite in einem Moment erneut. Ein gesuchtes Teil können Sie jederzeit direkt anfragen.</p>
           <div className="tk-actions">
             <button type="button" className="nexify-control primary-button" data-variant="primary" onClick={reset}>Erneut laden</button>
             <a className="hc-text-link" href="/teileklar/suche#teilefrage">Teil direkt anfragen</a>
