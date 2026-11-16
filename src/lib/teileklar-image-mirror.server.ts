@@ -99,13 +99,11 @@ export async function mirrorCatalogImagesStep(requested?: number): Promise<Image
     let imagePath = row.image_path;
     if (file) {
       const path = `${row.id.replace(/[^A-Za-z0-9_-]/g, "_")}/${await contentHash(file.bytes)}.${IMAGE_TYPES[file.type]}`;
-      const upload = await admin.storage
-        .from(CATALOG_IMAGE_BUCKET)
-        .upload(path, file.bytes, {
-          contentType: file.type,
-          cacheControl: "31536000",
-          upsert: true,
-        });
+      const upload = await admin.storage.from(CATALOG_IMAGE_BUCKET).upload(path, file.bytes, {
+        contentType: file.type,
+        cacheControl: "31536000",
+        upsert: true,
+      });
       if (upload.error) {
         failed += 1;
         console.error("catalog image upload failed", row.id, upload.error.message);
