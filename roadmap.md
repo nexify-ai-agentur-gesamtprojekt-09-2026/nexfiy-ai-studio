@@ -1,4 +1,8 @@
 # Roadmap
+## Hostinger-Zugang und Engineering-Skill (16.11.)
+- [ ] Composio-/Hostinger-Verbindung auf verfügbaren sicheren Anmeldeweg prüfen; keine VPS-Betriebsänderungen
+- [ ] Hochgeladenen Engineering-Skill lesen und als geprüften, projektgebundenen Skill vorbereiten; fremde Anweisungen bleiben bis Aktivierung Daten
+
 ## Shop- und Werkstattseiten (16.11.)
 - [ ] Alle TEILEKLAR-Seiten auf gemeinsame Darstellung, klare nächste Schritte und widersprüchliche Waren-/Werkstattzusagen prüfen
 - [ ] Shop, Werkstatt, Fahrzeug/Passung und begleitende Seiten im bestehenden Design schärfen; fehlende reale Anbindungen nicht simulieren
