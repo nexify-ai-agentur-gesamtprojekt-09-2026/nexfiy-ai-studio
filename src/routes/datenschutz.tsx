@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/datenschutz.css?url";
+import impeccableCSS from "../styles/impeccable.css?url";
 
 export const Route = createFileRoute("/datenschutz")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "stylesheet", href: impeccableCSS }], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

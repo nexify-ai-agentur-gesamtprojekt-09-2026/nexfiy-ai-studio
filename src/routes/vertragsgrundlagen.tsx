@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/vertragsgrundlagen.css?url";
+import impeccableCSS from "../styles/impeccable.css?url";
 
 export const Route = createFileRoute("/vertragsgrundlagen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "stylesheet", href: impeccableCSS }], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

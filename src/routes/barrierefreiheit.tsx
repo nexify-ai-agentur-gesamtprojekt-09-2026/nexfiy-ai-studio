@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
+import impeccableCSS from "../styles/impeccable.css?url";
 
 export const Route = createFileRoute("/barrierefreiheit")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "stylesheet", href: impeccableCSS }], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

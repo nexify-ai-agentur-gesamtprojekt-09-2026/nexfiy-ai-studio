@@ -3,9 +3,11 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.bestellungen.css?raw";
+import impeccableCSS from "../styles/impeccable.css?url";
 
 export const Route = createFileRoute("/teileklar_/bestellungen")({
-  head: () => ({ meta: [{ title: "Bestellungen · TEILEKLAR" }] }),
+  head: () => ({
+    links: [{ rel: "stylesheet", href: impeccableCSS }], meta: [{ title: "Bestellungen · TEILEKLAR" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

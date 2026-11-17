@@ -3,10 +3,11 @@ import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.werkstatt.css?url";
+import impeccableCSS from "../styles/impeccable.css?url";
 
 export const Route = createFileRoute("/teileklar_/werkstatt")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "stylesheet", href: impeccableCSS }],
     meta: [
       { title: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
       { name: "description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },

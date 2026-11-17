@@ -1,0 +1,163 @@
+/* Impeccable-Korrekturschicht (https://github.com/pbakaus/impeccable)
+ *
+ * Diese Datei wird in jeder Route als letztes Stylesheet geladen, nach der
+ * jeweiligen Seiten-CSS aus styles/captured.css bzw. styles/pages/<seite>.css.
+ * Dadurch bleibt die geklonte Kaskade unberührt (AGENTS.md) und die Korrekturen
+ * gelten trotzdem auf jeder Seite von Anfang bis Ende.
+ *
+ * Jede Regel behebt einen belegten Befund von `npx impeccable detect <url>`
+ * gegen die Live-Seiten. Der Befund steht als Kommentar darüber; die Selektoren
+ * sind die vom Detektor gemeldeten.
+ */
+
+/* [low-contrast] 4,2:1 statt 4,5:1 · nav.pc-breadcrumb > ol > li:nth-of-type(1) > a
+   Der erste Brotkrumen-Link erbt eine gedämpfte Farbe über einem Verlauf. */
+nav.pc-breadcrumb ol li a,
+.home-concept .pc-breadcrumb a {
+  color: var(--color-text-primaer, #f3f0ea);
+}
+nav.pc-breadcrumb ol li[aria-current="page"],
+nav.pc-breadcrumb ol li span {
+  color: var(--color-text-sekundaer, #d8ded9);
+}
+
+/* [low-contrast] 4,0:1 statt 4,5:1 · div.identity-copy > span.hc-kicker
+   Die Kleinschrift-Kicker über Verlaufsflächen brauchen die primäre Textfarbe;
+   zurückhaltend wirken sie weiter über Größe, Laufweite und Versalien. */
+.hc-kicker,
+.identity-copy .hc-kicker,
+#atelier .home-concept .hc-kicker,
+.home-concept .hc-kicker,
+.hc-scene-context {
+  color: var(--color-text-primaer, #f3f0ea);
+}
+
+/* [tiny-text] 11px Fließtext · li > article.tkc-card > p.tkc-card-price > small
+   Preiszusatz („inkl. MwSt.“) im Katalog: 11px ist unter der Lesbarkeitsgrenze. */
+article.tkc-card .tkc-card-price small,
+.tkc-card small,
+.tk-card small {
+  font-size: 0.78rem; /* ≈ 12,5px */
+  line-height: 1.45;
+}
+
+/* [text-overflow] a läuft um 21–32px aus seinem Kasten · nav.hc-anchors > a
+   Lange zusammengesetzte Wörter in der Sprungmarken-Leiste. */
+nav.hc-anchors > a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* [line-length] ~91 Zeichen je Zeile · #zusammenarbeit header p, p.tk-note
+   Lesbares Maß für die beiden gemeldeten Textblöcke. */
+.hc-section-heading > p,
+p.tk-note {
+  max-width: 72ch;
+}
+
+/* [straggler] Ein Wort allein auf der letzten Zeile · p.oracle-note, .footer-legal p
+   text-wrap: pretty zieht ein Wort herauf, wo der Browser es unterstützt. */
+p.oracle-note,
+.footer-legal p,
+.site-footer p,
+.hc-section-heading > p {
+  text-wrap: pretty;
+}
+
+/* [first-viewport-column-overflow] /datenschutz, /ki-hinweise:
+   section.hc-intro öffnet die Seite mit einer Spalte über 200 % Fensterhöhe,
+   während die Nachbarspalte 27 % füllt. Auf großen Fenstern nebeneinander zu
+   setzen hilft nicht; stattdessen beginnt der Fließtext erst nach dem Falz. */
+@media (min-width: 1024px) {
+  section.hc-intro.pc-section {
+    align-items: start;
+  }
+  section.hc-intro.pc-section > :last-child:not(:only-child) {
+    position: sticky;
+    top: var(--space-6, 24px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Zweiter Teil: die von Impeccable als „KI-Handschrift“ gemeldeten Muster.
+ * Reine Darstellung, kein Inhalt entfällt. Umkehrbar durch Entfernen dieser
+ * Datei aus den Routen.
+ * ------------------------------------------------------------------------- */
+
+/* [text-overflow] a läuft um 18–32px aus seinem Kasten · nav.hc-anchors > a
+   Die Leiste stand auf flex-wrap: nowrap; lange Begriffe passten nicht. */
+nav.hc-anchors,
+nav.hc-anchors.hc-container {
+  flex-wrap: wrap;
+}
+
+/* [gradient-text] background-clip: text + Verlauf auf allen Überschriften
+   (.workspace-shell :is(h1,h2,h3,h4) mit --gradient-atelier-heading).
+   Verlaufstext ist dekorativ und senkt den Kontrast; Überschriften werden
+   wieder einfarbig in der primären Textfarbe gesetzt. */
+.workspace-shell :is(h1, h2, h3, h4),
+.website :is(h1, h2, h3, h4) {
+  background-image: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--color-text-primaer, #f3f0ea);
+}
+
+/* [dark-glow] farbiger Schein (#8fae5a) auf dunklem Grund ·
+   a.nexify-control.primary-button, button.hc-finish-primary
+   Der grüne Lichtschein weicht einer klaren Kante; die Marke bleibt über
+   Fläche und Schriftfarbe erkennbar. */
+.nexify-control.primary-button,
+.nexify-control[data-variant="primary"],
+button.primary-button,
+.primary-button,
+button.hc-finish-primary,
+.hc-finish-primary {
+  /* !important: diese Schicht liegt über Regeln mit tieferen Scopes
+     (#atelier .home-concept …), die denselben Schein setzen. */
+  box-shadow: inset 0 1px 0 #ffffff40, 0 2px 0 #0000004d !important;
+}
+:root,
+.website,
+.workspace-shell,
+#atelier {
+  /* Der Schein steckt im Token, nicht in den Schaltflächen-Regeln. */
+  --shadow-button-primaer: inset 0 1px 0 #ffffff40, 0 2px 0 #0000004d;
+}
+.nexify-control.primary-button:focus-visible,
+button.hc-finish-primary:focus-visible {
+  outline: 2px solid var(--color-marke-lime-signal, #c0ee38);
+  outline-offset: 2px;
+}
+
+/* [radial-halo] radialer Lichtfleck (#b4cf7c → transparent) auf dunkler Seite
+   Der Seitengrund trägt den Schein großflächig; er wird entfernt, die
+   Flächenfarbe bleibt. */
+:root,
+.website,
+.workspace-shell,
+#atelier {
+  --gradient-seitengrund: none;
+  --gradient-markenlicht: none;
+  --gradient-band: none;
+  --material-section-glow: none;
+  --fx-glow: none;
+}
+html body,
+body .website,
+body .workspace-shell,
+body #atelier {
+  background-image: none !important;
+}
+
+/* [text-overflow] Rest: die Sprungmarken standen auf white-space: nowrap. */
+nav.hc-anchors > a,
+nav.hc-anchors.hc-container > a {
+  white-space: normal !important;
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+nav.hc-anchors,
+nav.hc-anchors.hc-container {
+  flex-wrap: wrap !important;
+}
