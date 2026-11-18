@@ -361,12 +361,12 @@
   outline-offset: 4px !important;
 }
 
-:root #atelier .orientation-unavailable {
+:root #atelier .chat-availability {
   padding: 1rem;
   flex-shrink: 0;
 }
 
-:root #atelier .orientation-unavailable .orientation-status {
+:root #atelier .chat-availability .orientation-status {
   min-height: auto;
   margin: 0 0 0.75rem;
   color: inherit;
@@ -381,23 +381,23 @@
 }
 
 /* The captures position a composer over a grid. The offline state is ordinary, visible flow content. */
-:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable) {
+:root #atelier #aifly-panel .public-orientation:has(.chat-availability) {
   display: flex;
   flex-direction: column;
 }
 
-:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable)::after {
+:root #atelier #aifly-panel .public-orientation:has(.chat-availability)::after {
   display: none;
 }
 
-:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable) .orientation-content {
+:root #atelier #aifly-panel .public-orientation:has(.chat-availability) .orientation-content {
   flex: 1 1 auto;
   min-height: 0;
   padding-bottom: 1rem;
   overflow-y: auto;
 }
 
-:root #atelier #aifly-panel .orientation-unavailable .orientation-status {
+:root #atelier #aifly-panel .chat-availability .orientation-status {
   clip-path: none;
   white-space: normal;
   width: auto;
@@ -406,4 +406,13 @@
   overflow: visible;
   font-size: 0.875rem;
   line-height: 1.5;
+}
+
+:root #atelier #aifly-panel .chat-availability a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
