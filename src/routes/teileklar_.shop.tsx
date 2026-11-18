@@ -316,7 +316,7 @@ function Index() {
     <>
       <style>{capturedCSS}</style>
       <div hidden />
-      <div id="atelier" className={chatOpen ? "workspace-shell site-teileklar is-open" : "workspace-shell site-teileklar is-closed"} data-hero-action-visible="true">{pageContent}</div>
+      <div id="atelier" className={chatOpen ? "workspace-shell site-teileklar is-open" : "workspace-shell site-teileklar is-closed"}>{pageContent}</div>
 
     </>
   );
