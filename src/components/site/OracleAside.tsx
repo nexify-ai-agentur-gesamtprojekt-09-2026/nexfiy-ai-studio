@@ -1,12 +1,11 @@
+import { ChatUnavailable } from "@/components/site/ChatUnavailable";
 import type { CSSProperties } from "react";
-import { fitComposer, useComposerFit } from "@/lib/imported-site";
 
 /** AIFly ORACLE side panel of the NeXify pages (desktop column, phone dialog). */
 export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open: boolean; isMobile: boolean; viewportHeight: number | null; onClose: () => void }) {
-  const composerRef = useComposerFit(open, isMobile, viewportHeight);
   return (
     <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!open} style={isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
-      <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
+      <div className="chat-resize-handle" aria-hidden="true" />
       <div className={"panel-heading"}>
         <div className={"panel-heading-copy"}>
           <div className={"panel-identity"}>
@@ -37,7 +36,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
             </div>
             <div className={"orientation-history"} role="log" aria-live="polite" aria-relevant="additions text" aria-busy="false" />
             <div className={"orientation-starters"} role="group" aria-label="Wobei können wir Ihnen helfen?">
-              <button type="button" className={"orientation-starter"} aria-pressed="false">
+              <a className={"orientation-starter"} href="/leistungen/websites">
                 <span className={"orientation-starter-index"} aria-hidden="true">01</span>
                 <span className={"orientation-starter-copy"}>
                   <strong>Marke &amp; Web</strong>
@@ -46,8 +45,8 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M4 12h16m-7-7 7 7-7 7" />
                 </svg>
-              </button>
-              <button type="button" className={"orientation-starter"} aria-pressed="false">
+              </a>
+              <a className={"orientation-starter"} href="/leistungen/agenten-automatisierung">
                 <span className={"orientation-starter-index"} aria-hidden="true">02</span>
                 <span className={"orientation-starter-copy"}>
                   <strong>Systeme &amp; KI</strong>
@@ -56,8 +55,8 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M4 12h16m-7-7 7 7-7 7" />
                 </svg>
-              </button>
-              <button type="button" className={"orientation-starter"} aria-pressed="false">
+              </a>
+              <a className={"orientation-starter"} href="/loesungen">
                 <span className={"orientation-starter-index"} aria-hidden="true">03</span>
                 <span className={"orientation-starter-copy"}>
                   <strong>Ads &amp; Marketing</strong>
@@ -66,7 +65,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M4 12h16m-7-7 7 7-7 7" />
                 </svg>
-              </button>
+              </a>
             </div>
             <ol className={"orientation-path orientation-path-quiet"} aria-label="Aus einer Idee wird ein klarer nächster Schritt.">
               <li data-state="open"><small>01</small>Vorhaben einordnen</li>
@@ -74,19 +73,7 @@ export function OracleAside({ open, isMobile, viewportHeight, onClose }: { open:
               <li data-state="open"><small>03</small>Persönlich vertiefen</li>
             </ol>
           </div>
-          <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
-            <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
-            <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Wobei können wir Ihnen helfen?" aria-describedby="orientation-keys" required enterKeyHint="send" />
-            <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
-            <div className={"orientation-composer-actions"}>
-              <button className={"primary-button"} disabled aria-label="Nachricht senden">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-                  <path d="M4 12h16m-7-7 7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </form>
-          <p className={"connection-note orientation-status"} role="status" />
+          <ChatUnavailable />
           <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="/datenschutz">Datenschutz</a></p>
         </section>
       </div>

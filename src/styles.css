@@ -354,3 +354,56 @@
   @media (prefers-reduced-motion: reduce) { animation: none; }
 }
 
+
+/* Imported pages override browser outlines. Keep keyboard location visible in every site shell. */
+:root #atelier :is(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid oklch(0.9 0.12 170) !important;
+  outline-offset: 4px !important;
+}
+
+:root #atelier .orientation-unavailable {
+  padding: 1rem;
+  flex-shrink: 0;
+}
+
+:root #atelier .orientation-unavailable .orientation-status {
+  min-height: auto;
+  margin: 0 0 0.75rem;
+  color: inherit;
+}
+
+:root #atelier .orientation-starter {
+  text-decoration: none;
+}
+
+:root #atelier #anfrage {
+  scroll-margin-top: 7rem;
+}
+
+/* The captures position a composer over a grid. The offline state is ordinary, visible flow content. */
+:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable) {
+  display: flex;
+  flex-direction: column;
+}
+
+:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable)::after {
+  display: none;
+}
+
+:root #atelier #aifly-panel .public-orientation:has(.orientation-unavailable) .orientation-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding-bottom: 1rem;
+  overflow-y: auto;
+}
+
+:root #atelier #aifly-panel .orientation-unavailable .orientation-status {
+  clip-path: none;
+  white-space: normal;
+  width: auto;
+  height: auto;
+  position: static;
+  overflow: visible;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

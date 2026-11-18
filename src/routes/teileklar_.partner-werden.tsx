@@ -1,6 +1,8 @@
+import { SiteGuide } from "@/components/site/SiteGuide";
+import { ChatUnavailable } from "@/components/site/ChatUnavailable";
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
-import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
+import { useChatPanel, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
 import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
@@ -27,7 +29,6 @@ function Index() {
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(false);
   useAtelierFilms();
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
-  const composerRef = useComposerFit(chatOpen, isMobile, viewportHeight);
   const pageContent = (<>
 <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
   <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
@@ -217,10 +218,7 @@ function Index() {
           </summary>
           <div className={"hc-service-body"}>
             <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-            <div className={"pc-guide-controls"}>
-              <label>Welchen Bereich möchten Sie erkunden?<select defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select></label>
-              <button type="button" aria-pressed="false">Begleitung starten</button>
-            </div>
+            <SiteGuide initialArea="business-website" />
           </div>
         </details>
       </section>
@@ -270,7 +268,7 @@ function Index() {
             <a className={"hc-finish-primary"} href="/kontakt">Pascal schreiben<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <a className={"hc-text-link"} href="/teileklar/werkstatt">Werkstatt finden<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <a className={"hc-text-link"} href="/teileklar/termine">Termin anfragen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-            <button type="button" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
+            <a href="/kontakt?anliegen=frage#anfrage" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </div>
         </div>
       </section>
@@ -334,7 +332,7 @@ function Index() {
         <span className={"footer-claim"}>TEILEKLAR — Na KLAR! <span aria-hidden="true">·</span> Teile · Fahrzeugzuordnung · Werkstatt · Partnerschaft</span>
         <a className={"footer-crosslink"} href="/">NeXify AI <span aria-hidden="true">→</span></a>
         <details className={"footer-overview"}>
-          <summary aria-expanded="false" aria-controls="_r_6_">
+          <summary aria-controls="_r_6_">
             <span>Seitenübersicht</span>
             <span className={"footer-overview-marker"} aria-hidden="true">+</span>
           </summary>
@@ -372,7 +370,7 @@ function Index() {
           <a href="/teileklar/rechtliches">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
         </nav>
         <details className={"footer-legal-details"}>
-          <summary aria-expanded="false" aria-controls="_r_5_">Hinweise zu den Rechtsdokumenten</summary>
+          <summary aria-controls="_r_5_">Hinweise zu den Rechtsdokumenten</summary>
           <div id="_r_5_">
             <p>Die Rechtsinformationen für TEILEKLAR sind direkt erreichbar. Vollständige Angaben zum Anbieter, Datenschutz und Verbraucherrechten im Shop stehen noch zur Prüfung und Freigabe.</p>
             <p>Eine öffentliche Übersicht der Drittanbieter-Komponenten und ihrer Lizenzen ist noch nicht verfügbar.</p>
@@ -400,7 +398,7 @@ function Index() {
 </div>
 {!chatOpen && <button ref={reopenRef} onClick={openChat} aria-expanded="false" aria-controls="aifly-panel" type="button" className={"nexify-control secondary-button reopen-chat"} data-variant="secondary"><span className={"aifly-symbol oracle-companion"} data-state="idle" aria-hidden="true"><img alt="" width="34" height="34" decoding="async" src="/site-assets/9176c58a16ff634a.png" /></span>TEILEKLAR Hilfe</button>}
 <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!chatOpen} style={!chatOpen || isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
-  <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
+  <div className="chat-resize-handle" aria-hidden="true" />
   <div className={"panel-heading"}>
     <div className={"panel-heading-copy"}>
       <div className={"panel-identity"}>
@@ -431,7 +429,7 @@ function Index() {
         </div>
         <div className={"orientation-history"} role="log" aria-live="polite" aria-relevant="additions text" aria-busy="false" />
         <div className={"orientation-starters"} role="group" aria-label="Ihr Fahrzeug-/Teile-Anliegen">
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          <a className={"orientation-starter"} href="/teileklar/fahrzeug-und-passung">
             <span className={"orientation-starter-index"} aria-hidden="true">01</span>
             <span className={"orientation-starter-copy"}>
               <strong>Fahrzeug &amp; Teil</strong>
@@ -440,8 +438,8 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          </a>
+          <a className={"orientation-starter"} href="/teileklar/werkstatt">
             <span className={"orientation-starter-index"} aria-hidden="true">02</span>
             <span className={"orientation-starter-copy"}>
               <strong>Werkstatt-Anfrage</strong>
@@ -450,8 +448,8 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          </a>
+          <a className={"orientation-starter"} href="/teileklar/partner-werden">
             <span className={"orientation-starter-index"} aria-hidden="true">03</span>
             <span className={"orientation-starter-copy"}>
               <strong>Zusammenarbeit</strong>
@@ -460,7 +458,7 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
+          </a>
         </div>
         <ol className={"orientation-path orientation-path-quiet"} aria-label="Vom Anliegen zur passenden Anlaufstelle.">
           <li data-state="open"><small>01</small>Fahrzeug nennen</li>
@@ -468,19 +466,7 @@ function Index() {
           <li data-state="open"><small>03</small>Nächsten Weg wählen</li>
         </ol>
       </div>
-      <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
-        <label htmlFor="orientation-message">Ihr Fahrzeug-/Teile-Anliegen</label>
-        <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Ihr Fahrzeug-/Teile-Anliegen" aria-describedby="orientation-keys" required enterKeyHint="send" />
-        <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
-        <div className={"orientation-composer-actions"}>
-          <button className={"primary-button"} disabled aria-label="Nachricht senden">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-              <path d="M4 12h16m-7-7 7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </form>
-      <p className={"connection-note orientation-status"} role="status" />
+      <ChatUnavailable />
       <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="/teileklar/rechtliches">Datenschutz</a></p>
     </section>
   </div>

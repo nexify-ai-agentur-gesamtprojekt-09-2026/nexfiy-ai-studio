@@ -68,7 +68,7 @@ export function NexifyFooter() {
           <span className={"footer-claim"}>NeXify AI{" "}<span aria-hidden="true">·</span>{" "}Chat it. Automate it.</span>
           <a className={"footer-crosslink"} href="/teileklar" {...here("/teileklar")}>TEILEKLAR{" "}<span aria-hidden="true">→</span></a>
           <details className={"footer-overview"}>
-            <summary aria-expanded="false" aria-controls="_R_8lbH1_">
+            <summary aria-controls="_R_8lbH1_">
               <span>Seitenübersicht</span>
               <span className={"footer-overview-marker"} aria-hidden="true">+</span>
             </summary>
@@ -133,7 +133,7 @@ export function NexifyFooter() {
             <a href="/ki-hinweise" {...here("/ki-hinweise")}>Markeninszenierung · KI-generiert</a>
           </p>
           <details className={"footer-legal-details"}>
-            <summary aria-expanded="false" aria-controls="_R_8lb_">Hinweise zu den Rechtsdokumenten</summary>
+            <summary aria-controls="_R_8lb_">Hinweise zu den Rechtsdokumenten</summary>
             <div id="_R_8lb_">
               <p>Die Seiten zu Anbieterinformationen und Datenschutz sind direkt erreichbar. Vollständige Pflichtangaben und Rechtstexte stehen noch zur Prüfung und Freigabe.</p>
               <p>Eine öffentliche Übersicht der Drittanbieter-Komponenten und ihrer Lizenzen ist noch nicht verfügbar.</p>
