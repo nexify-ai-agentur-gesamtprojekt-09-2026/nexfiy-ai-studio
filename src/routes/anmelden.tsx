@@ -74,7 +74,7 @@ function ImportedSectionAnmelden() {
             <div className={"atelier-film atelier-film-hero"}>
               <div className={"atelier-film-picture"}>
                 <img className={"atelier-film-fallback"} alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie" aria-hidden="false" width="1280" height="720" src="/site-assets/4b45951db0b51136.webp" />
-                <video src="/site-assets/b82843cf77d572df.mp4" poster="/site-assets/4b45951db0b51136.webp" width="1280" height="720" preload="auto" playsInline aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" muted />
+                <video src="/site-assets/b82843cf77d572df.mp4" poster="/site-assets/4b45951db0b51136.webp" width="1280" height="720" preload="metadata" playsInline aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" muted />
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Film abspielen">
                     <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>

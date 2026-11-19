@@ -124,8 +124,9 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    // Each content route, / included, must still set its own head(). Never add og:image or
-    // twitter:image here: every page without its own would inherit the root's preview image.
+    // 2026-11-20 00:15 (Europe/Berlin): og:image/twitter:image bewusst HIER als Marken-Default.
+    // Vorher fehlten sie auf allen 43 Seiten (Messung: 0 Vorkommen), Social-Previews blieben leer.
+    // Eine Route darf sie in ihrem eigenen head() ueberschreiben.
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
@@ -143,6 +144,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://www.nexifyai.de/og/nexify-ai.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "NeXify AI – Websites, Apps, Shops und KI" },
+      { property: "og:site_name", content: "NeXify AI" },
+      { property: "og:locale", content: "de_DE" },
+      { name: "twitter:image", content: "https://www.nexifyai.de/og/nexify-ai.png" },
     ],
     links: [
       {
@@ -172,9 +180,41 @@ declare module "@tanstack/react-router" {
 function RootShell({ children }: { children: ReactNode }) {
   const importedDocument = useImportedMatches({ select: matches => matches.at(-1)?.staticData.importedDocument });
   return (
-    <html lang="en" {...importedDocument?.html}>
+    <html lang="de" {...importedDocument?.html}>
       <head>
         <style href="site-import-inline" precedence="imported-inline">{"@layer imported-inline;"}</style>
+        <script
+          type="application/ld+json"
+          // 2026-11-20 00:15 (Europe/Berlin): strukturierte Daten fuer Organisation + Website.
+          // Ohne sie kennt Google nur Text, keine Entitaet (Knowledge Panel, Sitelinks-Suche).
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.nexifyai.de/#organisation",
+                  name: "NeXify AI",
+                  url: "https://www.nexifyai.de/",
+                  logo: "https://www.nexifyai.de/icons/icon-512.png",
+                  email: "mail@nexifyai.cloud",
+                  telephone: "+31613318856",
+                  founder: { "@type": "Person", name: "Pascal Courbois" },
+                  areaServed: ["DE", "NL", "AT", "CH"],
+                  sameAs: ["https://www.nexifyai.de/"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.nexifyai.de/#website",
+                  url: "https://www.nexifyai.de/",
+                  name: "NeXify AI",
+                  inLanguage: "de-DE",
+                  publisher: { "@id": "https://www.nexifyai.de/#organisation" },
+                },
+              ],
+            }),
+          }}
+        />
         <HeadContent />
       </head>
       <body {...importedDocument?.body}>

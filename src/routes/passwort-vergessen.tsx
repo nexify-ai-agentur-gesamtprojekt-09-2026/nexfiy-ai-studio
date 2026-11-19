@@ -59,7 +59,7 @@ function ImportedSectionPasswortVergessen() {
             <div className={"atelier-film atelier-film-hero"}>
               <div className={"atelier-film-picture"}>
                 <img className={"atelier-film-fallback"} src="/site-assets/4b45951db0b51136.webp" alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie" aria-hidden="false" width="1280" height="720" />
-                <video src="/site-assets/b82843cf77d572df.mp4" poster="/site-assets/4b45951db0b51136.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" />
+                <video src="/site-assets/b82843cf77d572df.mp4" poster="/site-assets/4b45951db0b51136.webp" width="1280" height="720" preload="metadata" playsInline muted aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" />
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Film abspielen">
                     <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>

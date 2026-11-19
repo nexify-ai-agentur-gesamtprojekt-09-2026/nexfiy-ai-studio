@@ -106,7 +106,7 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
             <div className={"atelier-film atelier-film-hero"}>
               <div className={"atelier-film-picture"}>
                 <img className={"atelier-film-fallback"} src="/site-assets/15fa9607b63661b1.webp" alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei" aria-hidden="false" width="1280" height="720" fetchPriority="high" />
-                <video src="/site-assets/8b4870140b46d3f8.mp4" poster="/site-assets/15fa9607b63661b1.webp" width="1280" height="720" preload="auto" playsInline muted aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" />
+                <video src="/site-assets/8b4870140b46d3f8.mp4" poster="/site-assets/15fa9607b63661b1.webp" width="1280" height="720" preload="metadata" playsInline muted aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" />
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Film abspielen">
                     <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>

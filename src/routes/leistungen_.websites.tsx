@@ -106,7 +106,7 @@ function ImportedSectionEineWebsiteDieIhr() {
             <div className={"atelier-film atelier-film-hero"}>
               <div className={"atelier-film-picture"}>
                 <img className={"atelier-film-fallback"} alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch" aria-hidden="false" width="1280" height="720" fetchPriority="high" src="/site-assets/5c592a5dc791fcc3.webp" />
-                <video src="/site-assets/e3638738b1263f00.mp4" poster="/site-assets/5c592a5dc791fcc3.webp" width="1280" height="720" preload="auto" playsInline aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" muted />
+                <video src="/site-assets/e3638738b1263f00.mp4" poster="/site-assets/5c592a5dc791fcc3.webp" width="1280" height="720" preload="metadata" playsInline aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" muted />
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Film abspielen">
                     <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" {...({ focusable: "false" } as any)}>
