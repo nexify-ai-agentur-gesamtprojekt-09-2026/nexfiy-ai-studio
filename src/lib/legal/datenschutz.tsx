@@ -158,10 +158,10 @@ export const datenschutzSections: LegalSection[] = [
       <p key="p1">
         Die Website wird ausschließlich über eine verschlüsselte Verbindung (TLS) ausgeliefert.
         Verwaltungszugänge sind auf wenige Personen beschränkt und durch Schlüssel statt Passwörter
-        geschützt. Wir treffen die technischen und organisatorischen Maßnahmen nach Art. 32 DSGVO, um
-        Daten gegen Verlust, Veränderung und unbefugten Zugriff zu schützen; da diese Website selbst
-        keine personenbezogenen Daten speichert, beziehen sie sich auf den sicheren Betrieb und die
-        abgesicherte Auslieferung.
+        geschützt. Wir treffen die technischen und organisatorischen Maßnahmen nach Art. 32 DSGVO,
+        um Daten gegen Verlust, Veränderung und unbefugten Zugriff zu schützen; da diese Website
+        selbst keine personenbezogenen Daten speichert, beziehen sie sich auf den sicheren Betrieb
+        und die abgesicherte Auslieferung.
       </p>,
     ],
   },
