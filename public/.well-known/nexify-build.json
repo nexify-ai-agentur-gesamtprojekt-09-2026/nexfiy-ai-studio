@@ -2,13 +2,13 @@
  "domain": "www.nexifyai.de",
  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
  "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
- "commit": "d754ef5879b180ff5cc4a3838fff663a0786a506",
- "commit_short": "d754ef5879",
- "commit_subject": "Dev-Port 5173 festgenagelt: hermes verify readiness wieder gruen (ok=true)",
+ "commit": "c6b03200b6d8fe68b527f62d5b665eaeaf4e1328",
+ "commit_short": "c6b03200b6",
+ "commit_subject": "Chat mit echter KI + Livebestand auf den TEILEKLAR-Strecken",
  "build_id": "",
  "deployed_at": "2026-11-19T11:40:35+01:00",
  "host": "srv1243952",
  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
- "generated_at": "2026-11-19T21:18:02+01:00",
+ "generated_at": "2026-11-19T22:41:17+01:00",
  "generator": "scripts/quality/gen-build-stamp.py"
 }

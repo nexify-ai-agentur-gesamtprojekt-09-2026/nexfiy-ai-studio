@@ -50,6 +50,17 @@ export function AiChat() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // 2026-11-19 22:55 (Europe/Berlin): Bei offenem Chat darf die Seite dahinter nicht
+  // mitscrollen — auf dem Telefon deckt das Panel den ganzen Bildschirm ab.
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
   async function send(text: string) {
     const message = text.trim().slice(0, 1000);
     if (!message || busy) return;

@@ -51,6 +51,28 @@ function sanitize(turns: ChatTurn[]): ChatTurn[] {
     .map((t) => ({ role: t.role, content: t.content.slice(0, MAX_CHARS) }));
 }
 
+
+/**
+ * Der Router antwortet je nach Modellpfad als JSON, NDJSON oder SSE. Statt auf ein Format zu
+ * wetten, wird das erste verwertbare Objekt gelesen — sonst scheitert der Chat an einem
+ * Beistrich hinter dem JSON (beobachtet 19.11.2026).
+ */
+function extractReply(body: string): string {
+  const candidates = [body, ...body.split(/\r?\n/)];
+  for (const raw of candidates) {
+    const line = raw.trim().replace(/^data:\s*/, "");
+    if (!line.startsWith("{")) continue;
+    try {
+      const parsed = JSON.parse(line) as { choices?: { message?: { content?: string } }[] };
+      const content = parsed.choices?.[0]?.message?.content?.trim();
+      if (content) return content;
+    } catch {
+      /* naechsten Kandidaten versuchen */
+    }
+  }
+  return "";
+}
+
 export const chatReply = createServerFn({ method: "POST" })
   .validator((input: { messages?: ChatTurn[] } | undefined) => {
     const messages = sanitize(Array.isArray(input?.messages) ? input.messages : []);
@@ -83,17 +105,18 @@ export const chatReply = createServerFn({ method: "POST" })
           messages: [{ role: "system", content: SYSTEM_PROMPT }, ...data.messages],
           max_tokens: 800,
           temperature: 0.4,
+          stream: false,
         }),
         signal: AbortSignal.timeout(25000),
       });
       if (!response.ok) throw new Error(`router ${response.status}`);
-      const payload = (await response.json()) as {
-        choices?: { message?: { content?: string } }[];
-      };
-      const reply = payload.choices?.[0]?.message?.content?.trim();
+      const reply = extractReply(await response.text());
       if (!reply) throw new Error("empty reply");
       return { ok: true, reply };
-    } catch {
+    } catch (error) {
+      // 2026-11-19 22:50 (Europe/Berlin): Fehler kurz protokollieren (ohne Secrets), damit
+      // ein Ausfall der Gegenstelle in den Worker-Logs sichtbar ist statt still zu bleiben.
+      console.error("[chat] Router-Aufruf fehlgeschlagen:", error instanceof Error ? error.message : String(error));
       return {
         ok: false,
         reply:
