@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type MouseEvent,
+  type RefObject,
+} from "react";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
@@ -15,13 +22,19 @@ function subscribePhone(onChange: () => void) {
 
 /** True on phone widths (the breakpoint the imported pages switch their chat panel to a dialog). False during SSR. */
 export function useImportedMobile() {
-  return useSyncExternalStore(subscribePhone, () => matchMedia(PHONE_QUERY).matches, () => false);
+  return useSyncExternalStore(
+    subscribePhone,
+    () => matchMedia(PHONE_QUERY).matches,
+    () => false,
+  );
 }
 
 /** Plays muted looping background videos only while they are on screen (decorative loops of some imported pages). */
 export function useLoopingVideos() {
   useEffect(() => {
-    const loopingVideos = Array.from(document.querySelectorAll<HTMLVideoElement>("video[loop]:not([autoplay]):not([controls])"))
+    const loopingVideos = Array.from(
+      document.querySelectorAll<HTMLVideoElement>("video[loop]:not([autoplay]):not([controls])"),
+    )
       .filter((video) => video.muted && !video.closest("[data-site-import-carousel-store]"))
       .slice(0, 32);
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -55,13 +68,17 @@ export function useShellSignals(heroActionSelector?: string) {
     const observers: IntersectionObserver[] = [];
     const heroAction = heroActionSelector ? document.querySelector(heroActionSelector) : null;
     if (heroAction) {
-      const observer = new IntersectionObserver((entries) => setHeroActionVisible(entries.at(-1)?.isIntersecting ?? true));
+      const observer = new IntersectionObserver((entries) =>
+        setHeroActionVisible(entries.at(-1)?.isIntersecting ?? true),
+      );
       observer.observe(heroAction);
       observers.push(observer);
     }
     const footer = document.querySelector("#atelier footer");
     if (footer) {
-      const observer = new IntersectionObserver((entries) => setFooterVisible(entries.at(-1)?.isIntersecting ?? false));
+      const observer = new IntersectionObserver((entries) =>
+        setFooterVisible(entries.at(-1)?.isIntersecting ?? false),
+      );
       observer.observe(footer);
       observers.push(observer);
     }
@@ -97,7 +114,8 @@ export function useChatPanel(defaultOpen: boolean) {
   useEffect(() => {
     if (!chatOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open]")) closeChat();
+      if (event.key === "Escape" && !document.querySelector(".site-header details[open]"))
+        closeChat();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -153,7 +171,9 @@ export function useComposerFit(open: boolean, ...deps: unknown[]) {
   // Like the original, a panel that is open on page load starts scrolled to its latest entry.
   const openOnLoad = useRef(open);
   useEffect(() => {
-    const log = composerRef.current?.closest(".public-orientation")?.querySelector<HTMLElement>(".orientation-content");
+    const log = composerRef.current
+      ?.closest(".public-orientation")
+      ?.querySelector<HTMLElement>(".orientation-content");
     if (!openOnLoad.current || !log) return;
     const toLatest = () => {
       log.scrollTop = log.scrollHeight;
@@ -190,29 +210,45 @@ export function useAtelierFilms() {
       if (!video) continue;
       video.muted = true;
       videos.push(video);
-      const buttons = Array.from(film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"));
+      const buttons = Array.from(
+        film.querySelectorAll<HTMLButtonElement>(".atelier-film-controls > button"),
+      );
       const playButton = buttons[0];
-      const soundButton = buttons.find((button) => /Ton/.test(button.getAttribute("aria-label") || ""));
-      const captionsButton = buttons.find((button) => button.getAttribute("aria-label") === "Untertitel");
+      const soundButton = buttons.find((button) =>
+        /Ton/.test(button.getAttribute("aria-label") || ""),
+      );
+      const captionsButton = buttons.find(
+        (button) => button.getAttribute("aria-label") === "Untertitel",
+      );
       const fallback = film.querySelector<HTMLImageElement>(".atelier-film-fallback");
       const bar = film.querySelector<HTMLElement>(".atelier-film-progress span");
       const volume = film.querySelector<HTMLInputElement>('.atelier-volume input[type="range"]');
       const sync = () => {
         if (playButton) {
-          playButton.setAttribute("aria-label", video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren");
+          playButton.setAttribute(
+            "aria-label",
+            video.ended ? "Erneut abspielen" : video.paused ? "Film abspielen" : "Film pausieren",
+          );
           const label = playButton.querySelector("span");
           if (label) label.textContent = video.paused ? "Abspielen" : "Pausieren";
-          playButton.querySelector("path")?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
+          playButton
+            .querySelector("path")
+            ?.setAttribute("d", video.paused ? PLAY_ICON : PAUSE_ICON);
         }
         if (soundButton) {
-          soundButton.setAttribute("aria-label", video.muted ? "Film mit Ton starten" : "Ton ausschalten");
+          soundButton.setAttribute(
+            "aria-label",
+            video.muted ? "Film mit Ton starten" : "Ton ausschalten",
+          );
           const label = soundButton.querySelector("span");
           if (label) label.textContent = video.muted ? "Ton an" : "Ton aus";
         }
         if (fallback && !video.paused) fallback.hidden = true;
-        if (bar && video.duration > 0) bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
+        if (bar && video.duration > 0)
+          bar.style.transform = `scaleX(${Math.min(1, video.currentTime / video.duration)})`;
       };
-      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"]) listen(video, type, sync);
+      for (const type of ["play", "pause", "ended", "timeupdate", "volumechange", "loadedmetadata"])
+        listen(video, type, sync);
       listen(video, "play", () => {
         for (const other of videos) if (other !== video && !other.paused) other.pause();
       });

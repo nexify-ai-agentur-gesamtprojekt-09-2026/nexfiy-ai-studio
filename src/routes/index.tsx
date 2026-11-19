@@ -81,7 +81,7 @@ function Index() {
                       <small>nach vereinbartem Umfang</small>
                       <p>Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.</p>
                     </div>
-                    <a className={"hc-text-link"} href="/preise-ablauf">Mehr zu Kosten und Ablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+                    <a className={"hc-text-link"} href="/preise-ablauf">Mehr zu Kosten und Ablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                   </header>
                   <div className={"hc-costs is-in"}>
                     <div>
@@ -107,7 +107,7 @@ function Index() {
                 <div className={"hc-finish-next is-in"}>
                   <p>Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.</p>
                   <div className={"hc-finish-actions"}>
-                    <button aria-controls="aifly-panel" aria-expanded={chatOpen} type="button" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary" onClick={openChat}>Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
+                    <button aria-controls="aifly-panel" aria-expanded={chatOpen} type="button" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary" onClick={openChat}>Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
                   </div>
                   <small />
                 </div>
@@ -159,10 +159,10 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/websites">
           <span className={"hc-scene-context"}>Marke &amp; Dienstleistung</span>
-          <h3>Ihr Angebot, auf den Punkt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
+          <h3>Ihr Angebot, auf den Punkt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
           <p>Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen verständlich zeigt und den Weg zur Anfrage öffnet.</p>
           <small className={"hc-scene-value"}>Ziel: passende Gespräche mit den richtigen Kunden.</small>
-          <span className={"hc-text-link"}>Websites &amp; Markenauftritt<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <span className={"hc-text-link"}>Websites &amp; Markenauftritt<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
         </a>
       </article>
       <article className={"hc-gallery-card is-in"}>
@@ -173,10 +173,10 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/agenten-automatisierung">
           <span className={"hc-scene-context"}>Fertigung &amp; Handwerk</span>
-          <h3>Mehr Zeit für die Arbeit, die zählt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
+          <h3>Mehr Zeit für die Arbeit, die zählt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
           <p>Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und KI Ihrem Team konkret Arbeit abnehmen können.</p>
           <small className={"hc-scene-value"}>Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.</small>
-          <span className={"hc-text-link"}>KI im Arbeitsablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <span className={"hc-text-link"}>KI im Arbeitsablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
         </a>
       </article>
       <article className={"hc-gallery-card is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":1296}}"}>
@@ -187,10 +187,10 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/teileklar">
           <span className={"hc-scene-context"}>Automotive &amp; Logistik</span>
-          <h3>Das richtige Teil. Der richtige Weg.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
+          <h3>Das richtige Teil. Der richtige Weg.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
           <p>TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in einem verständlichen Anfrageweg zusammenkommen.</p>
           <small className={"hc-scene-value"}>Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage.</small>
-          <span className={"hc-text-link"}>TEILEKLAR entdecken<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <span className={"hc-text-link"}>TEILEKLAR entdecken<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
         </a>
       </article>
     </nav>
@@ -205,7 +205,7 @@ function ImportedSectionWasKNnenWir() {
           <span className={"hc-kicker"}>Was wir für Sie tun</span>
           <h2 id="hc-services-title">Was können wir für Sie bauen?</h2>
           <p>Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten Aufgabe in Ihrem Unternehmen.</p>
-          <a className={"hc-text-link"} href="/kontakt">Ihr Vorhaben mit uns besprechen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <a className={"hc-text-link"} href="/kontakt">Ihr Vorhaben mit uns besprechen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           <figure className={"hc-plate hc-plate-services"}>
             <img src="/site-assets/5b8e74b98d950c05.webp" srcSet="/site-assets/05d4134e5686af4f.webp 800w, /site-assets/55d521535e5fc86c.webp 1280w, /site-assets/5b8e74b98d950c05.webp 1920w" sizes="(max-width: 820px) 100vw, 40vw" width="2000" height="1125" alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier" loading="lazy" decoding="async" />
           </figure>
@@ -228,7 +228,7 @@ function ImportedSectionWasKNnenWir() {
                 <li>Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe</li>
               </ul>
               <p className={"hc-caption"}>Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart.</p>
-              <a className={"hc-text-link"} href="/leistungen/websites">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <a className={"hc-text-link"} href="/leistungen/websites">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
           </details>
           <details className={"hc-service-detail is-in"}>
@@ -248,7 +248,7 @@ function ImportedSectionWasKNnenWir() {
                 <li>Fehlerfälle prüfen, Verantwortlichkeiten klären und Bedienung dokumentieren</li>
               </ul>
               <p className={"hc-caption"}>Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen wir den nächsten.</p>
-              <a className={"hc-text-link"} href="/leistungen/agenten-automatisierung">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <a className={"hc-text-link"} href="/leistungen/agenten-automatisierung">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
           </details>
           <details className={"hc-service-detail is-in"}>
@@ -268,7 +268,7 @@ function ImportedSectionWasKNnenWir() {
                 <li>SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen</li>
               </ul>
               <p className={"hc-caption"}>Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt.</p>
-              <a className={"hc-text-link"} href="/loesungen">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <a className={"hc-text-link"} href="/loesungen">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             </div>
           </details>
         </div>
@@ -295,7 +295,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <div>
             <h3>NeX AIFly Suite</h3>
             <p>Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.</p>
-            <span className={"hc-text-link"}>Suite kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>Suite kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/produkte/one">
@@ -305,7 +305,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <div>
             <h3>NeX Agentic AI</h3>
             <p>Der Agent für klar umrissene Aufgaben – mit den Werkzeugen, die Sie zulassen.</p>
-            <span className={"hc-text-link"}>Agenten kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>Agenten kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/produkte/api">
@@ -315,7 +315,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <div>
             <h3>NeXify API</h3>
             <p>KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.</p>
-            <span className={"hc-text-link"}>API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/teileklar">
@@ -325,7 +325,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <div>
             <h3>TEILEKLAR</h3>
             <p>Unsere eigene Marke: Zubehör und Teile für Auto und Motorrad, mit klaren Angaben.</p>
-            <span className={"hc-text-link"}>Zu TEILEKLAR<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>Zu TEILEKLAR<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
           </div>
         </a>
       </div>

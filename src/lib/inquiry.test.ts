@@ -28,7 +28,9 @@ describe("inquiry rules", () => {
   });
 
   it("requires the workshop name on the partner form", () => {
-    expect(validateInquiry("partner", valid).company).toBe("Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.");
+    expect(validateInquiry("partner", valid).company).toBe(
+      "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.",
+    );
   });
 
   it("rejects an e-mail address without a domain", () => {
@@ -37,7 +39,9 @@ describe("inquiry rules", () => {
 
   it("asks for at least ten characters of message", () => {
     expect(validateInquiry("contact", { ...valid, message: "Hallo" }).message).toBeDefined();
-    expect(validateInquiry("contact", { ...valid, message: "Neue Website" }).message).toBeUndefined();
+    expect(
+      validateInquiry("contact", { ...valid, message: "Neue Website" }).message,
+    ).toBeUndefined();
   });
 
   it("focuses fields in form order", () => {
@@ -50,7 +54,9 @@ describe("inquiry rules", () => {
   });
 
   it("trims input and reads the consent checkbox", () => {
-    expect(normalizeInquiry({ name: "  Erika   Muster ", email: " ERIKA@FIRMA.DE ", consent: "on" })).toMatchObject({
+    expect(
+      normalizeInquiry({ name: "  Erika   Muster ", email: " ERIKA@FIRMA.DE ", consent: "on" }),
+    ).toMatchObject({
       name: "Erika Muster",
       email: "erika@firma.de",
       consent: true,
@@ -68,7 +74,9 @@ describe("inquiry e-mail hand-off", () => {
   });
 
   it("names the workshop in partner requests", () => {
-    expect(buildInquiryMail("partner", { ...valid, company: "KFZ Berger" }).subject).toBe("TEILEKLAR Partneranfrage: KFZ Berger");
+    expect(buildInquiryMail("partner", { ...valid, company: "KFZ Berger" }).subject).toBe(
+      "TEILEKLAR Partneranfrage: KFZ Berger",
+    );
   });
 
   it("keeps very long messages within the mail-link limit", () => {

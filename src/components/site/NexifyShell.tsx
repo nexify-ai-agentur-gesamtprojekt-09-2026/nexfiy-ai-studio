@@ -6,7 +6,13 @@ export interface ShellChat {
   closeChat: () => void;
 }
 import shellCSS from "../../styles/site-shell.css?url";
-import { useAtelierFilms, useChatPanel, useImportedMobile, useLoopingVideos, useShellSignals } from "@/lib/imported-site";
+import {
+  useAtelierFilms,
+  useChatPanel,
+  useImportedMobile,
+  useLoopingVideos,
+  useShellSignals,
+} from "@/lib/imported-site";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
@@ -26,12 +32,15 @@ export function NexifyShell({
 }) {
   const isMobile = useImportedMobile();
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
-  const { scrolled, heroActionVisible, footerVisible, viewportHeight } = useShellSignals(heroActionSelector);
+  const { scrolled, heroActionVisible, footerVisible, viewportHeight } =
+    useShellSignals(heroActionSelector);
   useAtelierFilms();
   useLoopingVideos();
   return (
     <div
-      className={chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"}
+      className={
+        chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"
+      }
       id="atelier"
       data-hero-action-visible={heroActionSelector && heroActionVisible ? "true" : undefined}
       data-scrolled={scrolled ? "true" : "false"}
@@ -61,12 +70,23 @@ export function NexifyShell({
           onClick={openChat}
         >
           <span className="aifly-symbol oracle-companion" data-state="idle" aria-hidden="true">
-            <img alt="" width="34" height="34" decoding="async" src="/site-assets/9176c58a16ff634a.png" />
+            <img
+              alt=""
+              width="34"
+              height="34"
+              decoding="async"
+              src="/site-assets/9176c58a16ff634a.png"
+            />
           </span>
           Ihr Projekt mit NeXify
         </button>
       )}
-      <OracleAside open={chatOpen} isMobile={isMobile} viewportHeight={viewportHeight} onClose={closeChat} />
+      <OracleAside
+        open={chatOpen}
+        isMobile={isMobile}
+        viewportHeight={viewportHeight}
+        onClose={closeChat}
+      />
     </div>
   );
 }

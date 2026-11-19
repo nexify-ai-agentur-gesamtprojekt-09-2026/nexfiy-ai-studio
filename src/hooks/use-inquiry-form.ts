@@ -62,7 +62,9 @@ export function useInquiryForm(kind: InquiryKind) {
       const field = (event.target as HTMLInputElement).name as InquiryField;
       if (!INQUIRY_FIELD_ORDER.includes(field)) return;
       const message = validateInquiryField(kind, field, readInquiryForm(event.currentTarget));
-      setErrors((current) => (current[field] === message ? current : { ...current, [field]: message }));
+      setErrors((current) =>
+        current[field] === message ? current : { ...current, [field]: message },
+      );
     },
     [attempts, kind],
   );

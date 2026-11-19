@@ -28,10 +28,30 @@ export function CopyButton({
   };
   return (
     <button type="button" className={className} data-state={state} onClick={onClick}>
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-        {state === "copied" ? <path d="m5 12.5 4.5 4.5L19 7.5" /> : <><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" /></>}
+      <svg
+        viewBox="0 0 24 24"
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {state === "copied" ? (
+          <path d="m5 12.5 4.5 4.5L19 7.5" />
+        ) : (
+          <>
+            <rect x="8" y="8" width="12" height="12" rx="2.5" />
+            <path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" />
+          </>
+        )}
       </svg>
-      <span aria-live="polite">{state === "copied" ? copiedLabel : state === "failed" ? failedLabel : label}</span>
+      <span aria-live="polite">
+        {state === "copied" ? copiedLabel : state === "failed" ? failedLabel : label}
+      </span>
     </button>
   );
 }

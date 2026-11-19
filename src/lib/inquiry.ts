@@ -16,7 +16,13 @@ export type InquiryField = keyof InquiryValues;
 export type InquiryErrors = Partial<Record<InquiryField, string>>;
 
 /** Order in which fields appear in the form; the first invalid one receives focus. */
-export const INQUIRY_FIELD_ORDER: InquiryField[] = ["name", "email", "company", "message", "consent"];
+export const INQUIRY_FIELD_ORDER: InquiryField[] = [
+  "name",
+  "email",
+  "company",
+  "message",
+  "consent",
+];
 
 export const INQUIRY_RECIPIENT = "mail@nexifyai.cloud";
 
@@ -31,7 +37,8 @@ const PROFILES: Record<InquiryKind, InquiryProfile> = {
   contact: {
     companyRequired: false,
     companyLabel: "Unternehmen",
-    subject: (values) => `Projektanfrage von ${values.name}${values.company ? ` (${values.company})` : ""}`,
+    subject: (values) =>
+      `Projektanfrage von ${values.name}${values.company ? ` (${values.company})` : ""}`,
     intro: "Guten Tag Pascal,\n\nich möchte mein Vorhaben mit Ihnen besprechen.",
   },
   partner: {
@@ -71,7 +78,11 @@ export function readInquiryForm(form: HTMLFormElement): InquiryValues {
   });
 }
 
-export function validateInquiryField(kind: InquiryKind, field: InquiryField, values: InquiryValues): string | undefined {
+export function validateInquiryField(
+  kind: InquiryKind,
+  field: InquiryField,
+  values: InquiryValues,
+): string | undefined {
   switch (field) {
     case "name":
       if (!values.name) return "Bitte geben Sie Ihren Namen an.";
@@ -79,14 +90,17 @@ export function validateInquiryField(kind: InquiryKind, field: InquiryField, val
       return undefined;
     case "email":
       if (!values.email) return "Bitte geben Sie Ihre E-Mail-Adresse an.";
-      if (!EMAIL_PATTERN.test(values.email)) return "Bitte prüfen Sie die E-Mail-Adresse, zum Beispiel name@firma.de.";
+      if (!EMAIL_PATTERN.test(values.email))
+        return "Bitte prüfen Sie die E-Mail-Adresse, zum Beispiel name@firma.de.";
       return undefined;
     case "company":
-      if (PROFILES[kind].companyRequired && !values.company) return "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.";
+      if (PROFILES[kind].companyRequired && !values.company)
+        return "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.";
       return undefined;
     case "message":
       if (!values.message) return "Bitte beschreiben Sie kurz Ihr Anliegen.";
-      if (values.message.length < MIN_MESSAGE_LENGTH) return "Ein, zwei Sätze genügen – bitte etwas ausführlicher.";
+      if (values.message.length < MIN_MESSAGE_LENGTH)
+        return "Ein, zwei Sätze genügen – bitte etwas ausführlicher.";
       return undefined;
     case "consent":
       if (!values.consent) return "Bitte stimmen Sie zu, damit wir Ihre Anfrage bearbeiten dürfen.";
@@ -125,7 +139,15 @@ export const MAX_MAILTO_LENGTH = 1900;
 
 export function composeInquiryText(kind: InquiryKind, values: InquiryValues): string {
   const profile = PROFILES[kind];
-  const lines = [profile.intro, "", values.message, "", "—", `Name: ${values.name}`, `E-Mail: ${values.email}`];
+  const lines = [
+    profile.intro,
+    "",
+    values.message,
+    "",
+    "—",
+    `Name: ${values.name}`,
+    `E-Mail: ${values.email}`,
+  ];
   if (values.company) lines.push(`${profile.companyLabel}: ${values.company}`);
   lines.push("", "Einwilligung zur Bearbeitung der Anfrage: erteilt");
   return lines.join("\n");
@@ -138,7 +160,8 @@ export function buildInquiryMail(kind: InquiryKind, values: InquiryValues): Inqu
     `mailto:${INQUIRY_RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
   let href = link(body);
   if (href.length <= MAX_MAILTO_LENGTH) return { subject, body, href, shortened: false };
-  const note = "\n\n[Nachricht gekürzt – bitte den vollständigen Text aus der Zwischenablage einfügen.]";
+  const note =
+    "\n\n[Nachricht gekürzt – bitte den vollständigen Text aus der Zwischenablage einfügen.]";
   let cut = body.length;
   while (cut > 0 && link(body.slice(0, cut) + "…" + note).length > MAX_MAILTO_LENGTH) cut -= 50;
   href = link(body.slice(0, Math.max(0, cut)) + "…" + note);

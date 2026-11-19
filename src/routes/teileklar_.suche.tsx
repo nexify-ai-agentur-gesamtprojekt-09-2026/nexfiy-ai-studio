@@ -16,7 +16,7 @@ function Index() {
   const [activeSlide0, setActiveSlide0] = useState(0);
   const carouselContent0 = (<>
 {activeSlide0 === 0 && <Fragment key={0}>
-<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
+<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" focusable="false">
   <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
     <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte" {...({ href: "/glass/linse.svg" } as any)} />
     <feDisplacementMap in="SourceGraphic" in2="karte" {...({ scale: "36", xChannelSelector: "R", yChannelSelector: "G" } as any)} />
@@ -312,7 +312,7 @@ function Index() {
         <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
         <div className={"orientation-composer-actions"}>
           <button className={"primary-button"} disabled aria-label="Nachricht senden">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
           </button>
@@ -325,7 +325,7 @@ function Index() {
 </aside>
 </Fragment>}
 {activeSlide0 === 1 && <Fragment key={1}>
-<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
+<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" focusable="false">
   <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
     <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte" {...({ href: "/glass/linse.svg" } as any)} />
     <feDisplacementMap in="SourceGraphic" in2="karte" {...({ scale: "36", xChannelSelector: "R", yChannelSelector: "G" } as any)} />
@@ -620,7 +620,7 @@ function Index() {
         <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
         <div className={"orientation-composer-actions"}>
           <button className={"primary-button"} disabled aria-label="Nachricht senden">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
           </button>

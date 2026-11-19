@@ -25,7 +25,11 @@ export function BrandMark({ className, claim = true }: { className?: string; cla
         <span className="font-heading text-[17px] font-semibold tracking-[-0.03em] text-foreground">
           Ne<span className="text-brand-signal">X</span>ify AI
         </span>
-        {claim ? <span className="mt-1 text-[11px] tracking-[0.02em] text-muted-foreground">Chat it. Automate it.</span> : null}
+        {claim ? (
+          <span className="mt-1 text-[11px] tracking-[0.02em] text-muted-foreground">
+            Chat it. Automate it.
+          </span>
+        ) : null}
       </span>
     </Link>
   );

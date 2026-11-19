@@ -29,7 +29,7 @@ function Index() {
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
   const composerRef = useComposerFit(chatOpen, isMobile, viewportHeight);
   const pageContent = (<>
-<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
+<svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" focusable="false">
   <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
     <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="karte" {...({ href: "/glass/linse.svg" } as any)} />
     <feDisplacementMap in="SourceGraphic" in2="karte" {...({ scale: "36", xChannelSelector: "R", yChannelSelector: "G" } as any)} />
@@ -140,7 +140,7 @@ function Index() {
             <span className={"hc-kicker"}>Vor dem Kauf</span>
             <h2>Gut informiert.<br />Klar entschieden.</h2>
             <p>Vergleichen Sie Artikelnummer und Herstellerangaben. Ein Produktfoto allein bestätigt keine Fahrzeugpassung.</p>
-            <a className={"hc-text-link"} href="/teileklar/fahrzeug-und-passung">Zur Passform-Checkliste<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+            <a className={"hc-text-link"} href="/teileklar/fahrzeug-und-passung">Zur Passform-Checkliste<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </header>
           <div className={"hc-costs"}>
             <div>
@@ -152,7 +152,7 @@ function Index() {
                   <li>Lieferadresse, Versand und Gesamtpreis prüfen</li>
                   <li>Bestellung bestätigen und sicher bezahlen</li>
                 </ol>
-                <a className={"hc-text-link"} href="/teileklar/rechtliches">Versand, Widerruf und Bedingungen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+                <a className={"hc-text-link"} href="/teileklar/rechtliches">Versand, Widerruf und Bedingungen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
               </div>
             </div>
           </div>
@@ -359,7 +359,7 @@ function Index() {
         <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
         <div className={"orientation-composer-actions"}>
           <button className={"primary-button"} disabled aria-label="Nachricht senden">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
           </button>
