@@ -2,13 +2,13 @@
  "domain": "www.nexifyai.de",
  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
  "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
- "commit": "c6b03200b6d8fe68b527f62d5b665eaeaf4e1328",
- "commit_short": "c6b03200b6",
- "commit_subject": "Chat mit echter KI + Livebestand auf den TEILEKLAR-Strecken",
+ "commit": "46292fc2c1bc1ed9a867c96fce07d76820389347",
+ "commit_short": "46292fc2c1",
+ "commit_subject": "Chat: Router-Antwort robust lesen, Body-Scroll bei offenem Chat sperren",
  "build_id": "",
  "deployed_at": "2026-11-19T11:40:35+01:00",
  "host": "srv1243952",
  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
- "generated_at": "2026-11-19T22:41:17+01:00",
+ "generated_at": "2026-11-19T22:49:40+01:00",
  "generator": "scripts/quality/gen-build-stamp.py"
 }
