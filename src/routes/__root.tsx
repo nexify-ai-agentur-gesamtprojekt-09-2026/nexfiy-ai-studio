@@ -15,6 +15,7 @@ import { useEffect, type ReactNode } from "react";
 import { ArrowRight, RotateCcw } from "lucide-react";
 
 import appCss from "../styles.css?url";
+import { AiChat } from "@/components/AiChat";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
 import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
@@ -254,6 +255,10 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* 2026-11-19 22:15 (Europe/Berlin): EIN Chat fuer die ganze Website (echte KI,
+          mobil als Vollflaeche). Vorher gab es nur statische Panels auf den
+          TEILEKLAR-Strecken, ohne Gegenstelle und auf dem Telefon unsichtbar. */}
+      <AiChat />
     </QueryClientProvider>
   );
 }

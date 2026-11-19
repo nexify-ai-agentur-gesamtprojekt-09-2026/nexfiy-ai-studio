@@ -1,0 +1,221 @@
+/* 2026-11-19 22:10 (Europe/Berlin): Chat-Widget der Website — sichtbar, deckend, mobil
+   als Vollflaeche mit Safe-Area, Trefferflaechen >= 44 px, Kontrast >= 4.5:1 (WCAG 2.2 AA).
+   Die importierten Attrappen-Panels der Referenzstrecken werden ausgeblendet, damit es
+   genau EINEN Chat gibt. */
+
+/* Alte statische Panels (nur Optik, ohne Gegenstelle) ausblenden. */
+#aifly-panel,
+.reopen-chat {
+  display: none !important;
+}
+
+.nx-chat {
+  --nx-bg: #0b1220;
+  --nx-card: #131f36;
+  --nx-line: #2b3b57;
+  --nx-fg: #f8fafc;
+  --nx-muted: #cbd5e1;
+  --nx-accent: #38bdf8;
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.nx-chat__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.1rem;
+  border: 1px solid var(--nx-accent);
+  border-radius: 999px;
+  background: var(--nx-accent);
+  color: #04263a;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 45%);
+}
+
+.nx-chat__panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+  width: min(24rem, calc(100vw - 2rem));
+  max-height: min(32rem, 70vh);
+  display: flex;
+  flex-direction: column;
+  background: var(--nx-bg);
+  color: var(--nx-fg);
+  border: 1px solid var(--nx-line);
+  border-radius: 1rem;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 55%);
+  overflow: hidden;
+}
+
+.nx-chat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--nx-line);
+  background: var(--nx-card);
+}
+
+.nx-chat__title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.nx-chat__note {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--nx-muted);
+}
+
+.nx-chat__close {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--nx-line);
+  border-radius: 0.6rem;
+  background: transparent;
+  color: var(--nx-fg);
+  cursor: pointer;
+}
+
+.nx-chat__log {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overscroll-behavior: contain;
+}
+
+.nx-chat__msg {
+  max-width: 92%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.85rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.nx-chat__msg--bot {
+  align-self: flex-start;
+  background: var(--nx-card);
+  border: 1px solid var(--nx-line);
+}
+
+.nx-chat__msg--user {
+  align-self: flex-end;
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.nx-chat__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 1rem 0.5rem;
+}
+
+.nx-chat__quick button {
+  min-height: 44px;
+  padding: 0 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--nx-line);
+  background: var(--nx-card);
+  color: var(--nx-fg);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.nx-chat__form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--nx-line);
+  background: var(--nx-card);
+}
+
+.nx-chat__form textarea {
+  flex: 1 1 auto;
+  min-height: 44px;
+  max-height: 7rem;
+  resize: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--nx-line);
+  background: var(--nx-bg);
+  color: var(--nx-fg);
+  font: inherit;
+}
+
+.nx-chat__send {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--nx-accent);
+  background: var(--nx-accent);
+  color: #04263a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nx-chat__send[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.nx-chat button:focus-visible,
+.nx-chat textarea:focus-visible {
+  outline: 2px solid var(--nx-accent);
+  outline-offset: 2px;
+}
+
+/* Mobil: Vollflaeche statt kleiner Blase — vorher war der Chat hier unsichtbar. */
+@media (max-width: 640px) {
+  .nx-chat {
+    right: 0.75rem;
+    left: 0.75rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .nx-chat__toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nx-chat__panel {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    max-height: none;
+    height: 100dvh;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .nx-chat__log {
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Nur fuer Screenreader sichtbar (Label des Eingabefelds). */
+.nx-chat .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

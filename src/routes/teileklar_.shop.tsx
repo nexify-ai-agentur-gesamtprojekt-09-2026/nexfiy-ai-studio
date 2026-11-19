@@ -4,6 +4,8 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.shop.css?raw";
 import { canonicalLink } from "@/lib/seo";
+import { withLiveShop } from "@/components/teileklar/LiveShop";
+
 
 export const Route = createFileRoute("/teileklar_/shop")({
   head: () => ({
@@ -19,7 +21,7 @@ export const Route = createFileRoute("/teileklar_/shop")({
       body: {},
     },
   },
-  component: Index,
+  component: withLiveShop(Index, "shop"),
 });
 
 function Index() {

@@ -1,0 +1,177 @@
+/* 2026-11-19 21:50 (Europe/Berlin): Gestaltung des Livebestands auf den
+   TEILEKLAR-Referenzstrecken. Bewusst schlank und kontraststark (WCAG 2.2 AA),
+   damit sie sich in die dunkle Referenzoptik einfuegt, ohne deren CSS zu ueberschreiben. */
+.live-shop {
+  --ls-fg: #f8fafc;
+  --ls-muted: #cbd5e1;
+  --ls-bg: #0f172a;
+  --ls-card: #16213b;
+  --ls-line: #334155;
+  --ls-accent: #38bdf8;
+  margin: 3rem auto;
+  max-width: 76rem;
+  padding: 1.5rem;
+  background: var(--ls-bg);
+  color: var(--ls-fg);
+  border: 1px solid var(--ls-line);
+  border-radius: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.live-shop h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.25rem;
+}
+
+.live-shop__hint {
+  color: var(--ls-muted);
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+}
+
+.live-shop__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.live-shop__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 14rem;
+  flex: 1 1 16rem;
+}
+
+.live-shop__field span {
+  font-size: 0.9rem;
+  color: var(--ls-muted);
+}
+
+.live-shop input,
+.live-shop select,
+.live-shop button {
+  font: inherit;
+  min-height: 44px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--ls-line);
+  background: var(--ls-card);
+  color: var(--ls-fg);
+  padding: 0.5rem 0.75rem;
+}
+
+.live-shop button {
+  cursor: pointer;
+}
+
+.live-shop button:hover {
+  border-color: var(--ls-accent);
+}
+
+.live-shop button:focus-visible,
+.live-shop input:focus-visible,
+.live-shop select:focus-visible,
+.live-shop a:focus-visible {
+  outline: 2px solid var(--ls-accent);
+  outline-offset: 2px;
+}
+
+.live-shop__status {
+  color: var(--ls-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+
+.live-shop__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+}
+
+.live-shop__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--ls-card);
+  border: 1px solid var(--ls-line);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.live-shop__card h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.live-shop__meta {
+  color: var(--ls-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.live-shop__price {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.live-shop__card button {
+  margin-top: auto;
+}
+
+.live-shop__cart {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.live-shop__cart li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--ls-line);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--ls-card);
+}
+
+.live-shop__cart input {
+  width: 5rem;
+}
+
+.live-shop__sum {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.live-shop__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1.25rem;
+  border-radius: 999px;
+  background: var(--ls-accent);
+  color: #04263a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.live-shop__cta:hover {
+  background: #7dd3fc;
+}
+
+.live-shop__empty {
+  color: var(--ls-muted);
+  margin: 0;
+}
