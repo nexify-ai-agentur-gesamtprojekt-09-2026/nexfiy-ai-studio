@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/wissen.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/wissen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/wissen") ], meta: [{ title: "So arbeiten wir. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/wissen") ], meta: [{ title: "So arbeiten wir. · NeXify AI" }, { name: "description", content: "Vom ersten Gespräch bis zur Übergabe: Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes ansteht" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

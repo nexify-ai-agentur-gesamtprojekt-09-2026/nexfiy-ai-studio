@@ -215,6 +215,38 @@ function RootShell({ children }: { children: ReactNode }) {
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          // 2026-11-20 00:15 (Europe/Berlin): strukturierte Daten fuer Organisation + Website.
+          // Ohne sie kennt Google nur Text, keine Entitaet (Knowledge Panel, Sitelinks-Suche).
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.nexifyai.de/#organisation",
+                  name: "NeXify AI",
+                  url: "https://www.nexifyai.de/",
+                  logo: "https://www.nexifyai.de/icons/icon-512.png",
+                  email: "mail@nexifyai.cloud",
+                  telephone: "+31613318856",
+                  founder: { "@type": "Person", name: "Pascal Courbois" },
+                  areaServed: ["DE", "NL", "AT", "CH"],
+                  sameAs: ["https://www.nexifyai.de/"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.nexifyai.de/#website",
+                  url: "https://www.nexifyai.de/",
+                  name: "NeXify AI",
+                  inLanguage: "de-DE",
+                  publisher: { "@id": "https://www.nexifyai.de/#organisation" },
+                },
+              ],
+            }),
+          }}
+        />
         <HeadContent />
       </head>
       <body {...importedDocument?.body}>

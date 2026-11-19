@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/barrierefreiheit")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/barrierefreiheit") ], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/barrierefreiheit") ], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }, { name: "description", content: "Gutes Design trägt auch bei Tastaturbedienung, größerem Text und reduzierter Bewegung. Wir entwickeln diese Zugänglichkeit weiter; eine umfassend bestätigte." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

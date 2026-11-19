@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/ki-hinweise.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/ki-hinweise")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/ki-hinweise") ], meta: [{ title: "KI mit klarer Verantwortung. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/ki-hinweise") ], meta: [{ title: "KI mit klarer Verantwortung. · NeXify AI" }, { name: "description", content: "NeXify AI FACTORY verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

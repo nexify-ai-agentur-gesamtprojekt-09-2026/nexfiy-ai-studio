@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/suche")({
   head: () => ({
-    links: [canonicalLink("/teileklar/suche")], meta: [{ title: "Teil, Marke oder Nummer suchen. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/suche")], meta: [{ title: "Teil, Marke oder Nummer suchen. · TEILEKLAR.shop" }, { name: "description", content: "Der Katalog konnte nicht geladen werden. Bitte versuchen Sie es erneut" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -142,7 +142,7 @@ function Index() {
           <nav aria-label={"Produkte & Arbeitsbereiche"}>
             <h2>Produkte &amp; Arbeitsbereiche</h2>
             <a href="/teileklar">TEILEKLAR</a>
-            <a href="#">Teil, Marke oder Nummer suchen.</a>
+            <a href="/teileklar/suche" aria-current="page">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
@@ -184,10 +184,8 @@ function Index() {
               <div className={"footer-overview-group"}>
                 <h3>TEILEKLAR</h3>
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
-                <a href="#">Teil, Marke oder Nummer suchen.</a>
+                <a href="/teileklar/suche" aria-current="page">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -453,7 +451,7 @@ function Index() {
           <nav aria-label={"Produkte & Arbeitsbereiche"}>
             <h2>Produkte &amp; Arbeitsbereiche</h2>
             <a href="/teileklar">TEILEKLAR</a>
-            <a href="#">Teil, Marke oder Nummer suchen.</a>
+            <a href="/teileklar/suche" aria-current="page">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
@@ -495,10 +493,8 @@ function Index() {
               <div className={"footer-overview-group"}>
                 <h3>TEILEKLAR</h3>
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
-                <a href="#">Teil, Marke oder Nummer suchen.</a>
+                <a href="/teileklar/suche" aria-current="page">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>

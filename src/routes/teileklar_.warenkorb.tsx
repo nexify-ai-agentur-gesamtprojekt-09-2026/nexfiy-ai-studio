@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/warenkorb")({
   head: () => ({
-    links: [canonicalLink("/teileklar/warenkorb")], meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/warenkorb")], meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }, { name: "description", content: "Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -47,7 +47,7 @@ function Index() {
       </form>
       <div className={"tk-header-account"}>
         <a href="/anmelden">Mein Konto</a>
-        <a className={"tk-header-cart"} href="#">Warenkorb <span>–</span></a>
+        <a className={"tk-header-cart"} href="/teileklar/warenkorb" aria-current="page">Warenkorb <span>–</span></a>
       </div>
     </div>
     <nav className={"tk-commerce-nav"} aria-label="Shopnavigation">
@@ -125,7 +125,7 @@ function Index() {
             <h2>Leistungen &amp; Zusammenarbeit</h2>
             <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
             <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
-            <a href="#">Ihr Warenkorb. Alles im Blick.</a>
+            <a href="/teileklar/warenkorb" aria-current="page">Ihr Warenkorb. Alles im Blick.</a>
           </nav>
           <nav aria-label="NeXify AI">
             <h2>NeXify AI</h2>
@@ -159,9 +159,7 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
-                <a href="#">Ihr Warenkorb. Alles im Blick.</a>
+                <a href="/teileklar/warenkorb" aria-current="page">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
@@ -331,7 +329,7 @@ function Index() {
       </form>
       <div className={"tk-header-account"}>
         <a href="/anmelden">Mein Konto</a>
-        <a className={"tk-header-cart"} href="#">Warenkorb <span>–</span></a>
+        <a className={"tk-header-cart"} href="/teileklar/warenkorb" aria-current="page">Warenkorb <span>–</span></a>
       </div>
     </div>
     <nav className={"tk-commerce-nav"} aria-label="Shopnavigation">
@@ -409,7 +407,7 @@ function Index() {
             <h2>Leistungen &amp; Zusammenarbeit</h2>
             <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
             <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
-            <a href="#">Ihr Warenkorb. Alles im Blick.</a>
+            <a href="/teileklar/warenkorb" aria-current="page">Ihr Warenkorb. Alles im Blick.</a>
           </nav>
           <nav aria-label="NeXify AI">
             <h2>NeXify AI</h2>
@@ -443,9 +441,7 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
-                <a href="#">Ihr Warenkorb. Alles im Blick.</a>
+                <a href="/teileklar/warenkorb" aria-current="page">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>

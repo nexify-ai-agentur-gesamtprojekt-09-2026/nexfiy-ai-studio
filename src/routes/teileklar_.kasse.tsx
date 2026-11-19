@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/kasse")({
   head: () => ({
-    links: [canonicalLink("/teileklar/kasse")], meta: [{ title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/kasse")], meta: [{ title: "Zur Kasse. Schritt für Schritt. · TEILEKLAR.shop" }, { name: "description", content: "Der Shop kann Ihren Warenkorb momentan nicht abrufen. Bitte versuchen Sie es später erneut oder sprechen Sie uns an" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -159,10 +159,8 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
-                <a href="#">Zur Kasse. Schritt für Schritt.</a>
+                <a href="/teileklar/kasse" aria-current="page">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
@@ -443,10 +441,8 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
-                <a href="#">Zur Kasse. Schritt für Schritt.</a>
+                <a href="/teileklar/kasse" aria-current="page">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>

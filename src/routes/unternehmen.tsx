@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/unternehmen.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/unternehmen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/unternehmen") ], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/unternehmen") ], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }, { name: "description", content: "NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/gutscheine")({
   head: () => ({
-    links: [canonicalLink("/teileklar/gutscheine")], meta: [{ title: "Gutscheine gibt es noch nicht. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/gutscheine")], meta: [{ title: "Gutscheine gibt es noch nicht. · TEILEKLAR.shop" }, { name: "description", content: "Bei TEILEKLAR können Sie zurzeit keine Gutscheine kaufen oder einlösen. Wenn Sie eine Frage zu einem Gutschein haben, schreiben Sie uns" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -257,7 +257,7 @@ function Index() {
           <nav aria-label={"Leistungen & Zusammenarbeit"}>
             <h2>Leistungen &amp; Zusammenarbeit</h2>
             <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-            <a href="#">Gutscheine gibt es noch nicht.</a>
+            <a href="/teileklar/gutscheine" aria-current="page">Gutscheine gibt es noch nicht.</a>
             <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
           </nav>
           <nav aria-label="NeXify AI">
@@ -292,13 +292,11 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
-                <a href="#">Gutscheine gibt es noch nicht.</a>
+                <a href="/teileklar/gutscheine" aria-current="page">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
@@ -674,7 +672,7 @@ function Index() {
           <nav aria-label={"Leistungen & Zusammenarbeit"}>
             <h2>Leistungen &amp; Zusammenarbeit</h2>
             <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-            <a href="#">Gutscheine gibt es noch nicht.</a>
+            <a href="/teileklar/gutscheine" aria-current="page">Gutscheine gibt es noch nicht.</a>
             <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
           </nav>
           <nav aria-label="NeXify AI">
@@ -709,13 +707,11 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
-                <a href="#">Gutscheine gibt es noch nicht.</a>
+                <a href="/teileklar/gutscheine" aria-current="page">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>

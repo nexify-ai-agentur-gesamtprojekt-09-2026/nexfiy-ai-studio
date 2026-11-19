@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/produkte.skills-mcp.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/skills-mcp")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/skills-mcp") ], meta: [{ title: "Skills und MCP. Ihre Werkzeuge, angebunden. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/skills-mcp") ], meta: [{ title: "Skills und MCP. Ihre Werkzeuge, angebunden. · NeXify AI" }, { name: "description", content: "Ein Skill ist eine Arbeitsweise, die ein Agent wiederholt anwenden kann. MCP ist der Standard, über den Agenten Ihre Systeme nutzen. Beides macht KI-Arbeit." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/batterie-berater")({
   head: () => ({
-    links: [canonicalLink("/teileklar/batterie-berater")], meta: [{ title: "Die passende Batterie finden. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/batterie-berater")], meta: [{ title: "Die passende Batterie finden. · TEILEKLAR.shop" }, { name: "description", content: "Eine Starterbatterie muss zur Technik Ihres Fahrzeugs passen: Kapazität, Bauform und – bei Start-Stopp – die richtige Technologie" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -267,8 +267,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -278,7 +276,7 @@ function Index() {
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
-                <a href="#">Die passende Batterie finden.</a>
+                <a href="/teileklar/batterie-berater" aria-current="page">Die passende Batterie finden.</a>
               </div>
               <div className={"footer-overview-group"}>
                 <h3>Rechtliches</h3>
@@ -659,8 +657,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -670,7 +666,7 @@ function Index() {
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
-                <a href="#">Die passende Batterie finden.</a>
+                <a href="/teileklar/batterie-berater" aria-current="page">Die passende Batterie finden.</a>
               </div>
               <div className={"footer-overview-group"}>
                 <h3>Rechtliches</h3>

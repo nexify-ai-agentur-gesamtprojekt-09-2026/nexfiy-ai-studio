@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/vertragsgrundlagen.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/vertragsgrundlagen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/vertragsgrundlagen") ], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/vertragsgrundlagen") ], meta: [{ title: "Gute Zusammenarbeit hat klare Grundlagen. · NeXify AI" }, { name: "description", content: "Marke, Website, KI und Betreuung gehören zu einem abgestimmten Auftrag. Den verbindlichen Umfang legt die bestätigte Vereinbarung fest. Die." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/produkte.nex2fly.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/nex2fly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex2fly") ], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex2fly") ], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }, { name: "description", content: "Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

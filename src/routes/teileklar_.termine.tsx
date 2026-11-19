@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/termine")({
   head: () => ({
-    links: [canonicalLink("/teileklar/termine")], meta: [{ title: "Termin? Direkt bei der Werkstatt. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/termine")], meta: [{ title: "Termin? Direkt bei der Werkstatt. · TEILEKLAR.shop" }, { name: "description", content: "Online-Terminbuchung gibt es bei TEILEKLAR noch nicht. Sie finden eine Werkstatt in Ihrer Nähe und vereinbaren den Termin direkt – oder nennen uns Ihren." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -233,7 +233,7 @@ function Index() {
             <a href="/teileklar">TEILEKLAR</a>
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
-            <a href="#">Termin? Direkt bei der Werkstatt.</a>
+            <a href="/teileklar/termine" aria-current="page">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
             <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
           </nav>
@@ -275,12 +275,10 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
-                <a href="#">Termin? Direkt bei der Werkstatt.</a>
+                <a href="/teileklar/termine" aria-current="page">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
@@ -633,7 +631,7 @@ function Index() {
             <a href="/teileklar">TEILEKLAR</a>
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
             <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
-            <a href="#">Termin? Direkt bei der Werkstatt.</a>
+            <a href="/teileklar/termine" aria-current="page">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
             <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
           </nav>
@@ -675,12 +673,10 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
-                <a href="#">Termin? Direkt bei der Werkstatt.</a>
+                <a href="/teileklar/termine" aria-current="page">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>

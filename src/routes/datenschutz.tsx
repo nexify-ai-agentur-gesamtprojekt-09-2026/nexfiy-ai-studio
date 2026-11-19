@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/datenschutz.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/datenschutz")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/datenschutz") ], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/datenschutz") ], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { name: "description", content: "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

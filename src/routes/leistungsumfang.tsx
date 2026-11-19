@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/leistungsumfang.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungsumfang")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/leistungsumfang") ], meta: [{ title: "Drei Pakete. Ein klarer Umfang. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/leistungsumfang") ], meta: [{ title: "Drei Pakete. Ein klarer Umfang. · NeXify AI" }, { name: "description", content: "Markenstart, KI im Betrieb oder Wachstum: Aus Ihrem Ziel wird ein Auftrag mit benannten Ergebnissen, wählbaren Optionen und Kosten, die Sie vor dem Start." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

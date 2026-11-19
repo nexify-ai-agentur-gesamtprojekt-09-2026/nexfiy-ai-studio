@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/reifenrechner")({
   head: () => ({
-    links: [canonicalLink("/teileklar/reifenrechner")], meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/reifenrechner")], meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }, { name: "description", content: "Breite, Querschnitt und Felgendurchmesser gehören zusammen. Der Reifenrechner zeigt, wie sich eine andere Größe auf den Durchmesser auswirkt" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -267,8 +267,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -277,7 +275,7 @@ function Index() {
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
-                <a href="#">Reifengrößen vergleichen.</a>
+                <a href="/teileklar/reifenrechner" aria-current="page">Reifengrößen vergleichen.</a>
                 <a href="/teileklar/batterie-berater">Die passende Batterie finden.</a>
               </div>
               <div className={"footer-overview-group"}>
@@ -659,8 +657,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -669,7 +665,7 @@ function Index() {
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
                 <a href="/teileklar/shop">Auto &amp; Motorrad. Klar ausgewählt.</a>
-                <a href="#">Reifengrößen vergleichen.</a>
+                <a href="/teileklar/reifenrechner" aria-current="page">Reifengrößen vergleichen.</a>
                 <a href="/teileklar/batterie-berater">Die passende Batterie finden.</a>
               </div>
               <div className={"footer-overview-group"}>

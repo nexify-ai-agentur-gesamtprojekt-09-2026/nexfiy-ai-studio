@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/portale.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/portale")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/portale") ], meta: [{ title: "Portale. Ihr Zugang, Ihr Bereich. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/portale") ], meta: [{ title: "Portale. Ihr Zugang, Ihr Bereich. · NeXify AI" }, { name: "description", content: "Kunden, Partner und Werkstätten haben je einen eigenen, geschützten Bereich. Hier finden Sie Ihren Einstieg" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

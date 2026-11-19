@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/passwort-vergessen.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/passwort-vergessen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/passwort-vergessen") ], meta: [{ title: "Passwort vergessen · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/passwort-vergessen") ], meta: [{ title: "Passwort vergessen · NeXify AI" }, { name: "description", content: "Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

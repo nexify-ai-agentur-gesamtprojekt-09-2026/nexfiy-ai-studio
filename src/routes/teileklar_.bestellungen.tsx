@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/bestellungen")({
   head: () => ({
-    links: [canonicalLink("/teileklar/bestellungen")], meta: [{ title: "Bestellungen · TEILEKLAR" }] }),
+    links: [canonicalLink("/teileklar/bestellungen")], meta: [{ title: "Bestellungen · TEILEKLAR" }, { name: "description", content: "Die Bestellungen konnten nicht geladen werden" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -56,7 +56,7 @@ function Index() {
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
-      <a aria-current="page" href="#">Meine Bestellungen</a>
+      <a aria-current="page" href="/teileklar/bestellungen">Meine Bestellungen</a>
     </nav>
   </header>
   <main id="page-content" tabIndex={-1}>
@@ -155,8 +155,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -336,7 +334,7 @@ function Index() {
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
-      <a aria-current="page" href="#">Meine Bestellungen</a>
+      <a aria-current="page" href="/teileklar/bestellungen">Meine Bestellungen</a>
     </nav>
   </header>
   <main id="page-content" tabIndex={-1}>
@@ -435,8 +433,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>

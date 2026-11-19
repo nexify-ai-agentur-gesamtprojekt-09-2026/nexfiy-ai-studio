@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/impressum.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/impressum")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/impressum") ], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/impressum") ], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }, { name: "description", content: "Anbieter dieser Website ist NeXify AI by NeXify, Inhaber Pascal Courbois, eine Eenmanszaak nach niederländischem Recht mit Anschrift in Venlo" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/shop")({
   head: () => ({
-    links: [canonicalLink("/teileklar/shop")], meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/shop")], meta: [{ title: "Auto \u0026 Motorrad · TEILEKLAR.shop" }, { name: "description", content: "Artikel finden. Angaben prüfen. Sicher bestellen" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -52,7 +52,7 @@ function Index() {
     </div>
     <nav className={"tk-commerce-nav"} aria-label="Shopnavigation">
       <a href="/teileklar">Schaufenster</a>
-      <a aria-current="page" href="#">Alle Artikel</a>
+      <a aria-current="page" href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
@@ -183,8 +183,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -192,7 +190,7 @@ function Index() {
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
-                <a href="#">Auto &amp; Motorrad. Klar ausgewählt.</a>
+                <a href="/teileklar/shop" aria-current="page">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
                 <a href="/teileklar/batterie-berater">Die passende Batterie finden.</a>
               </div>
@@ -360,7 +358,7 @@ function Index() {
     </div>
     <nav className={"tk-commerce-nav"} aria-label="Shopnavigation">
       <a href="/teileklar">Schaufenster</a>
-      <a aria-current="page" href="#">Alle Artikel</a>
+      <a aria-current="page" href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
       <a href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
@@ -491,8 +489,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -500,7 +496,7 @@ function Index() {
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
                 <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
-                <a href="#">Auto &amp; Motorrad. Klar ausgewählt.</a>
+                <a href="/teileklar/shop" aria-current="page">Auto &amp; Motorrad. Klar ausgewählt.</a>
                 <a href="/teileklar/reifenrechner">Reifengrößen vergleichen.</a>
                 <a href="/teileklar/batterie-berater">Die passende Batterie finden.</a>
               </div>

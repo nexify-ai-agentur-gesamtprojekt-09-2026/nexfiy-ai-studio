@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/preise-ablauf.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/preise-ablauf")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/preise-ablauf") ], meta: [{ title: "Sie kennen die Kosten vor dem Start. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/preise-ablauf") ], meta: [{ title: "Sie kennen die Kosten vor dem Start. · NeXify AI" }, { name: "description", content: "Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung danach und externe Kosten sind getrennt ausgewiesen" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

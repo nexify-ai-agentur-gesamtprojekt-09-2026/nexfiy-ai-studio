@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/fahrzeug-und-passung")({
   head: () => ({
-    links: [canonicalLink("/teileklar/fahrzeug-und-passung")], meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/fahrzeug-und-passung")], meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }, { name: "description", content: "Der Modellname allein reicht nicht. Mit Schlüsselnummern, Baujahr und Motor finden Sie heraus, worauf es bei Ihrem Teil ankommt" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -54,7 +54,7 @@ function Index() {
       <a href="/teileklar">Schaufenster</a>
       <a href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
-      <a aria-current="page" href="#">Fahrzeugpassung</a>
+      <a aria-current="page" href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
       <a href="/teileklar/bestellungen">Meine Bestellungen</a>
     </nav>
@@ -86,7 +86,6 @@ function Index() {
                 <span>Teile suchen</span>
                 <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
               </a>
-              <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/produkt">Artikel ansehen</a>
             </div>
           </div>
           <div className={"identity-media"}>
@@ -229,10 +228,8 @@ function Index() {
           <li>
             <span className={"hc-kicker"}>TEILEKLAR</span>
             <h3>
-              <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
             <p>Technische Daten, Lieferumfang, Preis und Lieferung stehen getrennt und klar am Artikel. So sehen Sie, was Sie bekommen.</p>
-            <a aria-label="Alles zum Artikel. Vor dem Kauf. – Seite ansehen" className={"hc-text-link"} href="/teileklar/produkt">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
             <span className={"hc-kicker"}>TEILEKLAR</span>
@@ -261,7 +258,6 @@ function Index() {
           <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
           <div className={"hc-finish-actions"}>
             <a className={"hc-finish-primary"} href="/teileklar/suche">Teile suchen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-            <a className={"hc-text-link"} href="/teileklar/produkt">Artikel ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <button type="button" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
           </div>
         </div>
@@ -295,7 +291,7 @@ function Index() {
             <h2>Produkte &amp; Arbeitsbereiche</h2>
             <a href="/teileklar">TEILEKLAR</a>
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
-            <a href="#">Passt das Teil? So prüfen Sie es.</a>
+            <a href="/teileklar/fahrzeug-und-passung" aria-current="page">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
             <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
@@ -338,11 +334,9 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
-                <a href="#">Passt das Teil? So prüfen Sie es.</a>
+                <a href="/teileklar/fahrzeug-und-passung" aria-current="page">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>
@@ -517,7 +511,7 @@ function Index() {
       <a href="/teileklar">Schaufenster</a>
       <a href="/teileklar/shop">Alle Artikel</a>
       <a href="/teileklar/kategorien">Kategorien</a>
-      <a aria-current="page" href="#">Fahrzeugpassung</a>
+      <a aria-current="page" href="/teileklar/fahrzeug-und-passung">Fahrzeugpassung</a>
       <a href="/teileklar/werkstatt">Werkstätten</a>
       <a href="/teileklar/bestellungen">Meine Bestellungen</a>
     </nav>
@@ -549,7 +543,6 @@ function Index() {
                 <span>Teile suchen</span>
                 <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
               </a>
-              <a className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary" href="/teileklar/produkt">Artikel ansehen</a>
             </div>
           </div>
           <div className={"identity-media"}>
@@ -692,10 +685,8 @@ function Index() {
           <li>
             <span className={"hc-kicker"}>TEILEKLAR</span>
             <h3>
-              <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
             <p>Technische Daten, Lieferumfang, Preis und Lieferung stehen getrennt und klar am Artikel. So sehen Sie, was Sie bekommen.</p>
-            <a aria-label="Alles zum Artikel. Vor dem Kauf. – Seite ansehen" className={"hc-text-link"} href="/teileklar/produkt">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
           <li>
             <span className={"hc-kicker"}>TEILEKLAR</span>
@@ -724,7 +715,6 @@ function Index() {
           <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
           <div className={"hc-finish-actions"}>
             <a className={"hc-finish-primary"} href="/teileklar/suche">Teile suchen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-            <a className={"hc-text-link"} href="/teileklar/produkt">Artikel ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
             <button type="button" className={"hc-text-link"}>Frage stellen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
           </div>
         </div>
@@ -758,7 +748,7 @@ function Index() {
             <h2>Produkte &amp; Arbeitsbereiche</h2>
             <a href="/teileklar">TEILEKLAR</a>
             <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
-            <a href="#">Passt das Teil? So prüfen Sie es.</a>
+            <a href="/teileklar/fahrzeug-und-passung" aria-current="page">Passt das Teil? So prüfen Sie es.</a>
             <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
             <a href="/teileklar/partner-werden">Partner werden</a>
             <a href="/teileklar/werkstatt">Eine Werkstatt in Ihrer Nähe.</a>
@@ -801,11 +791,9 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
-                <a href="#">Passt das Teil? So prüfen Sie es.</a>
+                <a href="/teileklar/fahrzeug-und-passung" aria-current="page">Passt das Teil? So prüfen Sie es.</a>
                 <a href="/teileklar/termine">Termin? Direkt bei der Werkstatt.</a>
                 <a href="/teileklar/gutscheine">Gutscheine gibt es noch nicht.</a>
                 <a href="/teileklar/partner-werden">Werkstatt? Werden Sie Partner.</a>

@@ -7,7 +7,7 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/rechtliches")({
   head: () => ({
-    links: [canonicalLink("/teileklar/rechtliches")], meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }] }),
+    links: [canonicalLink("/teileklar/rechtliches")], meta: [{ title: "TEILEKLAR. Bedingungen mit eindeutiger Zuordnung. · TEILEKLAR.shop" }, { name: "description", content: "Handel und Werkstattservice brauchen eigene Anbieter-, Datenschutz- und Kaufunterlagen. Deren vollständige Freigabe steht aus; diese Übersicht bestätigt." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -35,7 +35,7 @@ function Index() {
   <header className={"tk-commerce-header"}>
     <div className={"tk-service-strip"}>
       <span>Auto &amp; Motorrad · Alle Preise inkl. MwSt.</span>
-      <a href="#">Versand &amp; Rückgabe</a>
+      <a href="/teileklar/rechtliches" aria-current="page">Versand &amp; Rückgabe</a>
       <a href="/kontakt">Persönlicher Kontakt</a>
     </div>
     <div className={"tk-commerce-main"}>
@@ -319,7 +319,7 @@ function Index() {
           </nav>
           <nav aria-label="Rechtliches">
             <h2>Rechtliches</h2>
-            <a href="#">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
+            <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
             <a href="/ki-hinweise">KI-Hinweise</a>
             <a href="/barrierefreiheit">Barrierefreiheit</a>
             <a href="/cookies">Datenschutzeinstellungen</a>
@@ -342,8 +342,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -357,7 +355,7 @@ function Index() {
               </div>
               <div className={"footer-overview-group"}>
                 <h3>Rechtliches</h3>
-                <a href="#">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
+                <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
               </div>
             </nav>
           </div>
@@ -365,7 +363,7 @@ function Index() {
       </div>
       <div className={"footer-legal"}>
         <nav className={"footer-legal-direct"} aria-label="Rechtsdokumente">
-          <a href="#">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
+          <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
         </nav>
         <details className={"footer-legal-details"}>
           <summary aria-expanded="false" aria-controls="_r_2_">Hinweise zu den Rechtsdokumenten</summary>
@@ -477,7 +475,7 @@ function Index() {
         </div>
       </form>
       <p className={"connection-note orientation-status"} role="status" />
-      <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="#">Datenschutz</a></p>
+      <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="/teileklar/rechtliches" aria-current="page">Datenschutz</a></p>
     </section>
   </div>
 </aside>
@@ -502,7 +500,7 @@ function Index() {
   <header className={"tk-commerce-header"}>
     <div className={"tk-service-strip"}>
       <span>Auto &amp; Motorrad · Alle Preise inkl. MwSt.</span>
-      <a href="#">Versand &amp; Rückgabe</a>
+      <a href="/teileklar/rechtliches" aria-current="page">Versand &amp; Rückgabe</a>
       <a href="/kontakt">Persönlicher Kontakt</a>
     </div>
     <div className={"tk-commerce-main"}>
@@ -786,7 +784,7 @@ function Index() {
           </nav>
           <nav aria-label="Rechtliches">
             <h2>Rechtliches</h2>
-            <a href="#">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
+            <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
             <a href="/ki-hinweise">KI-Hinweise</a>
             <a href="/barrierefreiheit">Barrierefreiheit</a>
             <a href="/cookies">Datenschutzeinstellungen</a>
@@ -809,8 +807,6 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>
@@ -824,7 +820,7 @@ function Index() {
               </div>
               <div className={"footer-overview-group"}>
                 <h3>Rechtliches</h3>
-                <a href="#">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
+                <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR. Bedingungen mit eindeutiger Zuordnung.</a>
               </div>
             </nav>
           </div>
@@ -832,7 +828,7 @@ function Index() {
       </div>
       <div className={"footer-legal"}>
         <nav className={"footer-legal-direct"} aria-label="Rechtsdokumente">
-          <a href="#">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
+          <a href="/teileklar/rechtliches" aria-current="page">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
         </nav>
         <details className={"footer-legal-details"}>
           <summary aria-expanded="false" aria-controls="_r_2_">Hinweise zu den Rechtsdokumenten</summary>
@@ -943,7 +939,7 @@ function Index() {
         </div>
       </form>
       <p className={"connection-note orientation-status"} role="status" />
-      <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="#">Datenschutz</a></p>
+      <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="/teileklar/rechtliches" aria-current="page">Datenschutz</a></p>
     </section>
   </div>
 </aside>

@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/produkte.one.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/one")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/one") ], meta: [{ title: "Zwei Agenten. Eine klare Aufgabe. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/one") ], meta: [{ title: "Zwei Agenten. Eine klare Aufgabe. · NeXify AI" }, { name: "description", content: "AIFly ORACLE ordnet, NeX führt aus: Zusammen übernehmen sie in Ihrem Auftrag benannte Arbeitsschritte – von der Recherche bis zum geprüften Entwurf" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

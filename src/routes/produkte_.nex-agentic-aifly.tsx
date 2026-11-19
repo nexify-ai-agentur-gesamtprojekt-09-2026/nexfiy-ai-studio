@@ -4,7 +4,7 @@ import capturedCSS from "../styles/pages/produkte.nex-agentic-aifly.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/nex-agentic-aifly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex-agentic-aifly") ], meta: [{ title: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex-agentic-aifly") ], meta: [{ title: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" }, { name: "description", content: "Vor jedem Einsatz steht fest, was entstehen soll, welche Quellen und Werkzeuge NeX verwenden darf und wer das Ergebnis prüft. Dann arbeitet NeX die Schritte." }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
