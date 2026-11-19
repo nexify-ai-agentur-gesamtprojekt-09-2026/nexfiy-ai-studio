@@ -1,0 +1,20 @@
+# 2026-11-20 01:10 (Europe/Berlin): Cache-Regeln fuer gehashte Dateien.
+# Warum: Nitro setzt von sich aus nur /assets/*. Medien unter /site-assets/ (10 MB),
+# Icons und das og-Bild wurden mit "max-age=0, must-revalidate" ausgeliefert — jeder Aufruf
+# fragte nach. Die Dateinamen sind inhaltsgehasht, ein Jahr immutable ist hier korrekt.
+# Nicht gelistet: HTML/SSR — das setzt der Worker selbst, hier nichts erzwingen.
+
+/site-assets/*
+  cache-control: public, max-age=31536000, immutable
+
+/assets/*
+  cache-control: public, max-age=31536000, immutable
+
+/icons/*
+  cache-control: public, max-age=31536000, immutable
+
+/og/*
+  cache-control: public, max-age=31536000, immutable
+
+/glass/*
+  cache-control: public, max-age=604800
