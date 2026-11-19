@@ -4,17 +4,31 @@ import capturedCSS from "../styles/pages/anmelden.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/anmelden")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/anmelden") ], meta: [{ title: "Anmelden und weiterarbeiten. · NeXify AI" }, { name: "description", content: "Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen" }] }),
-  staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  head: () => ({
+    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/anmelden")],
+    meta: [
+      { title: "Anmelden und weiterarbeiten. · NeXify AI" },
+      {
+        name: "description",
+        content: "Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen",
+      },
+    ],
+  }),
+  staticData: {
+    importedDocument: {
+      html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
+      body: {},
+    },
+  },
   component: Index,
 });
 
 function Index() {
   return (
     <NexifyShell>
-            <div className={"home-concept page-concept tk-shop nx-konto"}>
-              <ImportedSectionAnmelden />
-            </div>
+      <div className={"home-concept page-concept tk-shop nx-konto"}>
+        <ImportedSectionAnmelden />
+      </div>
     </NexifyShell>
   );
 }
@@ -35,26 +49,86 @@ function ImportedSectionAnmelden() {
           </ol>
         </nav>
         <h1 id="auth-login-title">Anmelden</h1>
-        <p className={"nx-konto-lead"}>Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.</p>
+        <p className={"nx-konto-lead"}>
+          Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.
+        </p>
         <form className={"tk-form tk-auth"} method="post" noValidate>
           <div className={"tk-field is-wide"}>
             <label htmlFor="auth-email">E-Mail-Adresse</label>
-            <input id="auth-email" autoComplete="email" aria-invalid="false" type="email" defaultValue="" />
+            <input
+              id="auth-email"
+              autoComplete="email"
+              aria-invalid="false"
+              type="email"
+              defaultValue=""
+            />
           </div>
           <div className={"tk-field is-wide"}>
             <label htmlFor="auth-password">Passwort</label>
             <span className={"nx-feld"}>
-              <input id="auth-password" autoComplete="current-password" aria-invalid="false" type="password" defaultValue="" />
-              <button type="button" className={"nx-feld-schalter"} aria-pressed="false" aria-label="Passwort anzeigen" title="Passwort anzeigen">
-                <svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+              <input
+                id="auth-password"
+                autoComplete="current-password"
+                aria-invalid="false"
+                type="password"
+                defaultValue=""
+              />
+              <button
+                type="button"
+                className={"nx-feld-schalter"}
+                aria-pressed="false"
+                aria-label="Passwort anzeigen"
+                title="Passwort anzeigen"
+              >
+                <svg
+                  className={"nx-zeichen"}
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
                   <path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5z" />
                 </svg>
               </button>
             </span>
           </div>
-          <button type="submit" className={"nexify-control primary-button hc-finish-primary tk-cta"} data-variant="primary">Anmelden</button>
-          <span className={"nx-konto-oder"} aria-hidden="true">oder</span>
-          <button type="button" className={"nexify-control secondary-button hc-text-link tk-cta"} data-variant="secondary"><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.5 12.2c0 4.9-3.4 8.3-8.4 8.3a8.5 8.5 0 1 1 5.7-14.8M12.3 12.2h8.2" /></svg>Mit Google anmelden</button>
+          <button
+            type="submit"
+            className={"nexify-control primary-button hc-finish-primary tk-cta"}
+            data-variant="primary"
+          >
+            Anmelden
+          </button>
+          <span className={"nx-konto-oder"} aria-hidden="true">
+            oder
+          </span>
+          <button
+            type="button"
+            className={"nexify-control secondary-button hc-text-link tk-cta"}
+            data-variant="secondary"
+          >
+            <svg
+              className={"nx-zeichen"}
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20.5 12.2c0 4.9-3.4 8.3-8.4 8.3a8.5 8.5 0 1 1 5.7-14.8M12.3 12.2h8.2" />
+            </svg>
+            Mit Google anmelden
+          </button>
           <div className={"tk-actions"}>
             <p>
               <a href="/registrieren">Neues Konto erstellen</a>
@@ -73,17 +147,52 @@ function ImportedSectionAnmelden() {
           <figure className={"identity-hero-photo"}>
             <div className={"atelier-film atelier-film-hero"}>
               <div className={"atelier-film-picture"}>
-                <img className={"atelier-film-fallback"} alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie" aria-hidden="false" width="1280" height="720" src="/site-assets/4b45951db0b51136.webp" />
-                <video src="/site-assets/b82843cf77d572df.mp4" poster="/site-assets/4b45951db0b51136.webp" width="1280" height="720" preload="metadata" playsInline aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE" muted />
+                <img
+                  className={"atelier-film-fallback"}
+                  alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
+                  aria-hidden="false"
+                  width="1280"
+                  height="720"
+                  src="/site-assets/4b45951db0b51136.webp"
+                />
+                <video
+                  src="/site-assets/b82843cf77d572df.mp4"
+                  poster="/site-assets/4b45951db0b51136.webp"
+                  width="1280"
+                  height="720"
+                  preload="metadata"
+                  playsInline
+                  aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE"
+                  muted
+                />
                 <div className={"atelier-film-controls"}>
                   <button type="button" aria-label="Film abspielen">
-                    <svg className={"atelier-playback-icon"} viewBox="0 0 20 20" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">
+                    <svg
+                      className={"atelier-playback-icon"}
+                      viewBox="0 0 20 20"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
                     </svg>
                     <span>Abspielen</span>
                   </button>
                   <button type="button" aria-label="Film mit Ton starten">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
                       <path d="M4 9h4l5-4v14l-5-4H4Z" />
                       <path d="m17 9 5 6m0-6-5 6" />
                     </svg>
@@ -91,14 +200,33 @@ function ImportedSectionAnmelden() {
                   </button>
                   <details className={"atelier-volume"}>
                     <summary aria-label="Lautstärke">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
                         <path d="M3 12h8m6 0h4" strokeLinecap="round" />
                         <circle cx="14" cy="12" r="3" />
                       </svg>
                       <span className={"visually-hidden"}>Lautstärke</span>
                     </summary>
                     <div>
-                      <label htmlFor="_r_4_-volume">Lautstärke<input id="_r_4_-volume" min="0" max="1" step="0.05" type="range" defaultValue="0.8" /></label>
+                      <label htmlFor="_r_4_-volume">
+                        Lautstärke
+                        <input
+                          id="_r_4_-volume"
+                          min="0"
+                          max="1"
+                          step="0.05"
+                          type="range"
+                          defaultValue="0.8"
+                        />
+                      </label>
                     </div>
                   </details>
                 </div>
@@ -110,11 +238,64 @@ function ImportedSectionAnmelden() {
           </figure>
         </div>
         <div className={"nx-konto-nutzen"}>
-          <span className={"hc-kicker"} id="auth-login-szene">NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto</span>
+          <span className={"hc-kicker"} id="auth-login-szene">
+            NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto
+          </span>
           <ul>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" /></svg>Persönliche Vorgänge</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 7.5v10h17v-8h-8l-2-2z" /></svg>Unterlagen</li>
-            <li><svg className={"nx-zeichen"} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" /></svg>Shop-Bestellungen</li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M3.5 6.5h17v11h-17zM4 7l8 6.5L20 7" />
+              </svg>
+              Persönliche Vorgänge
+            </li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M3.5 7.5v10h17v-8h-8l-2-2z" />
+              </svg>
+              Unterlagen
+            </li>
+            <li>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+              </svg>
+              Shop-Bestellungen
+            </li>
           </ul>
           <p>Zusätzliche Produkt- und Partnerberechtigungen werden separat freigeschaltet.</p>
         </div>
@@ -155,7 +336,9 @@ function ImportedNavSeitenBersicht() {
       </div>
       <div className={"footer-overview-group"}>
         <h3>Konto</h3>
-        <a href="/anmelden" aria-current="page">Anmelden und weiterarbeiten.</a>
+        <a href="/anmelden" aria-current="page">
+          Anmelden und weiterarbeiten.
+        </a>
         <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
       </div>
       <div className={"footer-overview-group"}>
@@ -174,4 +357,3 @@ function ImportedNavSeitenBersicht() {
     </nav>
   );
 }
-

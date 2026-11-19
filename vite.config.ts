@@ -10,6 +10,10 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // 2026-11-19 20:46 (Europe/Berlin): Dev-Port fest auf 5173. Der Wrapper waehlt sonst 8080
+  // (hier vom Docker-Proxy belegt) und weicht auf 8081 aus — `hermes verify` wartet auf
+  // 5173 und meldete deshalb dauerhaft readiness=false (falsches Rot).
+  vite: { server: { port: 5173, strictPort: true } },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this

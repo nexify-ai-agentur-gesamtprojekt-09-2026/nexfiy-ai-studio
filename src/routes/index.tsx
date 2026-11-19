@@ -7,17 +7,43 @@ import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }, canonicalLink("/") ],
+    links: [
+      { rel: "stylesheet", href: capturedCSS },
+      {
+        rel: "preload",
+        as: "image",
+        href: "/site-assets/05c51cdebbdd2aa6.webp",
+        fetchPriority: "high",
+      },
+      canonicalLink("/"),
+    ],
     meta: [
       { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
-      { name: "description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
+      {
+        name: "description",
+        content:
+          "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
+      },
       { property: "og:title", content: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
-      { property: "og:description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },
+      {
+        property: "og:description",
+        content:
+          "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  staticData: { importedDocument: { html: { "lang": "de", "data-theme": "dark", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
+  staticData: {
+    importedDocument: {
+      html: {
+        lang: "de",
+        "data-theme": "dark",
+        style: { colorScheme: "dark" } as import("react").CSSProperties,
+      },
+      body: {},
+    },
+  },
   component: Index,
 });
 
@@ -27,92 +53,206 @@ function Index() {
     <NexifyShell heroActionSelector=".identity-primary-link">
       {({ chatOpen, openChat }) => (
         <>
-            <div className={"home-concept"} data-fx="on">
-              <ImportedSectionEinGesprChEin onOpenChat={openChat} />
-              <section className={"hc-intro hc-container is-in"} aria-labelledby="hc-intro-title">
+          <div className={"home-concept"} data-fx="on">
+            <ImportedSectionEinGesprChEin onOpenChat={openChat} />
+            <section className={"hc-intro hc-container is-in"} aria-labelledby="hc-intro-title">
+              <div>
+                <span className={"hc-kicker"}>Hier fängt die Arbeit an</span>
+                <h2 id="hc-intro-title">Wo hakt es gerade?</h2>
+              </div>
+              <p>
+                Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet.
+                Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.
+              </p>
+            </section>
+            <ImportedNavWoHaktEsGerade />
+            <ImportedSectionWasKNnenWir />
+            <section
+              id="zusammenarbeit"
+              className={"hc-section hc-process hc-container"}
+              aria-labelledby="hc-process-title"
+            >
+              <header
+                className={"hc-section-heading is-in"}
+                data-site-import-scroll-header={
+                  '{"desktop":{"added":["is-in"],"removed":[],"threshold":2592}}'
+                }
+              >
                 <div>
-                  <span className={"hc-kicker"}>Hier fängt die Arbeit an</span>
-                  <h2 id="hc-intro-title">Wo hakt es gerade?</h2>
+                  <span className={"hc-kicker"}>Zusammenarbeit</span>
+                  <h2 id="hc-process-title">Mit Pascal am Tisch.</h2>
                 </div>
-                <p>Eine Website, die Ihr Angebot nicht erklärt. Ein Vorgang, der jeden Tag Zeit kostet. Eine Idee ohne nächsten Schritt. Zeigen Sie uns die Stelle, an der es hakt.</p>
-              </section>
-              <ImportedNavWoHaktEsGerade />
-              <ImportedSectionWasKNnenWir />
-              <section id="zusammenarbeit" className={"hc-section hc-process hc-container"} aria-labelledby="hc-process-title">
-                <header className={"hc-section-heading is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":2592}}"}>
-                  <div>
-                    <span className={"hc-kicker"}>Zusammenarbeit</span>
-                    <h2 id="hc-process-title">Mit Pascal am Tisch.</h2>
+                <p>
+                  Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh,
+                  welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes
+                  gebraucht wird.
+                </p>
+              </header>
+              <figure className={"hc-plate hc-plate-process"}>
+                <img
+                  src="/site-assets/5c592a5dc791fcc3.webp"
+                  srcSet="/site-assets/b4c1010258293e22.webp 800w, /site-assets/55ecd78d79c41c10.webp 1280w, /site-assets/5c592a5dc791fcc3.webp 1920w"
+                  sizes="(max-width: 820px) 100vw, 80vw"
+                  width="2000"
+                  height="1125"
+                  alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <ol>
+                <li className={"is-in"}>
+                  <h3>Wir verstehen, was Sie erreichen möchten.</h3>
+                  <p>
+                    Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den
+                    Maßstab, an dem das Ergebnis bestehen muss.
+                  </p>
+                </li>
+                <li className={"is-in"}>
+                  <h3>Sie erhalten einen klaren Leistungsrahmen.</h3>
+                  <p>
+                    Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden
+                    verständlich voneinander getrennt.
+                  </p>
+                </li>
+                <li className={"is-in"}>
+                  <h3>Konzept, Text und Design entstehen gemeinsam.</h3>
+                  <p>
+                    Sie sehen an vereinbarten Punkten ein schlüssiges Gesamtbild und entscheiden,
+                    wie es weitergeht.
+                  </p>
+                </li>
+                <li className={"is-in"}>
+                  <h3>Wir prüfen, übergeben und bleiben erreichbar.</h3>
+                  <p>
+                    Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und
+                    Weiterentwicklung können Sie passend ergänzen.
+                  </p>
+                </li>
+              </ol>
+            </section>
+            <ImportedSectionEigeneWerkzeugeFR />
+            <section
+              id="budget"
+              className={"hc-section hc-budget hc-container"}
+              aria-labelledby="hc-budget-title"
+            >
+              <div className={"hc-budget-story"}>
+                <header
+                  className={"hc-section-heading is-in"}
+                  data-site-import-scroll-header={
+                    '{"desktop":{"added":["is-in"],"removed":[],"threshold":5184}}'
+                  }
+                >
+                  <span className={"hc-kicker"}>Kosten und Umfang</span>
+                  <h2 id="hc-budget-title">Sie wissen vor dem Start, was enthalten ist.</h2>
+                  <p>
+                    Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Sie
+                    entscheiden, was jetzt entsteht und was später folgt.
+                  </p>
+                  <div
+                    className={"hc-rate is-in"}
+                    aria-label="Individuell nach vereinbartem Umfang"
+                    data-site-import-scroll-header={
+                      '{"desktop":{"added":["is-in"],"removed":[],"threshold":5832}}'
+                    }
+                  >
+                    <span>Klare Kalkulationsbasis</span>
+                    <strong>Individuell</strong>
+                    <small>nach vereinbartem Umfang</small>
+                    <p>
+                      Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten
+                      Umfang geplant. Externe Kosten weisen wir separat aus.
+                    </p>
                   </div>
-                  <p>Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes gebraucht wird.</p>
+                  <a className={"hc-text-link"} href="/preise-ablauf">
+                    Mehr zu Kosten und Ablauf
+                    <svg
+                      className={"hc-arrow"}
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M4 12h16M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
                 </header>
-                <figure className={"hc-plate hc-plate-process"}>
-                  <img src="/site-assets/5c592a5dc791fcc3.webp" srcSet="/site-assets/b4c1010258293e22.webp 800w, /site-assets/55ecd78d79c41c10.webp 1280w, /site-assets/5c592a5dc791fcc3.webp 1920w" sizes="(max-width: 820px) 100vw, 80vw" width="2000" height="1125" alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch" loading="lazy" decoding="async" />
-                </figure>
-                <ol>
-                  <li className={"is-in"}>
-                    <h3>Wir verstehen, was Sie erreichen möchten.</h3>
-                    <p>Wir sprechen über Ihr Angebot, Ihre Kunden, die bisherige Lösung und den Maßstab, an dem das Ergebnis bestehen muss.</p>
-                  </li>
-                  <li className={"is-in"}>
-                    <h3>Sie erhalten einen klaren Leistungsrahmen.</h3>
-                    <p>Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden verständlich voneinander getrennt.</p>
-                  </li>
-                  <li className={"is-in"}>
-                    <h3>Konzept, Text und Design entstehen gemeinsam.</h3>
-                    <p>Sie sehen an vereinbarten Punkten ein schlüssiges Gesamtbild und entscheiden, wie es weitergeht.</p>
-                  </li>
-                  <li className={"is-in"}>
-                    <h3>Wir prüfen, übergeben und bleiben erreichbar.</h3>
-                    <p>Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und Weiterentwicklung können Sie passend ergänzen.</p>
-                  </li>
-                </ol>
-              </section>
-              <ImportedSectionEigeneWerkzeugeFR />
-              <section id="budget" className={"hc-section hc-budget hc-container"} aria-labelledby="hc-budget-title">
-                <div className={"hc-budget-story"}>
-                  <header className={"hc-section-heading is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":5184}}"}>
-                    <span className={"hc-kicker"}>Kosten und Umfang</span>
-                    <h2 id="hc-budget-title">Sie wissen vor dem Start, was enthalten ist.</h2>
-                    <p>Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Sie entscheiden, was jetzt entsteht und was später folgt.</p>
-                    <div className={"hc-rate is-in"} aria-label="Individuell nach vereinbartem Umfang" data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":5832}}"}>
-                      <span>Klare Kalkulationsbasis</span>
-                      <strong>Individuell</strong>
-                      <small>nach vereinbartem Umfang</small>
-                      <p>Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten Umfang geplant. Externe Kosten weisen wir separat aus.</p>
-                    </div>
-                    <a className={"hc-text-link"} href="/preise-ablauf">Mehr zu Kosten und Ablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                  </header>
-                  <div className={"hc-costs is-in"}>
-                    <div>
-                      <h3>Entwicklung</h3>
-                      <p>Konzept, Text, Design und technische Umsetzung werden im Angebot einem konkreten Ergebnis zugeordnet.</p>
-                    </div>
-                    <div>
-                      <h3>Betreuung danach</h3>
-                      <p>Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener, nachvollziehbarer Baustein vereinbart.</p>
-                    </div>
-                    <div>
-                      <h3>Externe Kosten</h3>
-                      <p>Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen ausgewiesen statt im Projektpreis versteckt.</p>
-                    </div>
+                <div className={"hc-costs is-in"}>
+                  <div>
+                    <h3>Entwicklung</h3>
+                    <p>
+                      Konzept, Text, Design und technische Umsetzung werden im Angebot einem
+                      konkreten Ergebnis zugeordnet.
+                    </p>
+                  </div>
+                  <div>
+                    <h3>Betreuung danach</h3>
+                    <p>
+                      Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener,
+                      nachvollziehbarer Baustein vereinbart.
+                    </p>
+                  </div>
+                  <div>
+                    <h3>Externe Kosten</h3>
+                    <p>
+                      Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen
+                      ausgewiesen statt im Projektpreis versteckt.
+                    </p>
                   </div>
                 </div>
-              </section>
-              <section className={"hc-section hc-finish hc-container"} aria-labelledby="hc-finish-title">
-                <div className={"hc-finish-heading is-in"}>
-                  <span className={"hc-kicker"}>Kommen Sie rein.</span>
-                  <h2 id="hc-finish-title">Woran arbeiten Sie gerade?</h2>
+              </div>
+            </section>
+            <section
+              className={"hc-section hc-finish hc-container"}
+              aria-labelledby="hc-finish-title"
+            >
+              <div className={"hc-finish-heading is-in"}>
+                <span className={"hc-kicker"}>Kommen Sie rein.</span>
+                <h2 id="hc-finish-title">Woran arbeiten Sie gerade?</h2>
+              </div>
+              <div className={"hc-finish-next is-in"}>
+                <p>
+                  Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen
+                  für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.
+                </p>
+                <div className={"hc-finish-actions"}>
+                  <button
+                    aria-controls="aifly-panel"
+                    aria-expanded={chatOpen}
+                    type="button"
+                    className={"nexify-control primary-button hc-finish-primary"}
+                    data-variant="primary"
+                    onClick={openChat}
+                  >
+                    Vorhaben schildern
+                    <svg
+                      className={"hc-arrow"}
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M4 12h16M13 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
-                <div className={"hc-finish-next is-in"}>
-                  <p>Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.</p>
-                  <div className={"hc-finish-actions"}>
-                    <button aria-controls="aifly-panel" aria-expanded={chatOpen} type="button" className={"nexify-control primary-button hc-finish-primary"} data-variant="primary" onClick={openChat}>Vorhaben schildern<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
-                  </div>
-                  <small />
-                </div>
-              </section>
-            </div>
+                <small />
+              </div>
+            </section>
+          </div>
         </>
       )}
     </NexifyShell>
@@ -125,16 +265,29 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
       <div className={"identity-scene"}>
         <div className={"identity-copy"}>
           <h1 id="home-headline">
-            <span>Ein Gespräch.{" "}</span>
-            <span>Ein Projekt,{" "}</span>
+            <span>Ein Gespräch. </span>
+            <span>Ein Projekt, </span>
             <span className={"identity-title-accent"}>das passt.</span>
           </h1>
-          <p className={"identity-subtitle"}>Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.</p>
-          <p className={"identity-body"}>Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Und Sie wissen vor dem Start, was enthalten ist.</p>
+          <p className={"identity-subtitle"}>
+            Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.
+          </p>
+          <p className={"identity-body"}>
+            Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Und Sie
+            wissen vor dem Start, was enthalten ist.
+          </p>
           <div className={"identity-links"}>
-            <button aria-controls="aifly-panel" type="button" className={"nexify-control primary-button identity-primary-link"} data-variant="primary" onClick={onOpenChat}>
+            <button
+              aria-controls="aifly-panel"
+              type="button"
+              className={"nexify-control primary-button identity-primary-link"}
+              data-variant="primary"
+              onClick={onOpenChat}
+            >
               <span>Vorhaben schildern</span>
-              <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
+              <span aria-hidden="true" className={"identity-primary-arrow"}>
+                →
+              </span>
             </button>
           </div>
         </div>
@@ -159,10 +312,49 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/websites">
           <span className={"hc-scene-context"}>Marke &amp; Dienstleistung</span>
-          <h3>Ihr Angebot, auf den Punkt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
-          <p>Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen verständlich zeigt und den Weg zur Anfrage öffnet.</p>
-          <small className={"hc-scene-value"}>Ziel: passende Gespräche mit den richtigen Kunden.</small>
-          <span className={"hc-text-link"}>Websites &amp; Markenauftritt<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <h3>
+            Ihr Angebot, auf den Punkt.
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 19 19 5M5 5h14v14" />
+            </svg>
+          </h3>
+          <p>
+            Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen
+            verständlich zeigt und den Weg zur Anfrage öffnet.
+          </p>
+          <small className={"hc-scene-value"}>
+            Ziel: passende Gespräche mit den richtigen Kunden.
+          </small>
+          <span className={"hc-text-link"}>
+            Websites &amp; Markenauftritt
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </span>
         </a>
       </article>
       <article className={"hc-gallery-card is-in"}>
@@ -173,13 +365,57 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/leistungen/agenten-automatisierung">
           <span className={"hc-scene-context"}>Fertigung &amp; Handwerk</span>
-          <h3>Mehr Zeit für die Arbeit, die zählt.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
-          <p>Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und KI Ihrem Team konkret Arbeit abnehmen können.</p>
-          <small className={"hc-scene-value"}>Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.</small>
-          <span className={"hc-text-link"}>KI im Arbeitsablauf<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <h3>
+            Mehr Zeit für die Arbeit, die zählt.
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 19 19 5M5 5h14v14" />
+            </svg>
+          </h3>
+          <p>
+            Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und
+            KI Ihrem Team konkret Arbeit abnehmen können.
+          </p>
+          <small className={"hc-scene-value"}>
+            Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.
+          </small>
+          <span className={"hc-text-link"}>
+            KI im Arbeitsablauf
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </span>
         </a>
       </article>
-      <article className={"hc-gallery-card is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":1296}}"}>
+      <article
+        className={"hc-gallery-card is-in"}
+        data-site-import-scroll-header={
+          '{"desktop":{"added":["is-in"],"removed":[],"threshold":1296}}'
+        }
+      >
         <div className={"identity-media hc-art hc-art-2"}>
           <figure className={"identity-hero-photo"}>
             <SiteFilm film="teileklar" />
@@ -187,10 +423,49 @@ function ImportedNavWoHaktEsGerade() {
         </div>
         <a className={"hc-gallery-link"} href="/teileklar">
           <span className={"hc-scene-context"}>Automotive &amp; Logistik</span>
-          <h3>Das richtige Teil. Der richtige Weg.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></h3>
-          <p>TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in einem verständlichen Anfrageweg zusammenkommen.</p>
-          <small className={"hc-scene-value"}>Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage.</small>
-          <span className={"hc-text-link"}>TEILEKLAR entdecken<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+          <h3>
+            Das richtige Teil. Der richtige Weg.
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 19 19 5M5 5h14v14" />
+            </svg>
+          </h3>
+          <p>
+            TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in
+            einem verständlichen Anfrageweg zusammenkommen.
+          </p>
+          <small className={"hc-scene-value"}>
+            Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage.
+          </small>
+          <span className={"hc-text-link"}>
+            TEILEKLAR entdecken
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </span>
         </a>
       </article>
     </nav>
@@ -199,15 +474,53 @@ function ImportedNavWoHaktEsGerade() {
 
 function ImportedSectionWasKNnenWir() {
   return (
-    <section id="leistungen" className={"hc-section hc-container hc-service-story"} aria-labelledby="hc-services-title">
+    <section
+      id="leistungen"
+      className={"hc-section hc-container hc-service-story"}
+      aria-labelledby="hc-services-title"
+    >
       <div className={"hc-service-layout"}>
-        <header className={"hc-section-heading is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":1296}}"}>
+        <header
+          className={"hc-section-heading is-in"}
+          data-site-import-scroll-header={
+            '{"desktop":{"added":["is-in"],"removed":[],"threshold":1296}}'
+          }
+        >
           <span className={"hc-kicker"}>Was wir für Sie tun</span>
           <h2 id="hc-services-title">Was können wir für Sie bauen?</h2>
-          <p>Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten Aufgabe in Ihrem Unternehmen.</p>
-          <a className={"hc-text-link"} href="/kontakt">Ihr Vorhaben mit uns besprechen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+          <p>
+            Marken und Websites, vernetzte Abläufe oder Kampagnen: Wir beginnen bei einer konkreten
+            Aufgabe in Ihrem Unternehmen.
+          </p>
+          <a className={"hc-text-link"} href="/kontakt">
+            Ihr Vorhaben mit uns besprechen
+            <svg
+              className={"hc-arrow"}
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M4 12h16M13 5l7 7-7 7" />
+            </svg>
+          </a>
           <figure className={"hc-plate hc-plate-services"}>
-            <img src="/site-assets/5b8e74b98d950c05.webp" srcSet="/site-assets/05d4134e5686af4f.webp 800w, /site-assets/55d521535e5fc86c.webp 1280w, /site-assets/5b8e74b98d950c05.webp 1920w" sizes="(max-width: 820px) 100vw, 40vw" width="2000" height="1125" alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier" loading="lazy" decoding="async" />
+            <img
+              src="/site-assets/5b8e74b98d950c05.webp"
+              srcSet="/site-assets/05d4134e5686af4f.webp 800w, /site-assets/55d521535e5fc86c.webp 1280w, /site-assets/5b8e74b98d950c05.webp 1920w"
+              sizes="(max-width: 820px) 100vw, 40vw"
+              width="2000"
+              height="1125"
+              alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
         </header>
         <div className={"hc-service-list"}>
@@ -215,29 +528,74 @@ function ImportedSectionWasKNnenWir() {
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Marke, Text &amp; Website</strong>
-                <span className={"hc-service-lead"}>Ein Auftritt, der nach Ihrem Unternehmen aussieht – und sich auch so anfühlt.</span>
+                <span className={"hc-service-lead"}>
+                  Ein Auftritt, der nach Ihrem Unternehmen aussieht – und sich auch so anfühlt.
+                </span>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
             <div className={"hc-service-body"}>
               <ul>
                 <li>Positionierung, Seitenstruktur und klare Texte für Ihr Angebot</li>
-                <li>Individuelle Art Direction und Webdesign, eigens für Ihr Unternehmen entworfen</li>
+                <li>
+                  Individuelle Art Direction und Webdesign, eigens für Ihr Unternehmen entworfen
+                </li>
                 <li>Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe</li>
               </ul>
-              <p className={"hc-caption"}>Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start fest vereinbart.</p>
-              <a className={"hc-text-link"} href="/leistungen/websites">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <p className={"hc-caption"}>
+                Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start
+                fest vereinbart.
+              </p>
+              <a className={"hc-text-link"} href="/leistungen/websites">
+                Leistung und Umfang ansehen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </details>
           <details className={"hc-service-detail is-in"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Systeme &amp; Automatisierung</strong>
-                <span className={"hc-service-lead"}>Weniger Routine, mehr Überblick – ohne Ihre Arbeitsweise in ein fremdes System zu pressen.</span>
+                <span className={"hc-service-lead"}>
+                  Weniger Routine, mehr Überblick – ohne Ihre Arbeitsweise in ein fremdes System zu
+                  pressen.
+                </span>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
@@ -247,17 +605,49 @@ function ImportedSectionWasKNnenWir() {
                 <li>Vorhandene Systeme, Daten und Freigaben gezielt verbinden</li>
                 <li>Fehlerfälle prüfen, Verantwortlichkeiten klären und Bedienung dokumentieren</li>
               </ul>
-              <p className={"hc-caption"}>Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen wir den nächsten.</p>
-              <a className={"hc-text-link"} href="/leistungen/agenten-automatisierung">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <p className={"hc-caption"}>
+                Wir beginnen bewusst mit einem Ablauf. Erst wenn er zuverlässig funktioniert, planen
+                wir den nächsten.
+              </p>
+              <a className={"hc-text-link"} href="/leistungen/agenten-automatisierung">
+                Leistung und Umfang ansehen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </details>
           <details className={"hc-service-detail is-in"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Sichtbarkeit &amp; Kampagne</strong>
-                <span className={"hc-service-lead"}>Gefunden werden, verstanden werden und den richtigen Anlass für eine Anfrage schaffen.</span>
+                <span className={"hc-service-lead"}>
+                  Gefunden werden, verstanden werden und den richtigen Anlass für eine Anfrage
+                  schaffen.
+                </span>
               </span>
-              <svg className={"hc-disclosure-icon"} viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <svg
+                className={"hc-disclosure-icon"}
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden="true"
+              >
                 <path d="M5 12h14m-7-7v14" />
               </svg>
             </summary>
@@ -267,8 +657,27 @@ function ImportedSectionWasKNnenWir() {
                 <li>Landingpage, Inhalte und Werbemittel aus einem visuellen Konzept entwickeln</li>
                 <li>SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen</li>
               </ul>
-              <p className={"hc-caption"}>Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt.</p>
-              <a className={"hc-text-link"} href="/loesungen">Leistung und Umfang ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+              <p className={"hc-caption"}>
+                Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt.
+              </p>
+              <a className={"hc-text-link"} href="/loesungen">
+                Leistung und Umfang ansehen
+                <svg
+                  className={"hc-arrow"}
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M4 12h16M13 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
           </details>
         </div>
@@ -279,53 +688,169 @@ function ImportedSectionWasKNnenWir() {
 
 function ImportedSectionEigeneWerkzeugeFR() {
   return (
-    <section id="produktwelt" className={"hc-section hc-container hc-product-story"} aria-labelledby="hc-products-title">
-      <header className={"hc-section-heading is-in"} data-site-import-scroll-header={"{\"desktop\":{\"added\":[\"is-in\"],\"removed\":[],\"threshold\":3888}}"}>
+    <section
+      id="produktwelt"
+      className={"hc-section hc-container hc-product-story"}
+      aria-labelledby="hc-products-title"
+    >
+      <header
+        className={"hc-section-heading is-in"}
+        data-site-import-scroll-header={
+          '{"desktop":{"added":["is-in"],"removed":[],"threshold":3888}}'
+        }
+      >
         <div>
           <span className={"hc-kicker"}>Produkte von NeXify</span>
           <h2 id="hc-products-title">Eigene Werkzeuge für konkrete Arbeit.</h2>
         </div>
-        <p>Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.</p>
+        <p>
+          Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben
+          je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.
+        </p>
       </header>
       <div className={"hc-products"}>
         <a className={"hc-product is-in"} href="/produkte/nex2fly">
           <figure className={"hc-product-art"}>
-            <img src="/site-assets/4b45951db0b51136.webp" srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w" sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie" loading="lazy" decoding="async" />
+            <img
+              src="/site-assets/4b45951db0b51136.webp"
+              srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w"
+              sizes="(max-width: 900px) 100vw, 50vw"
+              width="2000"
+              height="1125"
+              alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
           <div>
             <h3>NeX AIFly Suite</h3>
             <p>Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.</p>
-            <span className={"hc-text-link"}>Suite kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>
+              Suite kennenlernen
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 12h16M13 5l7 7-7 7" />
+              </svg>
+            </span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/produkte/one">
           <figure className={"hc-product-art"}>
-            <img src="/site-assets/a28276c0cb67aeef.webp" srcSet="/site-assets/4651eb82c8a87835.webp 800w, /site-assets/62994bb0701a3e15.webp 1280w, /site-assets/a28276c0cb67aeef.webp 1920w" sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt="Markeninszenierung: Pascal im Gespräch mit einer Person in Hygienekleidung an einer Produktionsanlage" loading="lazy" decoding="async" />
+            <img
+              src="/site-assets/a28276c0cb67aeef.webp"
+              srcSet="/site-assets/4651eb82c8a87835.webp 800w, /site-assets/62994bb0701a3e15.webp 1280w, /site-assets/a28276c0cb67aeef.webp 1920w"
+              sizes="(max-width: 900px) 100vw, 50vw"
+              width="2000"
+              height="1125"
+              alt="Markeninszenierung: Pascal im Gespräch mit einer Person in Hygienekleidung an einer Produktionsanlage"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
           <div>
             <h3>NeX Agentic AI</h3>
             <p>Der Agent für klar umrissene Aufgaben – mit den Werkzeugen, die Sie zulassen.</p>
-            <span className={"hc-text-link"}>Agenten kennenlernen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>
+              Agenten kennenlernen
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 12h16M13 5l7 7-7 7" />
+              </svg>
+            </span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/produkte/api">
           <figure className={"hc-product-art"}>
-            <img src="/site-assets/df162c342bb041e0.webp" srcSet="/site-assets/3c2a16020520a9d2.webp 800w, /site-assets/310f26f4c183ff5d.webp 1280w, /site-assets/df162c342bb041e0.webp 1920w" sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt="Markeninszenierung: Pascal und ein Gesprächspartner betrachten Pläne und ein technisches Modell auf einem Arbeitstisch" loading="lazy" decoding="async" />
+            <img
+              src="/site-assets/df162c342bb041e0.webp"
+              srcSet="/site-assets/3c2a16020520a9d2.webp 800w, /site-assets/310f26f4c183ff5d.webp 1280w, /site-assets/df162c342bb041e0.webp 1920w"
+              sizes="(max-width: 900px) 100vw, 50vw"
+              width="2000"
+              height="1125"
+              alt="Markeninszenierung: Pascal und ein Gesprächspartner betrachten Pläne und ein technisches Modell auf einem Arbeitstisch"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
           <div>
             <h3>NeXify API</h3>
             <p>KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.</p>
-            <span className={"hc-text-link"}>API ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>
+              API ansehen
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 12h16M13 5l7 7-7 7" />
+              </svg>
+            </span>
           </div>
         </a>
         <a className={"hc-product is-in"} href="/teileklar">
           <figure className={"hc-product-art"}>
-            <img src="/site-assets/506495187c091a6f.webp" srcSet="/site-assets/3be13e6036057b5f.webp 800w, /site-assets/5467e1d560fa9ec8.webp 1280w, /site-assets/506495187c091a6f.webp 1920w" sizes="(max-width: 900px) 100vw, 50vw" width="2000" height="1125" alt="Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons; begleitet von NeX und AIFly ORACLE" loading="lazy" decoding="async" />
+            <img
+              src="/site-assets/506495187c091a6f.webp"
+              srcSet="/site-assets/3be13e6036057b5f.webp 800w, /site-assets/5467e1d560fa9ec8.webp 1280w, /site-assets/506495187c091a6f.webp 1920w"
+              sizes="(max-width: 900px) 100vw, 50vw"
+              width="2000"
+              height="1125"
+              alt="Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons; begleitet von NeX und AIFly ORACLE"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
           <div>
             <h3>TEILEKLAR</h3>
             <p>Unsere eigene Marke: Zubehör und Teile für Auto und Motorrad, mit klaren Angaben.</p>
-            <span className={"hc-text-link"}>Zu TEILEKLAR<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16M13 5l7 7-7 7" /></svg></span>
+            <span className={"hc-text-link"}>
+              Zu TEILEKLAR
+              <svg
+                className={"hc-arrow"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 12h16M13 5l7 7-7 7" />
+              </svg>
+            </span>
           </div>
         </a>
       </div>
@@ -335,7 +860,9 @@ function ImportedSectionEigeneWerkzeugeFR() {
 
 function useImportedLayout() {
   useEffect(() => {
-    const scrollingAreas = Array.from(document.querySelectorAll<HTMLElement>("[data-site-import-scroll-root]"));
+    const scrollingAreas = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-site-import-scroll-root]"),
+    );
     const scrollTop = () =>
       scrollingAreas.find(
         (node) =>
@@ -343,7 +870,9 @@ function useImportedLayout() {
           node.scrollHeight > node.clientHeight &&
           /^(auto|scroll)$/.test(getComputedStyle(node).overflowY),
       )?.scrollTop ?? window.scrollY;
-    const scrollHeaders = Array.from(document.querySelectorAll<HTMLElement>("[data-site-import-scroll-header]"))
+    const scrollHeaders = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-site-import-scroll-header]"),
+    )
       .slice(0, 128)
       .flatMap((node) => {
         try {
@@ -377,7 +906,9 @@ function useImportedLayout() {
       for (const { node, states, original, originalFill, transform, priority } of scrollHeaders) {
         if (!reset && node.getAttribute("data-import-menu-open") === "true") continue;
         const state = states[innerWidth < 768 ? "mobile" : "desktop"];
-        if ([states.desktop, states.mobile].some((entry) => entry && Object.hasOwn(entry, "fill"))) {
+        if (
+          [states.desktop, states.mobile].some((entry) => entry && Object.hasOwn(entry, "fill"))
+        ) {
           if (originalFill === null) node.removeAttribute("fill");
           else node.setAttribute("fill", originalFill);
         }
@@ -394,7 +925,8 @@ function useImportedLayout() {
             node.classList.toggle(token, original.has(token));
           }
         }
-        if (reset || !state || !Number.isFinite(state.threshold) || scrollTop() < state.threshold) continue;
+        if (reset || !state || !Number.isFinite(state.threshold) || scrollTop() < state.threshold)
+          continue;
         let until = state.until;
         if (
           typeof state.untilAnchor === "string" &&
@@ -405,11 +937,17 @@ function useImportedLayout() {
           const anchor = document.querySelector<HTMLElement>(
             '[data-site-import-header-end="' + state.untilAnchor + '"]',
           );
-          if (anchor) until = anchor.getBoundingClientRect().top + scrollTop() + innerHeight * state.untilProgress;
+          if (anchor)
+            until =
+              anchor.getBoundingClientRect().top + scrollTop() + innerHeight * state.untilProgress;
         }
         if (Number.isFinite(until) && scrollTop() >= until) continue;
         if (state.fill === null) node.removeAttribute("fill");
-        else if (typeof state.fill === "string" && state.fill.length <= 256 && !/url\(/i.test(state.fill))
+        else if (
+          typeof state.fill === "string" &&
+          state.fill.length <= 256 &&
+          !/url\(/i.test(state.fill)
+        )
           node.setAttribute("fill", state.fill);
         if (
           typeof state.transform === "string" &&
@@ -458,4 +996,3 @@ function useImportedLayout() {
     };
   }, []);
 }
-

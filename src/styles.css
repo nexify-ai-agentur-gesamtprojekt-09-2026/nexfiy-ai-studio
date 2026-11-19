@@ -82,9 +82,25 @@
 
 /* Brand fonts (self-hosted copies in /public/site-assets). The imported page stylesheets declare the
    same faces; declaring them here lets system pages (not found, error) use them too. */
-@font-face { font-family: Inter; src: url("/site-assets/0848630eef4b593d.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Plus Jakarta Sans"; src: url("/site-assets/f7f6e92afae6f3df.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Geist Mono"; src: url("/site-assets/a978be7d3173a36e.woff2") format("woff2"); font-display: swap; }
+@font-face {
+  font-family: Inter;
+  src: url("/site-assets/0848630eef4b593d.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/site-assets/f7f6e92afae6f3df.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/site-assets/a978be7d3173a36e.woff2") format("woff2");
+  font-display: swap;
+}
 
 /* NeXify dark palette (graphite + lime) on the shadcn roles, so every new UI piece matches the pages. */
 :root {
@@ -129,11 +145,20 @@
   --font-brand-text: Inter, "Segoe UI", system-ui, sans-serif;
   --font-brand-display: "Plus Jakarta Sans", Inter, "Segoe UI", system-ui, sans-serif;
   --font-brand-mono: "Geist Mono", ui-monospace, "Courier New", monospace;
-  --gradient-surface: linear-gradient(180deg, oklch(0.3264 0.0089 173.77) 0%, oklch(0.2803 0.0068 164.5) 100%);
-  --gradient-stage-glow: radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
+  --gradient-surface: linear-gradient(
+    180deg,
+    oklch(0.3264 0.0089 173.77) 0%,
+    oklch(0.2803 0.0068 164.5) 100%
+  );
+  --gradient-stage-glow:
+    radial-gradient(60rem 36rem at 85% -10%, oklch(0.786 0.125 124.36 / 14%), transparent 60%),
     radial-gradient(40rem 30rem at -10% 110%, oklch(0.7949 0.0125 223.56 / 8%), transparent 65%);
-  --elevation-card: inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%), 0 2px 6px oklch(0 0 0 / 30%);
-  --elevation-primary: inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%), 0 2px 0 oklch(0 0 0 / 30%);
+  --elevation-card:
+    inset 0 1px 0 oklch(1 0 0 / 6%), 0 32px 56px -32px oklch(0 0 0 / 90%),
+    0 2px 6px oklch(0 0 0 / 30%);
+  --elevation-primary:
+    inset 0 1px 0 oklch(1 0 0 / 65%), 0 16px 36px -14px oklch(0.786 0.125 124.36 / 38%),
+    0 2px 0 oklch(0 0 0 / 30%);
   --motion-ease-brand: cubic-bezier(0.22, 0.9, 0.32, 1);
 }
 
@@ -294,9 +319,10 @@
   --color-text-secondary: #cbd1d6;
   --color-text-sekundaer: #cbd1d6;
   --color-text-tertiaer: #aeb5bb;
-  --ease-emph: cubic-bezier(.22, .9, .32, 1);
-  --ease-standard: cubic-bezier(.2, .8, .3, 1);
-  --font-display: "Plus Jakarta Sans", "Jakarta Rueckfall", Inter, "Segoe UI", system-ui, sans-serif;
+  --ease-emph: cubic-bezier(0.22, 0.9, 0.32, 1);
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.3, 1);
+  --font-display:
+    "Plus Jakarta Sans", "Jakarta Rueckfall", Inter, "Segoe UI", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "Courier New", monospace;
   --font-text: Inter, "Inter Rueckfall", "Segoe UI", system-ui, sans-serif;
   --font-weight-bold: 700;
@@ -316,22 +342,41 @@
   --radius-leit: 24px;
   --radius-pille: 999px;
   --shadow-akzent-weich: 0 1px 2px #0000004d, 0 10px 22px -16px #00000085, inset 0 1px 0 #ffffff0d;
-  --shadow-atelier: inset 0 1px 0 color-mix(in srgb, #bdc5c9 16%, transparent), 0 24px 64px -32px color-mix(in srgb, #1b1e1d 90%, transparent);
-  --shadow-atelier-depth: inset 0 1px 0 color-mix(in srgb, #f3f0ea 20%, transparent), inset 1px 0 0 color-mix(in srgb, #b4bec2 9%, transparent), 0 6px 12px -6px #1b1e1d, 0 32px 64px -28px color-mix(in srgb, #1b1e1d 90%, transparent);
-  --shadow-atelier-panel-depth: inset 0 1px 0 color-mix(in srgb, #f3f0ea 28%, transparent), inset 1px 0 0 color-mix(in srgb, #bdc5c9 15%, transparent), inset -1px 0 0 color-mix(in srgb, #b4bec2 12%, transparent), inset 0 -1px 0 color-mix(in srgb, #1b1e1d 90%, transparent), 0 8px 18px -10px color-mix(in srgb, #1b1e1d 80%, transparent), 0 38px 76px -34px color-mix(in srgb, #1b1e1d 96%, transparent);
-  --shadow-atelier-polish: inset 0 1px 0 color-mix(in srgb, #bdc5c9 32%, transparent), inset 1px 0 0 color-mix(in srgb, #b4bec2 12%, transparent), 0 24px 64px -32px color-mix(in srgb, #1b1e1d 90%, transparent);
-  --shadow-button-primaer: inset 0 1px 0 #ffffffa6, 0 16px 36px -14px color-mix(in srgb, #a8c76a 38%, transparent), 0 2px 0 #0000004d;
+  --shadow-atelier:
+    inset 0 1px 0 color-mix(in srgb, #bdc5c9 16%, transparent),
+    0 24px 64px -32px color-mix(in srgb, #1b1e1d 90%, transparent);
+  --shadow-atelier-depth:
+    inset 0 1px 0 color-mix(in srgb, #f3f0ea 20%, transparent),
+    inset 1px 0 0 color-mix(in srgb, #b4bec2 9%, transparent), 0 6px 12px -6px #1b1e1d,
+    0 32px 64px -28px color-mix(in srgb, #1b1e1d 90%, transparent);
+  --shadow-atelier-panel-depth:
+    inset 0 1px 0 color-mix(in srgb, #f3f0ea 28%, transparent),
+    inset 1px 0 0 color-mix(in srgb, #bdc5c9 15%, transparent),
+    inset -1px 0 0 color-mix(in srgb, #b4bec2 12%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, #1b1e1d 90%, transparent),
+    0 8px 18px -10px color-mix(in srgb, #1b1e1d 80%, transparent),
+    0 38px 76px -34px color-mix(in srgb, #1b1e1d 96%, transparent);
+  --shadow-atelier-polish:
+    inset 0 1px 0 color-mix(in srgb, #bdc5c9 32%, transparent),
+    inset 1px 0 0 color-mix(in srgb, #b4bec2 12%, transparent),
+    0 24px 64px -32px color-mix(in srgb, #1b1e1d 90%, transparent);
+  --shadow-button-primaer:
+    inset 0 1px 0 #ffffffa6, 0 16px 36px -14px color-mix(in srgb, #a8c76a 38%, transparent),
+    0 2px 0 #0000004d;
   --shadow-chat-bubble: 0 1px 2px #00000057, 0 6px 14px -10px #0000008c, inset 0 1px 0 #ffffff0d;
   --shadow-chat-panel: inset 1px 0 0 #ffffff08, -28px 0 56px -40px #000000a6;
   --shadow-chat-raised: 0 2px 4px #0006, 0 16px 30px -18px #000000b3, inset 0 1px 0 #ffffff0d;
   --shadow-dialog: inset 0 1px 0 #ffffff14, 0 60px 120px -30px #000000fa;
-  --shadow-home-media: inset 0 2px 2px color-mix(in srgb, #f3f0ea 26%, transparent), inset 0 -3px 8px color-mix(in srgb, #1b1e1d 80%, transparent), 0 16px 32px -16px color-mix(in srgb, #1b1e1d 70%, transparent);
+  --shadow-home-media:
+    inset 0 2px 2px color-mix(in srgb, #f3f0ea 26%, transparent),
+    inset 0 -3px 8px color-mix(in srgb, #1b1e1d 80%, transparent),
+    0 16px 32px -16px color-mix(in srgb, #1b1e1d 70%, transparent);
   --shadow-karte: inset 0 1px 0 #ffffff0f, 0 32px 56px -32px #000000e6, 0 2px 6px #0000004d;
   --shadow-kleine-karte: inset 0 1px 0 #ffffff0d, 0 14px 24px -16px #000000d9;
   --shadow-leuchten: 0 0 32px color-mix(in srgb, #a8c76a 55%, transparent);
   --shadow-well: inset 0 2px 10px #00000073, inset 0 0 0 1px #ffffff0d;
-  --tracking-display: -.052em;
-  --tracking-heading: -.035em;
+  --tracking-display: -0.052em;
+  --tracking-heading: -0.035em;
 }
 /* site-import tokens: end */
 
@@ -343,14 +388,28 @@
 }
 
 @layer base {
-  html { color-scheme: dark; }
-  :focus-visible { outline-color: var(--ring); }
+  html {
+    color-scheme: dark;
+  }
+  :focus-visible {
+    outline-color: var(--ring);
+  }
 }
 
 /* System pages (not found, error) fade in once; motion is skipped for visitors who reduce it. */
-@keyframes status-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes status-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @utility animate-status-rise {
   animation: status-rise 0.7s var(--motion-ease-brand) both;
-  @media (prefers-reduced-motion: reduce) { animation: none; }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
-
