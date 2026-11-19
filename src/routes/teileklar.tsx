@@ -4,10 +4,11 @@ import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierF
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/506495187c091a6f.webp", fetchPriority: "high" }, canonicalLink("/teileklar") ],
     meta: [
       { title: "TEILEKLAR.shop – Zubehör für Auto & Motorrad" },
       { name: "description", content: "Passende Teile und Zubehör für Auto und Motorrad – mit klaren Angaben zu Fahrzeug, Passung und Werkstatt." },

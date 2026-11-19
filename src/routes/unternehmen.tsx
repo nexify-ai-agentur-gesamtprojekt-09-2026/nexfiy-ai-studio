@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/unternehmen.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/unternehmen")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/unternehmen") ], meta: [{ title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

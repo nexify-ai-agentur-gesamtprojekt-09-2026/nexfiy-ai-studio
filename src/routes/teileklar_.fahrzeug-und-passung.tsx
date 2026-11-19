@@ -3,9 +3,11 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.fahrzeug-und-passung.css?raw";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/fahrzeug-und-passung")({
-  head: () => ({ meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }] }),
+  head: () => ({
+    links: [canonicalLink("/teileklar/fahrzeug-und-passung")], meta: [{ title: "Passt das Teil? So prüfen Sie es. · TEILEKLAR.shop" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

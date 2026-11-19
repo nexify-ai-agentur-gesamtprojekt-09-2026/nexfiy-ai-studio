@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/impressum.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/impressum")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/impressum") ], meta: [{ title: "Impressum · NeXify AI by NeXify · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });
@@ -63,7 +64,7 @@ function Index() {
                     <h2 id="content-imprint-betreiber-1-title">Kontakt</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>E-Mail: hello@nexifyai.cloud. Telefon: +31 6 133 188 56. Web: www.nexifyai.cloud.</p>
+                    <p>E-Mail: hello@nexifyai.cloud. Telefon: +31 6 133 188 56. Web: www.nexifyai.de.</p>
                   </div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-imprint-registerangaben-2" tabIndex={-1} aria-labelledby="content-imprint-registerangaben-2-title">

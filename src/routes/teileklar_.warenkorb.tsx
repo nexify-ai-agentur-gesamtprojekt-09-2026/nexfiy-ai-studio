@@ -3,9 +3,11 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.warenkorb.css?raw";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/warenkorb")({
-  head: () => ({ meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }] }),
+  head: () => ({
+    links: [canonicalLink("/teileklar/warenkorb")], meta: [{ title: "Ihr Warenkorb. Alles im Blick. · TEILEKLAR.shop" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

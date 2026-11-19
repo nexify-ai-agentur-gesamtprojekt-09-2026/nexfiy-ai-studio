@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/captured.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }, canonicalLink("/") ],
     meta: [
       { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
       { name: "description", content: "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal." },

@@ -3,9 +3,11 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.reifenrechner.css?raw";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/reifenrechner")({
-  head: () => ({ meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }] }),
+  head: () => ({
+    links: [canonicalLink("/teileklar/reifenrechner")], meta: [{ title: "Reifengrößen vergleichen. · TEILEKLAR.shop" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

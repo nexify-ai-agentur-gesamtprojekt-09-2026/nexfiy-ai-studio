@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex2fly.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/nex2fly")({
-  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }] }),
+  head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex2fly") ], meta: [{ title: "NeX AIFly Suite. Ihr KI-Arbeitsbereich. · NeXify AI" }] }),
   staticData: { importedDocument: { html: { "lang": "de", "style": { colorScheme: "dark" } as import("react").CSSProperties }, body: {  } } },
   component: Index,
 });

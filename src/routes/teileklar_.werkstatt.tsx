@@ -3,10 +3,11 @@ import { useSyncExternalStore } from "react";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.werkstatt.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/werkstatt")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/teileklar/werkstatt") ],
     meta: [
       { title: "Werkstatt in Ihrer Nähe · TEILEKLAR.shop" },
       { name: "description", content: "Finden Sie Werkstätten in Ihrer Nähe – sortiert nach Entfernung, gesucht nach PLZ oder Ort." },
@@ -184,8 +185,8 @@ function Index() {
                 <a href="/teileklar">TEILEKLAR. Für Auto und Motorrad.</a>
                 <a href="/teileklar/suche">Teil, Marke oder Nummer suchen.</a>
                 <a href="/teileklar/kategorien">Alle Kategorien auf einen Blick.</a>
-                <a href="/teileklar/kategorie">Ähnliche Teile sicher unterscheiden.</a>
-                <a href="/teileklar/produkt">Alles zum Artikel. Vor dem Kauf.</a>
+                <a href="/teileklar/kategorien">Ähnliche Teile sicher unterscheiden.</a>
+                <a href="/teileklar/shop">Alles zum Artikel. Vor dem Kauf.</a>
                 <a href="/teileklar/warenkorb">Ihr Warenkorb. Alles im Blick.</a>
                 <a href="/teileklar/kasse">Zur Kasse. Schritt für Schritt.</a>
                 <a href="/teileklar/fahrzeug-und-passung">Passt das Teil? So prüfen Sie es.</a>

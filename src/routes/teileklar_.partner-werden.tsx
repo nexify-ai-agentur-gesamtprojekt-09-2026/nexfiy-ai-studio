@@ -5,10 +5,11 @@ import { SiteFilm } from "../components/SiteFilm";
 import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.partner-werden.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/teileklar_/partner-werden")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/15fa9607b63661b1.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/15fa9607b63661b1.webp", fetchPriority: "high" }, canonicalLink("/teileklar/partner-werden") ],
     meta: [
       { title: "Werkstatt? Werden Sie Partner. · TEILEKLAR.shop" },
       { name: "description", content: "Werden Sie TEILEKLAR-Werkstattpartner und erhalten Sie vollständige Aufträge mit Fahrzeug, geprüftem Teil und Kontaktdaten." },

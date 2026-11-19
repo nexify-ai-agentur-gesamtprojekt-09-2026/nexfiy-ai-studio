@@ -3,10 +3,11 @@ import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/kontakt.css?url";
+import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }],
+    links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }, canonicalLink("/kontakt") ],
     meta: [
       { title: "Schildern Sie Ihr Vorhaben. · NeXify AI" },
       { name: "description", content: "Beschreiben Sie Ihr Vorhaben in wenigen Sätzen – Pascal meldet sich persönlich mit einem klaren nächsten Schritt." },
