@@ -146,8 +146,22 @@ export const datenschutzSections: LegalSection[] = [
       <p key="p2">
         Texte und Bilder dieser Website entstehen mit Unterstützung von KI und werden vor
         Veröffentlichung redaktionell geprüft. Eine Verarbeitung Ihrer personenbezogenen Daten zu
-        Trainingszwecken findet dabei nicht statt. Hinweise zur Kennzeichnung stehen unter{" "}
-        <a href="/ki-hinweise">KI-Hinweise</a>.
+        Trainingszwecken findet dabei nicht statt. Die Kennzeichnung richtet sich nach Art. 50 EU AI
+        Act; Einzelheiten stehen unter <a href="/ki-hinweise">KI-Hinweise</a>.
+      </p>,
+    ],
+  },
+  {
+    id: "content-privacy-sicherheit-6",
+    title: "Sicherheit der Verarbeitung",
+    blocks: [
+      <p key="p1">
+        Die Website wird ausschließlich über eine verschlüsselte Verbindung (TLS) ausgeliefert.
+        Verwaltungszugänge sind auf wenige Personen beschränkt und durch Schlüssel statt Passwörter
+        geschützt. Wir treffen die technischen und organisatorischen Maßnahmen nach Art. 32 DSGVO, um
+        Daten gegen Verlust, Veränderung und unbefugten Zugriff zu schützen; da diese Website selbst
+        keine personenbezogenen Daten speichert, beziehen sie sich auf den sicheren Betrieb und die
+        abgesicherte Auslieferung.
       </p>,
     ],
   },
