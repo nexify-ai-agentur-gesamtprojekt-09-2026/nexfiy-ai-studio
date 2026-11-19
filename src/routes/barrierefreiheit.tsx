@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
 import { canonicalLink } from "@/lib/seo";
+import { LegalSections } from "@/components/site/LegalSections";
+import { barrierefreiheitSections } from "@/lib/legal/barrierefreiheit";
 
 export const Route = createFileRoute("/barrierefreiheit")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/barrierefreiheit") ], meta: [{ title: "Qualität soll zugänglich sein. · NeXify AI" }, { name: "description", content: "Gutes Design trägt auch bei Tastaturbedienung, größerem Text und reduzierter Bewegung. Wir entwickeln diese Zugänglichkeit weiter; eine umfassend bestätigte." }] }),
@@ -39,34 +41,7 @@ function Index() {
                   </div>
                 </div>
               </section>
-              <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
-                <a href="#content-accessibility-ueberblick-0">Lesbar, bedienbar, nachvollziehbar<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-accessibility-anspruch-rueckmeldung-1">Ihr Hinweis verbessert die nächste Version<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-              </nav>
-              <div className={"pc-sections"}>
-                <section className={"hc-intro hc-container pc-section"} id="content-accessibility-ueberblick-0" tabIndex={-1} aria-labelledby="content-accessibility-ueberblick-0-title">
-                  <div>
-                    <span className={"hc-kicker"}>01 / 02</span>
-                    <h2 id="content-accessibility-ueberblick-0-title">Lesbar, bedienbar, nachvollziehbar</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Klare Hierarchien, sichtbarer Fokus und verständliche Beschriftungen gehören zum Gestaltungsanspruch. Medien unterstützen die Botschaft; wichtige Informationen dürfen nicht allein von Bewegung oder Farbe abhängen.</p>
-                    <div className={"hc-service-detail pc-module"}>
-                      <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-                      <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    </div>
-                  </div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-accessibility-anspruch-rueckmeldung-1" tabIndex={-1} aria-labelledby="content-accessibility-anspruch-rueckmeldung-1-title">
-                  <div>
-                    <span className={"hc-kicker"}>02 / 02</span>
-                    <h2 id="content-accessibility-anspruch-rueckmeldung-1-title">Ihr Hinweis verbessert die nächste Version</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Beschreiben Sie eine Barriere mit Seite, betroffener Funktion und Gerät. Über den Kontaktweg erreicht Ihr Hinweis das Projektteam. Übermitteln Sie dabei keine Zugangsdaten oder vertraulichen Inhalte.</p>
-                  </div>
-                </section>
-              </div>
+              <LegalSections sections={barrierefreiheitSections} />
               <ImportedSectionDieFACTORYEntdeckenMit />
               <ImportedSectionPassendeThemen />
               <section className={"hc-section hc-finish hc-container is-plain"} aria-labelledby="finish-title-accessibility">
@@ -150,7 +125,7 @@ function ImportedSectionPassendeThemen() {
           <h3>
             <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
           </h3>
-          <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.</p>
+          <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Verantwortlicher, Zwecke, Rechtsgrundlagen und Fristen stehen in der Datenschutzerklärung.</p>
           <a aria-label="Ihre Daten. Ein klarer Zweck. – Seite ansehen" className={"hc-text-link"} href="/datenschutz">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
         </li>
       </ol>

@@ -44,12 +44,25 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// 2026-11-19 19:45 (Europe/Berlin): Dauerhafte Weiterleitungen für kurze Adressen.
+// Warum: /preise ist laut Kanalvorgabe der Einstieg für Angebotsanfragen (SOUL §0c), die Seite
+//   selbst heißt /preise-ablauf — /preise lief deshalb ins Leere (404). Ein 301 hält gesetzte
+//   Links und den Suchindex zusammen, ohne eine zweite Preisseite zu pflegen.
+const PERMANENT_REDIRECTS: Record<string, string> = {
+  "/preise": "/preise-ablauf",
+  "/preise/": "/preise-ablauf",
+};
+
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+      const target = PERMANENT_REDIRECTS[url.pathname];
+      if (target)
+        return Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301);
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

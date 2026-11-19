@@ -3434,3 +3434,9 @@ html:has(#atelier .mobile-navigation[open]) { overflow: hidden; }
   }
 }
 
+/* 2026-11-19 19:40 (Europe/Berlin): Listen und Verweise in den Rechtsabschnitten.
+   Warum: Die Volltexte nutzen Aufzaehlungen; ohne Regel erbten sie Browser-Standardabstaende
+   und brachen das 60ch-Lesemass der Abschnitte. */
+.pc-section-body ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-2); max-width: 60ch; }
+.pc-section-body li { line-height: 1.6; }
+.pc-section-body a { color: var(--color-marke-lime); text-underline-offset: 2px; }

@@ -199,7 +199,7 @@ function RootShell({ children }: { children: ReactNode }) {
                   legalName: "NeXify AI by NeXify",
                   url: "https://www.nexifyai.de/",
                   logo: "https://www.nexifyai.de/icons/icon-512.png",
-                  email: "hello@nexifyai.cloud",
+                  email: "mail@nexifyai.cloud",
                   telephone: "+31 6 133 188 56",
                   founder: { "@type": "Person", name: "Pascal Courbois" },
                   address: {

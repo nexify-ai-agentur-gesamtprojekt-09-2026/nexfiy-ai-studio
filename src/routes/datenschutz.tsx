@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/datenschutz.css?url";
 import { canonicalLink } from "@/lib/seo";
+import { LegalSections } from "@/components/site/LegalSections";
+import { datenschutzSections } from "@/lib/legal/datenschutz";
 
 export const Route = createFileRoute("/datenschutz")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/datenschutz") ], meta: [{ title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" }, { name: "description", content: "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung." }] }),
@@ -28,7 +30,7 @@ function Index() {
                     </nav>
                     <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht</span>
                     <h1 id="page-title-privacy">Ihre Daten. Ein klarer Zweck.</h1>
-                    <p className={"identity-body"}>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.</p>
+                    <p className={"identity-body"}>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Verantwortlicher, Zwecke, Rechtsgrundlagen und Fristen stehen in der Datenschutzerklärung.</p>
                     <div className={"identity-links"}>
                       <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                         <span>Mit NeXify Kontakt aufnehmen</span>
@@ -39,34 +41,7 @@ function Index() {
                   </div>
                 </div>
               </section>
-              <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
-                <a href="#content-privacy-ueberblick-0">Information passend zum Anliegen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-privacy-grundsatz-1">Transparenz vor der Nutzung<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-              </nav>
-              <div className={"pc-sections"}>
-                <section className={"hc-intro hc-container pc-section"} id="content-privacy-ueberblick-0" tabIndex={-1} aria-labelledby="content-privacy-ueberblick-0-title">
-                  <div>
-                    <span className={"hc-kicker"}>01 / 02</span>
-                    <h2 id="content-privacy-ueberblick-0-title">Information passend zum Anliegen</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Für den ersten Kontakt reichen Ihr Ziel und eine Kontaktmöglichkeit. Senden Sie keine Passwörter, Schlüssel oder vertraulichen Kundendaten über öffentliche Felder. Projektunterlagen benötigen einen gesondert vereinbarten Übergabeweg.</p>
-                    <div className={"hc-service-detail pc-module"}>
-                      <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-                      <a className={"hc-text-link"} href="/cookies">Sie wählen, was zusätzlich aktiv wird.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    </div>
-                  </div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-privacy-grundsatz-1" tabIndex={-1} aria-labelledby="content-privacy-grundsatz-1-title">
-                  <div>
-                    <span className={"hc-kicker"}>02 / 02</span>
-                    <h2 id="content-privacy-grundsatz-1-title">Transparenz vor der Nutzung</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Der konkrete Dienst bestimmt die jeweilige Verarbeitung. Verantwortliche, Empfänger, Rechtsgrundlage und Fristen gehören in die geprüften Informationen dieses Dienstes; diese Übersicht ersetzt sie nicht.</p>
-                  </div>
-                </section>
-              </div>
+              <LegalSections sections={datenschutzSections} />
               <ImportedSectionDieFACTORYEntdeckenMit />
               <ImportedSectionPassendeThemen />
               <section className={"hc-section hc-finish hc-container is-plain"} aria-labelledby="finish-title-privacy">

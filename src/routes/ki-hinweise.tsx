@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/ki-hinweise.css?url";
 import { canonicalLink } from "@/lib/seo";
+import { LegalSections } from "@/components/site/LegalSections";
+import { kiHinweiseSections } from "@/lib/legal/ki-hinweise";
 
 export const Route = createFileRoute("/ki-hinweise")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/ki-hinweise") ], meta: [{ title: "KI mit klarer Verantwortung. · NeXify AI" }, { name: "description", content: "NeXify AI FACTORY verbindet menschliche Gestaltung mit KI-gestützter Arbeit. Kennzeichnung, Quellenprüfung und Freigaben gehören zum jeweiligen Einsatz. Eine." }] }),
@@ -39,34 +41,7 @@ function Index() {
                   </div>
                 </div>
               </section>
-              <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
-                <a href="#content-ai-notice-ueberblick-0">Der Assistent auf dieser Website<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-                <a href="#content-ai-notice-ki-transparenz-1">Bildwelt und Entwürfe einordnen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-              </nav>
-              <div className={"pc-sections"}>
-                <section className={"hc-intro hc-container pc-section"} id="content-ai-notice-ueberblick-0" tabIndex={-1} aria-labelledby="content-ai-notice-ueberblick-0-title">
-                  <div>
-                    <span className={"hc-kicker"}>01 / 02</span>
-                    <h2 id="content-ai-notice-ueberblick-0-title">Der Assistent auf dieser Website</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>AIFly ORACLE führt im öffentlichen Chat derzeit durch Leistungen und Seiten, ohne Live-KI-Modell. Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus. Verbindliche Schritte werden gesondert bestätigt.</p>
-                    <div className={"hc-service-detail pc-module"}>
-                      <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-                      <a className={"hc-text-link"} href="/kontakt">Ihr Projekt an die Factory<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    </div>
-                  </div>
-                </section>
-                <section className={"hc-intro hc-container pc-section"} id="content-ai-notice-ki-transparenz-1" tabIndex={-1} aria-labelledby="content-ai-notice-ki-transparenz-1-title">
-                  <div>
-                    <span className={"hc-kicker"}>02 / 02</span>
-                    <h2 id="content-ai-notice-ki-transparenz-1-title">Bildwelt und Entwürfe einordnen</h2>
-                  </div>
-                  <div className={"pc-section-body"}>
-                    <p>Die Bildwelt enthält KI-gestützte Bearbeitungen und animierte Kompositionen. Sie zeigt die gestalterische Ausrichtung, keine Kundenreferenzen oder Leistungsnachweise. Fachliche Aussagen und folgenreiche Handlungen benötigen ihre eigene Prüfung.</p>
-                  </div>
-                </section>
-              </div>
+              <LegalSections sections={kiHinweiseSections} />
               <ImportedSectionDieFACTORYEntdeckenMit />
               <ImportedSectionPassendeThemen />
               <section className={"hc-section hc-finish hc-container is-plain"} aria-labelledby="finish-title-ai-notice">
@@ -150,7 +125,7 @@ function ImportedSectionPassendeThemen() {
           <h3>
             <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
           </h3>
-          <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.</p>
+          <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Verantwortlicher, Zwecke, Rechtsgrundlagen und Fristen stehen in der Datenschutzerklärung.</p>
           <a aria-label="Ihre Daten. Ein klarer Zweck. – Seite ansehen" className={"hc-text-link"} href="/datenschutz">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
         </li>
       </ol>

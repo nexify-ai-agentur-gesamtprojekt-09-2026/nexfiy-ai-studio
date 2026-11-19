@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/cookies.css?url";
 import { canonicalLink } from "@/lib/seo";
+import { LegalSections } from "@/components/site/LegalSections";
+import { cookiesSections } from "@/lib/legal/cookies";
 
 export const Route = createFileRoute("/cookies")({
   head: () => ({ links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/cookies") ], meta: [{ title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" }, { name: "description", content: "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die." }] }),
@@ -28,7 +30,7 @@ function Index() {
             </nav>
             <span className={"hc-kicker"}>NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht</span>
             <h1 id="page-title-cookies">Sie wählen, was zusätzlich aktiv wird.</h1>
-            <p className={"identity-body"}>Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die vollständige rechtliche Beschreibung wird noch geprüft.</p>
+            <p className={"identity-body"}>Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Was gespeichert wird und was nicht, steht vollständig auf dieser Seite.</p>
             <div className={"identity-links"}>
               <a className={"nexify-control primary-button identity-primary-link"} data-variant="primary" href="/kontakt">
                 <span>Mit NeXify Kontakt aufnehmen</span>
@@ -39,34 +41,7 @@ function Index() {
           </div>
         </div>
       </section>
-      <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
-        <a href="#content-cookies-ueberblick-0">Funktionen einzeln beurteilen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-        <a href="#content-cookies-einstellungen-1">Eine Entscheidung bleibt änderbar<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
-      </nav>
-      <div className={"pc-sections"}>
-        <section className={"hc-intro hc-container pc-section"} id="content-cookies-ueberblick-0" tabIndex={-1} aria-labelledby="content-cookies-ueberblick-0-title">
-          <div>
-            <span className={"hc-kicker"}>01 / 02</span>
-            <h2 id="content-cookies-ueberblick-0-title">Funktionen einzeln beurteilen</h2>
-          </div>
-          <div className={"pc-section-body"}>
-            <p>Technisch erforderliche Speicherung ist von Analyse und externen Diensten zu trennen. Eine Zustimmung für diesen Auftritt gilt nicht automatisch für andere Markenbereiche, Domains oder eigenständige Produkte.</p>
-            <div className={"hc-service-detail pc-module"}>
-              <span className={"hc-caption"}>AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt</span>
-              <a className={"hc-text-link"} href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-            </div>
-          </div>
-        </section>
-        <section className={"hc-intro hc-container pc-section"} id="content-cookies-einstellungen-1" tabIndex={-1} aria-labelledby="content-cookies-einstellungen-1-title">
-          <div>
-            <span className={"hc-kicker"}>02 / 02</span>
-            <h2 id="content-cookies-einstellungen-1-title">Eine Entscheidung bleibt änderbar</h2>
-          </div>
-          <div className={"pc-section-body"}>
-            <p>Optionale Messfunktionen benötigen Ihre Zustimmung. Über die zugehörigen Einstellungen können Sie Ihre Wahl ändern. Welche Funktionen tatsächlich verfügbar sind, zeigt der jeweilige Einstellungsbereich.</p>
-          </div>
-        </section>
-      </div>
+      <LegalSections sections={cookiesSections} />
       <section className={"hc-container pc-guide"} aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE">
         <details className={"hc-service-detail"}>
           <summary>
@@ -124,7 +99,7 @@ function Index() {
             <h3>
               <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M5 19 19 5M5 5h14v14" /></svg></a>
             </h3>
-            <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Die vollständige Datenschutzerklärung ist noch in Prüfung.</p>
+            <p>Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen. Verantwortlicher, Zwecke, Rechtsgrundlagen und Fristen stehen in der Datenschutzerklärung.</p>
             <a aria-label="Ihre Daten. Ein klarer Zweck. – Seite ansehen" className={"hc-text-link"} href="/datenschutz">Seite ansehen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
           </li>
         </ol>

@@ -64,7 +64,7 @@ function Index() {
                     <h2 id="content-imprint-betreiber-1-title">Kontakt</h2>
                   </div>
                   <div className={"pc-section-body"}>
-                    <p>E-Mail: hello@nexifyai.cloud. Telefon: +31 6 133 188 56. Web: www.nexifyai.de.</p>
+                    <p>E-Mail: mail@nexifyai.cloud. Telefon: +31 6 133 188 56. Web: www.nexifyai.de.</p>
                   </div>
                 </section>
                 <section className={"hc-intro hc-container pc-section"} id="content-imprint-registerangaben-2" tabIndex={-1} aria-labelledby="content-imprint-registerangaben-2-title">
