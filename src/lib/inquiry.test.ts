@@ -78,3 +78,14 @@ describe("inquiry e-mail hand-off", () => {
     expect(mail.body).toContain("Ä Ä Ä");
   });
 });
+
+describe("contact request intents", () => {
+  it("accepts only supported request types", async () => {
+    const { inquiryIntent, INQUIRY_INTROS } = await import("./inquiry");
+    expect(inquiryIntent("termin")).toBe("termin");
+    expect(INQUIRY_INTROS.termin).toContain("Terminwunsch");
+    for (const invalid of ["__proto__", "constructor", "unknown", ["angebot"], null]) {
+      expect(inquiryIntent(invalid)).toBeUndefined();
+    }
+  });
+});

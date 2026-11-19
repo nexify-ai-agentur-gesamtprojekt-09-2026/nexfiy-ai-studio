@@ -1,3 +1,5 @@
+import { SiteGuide } from "@/components/site/SiteGuide";
+import { INQUIRY_INTROS, inquiryIntent } from "@/lib/inquiry";
 import { SiteFilm } from "../components/SiteFilm";
 import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
@@ -6,6 +8,9 @@ import capturedCSS from "../styles/pages/kontakt.css?url";
 import { canonicalLink } from "@/lib/seo";
 
 export const Route = createFileRoute("/kontakt")({
+  validateSearch: (search: Record<string, unknown>): { anliegen?: ReturnType<typeof inquiryIntent> } => ({
+    anliegen: inquiryIntent(search["anliegen"]),
+  }),
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }, { rel: "preload", as: "image", href: "/site-assets/05c51cdebbdd2aa6.webp", fetchPriority: "high" }, canonicalLink("/kontakt") ],
     meta: [
@@ -22,6 +27,7 @@ export const Route = createFileRoute("/kontakt")({
 });
 
 function Index() {
+  const { anliegen } = Route.useSearch();
   return (
     <NexifyShell>
             <div className={"home-concept page-concept page-contact layout-company context-nexify"}>
@@ -46,7 +52,7 @@ function Index() {
                         <span>Pakete vergleichen</span>
                         <span aria-hidden="true" className={"identity-primary-arrow"}>→</span>
                       </a>
-                      <button type="button" className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary">Angebot anfragen</button>
+                      <a href="/kontakt?anliegen=angebot#anfrage" className={"nexify-control secondary-button identity-secondary-link"} data-variant="secondary">Angebot anfragen</a>
                     </div>
                   </div>
                   <div className={"identity-media"}>
@@ -60,8 +66,8 @@ function Index() {
                 <a href="#content-contact-contact-customer-1-0">Das genügt für den Anfang<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
                 <a href="#content-contact-contact-customer-2-1">Was nach Ihrer Anfrage passiert<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M12 4v16M5 13l7 7 7-7" /></svg></a>
               </nav>
-              <section className={"hc-container pc-supplement"}>
-                <InquiryForm kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" />
+              <section id="anfrage" tabIndex={-1} aria-label="Kontaktanfrage" className={"hc-container pc-supplement"}>
+                <InquiryForm key={anliegen ?? "contact"} initialMessage={anliegen ? INQUIRY_INTROS[anliegen] : ""} kind="contact" title="Anfrage senden" companyLabel="Unternehmen" privacyHref="/datenschutz" />
               </section>
               <div className={"pc-sections"}>
                 <section className={"hc-intro hc-container pc-section"} id="content-contact-contact-customer-1-0" tabIndex={-1} aria-labelledby="content-contact-contact-customer-1-0-title">
@@ -114,9 +120,9 @@ function Index() {
                   <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
                   <div className={"hc-finish-actions"}>
                     <a className={"hc-finish-primary"} href="/leistungsumfang">Pakete vergleichen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
-                    <button type="button" className={"hc-text-link"}>Angebot anfragen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
-                    <button type="button" className={"hc-text-link"}>Terminwunsch nennen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
-                    <button type="button" className={"hc-text-link"}>Kampagne besprechen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
+                    <a href="/kontakt?anliegen=angebot#anfrage" className={"hc-text-link"}>Angebot anfragen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+                    <a href="/kontakt?anliegen=termin#anfrage" className={"hc-text-link"}>Terminwunsch nennen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
+                    <a href="/kontakt?anliegen=kampagne#anfrage" className={"hc-text-link"}>Kampagne besprechen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                     <a className={"hc-text-link"} href="/datenschutz">Datenschutz lesen<svg className={"hc-arrow"} viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}><path d="M4 12h16M13 5l7 7-7 7" /></svg></a>
                   </div>
                 </div>
@@ -140,10 +146,7 @@ function ImportedSectionDieFACTORYEntdeckenMit() {
         </summary>
         <div className={"hc-service-body"}>
           <p>Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können jeden Bereich auch direkt öffnen.</p>
-          <div className={"pc-guide-controls"}>
-            <label>Welchen Bereich möchten Sie erkunden?<select defaultValue="business-website"><option value="business-website">Markenstart</option><option value="business-automation">KI im Betrieb</option><option value="business-growth">Wachstum &amp; Kampagnen</option><option value="business-apps">Digitale Arbeitsräume</option><option value="business-api">Agentische KI &amp; Integrationen</option><option value="knowledge-to-project">Ihr Projektbriefing</option><option value="teileklar-selection">Ihr Fahrzeug. Die passende Anfrage.</option><option value="teileklar-workshop">Werkstatt &amp; Zusammenarbeit</option><option value="teileklar-vouchers">Gutschein &amp; Bedingungen</option><option value="existing-client">Zusammenarbeit mit der FACTORY</option><option value="nex2fly-trial">NeX AIFly Suite · Ihr eigener Bereich</option></select></label>
-            <button type="button" aria-pressed="false">Begleitung starten</button>
-          </div>
+          <SiteGuide initialArea="business-website" />
         </div>
       </details>
     </section>

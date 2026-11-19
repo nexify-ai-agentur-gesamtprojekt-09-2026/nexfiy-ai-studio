@@ -144,3 +144,18 @@ export function buildInquiryMail(kind: InquiryKind, values: InquiryValues): Inqu
   href = link(body.slice(0, Math.max(0, cut)) + "…" + note);
   return { subject, body, href, shortened: true };
 }
+
+/** Only known request intents can prefill the contact form, never arbitrary URL text. */
+export const INQUIRY_INTROS = {
+  angebot: "Ich möchte ein Angebot für folgendes Vorhaben anfragen: ",
+  termin: "Mein Terminwunsch für ein persönliches Gespräch: ",
+  kampagne: "Ich möchte folgende Kampagne mit Ihnen besprechen: ",
+  frage: "Ich habe folgende Frage: ",
+  begleitung: "Ich wünsche persönliche Begleitung bei folgendem Anliegen: ",
+} as const;
+
+export function inquiryIntent(value: unknown): keyof typeof INQUIRY_INTROS | undefined {
+  return typeof value === "string" && Object.hasOwn(INQUIRY_INTROS, value)
+    ? (value as keyof typeof INQUIRY_INTROS)
+    : undefined;
+}

@@ -12,6 +12,7 @@ const ERROR_ICON = (
 );
 
 export interface InquiryFormProps {
+  initialMessage?: string;
   kind: InquiryKind;
   title: string;
   companyLabel: string;
@@ -27,6 +28,7 @@ export interface InquiryFormProps {
  * visitor's e-mail program with the finished message to the NeXify inbox; this copy has no own form backend.
  */
 export function InquiryForm({
+  initialMessage = "",
   kind,
   title,
   companyLabel,
@@ -95,7 +97,7 @@ export function InquiryForm({
           </div>
           <div className="tk-field is-wide">
             {label("message", messageLabel)}
-            <textarea {...form.fieldProps("message")} rows={5} maxLength={4000} />
+            <textarea {...form.fieldProps("message")} defaultValue={initialMessage} rows={5} maxLength={4000} />
             {error("message")}
           </div>
         </div>

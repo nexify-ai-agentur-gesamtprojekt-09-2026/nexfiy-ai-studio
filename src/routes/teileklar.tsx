@@ -1,6 +1,7 @@
+import { ChatUnavailable } from "@/components/site/ChatUnavailable";
 import type { CSSProperties } from "react";
 import { useSyncExternalStore } from "react";
-import { fitComposer, useChatPanel, useComposerFit, useShellSignals, useAtelierFilms } from "../lib/imported-site";
+import { useChatPanel, useShellSignals, useAtelierFilms } from "../lib/imported-site";
 import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.css?url";
@@ -27,7 +28,6 @@ function Index() {
   const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(false);
   useAtelierFilms();
   const { scrolled, footerVisible, viewportHeight } = useShellSignals();
-  const composerRef = useComposerFit(chatOpen, isMobile, viewportHeight);
   const pageContent = (<>
 <svg className={"glass-lens-filter"} width="0" height="0" aria-hidden="true" {...({ focusable: "false" } as any)}>
   <filter id="as-linse" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
@@ -221,7 +221,7 @@ function Index() {
         <span className={"footer-claim"}>TEILEKLAR — Na KLAR!{" "}<span aria-hidden="true">·</span>{" "}Teile · Fahrzeugzuordnung · Werkstatt · Partnerschaft</span>
         <a className={"footer-crosslink"} href="/">NeXify AI{" "}<span aria-hidden="true">→</span></a>
         <details className={"footer-overview"}>
-          <summary aria-expanded="false" aria-controls="_R_8lbH1_">
+          <summary aria-controls="_R_8lbH1_">
             <span>Seitenübersicht</span>
             <span className={"footer-overview-marker"} aria-hidden="true">+</span>
           </summary>
@@ -259,7 +259,7 @@ function Index() {
           <a href="/teileklar/rechtliches">TEILEKLAR: Anbieterinformationen und Datenschutz</a>
         </nav>
         <details className={"footer-legal-details"}>
-          <summary aria-expanded="false" aria-controls="_R_8lb_">Hinweise zu den Rechtsdokumenten</summary>
+          <summary aria-controls="_R_8lb_">Hinweise zu den Rechtsdokumenten</summary>
           <div id="_R_8lb_">
             <p>Die Rechtsinformationen für TEILEKLAR sind direkt erreichbar. Vollständige Angaben zum Anbieter, Datenschutz und Verbraucherrechten im Shop stehen noch zur Prüfung und Freigabe.</p>
             <p>Eine öffentliche Übersicht der Drittanbieter-Komponenten und ihrer Lizenzen ist noch nicht verfügbar.</p>
@@ -287,7 +287,7 @@ function Index() {
 </div>
 {!chatOpen && <button ref={reopenRef} onClick={openChat} aria-expanded="false" aria-controls="aifly-panel" type="button" className={"nexify-control secondary-button reopen-chat"} data-variant="secondary"><span className={"aifly-symbol oracle-companion"} data-state="idle" aria-hidden="true"><img src="/site-assets/9176c58a16ff634a.png" alt="" width="34" height="34" decoding="async" /></span>TEILEKLAR Hilfe</button>}
 <aside id="aifly-panel" className={"aifly-panel"} aria-label="AIFly ORACLE" role={isMobile ? "dialog" : undefined} hidden={!chatOpen} style={!chatOpen || isMobile || viewportHeight === null ? undefined : ({ "--chat-viewport-height": viewportHeight + "px", "--chat-viewport-top": "0px" } as CSSProperties)}>
-  <div className={"chat-resize-handle"} role="separator" aria-orientation="vertical" aria-label="Chatbreite anpassen" tabIndex={0} aria-valuemin={360} aria-valuemax={952} aria-valuenow={360} />
+  <div className="chat-resize-handle" aria-hidden="true" />
   <div className={"panel-heading"}>
     <div className={"panel-heading-copy"}>
       <div className={"panel-identity"}>
@@ -318,7 +318,7 @@ function Index() {
         </div>
         <div className={"orientation-history"} role="log" aria-live="polite" aria-relevant="additions text" aria-busy="false" />
         <div className={"orientation-starters"} role="group" aria-label="Ihr Fahrzeug-/Teile-Anliegen">
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          <a className={"orientation-starter"} href="/teileklar/fahrzeug-und-passung">
             <span className={"orientation-starter-index"} aria-hidden="true">01</span>
             <span className={"orientation-starter-copy"}>
               <strong>Fahrzeug &amp; Teil</strong>
@@ -327,8 +327,8 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          </a>
+          <a className={"orientation-starter"} href="/teileklar/werkstatt">
             <span className={"orientation-starter-index"} aria-hidden="true">02</span>
             <span className={"orientation-starter-copy"}>
               <strong>Werkstatt-Anfrage</strong>
@@ -337,8 +337,8 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
-          <button type="button" className={"orientation-starter"} aria-pressed="false">
+          </a>
+          <a className={"orientation-starter"} href="/teileklar/partner-werden">
             <span className={"orientation-starter-index"} aria-hidden="true">03</span>
             <span className={"orientation-starter-copy"}>
               <strong>Zusammenarbeit</strong>
@@ -347,7 +347,7 @@ function Index() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 12h16m-7-7 7 7-7 7" />
             </svg>
-          </button>
+          </a>
         </div>
         <ol className={"orientation-path orientation-path-quiet"} aria-label="Vom Anliegen zur passenden Anlaufstelle.">
           <li data-state="open"><small>01</small>Fahrzeug nennen</li>
@@ -355,19 +355,7 @@ function Index() {
           <li data-state="open"><small>03</small>Nächsten Weg wählen</li>
         </ol>
       </div>
-      <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
-        <label htmlFor="orientation-message">Ihr Fahrzeug-/Teile-Anliegen</label>
-        <textarea ref={composerRef} onInput={(event) => fitComposer(event.currentTarget)} id="orientation-message" maxLength={1000} rows={1} placeholder="Ihr Fahrzeug-/Teile-Anliegen" aria-describedby="orientation-keys" required enterKeyHint="send" />
-        <span id="orientation-keys" className={"visually-hidden"}>Eingabetaste sendet, Umschalt und Eingabetaste beginnt eine neue Zeile.</span>
-        <div className={"orientation-composer-actions"}>
-          <button className={"primary-button"} disabled aria-label="Nachricht senden">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...({ focusable: "false" } as any)}>
-              <path d="M4 12h16m-7-7 7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </form>
-      <p className={"connection-note orientation-status"} role="status" />
+      <ChatUnavailable />
       <p className={"connection-note"}>Bitte keine Passwörter oder Zahlungsdaten eingeben. <a href="/teileklar/rechtliches">Datenschutz</a></p>
     </section>
   </div>

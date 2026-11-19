@@ -15,3 +15,25 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 });
+
+// Native inquiry and guide links must reach real pages, not the generic 404.
+describe("frontend request and guide destinations", () => {
+  it.each([
+    "/kontakt",
+    "/leistungen/websites",
+    "/leistungen/agenten-automatisierung",
+    "/leistungen/apps-portale",
+    "/loesungen",
+    "/produkte/api",
+    "/wissen/projekt-vorbereiten",
+    "/teileklar/fahrzeug-und-passung",
+    "/teileklar/werkstatt",
+    "/teileklar/gutscheine",
+    "/produkte/nex2fly",
+    "/teileklar/partner-werden",
+    "/datenschutz",
+  ])("matches %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes(path).at(-1)?.routeId).not.toBe(rootRouteId);
+  });
+});

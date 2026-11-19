@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type MouseEvent, type RefObject } from "react";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
@@ -78,30 +78,80 @@ export function useShellSignals(heroActionSelector?: string) {
 export function useChatPanel(defaultOpen: boolean) {
   const [preference, setPreference] = useState<boolean | null>(null);
   const chatOpen = preference ?? defaultOpen;
+  const isMobile = useImportedMobile();
   const reopenRef = useRef<HTMLButtonElement>(null);
-  const focusAfterToggle = useRef<"composer" | "launcher" | null>(null);
-  const openChat = () => {
-    focusAfterToggle.current = "composer";
+  const openerRef = useRef<HTMLElement | null>(null);
+  const focusAfterToggle = useRef<"panel" | "launcher" | null>(null);
+  const openChat = useCallback(() => {
+    const active = document.activeElement;
+    openerRef.current = active instanceof HTMLElement && active !== document.body ? active : null;
+    focusAfterToggle.current = "panel";
     setPreference(true);
-  };
-  const closeChat = () => {
+  }, []);
+  const closeChat = useCallback(() => {
     focusAfterToggle.current = "launcher";
     setPreference(false);
-  };
+  }, []);
   useEffect(() => {
     const target = focusAfterToggle.current;
     focusAfterToggle.current = null;
-    if (target === "composer") document.getElementById("orientation-message")?.focus();
-    if (target === "launcher") reopenRef.current?.focus();
+    if (target === "panel")
+      document.querySelector<HTMLButtonElement>("#aifly-panel .panel-minimize")?.focus();
+    if (target === "launcher") {
+      const opener = openerRef.current;
+      (opener?.isConnected ? opener : reopenRef.current)?.focus();
+    }
   }, [chatOpen]);
   useEffect(() => {
     if (!chatOpen) return;
+    const panel = document.getElementById("aifly-panel");
+    const website = document.querySelector<HTMLElement>("#atelier > .website");
+    const wasInert = website?.inert ?? false;
+    const overflow = document.body.style.overflow;
+    if (isMobile && panel) {
+      panel.setAttribute("aria-modal", "true");
+      if (website) website.inert = true;
+      document.body.style.overflow = "hidden";
+      if (!panel.contains(document.activeElement))
+        panel.querySelector<HTMLButtonElement>(".panel-minimize")?.focus();
+    }
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open]")) closeChat();
+      if (event.key === "Escape" && (isMobile || !document.querySelector(".site-header details[open]"))) {
+        event.preventDefault();
+        closeChat();
+      }
+      if (event.key !== "Tab" || !isMobile || !panel) return;
+      const controls = Array.from(
+        panel.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex="0"]',
+        ),
+      ).filter((element) => !element.closest("[hidden]"));
+      const first = controls[0];
+      const last = controls.at(-1);
+      if (
+        event.shiftKey &&
+        (document.activeElement === first || !panel.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        last?.focus();
+      } else if (
+        !event.shiftKey &&
+        (document.activeElement === last || !panel.contains(document.activeElement))
+      ) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [chatOpen]);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      panel?.removeAttribute("aria-modal");
+      if (isMobile) {
+        if (website) website.inert = wasInert;
+        document.body.style.overflow = overflow;
+      }
+    };
+  }, [chatOpen, isMobile, closeChat]);
   return { chatOpen, openChat, closeChat, reopenRef };
 }
 
@@ -128,8 +178,18 @@ export function useHeaderMenus() {
       setOpenMenu(null);
       summary?.focus();
     };
+    const onOutside = (event: Event) => {
+      const disclosure = summaryFor(openMenu).current?.closest("details");
+      if (event.target instanceof Node && !disclosure?.contains(event.target)) setOpenMenu(null);
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onOutside);
+    document.addEventListener("focusin", onOutside);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onOutside);
+      document.removeEventListener("focusin", onOutside);
+    };
   }, [openMenu]);
   const toggleMenu = (menu: HeaderMenu) => (event: MouseEvent) => {
     event.preventDefault();

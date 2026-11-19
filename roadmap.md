@@ -12,7 +12,7 @@
 - [x] Deutsche, markengerechte Fehler- und „Seite nicht gefunden“-Seite
 - [x] Kontakt- und Partnerformular: Prüfung mit verständlichen Fehlermeldungen, Bestätigung, Zustellung per E-Mail-Programm an mail@nexifyai.cloud
 - [ ] Buttons ohne Funktion (z. B. „Angebot anfragen“, „Terminwunsch nennen“) mit echter Funktion belegen
-- [ ] Chat-Eingabe: verständlicher Zustand statt stillem Nichts beim Absenden
+- [x] Chat-Eingabe: verständlicher Zustand statt stillem Nichts beim Absenden (ohne Backend durch sichtbaren Verfügbarkeitshinweis und Kontaktweg ersetzt)
 - [ ] Tastatur & Screenreader: Fokus-Ringe, Menüs, Chat-Panel auf allen Seiten prüfen
 
 
@@ -23,3 +23,13 @@
 - [ ] Konto: /anmelden, /registrieren
 - [ ] TEILEKLAR: /teileklar/rechtliches, /shop, /kategorien, /kategorie, /produkt, /fahrzeug-und-passung, /suche, /warenkorb, /kasse, /bestellungen, /termine, /gutscheine, /reifenrechner, /batterie-berater
 - [ ] Neue Seiten an gemeinsame Bausteine anschließen (Stylesheet-Datei, Filme, Formulare, Menüs) und Links prüfen
+
+## Frontend-Korrekturen 18.11.2026
+- [x] Angebots-, Termin-, Kampagnen- und Frage-CTAs führen zum Kontaktformular mit passender, ausschließlich lokal vorausgefüllter Einleitung.
+- [x] Chat ohne Backend: sichtbarer Verfügbarkeitshinweis mit Kontaktweg statt nicht absendbarer Eingabe; Themenkarten verlinken echte Seiten.
+- [x] TEILEKLAR-Hilfe an gemeinsamen Panel-Zustand angeschlossen, ohne beim Öffnen Formularfelder durch eine zweite Seitenkopie zu ersetzen.
+- [x] Native Bereichsauswahl mit funktionierenden Zielen statt importierter, funktionsloser Combobox-Kopie.
+- [x] Fokus-Ringe, Escape/Fokusrückgabe, mobile Fokusbegrenzung und korrekte native Disclosure-Zustände ergänzt und durch Regressionstests abgesichert.
+- [ ] Vollständige manuelle Tastatur-/Screenreader- und Safari-Abnahme auf allen Seiten. Automatisierte Prüfungen ersetzen diese Abnahme nicht.
+
+Die älteren Punkte „fehlende Seiten“ sind ein Import-Backlog, kein aktueller Fehlbestand: viele Routen existieren bereits. Ihre vollständige Inhalts- und Funktionsabnahme bleibt separat offen. Anmeldung, Registrierung, Passwortversand, Produktdaten, Warenkorb/Kasse, Werkstattsuche und KI benötigen weiterhin echte Backend-Anbindungen. Dieses Frontend-Update simuliert diese Dienste nicht. Design-/Markenentscheidungen aus PR #2 bleiben unverändert offen.
