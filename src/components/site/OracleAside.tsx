@@ -206,10 +206,6 @@ export function OracleAside({
               </li>
             </ol>
           </div>
-          {/* 2026-11-20 21:45 (Europe/Berlin): KI-Offenlegung nach Art. 50 KI-VO ergaenzt — Panel war ohne Hinweis auf KI-Interaktion ausgeliefert (Befund B-159, Ebene B). Bestehende Klasse connection-note, keine Gestaltungsaenderung. */}
-          <p className={"connection-note"}>
-            Sie schreiben hier mit einem KI-Assistenten (NeX); Antworten werden maschinell erzeugt.
-          </p>
           <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
             <textarea
@@ -246,7 +242,12 @@ export function OracleAside({
             </div>
           </form>
           <p className={"connection-note orientation-status"} role="status" />
+          {/* 2026-11-20 21:52 (Europe/Berlin): KI-Offenlegung (Art. 50 KI-VO, B-159) mit der bestehenden
+              Datenschutz-Zeile in EINEN Absatz zusammengefuehrt. Zwei <p class="connection-note"> landen im
+              Panel-Grid in derselben Zelle (grid-column: 2) und ueberdruckten sich vollstaendig
+              (gemessen 20.11. 21:49 live: beide rect 405,6x71,5 px an identischer Position). */}
           <p className={"connection-note"}>
+            Sie schreiben hier mit einem KI-Assistenten (NeX); Antworten werden maschinell erzeugt.{" "}
             Bitte keine Passwörter oder Zahlungsdaten eingeben.{" "}
             <a href="/datenschutz">Datenschutz</a>
           </p>
