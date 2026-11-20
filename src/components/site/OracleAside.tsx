@@ -206,6 +206,10 @@ export function OracleAside({
               </li>
             </ol>
           </div>
+          {/* 2026-11-20 21:45 (Europe/Berlin): KI-Offenlegung nach Art. 50 KI-VO ergaenzt — Panel war ohne Hinweis auf KI-Interaktion ausgeliefert (Befund B-159, Ebene B). Bestehende Klasse connection-note, keine Gestaltungsaenderung. */}
+          <p className={"connection-note"}>
+            Sie schreiben hier mit einem KI-Assistenten (NeX); Antworten werden maschinell erzeugt.
+          </p>
           <form onSubmit={(event) => event.preventDefault()} className={"orientation-composer"}>
             <label htmlFor="orientation-message">Wobei können wir Ihnen helfen?</label>
             <textarea
