@@ -11,8 +11,11 @@ import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.css?url";
 import { canonicalLink } from "@/lib/seo";
+import { KatalogSchaufenster } from "@/components/teileklar/Katalog";
+import { getTeileklarKatalog } from "@/lib/teileklar-katalog-server";
 
 export const Route = createFileRoute("/teileklar")({
+  loader: () => getTeileklarKatalog({ data: {} }),
   head: () => ({
     links: [
       { rel: "stylesheet", href: capturedCSS },
@@ -55,6 +58,7 @@ export const Route = createFileRoute("/teileklar")({
 });
 
 function Index() {
+  const katalog = Route.useLoaderData();
   const isMobile = useSyncExternalStore(
     subscribeMobile,
     () => matchMedia("(max-width: 767px)").matches,
@@ -265,28 +269,41 @@ function Index() {
                 <span className={"hc-kicker"}>Aus dem Sortiment</span>
                 <h2>Artikel im Schaufenster</h2>
               </header>
-              <div className={"tk-empty"} role="status">
-                <p>
-                  Das Schaufenster wird gerade neu bestückt. Bis dahin finden Sie hier die passende
-                  Werkstatt oder schreiben uns direkt, welches Teil Sie suchen.
-                </p>
-                <div className={"identity-links"}>
+              <KatalogSchaufenster ergebnis={katalog} />
+              {katalog.status === "bereit" && katalog.artikel.length > 0 ? (
+                <div className="identity-links">
                   <a
-                    className={"nexify-control primary-button"}
+                    className="nexify-control primary-button"
                     data-variant="primary"
-                    href="/teileklar/werkstatt"
+                    href="/teileklar/shop"
                   >
-                    Werkstatt finden
-                  </a>
-                  <a
-                    className={"nexify-control secondary-button"}
-                    data-variant="secondary"
-                    href="/kontakt"
-                  >
-                    Teil anfragen
+                    Alle Artikel ansehen
                   </a>
                 </div>
-              </div>
+              ) : (
+                <div className={"tk-empty"} role="status">
+                  <p>
+                    Das Schaufenster wird gerade neu bestückt. Bis dahin finden Sie hier die
+                    passende Werkstatt oder schreiben uns direkt, welches Teil Sie suchen.
+                  </p>
+                  <div className={"identity-links"}>
+                    <a
+                      className={"nexify-control primary-button"}
+                      data-variant="primary"
+                      href="/teileklar/werkstatt"
+                    >
+                      Werkstatt finden
+                    </a>
+                    <a
+                      className={"nexify-control secondary-button"}
+                      data-variant="secondary"
+                      href="/kontakt"
+                    >
+                      Teil anfragen
+                    </a>
+                  </div>
+                </div>
+              )}
             </section>
             <section className={"hc-section hc-budget hc-container"}>
               <div className={"hc-budget-story"}>

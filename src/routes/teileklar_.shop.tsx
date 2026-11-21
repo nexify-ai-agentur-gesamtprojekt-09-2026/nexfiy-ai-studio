@@ -4,8 +4,14 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.shop.css?raw";
 import { canonicalLink } from "@/lib/seo";
+import { KatalogListe } from "@/components/teileklar/Katalog";
+import { katalogSuche } from "@/lib/teileklar-katalog";
+import { getTeileklarKatalog } from "@/lib/teileklar-katalog-server";
 
 export const Route = createFileRoute("/teileklar_/shop")({
+  validateSearch: katalogSuche,
+  loaderDeps: ({ search }) => search,
+  loader: ({ deps }) => getTeileklarKatalog({ data: deps }),
   head: () => ({
     links: [canonicalLink("/teileklar/shop")],
     meta: [
@@ -23,6 +29,8 @@ export const Route = createFileRoute("/teileklar_/shop")({
 });
 
 function Index() {
+  const katalog = Route.useLoaderData();
+  const suche = Route.useSearch();
   const [activeSlide0, setActiveSlide0] = useState(0);
   const carouselContent0 = (
     <>
@@ -181,89 +189,7 @@ function Index() {
                 </section>
                 <section className={"hc-container pc-supplement tk-shop-body"}>
                   <p className={"tk-meta"}>Artikel finden. Angaben prüfen. Sicher bestellen.</p>
-                  <form role="search" className={"tk-search"}>
-                    <label htmlFor="_r_0_">Artikel suchen (Name, SKU oder EAN)</label>
-                    <div className={"tk-search-row"}>
-                      <input id="_r_0_" maxLength={120} type="search" defaultValue="" />
-                      <button className={"hc-finish-primary"} type="submit">
-                        Suchen
-                      </button>
-                    </div>
-                  </form>
-                  <div className={"tk-catalog-layout"}>
-                    <aside className={"tk-filter-panel"}>
-                      <h2>Auswahl eingrenzen</h2>
-                      <label className={"tk-stock-filter"}>
-                        <input type="checkbox" />
-                        Nur verfügbare Artikel
-                      </label>
-                      <h3>Kategorien</h3>
-                      <nav aria-label="Kategorie filtern">
-                        <button type="button" aria-pressed="true">
-                          Alle Artikel
-                        </button>
-                      </nav>
-                      <button className={"\x74ext-button"}>Filter zurücksetzen</button>
-                    </aside>
-                    <section className={"tk-catalog-list"} aria-label="Produkte">
-                      <div className={"tk-results-toolbar"}>
-                        <p role="status">Artikel werden geladen …</p>
-                        <label htmlFor="catalog-sort" id="bb-customSelect-k0xce-label">
-                          Sortieren
-                          <div className={"bb-custom-select-container bb-customSelect"}>
-                            <span
-                              className={"bb-custom-select-opener"}
-                              role="combobox"
-                              aria-autocomplete="list"
-                              aria-expanded="false"
-                              aria-owns="bb-customSelect-k0xce-panel"
-                              aria-activedescendant="bb-customSelect-k0xce-selectedOption"
-                              aria-labelledby="bb-customSelect-k0xce-label"
-                              tabIndex={0}
-                            >
-                              <span>Verfügbarkeit</span>
-                            </span>
-                            <select id="catalog-sort" tabIndex={-1} defaultValue="availability">
-                              <option value="availability">Verfügbarkeit</option>
-                              <option value="price_asc">Preis aufsteigend</option>
-                              <option value="price_desc">Preis absteigend</option>
-                              <option value="name">Name A–Z</option>
-                            </select>
-                            <div
-                              id="bb-customSelect-k0xce-panel"
-                              className={"bb-custom-select-panel"}
-                              role="listbox"
-                            >
-                              <div
-                                className={"bb-custom-select-option bb-is-selected bb-has-focus"}
-                                role="option"
-                                id="bb-customSelect-k0xce-selectedOption"
-                              >
-                                Verfügbarkeit
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Preis aufsteigend
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Preis absteigend
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Name A–Z
-                              </div>
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                      <div className={"tk-empty"} role="alert">
-                        <p>
-                          Der Katalog konnte nicht geladen werden. Bitte versuchen Sie es erneut.
-                        </p>
-                        <button type="button" className={"hc-text-link"}>
-                          Erneut versuchen
-                        </button>
-                      </div>
-                    </section>
-                  </div>
+                  <KatalogListe ergebnis={katalog} suche={suche} sucheId="tk-katalog-suche-1" />
                 </section>
               </div>
             </main>
@@ -878,89 +804,7 @@ function Index() {
                 </section>
                 <section className={"hc-container pc-supplement tk-shop-body"}>
                   <p className={"tk-meta"}>Artikel finden. Angaben prüfen. Sicher bestellen.</p>
-                  <form role="search" className={"tk-search"}>
-                    <label htmlFor="_r_0_">Artikel suchen (Name, SKU oder EAN)</label>
-                    <div className={"tk-search-row"}>
-                      <input id="_r_0_" maxLength={120} type="search" defaultValue="" />
-                      <button className={"hc-finish-primary"} type="submit">
-                        Suchen
-                      </button>
-                    </div>
-                  </form>
-                  <div className={"tk-catalog-layout"}>
-                    <aside className={"tk-filter-panel"}>
-                      <h2>Auswahl eingrenzen</h2>
-                      <label className={"tk-stock-filter"}>
-                        <input type="checkbox" />
-                        Nur verfügbare Artikel
-                      </label>
-                      <h3>Kategorien</h3>
-                      <nav aria-label="Kategorie filtern">
-                        <button type="button" aria-pressed="true">
-                          Alle Artikel
-                        </button>
-                      </nav>
-                      <button className={"\x74ext-button"}>Filter zurücksetzen</button>
-                    </aside>
-                    <section className={"tk-catalog-list"} aria-label="Produkte">
-                      <div className={"tk-results-toolbar"}>
-                        <p role="status">Artikel werden geladen …</p>
-                        <label htmlFor="catalog-sort" id="bb-customSelect-k0xce-label">
-                          Sortieren
-                          <div className={"bb-custom-select-container bb-customSelect"}>
-                            <span
-                              className={"bb-custom-select-opener"}
-                              role="combobox"
-                              aria-autocomplete="list"
-                              aria-expanded="false"
-                              aria-owns="bb-customSelect-k0xce-panel"
-                              aria-activedescendant="bb-customSelect-k0xce-selectedOption"
-                              aria-labelledby="bb-customSelect-k0xce-label"
-                              tabIndex={0}
-                            >
-                              <span>Verfügbarkeit</span>
-                            </span>
-                            <select id="catalog-sort" tabIndex={-1} defaultValue="availability">
-                              <option value="availability">Verfügbarkeit</option>
-                              <option value="price_asc">Preis aufsteigend</option>
-                              <option value="price_desc">Preis absteigend</option>
-                              <option value="name">Name A–Z</option>
-                            </select>
-                            <div
-                              id="bb-customSelect-k0xce-panel"
-                              className={"bb-custom-select-panel"}
-                              role="listbox"
-                            >
-                              <div
-                                className={"bb-custom-select-option bb-is-selected bb-has-focus"}
-                                role="option"
-                                id="bb-customSelect-k0xce-selectedOption"
-                              >
-                                Verfügbarkeit
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Preis aufsteigend
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Preis absteigend
-                              </div>
-                              <div className={"bb-custom-select-option"} role="option">
-                                Name A–Z
-                              </div>
-                            </div>
-                          </div>
-                        </label>
-                      </div>
-                      <div className={"tk-empty"} role="alert">
-                        <p>
-                          Der Katalog konnte nicht geladen werden. Bitte versuchen Sie es erneut.
-                        </p>
-                        <button type="button" className={"hc-text-link"}>
-                          Erneut versuchen
-                        </button>
-                      </div>
-                    </section>
-                  </div>
+                  <KatalogListe ergebnis={katalog} suche={suche} sucheId="tk-katalog-suche-2" />
                 </section>
               </div>
             </main>
