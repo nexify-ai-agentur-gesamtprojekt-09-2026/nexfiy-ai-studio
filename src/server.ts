@@ -60,7 +60,6 @@ const PERMANENT_REDIRECTS: Record<string, string> = {
   "/konto/": "/portale",
 };
 
-
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
