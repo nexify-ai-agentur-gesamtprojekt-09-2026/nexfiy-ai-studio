@@ -27,6 +27,20 @@ const AUTH_PAGES = {
   "/registrieren": ["email", "password"],
   "/passwort-vergessen": ["email"],
 };
+// Erwartete Marken-Weiterleitungen: eigene Domain, eigene CI (Mandantentrennung).
+// 2026-11-21 22:40 (Europe/Berlin): /teileklar leitet live auf teileklar.shop um —
+// die Referenz-Aufnahme zeigt noch die NeXify-Portalhuelle. Ohne diese Zuordnung
+// meldete der Check 0,0 % Ankerdeckung als "kritischen Design-Drift", obwohl die
+// Strecke korrekt ist. Nicht gelistete Fremd-Domains bleiben ein Fehler.
+const EXPECTED_EXTERNAL = { "/teileklar": "teileklar.shop" };
+
+// Gilt fuer die Strecke selbst und alle Unterpfade (/teileklar/shop usw.).
+function expectedExternalHost(route) {
+  const key = Object.keys(EXPECTED_EXTERNAL)
+    .filter((k) => route === k || route.startsWith(k + "/"))
+    .sort((a, b) => b.length - a.length)[0];
+  return key ? EXPECTED_EXTERNAL[key] : null;
+}
 const DRIFT_FLOOR = 0.9; // unter 90 % Ankerdeckung = kritischer Drift
 const DRIFT_MIN_TOKENS = 10; // Seiten mit weniger Referenz-Ankern werden nicht bewertet
 
@@ -65,7 +79,7 @@ async function get(url, opts = {}) {
       headers: { "user-agent": "nexify-live-check/1.0", accept: "text/html" },
     });
     const body = res.headers.get("content-type")?.includes("text/html") ? await res.text() : "";
-    return { status: res.status, location: res.headers.get("location"), body };
+    return { status: res.status, location: res.headers.get("location"), body, finalUrl: res.url };
   } catch (err) {
     return { status: `FEHLER ${err.name}`, location: null, body: "" };
   } finally {
@@ -81,10 +95,26 @@ const routes = [...new Set(files.map(toUrl))].sort();
 const problems = []; // {route, kind, detail}
 const drifts = []; // {route, coverage, missing}
 const rows = [];
+const BASE_HOST = new URL(BASE).host;
 
 for (const route of routes) {
   const file = files.find((f) => toUrl(f) === route);
-  const { status, body } = await get(BASE + route);
+  const { status, body, finalUrl } = await get(BASE + route);
+  // Marken-Weiterleitung erkennen: fremder Host = anderer Auftritt, andere CI.
+  let external = null;
+  try {
+    const host = new URL(finalUrl).host;
+    if (host && host !== BASE_HOST) external = host;
+  } catch {
+    external = null;
+  }
+  if (external && expectedExternalHost(route) !== external) {
+    problems.push({
+      route,
+      kind: "Weiterleitung",
+      detail: `unerwartet extern -> ${external}`,
+    });
+  }
   const hasH1 = /<h1[\s>]/i.test(body);
   const hasCanonical = /<link[^>]+rel=["']canonical/i.test(body);
   const live = tokens(body);
@@ -93,7 +123,7 @@ for (const route of routes) {
   const refFile = slug ? path.join(REF_DIR, slug, "clone.marked.html") : "";
   let coverage = null;
   let missing = [];
-  if (refFile && existsSync(refFile)) {
+  if (!external && refFile && existsSync(refFile)) {
     const ref = tokens(readFileSync(refFile, "utf8"));
     if (ref.size >= DRIFT_MIN_TOKENS) {
       missing = [...ref].filter((t) => !live.has(t));
@@ -111,9 +141,12 @@ for (const route of routes) {
   }
 
   if (status !== 200) problems.push({ route, kind: "HTTP", detail: String(status) });
-  if (status === 200 && !hasCanonical)
+  // Bei erwarteter Marken-Weiterleitung gilt der Zielauftritt; canonical/H1 dort
+  // sind Sache der Marke, nicht des NeXify-Vertrags.
+  if (status === 200 && !external && !hasCanonical)
     problems.push({ route, kind: "SEO", detail: "canonical fehlt" });
-  if (status === 200 && !hasH1) problems.push({ route, kind: "A11y", detail: "H1 fehlt" });
+  if (status === 200 && !external && !hasH1)
+    problems.push({ route, kind: "A11y", detail: "H1 fehlt" });
 
   const needed = AUTH_PAGES[route];
   if (needed && status === 200) {
@@ -131,7 +164,7 @@ for (const route of routes) {
     status,
     canonical: hasCanonical,
     h1: hasH1,
-    coverage: coverage === null ? "—" : (coverage * 100).toFixed(1) + "%",
+    coverage: external ? `extern:${external}` : coverage === null ? "—" : (coverage * 100).toFixed(1) + "%",
     missing: missing.length,
   });
 }
