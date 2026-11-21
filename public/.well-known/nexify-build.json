@@ -2,13 +2,13 @@
  "domain": "www.nexifyai.de",
  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
  "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
- "commit": "46292fc2c1bc1ed9a867c96fce07d76820389347",
- "commit_short": "46292fc2c1",
- "commit_subject": "Chat: Router-Antwort robust lesen, Body-Scroll bei offenem Chat sperren",
+ "commit": "7813eca7174184c6e1732f9f15c453017c2dd6b1",
+ "commit_short": "7813eca717",
+ "commit_subject": "fix(shell): Chat-Panel auf dem Telefon wieder als Flaeche",
  "build_id": "",
- "deployed_at": "2026-11-19T11:40:35+01:00",
+ "deployed_at": "2026-11-21T14:49:11+01:00",
  "host": "srv1243952",
  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
- "generated_at": "2026-11-19T22:49:40+01:00",
+ "generated_at": "2026-11-21T13:49:11+00:00",
  "generator": "scripts/quality/gen-build-stamp.py"
 }
