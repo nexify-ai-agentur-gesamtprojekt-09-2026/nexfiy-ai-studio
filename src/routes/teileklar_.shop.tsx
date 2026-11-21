@@ -9,7 +9,11 @@ import { katalogSuche } from "@/lib/teileklar-katalog";
 import { getTeileklarKatalog } from "@/lib/teileklar-katalog-server";
 
 export const Route = createFileRoute("/teileklar_/shop")({
-  validateSearch: katalogSuche,
+  // 2026-11-21 13:4x (Europe/Berlin): Defaults nicht serialisieren — sonst 307 auf ?q=&seite=1 (Sitemap-URL nie 200).
+  validateSearch: (eingabe: Record<string, unknown>) => {
+    const s = katalogSuche(eingabe);
+    return { ...(s.q ? { q: s.q } : {}), ...(s.seite !== 1 ? { seite: s.seite } : {}) };
+  },
   loaderDeps: ({ search }) => search,
   loader: ({ deps }) => getTeileklarKatalog({ data: deps }),
   head: () => ({
@@ -30,7 +34,8 @@ export const Route = createFileRoute("/teileklar_/shop")({
 
 function Index() {
   const katalog = Route.useLoaderData();
-  const suche = Route.useSearch();
+  const { q: sucheQ, seite: sucheSeite } = Route.useSearch();
+  const suche = { q: sucheQ ?? "", seite: sucheSeite ?? 1 };
   const [activeSlide0, setActiveSlide0] = useState(0);
   const carouselContent0 = (
     <>
