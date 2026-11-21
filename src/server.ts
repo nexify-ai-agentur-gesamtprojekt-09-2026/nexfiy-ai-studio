@@ -51,6 +51,10 @@ function isH3SwallowedErrorBody(body: string): boolean {
 const PERMANENT_REDIRECTS: Record<string, string> = {
   "/preise": "/preise-ablauf",
   "/preise/": "/preise-ablauf",
+  // 2026-11-21 01:40 (Europe/Berlin): www.nexifyai.cloud/login leitet auf /login um; die Seite
+  // heisst hier /anmelden. Ohne diese Zeile endete der Kanal-Link (SOUL §0c) in einem 404.
+  "/login": "/anmelden",
+  "/login/": "/anmelden",
 };
 
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
