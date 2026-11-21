@@ -1,5 +1,9 @@
-import type { CSSProperties } from "react";
-import { useSyncExternalStore } from "react";
+import type { CSSProperties, FormEvent } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
+import type { WerkstattErgebnis } from "../lib/teileklar-werkstatt";
+import { getTeileklarWerkstaetten } from "../lib/teileklar-werkstatt-server";
+import osmDataset from "../lib/teileklar-werkstattdaten/osm-werkstaetten.json?url";
+import geoDataset from "../lib/teileklar-werkstattdaten/geonames-orte.json?url";
 import { fitComposer, useChatPanel, useComposerFit, useShellSignals } from "../lib/imported-site";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/pages/teileklar.werkstatt.css?url";
@@ -39,6 +43,24 @@ export const Route = createFileRoute("/teileklar_/werkstatt")({
 });
 
 function Index() {
+  const latestSearch = useRef(0);
+  const [query, setQuery] = useState("");
+  const [radius, setRadius] = useState(25);
+  const [result, setResult] = useState<WerkstattErgebnis | { status: "loading" | "error" }>();
+  async function search(q: string) {
+    const id = ++latestSearch.current;
+    setResult({ status: "loading" });
+    try {
+      const data = await getTeileklarWerkstaetten({ data: { q, radius } });
+      if (id === latestSearch.current) setResult(data);
+    } catch {
+      if (id === latestSearch.current) setResult({ status: "error" });
+    }
+  }
+  function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void search(query);
+  }
   const isMobile = useSyncExternalStore(
     subscribeMobile,
     () => matchMedia("(max-width: 767px)").matches,
@@ -207,18 +229,28 @@ function Index() {
             <section className={"hc-container pc-supplement tk-shop-body"}>
               <div className={"tk-finder"}>
                 <form
-                  onSubmit={(event) => event.preventDefault()}
+                  onSubmit={submit}
                   role="search"
                   className={"tk-search tk-finder-form"}
                   noValidate
                 >
                   <div className={"tk-field"}>
                     <label htmlFor="ws-q">PLZ oder Ort</label>
-                    <input id="ws-q" maxLength={80} aria-invalid="false" defaultValue="" />
+                    <input
+                      id="ws-q"
+                      maxLength={80}
+                      aria-invalid={result?.status === "invalid"}
+                      value={query}
+                      onChange={(event) => setQuery(event.currentTarget.value)}
+                    />
                   </div>
                   <div className={"tk-field"}>
                     <label htmlFor="ws-r">Umkreis</label>
-                    <select id="ws-r" defaultValue="25">
+                    <select
+                      id="ws-r"
+                      value={radius}
+                      onChange={(event) => setRadius(Number(event.currentTarget.value))}
+                    >
                       <option value="10">10 km</option>
                       <option value="25">25 km</option>
                       <option value="50">50 km</option>
@@ -233,9 +265,68 @@ function Index() {
                     Werkstätten suchen
                   </button>
                 </form>
+                <div role="status" id="workshop-search-status" className="tk-note">
+                  {result?.status === "loading" && "Werkstätten werden gesucht …"}
+                  {result?.status === "invalid" &&
+                    "Geben Sie eine fünfstellige deutsche PLZ oder einen Ortsnamen ein."}
+                  {result?.status === "unknown" &&
+                    "PLZ oder Ort nicht gefunden. Prüfen Sie die Eingabe oder suchen Sie nach der PLZ."}
+                  {result?.status === "ambiguous" &&
+                    "Der Ortsname ist nicht eindeutig. Wählen Sie einen Ort aus oder geben Sie die PLZ ein."}
+                  {result?.status === "error" &&
+                    "Die Werkstattsuche ist gerade nicht verfügbar. Bitte versuchen Sie es erneut."}
+                  {result?.status === "ok" &&
+                    (result.total === 0
+                      ? "Keine Werkstätten im gewählten Umkreis gefunden."
+                      : `${result.total} ${result.total === 1 ? "Werkstatt" : "Werkstätten"} gefunden${result.total > result.items.length ? ` · die ${result.items.length} nächstgelegenen` : ""}.`)}
+                </div>
+                {result?.status === "ambiguous" && (
+                  <ul aria-label="Ortsauswahl">
+                    {result.options.map((option) => (
+                      <li key={option}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setQuery(option);
+                            void search(option);
+                          }}
+                        >
+                          {option}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {result?.status === "ok" && result.items.length > 0 && (
+                  <ul aria-label="Werkstätten nach Entfernung">
+                    {result.items.map((item) => (
+                      <li key={item.id}>
+                        <a
+                          href={`https://www.openstreetmap.org/${({ n: "node", w: "way", r: "relation" } as const)[item.id[0] as "n" | "w" | "r"]}/${item.id.slice(1)}`}
+                        >
+                          {item.name}
+                        </a>
+                        {` · ${item.distanceKm.toLocaleString("de-DE")} km`}
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 <p className={"tk-note"}>
                   Alle Einträge stammen aus einem Werkstattverzeichnis. Es handelt sich um
                   Verzeichnisbetriebe, nicht um TEILEKLAR-Partner. Entfernungen sind Luftlinie.
+                  {" Werkstattdaten: "}
+                  <a href="https://www.openstreetmap.org/copyright">
+                    © OpenStreetMap-Mitwirkende (ODbL)
+                  </a>
+                  .{" PLZ und Orte: "}
+                  <a href="https://www.geonames.org/">GeoNames</a>
+                  {" ("}
+                  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+                  {", bearbeiteter Datenauszug)."}
+                  {" Datenauszüge: "}
+                  <a href={osmDataset}>Werkstattdaten (ODbL)</a>
+                  {" · "}
+                  <a href={geoDataset}>PLZ und Orte (CC BY 4.0)</a>.
                 </p>
               </div>
             </section>
