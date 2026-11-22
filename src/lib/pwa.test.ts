@@ -275,44 +275,69 @@ describe("Service Worker: was er nie anfasst", () => {
 });
 
 describe("Service Worker: Cache-Regeln", () => {
-  it("gehashte Dateien: einmal aus dem Netz, danach aus dem Cache", async () => {
+  it("kein Zwischenspeichern zur Laufzeit: Skripte, Stile und Bilder fasst der Worker nicht an", async () => {
     const w = aufbau();
     await w.lebenszyklus("install");
-    const erste = await w.anfrage("/assets/index-abc123.js", { mode: "no-cors" });
-    expect(await erste?.text()).toBe("datei /assets/index-abc123.js");
-    w.zustand.online = false;
-    const zweite = await w.anfrage("/assets/index-abc123.js", { mode: "no-cors" });
-    expect(await zweite?.text()).toBe("datei /assets/index-abc123.js");
-    expect(w.eintraege(STATIC)).toContain("/assets/index-abc123.js");
+    const vorher = w.abrufe.length;
+    for (const pfad of [
+      "/assets/index-abc123.js",
+      "/assets/styles-abc123.css",
+      "/site-assets/5c592a5dc791fcc3.webp",
+      "/site-assets/9176c58a16ff634a-192.webp",
+    ]) {
+      for (const mode of ["no-cors", "cors", "same-origin"])
+        expect(await w.anfrage(pfad, { mode }), pfad).toBeNull();
+    }
+    // Nichts abgerufen, nichts dazugekommen: es bleibt bei den drei Dateien der Offline-Seite.
+    expect(w.abrufe.length).toBe(vorher);
+    expect(w.eintraege(STATIC)).toEqual([LOGO, ...SCHRIFTEN].sort());
   });
 
-  it("fällt der Cache aus (voll, gesperrt), kommt die Netzantwort trotzdem an", async () => {
-    for (const fehler of ["put", "open", "match"]) {
+  it("Dateien der Offline-Seite: zuerst das Netz, nur ohne Netz die gespeicherte Fassung", async () => {
+    const w = aufbau();
+    await w.lebenszyklus("install");
+    const vorher = w.abrufe.length;
+    const online = await w.anfrage(LOGO, { mode: "no-cors" });
+    expect(await online?.text()).toBe("datei " + LOGO);
+    expect(w.abrufe.length).toBe(vorher + 1);
+    w.zustand.online = false;
+    const offline = await w.anfrage(LOGO, { mode: "no-cors" });
+    expect(await offline?.text()).toBe("datei " + LOGO);
+  });
+
+  it("ein werfender Cache-Speicher blockiert keine Anfrage", async () => {
+    for (const fehler of ["open", "match", "put"]) {
       const w = aufbau();
       await w.lebenszyklus("install");
       w.zustand.cacheFehler = fehler;
-      const datei = await w.anfrage("/assets/index-voll.js", { mode: "no-cors" });
-      expect(await datei?.text(), fehler).toBe("datei /assets/index-voll.js");
-      expect(w.eintraege(STATIC)).not.toContain("/assets/index-voll.js");
+      // Seiten und die Dateien der Offline-Seite kommen weiter aus dem Netz.
+      expect(await (await w.anfrage("/kontakt"))?.text(), fehler).toBe("seite /kontakt");
+      expect(await (await w.anfrage(LOGO, { mode: "no-cors" }))?.text(), fehler).toBe(
+        "datei " + LOGO,
+      );
+      expect(await w.anfrage("/assets/index-abc123.js", { mode: "no-cors" })).toBeNull();
+      // Ohne Netz und ohne Speicher bleibt der schlichte Hinweis statt eines Absturzes.
+      w.zustand.online = false;
+      const seite = await w.anfrage("/kontakt");
+      expect(seite?.status, fehler).toBe(503);
+      expect(await seite?.text()).toContain("Sie sind offline.");
+      // Die Datei meldet dann den Netzfehler – wie ohne Worker.
+      if (fehler !== "put")
+        await expect(w.anfrage(LOGO, { mode: "no-cors" })).rejects.toThrow("offline");
     }
   });
 
-  it("speichert weder 404 noch no-store, private, Umleitungen oder fremde Antworten", async () => {
-    const routes: Record<string, Antwort> = {
-      "/assets/fehlt.js": () => antwort("nicht da", { status: 404 }),
-      "/assets/nostore.js": () => antwort("x", { headers: { "cache-control": "no-store" } }),
-      "/assets/privat.js": () =>
-        antwort("x", { headers: { "cache-control": "private, max-age=60" } }),
-      "/assets/umgeleitet.js": () => antwort("x", { redirected: true }),
-      "/assets/fremd.js": () => antwort("x", { type: "opaque" }),
-      "/assets/teil.js": () => antwort("x", { status: 206 }),
-    };
-    const w = aufbau({ routes });
-    await w.lebenszyklus("install");
-    for (const pfad of Object.keys(routes)) {
-      const response = await w.anfrage(pfad, { mode: "no-cors" });
-      expect(response).not.toBeNull();
-      expect(w.eintraege(STATIC)).not.toContain(pfad);
+  it("die Dateien der Offline-Seite gibt es wirklich (Quelle und, falls gebaut, Auslieferung)", async () => {
+    const { existsSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const quelle = serviceWorkerScript("v1");
+    const liste = /const OFFLINE_FILES = \[([^\]]+)\]/.exec(quelle)?.[1] ?? "";
+    const dateien = [...liste.matchAll(/"([^"]+)"/g)].map((m) => m[1] ?? "");
+    expect(dateien.sort()).toEqual([LOGO, ...SCHRIFTEN].sort());
+    for (const datei of dateien) {
+      expect(existsSync(join(process.cwd(), "public", datei)), datei).toBe(true);
+      const gebaut = join(process.cwd(), ".output", "public");
+      if (existsSync(gebaut)) expect(existsSync(join(gebaut, datei)), "Build: " + datei).toBe(true);
     }
   });
 

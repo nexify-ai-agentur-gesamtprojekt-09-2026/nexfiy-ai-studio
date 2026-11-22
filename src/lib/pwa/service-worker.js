@@ -1,13 +1,15 @@
 /* Service Worker der NeXify-Agenturseite, ausgeliefert unter /sw.js (src/server.ts).
    Klein und von Hand geschrieben; die Grenzen prüft src/lib/pwa.test.ts.
 
-   Gespeichert wird nur zweierlei:
-   1. Die Offline-Seite /offline samt Markenzeichen und Schriften (beim Installieren).
-   2. Statische Dateien mit Inhalts-Hash im Namen (/assets/**, /site-assets/**), Cache-zuerst.
+   Gespeichert wird nur eines: die Offline-Seite /offline samt Markenzeichen und Schriften,
+   einmal beim Installieren. Es gibt kein Zwischenspeichern zur Laufzeit.
 
-   Nie gespeichert und nie beantwortet: /api/**, Konto- und Kundencenter-Adressen,
-   /.well-known/**, alles außer GET, fremde Ursprünge, Bereichsanfragen und Filme.
-   Seiten (Navigation) kommen immer aus dem Netz; nur ohne Netz erscheint die Offline-Seite.
+   Beantwortet wird nur zweierlei, beides zuerst aus dem Netz:
+   1. Seitenaufrufe (Navigation); nur ohne Netz erscheint die Offline-Seite.
+   2. Die drei Dateien der Offline-Seite; nur ohne Netz kommen sie aus dem Speicher.
+   Alles andere – Skripte, Stile, Bilder, Filme, /api/**, Konto- und Kundencenter-Adressen,
+   /.well-known/**, alles außer GET, fremde Ursprünge, Bereichsanfragen – fasst der Worker nicht
+   an. Ein Fehler im Cache-Speicher kann deshalb nie eine Antwort aus dem Netz verhindern.
    Keine Push-Benachrichtigungen, keine Hintergrund-Synchronisierung, keine Nachrichten. */
 const VERSION = "__NEXIFY_SW_VERSION__";
 const PREFIX = "nexify-pwa-";
@@ -20,7 +22,6 @@ const OFFLINE_FILES = [
   "/site-assets/0848630eef4b593d.woff2",
   "/site-assets/f7f6e92afae6f3df.woff2",
 ];
-const STATIC_PREFIXES = ["/assets/", "/site-assets/"];
 // Adressen mit Anmeldung, Konto oder Schnittstelle. Der Worker beantwortet sie nicht einmal.
 const PRIVATE_PREFIXES = [
   "/api",
@@ -36,11 +37,6 @@ const PRIVATE_PREFIXES = [
 
 const under = (path, prefix) => path === prefix || path.startsWith(prefix + "/");
 const isPrivate = (path) => PRIVATE_PREFIXES.some((prefix) => under(path, prefix));
-const isStatic = (path) =>
-  !isPrivate(path) &&
-  !path.endsWith(".mp4") &&
-  STATIC_PREFIXES.some((prefix) => path.startsWith(prefix));
-
 // Nur vollständige, eigene, nicht umgeleitete 200-Antworten ohne no-store/private.
 function storable(response) {
   if (!response || response.status !== 200 || response.type !== "basic" || response.redirected)
@@ -76,25 +72,22 @@ async function precache() {
   );
 }
 
-// Der Cache ist nur ein Zusatz: fällt er aus (Speicher voll, gesperrt), zählt die Netzantwort.
-async function cacheFirst(request) {
-  let cache = null;
+// Eine Datei der Offline-Seite: immer zuerst das Netz. Nur wenn das Netz fehlt, kommt die beim
+// Installieren gespeicherte Fassung; fehlt auch sie oder streikt der Speicher, bleibt der
+// ursprüngliche Netzfehler stehen.
+async function offlineFile(request, path) {
   try {
-    cache = await caches.open(STATIC);
-    const hit = await cache.match(request.url, { ignoreVary: true });
-    if (hit) return hit;
-  } catch {
-    cache = null;
-  }
-  const response = await fetch(request);
-  if (cache && storable(response)) {
+    return await fetch(request);
+  } catch (netzfehler) {
     try {
-      await cache.put(request.url, response.clone());
+      const cache = await caches.open(STATIC);
+      const hit = await cache.match(path);
+      if (hit) return hit;
     } catch {
-      // Nicht gespeichert; die geladene Antwort geht trotzdem an die Seite.
+      // Speicher nicht erreichbar: es bleibt beim Netzfehler.
     }
+    throw netzfehler;
   }
-  return response;
 }
 
 // Rückfall, falls die gespeicherte Offline-Seite fehlt. Nur fester Text.
@@ -109,13 +102,18 @@ function plainNotice() {
 
 // 503, damit nichts die Offline-Seite für die angefragte Seite hält; nie zwischenspeichern.
 async function offlineNotice() {
-  const cache = await caches.open(OFFLINE);
-  const page = await cache.match(OFFLINE_URL);
-  if (!page) return plainNotice();
-  return new Response(page.body, {
-    status: 503,
-    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
-  });
+  try {
+    const cache = await caches.open(OFFLINE);
+    const page = await cache.match(OFFLINE_URL);
+    if (page)
+      return new Response(page.body, {
+        status: 503,
+        headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
+      });
+  } catch {
+    // Speicher nicht erreichbar: der schlichte Hinweis genügt.
+  }
+  return plainNotice();
 }
 
 // Eine neue Version wartet nicht auf das Schließen aller Fenster: Seiten kommen ohnehin immer
@@ -149,8 +147,8 @@ self.addEventListener("fetch", (event) => {
     request.headers.has("range")
   )
     return;
-  if (isStatic(url.pathname)) {
-    event.respondWith(cacheFirst(request));
+  if (OFFLINE_FILES.includes(url.pathname)) {
+    event.respondWith(offlineFile(request, url.pathname));
     return;
   }
   if (request.mode !== "navigate") return;

@@ -18,9 +18,12 @@ ohne Netz erscheint die Offline-Seite.
 | Installationshinweis | `src/components/pwa/InstallHint.tsx`, im Seitenfluss unter der Fußzeile                            |
 | Schalter             | `src/lib/pwa-config.ts`                                                                            |
 
-Der Worker speichert nur die Offline-Seite mit Markenzeichen und Schriften sowie Dateien mit
-Inhalts-Hash unter `/assets/` und `/site-assets/` (ohne Filme). Seiten kommen immer aus dem Netz.
-Nie beantwortet werden `/api/*`, `/.well-known/*`, Konto- und Kundencenter-Adressen, alles außer
+Der Worker speichert nur die Offline-Seite mit Markenzeichen und zwei Schriften, einmal beim
+Installieren. Ein Zwischenspeichern zur Laufzeit gibt es nicht: Skripte, Stile, Bilder und Filme
+unter `/assets/` und `/site-assets/` fasst er nicht an, sie gehen ungehindert ans Netz und in den
+normalen Browser-Cache. Seiten kommen immer aus dem Netz; nur ohne Netz erscheint die
+Offline-Seite. Ein Fehler im Cache-Speicher (voll, gesperrt) verhindert deshalb nie eine Antwort
+aus dem Netz. Nie beantwortet werden `/api/*`, `/.well-known/*`, Konto- und Kundencenter-Adressen, alles außer
 GET, Bereichsanfragen und fremde Ursprünge. Keine Push-Benachrichtigungen, kein Hintergrund-Sync.
 
 Jeder Build bekommt eine eigene Kennung (`vite.config.ts`, `__NEXIFY_BUILD_ID__`) und damit eigene
