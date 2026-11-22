@@ -1,14 +1,15 @@
 {
- "domain": "www.nexifyai.de",
- "source_repo": "nexifyai-dev/nexfiy-ai-studio",
- "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
- "commit": "7813eca7174184c6e1732f9f15c453017c2dd6b1",
- "commit_short": "7813eca717",
- "commit_subject": "fix(shell): Chat-Panel auf dem Telefon wieder als Flaeche",
- "build_id": "",
- "deployed_at": "2026-11-21T14:49:11+01:00",
- "host": "srv1243952",
- "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
- "generated_at": "2026-11-21T13:49:11+00:00",
- "generator": "scripts/quality/gen-build-stamp.py"
+  "domain": "www.nexifyai.de",
+  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
+  "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
+  "commit": "b3220175521d3aea9c03db8a8f20f673b97496d9",
+  "commit_short": "b322017552",
+  "commit_subject": "feat(seo): Service+FAQPage JSON-LD, FAQ-Block und B2B-Hinweis § 14 BGB auf Tier-1",
+  "build_id": "",
+  "deployed_at": "2026-11-22T03:11:27+01:00",
+  "host": "srv1243952",
+  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
+  "generated_at": "2026-11-22T03:11:27+01:00",
+  "generator": "scripts/quality/gen-build-stamp.py",
+  "worker_version": "f319063a-15ef-4233-881a-ca6f6b5aa1cf"
 }
