@@ -242,8 +242,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <a className={"hc-text-link"} href="/anmelden">
-                Anmelden
+              <a className={"hc-text-link"} href="/portale">
+                Kundencenter
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -624,8 +624,8 @@ function ImportedSectionPassendeThemen() {
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/anmelden">
-              Anmelden und weiterarbeiten.
+            <a href="/portale">
+              Stand des Kundencenters.
               <svg
                 className={"hc-arrow"}
                 viewBox="0 0 24 24"
@@ -644,13 +644,13 @@ function ImportedSectionPassendeThemen() {
             </a>
           </h3>
           <p>
-            Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder
-            Partnerbereich.
+            Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je
+            Kunde. Bis dahin erreichen Sie uns direkt.
           </p>
           <a
-            aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
+            aria-label="Stand des Kundencenters. – Seite ansehen"
             className={"hc-text-link"}
-            href="/anmelden"
+            href="/portale"
           >
             Seite ansehen
             <svg
@@ -708,9 +708,8 @@ function ImportedNavSeitenBersicht() {
         <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
       </div>
       <div className={"footer-overview-group"}>
-        <h3>Konto</h3>
-        <a href="/anmelden">Anmelden und weiterarbeiten.</a>
-        <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
+        <h3>Kundencenter</h3>
+        <a href="/portale">Stand des Kundencenters.</a>
       </div>
       <div className={"footer-overview-group"}>
         <h3>Rechtliches</h3>

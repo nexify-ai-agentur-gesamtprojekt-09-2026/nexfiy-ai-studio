@@ -63,9 +63,9 @@ function Index() {
                 <a
                   className={"nexify-control secondary-button identity-secondary-link"}
                   data-variant="secondary"
-                  href="/registrieren"
+                  href="/kontakt"
                 >
-                  Konto erstellen
+                  Zugang anfragen
                 </a>
               </div>
             </div>
@@ -184,8 +184,8 @@ function Index() {
                 <span className={"hc-caption"}>
                   AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
                 </span>
-                <a className={"hc-text-link"} href="/registrieren">
-                  NeX AIFly Suite. In Ruhe testen.
+                <a className={"hc-text-link"} href="/kontakt">
+                  Zugang anfragen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -326,8 +326,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <a className={"hc-text-link"} href="/registrieren">
-                Konto erstellen
+              <a className={"hc-text-link"} href="/kontakt">
+                Zugang anfragen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -344,8 +344,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <a className={"hc-text-link"} href="/anmelden">
-                Anmelden
+              <a className={"hc-text-link"} href="/portale">
+                Kundencenter
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -788,8 +788,8 @@ function ImportedSectionPassendeThemen() {
         <li>
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
-            <a href="/registrieren">
-              NeX AIFly Suite. In Ruhe testen.
+            <a href="/portale">
+              Stand des Kundencenters.
               <svg
                 className={"hc-arrow"}
                 viewBox="0 0 24 24"
@@ -808,62 +808,13 @@ function ImportedSectionPassendeThemen() {
             </a>
           </h3>
           <p>
-            Erstellen Sie Ihr Konto und lernen Sie Ihren eigenen KI-Arbeitsbereich kennen. Der Test
-            über 24 Stunden beginnt erst, wenn Sie ihn starten.
+            Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je
+            Kunde. Bis dahin erreichen Sie uns direkt.
           </p>
           <a
-            aria-label="NeX AIFly Suite. In Ruhe testen. – Seite ansehen"
+            aria-label="Stand des Kundencenters. – Seite ansehen"
             className={"hc-text-link"}
-            href="/registrieren"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/anmelden">
-              Anmelden und weiterarbeiten.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder
-            Partnerbereich.
-          </p>
-          <a
-            aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/anmelden"
+            href="/portale"
           >
             Seite ansehen
             <svg

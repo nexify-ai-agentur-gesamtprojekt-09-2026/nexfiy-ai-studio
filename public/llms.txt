@@ -6,7 +6,6 @@
 ## Seiten
 
 - [https://www.nexifyai.de/](https://www.nexifyai.de/)
-- [https://www.nexifyai.de/anmelden](https://www.nexifyai.de/anmelden)
 - [https://www.nexifyai.de/barrierefreiheit](https://www.nexifyai.de/barrierefreiheit)
 - [https://www.nexifyai.de/cookies](https://www.nexifyai.de/cookies)
 - [https://www.nexifyai.de/datenschutz](https://www.nexifyai.de/datenschutz)

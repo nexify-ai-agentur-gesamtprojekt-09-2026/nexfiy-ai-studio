@@ -2,7 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-# Nicht oeffentlich: Auth-Flows und Kundenkonten (kein Index)
+# Kundencenter in Einrichtung: die drei Hinweisseiten gehoeren nicht in den Index
+Disallow: /anmelden
 Disallow: /registrieren
 Disallow: /passwort-vergessen
 

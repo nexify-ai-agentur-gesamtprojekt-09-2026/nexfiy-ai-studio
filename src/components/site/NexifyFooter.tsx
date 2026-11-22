@@ -111,11 +111,8 @@ export function NexifyFooter() {
               <a href="/kontakt" {...here("/kontakt")}>
                 Kontakt
               </a>
-              <a href="/anmelden" {...here("/anmelden")}>
-                Anmelden
-              </a>
-              <a href="/registrieren" {...here("/registrieren")}>
-                Registrieren
+              <a href="/portale" {...here("/portale")}>
+                Kundencenter
               </a>
             </nav>
             <nav aria-label="Rechtliches">
@@ -224,12 +221,9 @@ export function NexifyFooter() {
                   </a>
                 </div>
                 <div className={"footer-overview-group"}>
-                  <h3>Konto</h3>
-                  <a href="/anmelden" {...here("/anmelden")}>
-                    Anmelden und weiterarbeiten.
-                  </a>
-                  <a href="/registrieren" {...here("/registrieren")}>
-                    NeX AIFly Suite. In Ruhe testen.
+                  <h3>Kundencenter</h3>
+                  <a href="/portale" {...here("/portale")}>
+                    Stand des Kundencenters.
                   </a>
                 </div>
                 <div className={"footer-overview-group"}>

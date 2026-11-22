@@ -391,27 +391,9 @@ export function NexifyHeader() {
             </a>
           </div>
           <div className={"megamenu-group"}>
-            <h2>Ihr Konto</h2>
-            <a href="/anmelden" {...here("/anmelden")}>
-              <span>Anmelden und weiterarbeiten.</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/registrieren" {...here("/registrieren")}>
-              <span>NeX AIFly Suite. In Ruhe testen.</span>
+            <h2>Kundencenter</h2>
+            <a href="/portale" {...here("/portale")}>
+              <span>Stand des Kundencenters.</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"

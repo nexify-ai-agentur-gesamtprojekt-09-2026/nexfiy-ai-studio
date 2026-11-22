@@ -474,9 +474,8 @@ function ImportedNavSeitenBersicht() {
         <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
       </div>
       <div className={"footer-overview-group"}>
-        <h3>Konto</h3>
-        <a href="/anmelden">Anmelden und weiterarbeiten.</a>
-        <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
+        <h3>Kundencenter</h3>
+        <a href="/portale">Stand des Kundencenters.</a>
       </div>
       <div className={"footer-overview-group"}>
         <h3>Rechtliches</h3>

@@ -8,11 +8,11 @@ export const Route = createFileRoute("/anmelden")({
   head: () => ({
     links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/anmelden")],
     meta: [
-      { title: "Anmelden und weiterarbeiten. · NeXify AI" },
+      { title: "Kundencenter – in Einrichtung · NeXify AI" },
       {
         name: "description",
         content:
-          "Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je Kunde",
+          "Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde.",
       },
     ],
   }),
@@ -46,11 +46,11 @@ function ImportedSectionAnmelden() {
               <span aria-hidden="true">/</span>
             </li>
             <li>
-              <span aria-current="page">Anmelden</span>
+              <span aria-current="page">Kundencenter</span>
             </li>
           </ol>
         </nav>
-        <h1 id="auth-login-title">Anmelden</h1>
+        <h1 id="auth-login-title">Kundencenter</h1>
         <KundencenterHinweis />
       </div>
       <aside className={"nx-konto-szene"} aria-labelledby="auth-login-szene">
@@ -150,7 +150,7 @@ function ImportedSectionAnmelden() {
         </div>
         <div className={"nx-konto-nutzen"}>
           <span className={"hc-kicker"} id="auth-login-szene">
-            NEXIFY AI<span aria-hidden="true"> / </span>Ihr NeXify-Konto
+            NEXIFY AI<span aria-hidden="true"> / </span>Geplant im Kundencenter
           </span>
           <ul>
             <li>
@@ -190,7 +190,6 @@ function ImportedSectionAnmelden() {
               Unterlagen
             </li>
           </ul>
-          <p>Zusätzliche Produkt- und Partnerberechtigungen werden separat freigeschaltet.</p>
         </div>
       </aside>
     </section>
@@ -228,11 +227,8 @@ function ImportedNavSeitenBersicht() {
         <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
       </div>
       <div className={"footer-overview-group"}>
-        <h3>Konto</h3>
-        <a href="/anmelden" aria-current="page">
-          Anmelden und weiterarbeiten.
-        </a>
-        <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
+        <h3>Kundencenter</h3>
+        <a href="/portale">Stand des Kundencenters.</a>
       </div>
       <div className={"footer-overview-group"}>
         <h3>Rechtliches</h3>
