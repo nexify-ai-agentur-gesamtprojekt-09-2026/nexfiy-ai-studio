@@ -1,12 +1,14 @@
 # Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio) mit menschlicher Freigabe.
 # Startet nur von Hand (Actions -> "Deploy live" -> "Run workflow") und nur von main aus.
-# Job "aufloesen" (ohne Environment, ohne Secrets) legt den auszuliefernden Commit als festen SHA
-# aus der main-Historie fest und zeigt ihn in der Zusammenfassung. Job "deploy" wartet auf die
-# Freigabe im Environment "production" (Required reviewers) und baut/testet/liefert genau diesen
-# SHA aus. Ein Zweig, der sich während des Wartens ändert, kann so nicht mehr ausgeliefert werden.
-# Das Deploy-Werkzeug (tools/deploy-live.sh) kommt immer aus dem Workflow-Commit (github.sha,
-# main-Kopf beim Start) unter werkzeug/; gebaut wird nur der Anwendungsstand unter app/. So läuft
-# auch ein Rückweg auf einen älteren main-Commit mit dem aktuellen, CI-fähigen Skript.
+# Drei Jobs, nur der letzte kennt das Cloudflare-Token:
+#   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
+#              und zeigt SHA, Betreff, Autor, Datum in der Zusammenfassung.
+#   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus, lint/tsc/test/build/test,
+#              lädt .output/ samt sha256-Liste als Artefakt hoch.
+#   deploy     (Environment "production", wartet auf Freigabe): checkt nur das Deploy-Werkzeug aus
+#              dem Workflow-Commit (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und
+#              liefert mit tools/deploy-live.sh aus. Hier läuft kein Code aus dem Anwendungsstand;
+#              das gebaute Worker-Bundle wird von wrangler nur hochgeladen.
 # Die Deploy-Logik liegt ausschließlich in tools/deploy-live.sh (Server und CI prüfen gleich).
 # Einrichtung und Rückweg: docs/auslieferung.md
 name: Deploy live
@@ -42,6 +44,7 @@ jobs:
       contents: read
     outputs:
       sha: ${{ steps.sha.outputs.sha }}
+      betreff: ${{ steps.sha.outputs.betreff }}
     steps:
       # Action-Versionen per Commit-SHA gepinnt; SHA = Tag laut `git ls-remote --tags` der offiziellen Repos (2026-11-22).
       - name: Checkout main (volle Historie)
@@ -91,49 +94,36 @@ jobs:
             echo "Freigeben nur, wenn dieser Commit ausgeliefert werden soll."
           } >> "$GITHUB_STEP_SUMMARY"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "betreff=$(git log -1 --format=%s "$sha")" >> "$GITHUB_OUTPUT"
           echo "Auszuliefern: $sha"
 
-  deploy:
-    name: Prüfen, bauen, ausliefern
+  bauen:
+    name: Prüfen und bauen
     needs: aufloesen
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    environment:
-      name: production
-      url: https://www.nexifyai.de
+    permissions:
+      contents: read
+    outputs:
+      liste_sha256: ${{ steps.liste.outputs.liste_sha256 }}
     steps:
-      - name: Checkout Deploy-Werkzeug (Workflow-Commit)
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ github.sha }}
-          path: werkzeug
-          persist-credentials: false
-
       - name: Checkout Anwendungsstand (festgelegter Commit)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.aufloesen.outputs.sha }}
-          path: app
           persist-credentials: false
 
-      - name: Ausgecheckte Commits prüfen
+      - name: Ausgecheckten Commit prüfen
         env:
           SOLL: ${{ needs.aufloesen.outputs.sha }}
-          WERKZEUG_SOLL: ${{ github.sha }}
         run: |
-          ist="$(git -C app rev-parse HEAD)"
+          ist="$(git rev-parse HEAD)"
           if [ -z "$SOLL" ] || [ "$ist" != "$SOLL" ]; then
-            echo "::error::Anwendung: ausgecheckt ist $ist, festgelegt war ${SOLL:-leer}; Abbruch."
+            echo "::error::Ausgecheckt ist $ist, festgelegt war ${SOLL:-leer}; Abbruch."
             exit 1
           fi
-          werkzeug="$(git -C werkzeug rev-parse HEAD)"
-          if [ "$werkzeug" != "$WERKZEUG_SOLL" ]; then
-            echo "::error::Werkzeug: ausgecheckt ist $werkzeug, erwartet $WERKZEUG_SOLL; Abbruch."
-            exit 1
-          fi
-          echo "Anwendung: $ist"
-          echo "Werkzeug:  $werkzeug"
+          echo "Ausgecheckt: $ist"
 
       - name: Node.js einrichten
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -146,37 +136,115 @@ jobs:
           bun-version: "1.4.4"
 
       - name: Abhängigkeiten installieren
-        working-directory: app
         run: bun install --frozen-lockfile
 
       - name: Lint
-        working-directory: app
         run: npm run lint
 
       - name: Typprüfung
-        working-directory: app
         run: npx tsc --noEmit
 
       - name: Tests (Quellen)
-        working-directory: app
         run: npm test
 
       - name: Build
-        working-directory: app
         run: npm run build
 
       - name: Tests (mit Build-Ausgabe)
-        working-directory: app
         run: npm test
+
+      - name: Arbeitsbaum-Status und sha256-Liste festhalten
+        id: liste
+        run: |
+          set -euo pipefail
+          mkdir -p deploy-meta
+          git status --porcelain -- . ':(exclude)deploy-meta' > deploy-meta/worktree-status.txt
+          find .output -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > deploy-meta/output.sha256
+          echo "liste_sha256=$(sha256sum deploy-meta/output.sha256 | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "Dateien im Artefakt: $(wc -l < deploy-meta/output.sha256)"
+
+      - name: Artefakt hochladen
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: build-${{ needs.aufloesen.outputs.sha }}
+          path: |
+            .output/
+            deploy-meta/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    name: Ausliefern
+    needs: [aufloesen, bauen]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: https://www.nexifyai.de
+    steps:
+      - name: Checkout Deploy-Werkzeug (Workflow-Commit)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          path: werkzeug
+          persist-credentials: false
+
+      - name: Werkzeug-Commit prüfen
+        env:
+          SOLL: ${{ github.sha }}
+        run: |
+          ist="$(git -C werkzeug rev-parse HEAD)"
+          if [ "$ist" != "$SOLL" ]; then
+            echo "::error::Werkzeug: ausgecheckt ist $ist, erwartet $SOLL; Abbruch."
+            exit 1
+          fi
+          echo "Werkzeug: $ist"
+
+      - name: Artefakt laden
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: build-${{ needs.aufloesen.outputs.sha }}
+          path: app
+
+      - name: Artefakt prüfen (sha256)
+        working-directory: app
+        env:
+          LISTE_SHA256: ${{ needs.bauen.outputs.liste_sha256 }}
+        run: |
+          set -euo pipefail
+          ist="$(sha256sum deploy-meta/output.sha256 | cut -d' ' -f1)"
+          if [ -z "$LISTE_SHA256" ] || [ "$ist" != "$LISTE_SHA256" ]; then
+            echo "::error::sha256-Liste weicht vom Build-Job ab; Abbruch."
+            exit 1
+          fi
+          sha256sum --check --quiet --strict deploy-meta/output.sha256
+          liste="$(wc -l < deploy-meta/output.sha256)"
+          gefunden="$(find .output -type f | wc -l)"
+          if [ "$liste" != "$gefunden" ]; then
+            echo "::error::.output enthält $gefunden Dateien, die Liste $liste; Abbruch."
+            exit 1
+          fi
+          echo "Artefakt geprüft: $liste Dateien"
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
 
       - name: Ausliefern
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           DEPLOY_HOST: github-actions
-          # Werkzeug aus werkzeug/, ausgeliefert wird das oben gebaute und getestete app/.output/.
+          # Werkzeug aus werkzeug/, ausgeliefert wird das geprüfte Artefakt unter app/.output/.
           DEPLOY_APP_DIR: ${{ github.workspace }}/app
           DEPLOY_SKIP_BUILD: "1"
+          # Commit-Angaben für Stempel und Readback (kein Git-Checkout der Anwendung in diesem Job).
+          DEPLOY_COMMIT: ${{ needs.aufloesen.outputs.sha }}
+          DEPLOY_COMMIT_SUBJECT: ${{ needs.aufloesen.outputs.betreff }}
+          DEPLOY_WORKTREE_STATUS_FILE: ${{ github.workspace }}/app/deploy-meta/worktree-status.txt
           # Wrangler ist keine Projektabhängigkeit; Version fest (npm, veröffentlicht 2026-11-05).
           WRANGLER_VERSION: "4.158.0"
           DRY_RUN: ${{ inputs.dry_run }}
