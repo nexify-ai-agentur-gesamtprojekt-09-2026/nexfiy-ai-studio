@@ -285,6 +285,8 @@ export function NexifyFooter() {
             <a href="/ki-hinweise" {...here("/ki-hinweise")}>
               Markeninszenierung · KI-generiert
             </a>
+            {/* 2026-11-22 03:03 (Europe/Berlin): B2B-Hinweis nach § 14 BGB. */}
+            <span>Angebot für Unternehmer gemäß § 14 BGB (B2B).</span>
           </p>
           <details className={"footer-legal-details"}>
             <summary aria-expanded="false" aria-controls="_R_8lb_">

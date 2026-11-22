@@ -252,10 +252,78 @@ function Index() {
                 <small />
               </div>
             </section>
+            <HomeFaq />
           </div>
         </>
       )}
     </NexifyShell>
+  );
+}
+
+// 2026-11-22 03:02 (Europe/Berlin): Eine Quelle fuer sichtbare FAQ und FAQPage-Markup.
+// Google verlangt Deckungsgleichheit; Aenderung nur hier. Antworten nur mit belegten
+// Aussagen der eigenen Seiten (Prozess, Preise, Zielgruppe, Kontakt).
+const HOME_FAQ: Array<{ q: string; a: string }> = [
+  {
+    q: "Welche Leistungen bietet NeXify AI?",
+    a: "Marken und Websites, Apps und Portale sowie Automatisierung und KI. Dazu kommen Kampagnen-Landingpages und die Betreuung nach der Übergabe.",
+  },
+  {
+    q: "Wie läuft ein Projekt ab?",
+    a: "Erstgespräch, Leistungsrahmen, Konzept mit Text und Design, Umsetzung und Übergabe. Nach der Übergabe bleiben wir für Pflege und Weiterentwicklung erreichbar.",
+  },
+  {
+    q: "Was kostet ein Projekt?",
+    a: "Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Konzept, Text, Design und technische Umsetzung werden nach diesem Umfang geplant; externe Kosten weisen wir separat aus.",
+  },
+  {
+    q: "An wen richtet sich das Angebot?",
+    a: "An Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz. Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB (B2B).",
+  },
+  {
+    q: "Wie nehme ich Kontakt auf?",
+    a: "Über das Kontaktformular auf /kontakt oder das Erstgespräch. Wir melden uns mit einer Rückmeldung zu Ihrem Vorhaben.",
+  },
+];
+
+function HomeFaq() {
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.nexifyai.de/#faq",
+    mainEntity: HOME_FAQ.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+  return (
+    <section
+      id="faq"
+      className={"hc-section hc-container"}
+      aria-labelledby="hc-faq-title"
+      style={{ scrollMarginTop: "7rem" }}
+    >
+      <header className={"hc-section-heading is-in"}>
+        <div>
+          <span className={"hc-kicker"}>Häufige Fragen</span>
+          <h2 id="hc-faq-title">Was vor dem Start geklärt ist.</h2>
+        </div>
+        <p>Kurze Antworten auf die Fragen, die im ersten Gespräch am häufigsten kommen.</p>
+      </header>
+      <ol>
+        {HOME_FAQ.map(({ q, a }) => (
+          <li key={q} className={"is-in"}>
+            <h3>{q}</h3>
+            <p>{a}</p>
+          </li>
+        ))}
+      </ol>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+    </section>
   );
 }
 

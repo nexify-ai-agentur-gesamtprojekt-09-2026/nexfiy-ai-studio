@@ -49,6 +49,12 @@ function Index() {
                 Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung
                 danach und externe Kosten sind getrennt ausgewiesen.
               </p>
+              {/* 2026-11-22 03:04 (Europe/Berlin): B2B-Abgrenzung nach § 14 BGB. */}
+              <p className={"identity-body"}>
+                Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB. Genannte Preise und
+                Leistungen gelten für geschäftliche Auftraggeber; Umsatzsteuer wird gesondert
+                ausgewiesen.
+              </p>
               <div className={"identity-links"}>
                 <a
                   className={"nexify-control primary-button identity-primary-link"}

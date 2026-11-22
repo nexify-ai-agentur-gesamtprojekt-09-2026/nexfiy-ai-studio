@@ -233,6 +233,35 @@ function RootShell({ children }: { children: ReactNode }) {
                   inLanguage: "de-DE",
                   publisher: { "@id": "https://www.nexifyai.de/#organisation" },
                 },
+                // 2026-11-22 03:00 (Europe/Berlin): Leistungsangebot als Service-Entitaeten.
+                // Quelle: eigene Leistungsseiten /leistungen/*; nur dort belegte Angebote.
+                {
+                  "@type": "Service",
+                  "@id": "https://www.nexifyai.de/#service-websites",
+                  name: "Websites & Markenauftritt",
+                  serviceType: "Webdesign und Website-Entwicklung",
+                  url: "https://www.nexifyai.de/leistungen/websites",
+                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
+                  areaServed: ["DE", "NL", "AT", "CH"],
+                },
+                {
+                  "@type": "Service",
+                  "@id": "https://www.nexifyai.de/#service-apps",
+                  name: "Apps & Portale",
+                  serviceType: "Softwareentwicklung für Web-Apps und Portale",
+                  url: "https://www.nexifyai.de/leistungen/apps-portale",
+                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
+                  areaServed: ["DE", "NL", "AT", "CH"],
+                },
+                {
+                  "@type": "Service",
+                  "@id": "https://www.nexifyai.de/#service-ki",
+                  name: "Automatisierung & KI",
+                  serviceType: "KI-Agenten und Prozessautomatisierung",
+                  url: "https://www.nexifyai.de/leistungen/agenten-automatisierung",
+                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
+                  areaServed: ["DE", "NL", "AT", "CH"],
+                },
               ],
             }),
           }}
