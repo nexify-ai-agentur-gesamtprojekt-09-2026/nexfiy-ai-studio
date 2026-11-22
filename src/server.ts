@@ -87,10 +87,20 @@ function withSecurityHeaders(response: Response): Response {
   });
 }
 
+const LOKALE_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      // 2026-11-22 12:55 (Europe/Berlin): http://www.nexifyai.de lieferte 200 statt TLS-Weiterleitung.
+      // Der Worker ist die letzte Instanz vor der Antwort; hier dauerhaft auf https umleiten.
+      // Merge 22.11.2026: lokale Prüfgerüste (localhost, 127.0.0.1, ::1) bleiben auf http, sonst
+      // liefe jede lokale Abnahme in eine Umleitung auf einen Host ohne TLS.
+      if (url.protocol === "http:" && !LOKALE_HOSTS.has(url.hostname)) {
+        url.protocol = "https:";
+        return Response.redirect(url.toString(), 301);
+      }
       // 2026-11-22: Anfrage-Eingang vor dem Framework beantworten (A-36). Der Entry bekommt die
       // Bindings vom Worker-Runtime; Framework-Routen sehen sie nicht.
       if (url.pathname === "/api/anfrage") {

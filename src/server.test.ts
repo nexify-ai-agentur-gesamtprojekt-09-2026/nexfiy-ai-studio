@@ -289,3 +289,37 @@ describe("installierbare Web-App: /sw.js und /offline", () => {
     expect(regeln).not.toMatch(/^\/sw\.js/m);
   });
 });
+
+describe("http auf https (aus main, 2026-11-22)", () => {
+  it("leitet http-Abrufe der Domain dauerhaft auf https um", async () => {
+    const antwort = await server.fetch(
+      new Request("http://www.nexifyai.de/kontakt?x=1", { redirect: "manual" }),
+      {},
+      {},
+    );
+    expect(antwort.status).toBe(301);
+    expect(antwort.headers.get("location")).toBe("https://www.nexifyai.de/kontakt?x=1");
+  });
+
+  it("bleibt bei einer früheren Shop-Adresse auf derselben Domain", async () => {
+    const antwort = await server.fetch(
+      new Request("http://www.nexifyai.de/teileklar?utm_source=x", { redirect: "manual" }),
+      {},
+      {},
+    );
+    expect(new URL(antwort.headers.get("location") ?? "").host).toBe("www.nexifyai.de");
+  });
+
+  it.each(["localhost", "127.0.0.1", "[::1]"])(
+    "lässt lokales Prüfgerüst %s auf http",
+    async (host) => {
+      const antwort = await server.fetch(
+        new Request(`http://${host}:8788/teileklar`, { redirect: "manual" }),
+        {},
+        {},
+      );
+      expect(antwort.status).toBe(404);
+      expect(antwort.headers.get("location")).toBeNull();
+    },
+  );
+});
