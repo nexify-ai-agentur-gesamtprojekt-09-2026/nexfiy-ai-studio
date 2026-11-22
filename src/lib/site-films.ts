@@ -1,5 +1,5 @@
 /** Every brand film of the site, defined once and reused by each page that shows it. */
-export type SiteFilmId = "studio" | "angebot" | "fertigung";
+export type SiteFilmId = "studio" | "angebot" | "fertigung" | "tablet";
 
 export interface SiteFilmData {
   src: string;
@@ -29,5 +29,11 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     poster: "/site-assets/15fa9607b63661b1.webp",
     label: "Mehr Zeit für die Arbeit, die zählt.",
     alt: "Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage",
+  },
+  tablet: {
+    src: "/site-assets/b82843cf77d572df.mp4",
+    poster: "/site-assets/4b45951db0b51136.webp",
+    label: "Pascal und eine Gesprächspartnerin am Tablet",
+    alt: "Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie",
   },
 };
