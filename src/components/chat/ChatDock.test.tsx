@@ -306,6 +306,8 @@ describe("ChatDock", () => {
     expect(screen.queryByLabelText("Ihre Frage an den KI-Assistenten")).toBeNull();
     expect(dialog.querySelector('.nxc-aus a[href="/kontakt"]')).not.toBeNull();
     expect(dialog.querySelector(".nxc-einstiege")).toBeNull();
+    // Nichts wird übermittelt, also behauptet die Oberfläche das auch nicht.
+    expect(dialog).not.toHaveTextContent(/übermittelt|Sie schreiben mit/);
     expect(posts()).toHaveLength(0);
   });
 

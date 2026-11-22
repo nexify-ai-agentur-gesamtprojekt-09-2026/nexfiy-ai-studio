@@ -375,7 +375,8 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
             amEnde.current = liste.scrollHeight - liste.scrollTop - liste.clientHeight < 48;
           }}
         >
-          <Hinweis />
+          {/* Abgeschaltet wird nichts übermittelt: dann steht hier auch kein Hinweis darauf. */}
+          {!abgeschaltet && <Hinweis />}
           {leer && !abgeschaltet && (
             <div className="nxc-start">
               <h3>Womit kann ich Ihnen weiterhelfen?</h3>
@@ -477,11 +478,13 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
               )}
             </form>
           )}
-          <p className="nxc-recht">
-            KI-Antworten können Fehler enthalten und sind unverbindlich. Keine sensiblen Daten
-            eingeben. <a href="/ki-hinweise">KI-Hinweise</a> ·{" "}
-            <a href="/datenschutz">Datenschutz</a> · <a href="/kontakt">Kontakt</a>
-          </p>
+          {!abgeschaltet && (
+            <p className="nxc-recht">
+              KI-Antworten können Fehler enthalten und sind unverbindlich. Keine sensiblen Daten
+              eingeben. <a href="/ki-hinweise">KI-Hinweise</a> ·{" "}
+              <a href="/datenschutz">Datenschutz</a> · <a href="/kontakt">Kontakt</a>
+            </p>
+          )}
         </div>
         <p className="nxc-sr" role="status" aria-live="polite">
           {ansage}

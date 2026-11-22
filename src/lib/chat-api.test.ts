@@ -49,7 +49,14 @@ type Zeile = {
   versuche: number;
 };
 
-/** D1-Oberfläche über einer echten SQLite-Datenbank im Speicher. */
+/**
+ * Jede Anweisung ist wie bei D1 ein eigener Weg zur Datenbank: Dazwischen kommen andere Anfragen
+ * zum Zug. Erst dadurch überlappen sich gleichzeitige Anfragen im Test wirklich – ein
+ * „erst zählen, dann schreiben“ fiele hier durch (per Gegenprobe geprüft).
+ */
+const unterwegs = () => new Promise<void>((weiter) => setImmediate(weiter));
+
+/** D1-Oberfläche über einer echten SQLite-Datenbank im Speicher; jede Anweisung läuft für sich atomar. */
 function neueDb() {
   const sqlite = new DatabaseSync(":memory:");
   sqlite.exec(readFileSync("migrations/0002-chat.sql", "utf8"));
@@ -64,15 +71,18 @@ function neueDb() {
           return stmt;
         },
         async first<T>() {
+          await unterwegs();
           anweisungen.push(sql);
           return (sqlite.prepare(sql).get(...werte) ?? null) as T | null;
         },
         async run() {
+          await unterwegs();
           anweisungen.push(sql);
           const ergebnis = sqlite.prepare(sql).run(...werte);
           return { success: true, meta: { changes: Number(ergebnis.changes) } };
         },
         async all<T>() {
+          await unterwegs();
           anweisungen.push(sql);
           return { results: sqlite.prepare(sql).all(...werte) as T[] };
         },
