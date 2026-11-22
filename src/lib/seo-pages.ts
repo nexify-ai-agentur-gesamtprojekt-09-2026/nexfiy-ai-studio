@@ -307,10 +307,10 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/regionen",
     datei: "regionen.tsx",
-    titel: "Regionen: Zusammenarbeit in ganz Deutschland",
+    titel: "Regionen: Feiertage und Aufsicht je Bundesland",
     kurz: "Regionen",
     beschreibung:
-      "NeXify AI arbeitet von Venlo aus für Unternehmen in allen 16 Bundesländern. Für jedes Land stehen hier die Feiertage und die Datenschutzaufsicht.",
+      "Für jedes Bundesland die zusätzlichen Feiertage und die zuständige Datenschutzaufsicht. Die Zusammenarbeit mit NeXify AI läuft überwiegend online.",
     typ: "info",
     index: true,
   },

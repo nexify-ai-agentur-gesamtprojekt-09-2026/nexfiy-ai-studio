@@ -14,7 +14,7 @@ import {
   type FeiertagId,
 } from "./regionen-daten";
 import { SEITEN, canonicalUrl, pageJsonLd, seitenTitel } from "./seo";
-import { KONTAKT, UNTERNEHMEN } from "./site-facts";
+import { KONTAKT } from "./site-facts";
 
 /**
  * Regionalseiten: Datentabelle, Feiertagsrechnung, Seitentabelle und Sitemap, und – vor allem –
@@ -46,6 +46,10 @@ export const VERBOTENE_BEHAUPTUNGEN: RegExp[] = [
   /aus der Region/i,
   /in Ihrer Nähe/i,
   /LocalBusiness/,
+  // Keine Länder- oder Gebietszusagen (Startseite seit 22.11.2026: überwiegend online).
+  /Niederlanden|Österreich|Schweiz/,
+  /ganz Deutschland/i,
+  /allen 16 Bundesländern/i,
 ];
 
 export function verboteneBehauptungen(text: string): string[] {
@@ -70,6 +74,8 @@ describe("Prüfhilfen", () => {
     expect(verboteneBehauptungen("ab 449 € pro Tag")).toHaveLength(1);
     expect(verboteneBehauptungen("Ihr Ansprechpartner für München")).toHaveLength(1);
     expect(verboteneBehauptungen("NeXify AI ist die Agentur in Venlo.")).toEqual([]);
+    expect(verboteneBehauptungen("für Unternehmen in Deutschland und der Schweiz")).toHaveLength(1);
+    expect(verboteneBehauptungen("Zusammenarbeit in ganz Deutschland")).toHaveLength(1);
     expect(fremdeTelefonnummern("Rufen Sie 0221 123 4567 an")).toHaveLength(1);
     expect(fremdeTelefonnummern(`Telefon ${KONTAKT.telefon}`)).toEqual([]);
   });
@@ -154,10 +160,15 @@ describe("Datentabelle der Bundesländer", () => {
       expect(land.aufsicht.url).toMatch(/^https:\/\/[a-z0-9.-]+\/$/);
   });
 
-  it("Grenzländer nur aus den Zielländern der Website", () => {
-    for (const land of BUNDESLAENDER)
-      for (const code of land.grenzeZu)
-        expect((UNTERNEHMEN.zielLaender as readonly string[]).includes(code)).toBe(true);
+  it("Quelltexte der Regionalseiten: keine Länderliste, kein „vor Ort“, keine Gebietszusage", () => {
+    const quellen = [
+      lies("src/routes/regionen.tsx"),
+      lies("src/routes/regionen_.$land.tsx"),
+      lies("src/components/site/RegionenBausteine.tsx"),
+      JSON.stringify(REGIONEN),
+    ];
+    for (const quelle of quellen) expect(verboteneBehauptungen(quelle)).toEqual([]);
+    expect(lies("src/routes/regionen_.$land.tsx")).not.toContain("zielLaender");
   });
 
   it("enthält keine verbotenen Behauptungen und keine Telefonnummern", () => {

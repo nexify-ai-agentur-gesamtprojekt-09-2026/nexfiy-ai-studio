@@ -5,9 +5,9 @@
  * (src/lib/seo-pages.ts) und die Sitemap lesen dieselben Einträge.
  *
  * Was hier steht und warum nur das:
- *  - NeXify AI arbeitet von Venlo (NL) aus für Unternehmen in Deutschland, den Niederlanden,
- *    Österreich und der Schweiz. Es gibt keine Büros, Adressen, Ansprechpartner, Referenzen,
- *    Bewertungen oder Preise je Land – deshalb steht nichts davon in dieser Tabelle.
+ *  - NeXify AI sitzt in Venlo (NL); die Zusammenarbeit läuft überwiegend online. Die Seiten
+ *    machen keine Länder- oder Vor-Ort-Zusagen. Es gibt keine Büros, Adressen, Ansprechpartner,
+ *    Referenzen, Bewertungen oder Preise je Land – deshalb steht nichts davon in dieser Tabelle.
  *  - `feiertage`: gesetzliche Feiertage, die zusätzlich zu den bundesweiten im Land gelten und
  *    auf einen Werktag fallen können (Oster- und Pfingstsonntag bleiben weg). Quelle: das
  *    Feiertagsgesetz des jeweiligen Landes, Stand 22.11.2026. `teilweise`: gilt nicht im ganzen
@@ -15,9 +15,6 @@
  *  - `aufsicht`: die für nichtöffentliche Stellen (Unternehmen) im Land zuständige
  *    Datenschutzaufsicht. Name und Adresse von der Website der Behörde, abgerufen am 22.11.2026
  *    (Bremen: Website verweigerte den automatischen Abruf, Name und Adresse nach bekanntem Stand).
- *  - `grenzeZu`: Nachbarstaaten des Landes, die zugleich Zielländer von NeXify AI sind
- *    (src/lib/site-facts.ts, `zielLaender`). Andere Nachbarstaaten bleiben weg, weil NeXify AI
- *    dort nicht arbeitet.
  *
  * Planungsgrundlage: Governance-Repository, docs/09-final/11-seo-kampagne-und-wettbewerb.md (K8
  * Local) und config/pseo.json („Städteseiten ohne Partner (Doorway)" verboten), Recherche
@@ -51,8 +48,6 @@ export interface LandFeiertag {
   teilweise?: string;
 }
 
-export type Zielland = "NL" | "AT" | "CH";
-
 export interface Bundesland {
   /** Adressteil unter /regionen/, klein und ohne Umlaute. */
   slug: string;
@@ -63,7 +58,6 @@ export interface Bundesland {
   stadtstaat: boolean;
   feiertage: LandFeiertag[];
   aufsicht: { name: string; kurz: string; url: string };
-  grenzeZu: Zielland[];
 }
 
 export const BUNDESLAENDER: Bundesland[] = [
@@ -79,7 +73,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfDI Baden-Württemberg",
       url: "https://www.baden-wuerttemberg.datenschutz.de/",
     },
-    grenzeZu: ["CH"],
   },
   {
     slug: "bayern",
@@ -102,7 +95,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "BayLDA",
       url: "https://www.lda.bayern.de/",
     },
-    grenzeZu: ["AT"],
   },
   {
     slug: "berlin",
@@ -116,7 +108,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "BlnBDI",
       url: "https://www.datenschutz-berlin.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "brandenburg",
@@ -130,7 +121,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LDA Brandenburg",
       url: "https://www.lda.brandenburg.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "bremen",
@@ -144,7 +134,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfDI Bremen",
       url: "https://www.datenschutz.bremen.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "hamburg",
@@ -158,7 +147,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "HmbBfDI",
       url: "https://datenschutz-hamburg.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "hessen",
@@ -172,7 +160,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "HBDI",
       url: "https://datenschutz.hessen.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "mecklenburg-vorpommern",
@@ -186,7 +173,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfDI Mecklenburg-Vorpommern",
       url: "https://www.datenschutz-mv.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "niedersachsen",
@@ -200,7 +186,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfD Niedersachsen",
       url: "https://www.lfd.niedersachsen.de/",
     },
-    grenzeZu: ["NL"],
   },
   {
     slug: "nordrhein-westfalen",
@@ -214,7 +199,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LDI NRW",
       url: "https://www.ldi.nrw.de/",
     },
-    grenzeZu: ["NL"],
   },
   {
     slug: "rheinland-pfalz",
@@ -228,7 +212,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfDI Rheinland-Pfalz",
       url: "https://www.datenschutz.rlp.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "saarland",
@@ -242,7 +225,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "UDZ Saarland",
       url: "https://www.datenschutz.saarland.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "sachsen",
@@ -263,7 +245,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "SDTB",
       url: "https://www.datenschutz.sachsen.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "sachsen-anhalt",
@@ -277,7 +258,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "LfD Sachsen-Anhalt",
       url: "https://datenschutz.sachsen-anhalt.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "schleswig-holstein",
@@ -291,7 +271,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "ULD",
       url: "https://www.datenschutzzentrum.de/",
     },
-    grenzeZu: [],
   },
   {
     slug: "thueringen",
@@ -313,7 +292,6 @@ export const BUNDESLAENDER: Bundesland[] = [
       kurz: "TLfDI",
       url: "https://www.tlfdi.de/",
     },
-    grenzeZu: [],
   },
 ];
 
@@ -343,5 +321,5 @@ export function landTitel(land: Bundesland): string {
 
 /** Beschreibung aus dem sichtbaren Einleitungstext der Länderseite. */
 export function landBeschreibung(land: Bundesland): string {
-  return `NeXify AI begleitet Unternehmen in ${land.name} aus Venlo, ohne Anfahrt. Diese Seite nennt die Feiertage und die Datenschutzaufsicht für Ihr Projekt.`;
+  return `Die Zusammenarbeit mit NeXify AI läuft überwiegend online. Hier stehen Feiertage und Datenschutzaufsicht in ${land.name} für Ihr Projekt.`;
 }

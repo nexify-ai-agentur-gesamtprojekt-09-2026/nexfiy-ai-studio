@@ -9,14 +9,8 @@ import {
 import capturedCSS from "../styles/pages/wissen.projekt-vorbereiten.css?url";
 import regionenCSS from "../styles/site-regionen.css?url";
 import { datumText, heuteInDeutschland, naechsterTermin } from "@/lib/feiertage";
-import {
-  BUNDESLAENDER,
-  FEIERTAG_NAMEN,
-  type Bundesland,
-  type Zielland,
-} from "@/lib/regionen-daten";
+import { BUNDESLAENDER, FEIERTAG_NAMEN, type Bundesland } from "@/lib/regionen-daten";
 import { pageHead } from "@/lib/seo";
-import { UNTERNEHMEN } from "@/lib/site-facts";
 
 /**
  * Eine Vorlage für die 16 Länderseiten. Inhalt kommt ausschließlich aus der Datentabelle
@@ -48,24 +42,6 @@ export const Route = createFileRoute("/regionen_/$land")({
   component: Land,
 });
 
-const ZIELLAND_NAME: Record<Zielland, { im: string; nach: string }> = {
-  NL: { im: "in den Niederlanden", nach: "die Niederlande" },
-  AT: { im: "in Österreich", nach: "Österreich" },
-  CH: { im: "in der Schweiz", nach: "die Schweiz" },
-};
-
-/** „Deutschland, den Niederlanden, Österreich und der Schweiz" aus src/lib/site-facts.ts. */
-function zielLaenderText(): string {
-  const dativ: Record<string, string> = {
-    DE: "Deutschland",
-    NL: "den Niederlanden",
-    AT: "Österreich",
-    CH: "der Schweiz",
-  };
-  const namen = UNTERNEHMEN.zielLaender.map((code) => dativ[code] ?? code);
-  return `${namen.slice(0, -1).join(", ")} und ${namen.at(-1)}`;
-}
-
 function Land() {
   const { slug, heute } = Route.useLoaderData();
   const land = BUNDESLAENDER.find((eintrag) => eintrag.slug === slug) as Bundesland;
@@ -73,7 +49,6 @@ function Land() {
     .map((tag) => ({ ...tag, datum: naechsterTermin(tag.id, heute) }))
     .sort((a, b) => a.datum.getTime() - b.datum.getTime());
   const teilweise = land.feiertage.filter((tag) => tag.teilweise);
-  const abschnitte = land.grenzeZu.length ? 3 : 2;
   const im = `in ${land.name}`;
   return (
     <NexifyShell>
@@ -103,8 +78,8 @@ function Land() {
               </span>
               <h1 id="land-titel">Websites und KI für Unternehmen {im}.</h1>
               <p className={"identity-body"}>
-                NeXify AI begleitet Unternehmen {im} aus Venlo, ohne Anfahrt. Diese Seite nennt die
-                Feiertage und die Datenschutzaufsicht für Ihr Projekt.
+                Die Zusammenarbeit mit NeXify AI läuft überwiegend online. Hier stehen Feiertage und
+                Datenschutzaufsicht {im} für Ihr Projekt.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -131,7 +106,7 @@ function Land() {
         <div className={"pc-sections"}>
           <Abschnitt
             id="land-feiertage"
-            nummer={`01 / 0${abschnitte}`}
+            nummer="01 / 02"
             titel={`Feiertage ${im}, die Ihre Abläufe betreffen`}
           >
             <p>
@@ -173,7 +148,7 @@ function Land() {
           </Abschnitt>
           <Abschnitt
             id="land-aufsicht"
-            nummer={`02 / 0${abschnitte}`}
+            nummer="02 / 02"
             titel={`Datenschutzaufsicht für Unternehmen ${im}`}
           >
             <p>
@@ -193,17 +168,6 @@ function Land() {
               <a href="/ki-hinweise">KI-Hinweisen</a>. Eine Rechtsberatung ersetzt beides nicht.
             </p>
           </Abschnitt>
-          {land.grenzeZu.length ? (
-            <Abschnitt id="land-grenze" nummer="03 / 03" titel="Auch jenseits der Grenze tätig?">
-              <p>
-                {land.name} grenzt an{" "}
-                {land.grenzeZu.map((code) => ZIELLAND_NAME[code].nach).join(" und ")}. Ist Ihr
-                Unternehmen auch{" "}
-                {land.grenzeZu.map((code) => ZIELLAND_NAME[code].im).join(" oder ")} tätig? NeXify
-                AI arbeitet für Unternehmen in {zielLaenderText()}.
-              </p>
-            </Abschnitt>
-          ) : null}
         </div>
         <PassendeLeistungen id="land-leistungen" />
         <Abschluss id="land-abschluss" />

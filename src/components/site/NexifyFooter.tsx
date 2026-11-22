@@ -235,7 +235,7 @@ export function NexifyFooter() {
                     Schildern Sie Ihr Vorhaben.
                   </a>
                   <a href="/regionen" {...here("/regionen")}>
-                    Zusammenarbeit in ganz Deutschland.
+                    Feiertage und Aufsicht je Bundesland.
                   </a>
                 </div>
                 <div className={"footer-overview-group"}>

@@ -49,7 +49,7 @@ function Regionen() {
               <span className={"hc-kicker"}>
                 NeXify AI<span aria-hidden="true"> / </span>Regionen
               </span>
-              <h1 id="regionen-titel">Zusammenarbeit mit Unternehmen in ganz Deutschland.</h1>
+              <h1 id="regionen-titel">Feiertage und Datenschutzaufsicht je Bundesland.</h1>
               <p className={"identity-body"}>{seite("/regionen").beschreibung}</p>
               <div className={"identity-links"}>
                 <a
@@ -96,7 +96,7 @@ function Regionen() {
             <p>
               NeXify AI ist die Agentur von Pascal Courbois in Venlo, Niederlande. Eine weitere
               Geschäftsadresse gibt es nicht – weder in Deutschland noch anderswo. Die
-              Zusammenarbeit läuft deshalb aus der Ferne, und eine Anfahrt entfällt.
+              Zusammenarbeit läuft deshalb überwiegend online.
             </p>
             <ol className={"nxr-schritte"}>
               <li>
@@ -112,7 +112,7 @@ function Regionen() {
               </li>
               <li>
                 <strong>Umsetzung und Übergabe.</strong> Sie sehen Entwürfe früh, geben frei und
-                erhalten am Ende eine persönliche Übergabe.
+                erhalten am Ende die Übergabe.
               </li>
             </ol>
             <div className={"hc-service-detail pc-module"}>
