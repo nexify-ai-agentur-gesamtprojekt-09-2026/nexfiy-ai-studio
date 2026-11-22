@@ -16443,3 +16443,32 @@ html[data-theme="light"] #atelier {
     transform: none !important;
   }
 }
+/* 2026-11-22 (Europe/Berlin): Die Startseite zeigt zwei Galerie-Karten und drei Produktkacheln
+   (vorher drei und vier). Die aufgenommenen Raster rechnen noch mit der alten Anzahl und ließen
+   deshalb eine leere Zelle stehen. Diese Regeln schließen die Reihe: im zweispaltigen Raster liegt
+   die dritte Kachel quer über beide Spalten (Bild links, Text rechts), im breiten Raster stehen
+   drei Kacheln und zwei Karten je gleich breit nebeneinander. */
+@container home (min-width: 821px) and (max-width: 1499.98px) {
+  #atelier .home-concept .hc-products > .hc-product:nth-child(3):last-child {
+    flex-direction: row;
+    grid-column: 1 / -1;
+    align-items: center;
+  }
+  #atelier .home-concept .hc-products > .hc-product:nth-child(3):last-child > .hc-product-art {
+    flex: 1 1 0%;
+    min-width: 0px;
+    margin: 0px;
+  }
+  #atelier .home-concept .hc-products > .hc-product:nth-child(3):last-child > div {
+    justify-content: center;
+  }
+}
+@container home (min-width: 1500px) {
+  #atelier .home-concept .hc-products {
+    grid-template-columns: repeat(3, minmax(0px, 1fr));
+  }
+  #atelier .home-concept .hc-gallery-card:first-child:nth-last-child(2),
+  #atelier .home-concept .hc-gallery-card:nth-child(2):last-child {
+    grid-column: span 6;
+  }
+}

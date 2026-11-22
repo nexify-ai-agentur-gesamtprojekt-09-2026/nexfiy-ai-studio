@@ -5,10 +5,18 @@ import { describe, expect, it, vi } from "vitest";
 // Das Framework wird ersetzt: bekannte Seiten antworten mit 200, alles andere mit der 404-Seite.
 // So prüft der Test genau die Schicht, die dieses Repo selbst verantwortet (src/server.ts).
 const BEKANNT = new Set(["/", "/portale", "/kontakt", "/anmelden"]);
+const gesehen = vi.hoisted(() => [] as string[]);
 vi.mock("@tanstack/react-start/server-entry", () => ({
   default: {
     fetch: (request: Request) => {
-      const { pathname } = new URL(request.url);
+      const { pathname, search } = new URL(request.url);
+      // Wie das echte Framework: Schrägstrich am Ende wird samt Querystring weitergeleitet.
+      if (pathname.length > 1 && pathname.endsWith("/"))
+        return new Response(null, {
+          status: 307,
+          headers: { location: `${pathname.replace(/\/+$/, "")}${search}` },
+        });
+      gesehen.push(`${pathname}${search}`);
       const gefunden = BEKANNT.has(pathname);
       return new Response(gefunden ? "<h1>Seite</h1>" : "<h1>Seite nicht gefunden</h1>", {
         status: gefunden ? 200 : 404,
@@ -36,6 +44,8 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
     "/teileklar/kasse?x=1",
     "/teileklar/kasse?utm_source=x&q=y",
     "/teileklar/bestellungen?email=erika%40firma.de",
+    "/teileklar/kasse/?utm_source=x&q=y",
+    "/TEILEKLAR/shop",
   ];
 
   it.each(ALTPFADE)("%s antwortet mit 404, noindex-Header und ohne Weiterleitung", async (pfad) => {
@@ -46,6 +56,12 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
     expect(antwort.headers.get("refresh")).toBeNull();
   });
 
+  it("reicht weder Querystring noch Schrägstrich-Variante an die Seitenausgabe weiter", async () => {
+    gesehen.length = 0;
+    await abruf("/teileklar/kasse/?utm_source=x&email=erika%40firma.de");
+    expect(gesehen).toEqual(["/teileklar/kasse"]);
+  });
+
   it("setzt den noindex-Header auf jede 404-Antwort, nicht auf gefundene Seiten", async () => {
     expect((await abruf("/gibt-es-nicht")).headers.get("x-robots-tag")).toBe("noindex");
     const start = await abruf("/");
@@ -54,8 +70,9 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
   });
 
   it("kennt keine Weiterleitungsregel mehr, weder im Worker noch in public/_redirects", async () => {
-    const { PERMANENT_REDIRECTS } = await import("./lib/server-routing");
-    for (const [quelle, ziel] of Object.entries(PERMANENT_REDIRECTS)) {
+    const { PERMANENT_REDIRECTS, TEMPORARY_REDIRECTS } = await import("./lib/server-routing");
+    const alle = { ...PERMANENT_REDIRECTS, ...TEMPORARY_REDIRECTS };
+    for (const [quelle, ziel] of Object.entries(alle)) {
       expect(quelle).not.toMatch(/teileklar/i);
       // Nur Ziele derselben Domain: ein Pfad, kein Schema, kein Host.
       expect(ziel).toMatch(/^\/[a-z0-9/-]*$/);
@@ -65,11 +82,26 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
       .filter((zeile) => zeile.trim() && !zeile.trim().startsWith("#"));
     expect(regeln).toEqual([]);
   });
+
+  it("führt /kundencenter nicht in der dauerhaften Tabelle", async () => {
+    const { PERMANENT_REDIRECTS } = await import("./lib/server-routing");
+    expect(Object.keys(PERMANENT_REDIRECTS)).not.toContain("/kundencenter");
+    expect(Object.keys(PERMANENT_REDIRECTS)).not.toContain("/kundencenter/");
+  });
 });
 
 describe("Kurzadressen des Kundencenters", () => {
-  it.each(["/kundencenter", "/kundencenter/", "/kundenportal", "/kundenportal/"])(
-    "%s leitet dauerhaft auf /portale derselben Domain",
+  it.each(["/kundencenter", "/kundencenter/"])(
+    "%s leitet vorläufig (302) auf /portale, damit der Pfad später frei bleibt",
+    async (pfad) => {
+      const antwort = await abruf(pfad);
+      expect(antwort.status).toBe(302);
+      expect(antwort.headers.get("location")).toBe("https://www.nexifyai.de/portale");
+    },
+  );
+
+  it.each(["/kundenportal", "/kundenportal/"])(
+    "%s leitet dauerhaft (301) auf /portale derselben Domain",
     async (pfad) => {
       const antwort = await abruf(pfad);
       expect(antwort.status).toBe(301);

@@ -6,7 +6,7 @@
 // Was: Routen aus src/routes ableiten, live abrufen und vier Dinge messen —
 //   1) HTTP 200, 2) canonical, 3) H1, 4) Struktur-Anker (hc-/nx-/tk-Klassen) gegen die
 //   Referenz-Aufnahme in .site-import/pages/<slug>/clone.marked.html.
-//   Zusaetzlich: Auth-Strecken (Formularfelder) und die Kurzadresse /login.
+//   Zusaetzlich: Kontoseiten (Stand des Kundencenters), Kurzadressen und fruehere Shop-Adressen.
 // Ausgabe: je Seite eine Zeile, danach Summe. Exit 1 bei Fehlern oder kritischem Drift.
 // ponytail: Regex statt DOM-Parser und keine Pixel-Diffs — Deckung ueber Klassentoken.
 //   Aufstiegspfad: bei Bedarf parse5 + Screenshot-Diff je Referenz-PNG.
@@ -22,11 +22,20 @@ const BASE = (
   argBase ? argBase.slice(7) : process.env.LIVE_BASE || "https://www.nexifyai.de"
 ).replace(/\/$/, "");
 
-const AUTH_PAGES = {
-  "/anmelden": ["email", "password"],
-  "/registrieren": ["email", "password"],
-  "/passwort-vergessen": ["email"],
-};
+// 2026-11-22 (Europe/Berlin): Die Kontoseiten zeigen den Stand des Kundencenters statt
+// Formularen ohne Gegenstelle. Geprueft wird deshalb das Gegenteil von frueher: kein <form>,
+// kein Submit-Button, dafuer der Hinweis und der Weg zur Kontaktseite.
+const AUTH_PAGES = ["/anmelden", "/registrieren", "/passwort-vergessen"];
+const AUTH_NOTICE = "Das NeXify-Kundencenter wird derzeit eingerichtet.";
+// Die Referenz-Aufnahmen dieser Seiten zeigen noch die frueheren Formulare. Deren Anker
+// zaehlen nicht mehr als Soll, sonst meldet der Check den gewollten Umbau als Design-Drift.
+const AUTH_RETIRED_TOKENS = [
+  "tk-field",
+  "nx-feld",
+  "nx-feld-schalter",
+  "nx-konto-oder",
+  "hc-text-link",
+];
 // 2026-11-22 (Europe/Berlin): Keine erwarteten Weiterleitungen auf fremde Domains mehr.
 // Inhaberentscheidung vom 22.11.2026: die Agenturseite leitet nicht in einen Shop um.
 // Jede Fremd-Domain als Ziel ist damit ein Fehler. Die Zuordnung bleibt als leere Tabelle,
@@ -132,6 +141,7 @@ for (const route of routes) {
   let missing = [];
   if (!external && refFile && existsSync(refFile)) {
     const ref = tokens(readFileSync(refFile, "utf8"));
+    if (AUTH_PAGES.includes(route)) for (const t of AUTH_RETIRED_TOKENS) ref.delete(t);
     if (ref.size >= DRIFT_MIN_TOKENS) {
       missing = [...ref].filter((t) => !live.has(t));
       coverage = (ref.size - missing.length) / ref.size;
@@ -155,15 +165,16 @@ for (const route of routes) {
   if (status === 200 && !external && !hasH1)
     problems.push({ route, kind: "A11y", detail: "H1 fehlt" });
 
-  const needed = AUTH_PAGES[route];
-  if (needed && status === 200) {
-    if (!/<form[\s>]/i.test(body)) problems.push({ route, kind: "Auth", detail: "kein <form>" });
-    for (const field of needed) {
-      if (!new RegExp(`type=["']${field}["']`, "i").test(body))
-        problems.push({ route, kind: "Auth", detail: `Feld type=${field} fehlt` });
-    }
-    if (!/<button[^>]+type=["']submit["']/i.test(body))
-      problems.push({ route, kind: "Auth", detail: "Submit-Button fehlt" });
+  if (AUTH_PAGES.includes(route) && status === 200) {
+    const main = body.split(/<footer[\s>]/i)[0];
+    if (/<form[\s>]/i.test(main))
+      problems.push({ route, kind: "Auth", detail: "Formular ohne Gegenstelle vorhanden" });
+    if (/<button[^>]+type=["']submit["']/i.test(main))
+      problems.push({ route, kind: "Auth", detail: "Submit-Button ohne Gegenstelle vorhanden" });
+    if (!body.includes(AUTH_NOTICE))
+      problems.push({ route, kind: "Auth", detail: "Hinweis zum Kundencenter fehlt" });
+    if (!/href=["']\/kontakt["']/i.test(main))
+      problems.push({ route, kind: "Auth", detail: "Link zur Kontaktseite fehlt" });
   }
 
   rows.push({
@@ -207,6 +218,27 @@ for (const alt of RETIRED_PATHS) {
       route: alt,
       kind: "Altpfad",
       detail: `erwartet 404 + noindex ohne Location, erhalten ${res.status} · location=${res.location || "-"} · x-robots-tag=${res.robots || "-"}`,
+    });
+}
+
+// Kurzadressen des Kundencenters auf /portale derselben Domain. /kundencenter nur vorlaeufig
+// (302): der Pfad wird spaeter der geschuetzte Einstieg; ein 301 bliebe im Browser haengen.
+for (const [kurz, code] of [
+  ["/kundencenter", 302],
+  ["/kundenportal", 301],
+]) {
+  const res = await get(BASE + kurz, { redirect: "manual" });
+  let ziel = "";
+  try {
+    ziel = new URL(res.location || "", BASE).pathname;
+  } catch {
+    ziel = "";
+  }
+  if (res.status !== code || ziel !== "/portale")
+    problems.push({
+      route: kurz,
+      kind: "Weiterleitung",
+      detail: `erwartet ${code} -> /portale, erhalten ${res.status} -> ${res.location || "-"}`,
     });
 }
 

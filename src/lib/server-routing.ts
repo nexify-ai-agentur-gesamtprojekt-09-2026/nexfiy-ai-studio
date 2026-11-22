@@ -17,12 +17,21 @@ export const PERMANENT_REDIRECTS: Record<string, string> = {
   // Der Kundenbereich heisst hier /portale; der Redirect haelt alte Links am Leben.
   "/konto": "/portale",
   "/konto/": "/portale",
-  // 2026-11-22 (Europe/Berlin): Kurzadressen des Kundencenters. Es wird derzeit eingerichtet;
+  // 2026-11-22 (Europe/Berlin): alte Kurzadresse des Kundencenters. Es wird derzeit eingerichtet;
   // /portale erklärt den Stand und den Weg zum Zugang. Gleiche Domain, kein fremdes Ziel.
-  "/kundencenter": "/portale",
-  "/kundencenter/": "/portale",
   "/kundenportal": "/portale",
   "/kundenportal/": "/portale",
+};
+
+/**
+ * 2026-11-22 (Europe/Berlin): Vorläufige Weiterleitungen (302).
+ * Warum getrennt: /kundencenter wird später der geschützte Einstieg des Kundencenters. Ein 301
+ *   würde im Browser dauerhaft gespeichert und den Pfad auch dann noch auf /portale lenken;
+ *   ein 302 lässt sich ohne Altlast wieder entfernen.
+ */
+export const TEMPORARY_REDIRECTS: Record<string, string> = {
+  "/kundencenter": "/portale",
+  "/kundencenter/": "/portale",
 };
 
 /**
@@ -43,4 +52,26 @@ export function withNoindexOnNotFound(response: Response): Response {
     statusText: response.statusText,
     headers,
   });
+}
+
+/**
+ * 2026-11-22 (Europe/Berlin): Frühere Shop-Adressen — `/teileklar` und alles darunter.
+ * Sie laufen ohne Umweg in die normale Fehlerseite. Dafür bekommt das Framework die Adresse ohne
+ * Schrägstrich am Ende und ohne Querystring: sonst antwortet es auf `/teileklar/` zuerst mit einer
+ * Weiterleitung auf `/teileklar` und reicht dabei den Querystring weiter (nachgemessen: 307).
+ * Rückgabe `null` heißt: keine frühere Shop-Adresse, normaler Weg.
+ */
+export function retiredPathUrl(url: URL): URL | null {
+  if (!/^\/teileklar(\/|$)/i.test(url.pathname)) return null;
+  return new URL(url.pathname.replace(/\/+$/, ""), url.origin);
+}
+
+/** Antwort für eine frühere Shop-Adresse: immer 404 mit noindex, nie mit Weiterleitungs-Headern. */
+export function asRetiredResponse(response: Response): Response {
+  const headers = new Headers(response.headers);
+  headers.delete("location");
+  headers.delete("refresh");
+  headers.set("x-robots-tag", "noindex");
+  const umleitung = response.status >= 300 && response.status < 400;
+  return new Response(umleitung ? null : response.body, { status: 404, headers });
 }

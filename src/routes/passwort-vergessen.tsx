@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
+import { KundencenterHinweis } from "@/components/site/KundencenterHinweis";
 import capturedCSS from "../styles/pages/passwort-vergessen.css?url";
 import { canonicalLink } from "@/lib/seo";
 
@@ -10,7 +11,8 @@ export const Route = createFileRoute("/passwort-vergessen")({
       { title: "Passwort vergessen · NeXify AI" },
       {
         name: "description",
-        content: "Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen",
+        content:
+          "Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je Kunde",
       },
     ],
   }),
@@ -49,39 +51,7 @@ function ImportedSectionPasswortVergessen() {
           </ol>
         </nav>
         <h1 id="auth-forgot-title">Passwort vergessen</h1>
-        <p className={"nx-konto-lead"}>
-          Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.
-        </p>
-        <form className={"tk-form tk-auth"} noValidate method="post">
-          <div className={"tk-field is-wide"}>
-            <label htmlFor="auth-email">E-Mail-Adresse</label>
-            <input
-              id="auth-email"
-              type="email"
-              autoComplete="email"
-              aria-invalid="false"
-              defaultValue=""
-            />
-          </div>
-          <button
-            type="submit"
-            className={"nexify-control primary-button hc-finish-primary tk-cta"}
-            data-variant="primary"
-          >
-            Link anfordern
-          </button>
-          <div className={"tk-actions"}>
-            <p>
-              <span>Bereits ein Konto?</span> <a href="/anmelden">Zur Anmeldung</a>
-            </p>
-            <p>
-              <a href="/registrieren">Neues Konto erstellen</a>
-            </p>
-            <p className={"nx-konto-hinweis"}>
-              <a href="/datenschutz">Datenschutz</a>
-            </p>
-          </div>
-        </form>
+        <KundencenterHinweis />
       </div>
       <aside className={"nx-konto-szene"} aria-labelledby="auth-forgot-szene">
         <div className={"identity-media"}>
@@ -218,24 +188,6 @@ function ImportedSectionPasswortVergessen() {
                 <path d="M3.5 7.5v10h17v-8h-8l-2-2z" />
               </svg>
               Unterlagen
-            </li>
-            <li>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
-              </svg>
-              Shop-Bestellungen
             </li>
           </ul>
           <p>Zusätzliche Produkt- und Partnerberechtigungen werden separat freigeschaltet.</p>

@@ -4,7 +4,13 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
 import { handleChat, type ChatBindings } from "./lib/chat-api";
 import { renderErrorPage } from "./lib/error-page";
-import { PERMANENT_REDIRECTS, withNoindexOnNotFound } from "./lib/server-routing";
+import {
+  PERMANENT_REDIRECTS,
+  TEMPORARY_REDIRECTS,
+  asRetiredResponse,
+  retiredPathUrl,
+  withNoindexOnNotFound,
+} from "./lib/server-routing";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -94,7 +100,23 @@ export default {
         return withSecurityHeaders(
           Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301),
         );
+      const temporary = TEMPORARY_REDIRECTS[url.pathname];
+      if (temporary)
+        return withSecurityHeaders(
+          Response.redirect(new URL(`${temporary}${url.search}`, url.origin).toString(), 302),
+        );
       const handler = await getServerEntry();
+      const retired = retiredPathUrl(url);
+      if (retired) {
+        const response = await handler.fetch(
+          new Request(retired, { method: "GET", headers: request.headers }),
+          env,
+          ctx,
+        );
+        return withSecurityHeaders(
+          asRetiredResponse(await normalizeCatastrophicSsrResponse(response)),
+        );
+      }
       const response = await handler.fetch(request, env, ctx);
       return withSecurityHeaders(
         withNoindexOnNotFound(await normalizeCatastrophicSsrResponse(response)),

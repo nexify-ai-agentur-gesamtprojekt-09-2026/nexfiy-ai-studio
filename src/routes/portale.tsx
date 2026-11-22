@@ -11,7 +11,7 @@ export const Route = createFileRoute("/portale")({
       {
         name: "description",
         content:
-          "Kunden und Partner haben je einen eigenen, geschützten Bereich. Hier finden Sie Ihren Einstieg",
+          "Kunden und Partner erhalten je einen eigenen, geschützten Bereich. Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde",
       },
     ],
   }),
@@ -46,16 +46,17 @@ function Index() {
               </span>
               <h1 id="page-title-portals">Portale. Ihr Zugang, Ihr Bereich.</h1>
               <p className={"identity-body"}>
-                Kunden und Partner haben je einen eigenen, geschützten Bereich. Hier finden Sie
-                Ihren Einstieg.
+                Kunden und Partner erhalten je einen eigenen, geschützten Bereich. Das
+                NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je
+                Kunde.
               </p>
               <div className={"identity-links"}>
                 <a
                   className={"nexify-control primary-button identity-primary-link"}
                   data-variant="primary"
-                  href="/anmelden"
+                  href="/kontakt"
                 >
-                  <span>Anmelden</span>
+                  <span>Zugang anfragen</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
@@ -155,8 +156,8 @@ function Index() {
                 <span className={"hc-caption"}>
                   Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt
                 </span>
-                <a className={"hc-text-link"} href="/anmelden">
-                  Anmelden
+                <a className={"hc-text-link"} href="/kontakt">
+                  Zugang anfragen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -188,8 +189,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Jeder Bereich hat eigene Rollen und Rechte. Eine Anmeldung gilt für Ihren Bereich,
-                nicht für einen anderen. Private Inhalte sehen Sie erst nach der Anmeldung.
+                Jeder Bereich erhält eigene Rollen und Rechte. Ein Zugang gilt für Ihren Bereich,
+                nicht für einen anderen. Das NeXify-Kundencenter wird derzeit eingerichtet; eine
+                Anmeldung ist noch nicht möglich.
               </p>
             </div>
           </section>
@@ -225,8 +227,8 @@ function Index() {
           <div className={"hc-finish-next"}>
             <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
             <div className={"hc-finish-actions"}>
-              <a className={"hc-finish-primary"} href="/anmelden">
-                Anmelden
+              <a className={"hc-finish-primary"} href="/kontakt">
+                Zugang anfragen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -245,24 +247,6 @@ function Index() {
               </a>
               <a className={"hc-text-link"} href="/produkte/nex2fly">
                 NeX AIFly Suite ansehen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a className={"hc-text-link"} href="/kontakt">
-                Zugang anfragen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -360,7 +344,7 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>NEXIFY AI</span>
           <h3>
             <a href="/anmelden">
-              Anmelden und weiterarbeiten.
+              Stand des Kundencenters.
               <svg
                 className={"hc-arrow"}
                 viewBox="0 0 24 24"
@@ -379,11 +363,11 @@ function ImportedSectionPassendeThemen() {
             </a>
           </h3>
           <p>
-            Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder
-            Partnerbereich.
+            Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je
+            Kunde. Bis dahin erreichen Sie uns direkt.
           </p>
           <a
-            aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
+            aria-label="Stand des Kundencenters. – Seite ansehen"
             className={"hc-text-link"}
             href="/anmelden"
           >

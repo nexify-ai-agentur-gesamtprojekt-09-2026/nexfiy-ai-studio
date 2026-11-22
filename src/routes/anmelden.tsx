@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
+import { KundencenterHinweis } from "@/components/site/KundencenterHinweis";
 import capturedCSS from "../styles/pages/anmelden.css?url";
 import { canonicalLink } from "@/lib/seo";
 
@@ -10,7 +11,8 @@ export const Route = createFileRoute("/anmelden")({
       { title: "Anmelden und weiterarbeiten. · NeXify AI" },
       {
         name: "description",
-        content: "Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen",
+        content:
+          "Das NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je Kunde",
       },
     ],
   }),
@@ -49,98 +51,7 @@ function ImportedSectionAnmelden() {
           </ol>
         </nav>
         <h1 id="auth-login-title">Anmelden</h1>
-        <p className={"nx-konto-lead"}>
-          Ihr Zugang zu persönlichen Vorgängen, Unterlagen und Shop-Bestellungen.
-        </p>
-        <form className={"tk-form tk-auth"} method="post" noValidate>
-          <div className={"tk-field is-wide"}>
-            <label htmlFor="auth-email">E-Mail-Adresse</label>
-            <input
-              id="auth-email"
-              autoComplete="email"
-              aria-invalid="false"
-              type="email"
-              defaultValue=""
-            />
-          </div>
-          <div className={"tk-field is-wide"}>
-            <label htmlFor="auth-password">Passwort</label>
-            <span className={"nx-feld"}>
-              <input
-                id="auth-password"
-                autoComplete="current-password"
-                aria-invalid="false"
-                type="password"
-                defaultValue=""
-              />
-              <button
-                type="button"
-                className={"nx-feld-schalter"}
-                aria-pressed="false"
-                aria-label="Passwort anzeigen"
-                title="Passwort anzeigen"
-              >
-                <svg
-                  className={"nx-zeichen"}
-                  viewBox="0 0 24 24"
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12s-3.5 6.5-9.5 6.5S2.5 12 2.5 12zM12 9.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5z" />
-                </svg>
-              </button>
-            </span>
-          </div>
-          <button
-            type="submit"
-            className={"nexify-control primary-button hc-finish-primary tk-cta"}
-            data-variant="primary"
-          >
-            Anmelden
-          </button>
-          <span className={"nx-konto-oder"} aria-hidden="true">
-            oder
-          </span>
-          <button
-            type="button"
-            className={"nexify-control secondary-button hc-text-link tk-cta"}
-            data-variant="secondary"
-          >
-            <svg
-              className={"nx-zeichen"}
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M20.5 12.2c0 4.9-3.4 8.3-8.4 8.3a8.5 8.5 0 1 1 5.7-14.8M12.3 12.2h8.2" />
-            </svg>
-            Mit Google anmelden
-          </button>
-          <div className={"tk-actions"}>
-            <p>
-              <a href="/registrieren">Neues Konto erstellen</a>
-            </p>
-            <p>
-              <a href="/passwort-vergessen">Passwort vergessen?</a>
-            </p>
-            <p className={"nx-konto-hinweis"}>
-              <a href="/datenschutz">Datenschutz</a>
-            </p>
-          </div>
-        </form>
+        <KundencenterHinweis />
       </div>
       <aside className={"nx-konto-szene"} aria-labelledby="auth-login-szene">
         <div className={"identity-media"}>
@@ -277,24 +188,6 @@ function ImportedSectionAnmelden() {
                 <path d="M3.5 7.5v10h17v-8h-8l-2-2z" />
               </svg>
               Unterlagen
-            </li>
-            <li>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M6.5 10.5h11v9h-11zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
-              </svg>
-              Shop-Bestellungen
             </li>
           </ul>
           <p>Zusätzliche Produkt- und Partnerberechtigungen werden separat freigeschaltet.</p>
