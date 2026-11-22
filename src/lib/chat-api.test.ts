@@ -587,7 +587,7 @@ describe("handleChat: Fragen, Wiederholung und Verlauf", () => {
       session_id: SITZUNG,
       ip_hash: hash,
       inhalt: "Wir brauchen eine Website.",
-      vorMs: 50_000 * 60 > 0 ? 400_000 : 0,
+      vorMs: 400_000,
     });
     db.lege({
       id: "f1.a",

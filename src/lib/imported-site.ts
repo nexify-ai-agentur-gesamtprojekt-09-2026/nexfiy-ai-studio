@@ -58,14 +58,10 @@ export function useShellSignals(heroActionSelector?: string) {
   const [scrolled, setScrolled] = useState(false);
   const [heroActionVisible, setHeroActionVisible] = useState(Boolean(heroActionSelector));
   const [footerVisible, setFooterVisible] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    const onResize = () => setViewportHeight(window.innerHeight);
     onScroll();
-    onResize();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
     const observers: IntersectionObserver[] = [];
     const heroAction = heroActionSelector ? document.querySelector(heroActionSelector) : null;
     if (heroAction) {
@@ -85,11 +81,10 @@ export function useShellSignals(heroActionSelector?: string) {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
       observers.forEach((observer) => observer.disconnect());
     };
   }, [heroActionSelector]);
-  return { scrolled, heroActionVisible, footerVisible, viewportHeight };
+  return { scrolled, heroActionVisible, footerVisible };
 }
 
 export type HeaderMenu = "products" | "mobile";

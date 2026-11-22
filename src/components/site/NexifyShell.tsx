@@ -5,14 +5,14 @@ export interface ShellChat {
   openChat: () => void;
   closeChat: () => void;
 }
-import shellCSS from "../../styles/site-shell.css?url";
 import {
   useAtelierFilms,
   useImportedMobile,
   useLoopingVideos,
   useShellSignals,
 } from "@/lib/imported-site";
-import { ChatDock, useChatDock } from "../chat/ChatDock";
+import { useChatDock } from "@/lib/chat-dock";
+import { ChatDock } from "../chat/ChatDock";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
@@ -49,7 +49,6 @@ export function NexifyShell({
       data-chat-compact={isMobile ? undefined : "false"}
       data-footer-visible={footerVisible ? "true" : "false"}
     >
-      <link rel="stylesheet" href={shellCSS} precedence="site-shell" />
       <GlassLensFilters />
       <div className="website">
         <a className="skip-link" href="#page-content">

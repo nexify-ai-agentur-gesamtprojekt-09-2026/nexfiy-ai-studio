@@ -73,6 +73,8 @@ function fehlerAusAntwort(status: number, fehler: unknown): ChatFehler {
 
 export interface SendeOptionen {
   nachricht: string;
+  /** Kennung der Frage; „Erneut senden“ schickt dieselbe, damit der Server sie nicht doppelt führt. */
+  frageId: string;
   sessionId: string | null;
   signal: AbortSignal;
   beiSitzung(sessionId: string): void;
@@ -107,6 +109,7 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
         headers: { "content-type": "application/json", accept: "text/event-stream" },
         body: JSON.stringify({
           message: optionen.nachricht,
+          frage_id: optionen.frageId,
           ...(optionen.sessionId ? { session_id: optionen.sessionId } : {}),
         }),
         signal: steuerung.signal,
@@ -228,7 +231,11 @@ const hoerer = new Set<() => void>();
 
 function neueId(): string {
   zaehler += 1;
-  return `n${Date.now().toString(36)}-${zaehler}`;
+  const zufall =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Math.random().toString(36).slice(2)}${Math.random().toString(36).slice(2)}`;
+  return `n${Date.now().toString(36)}-${zaehler}-${zufall}`.slice(0, 64);
 }
 
 function lade(): void {
@@ -263,8 +270,17 @@ function lade(): void {
   }
 }
 
-function setze(aenderung: Partial<ChatZustand>): void {
+/**
+ * `ablegen: false` für eintreffende Textstücke: Der Verlauf wird nicht mit jedem Stück neu in den
+ * Tab-Speicher geschrieben (das wäre quadratischer Aufwand), sondern bei jedem Statuswechsel.
+ */
+function setze(aenderung: Partial<ChatZustand>, ablegen = true): void {
   zustand = { ...zustand, ...aenderung };
+  if (ablegen) lege();
+  hoerer.forEach((melde) => melde());
+}
+
+function lege(): void {
   try {
     window.sessionStorage.setItem(
       SPEICHER_SCHLUESSEL,
@@ -277,14 +293,17 @@ function setze(aenderung: Partial<ChatZustand>): void {
   } catch {
     // Ohne Speicher bleibt der Verlauf bis zum Neuladen bestehen.
   }
-  hoerer.forEach((melde) => melde());
 }
 
-function aendereEintrag(id: string, aendere: (eintrag: ChatEintrag) => ChatEintrag): void {
-  setze({ eintraege: zustand.eintraege.map((e) => (e.id === id ? aendere(e) : e)) });
+function aendereEintrag(
+  id: string,
+  aendere: (eintrag: ChatEintrag) => ChatEintrag,
+  ablegen = true,
+): void {
+  setze({ eintraege: zustand.eintraege.map((e) => (e.id === id ? aendere(e) : e)) }, ablegen);
 }
 
-async function frage(nachricht: string): Promise<void> {
+async function frage(nachricht: string, frageId: string): Promise<void> {
   const antwortId = neueId();
   const steuerung = new AbortController();
   laufend = steuerung;
@@ -298,10 +317,12 @@ async function frage(nachricht: string): Promise<void> {
   try {
     await sendeChatNachricht({
       nachricht,
+      frageId,
       sessionId: zustand.sessionId,
       signal: steuerung.signal,
       beiSitzung: (sessionId) => setze({ sessionId }),
-      beiText: (stueck) => aendereEintrag(antwortId, (e) => ({ ...e, text: e.text + stueck })),
+      beiText: (stueck) =>
+        aendereEintrag(antwortId, (e) => ({ ...e, text: e.text + stueck }), false),
       beiErsatz: (text) => aendereEintrag(antwortId, (e) => ({ ...e, text })),
     });
     aendereEintrag(antwortId, (e) => ({ ...e, text: e.text.trim(), status: "fertig" }));
@@ -332,13 +353,14 @@ export const chat = {
     const nachricht = text.trim();
     if (zustand.beschaeftigt || nachricht.length < 2 || nachricht.length > CHAT_MAX_ZEICHEN)
       return false;
+    const frageId = neueId();
     setze({
       eintraege: [
         ...zustand.eintraege,
-        { id: neueId(), rolle: "user", text: nachricht, status: "fertig" },
+        { id: frageId, rolle: "user", text: nachricht, status: "fertig" },
       ],
     });
-    void frage(nachricht);
+    void frage(nachricht, frageId);
     return true;
   },
   /** Sendet die letzte Frage erneut, nachdem die Antwort ausgeblieben oder abgebrochen ist. */
@@ -349,7 +371,7 @@ export const chat = {
     if (!letzte || letzte.rolle !== "assistant" || letzte.status === "fertig") return;
     if (!davor || davor.rolle !== "user") return;
     setze({ eintraege: zustand.eintraege.slice(0, -1) });
-    void frage(davor.text);
+    void frage(davor.text, davor.id);
   },
   stoppe(): void {
     laufend?.abort();

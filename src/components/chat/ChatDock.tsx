@@ -1,5 +1,4 @@
 import {
-  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -7,7 +6,6 @@ import {
   useSyncExternalStore,
   type FormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
-  type RefObject,
 } from "react";
 import chatCSS from "../../styles/site-chat.css?url";
 import {
@@ -18,34 +16,16 @@ import {
   useChat,
   type ChatEintrag,
 } from "@/lib/chat-client";
+import {
+  CHAT_EINGABE_ID,
+  CHAT_EINSTIEGE,
+  CHAT_PANEL_ID,
+  CHAT_VORLIEBE_SKRIPT,
+  type ChatDockZustand,
+} from "@/lib/chat-dock";
 import { ChatText } from "./ChatText";
 
-/** Ab dieser Breite steht das Panel als eigene Spalte neben der Seite; darunter ist es ein Dialog. */
-const BREIT = "(min-width: 1200px)";
-export const CHAT_PANEL_ID = "nexify-chat";
-const EINGABE_ID = "nexify-chat-eingabe";
 const AVATAR = "/site-assets/9176c58a16ff634a.png";
-
-/** Einstiegsfragen: Jede löst eine echte Anfrage an den Assistenten aus. */
-export const CHAT_EINSTIEGE = [
-  "Welche Leistungen bietet NeXify AI an?",
-  "Wie läuft ein Projekt mit NeXify AI ab?",
-  "Was sollte ich für eine erste Anfrage vorbereiten?",
-  "Wie erfahre ich, was mein Vorhaben kostet?",
-] as const;
-
-/**
- * Setzt vor dem ersten Bildaufbau die gespeicherte Wahl „eingeklappt“, damit das angedockte Panel
- * nicht kurz aufklappt. Fester Text ohne Fremdinhalt.
- */
-const VORLIEBE_SKRIPT =
-  'try{var s=sessionStorage.getItem("nexify-chat-v1");if(s&&JSON.parse(s).offen===false)document.documentElement.setAttribute("data-nxc-vorliebe","zu")}catch(e){}';
-
-function abonniereBreite(melde: () => void) {
-  const abfrage = matchMedia(BREIT);
-  abfrage.addEventListener("change", melde);
-  return () => abfrage.removeEventListener("change", melde);
-}
 
 function abonniereNetz(melde: () => void) {
   window.addEventListener("online", melde);
@@ -54,62 +34,6 @@ function abonniereNetz(melde: () => void) {
     window.removeEventListener("online", melde);
     window.removeEventListener("offline", melde);
   };
-}
-
-export interface ChatDockZustand {
-  /** null bis zur Hydration: dann entscheidet allein das Stylesheet nach Fensterbreite. */
-  offen: boolean | null;
-  /** true: Spalte neben der Seite · false: Dialog über der Seite · null: noch unbekannt. */
-  breit: boolean | null;
-  oeffne: () => void;
-  schliesse: () => void;
-  ausloeser: RefObject<HTMLButtonElement | null>;
-}
-
-/** Offen/geschlossen des Chats: auf schmalen Fenstern immer zu, bis der Besucher ihn öffnet. */
-export function useChatDock(): ChatDockZustand {
-  const { offen: vorliebe } = useChat();
-  const breit = useSyncExternalStore<boolean | null>(
-    abonniereBreite,
-    () => matchMedia(BREIT).matches,
-    () => null,
-  );
-  const [gewaehlt, setGewaehlt] = useState<boolean | null>(null);
-  const ausloeser = useRef<HTMLButtonElement>(null);
-  const fokusZiel = useRef<"panel" | "ausloeser" | null>(null);
-  const offen = breit === null ? null : (gewaehlt ?? (breit ? vorliebe !== false : false));
-
-  // Wird das Fenster schmal, klappt ein nur angedockt geöffnetes Panel ein, statt die Seite zu verdecken.
-  useEffect(() => {
-    if (breit === false) setGewaehlt(null);
-  }, [breit]);
-
-  const oeffne = useCallback(() => {
-    fokusZiel.current = "panel";
-    setGewaehlt(true);
-    if (matchMedia(BREIT).matches) chat.merkeOffen(true);
-  }, []);
-  const schliesse = useCallback(() => {
-    fokusZiel.current = "ausloeser";
-    setGewaehlt(false);
-    if (matchMedia(BREIT).matches) chat.merkeOffen(false);
-  }, []);
-
-  useEffect(() => {
-    const ziel = fokusZiel.current;
-    fokusZiel.current = null;
-    if (ziel === "ausloeser") ausloeser.current?.focus();
-    if (ziel === "panel") {
-      // Auf Touch-Geräten nicht sofort die Bildschirmtastatur öffnen: erst den Dialog zeigen.
-      const grob = matchMedia("(pointer: coarse)").matches;
-      const element = grob
-        ? document.getElementById(CHAT_PANEL_ID)
-        : document.getElementById(EINGABE_ID);
-      (element ?? document.getElementById(CHAT_PANEL_ID))?.focus();
-    }
-  }, [offen]);
-
-  return { offen, breit, oeffne, schliesse, ausloeser };
 }
 
 function Symbol({ pfad, groesse = 20 }: { pfad: string; groesse?: number }) {
@@ -281,17 +205,18 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
     };
   }, [dialog]);
 
-  // Escape schließt: im Dialog immer, angedockt nur, wenn der Fokus im Panel steht.
+  // Escape schließt nur den Dialog. Die angedockte Spalte ist kein Dialog: dort klappt Escape
+  // (etwa beim Tippen im Eingabefeld) nichts ein.
   useEffect(() => {
-    if (!offen) return;
+    if (!dialog) return;
     const beiTaste = (ereignis: KeyboardEvent) => {
       if (ereignis.key !== "Escape") return;
       if (document.querySelector(".site-header details[open]")) return;
-      if (dialog || panel.current?.contains(document.activeElement)) schliesse();
+      schliesse();
     };
     window.addEventListener("keydown", beiTaste);
     return () => window.removeEventListener("keydown", beiTaste);
-  }, [offen, dialog, schliesse]);
+  }, [dialog, schliesse]);
 
   // Fokusfalle nur im Dialog.
   const beiPanelTaste = (ereignis: ReactKeyboardEvent<HTMLElement>) => {
@@ -365,7 +290,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
   return (
     <>
       <link rel="stylesheet" href={chatCSS} precedence="site-chat" />
-      <script dangerouslySetInnerHTML={{ __html: VORLIEBE_SKRIPT }} />
+      <script dangerouslySetInnerHTML={{ __html: CHAT_VORLIEBE_SKRIPT }} />
       {offen !== true && (
         <button
           ref={ausloeser}
@@ -506,12 +431,12 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
             </div>
           ) : (
             <form className="nxc-eingabe" onSubmit={beiAbsenden}>
-              <label className="nxc-sr" htmlFor={EINGABE_ID}>
+              <label className="nxc-sr" htmlFor={CHAT_EINGABE_ID}>
                 Ihre Frage an den KI-Assistenten
               </label>
               <textarea
                 ref={eingabe}
-                id={EINGABE_ID}
+                id={CHAT_EINGABE_ID}
                 rows={1}
                 maxLength={CHAT_MAX_ZEICHEN}
                 placeholder="Ihre Frage …"

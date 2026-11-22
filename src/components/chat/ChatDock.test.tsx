@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ChatDock, CHAT_EINSTIEGE, useChatDock } from "@/components/chat/ChatDock";
+import { ChatDock } from "@/components/chat/ChatDock";
+import { CHAT_BREIT, CHAT_EINSTIEGE, useChatDock } from "@/lib/chat-dock";
 import { ChatText } from "@/components/chat/ChatText";
 import { CHAT_FEHLERTEXT, setzeChatZurueck } from "@/lib/chat-client";
 
@@ -9,7 +10,9 @@ function Huelle() {
   return (
     <div id="atelier" data-nxc={dock.offen === null ? "auto" : dock.offen ? "offen" : "zu"}>
       <div className="website">
-        <button type="button">Seite</button>
+        <button type="button" onClick={dock.oeffne}>
+          Vorhaben schildern
+        </button>
       </div>
       <ChatDock dock={dock} />
     </div>
@@ -69,12 +72,23 @@ async function frage(text: string) {
   });
 }
 
+const urMatchMedia = window.matchMedia;
+/** Fensterbreite nachbilden: ab 1200 px meldet die Breitenabfrage einen Treffer. */
+function stelleBreite(breit: boolean) {
+  window.matchMedia = ((abfrage: string) => ({
+    ...urMatchMedia(abfrage),
+    matches: abfrage === CHAT_BREIT ? breit : false,
+  })) as typeof window.matchMedia;
+}
+
 beforeEach(() => {
   aufrufe.length = 0;
   setzeChatZurueck();
 });
 afterEach(() => {
   vi.unstubAllGlobals();
+  window.matchMedia = urMatchMedia;
+  document.documentElement.classList.remove("nxc-gesperrt");
   setzeChatZurueck();
 });
 
@@ -128,7 +142,10 @@ describe("ChatDock", () => {
     expect(screen.getByText("Was bieten Sie an?")).toBeInTheDocument();
     const [post] = posts();
     expect(post?.url).toBe("/api/chat");
-    expect(JSON.parse(String(post?.init?.body))).toEqual({ message: "Was bieten Sie an?" });
+    const rumpf = JSON.parse(String(post?.init?.body)) as Record<string, string>;
+    expect(Object.keys(rumpf).sort()).toEqual(["frage_id", "message"]);
+    expect(rumpf["message"]).toBe("Was bieten Sie an?");
+    expect(rumpf["frage_id"]).toMatch(/^[A-Za-z0-9_-]{8,64}$/);
     expect(screen.getByRole("link", { name: "Leistungen im Überblick" })).toHaveAttribute(
       "href",
       "/leistungen",
@@ -142,10 +159,15 @@ describe("ChatDock", () => {
     await screen.findByText("Erste Antwort.");
     await frage("Zweite Frage");
     await screen.findByText("Zweite Antwort.");
-    expect(JSON.parse(String(posts()[1]?.init?.body))).toEqual({
+    const [erste, zweite] = posts().map(
+      (post) => JSON.parse(String(post.init?.body)) as Record<string, string>,
+    );
+    expect(zweite).toMatchObject({
       message: "Zweite Frage",
       session_id: "sitzung-0123456789abcdef",
     });
+    // Jede Frage hat ihre eigene Kennung.
+    expect(zweite?.["frage_id"]).not.toBe(erste?.["frage_id"]);
   });
 
   it("löst mit einer Einstiegsfrage eine echte Anfrage aus", async () => {
@@ -214,6 +236,12 @@ describe("ChatDock", () => {
     await screen.findByText("Jetzt klappt es.");
     expect(screen.getAllByText("Meine Frage")).toHaveLength(1);
     expect(posts()).toHaveLength(2);
+    // Dieselbe Kennung: der Server führt die Frage als eine Zeile.
+    const kennungen = posts().map(
+      (post) => (JSON.parse(String(post.init?.body)) as Record<string, string>)["frage_id"],
+    );
+    expect(kennungen[0]).toBeTruthy();
+    expect(kennungen[1]).toBe(kennungen[0]);
   });
 
   it("zeigt einen Strom ohne Abschluss als unvollständig", async () => {
@@ -303,6 +331,107 @@ describe("ChatDock", () => {
     fireEvent.click(screen.getByRole("button", { name: /Neues Gespräch/ }));
     expect(screen.queryByText("Bleibt erhalten.")).toBeNull();
     expect(window.sessionStorage.getItem("nexify-chat-v1")).not.toContain("Bleibt erhalten.");
+  });
+});
+
+describe("ChatDock: Fokus", () => {
+  it("hält den Fokus im Dialog: Tab am Ende springt zum Anfang, Umschalt+Tab am Anfang zum Ende", async () => {
+    stelleFetch([]);
+    const dialog = await oeffne();
+    await act(async () => {});
+    const ziele = [
+      ...dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), [tabindex="0"]',
+      ),
+    ];
+    // jsdom kennt kein Layout: die Sichtbarkeitsprüfung der Falle auf „sichtbar“ stellen.
+    for (const ziel of ziele)
+      Object.defineProperty(ziel, "offsetParent", { configurable: true, get: () => dialog });
+    const erstes = ziele[0] as HTMLElement;
+    const letztes = ziele.at(-1) as HTMLElement;
+    expect(erstes).not.toBe(letztes);
+    letztes.focus();
+    fireEvent.keyDown(letztes, { key: "Tab" });
+    expect(erstes).toHaveFocus();
+    fireEvent.keyDown(erstes, { key: "Tab", shiftKey: true });
+    expect(letztes).toHaveFocus();
+    // In der Mitte greift die Falle nicht ein.
+    const mitte = ziele[1] as HTMLElement;
+    mitte.focus();
+    expect(fireEvent.keyDown(mitte, { key: "Tab" })).toBe(true);
+    expect(mitte).toHaveFocus();
+  });
+
+  it("gibt den Fokus an die Schaltfläche zurück, die den Chat geöffnet hat", async () => {
+    stelleFetch([]);
+    render(<Huelle />);
+    const seitenknopf = screen.getByRole("button", { name: "Vorhaben schildern" });
+    seitenknopf.focus();
+    fireEvent.click(seitenknopf);
+    await screen.findByRole("dialog");
+    fireEvent.click(screen.getByRole("button", { name: "Chat schließen" }));
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    expect(seitenknopf).toHaveFocus();
+  });
+});
+
+describe("ChatDock: angedockt ab 1200 px", () => {
+  beforeEach(() => stelleBreite(true));
+
+  it("ist auch breit geschlossen, bis der Besucher öffnet, und ruft vorher nichts auf", async () => {
+    stelleFetch([]);
+    render(<Huelle />);
+    expect(document.getElementById("atelier")).toHaveAttribute("data-nxc", "zu");
+    expect(document.getElementById("nexify-chat")).toHaveAttribute("hidden");
+    await act(async () => {});
+    expect(aufrufe).toHaveLength(0);
+  });
+
+  it("öffnet als Spalte neben der Seite: kein Dialog, keine Sperre, keine Fokusfalle", async () => {
+    stelleFetch([]);
+    render(<Huelle />);
+    fireEvent.click(screen.getByRole("button", { name: /Frage stellen/ }));
+    const spalte = await screen.findByRole("complementary", { name: "AIFly ORACLE" });
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(spalte).not.toHaveAttribute("aria-modal");
+    expect(document.getElementById("atelier")).toHaveAttribute("data-nxc", "offen");
+    expect(document.querySelector("#atelier > .website")).not.toHaveAttribute("inert");
+    expect(document.documentElement).not.toHaveClass("nxc-gesperrt");
+    expect(document.querySelector(".nxc-schleier")).toBeNull();
+    // Tab am letzten Element wird nicht abgefangen: der Fokus darf zur Seite weiterwandern.
+    const letztes = [...spalte.querySelectorAll<HTMLElement>("a[href]")].at(-1) as HTMLElement;
+    letztes.focus();
+    expect(fireEvent.keyDown(letztes, { key: "Tab" })).toBe(true);
+    expect(letztes).toHaveFocus();
+  });
+
+  it("klappt bei Escape im Eingabefeld nicht ein", async () => {
+    stelleFetch([]);
+    render(<Huelle />);
+    fireEvent.click(screen.getByRole("button", { name: /Frage stellen/ }));
+    const feld = await screen.findByLabelText("Ihre Frage an den KI-Assistenten");
+    feld.focus();
+    fireEvent.keyDown(feld, { key: "Escape" });
+    fireEvent.keyDown(window, { key: "Escape" });
+    await act(async () => {});
+    expect(screen.getByRole("complementary", { name: "AIFly ORACLE" })).not.toHaveAttribute(
+      "hidden",
+    );
+  });
+
+  it("merkt sich die angedockte Wahl für die nächste Seite, schmal bleibt es trotzdem zu", async () => {
+    stelleFetch([]);
+    const erste = render(<Huelle />);
+    fireEvent.click(screen.getByRole("button", { name: /Frage stellen/ }));
+    await screen.findByRole("complementary", { name: "AIFly ORACLE" });
+    erste.unmount();
+    const zweite = render(<Huelle />);
+    expect(document.getElementById("atelier")).toHaveAttribute("data-nxc", "offen");
+    zweite.unmount();
+    stelleBreite(false);
+    render(<Huelle />);
+    expect(document.getElementById("atelier")).toHaveAttribute("data-nxc", "zu");
+    expect(screen.queryByRole("dialog")).toBeNull();
   });
 });
 

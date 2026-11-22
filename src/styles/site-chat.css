@@ -23,22 +23,22 @@
 }
 @media (min-width: 1200px) {
   #atelier.workspace-shell[data-nxc="offen"],
-  html:not([data-nxc-vorliebe="zu"]) #atelier.workspace-shell[data-nxc="auto"] {
+  html[data-nxc-vorliebe="offen"] #atelier.workspace-shell[data-nxc="auto"] {
     display: grid;
     grid-template-columns: minmax(0, 1fr) var(--nxc-breite);
     column-gap: 0;
   }
 }
 
-/* Vor der Hydration („auto“) entscheidet nur die Fensterbreite. */
+/* Vor der Hydration („auto“) ist der Chat zu – außer der Besucher hatte ihn angedockt geöffnet. */
 #atelier[data-nxc="auto"] > #nexify-chat {
   display: none;
 }
 @media (min-width: 1200px) {
-  html:not([data-nxc-vorliebe="zu"]) #atelier[data-nxc="auto"] > #nexify-chat {
+  html[data-nxc-vorliebe="offen"] #atelier[data-nxc="auto"] > #nexify-chat {
     display: flex;
   }
-  html:not([data-nxc-vorliebe="zu"]) #atelier[data-nxc="auto"] > #nexify-chat-ausloeser {
+  html[data-nxc-vorliebe="offen"] #atelier[data-nxc="auto"] > #nexify-chat-ausloeser {
     display: none;
   }
 }
