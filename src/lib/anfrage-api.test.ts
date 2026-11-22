@@ -113,5 +113,36 @@ describe("handleAnfrage", () => {
   it("ist ohne Speicherbindung fail-closed", async () => {
     const antwort = await handleAnfrage(anfrage(gueltig), {});
     expect(antwort.status).toBe(503);
+    // Keine Technik an Besucher: kein „Speicher“, kein „Eingang“, kein Statuscode im Text.
+    const { fehler } = (await antwort.json()) as { fehler: string };
+    expect(fehler).toBe("Die Anfrage konnte gerade nicht angenommen werden.");
+    expect(fehler).not.toMatch(/speicher|verbunden|eingang|503/i);
+  });
+
+  it("speichert und versendet nichts, wenn das Köderfeld gefüllt ist", async () => {
+    const aufrufe: Aufruf[] = [];
+    const antwort = await handleAnfrage(
+      anfrage({ ...gueltig, website: "https://spam.example" }),
+      bindings(aufrufe),
+    );
+    expect(antwort.status).toBe(422);
+    expect(aufrufe).toHaveLength(0);
+    expect(mails).toHaveLength(0);
+    // Ein leeres Köderfeld (so sendet es das echte Formular) ändert nichts am Erfolg.
+    const normal = await handleAnfrage(anfrage({ ...gueltig, website: "" }), bindings(aufrufe));
+    expect(normal.status).toBe(200);
+  });
+
+  it("verspricht auf der Erfolgsseite ohne JavaScript keine Kopie per E-Mail", async () => {
+    const formular = new Request("https://www.nexifyai.de/api/anfrage", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ ...gueltig, consent: "on" }).toString(),
+    });
+    const antwort = await handleAnfrage(formular, bindings([]));
+    expect(antwort.status).toBe(200);
+    const html = await antwort.text();
+    expect(html).toContain("Wir melden uns persönlich unter der angegebenen E-Mail-Adresse.");
+    expect(html).not.toMatch(/Kopie/);
   });
 });

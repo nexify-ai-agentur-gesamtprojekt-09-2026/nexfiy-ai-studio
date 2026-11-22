@@ -10,10 +10,12 @@
 import {
   ANFRAGE_FENSTER_SEKUNDEN,
   ANFRAGE_MAX_JE_FENSTER,
+  ANFRAGE_NICHT_ANGENOMMEN,
   anfrageArt,
   anfrageDedupKey,
   anfrageNummer,
   anfrageSchluesselAusHeader,
+  koederGefuellt,
   liesAnfrageBody,
   pruefeAnfrage,
 } from "@/lib/anfrage";
@@ -105,7 +107,7 @@ function erfolgAntwort(alsJson: boolean, nummer: string, doppelt: boolean) {
   return seite(
     "Anfrage eingegangen",
     `<p>Ihre Anfrage liegt bei uns unter der Nummer <code>${nummer}</code>.</p>
-     <p>Wir melden uns persönlich. Eine Kopie geht zusätzlich per E-Mail ein.</p>`,
+     <p>Wir melden uns persönlich unter der angegebenen E-Mail-Adresse.</p>`,
     200,
   );
 }
@@ -199,6 +201,12 @@ export async function handleAnfrage(
       : fehlerAntwort(alsJson, { fehler: "Die Anfrage war nicht lesbar." }, 400);
   }
 
+  // Köderfeld gefüllt: nichts speichern, nichts versenden. Ein Mensch, dessen Browser das Feld
+  // doch gefüllt hat, erfährt den Weg per E-Mail (steht auf der Fehlerseite und im Formular).
+  if (koederGefuellt(body.daten)) {
+    return fehlerAntwort(alsJson, { fehler: ANFRAGE_NICHT_ANGENOMMEN }, 422);
+  }
+
   const art = anfrageArt(body.daten);
   const { werte, felder } = pruefeAnfrage(art, body.daten);
   if (Object.keys(felder).length > 0) {
@@ -211,11 +219,9 @@ export async function handleAnfrage(
 
   const db = bindings.DB;
   if (!db) {
-    return fehlerAntwort(
-      alsJson,
-      { fehler: "Der Anfrage-Eingang ist nicht mit dem Speicher verbunden." },
-      503,
-    );
+    // Die Ursache gehört ins Protokoll, nicht auf die Seite des Besuchers.
+    console.error("[anfrage] Speicherbindung DB fehlt – Anfrage nicht angenommen.");
+    return fehlerAntwort(alsJson, { fehler: ANFRAGE_NICHT_ANGENOMMEN }, 503);
   }
 
   const ip = request.headers.get("cf-connecting-ip") ?? "";
