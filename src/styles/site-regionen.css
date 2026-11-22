@@ -1,0 +1,81 @@
+/*
+ * Regionalseiten (/regionen, /regionen/<land>): nur die Länderliste, die Ablaufschritte und die
+ * Faktenzeilen. Alles andere kommt aus den übernommenen Seitenstilen (wissen.projekt-vorbereiten.css).
+ * Eigene Klassen mit Präfix nxr-, damit keine aufgenommene Regel berührt wird.
+ */
+.nxr-seite .nxr-schritte {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding-left: 1.25rem;
+  max-width: 60ch;
+}
+
+.nxr-seite .nxr-laender {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+}
+
+.nxr-seite .nxr-land {
+  display: grid;
+  gap: 0.35rem;
+  height: 100%;
+  box-sizing: border-box;
+  align-content: start;
+  padding: 1rem 1.1rem;
+  /* Rahmen als Schatten: die Seitenstile setzen die Randfarbe von Links auf transparent. */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 160ms ease;
+}
+
+.nxr-seite .nxr-land:hover,
+.nxr-seite .nxr-land:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--color-brand-lime, #d7fa50);
+}
+
+.nxr-seite .nxr-land-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.nxr-seite .nxr-land-fakt {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--color-dunkel-schrift-leise, rgba(255, 255, 255, 0.7));
+}
+
+.nxr-seite .nxr-fakten {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  max-width: 60ch;
+}
+
+.nxr-seite .nxr-fakten li {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.nxr-seite .nxr-fakt-name {
+  font-weight: 600;
+}
+
+.nxr-seite .nxr-fakt-wert {
+  color: var(--color-dunkel-schrift-leise, rgba(255, 255, 255, 0.7));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nxr-seite .nxr-land {
+    transition: none;
+  }
+}

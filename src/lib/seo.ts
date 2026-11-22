@@ -128,6 +128,18 @@ export function pageJsonLd(pfad: string): JsonLd {
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": ORGANISATION_ID },
       ...(kette.length > 1 ? { breadcrumb: { "@id": `${url}#breadcrumb` } } : {}),
+      // Regionalseiten: das Gebiet, von dem die Seite handelt. Bewusst kein LocalBusiness und
+      // keine Anschrift im Land: NeXify AI hat dort keinen Standort.
+      ...(eintrag.region
+        ? {
+            spatialCoverage: {
+              "@type": "AdministrativeArea",
+              name: eintrag.region.name,
+              identifier: eintrag.region.code,
+              containedInPlace: { "@type": "Country", name: "Deutschland", identifier: "DE" },
+            },
+          }
+        : {}),
     },
   ];
   if (kette.length > 1)

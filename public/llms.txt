@@ -44,6 +44,7 @@ Produktangebot.
 - [Unternehmen](https://www.nexifyai.de/unternehmen): Pascal Courbois gibt Idee, Gestaltung und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
 - [So arbeiten wir](https://www.nexifyai.de/wissen): vom ersten Gespräch bis zur Übergabe.
 - [Projekt vorbereiten](https://www.nexifyai.de/wissen/projekt-vorbereiten): fünf Fragen als Briefing.
+- [Regionen](https://www.nexifyai.de/regionen): Zusammenarbeit aus Venlo mit Unternehmen in allen 16 Bundesländern, ohne weitere Geschäftsadressen; je Land die zusätzlichen Feiertage und die zuständige Datenschutzaufsicht.
 
 ## Kontakt
 

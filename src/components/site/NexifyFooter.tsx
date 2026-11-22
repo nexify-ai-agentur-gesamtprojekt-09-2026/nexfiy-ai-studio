@@ -123,6 +123,9 @@ export function NexifyFooter() {
               <a href="/kontakt" {...here("/kontakt")}>
                 Kontakt
               </a>
+              <a href="/regionen" {...here("/regionen")}>
+                Regionen in Deutschland
+              </a>
               <a href="/portale" {...here("/portale")}>
                 Kundencenter
               </a>
@@ -230,6 +233,9 @@ export function NexifyFooter() {
                   </a>
                   <a href="/kontakt" {...here("/kontakt")}>
                     Schildern Sie Ihr Vorhaben.
+                  </a>
+                  <a href="/regionen" {...here("/regionen")}>
+                    Zusammenarbeit in ganz Deutschland.
                   </a>
                 </div>
                 <div className={"footer-overview-group"}>
