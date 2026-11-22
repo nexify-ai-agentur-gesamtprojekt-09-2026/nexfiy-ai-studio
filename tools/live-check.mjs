@@ -40,6 +40,23 @@ const AUTH_RETIRED_TOKENS = [
   "nx-konto-oder",
   "hc-text-link",
 ];
+// 2026-11-22 (Europe/Berlin): Bewusst gestrichene Bausteine der Referenz-Aufnahmen: das
+// Aufklappmodul „Die FACTORY entdecken" (Fuelltext ohne Gegenstueck), der zweite Linkblock
+// „Passende Themen" neben „Der passende Einstieg." und die Filmsteuerung der Kontoseiten.
+// Ihre Klassen zaehlen nicht mehr als Soll, wenn die Seite sie nicht mehr traegt; sonst meldet
+// der Check den gewollten Rueckbau als Design-Drift. Seiten, die diese Klassen fuer andere
+// Inhalte weiter nutzen (Fragen, Themenkarten), werden unveraendert daran gemessen.
+const REMOVED_MODULE_TOKENS = [
+  "pc-guide",
+  "hc-service-detail",
+  "hc-service-name",
+  "hc-service-body",
+  "hc-disclosure-icon",
+  "hc-caption",
+  "pc-related",
+  "hc-process",
+  "hc-process-heading",
+];
 // 2026-11-22 (Europe/Berlin): Keine erwarteten Weiterleitungen auf fremde Domains mehr.
 // Inhaberentscheidung vom 22.11.2026: die Agenturseite leitet nicht in einen Shop um.
 // Jede Fremd-Domain als Ziel ist damit ein Fehler. Die Zuordnung bleibt als leere Tabelle,
@@ -218,6 +235,7 @@ for (const route of routes) {
   if (!external && refFile && existsSync(refFile)) {
     const ref = tokens(readFileSync(refFile, "utf8"));
     if (AUTH_PAGES.includes(route)) for (const t of AUTH_RETIRED_TOKENS) ref.delete(t);
+    for (const t of REMOVED_MODULE_TOKENS) if (!live.has(t)) ref.delete(t);
     if (ref.size >= DRIFT_MIN_TOKENS) {
       missing = [...ref].filter((t) => !live.has(t));
       coverage = (ref.size - missing.length) / ref.size;
