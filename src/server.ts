@@ -1,6 +1,7 @@
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
+import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
 import { renderErrorPage } from "./lib/error-page";
 
 type ServerEntry = {
@@ -67,6 +68,11 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      // 2026-11-22: Anfrage-Eingang vor dem Framework beantworten (A-36). Der Entry bekommt die
+      // Bindings vom Worker-Runtime; Framework-Routen sehen sie nicht.
+      if (url.pathname === "/api/anfrage") {
+        return await handleAnfrage(request, env as AnfrageBindings);
+      }
       const target = PERMANENT_REDIRECTS[url.pathname];
       if (target)
         return Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301);

@@ -76,13 +76,16 @@ export function InquiryForm({
         onSubmit={form.onSubmit}
         onChange={form.onChange}
         className="tk-form"
+        action="/api/anfrage"
         method="post"
         noValidate
         aria-labelledby={titleId}
-        hidden={form.mail !== null}
+        hidden={form.mail !== null || form.nummer !== null}
       >
         <h2 id={titleId}>{title}</h2>
         <p className="tk-meta">Pflichtfelder sind mit * markiert.</p>
+        {/* Der Serverpfad braucht die Art im Rumpf; ohne JS greift genau dieses Feld. */}
+        <input type="hidden" name="kind" value={kind} />
         <div role="status" aria-live="polite">
           {form.hasErrors ? (
             <p className="inquiry-summary">
@@ -135,16 +138,62 @@ export function InquiryForm({
             className="nexify-control primary-button hc-finish-primary"
             data-variant="primary"
             aria-describedby={hintId}
+            disabled={form.senden}
           >
-            {submitLabel}
+            {form.senden ? "Wird gesendet …" : submitLabel}
           </button>
           <p id={hintId} className="inquiry-hint">
-            Öffnet Ihr E-Mail-Programm mit der fertigen Anfrage an {INQUIRY_RECIPIENT}.
+            Ihre Anfrage geht direkt bei uns ein. Sie erhalten sofort eine Anfrage-Nummer.
           </p>
         </div>
       </form>
 
-      {form.mail ? (
+      {form.nummer ? (
+        <section className="tk-success inquiry-handoff" aria-labelledby={handoffTitleId}>
+          <span className="inquiry-handoff-mark" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              focusable="false"
+            >
+              <path d="m5 12.5 4.5 4.5L19 7.5" />
+            </svg>
+          </span>
+          <h2 id={handoffTitleId} ref={form.handoffRef} tabIndex={-1}>
+            {successTitle}
+          </h2>
+          <p>
+            Ihre Anfrage ist bei uns eingegangen. Die Nummer lautet{" "}
+            <strong className="inquiry-nummer">{form.nummer}</strong>. Wir melden uns persönlich.
+          </p>
+          <div className="tk-actions">
+            <button type="button" className="hc-text-link" onClick={form.editAgain}>
+              Weitere Anfrage stellen
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      {form.fehler ? (
+        <p className="inquiry-summary" role="alert">
+          {ERROR_ICON}
+          {form.fehler}
+          {form.mail ? (
+            <>
+              {" "}
+              <a className="hc-text-link" href={form.mail.href}>
+                E-Mail jetzt öffnen
+              </a>
+            </>
+          ) : null}
+        </p>
+      ) : null}
+
+      {form.mail && !form.fehler ? (
         <section className="tk-success inquiry-handoff" aria-labelledby={handoffTitleId}>
           <span className="inquiry-handoff-mark" aria-hidden="true">
             <svg

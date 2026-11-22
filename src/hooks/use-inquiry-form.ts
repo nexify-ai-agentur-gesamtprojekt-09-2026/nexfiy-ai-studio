@@ -12,30 +12,36 @@ import {
   type InquiryKind,
   type InquiryMail,
 } from "@/lib/inquiry";
+import { sendeAnfrage } from "@/lib/anfrage";
 import { copyText } from "@/lib/clipboard";
 
 /**
- * State for an inquiry form: validates on submit, re-checks edited fields after the first attempt,
- * focuses the first problem and hands a valid inquiry to the visitor's e-mail program.
+ * State for an inquiry form: validates on submit, re-checks edited fields after the first attempt and
+ * sends a valid inquiry to the server ingress (`/api/anfrage`). Only when that path is unavailable does
+ * it fall back to the visitor's e-mail program — the page must never get worse than before.
  */
 export function useInquiryForm(kind: InquiryKind) {
   const baseId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const handoffRef = useRef<HTMLHeadingElement>(null);
-  const focusTarget = useRef<InquiryField | "handoff" | null>(null);
+  const focusTarget = useRef<InquiryField | "handoff" | "fehler" | null>(null);
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [attempts, setAttempts] = useState(0);
   const [mail, setMail] = useState<InquiryMail | null>(null);
+  const [nummer, setNummer] = useState<string | null>(null);
+  const [senden, setSenden] = useState(false);
+  const [fehler, setFehler] = useState<string | null>(null);
 
   useEffect(() => {
     const target = focusTarget.current;
     focusTarget.current = null;
     if (target === "handoff") handoffRef.current?.focus();
+    else if (target === "fehler") handoffRef.current?.focus();
     else if (target) (formRef.current?.elements.namedItem(target) as HTMLElement | null)?.focus();
   });
 
   const onSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
+    async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const values = readInquiryForm(event.currentTarget);
       const next = validateInquiry(kind, values);
@@ -46,11 +52,28 @@ export function useInquiryForm(kind: InquiryKind) {
         focusTarget.current = first;
         return;
       }
+
+      setFehler(null);
+      setSenden(true);
+      const ergebnis = await sendeAnfrage(kind, values);
+      setSenden(false);
+
+      if (ergebnis.nummer) {
+        setNummer(ergebnis.nummer);
+        focusTarget.current = "handoff";
+        return;
+      }
+
+      // Rueckfall: der Serverpfad ist nicht erreichbar. Der Besucher behaelt einen Weg zum Ziel.
       const built = buildInquiryMail(kind, values);
       if (built.shortened) void copyText(built.body);
-      focusTarget.current = "handoff";
       setMail(built);
-      window.location.href = built.href;
+      setFehler(
+        ergebnis.fehler
+          ? `${ergebnis.fehler} Sie können die Anfrage weiterhin per E-Mail senden.`
+          : "Der direkte Versand war nicht möglich. Sie können die Anfrage per E-Mail senden.",
+      );
+      focusTarget.current = "fehler";
     },
     [kind],
   );
@@ -72,6 +95,8 @@ export function useInquiryForm(kind: InquiryKind) {
   const editAgain = useCallback(() => {
     focusTarget.current = "name";
     setMail(null);
+    setNummer(null);
+    setFehler(null);
   }, []);
 
   const errorId = useCallback((field: InquiryField) => `${baseId}-${field}-error`, [baseId]);
@@ -97,6 +122,9 @@ export function useInquiryForm(kind: InquiryKind) {
     hasErrors,
     attempts,
     mail,
+    nummer,
+    senden,
+    fehler,
     onSubmit,
     onChange,
     editAgain,
