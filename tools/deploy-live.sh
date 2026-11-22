@@ -11,6 +11,9 @@
 #   - DEPLOY_HOST setzt das Stempelfeld "host" (Standard: Ausgabe von `hostname`).
 #   - DEPLOY_SKIP_BUILD=1 verwendet einen bereits gebauten und getesteten Stand in .output/,
 #     statt neu zu bauen (CI: genau das geprüfte Artefakt wird ausgeliefert).
+#   - DEPLOY_COMMIT (40 Zeichen), DEPLOY_COMMIT_SUBJECT, DEPLOY_WORKTREE_STATUS_FILE: Commit-Angaben
+#     für Stempel und Readback, wenn DEPLOY_APP_DIR kein Git-Checkout ist (CI: nur das gebaute
+#     .output/ als Artefakt). Ohne DEPLOY_COMMIT wie bisher aus `git` im Anwendungsstand.
 #   - DEPLOY_APP_DIR: Verzeichnis des auszuliefernden Anwendungsstands (CI); Standard: dieses Repo.
 #   - WRANGLER_VERSION legt die Wrangler-Version fest (CI); ohne Angabe wie bisher `npx wrangler`.
 #   - Nach dem Deploy wird über die Cloudflare-API geprüft, dass der Worker das D1-Binding DB hat.
@@ -20,6 +23,7 @@
 #   - keine Variablen oder Secrets setzen (CHAT_AKTIV, SENDER_EMAIL, ANFRAGE_TO, NINEROUTER_API_KEY,
 #     CHAT_IP_SCHLUESSEL … werden im Cloudflare-Dashboard oder mit `wrangler secret put` gepflegt)
 set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # 2026-11-22 (Europe/Berlin): DEPLOY_APP_DIR (optional) ist der Anwendungsstand, der gebaut und
 # ausgeliefert wird. In CI liegt das Werkzeug (dieses Skript, aus dem Workflow-Commit) getrennt vom
 # Anwendungsstand (festgelegter SHA, z. B. ein älterer main-Commit beim Rückweg). Ohne Angabe wie
@@ -31,9 +35,22 @@ else
 fi
 cd "$ROOT_DIR"
 
+# 2026-11-22 (Europe/Berlin): Kurz-Commit für Readback; aus DEPLOY_COMMIT, sonst aus git.
+commit_short() {
+  if [ -n "${DEPLOY_COMMIT:-}" ]; then
+    printf '%s\n' "${DEPLOY_COMMIT:0:10}"
+  else
+    git rev-parse --short=10 HEAD
+  fi
+}
+if [ -n "${DEPLOY_COMMIT:-}" ] && ! printf '%s' "$DEPLOY_COMMIT" | grep -Eqx '[0-9a-f]{40}'; then
+  echo "FEHLER: DEPLOY_COMMIT muss ein vollständiger 40-stelliger SHA sein." >&2
+  exit 1
+fi
+
 # 2026-11-22 13:04: Nur pruefen, nichts bauen/deployen.
 if [ "${1:-}" = "--verify-only" ]; then
-  want="$(git rev-parse --short=10 HEAD)"
+  want="$(commit_short)"
   got="$(curl -sL --max-time 10 https://www.nexifyai.de/.well-known/nexify-build.json | python3 -c 'import json,sys
 try: print(json.load(sys.stdin).get("commit_short",""))
 except Exception: print("")' 2>/dev/null)"
@@ -55,24 +72,14 @@ if [ "${DEPLOY_SKIP_BUILD:-}" = "1" ]; then
 else
   npm run build
 fi
-python3 - <<'PY'
-import json
-p = ".output/server/wrangler.json"
-d = json.load(open(p))
-d["name"] = "nexfiy-ai-studio"
-d["d1_databases"] = [{
-    "binding": "DB",
-    "database_name": "nexify-main",
-    "database_id": "2dbf4047-20ee-4a68-a258-26ee9eb100e4",
-}]
-# 2026-11-22 (Europe/Berlin): Ohne `keep_vars` ersetzt `wrangler deploy` die im Dashboard gesetzten
-# Klartext-Variablen durch die (leere) Liste dieser Konfiguration – SENDER_EMAIL, ANFRAGE_TO und
-# später CHAT_AKTIV wären nach jedem Deploy weg. Beleg: developers.cloudflare.com/workers/wrangler/
-# configuration/ („Top-level only keys“: keep_vars – „Whether Wrangler should keep variables
-# configured in the dashboard on deploy“; Abschnitt „Source of truth“). Secrets löscht ein Deploy nie.
-d["keep_vars"] = True
-json.dump(d, open(p, "w"), indent=2)
-PY
+# 2026-11-22 (Europe/Berlin), Sicherheitsbefund PR #8: Die wrangler.json aus dem Build wird nicht
+# ungefiltert verwendet. tools/wrangler-config.py übernimmt nur erlaubte Schlüssel (build.command u. a.
+# werden verworfen und gemeldet), setzt Name, D1-Binding DB und keep_vars fest, verlangt Pfade
+# innerhalb von .output/ und bricht bei .env*, .dev.vars*, .wrangler im Artefakt ab. Die Konfiguration
+# liegt in einem frischen Verzeichnis außerhalb des Artefakts; Wrangler läuft auch dort.
+WRANGLER_DIR="$(mktemp -d)"
+trap 'rm -rf "$WRANGLER_DIR"' EXIT
+python3 -I "$SCRIPT_DIR/wrangler-config.py" "$ROOT_DIR/.output" "$WRANGLER_DIR/wrangler.json"
 
 # 2026-11-22 (Europe/Berlin): Server lädt seine Zugangsdaten aus hermes.env; in CI kommen sie aus
 # der Umgebung (GitHub-Environment "production"). Fail-closed: ohne beide Werte kein Deploy.
@@ -107,7 +114,15 @@ now = datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%:z")
 # sauberen Deploy nicht unterscheidbar ("Ob der Deploy den committeten oder den Arbeitsbaum-Stand
 # gebaut hat, ist nicht belegt"). Ab hier steht beides im Artefakt: Commit UND dirty-Liste.
 # Der Stempel selbst wird beim Schreiben veraendert und zaehlt deshalb nicht als Aenderung.
-_dirty_raw = [l for l in git("status", "--porcelain").splitlines() if l.strip()]
+# 2026-11-22 (Europe/Berlin): Mit DEPLOY_COMMIT (CI-Artefakt) kommen Commit, Betreff und
+# Arbeitsbaum-Status aus dem Build-Job statt aus einem Git-Checkout.
+_commit = os.environ.get("DEPLOY_COMMIT", "")
+if _commit:
+    _status_file = os.environ.get("DEPLOY_WORKTREE_STATUS_FILE", "")
+    _status = open(_status_file, encoding="utf-8").read() if _status_file else ""
+else:
+    _status = git("status", "--porcelain")
+_dirty_raw = [l for l in _status.splitlines() if l.strip()]
 _dirty = [l for l in _dirty_raw if "nexify-build.json" not in l]
 stamp = {
     "domain": "www.nexifyai.de",
@@ -117,9 +132,9 @@ stamp = {
     # In GitHub Actions stehen hier Repository und Arbeitsverzeichnis des Laufs.
     "source_repo": os.environ.get("GITHUB_REPOSITORY") or "nexifyai-dev/nexfiy-ai-studio",
     "source_path": os.environ.get("DEPLOY_APP_DIR") or os.environ.get("GITHUB_WORKSPACE") or "/opt/nexifyai/repos/nexfiy-ai-studio",
-    "commit": git("rev-parse", "HEAD"),
-    "commit_short": git("rev-parse", "--short=10", "HEAD"),
-    "commit_subject": git("log", "-1", "--pretty=%s"),
+    "commit": _commit or git("rev-parse", "HEAD"),
+    "commit_short": _commit[:10] if _commit else git("rev-parse", "--short=10", "HEAD"),
+    "commit_subject": os.environ.get("DEPLOY_COMMIT_SUBJECT", "") if _commit else git("log", "-1", "--pretty=%s"),
     "build_id": "",
     "deployed_at": now,
     "host": os.environ["DEPLOY_HOST"],
@@ -193,12 +208,13 @@ else
   WRANGLER=(npx wrangler)
 fi
 
-cd .output/server
+cd "$WRANGLER_DIR"
 if [ "${1:-}" = "--dry-run" ]; then
-  exec "${WRANGLER[@]}" deploy --dry-run --config wrangler.json
+  "${WRANGLER[@]}" deploy --dry-run --config "$WRANGLER_DIR/wrangler.json"
+  exit $?
 fi
-"${WRANGLER[@]}" deploy --config wrangler.json
+"${WRANGLER[@]}" deploy --config "$WRANGLER_DIR/wrangler.json"
 
 cd "$ROOT_DIR"
 verify_d1_binding
-verify_live_stamp "$(git rev-parse --short=10 HEAD)"
+verify_live_stamp "$(commit_short)"

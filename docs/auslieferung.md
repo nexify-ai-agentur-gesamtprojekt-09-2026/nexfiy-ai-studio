@@ -25,31 +25,59 @@ Der Workflow läuft nur von `main` aus und hat zwei Jobs:
 3. SHA, Betreff, Autor und Datum stehen in der **Zusammenfassung** des Laufs. Ist es nicht der
    aktuelle Kopf von `main`, steht dort ein Rollback-Hinweis.
 
-**Job „Prüfen, bauen, ausliefern“** (`deploy`, Environment `production`, wartet auf Freigabe):
+**Job „Prüfen und bauen“** (`bauen`, ohne Environment, ohne Secrets, nur Leserecht):
 
-1. Zwei Checkouts, beide ohne gespeicherte Git-Zugangsdaten:
-   - `werkzeug/` mit dem Workflow-Commit (`github.sha`) liefert `tools/deploy-live.sh`.
-   - `app/` mit genau dem festgelegten SHA ist der Anwendungsstand.
+1. Checkout genau des festgelegten SHA, ohne gespeicherte Git-Zugangsdaten. Danach prüft der Job,
+   dass `git rev-parse HEAD` diesen SHA meldet.
+2. `bun install --frozen-lockfile`, `npm run lint`, `npx tsc --noEmit`, `npm test`.
+3. `npm run build`, danach `npm test` erneut. Jetzt laufen auch die Prüfungen der Build-Ausgabe
+   (`src/test/build-ausgabe.test.ts`, `src/test/ssr-ausgabe.test.ts`, `src/lib/chat-bundle.test.ts`).
+4. Der Job hält den Arbeitsbaum-Status (`git status --porcelain`) und eine sha256-Liste aller
+   Dateien unter `.output/` fest. Die Prüfsumme dieser Liste gibt er als Job-Output weiter.
+5. `.output/` und die Metadaten werden als Artefakt `build-<sha>` hochgeladen
+   (Aufbewahrung 1 Tag).
 
-   Danach prüft der Job, dass `git rev-parse HEAD` in beiden Verzeichnissen den erwarteten
-   Commit meldet. Ein Zweig, der sich während der Wartezeit ändert, kann so nichts mehr
-   beeinflussen. Ein Rückweg auf einen älteren Commit läuft trotzdem mit dem aktuellen
+**Job „Ausliefern“** (`deploy`, Environment `production`, wartet auf Freigabe):
+
+1. Checkout nur des Deploy-Werkzeugs nach `werkzeug/`, und zwar aus dem Workflow-Commit
+   (`github.sha`, der Kopf von `main` beim Start). Der Job prüft, dass HEAD diesem Commit
+   entspricht. Ein Rückweg auf einen älteren Commit läuft dadurch mit dem aktuellen,
    CI-fähigen Skript.
-2. In `app/`: `bun install --frozen-lockfile`, `npm run lint`, `npx tsc --noEmit`, `npm test`.
-3. In `app/`: `npm run build`, danach `npm test` erneut. Jetzt laufen auch die Prüfungen der
-   Build-Ausgabe (`src/test/build-ausgabe.test.ts`, `src/test/ssr-ausgabe.test.ts`,
-   `src/lib/chat-bundle.test.ts`).
-4. `werkzeug/tools/deploy-live.sh` mit `DEPLOY_APP_DIR=app` und `DEPLOY_SKIP_BUILD=1` liefert
-   genau das geprüfte `app/.output/` aus. Das Skript setzt:
-   - den Worker-Namen `nexfiy-ai-studio`,
-   - das D1-Binding `DB` (`nexify-main`),
-   - `keep_vars: true`.
+2. Das Artefakt wird nach `app/` geladen. Die Prüfsumme der sha256-Liste muss dem Output des
+   Build-Jobs entsprechen. Danach muss jede Datei zur Liste passen und die Anzahl der Dateien
+   stimmen.
+3. `werkzeug/tools/deploy-live.sh` wird mit diesen Angaben aufgerufen:
+   - `DEPLOY_APP_DIR=app` und `DEPLOY_SKIP_BUILD=1`.
+   - Commit, Betreff und Arbeitsbaum-Status kommen als `DEPLOY_COMMIT`,
+     `DEPLOY_COMMIT_SUBJECT` und `DEPLOY_WORKTREE_STATUS_FILE` aus den vorigen Jobs. Einen
+     Git-Checkout der Anwendung gibt es in diesem Job nicht.
 
-   Es schreibt den Build-Stempel (`host: github-actions`, zusätzlich `run_url`) und ruft
-   `wrangler deploy` auf (Version im Workflow fest). Nur dieser Schritt kennt das Token.
-5. Über die Cloudflare-API prüft das Skript, dass der Worker das Binding `DB` vom Typ `d1` trägt
+   Die `wrangler.json` aus dem Artefakt verwendet das Skript nicht ungefiltert.
+   `tools/wrangler-config.py` schreibt sie nach einer Allowlist neu, in ein frisches Verzeichnis
+   außerhalb des Artefakts:
+   - Übernommen werden nur `main`, `compatibility_date`, `compatibility_flags`, `no_bundle`,
+     `rules` und `assets` (`binding`, `directory`). Alle anderen Schlüssel werden verworfen und
+     im Protokoll gemeldet, zum Beispiel `build.command`, das Wrangler sonst bei `deploy` in einer
+     Shell ausführt.
+   - Fest vorgegeben sind `name`, `d1_databases` und `keep_vars`. `no_bundle` muss `true` sein.
+   - `main` und `assets.directory` müssen innerhalb von `.output/` liegen.
+   - Das Skript bricht ab, wenn im Artefakt `.env*`, `.dev.vars*`, `.wrangler` oder weitere
+     Wrangler-Konfigurationen liegen. Über `.env` ließen sich sonst etwa
+     `CLOUDFLARE_API_BASE_URL` oder `CLOUDFLARE_API_HEADERS` setzen.
+
+   Wrangler läuft im selben frischen Verzeichnis. Die sha256-Liste reicht dafür nicht aus: Sie
+   belegt nur, dass das Artefakt zwischen Build- und Deploy-Job unverändert blieb. Der Build-Job
+   führt aber Repository-Code aus und könnte die Datei selbst so erzeugen. Dieselbe Prüfung
+   gilt auf dem Server.
+
+   Das Skript setzt den Worker-Namen `nexfiy-ai-studio`, das D1-Binding `DB` (`nexify-main`) und
+   `keep_vars: true`. Es schreibt den Build-Stempel (`host: github-actions`, zusätzlich
+   `run_url`) und ruft `wrangler deploy` auf (Version im Workflow fest). Aus dem
+   Anwendungsstand läuft in diesem Job kein Code: Wrangler lädt das gebaute Worker-Bundle nur
+   hoch. Nur dieser Schritt kennt das Token.
+4. Über die Cloudflare-API prüft das Skript, dass der Worker das Binding `DB` vom Typ `d1` trägt
    (`GET /accounts/<Konto>/workers/scripts/nexfiy-ai-studio/settings`, `result.bindings`).
-6. Readback: `https://www.nexifyai.de/.well-known/nexify-build.json` muss den ausgelieferten
+5. Readback: `https://www.nexifyai.de/.well-known/nexify-build.json` muss den ausgelieferten
    Commit (`commit_short`) melden, sonst schlägt der Lauf fehl.
 
 Mit `dry_run` läuft alles bis `wrangler deploy --dry-run`; es wird nichts ausgeliefert und es
@@ -114,7 +142,7 @@ Fehlt Token oder Konto-ID, bricht `tools/deploy-live.sh` vor dem Deploy mit
    anhaken. Dann **Run workflow**.
 3. Den Lauf öffnen. Der Job „Commit festlegen“ ist durchgelaufen, in der **Zusammenfassung**
    stehen SHA, Betreff, Autor und Datum. Prüfen, ob genau dieser Commit ausgeliefert werden soll.
-4. Der Job „Prüfen, bauen, ausliefern“ steht auf „Waiting“. **Review deployments** →
+4. Ist „Prüfen und bauen“ grün, steht der Job „Ausliefern“ auf „Waiting“. **Review deployments** →
    `production` anhaken → **Approve and deploy**. Ohne Freigabe läuft nichts. Ein zweiter Lauf
    wartet, bis der erste fertig ist (`concurrency: deploy-live`).
 5. Im Protokoll stehen am Ende `BINDING OK: DB (d1)` und `READBACK OK: live=<commit>`.
@@ -137,8 +165,8 @@ Ein fehlerhafter Stand wird auf die vorige Worker-Version zurückgesetzt:
 - **Dashboard:** Workers & Pages → `nexfiy-ai-studio` → **Deployments** → frühere Version →
   **Rollback**.
 - Alternativ den Workflow mit dem vollständigen SHA des vorigen guten main-Commits als `ref`
-  erneut laufen lassen. Gebaut wird dann dieser Stand, das Deploy-Skript kommt aber aus dem
-  aktuellen `main`.
+  erneut laufen lassen. Gebaut und geprüft wird dann dieser Stand, das Deploy-Skript kommt aber
+  aus dem aktuellen `main`.
 
 Ein Rollback setzt nur den Code zurück; D1-Daten und Secrets bleiben unverändert. Danach meldet
 der Build-Stempel wieder den älteren Commit.
