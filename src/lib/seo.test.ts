@@ -33,8 +33,16 @@ const wert = (pfad: string, schluessel: "name" | "property", name: string) =>
     .map((eintrag) => eintrag["content"]);
 
 describe("Seitentabelle und Routen", () => {
-  it("jede Routendatei hat genau einen Eintrag und umgekehrt", () => {
-    expect(SEITEN.map((seite) => seite.datei).sort()).toEqual([...ROUTEN_DATEIEN].sort());
+  it("jede Routendatei hat einen Eintrag und umgekehrt; mehrere nur für eine Vorlage mit $", () => {
+    expect([...new Set(SEITEN.map((seite) => seite.datei))].sort()).toEqual(
+      [...ROUTEN_DATEIEN].sort(),
+    );
+    for (const datei of ROUTEN_DATEIEN)
+      if (!datei.includes("$"))
+        expect(
+          SEITEN.filter((seite) => seite.datei === datei),
+          datei,
+        ).toHaveLength(1);
     expect(new Set(SEITEN.map((seite) => seite.pfad)).size).toBe(SEITEN.length);
   });
 
@@ -44,8 +52,17 @@ describe("Seitentabelle und Routen", () => {
     const kennung =
       datei === "index.tsx" ? "/" : "/" + datei.replace(/\.tsx$/, "").replace(/\./g, "/");
     expect(quelle).toContain(`createFileRoute("${kennung}")`);
-    expect(kennung.replace(/_\//g, "/")).toBe(pfad);
-    expect(quelle).toContain(`pageHead("${pfad}"`);
+    if (datei.includes("$")) {
+      // Vorlage: der Pfad füllt den Platzhalter mit einem kleinen Adressteil ohne Umlaute.
+      const muster = new RegExp(
+        "^" + kennung.replace(/_\//g, "/").replace(/\$[a-z]+/g, "[a-z0-9-]+") + "$",
+      );
+      expect(pfad).toMatch(muster);
+      expect(quelle).toMatch(/pageHead\(`\/regionen\/\$\{params\.land\}`/);
+    } else {
+      expect(kennung.replace(/_\//g, "/")).toBe(pfad);
+      expect(quelle).toContain(`pageHead("${pfad}"`);
+    }
     // Semantik: genau eine Hauptüberschrift, Sprache Deutsch.
     expect(quelle.match(/<h1[\s>]/g)).toHaveLength(1);
     expect(quelle).toContain('lang: "de"');
