@@ -675,16 +675,51 @@ function eingerichtet(b: ChatBindings): boolean {
   );
 }
 
+/**
+ * Prüfergebnis „Tabelle hat die Spalte `versuche`“ (Migration 0003) je Datenbank und Isolate.
+ * Ein Treffer gilt für die Lebensdauer des Isolates; ein Fehlschlag nur kurz, damit eine eben
+ * angewendete Migration ohne neuen Deploy wirkt.
+ */
+const SCHEMA_FEHLT_MS = 60_000;
+const schemaGeprueft = new WeakMap<D1, { ok: boolean; zeit: number }>();
+
+async function schemaBereit(db: D1): Promise<boolean> {
+  const bekannt = schemaGeprueft.get(db);
+  if (bekannt && (bekannt.ok || Date.now() - bekannt.zeit < SCHEMA_FEHLT_MS)) return bekannt.ok;
+  let ok: boolean;
+  try {
+    // Liest keine Zeile, scheitert aber, solange es Tabelle oder Spalte nicht gibt.
+    await db.prepare("SELECT versuche FROM chat_nachrichten LIMIT 0").all();
+    ok = true;
+  } catch {
+    ok = false;
+  }
+  schemaGeprueft.set(db, { ok, zeit: Date.now() });
+  return ok;
+}
+
+export type ChatZustandGrund = "abgeschaltet" | "nicht_eingerichtet";
+
+/**
+ * Ob der Chat Fragen annimmt: eingeschaltet, eingerichtet und Datenbank auf dem Stand von
+ * Migration 0003. Ohne Modellaufruf, ohne Besucherdaten; die Datenbank wird nur gefragt, wenn der
+ * Chat eingeschaltet ist. Grundlage für `GET /api/chat` und den Schalterzustand im Seiten-HTML.
+ */
+export async function ermittleChatZustand(
+  argument?: ChatBindings,
+): Promise<{ aktiv: boolean; grund: ChatZustandGrund | null }> {
+  const b = chatBindings(argument);
+  if (!eingeschaltet(b)) return { aktiv: false, grund: "abgeschaltet" };
+  if (!eingerichtet(b) || !b.DB || !(await schemaBereit(b.DB)))
+    return { aktiv: false, grund: "nicht_eingerichtet" };
+  return { aktiv: true, grund: null };
+}
+
 export async function handleChat(request: Request, argument?: ChatBindings): Promise<Response> {
   // GET: Zustand für die Oberfläche (kein Modellaufruf, keine Speicherung, keine Besucherdaten).
   if (request.method === "GET" || request.method === "HEAD") {
-    const b = chatBindings(argument);
-    const an = eingeschaltet(b);
-    const aktiv = an && eingerichtet(b);
-    return json(
-      { ok: true, aktiv, grund: aktiv ? null : an ? "nicht_eingerichtet" : "abgeschaltet" },
-      200,
-    );
+    const { aktiv, grund } = await ermittleChatZustand(argument);
+    return json({ ok: true, aktiv, grund }, 200);
   }
   if (request.method !== "POST")
     return json({ ok: false, fehler: "methode_nicht_erlaubt" }, 405, { allow: "GET, POST" });

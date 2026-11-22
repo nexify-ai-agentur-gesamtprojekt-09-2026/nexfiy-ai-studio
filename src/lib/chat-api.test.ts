@@ -10,6 +10,7 @@ import {
   CHAT_AUFBEWAHRUNG_STANDARD_TAGE,
   CHAT_LIMITS,
   CHAT_MAX_BYTES,
+  ermittleChatZustand,
   handleChat,
   ipFuerKurzwert,
   ipKurzwert,
@@ -343,12 +344,35 @@ describe("handleChat: Schalter und Einrichtung (fail-closed)", () => {
         return stmt;
       },
     };
-    const res = await handleChat(
-      anfrage({ message: "Hallo" }),
-      bindings(db, { DB: alt as unknown as NonNullable<ChatBindings["DB"]> }),
-    );
+    const ohne0003 = bindings(db, { DB: alt as unknown as NonNullable<ChatBindings["DB"]> });
+    // Die Oberfläche erfährt das schon beim Öffnen: kein Eingabefeld für einen Chat, der 503 liefert.
+    expect(await zustand(ohne0003)).toMatchObject({ aktiv: false, grund: "nicht_eingerichtet" });
+    expect(await ermittleChatZustand(ohne0003)).toEqual({
+      aktiv: false,
+      grund: "nicht_eingerichtet",
+    });
+    const res = await handleChat(anfrage({ message: "Hallo" }), ohne0003);
     expect(res.status).toBe(503);
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("prüft die Spalte je Datenbank nur einmal und fragt abgeschaltet gar nicht", async () => {
+    const pruefungen: string[] = [];
+    const zaehlend = {
+      prepare(sql: string) {
+        if (sql.includes("LIMIT 0")) pruefungen.push(sql);
+        return db.DB.prepare(sql);
+      },
+    } as unknown as NonNullable<ChatBindings["DB"]>;
+    const b = bindings(db, { DB: zaehlend });
+    expect(await ermittleChatZustand(b)).toEqual({ aktiv: true, grund: null });
+    expect(await ermittleChatZustand(b)).toEqual({ aktiv: true, grund: null });
+    expect(pruefungen).toHaveLength(1);
+    expect(await ermittleChatZustand(bindings(db, { DB: zaehlend, CHAT_AKTIV: "aus" }))).toEqual({
+      aktiv: false,
+      grund: "abgeschaltet",
+    });
+    expect(pruefungen).toHaveLength(1);
   });
 });
 

@@ -1,7 +1,14 @@
 -- 0003-chat-aufbewahrung.sql — Zeitindex, Versuchszähler und Aufräumweg für den KI-Chat.
 -- Anwenden (einmal, VOR dem Einschalten des Chats):
 --   npx wrangler d1 execute nexify-main --remote --file migrations/0003-chat-aufbewahrung.sql
--- Ohne diese Migration schlägt die Reservierung in /api/chat fehl und der Chat antwortet 503.
+-- Ohne diese Migration schlägt die Reservierung in /api/chat fehl und der Chat antwortet 503;
+-- GET /api/chat meldet dann `aktiv: false, grund: "nicht_eingerichtet"`.
+--
+-- GENAU EINMAL anwenden: ALTER TABLE … ADD COLUMN ist nicht wiederholbar; ein zweiter Lauf bricht
+-- mit "duplicate column name: versuche" ab (die Datenbank bleibt dabei unverändert). Vorher prüfen:
+--   npx wrangler d1 execute nexify-main --remote --command \
+--     "SELECT name FROM pragma_table_info('chat_nachrichten') WHERE name = 'versuche'"
+--   Leeres Ergebnis: Migration fehlt, jetzt anwenden. Eine Zeile `versuche`: bereits angewendet.
 --
 -- versuche: Jede Frage steht nur einmal in der Tabelle; „Erneut senden“ erhöht den Zähler. Die
 --   Limits zählen SUM(versuche), also tatsächliche Anbieteraufrufe. Prüfen und Reservieren laufen
