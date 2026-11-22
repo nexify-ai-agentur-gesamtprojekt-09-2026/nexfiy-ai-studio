@@ -1,0 +1,88 @@
+# Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio) mit menschlicher Freigabe.
+# Startet nur von Hand (Actions -> "Deploy live" -> "Run workflow"). Jeder Lauf wartet auf die
+# Freigabe im Environment "production" (Required reviewers), bevor ein Schritt ausgeführt wird.
+# Die Deploy-Logik liegt ausschließlich in tools/deploy-live.sh (Server und CI prüfen gleich).
+# Einrichtung und Rückweg: docs/auslieferung.md
+name: Deploy live
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, Tag oder Commit, der ausgeliefert wird"
+        required: true
+        default: main
+        type: string
+      dry_run:
+        description: "Nur prüfen (wrangler deploy --dry-run), nichts ausliefern"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-live
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Prüfen, bauen, ausliefern
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: production
+      url: https://www.nexifyai.de
+    steps:
+      # Action-Versionen per Commit-SHA gepinnt; SHA = Tag laut `git ls-remote --tags` der offiziellen Repos (2026-11-22).
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.ref }}
+          persist-credentials: false
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.4"
+
+      - name: Abhängigkeiten installieren
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      - name: Tests (Quellen)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests (mit Build-Ausgabe)
+        run: npm test
+
+      - name: Ausliefern
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          DEPLOY_HOST: github-actions
+          # Genau das oben gebaute und getestete .output/ ausliefern.
+          DEPLOY_SKIP_BUILD: "1"
+          # Wrangler ist keine Projektabhängigkeit; Version fest (npm, veröffentlicht 2026-11-05).
+          WRANGLER_VERSION: "4.158.0"
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            tools/deploy-live.sh --dry-run
+          else
+            tools/deploy-live.sh
+          fi
