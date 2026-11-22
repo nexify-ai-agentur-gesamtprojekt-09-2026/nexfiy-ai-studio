@@ -18,7 +18,6 @@ import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
 import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function useDocumentTitle(title: string) {
   useEffect(() => {
@@ -79,9 +78,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
   useDocumentTitle("Kurze Störung · NeXify AI");
 
   return (
@@ -169,7 +165,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      // 2026-11-22 (Europe/Berlin): /favicon.ico ist das Originalzeichen des NeXify-Auftritts
+      // (16, 32 und 48 px), dieselbe Datei wie public/site-assets/6515657575db596f.ico.
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
     ],
