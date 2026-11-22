@@ -2,13 +2,13 @@
  "domain": "www.nexifyai.de",
  "source_repo": "nexifyai-dev/nexfiy-ai-studio",
  "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
- "commit": "9586461195e4aa87d1ec3b025489dc2b9bbe1419",
- "commit_short": "9586461195",
- "commit_subject": "feat(chat): belegte Leistungen im Systemprompt, keine Preis-/Terminaussagen",
+ "commit": "09eb53cd418ff8af947eed4e5594b43eb37b77d0",
+ "commit_short": "09eb53cd41",
+ "commit_subject": "fix(website): ausgelieferten Arbeitsbaum versionieren (B-206)",
  "build_id": "",
- "deployed_at": "2026-11-22T06:58:37+01:00",
+ "deployed_at": "2026-11-22T08:59:49+01:00",
  "host": "srv1243952",
  "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
- "generated_at": "2026-11-22T06:58:37+01:00",
+ "generated_at": "2026-11-22T08:59:49+01:00",
  "generator": "scripts/quality/gen-build-stamp.py"
 }
