@@ -20,7 +20,9 @@
  *            405 methode_nicht_erlaubt                        413 zu_gross
  *            415 falscher_inhaltstyp
  *            429 zu_viele_anfragen | sitzungslimit_erreicht | tageslimit_erreicht  (+ retry-after)
- *            502 upstream_fehler      504 upstream_zeit
+ *            502 upstream_fehler      504 upstream_zeit      499 besucher_abbruch
+ *            Ein gestarteter Anbieteraufruf zählt immer gegen die Limits; erstattet wird nur,
+ *            wenn der Anbieter mit Fehlerstatus abgelehnt hat, bevor er eine Antwort begann.
  *            503 chat_abgeschaltet | chat_not_configured (fail-closed)
  *   GET      200 { ok: true, aktiv, grund }   Zustand für die Oberfläche, ohne Modellaufruf
  *
@@ -314,8 +316,9 @@ async function nenneGrenze(db: D1, hash: string, sessionId: string, f: Fenster):
 }
 
 /**
- * Gibt eine Reservierung zurück, wenn der Anbieter nichts geliefert hat: Die Frage zählt dann
- * nicht, und es bleibt keine unbeantwortete Zeile liegen.
+ * Gibt eine Reservierung zurück – ausschließlich, wenn der Anbieter die Anfrage mit Fehlerstatus
+ * abgelehnt hat (siehe `AnbieterFehler.erstattbar`): Die Frage zählt dann nicht, und es bleibt
+ * keine unbeantwortete Zeile liegen.
  */
 async function gibFrei(db: D1, id: string): Promise<void> {
   await db
@@ -401,8 +404,17 @@ export async function raeumeChatAuf(db: D1, tage: number, jetzt: Date = new Date
     .run();
 }
 
+/**
+ * `erstattbar` ist nur der eine Fall, in dem der Anbieter die Anfrage mit einem Fehlerstatus
+ * abgelehnt hat, bevor er eine Antwort begann. Alles andere – Besucherabbruch, Zeitlimit,
+ * Netzfehler, Fehler im laufenden Strom, Modellabweichung, leere Antwort – zählt als
+ * gestarteter Anbieteraufruf und bleibt auf die Limits angerechnet.
+ */
 class AnbieterFehler extends Error {
-  constructor(readonly art: "upstream_fehler" | "upstream_zeit") {
+  constructor(
+    readonly art: "upstream_fehler" | "upstream_zeit" | "besucher_abbruch",
+    readonly erstattbar = false,
+  ) {
     super(art);
   }
 }
@@ -531,8 +543,12 @@ async function rufeAnbieter(
     stille = setTimeout(zeitAus, ZEIT_LEERLAUF_MS);
   };
   // Verlässt der Besucher die Seite, endet auch der Aufruf beim Anbieter.
-  const besucherWeg = () => steuerung.abort();
-  if (besucher?.aborted) steuerung.abort();
+  let besucherAbbruch = false;
+  const besucherWeg = () => {
+    besucherAbbruch = true;
+    steuerung.abort();
+  };
+  if (besucher?.aborted) besucherWeg();
   else besucher?.addEventListener("abort", besucherWeg, { once: true });
   /** Beendet den Anbieteraufruf in jedem Fall: Zeitgeber aus, Verbindung zu. */
   const beende = () => {
@@ -541,7 +557,9 @@ async function rufeAnbieter(
     besucher?.removeEventListener("abort", besucherWeg);
     steuerung.abort();
   };
-  const fehler = () => new AnbieterFehler(grund ?? "upstream_fehler");
+  // Zeitlimit und Besucherabbruch sind eigene Ursachen; beide sind nie erstattbar.
+  const fehler = () =>
+    new AnbieterFehler(grund ?? (besucherAbbruch ? "besucher_abbruch" : "upstream_fehler"));
 
   let antwort: Response;
   try {
@@ -566,12 +584,18 @@ async function rufeAnbieter(
   }
   if (!antwort.ok) {
     beende();
-    throw fehler();
+    // Der Anbieter hat mit Fehlerstatus abgelehnt, ohne eine Antwort zu beginnen: der einzige
+    // Fall, in dem die Reservierung zurückgegeben wird. Ein Abbruch oder Zeitlimit, das zufällig
+    // gleichzeitig eintrat, geht vor.
+    throw grund || besucherAbbruch ? fehler() : new AnbieterFehler("upstream_fehler", true);
   }
   leerlauf();
 
   return {
-    abbrechen: beende,
+    abbrechen() {
+      besucherAbbruch = true;
+      beende();
+    },
     async lies(melde) {
       // Rohtext des Modells; sichtbar wird nur, was die Leitplanken satzweise freigeben.
       let rohLaenge = 0;
@@ -732,15 +756,19 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
   const alsStrom = (request.headers.get("accept") ?? "").includes("text/event-stream");
   const fehlerAntwort = (ursache: unknown) => {
     const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
-    return json(
-      { ok: false, fehler: art, session_id: sessionId },
-      art === "upstream_zeit" ? 504 : 502,
-    );
+    // 499: Der Besucher hat die Anfrage selbst beendet; die Antwort erreicht ihn in der Regel nicht.
+    const status = art === "upstream_zeit" ? 504 : art === "besucher_abbruch" ? 499 : 502;
+    return json({ ok: false, fehler: art, session_id: sessionId }, status);
   };
-  /** Hat der Anbieter nichts geliefert, zählt die Frage nicht und bleibt nicht unbeantwortet liegen. */
-  const ohneErgebnis = async (ursache: unknown) => {
-    if (ursache instanceof AnbieterFehler && ursache.art === "upstream_zeit") return;
-    await gibFrei(db, frageId).catch(() => {});
+  /**
+   * Ein gestarteter Anbieteraufruf zählt immer gegen die Limits. Zurückgegeben wird die
+   * Reservierung nur, wenn der Anbieter die Anfrage mit Fehlerstatus abgelehnt hat
+   * (`erstattbar`) – nie bei Besucherabbruch, Zeitlimit, Netzfehler oder nach Beginn der Antwort.
+   * Sonst ließen sich die Limits durch Abbrechen und Wiederholen umgehen.
+   */
+  const erstatteFallsAbgelehnt = async (ursache: unknown) => {
+    if (ursache instanceof AnbieterFehler && ursache.erstattbar)
+      await gibFrei(db, frageId).catch(() => {});
   };
 
   let lauf: Lauf;
@@ -754,7 +782,7 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       request.signal,
     );
   } catch (ursache) {
-    await ohneErgebnis(ursache);
+    await erstatteFallsAbgelehnt(ursache);
     return fehlerAntwort(ursache);
   }
 
@@ -783,26 +811,23 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
         200,
       );
     } catch (ursache) {
-      await ohneErgebnis(ursache);
+      // Die Antwort hatte begonnen: keine Erstattung, gleich aus welchem Grund sie endete.
       return fehlerAntwort(ursache);
     }
   }
 
   let beendet = false;
-  let gezeigt = false;
   const strom = new ReadableStream<Uint8Array>({
     async start(steuerung) {
       steuerung.enqueue(ereignis("start", { session_id: sessionId }));
       try {
         const text = await lauf.lies((name, stueck) => {
-          gezeigt = true;
           if (!beendet) steuerung.enqueue(ereignis(name, { t: stueck }));
         });
         const gespeichert = await ablegen(text);
         if (!beendet) steuerung.enqueue(ereignis("ende", { hinweis: CHAT_HINWEIS, gespeichert }));
       } catch (ursache) {
-        // Abbruch durch den Besucher gibt nichts frei: Der Anbieter hat bereits gearbeitet.
-        if (!beendet && !gezeigt) await ohneErgebnis(ursache);
+        // Die Antwort hatte begonnen: keine Erstattung, gleich aus welchem Grund sie endete.
         const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
         if (!beendet) steuerung.enqueue(ereignis("fehler", { fehler: art }));
       }
