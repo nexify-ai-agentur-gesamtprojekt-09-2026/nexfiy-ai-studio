@@ -4,7 +4,8 @@
 # Ohne Override entsteht ein neuer Worker "nexify-ai-agentur-gesamtprojekt-..." ohne DB.
 # Nutzung: tools/deploy-live.sh [--dry-run]
 set -euo pipefail
-cd "$(dirname "$0")/.."
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT_DIR"
 
 # 2026-11-22 13:04: Nur pruefen, nichts bauen/deployen.
 if [ "${1:-}" = "--verify-only" ]; then
@@ -104,5 +105,5 @@ if [ "${1:-}" = "--dry-run" ]; then
 fi
 npx wrangler deploy --config wrangler.json
 
-cd "$(dirname "$0")/.."
+cd "$ROOT_DIR"
 verify_live_stamp "$(git rev-parse --short=10 HEAD)"
