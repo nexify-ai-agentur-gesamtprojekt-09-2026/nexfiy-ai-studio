@@ -1,24 +1,28 @@
-# Nexfiy Ai Studio
+# NeXify AI – Agenturseite
 
-Imported website: https://github.com/nexify-ai-agentur-gesamtprojekt-09-2026/nexify-ai-finales-agentur-gesamtprojekt-09-2026-0c70a665.git
+Quelltext der öffentlichen NeXify-Agenturseite www.nexifyai.de: TanStack Start (React, TypeScript),
+ausgeliefert als Cloudflare Worker.
 
-This project was built with [Lovable](https://lovable.dev).
+## Entwicklung
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/dcb47f25-0aec-4b03-88b7-4b67f07d4a09).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Voraussetzung: Node.js 22 und [bun](https://bun.sh) für die Installation (`bun.lock` ist das
+Lockfile des Projekts).
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install --frozen-lockfile
+npm run dev      # Dev-Server auf Port 5173
+npm run lint
+npm test
+npm run build    # erzeugt .output/ (Worker und statische Dateien)
 ```
+
+## Auslieferung
+
+`tools/deploy-live.sh` baut den Stand, ergänzt Worker-Name und Datenbank-Bindung, schreibt den
+Build-Stempel und liefert auf den bestehenden Worker aus. `tools/deploy-live.sh --dry-run` prüft
+ohne Auslieferung, `--verify-only` vergleicht den Live-Stempel mit dem aktuellen Commit.
+
+`node tools/live-check.mjs` prüft die ausgelieferten Seiten (Status, canonical, H1,
+Struktur-Anker, Kurzadressen); mit `--base=<Adresse>` auch gegen einen lokalen Stand.
+
+Regeln für die Arbeit am Code stehen in [AGENTS.md](AGENTS.md).
