@@ -20,12 +20,13 @@ const TENANT = "nexifyai-platform";
 const MAX_ZEICHEN = 1500;
 const MIN_ZEICHEN = 2;
 const MAX_PRO_MINUTE = 8;
-const MODELL_STANDARD = "nexifyai-cheap-first";
+const MODELL_STANDARD = "openrouter/deepseek-v4.1-flash";
 const BASIS_STANDARD = "https://ai-router.nexifyai.cloud";
 const SYSTEM =
-  "Du bist der KI-Assistent von NeXify AI (Chat it. Automate it.). Antworte auf Deutsch, knapp und " +
-  "sachlich. Erfinde keine Fakten, keine Preise, keine Termine und keine Zusagen. Bei Unsicherheit " +
-  "verweise auf das Kontaktformular unter /kontakt oder mail@nexifyai.cloud. Keine Rechtsberatung.";
+  "Du bist der KI-Assistent von NeXify AI (Chat it. Automate it.). Antworte in der Sprache der " +
+  "Frage, bei unklarer Sprache auf Deutsch. Knapp und sachlich. Erfinde keine Fakten, keine Preise, " +
+  "keine Termine und keine Zusagen. Bei Unsicherheit verweise auf das Kontaktformular unter /kontakt " +
+  "oder mail@nexifyai.cloud. Keine Rechtsberatung.";
 
 type D1Stmt = {
   bind(...values: unknown[]): D1Stmt;
