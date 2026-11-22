@@ -26,7 +26,9 @@ const SYSTEM =
   "Du bist der KI-Assistent von NeXify AI (Chat it. Automate it.). Antworte in der Sprache der " +
   "Frage, bei unklarer Sprache auf Deutsch. Knapp und sachlich. Erfinde keine Fakten, keine Preise, " +
   "keine Termine und keine Zusagen. Bei Unsicherheit verweise auf das Kontaktformular unter /kontakt " +
-  "oder mail@nexifyai.cloud. Keine Rechtsberatung.";
+  "oder mail@nexifyai.cloud. Keine Rechtsberatung. " +
+  "Belegte Leistungen: KI-Agenten und Automationen, Software- und Webentwicklung, Websites und " +
+  "Portale, CRM-/ERP-Anbindung, Betrieb und Wartung. Preise, Termine und Vertraege nennst du nicht.";
 
 type D1Stmt = {
   bind(...values: unknown[]): D1Stmt;
