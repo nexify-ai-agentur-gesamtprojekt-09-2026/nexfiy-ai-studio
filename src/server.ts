@@ -62,6 +62,23 @@ const PERMANENT_REDIRECTS: Record<string, string> = {
   "/konto/": "/portale",
 };
 
+// 2026-11-22 21:47 (Europe/Berlin): TEILEKLAR ist ein eigener Mandant mit eigener Domain.
+// Die 301-Zeilen aus public/_redirects greifen nur auf der workers.dev-Adresse (Asset-Schicht);
+// hinter www.nexifyai.de beantwortete das Framework /teileklar mit 404 (gemessen, 3 tote Links
+// im Footer/Header). Darum dieselbe Zuordnung hier, vor dem Framework.
+const TEILEKLAR_REDIRECTS: Record<string, string> = {
+  "/teileklar/werkstatt": "https://teileklar.shop/werkstatt-partner",
+  "/teileklar/fahrzeug-und-passung": "https://teileklar.shop/fitment-checker",
+  "/teileklar/kategorien": "https://teileklar.shop/shop",
+  "/teileklar/suche": "https://teileklar.shop/shop",
+  "/teileklar/rechtliches": "https://teileklar.shop/impressum",
+  "/teileklar/warenkorb": "https://teileklar.shop/shop",
+  "/teileklar/kasse": "https://teileklar.shop/shop",
+  "/teileklar/gutscheine": "https://teileklar.shop/shop",
+  "/teileklar/bestellungen": "https://teileklar.shop/kundenportal",
+  "/teileklar/termine": "https://teileklar.shop/werkstatt-partner",
+};
+
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
@@ -94,6 +111,12 @@ export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
+      // 2026-11-22 12:55 (Europe/Berlin): http://www.nexifyai.de lieferte 200 statt TLS-Weiterleitung.
+      // Der Worker ist die letzte Instanz vor der Antwort; hier dauerhaft auf https umleiten.
+      if (url.protocol === "http:") {
+        url.protocol = "https:";
+        return Response.redirect(url.toString(), 301);
+      }
       // 2026-11-22: Anfrage-Eingang vor dem Framework beantworten (A-36). Der Entry bekommt die
       // Bindings vom Worker-Runtime; Framework-Routen sehen sie nicht.
       if (url.pathname === "/api/anfrage") {
@@ -108,6 +131,13 @@ export default {
       if (target)
         return withSecurityHeaders(
           Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301),
+        );
+      if (url.pathname === "/teileklar" || url.pathname.startsWith("/teileklar/"))
+        return withSecurityHeaders(
+          Response.redirect(
+            TEILEKLAR_REDIRECTS[url.pathname.replace(/\/$/, "")] ?? "https://teileklar.shop/",
+            301,
+          ),
         );
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
