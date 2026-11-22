@@ -52,6 +52,24 @@ Der Workflow läuft nur von `main` aus und hat zwei Jobs:
      `DEPLOY_COMMIT_SUBJECT` und `DEPLOY_WORKTREE_STATUS_FILE` aus den vorigen Jobs. Einen
      Git-Checkout der Anwendung gibt es in diesem Job nicht.
 
+   Die `wrangler.json` aus dem Artefakt verwendet das Skript nicht ungefiltert.
+   `tools/wrangler-config.py` schreibt sie nach einer Allowlist neu, in ein frisches Verzeichnis
+   außerhalb des Artefakts:
+   - Übernommen werden nur `main`, `compatibility_date`, `compatibility_flags`, `no_bundle`,
+     `rules` und `assets` (`binding`, `directory`). Alle anderen Schlüssel werden verworfen und
+     im Protokoll gemeldet, zum Beispiel `build.command`, das Wrangler sonst bei `deploy` in einer
+     Shell ausführt.
+   - Fest vorgegeben sind `name`, `d1_databases` und `keep_vars`. `no_bundle` muss `true` sein.
+   - `main` und `assets.directory` müssen innerhalb von `.output/` liegen.
+   - Das Skript bricht ab, wenn im Artefakt `.env*`, `.dev.vars*`, `.wrangler` oder weitere
+     Wrangler-Konfigurationen liegen. Über `.env` ließen sich sonst etwa
+     `CLOUDFLARE_API_BASE_URL` oder `CLOUDFLARE_API_HEADERS` setzen.
+
+   Wrangler läuft im selben frischen Verzeichnis. Die sha256-Liste reicht dafür nicht aus: Sie
+   belegt nur, dass das Artefakt zwischen Build- und Deploy-Job unverändert blieb. Der Build-Job
+   führt aber Repository-Code aus und könnte die Datei selbst so erzeugen. Dieselbe Prüfung
+   gilt auf dem Server.
+
    Das Skript setzt den Worker-Namen `nexfiy-ai-studio`, das D1-Binding `DB` (`nexify-main`) und
    `keep_vars: true`. Es schreibt den Build-Stempel (`host: github-actions`, zusätzlich
    `run_url`) und ruft `wrangler deploy` auf (Version im Workflow fest). Aus dem

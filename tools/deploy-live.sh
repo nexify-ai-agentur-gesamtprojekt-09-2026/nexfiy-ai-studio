@@ -23,6 +23,7 @@
 #   - keine Variablen oder Secrets setzen (CHAT_AKTIV, SENDER_EMAIL, ANFRAGE_TO, NINEROUTER_API_KEY,
 #     CHAT_IP_SCHLUESSEL … werden im Cloudflare-Dashboard oder mit `wrangler secret put` gepflegt)
 set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # 2026-11-22 (Europe/Berlin): DEPLOY_APP_DIR (optional) ist der Anwendungsstand, der gebaut und
 # ausgeliefert wird. In CI liegt das Werkzeug (dieses Skript, aus dem Workflow-Commit) getrennt vom
 # Anwendungsstand (festgelegter SHA, z. B. ein älterer main-Commit beim Rückweg). Ohne Angabe wie
@@ -71,24 +72,14 @@ if [ "${DEPLOY_SKIP_BUILD:-}" = "1" ]; then
 else
   npm run build
 fi
-python3 - <<'PY'
-import json
-p = ".output/server/wrangler.json"
-d = json.load(open(p))
-d["name"] = "nexfiy-ai-studio"
-d["d1_databases"] = [{
-    "binding": "DB",
-    "database_name": "nexify-main",
-    "database_id": "2dbf4047-20ee-4a68-a258-26ee9eb100e4",
-}]
-# 2026-11-22 (Europe/Berlin): Ohne `keep_vars` ersetzt `wrangler deploy` die im Dashboard gesetzten
-# Klartext-Variablen durch die (leere) Liste dieser Konfiguration – SENDER_EMAIL, ANFRAGE_TO und
-# später CHAT_AKTIV wären nach jedem Deploy weg. Beleg: developers.cloudflare.com/workers/wrangler/
-# configuration/ („Top-level only keys“: keep_vars – „Whether Wrangler should keep variables
-# configured in the dashboard on deploy“; Abschnitt „Source of truth“). Secrets löscht ein Deploy nie.
-d["keep_vars"] = True
-json.dump(d, open(p, "w"), indent=2)
-PY
+# 2026-11-22 (Europe/Berlin), Sicherheitsbefund PR #8: Die wrangler.json aus dem Build wird nicht
+# ungefiltert verwendet. tools/wrangler-config.py übernimmt nur erlaubte Schlüssel (build.command u. a.
+# werden verworfen und gemeldet), setzt Name, D1-Binding DB und keep_vars fest, verlangt Pfade
+# innerhalb von .output/ und bricht bei .env*, .dev.vars*, .wrangler im Artefakt ab. Die Konfiguration
+# liegt in einem frischen Verzeichnis außerhalb des Artefakts; Wrangler läuft auch dort.
+WRANGLER_DIR="$(mktemp -d)"
+trap 'rm -rf "$WRANGLER_DIR"' EXIT
+python3 -I "$SCRIPT_DIR/wrangler-config.py" "$ROOT_DIR/.output" "$WRANGLER_DIR/wrangler.json"
 
 # 2026-11-22 (Europe/Berlin): Server lädt seine Zugangsdaten aus hermes.env; in CI kommen sie aus
 # der Umgebung (GitHub-Environment "production"). Fail-closed: ohne beide Werte kein Deploy.
@@ -217,11 +208,12 @@ else
   WRANGLER=(npx wrangler)
 fi
 
-cd .output/server
+cd "$WRANGLER_DIR"
 if [ "${1:-}" = "--dry-run" ]; then
-  exec "${WRANGLER[@]}" deploy --dry-run --config wrangler.json
+  "${WRANGLER[@]}" deploy --dry-run --config "$WRANGLER_DIR/wrangler.json"
+  exit $?
 fi
-"${WRANGLER[@]}" deploy --config wrangler.json
+"${WRANGLER[@]}" deploy --config "$WRANGLER_DIR/wrangler.json"
 
 cd "$ROOT_DIR"
 verify_d1_binding

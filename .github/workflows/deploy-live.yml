@@ -9,6 +9,8 @@
 #              dem Workflow-Commit (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und
 #              liefert mit tools/deploy-live.sh aus. Hier läuft kein Code aus dem Anwendungsstand;
 #              das gebaute Worker-Bundle wird von wrangler nur hochgeladen.
+#              Die wrangler.json aus dem Artefakt schreibt tools/wrangler-config.py per Allowlist neu
+#              (kein build.command, keine .env/.wrangler im Artefakt, Pfade nur innerhalb .output/).
 # Die Deploy-Logik liegt ausschließlich in tools/deploy-live.sh (Server und CI prüfen gleich).
 # Einrichtung und Rückweg: docs/auslieferung.md
 name: Deploy live
