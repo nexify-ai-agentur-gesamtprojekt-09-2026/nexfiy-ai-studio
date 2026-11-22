@@ -4,6 +4,7 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
 import { handleChat, type ChatBindings } from "./lib/chat-api";
 import { renderErrorPage } from "./lib/error-page";
+import { teileklarTarget } from "./lib/teileklar-redirects";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -62,23 +63,6 @@ const PERMANENT_REDIRECTS: Record<string, string> = {
   "/konto/": "/portale",
 };
 
-// 2026-11-22 21:47 (Europe/Berlin): TEILEKLAR ist ein eigener Mandant mit eigener Domain.
-// Die 301-Zeilen aus public/_redirects greifen nur auf der workers.dev-Adresse (Asset-Schicht);
-// hinter www.nexifyai.de beantwortete das Framework /teileklar mit 404 (gemessen, 3 tote Links
-// im Footer/Header). Darum dieselbe Zuordnung hier, vor dem Framework.
-const TEILEKLAR_REDIRECTS: Record<string, string> = {
-  "/teileklar/werkstatt": "https://teileklar.shop/werkstatt-partner",
-  "/teileklar/fahrzeug-und-passung": "https://teileklar.shop/fitment-checker",
-  "/teileklar/kategorien": "https://teileklar.shop/shop",
-  "/teileklar/suche": "https://teileklar.shop/shop",
-  "/teileklar/rechtliches": "https://teileklar.shop/impressum",
-  "/teileklar/warenkorb": "https://teileklar.shop/shop",
-  "/teileklar/kasse": "https://teileklar.shop/shop",
-  "/teileklar/gutscheine": "https://teileklar.shop/shop",
-  "/teileklar/bestellungen": "https://teileklar.shop/kundenportal",
-  "/teileklar/termine": "https://teileklar.shop/werkstatt-partner",
-};
-
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
@@ -132,13 +116,8 @@ export default {
         return withSecurityHeaders(
           Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301),
         );
-      if (url.pathname === "/teileklar" || url.pathname.startsWith("/teileklar/"))
-        return withSecurityHeaders(
-          Response.redirect(
-            TEILEKLAR_REDIRECTS[url.pathname.replace(/\/$/, "")] ?? "https://teileklar.shop/",
-            301,
-          ),
-        );
+      const teileklar = teileklarTarget(url.pathname);
+      if (teileklar) return withSecurityHeaders(Response.redirect(teileklar, 301));
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
