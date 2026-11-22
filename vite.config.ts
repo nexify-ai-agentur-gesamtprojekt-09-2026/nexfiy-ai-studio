@@ -1,22 +1,60 @@
-// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually
-// or the app will break with duplicate plugins:
-//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,
-//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
-//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
-// Never set ssr.external or resolve.external: the Worker has no runtime module resolution, so
-// the build fails. Never add compression (compressPublicAssets, vite-plugin-compression):
-// hosting already compresses at the edge.
-// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
-import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+// Build- und Dev-Konfiguration der NeXify-Agenturseite (TanStack Start, Auslieferung als
+// Cloudflare Worker über tools/deploy-live.sh).
+//
+// Regeln, die hier gelten:
+// - Kein ssr.external und kein resolve.external: der Worker löst zur Laufzeit keine Module auf,
+//   der Build bräche.
+// - Keine Kompression (compressPublicAssets, vite-plugin-compression): die Auslieferung
+//   komprimiert bereits an der Kante, doppelt kodierte Antworten kämen unlesbar an.
+// - Die Reihenfolge der Plugins ist Absicht: Tailwind und Pfadauflösung vor TanStack Start,
+//   React zuletzt.
+import tailwindcss from "@tailwindcss/vite";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import { nitro } from "nitro/vite";
+import { defineConfig } from "vite";
+import tsConfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig({
-  // 2026-11-19 20:46 (Europe/Berlin): Dev-Port fest auf 5173. Der Wrapper waehlt sonst 8080
-  // (hier vom Docker-Proxy belegt) und weicht auf 8081 aus — `hermes verify` wartet auf
-  // 5173 und meldete deshalb dauerhaft readiness=false (falsches Rot).
-  vite: { server: { port: 5173, strictPort: true } },
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
+export default defineConfig(({ command }) => ({
+  plugins: [
+    tailwindcss(),
+    tsConfigPaths({ projects: ["./tsconfig.json"] }),
+    tanstackStart({
+      // Servercode darf nicht in das Browser-Bündel geraten.
+      importProtection: {
+        behavior: "error",
+        client: { files: ["**/server/**"], specifiers: ["server-only"] },
+      },
+      // Der Server-Einstieg ist src/server.ts (Adressregeln, Fehlerseite, Sicherheits-Header).
+      server: { entry: "server" },
+    }),
+    // Nur im Build: erzeugt .output/ als Cloudflare-Worker samt wrangler.json.
+    ...(command === "build" ? [nitro({ defaultPreset: "cloudflare-module" })] : []),
+    viteReact(),
+  ],
+  css: { transformer: "lightningcss" },
+  resolve: {
+    alias: { "@": `${process.cwd()}/src` },
+    dedupe: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+      "@tanstack/react-query",
+      "@tanstack/query-core",
+    ],
   },
-});
+  optimizeDeps: {
+    include: [
+      "react",
+      "react-dom",
+      "react-dom/client",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+    ],
+    ignoreOutdatedRequests: true,
+  },
+  // 2026-11-19 20:46 (Europe/Berlin): Dev-Port fest auf 5173. `hermes verify` wartet auf 5173;
+  // ein ausweichender Port meldete dauerhaft readiness=false (falsches Rot).
+  server: { host: "::", port: 5173, strictPort: true },
+}));
