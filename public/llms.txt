@@ -29,7 +29,7 @@ Produktangebot.
 
 - [NeX AIFly Suite](https://www.nexifyai.de/produkte/nex2fly): KI-Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.
 - [NeX Agentic AI](https://www.nexifyai.de/produkte/one): AIFly ORACLE ordnet, NeX führt aus – benannte Arbeitsschritte im Auftrag.
-- [AIFly ORACLE](https://www.nexifyai.de/produkte/aifly-oracle): KI-System, das Aufgaben ordnet; der Chat auf dieser Website ist in Vorbereitung.
+- [AIFly ORACLE](https://www.nexifyai.de/produkte/aifly-oracle): KI-System, das Aufgaben ordnet; der Chat auf dieser Website ist noch nicht aktiv.
 - [NeX Agentic AIFly](https://www.nexifyai.de/produkte/nex-agentic-aifly): Agent für klar umrissene Aufgaben mit zugelassenen Werkzeugen.
 - [NeXify API](https://www.nexifyai.de/produkte/api): KI-Funktionen von NeXify in eigener Software; den Zugang gibt es im Rahmen eines Projekts.
 - [Skills und MCP](https://www.nexifyai.de/produkte/skills-mcp): wiederholbare Arbeitsweisen für Agenten und Anbindung eigener Systeme.

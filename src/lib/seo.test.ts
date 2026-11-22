@@ -330,9 +330,9 @@ describe("Chat: keine Verfügbarkeitsbehauptung, solange er abgeschaltet ausgeli
     expect(text).not.toMatch(/Im Chat hilft Ihnen/);
     expect(text).not.toMatch(/mit dem KI-Assistenten AIFly ORACLE"/);
   });
-  it("die ORACLE-Seite nennt den Chat ausdrücklich als in Vorbereitung", () => {
+  it("die ORACLE-Seite nennt den Chat ausdrücklich als noch nicht aktiv", () => {
     expect(lies("src/routes/produkte_.aifly-oracle.tsx").replace(/\s+/g, " ")).toMatch(
-      /Der Chat auf dieser Website ist in Vorbereitung/,
+      /Der Chat auf dieser Website ist noch nicht aktiv/,
     );
   });
 });

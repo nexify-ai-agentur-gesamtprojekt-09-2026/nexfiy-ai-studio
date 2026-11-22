@@ -38,7 +38,7 @@ function Index() {
               <h1 id="page-title-aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</h1>
               <p className={"identity-body"}>
                 AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist
-                in Vorbereitung; Ihr Vorhaben schildern Sie bis dahin über das Kontaktformular.
+                noch nicht aktiv. Ihr Vorhaben schildern Sie bis dahin über das Kontaktformular.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -146,9 +146,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                AIFly ORACLE zerlegt ein Vorhaben in Aufgaben, ordnet Zuständigkeiten zu und macht
-                sichtbar, was wovon abhängt. So ist klar, was als Nächstes dran ist und wer es
-                erledigt.
+                AIFly ORACLE ist dafür gedacht, ein Vorhaben in Aufgaben zu zerlegen,
+                Zuständigkeiten zuzuordnen und Abhängigkeiten sichtbar zu machen. So ist klar, was
+                als Nächstes ansteht und wer es erledigt.
               </p>
               <p>
                 In Kundenprojekten vereinbaren wir vorab, welche Werkzeuge und Verbindungen AIFly
@@ -189,8 +189,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Fachliche Entscheidungen, technische Änderungen und verbindliche Zusagen haben
-                jeweils eine benannte verantwortliche Person. Das legen wir vor dem Einsatz fest.
+                Für fachliche Entscheidungen, technische Änderungen und verbindliche Zusagen
+                benennen wir vor dem Einsatz je eine verantwortliche Person.
               </p>
               <p>
                 Verträge, Zahlungen und Zusagen entscheiden Menschen. AIFly ORACLE bereitet vor und
@@ -210,7 +210,7 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Der Chat mit AIFly ORACLE ist in Vorbereitung. Er soll Ihnen helfen, Leistungen und
+                Der Chat mit AIFly ORACLE ist noch nicht aktiv. Er soll Ihnen helfen, Leistungen und
                 passende Seiten zu finden und Ihre Anfrage vorzubereiten. AIFly ORACLE ist ein
                 KI-System, kein Mensch, und kann sich irren.
               </p>
@@ -306,11 +306,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-aifly-oracle">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/ki-hinweise">
               KI mit klarer Verantwortung.
@@ -360,7 +360,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Produkte</span>
           <h3>
             <a href="/produkte/nex-agentic-aifly">
               NeX Agentic AIFly. Der Agent, der ausführt.
@@ -409,7 +409,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Kontakt</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -459,7 +459,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Unternehmen</span>
           <h3>
             <a href="/unternehmen">
               Ein Ansprechpartner. Ein Agententeam.
@@ -482,8 +482,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und
-            Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir nennen das AI
-            FACTORY.
+            Richtung vor. Die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
           </p>
           <a
             aria-label="Ein Ansprechpartner. Ein Agententeam. – Seite ansehen"

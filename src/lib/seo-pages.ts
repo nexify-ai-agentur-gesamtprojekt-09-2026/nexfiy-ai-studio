@@ -150,7 +150,7 @@ export const SEITEN: Seite[] = [
     titel: "AIFly ORACLE – erst ordnen, dann handeln",
     kurz: "AIFly ORACLE",
     beschreibung:
-      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist in Vorbereitung.",
+      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist noch nicht aktiv.",
     typ: "produkt",
     index: true,
   },

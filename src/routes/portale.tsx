@@ -178,8 +178,8 @@ function Index() {
             <div className={"pc-section-body"}>
               <p>
                 Jeder Bereich ist mit eigenen Rollen und Rechten geplant. Ein Zugang gilt für Ihren
-                Bereich, nicht für einen anderen. Das NeXify-Kundencenter wird derzeit eingerichtet;
-                eine Anmeldung ist noch nicht möglich.
+                Bereich, nicht für einen anderen. Das Kundencenter wird derzeit eingerichtet. Eine
+                Anmeldung ist noch nicht möglich.
               </p>
             </div>
           </section>
@@ -268,11 +268,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-portals">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Produkte</span>
           <h3>
             <a href="/produkte/nex2fly">
               NeX AIFly Suite. Ihr KI-Arbeitsbereich.
