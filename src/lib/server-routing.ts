@@ -12,9 +12,10 @@ import { isRetiredPath } from "./system-pages";
 export const PERMANENT_REDIRECTS: Record<string, string> = {
   "/preise": "/preise-ablauf",
   "/preise/": "/preise-ablauf",
-  // 2026-11-21 01:40 ([ADDRESS]): /login -> /anmelden (Seite heisst hier so).
-  "/login": "/anmelden",
-  "/login/": "/anmelden",
+  // 2026-11-22 (Europe/Berlin): /login führt direkt auf /portale. Vorher ging es auf /anmelden;
+  // diese Adresse leitet inzwischen selbst dorthin weiter (siehe TEMPORARY_REDIRECTS).
+  "/login": "/portale",
+  "/login/": "/portale",
   // 2026-11-21 02:30 ([ADDRESS]/Berlin): Backend-CTAs und alte Mails zeigten auf /konto (HTTP 404).
   // Der Kundenbereich heisst hier /portale; der Redirect haelt alte Links am Leben.
   "/konto": "/portale",
@@ -34,6 +35,20 @@ export const PERMANENT_REDIRECTS: Record<string, string> = {
 export const TEMPORARY_REDIRECTS: Record<string, string> = {
   "/kundencenter": "/portale",
   "/kundencenter/": "/portale",
+  // 2026-11-22 (Europe/Berlin): Die drei Kontoadressen zeigten denselben Hinweis wie /portale
+  // („Kundencenter in Einrichtung"), also viermal dieselbe Seite. Bis es eine Anmeldung gibt,
+  // führen sie vorläufig auf /portale. 302, weil die Adressen später wieder eigene Seiten werden;
+  // die Routendateien bleiben dafür erhalten.
+  "/anmelden": "/portale",
+  "/anmelden/": "/portale",
+  "/registrieren": "/portale",
+  "/registrieren/": "/portale",
+  "/passwort-vergessen": "/portale",
+  "/passwort-vergessen/": "/portale",
+  // /produkte hat keine Übersichtsseite; alle Produktadressen liegen darunter. Vorläufig auf das
+  // erste Produkt, bis eine Übersicht entschieden ist.
+  "/produkte": "/produkte/nex2fly",
+  "/produkte/": "/produkte/nex2fly",
 };
 
 /**

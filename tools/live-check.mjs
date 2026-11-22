@@ -25,9 +25,10 @@ const BASE = (
   argBase ? argBase.slice(7) : process.env.LIVE_BASE || "https://www.nexifyai.de"
 ).replace(/\/$/, "");
 
-// 2026-11-22 (Europe/Berlin): Die Kontoseiten zeigen den Stand des Kundencenters statt
-// Formularen ohne Gegenstelle. Geprueft wird deshalb das Gegenteil von frueher: kein <form>,
-// kein Submit-Button, dafuer der Hinweis und der Weg zur Kontaktseite.
+// 2026-11-22 (Europe/Berlin): Die Kontoadressen leiten vorlaeufig (302) auf /portale, weil sie
+// denselben Hinweis zeigten. Geprueft wird die Weiterleitung. Liefert eine der Adressen doch
+// wieder eine Seite (200), gilt weiter: kein <form>, kein Submit-Button, dafuer der Hinweis und
+// der Weg zur Kontaktseite.
 const AUTH_PAGES = ["/anmelden", "/registrieren", "/passwort-vergessen"];
 const AUTH_NOTICE = "Das NeXify-Kundencenter wird derzeit eingerichtet.";
 // Die Referenz-Aufnahmen dieser Seiten zeigen noch die frueheren Formulare. Deren Anker
@@ -164,6 +165,32 @@ const BASE_HOST = new URL(BASE).host;
 
 for (const route of routes) {
   const file = files.find((f) => toUrl(f) === route);
+  if (AUTH_PAGES.includes(route)) {
+    const direkt = await get(BASE + route, { redirect: "manual" });
+    if (direkt.status !== 200) {
+      let ziel = "";
+      try {
+        ziel = new URL(direkt.location || "", BASE).pathname;
+      } catch {
+        ziel = "";
+      }
+      if (direkt.status !== 302 || ziel !== "/portale")
+        problems.push({
+          route,
+          kind: "Weiterleitung",
+          detail: `erwartet 302 -> /portale, erhalten ${direkt.status} -> ${direkt.location || "-"}`,
+        });
+      rows.push({
+        route,
+        status: direkt.status,
+        canonical: true,
+        h1: true,
+        coverage: "-> /portale",
+        missing: 0,
+      });
+      continue;
+    }
+  }
   const { status, body, finalUrl } = await get(BASE + route);
   // Marken-Weiterleitung erkennen: fremder Host = anderer Auftritt, andere CI.
   let external = null;
@@ -309,7 +336,7 @@ const loginOk =
   login.status === 303 ||
   login.status === 307 ||
   login.status === 308
-    ? String(login.location || "").includes("/anmelden")
+    ? String(login.location || "").includes("/portale")
     : login.status === 200;
 if (!loginOk)
   problems.push({
@@ -333,9 +360,11 @@ for (const alt of RETIRED_PATHS) {
 
 // Kurzadressen des Kundencenters auf /portale derselben Domain. /kundencenter nur vorlaeufig
 // (302): der Pfad wird spaeter der geschuetzte Einstieg; ein 301 bliebe im Browser haengen.
-for (const [kurz, code] of [
+for (const [kurz, code, soll = "/portale"] of [
   ["/kundencenter", 302],
   ["/kundenportal", 301],
+  ["/login", 301],
+  ["/produkte", 302, "/produkte/nex2fly"],
 ]) {
   const res = await get(BASE + kurz, { redirect: "manual" });
   let ziel = "";
@@ -344,11 +373,11 @@ for (const [kurz, code] of [
   } catch {
     ziel = "";
   }
-  if (res.status !== code || ziel !== "/portale")
+  if (res.status !== code || ziel !== soll)
     problems.push({
       route: kurz,
       kind: "Weiterleitung",
-      detail: `erwartet ${code} -> /portale, erhalten ${res.status} -> ${res.location || "-"}`,
+      detail: `erwartet ${code} -> ${soll}, erhalten ${res.status} -> ${res.location || "-"}`,
     });
 }
 

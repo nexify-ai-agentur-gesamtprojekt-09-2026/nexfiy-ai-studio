@@ -5,9 +5,9 @@
 # genannt. Sie stehen in derselben Gruppe wie alle anderen: Eine eigene Gruppe je Crawler würde
 # die Regeln der Gruppe "*" für ihn aufheben, also auch die Sperre von /api/.
 #
-# Die Hinweisseiten des Kundencenters (/anmelden, /registrieren, /passwort-vergessen) und
-# /offline sind hier nicht gesperrt: Sie tragen "noindex". Das wirkt nur, wenn die Seite
-# abgerufen werden darf.
+# Die Kontoadressen (/anmelden, /registrieren, /passwort-vergessen) leiten vorläufig auf
+# /portale weiter. Sie und /offline sind hier nicht gesperrt: "noindex" und eine Weiterleitung
+# wirken nur, wenn die Adresse abgerufen werden darf.
 
 User-agent: *
 User-agent: GPTBot

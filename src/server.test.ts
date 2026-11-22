@@ -116,13 +116,55 @@ describe("Kurzadressen des Kundencenters", () => {
   );
 
   it("lässt die bestehenden Kurzadressen unverändert", async () => {
-    expect((await abruf("/login")).headers.get("location")).toBe(
-      "https://www.nexifyai.de/anmelden",
-    );
+    const login = await abruf("/login");
+    expect(login.status).toBe(301);
+    expect(login.headers.get("location")).toBe("https://www.nexifyai.de/portale");
     expect((await abruf("/konto")).headers.get("location")).toBe("https://www.nexifyai.de/portale");
     expect((await abruf("/preise")).headers.get("location")).toBe(
       "https://www.nexifyai.de/preise-ablauf",
     );
+  });
+});
+
+describe("Kontoadressen und /produkte", () => {
+  it.each([
+    "/anmelden",
+    "/anmelden/",
+    "/registrieren",
+    "/registrieren/",
+    "/passwort-vergessen",
+    "/passwort-vergessen/",
+  ])(
+    "%s leitet vorläufig (302) auf /portale, statt denselben Hinweis zu wiederholen",
+    async (pfad) => {
+      gesehen.length = 0;
+      const antwort = await abruf(pfad);
+      expect(antwort.status).toBe(302);
+      expect(antwort.headers.get("location")).toBe("https://www.nexifyai.de/portale");
+      // Die Seitenausgabe wird für diese Adressen nicht mehr gefragt.
+      expect(gesehen).toEqual([]);
+    },
+  );
+
+  it.each(["/produkte", "/produkte/"])("%s leitet vorläufig (302) auf die Suite", async (pfad) => {
+    const antwort = await abruf(pfad);
+    expect(antwort.status).toBe(302);
+    expect(antwort.headers.get("location")).toBe("https://www.nexifyai.de/produkte/nex2fly");
+  });
+
+  it("lässt die Produktseiten selbst und den Querystring in Ruhe", async () => {
+    gesehen.length = 0;
+    await abruf("/produkte/nex2fly");
+    expect(gesehen).toEqual(["/produkte/nex2fly"]);
+    expect((await abruf("/anmelden?von=mail")).headers.get("location")).toBe(
+      "https://www.nexifyai.de/portale?von=mail",
+    );
+  });
+
+  it("keine Weiterleitung zeigt auf eine Adresse, die selbst weiterleitet", async () => {
+    const { PERMANENT_REDIRECTS, TEMPORARY_REDIRECTS } = await import("./lib/server-routing");
+    const alle: Record<string, string> = { ...PERMANENT_REDIRECTS, ...TEMPORARY_REDIRECTS };
+    for (const [quelle, ziel] of Object.entries(alle)) expect(alle[ziel], quelle).toBeUndefined();
   });
 });
 
