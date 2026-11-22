@@ -44,14 +44,16 @@ export const CHAT_FEHLERTEXT: Record<ChatFehler, string> = {
   unbekannt: "Die Nachricht konnte nicht gesendet werden.",
 };
 
-/** Bei diesen Ursachen hilft ein erneutes Senden derselben Frage. */
+/**
+ * Bei diesen Ursachen hilft ein erneutes Senden derselben Frage. Nicht dabei: `nicht_verfuegbar`
+ * (abgeschaltet oder nicht eingerichtet – ein zweiter Versuch ändert daran nichts).
+ */
 export const CHAT_WIEDERHOLBAR: ReadonlySet<ChatFehler> = new Set([
   "offline",
   "netz",
   "unvollstaendig",
   "zeit",
   "limit_kurz",
-  "nicht_verfuegbar",
   "anbieter",
   "unbekannt",
 ]);
@@ -204,15 +206,19 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<Sende
   }
 }
 
-/** Fragt den Schalterzustand ab (kein Modellaufruf). Bei Fehlern gilt der Chat als nutzbar. */
-export async function ladeChatZustand(): Promise<boolean> {
+/**
+ * Fragt den Schalterzustand ab (kein Modellaufruf). true/false nur auf ausdrückliche Antwort des
+ * Servers; bei Netz- oder Serverfehlern `null` (unbekannt) – dann bietet die Oberfläche nichts an,
+ * was gesendet würde.
+ */
+export async function ladeChatZustand(): Promise<boolean | null> {
   try {
     const antwort = await fetch(CHAT_PFAD, { headers: { accept: "application/json" } });
-    if (!antwort.ok) return true;
+    if (!antwort.ok) return null;
     const daten = (await antwort.json()) as { aktiv?: unknown };
-    return daten.aktiv !== false;
+    return typeof daten.aktiv === "boolean" ? daten.aktiv : null;
   } catch {
-    return true;
+    return null;
   }
 }
 
@@ -233,8 +239,13 @@ export interface ChatZustand {
   beschaeftigt: boolean;
   /** Wahl des Besuchers für das angedockte Panel; null = noch keine Wahl. */
   offen: boolean | null;
-  /** false, wenn der Betreiber den Chat abgeschaltet hat oder er nicht eingerichtet ist. */
+  /**
+   * true: Der Server nimmt Fragen an · false: abgeschaltet oder nicht eingerichtet ·
+   * null: noch nicht geprüft oder Prüfung gescheitert (dann ist nichts sendbar).
+   */
   aktiv: boolean | null;
+  /** Zustandsabfrage: läuft gerade · gescheitert (Netz/Server) · null: keine offen. */
+  pruefung: "laeuft" | "fehler" | null;
 }
 
 const LEER: ChatZustand = {
@@ -243,6 +254,7 @@ const LEER: ChatZustand = {
   beschaeftigt: false,
   offen: null,
   aktiv: null,
+  pruefung: null,
 };
 
 let zustand: ChatZustand = LEER;
@@ -377,9 +389,12 @@ async function frage(nachricht: string, frageId: string): Promise<void> {
 }
 
 async function pruefeZustand(erneut = false): Promise<void> {
+  if (zustand.pruefung === "laeuft") return;
   if (zustand.aktiv !== null && !erneut) return;
+  // Nur der Speicher im Modul: Zustand und Prüfung gehören nicht in den Sitzungsspeicher.
+  setze({ pruefung: "laeuft" }, false);
   const aktiv = await ladeChatZustand();
-  setze({ aktiv });
+  setze({ aktiv, pruefung: aktiv === null ? "fehler" : null }, false);
 }
 
 export const chat = {
@@ -387,6 +402,8 @@ export const chat = {
   sende(text: string): boolean {
     lade();
     const nachricht = text.trim();
+    // Nur wenn der Server ausdrücklich Fragen annimmt (GET /api/chat meldete aktiv: true).
+    if (zustand.aktiv !== true) return false;
     if (zustand.beschaeftigt || nachricht.length < 2 || nachricht.length > CHAT_MAX_ZEICHEN)
       return false;
     const frageId = neueId();
@@ -401,7 +418,7 @@ export const chat = {
   },
   /** Sendet die letzte Frage erneut, nachdem die Antwort ausgeblieben oder abgebrochen ist. */
   wiederhole(): void {
-    if (zustand.beschaeftigt) return;
+    if (zustand.beschaeftigt || zustand.aktiv !== true) return;
     const letzte = zustand.eintraege.at(-1);
     const davor = zustand.eintraege.at(-2);
     if (!letzte || letzte.rolle !== "assistant" || letzte.status === "fertig") return;

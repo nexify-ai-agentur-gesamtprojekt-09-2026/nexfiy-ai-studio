@@ -2,7 +2,8 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
-import { handleChat, type ChatBindings } from "./lib/chat-api";
+import { ermittleChatZustand, handleChat, type ChatBindings } from "./lib/chat-api";
+import { setzeChatSchalter } from "./lib/chat-schalter";
 import { renderErrorPage } from "./lib/error-page";
 import { offlineResponse, serviceWorkerResponse, type PwaBindings } from "./lib/pwa";
 import { OFFLINE_PATH, SW_PATH } from "./lib/pwa-config";
@@ -117,6 +118,14 @@ export default {
           Response.redirect(new URL(`${temporary}${url.search}`, url.origin).toString(), 302),
         );
       const handler = await getServerEntry();
+      // Chat-Schalter fürs Seiten-HTML (src/lib/chat-schalter.ts): vor dem Rendern ermittelt, damit
+      // die Seite ohne Zusatzanfrage weiß, ob es einen Chat gibt. Im Zweifel aus.
+      setzeChatSchalter(
+        await ermittleChatZustand(env as ChatBindings).then(
+          (zustand) => zustand.aktiv,
+          () => false,
+        ),
+      );
       const retired = retiredPathUrl(url);
       if (retired) {
         const response = await handler.fetch(

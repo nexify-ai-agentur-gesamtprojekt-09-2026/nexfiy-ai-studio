@@ -19,6 +19,7 @@ import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
 import { PwaRegistration } from "@/components/pwa/PwaRegistration";
 import { siteJsonLd } from "@/lib/seo";
+import { CHAT_SCHALTER_ATTRIBUT, chatSchalterAn } from "@/lib/chat-schalter";
 import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
 
 function useDocumentTitle(title: string) {
@@ -194,7 +195,12 @@ function RootShell({ children }: { children: ReactNode }) {
     select: (matches) => matches.at(-1)?.staticData.importedDocument,
   });
   return (
-    <html lang="de" {...importedDocument?.html}>
+    <html
+      lang="de"
+      // Chat an oder aus, vom Server gerendert (src/lib/chat-schalter.ts); im Browser von hier gelesen.
+      {...{ [CHAT_SCHALTER_ATTRIBUT]: chatSchalterAn() ? "an" : "aus" }}
+      {...importedDocument?.html}
+    >
       <head>
         <style href="site-import-inline" precedence="imported-inline">
           {"@layer imported-inline;"}

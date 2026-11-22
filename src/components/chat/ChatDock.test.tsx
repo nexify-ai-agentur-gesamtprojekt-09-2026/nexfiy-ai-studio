@@ -64,7 +64,8 @@ async function oeffne() {
   return screen.findByRole("dialog");
 }
 async function frage(text: string) {
-  fireEvent.change(screen.getByLabelText("Ihre Frage an den KI-Assistenten"), {
+  // Das Eingabefeld erscheint erst, wenn der Server den Chat als aktiv gemeldet hat.
+  fireEvent.change(await screen.findByLabelText("Ihre Frage an den KI-Assistenten"), {
     target: { value: text },
   });
   await act(async () => {
@@ -200,7 +201,8 @@ describe("ChatDock", () => {
   it.each([
     [() => fehler(429, "zu_viele_anfragen"), CHAT_FEHLERTEXT.limit_kurz, true],
     [() => fehler(429, "tageslimit_erreicht"), CHAT_FEHLERTEXT.limit_tag, false],
-    [() => fehler(503, "chat_not_configured"), CHAT_FEHLERTEXT.nicht_verfuegbar, true],
+    // Abgeschaltet oder nicht eingerichtet: ein zweiter Versuch ändert nichts, also kein „Erneut senden“.
+    [() => fehler(503, "chat_not_configured"), CHAT_FEHLERTEXT.nicht_verfuegbar, false],
     [() => fehler(502, "upstream_fehler"), CHAT_FEHLERTEXT.anbieter, true],
     [() => fehler(504, "upstream_zeit"), CHAT_FEHLERTEXT.zeit, true],
     [
@@ -354,6 +356,55 @@ describe("ChatDock", () => {
     expect(posts()).toHaveLength(0);
   });
 
+  it("bietet bei unbekanntem Zustand nichts Sendbares an und lässt erneut prüfen", async () => {
+    let gemeldet = false;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string, init?: RequestInit) => {
+        aufrufe.push({ url, init });
+        if (init?.method === "POST") throw new TypeError("kein Netz");
+        if (!gemeldet) {
+          gemeldet = true;
+          throw new TypeError("Failed to fetch");
+        }
+        return new Response(JSON.stringify({ ok: true, aktiv: true }), { status: 200 });
+      }),
+    );
+    const dialog = await oeffne();
+    const erneut = await screen.findByRole("button", { name: "Erneut prüfen" });
+    expect(screen.queryByLabelText("Ihre Frage an den KI-Assistenten")).toBeNull();
+    expect(dialog.querySelector(".nxc-einstiege")).toBeNull();
+    expect(dialog).not.toHaveTextContent(/übermittelt|Sie schreiben mit/);
+    expect(dialog.querySelector('.nxc-aus a[href="/kontakt"]')).not.toBeNull();
+    // Auch über die Programmierschnittstelle geht nichts hinaus, solange der Zustand offen ist.
+    const { chat } = await import("@/lib/chat-client");
+    expect(chat.sende("Hallo zusammen")).toBe(false);
+    await act(async () => {
+      fireEvent.click(erneut);
+    });
+    expect(await screen.findByLabelText("Ihre Frage an den KI-Assistenten")).toBeInTheDocument();
+    expect(dialog.querySelector(".nxc-einstiege")).not.toBeNull();
+    expect(posts()).toHaveLength(0);
+  });
+
+  it("zeigt bis zur Antwort des Servers nur den Verbindungsaufbau", async () => {
+    let melde: (r: Response) => void = () => {};
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url: string, init?: RequestInit) => {
+        aufrufe.push({ url, init });
+        return new Promise<Response>((weiter) => (melde = weiter));
+      }),
+    );
+    const dialog = await oeffne();
+    expect(dialog).toHaveTextContent("Assistent wird verbunden");
+    expect(screen.queryByLabelText("Ihre Frage an den KI-Assistenten")).toBeNull();
+    expect(dialog.querySelector(".nxc-einstiege")).toBeNull();
+    expect(dialog).not.toHaveTextContent(/übermittelt/);
+    await act(async () => melde(new Response(JSON.stringify({ ok: true, aktiv: false }))));
+    await screen.findByText("Der Assistent ist derzeit nicht verfügbar.");
+  });
+
   it("schließt mit Escape, gibt die Seite frei und setzt den Fokus auf den Auslöser", async () => {
     stelleFetch([]);
     await oeffne();
@@ -380,6 +431,36 @@ describe("ChatDock", () => {
 });
 
 describe("ChatDock: Fokus", () => {
+  it("verliert den Fokus nicht an die Seite, wenn der Stopp-Knopf mit der fertigen Antwort verschwindet", async () => {
+    let gib: (r: Response) => void = () => {};
+    stelleFetch([() => new Promise<Response>((weiter) => (gib = weiter))]);
+    await oeffne();
+    await frage("Was bieten Sie an?");
+    const stopp = await screen.findByRole("button", { name: "Antwort abbrechen" });
+    stopp.focus();
+    expect(stopp).toHaveFocus();
+    await act(async () => gib(fertig("Fertig.")()));
+    await screen.findByText("Fertig.");
+    expect(document.activeElement).not.toBe(document.body);
+    expect(screen.getByLabelText("Ihre Frage an den KI-Assistenten")).toHaveFocus();
+  });
+
+  it("fängt den Fokus auf, wenn das Eingabefeld beim Abschalten verschwindet", async () => {
+    stelleFetch([() => fehler(503, "chat_abgeschaltet")], true);
+    await oeffne();
+    await frage("Hallo zusammen");
+    const feld = screen.getByLabelText("Ihre Frage an den KI-Assistenten");
+    feld.focus();
+    // Die erneute Zustandsprüfung nach dem 503 meldet jetzt „aus“.
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response(JSON.stringify({ ok: true, aktiv: false }))),
+    );
+    await screen.findByText("Der Assistent ist derzeit nicht verfügbar.");
+    expect(document.activeElement).not.toBe(document.body);
+    expect(document.getElementById("nexify-chat")?.contains(document.activeElement)).toBe(true);
+  });
+
   it("hält den Fokus im Dialog: Tab am Ende springt zum Anfang, Umschalt+Tab am Anfang zum Ende", async () => {
     stelleFetch([]);
     const dialog = await oeffne();

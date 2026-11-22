@@ -80,10 +80,13 @@ function Eintrag({
   eintrag,
   letzter,
   beschaeftigt,
+  bereit,
 }: {
   eintrag: ChatEintrag;
   letzter: boolean;
   beschaeftigt: boolean;
+  /** Der Server nimmt Fragen an (aktiv === true); sonst kein „Erneut senden“. */
+  bereit: boolean;
 }) {
   if (eintrag.rolle === "user") {
     return (
@@ -98,7 +101,10 @@ function Eintrag({
   // Ohne Text gibt es keine Antwort zu zeigen: dann steht nur die Meldung, nicht die Antwortkarte.
   const ohneAntwort = eintrag.status === "fehler" || (unvollstaendig && !eintrag.text);
   const wiederholbar =
-    letzter && !beschaeftigt && (!eintrag.fehler || CHAT_WIEDERHOLBAR.has(eintrag.fehler));
+    letzter &&
+    bereit &&
+    !beschaeftigt &&
+    (!eintrag.fehler || CHAT_WIEDERHOLBAR.has(eintrag.fehler));
   return (
     <li
       className={ohneAntwort ? "nxc-n nxc-n-stoerung" : "nxc-n nxc-n-ki"}
@@ -166,7 +172,7 @@ function Eintrag({
 
 export function ChatDock({ dock }: { dock: ChatDockZustand }) {
   const { offen, breit, oeffne, schliesse, ausloeser } = dock;
-  const { eintraege, beschaeftigt, aktiv } = useChat();
+  const { eintraege, beschaeftigt, aktiv, pruefung } = useChat();
   const online = useSyncExternalStore(
     abonniereNetz,
     () => navigator.onLine !== false,
@@ -281,18 +287,40 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
   };
   const beiAbsenden = (ereignis: FormEvent) => {
     ereignis.preventDefault();
-    if (beschaeftigt) return;
+    if (beschaeftigt || !bereit) return;
     sende(entwurf);
   };
   const beiEingabeTaste = (ereignis: ReactKeyboardEvent<HTMLTextAreaElement>) => {
     if (ereignis.key !== "Enter" || ereignis.shiftKey || ereignis.nativeEvent.isComposing) return;
     ereignis.preventDefault();
-    if (!beschaeftigt) sende(entwurf);
+    if (!beschaeftigt && bereit) sende(entwurf);
   };
 
+  // Sendbar ist nur, was der Server ausdrücklich annimmt. Abgeschaltet oder unbekannt: kein
+  // Eingabefeld, keine Einstiegsfragen, kein Übermittlungshinweis, kein „Erneut senden“.
+  const bereit = aktiv === true;
   const abgeschaltet = aktiv === false;
   const leer = eintraege.length === 0;
-  const kannSenden = entwurf.trim().length >= 2 && !beschaeftigt && online;
+  const kannSenden = bereit && entwurf.trim().length >= 2 && !beschaeftigt && online;
+
+  // Fokus nicht an die Seite verlieren, wenn ein Bedienelement im Panel mit einem Zustandswechsel
+  // verschwindet (Stopp → Senden, Eingabefeld → Hinweis „nicht verfügbar“, „Erneut senden“).
+  const fokusImPanel = useRef(false);
+  const fokusAuffangen = () => {
+    const element = panel.current;
+    if (!element || element.hidden || !fokusImPanel.current) return;
+    const aktuell = document.activeElement;
+    // Ein Knopf, der gerade gesperrt wurde, hält den Fokus nicht sinnvoll (Browser geben ihn ab).
+    const gesperrt =
+      aktuell instanceof HTMLButtonElement && aktuell.disabled && element.contains(aktuell);
+    if (aktuell && aktuell !== document.body && element.contains(aktuell) && !gesperrt) return;
+    if (aktuell && aktuell !== document.body && !gesperrt) {
+      fokusImPanel.current = false;
+      return;
+    }
+    (eingabe.current ?? element).focus();
+  };
+  useLayoutEffect(fokusAuffangen);
 
   return (
     <>
@@ -330,6 +358,24 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
         aria-labelledby="nexify-chat-titel"
         tabIndex={-1}
         onKeyDown={beiPanelTaste}
+        onFocus={() => {
+          fokusImPanel.current = true;
+        }}
+        onBlur={(ereignis) => {
+          const ziel = ereignis.relatedTarget;
+          if (ziel instanceof Node && panel.current?.contains(ziel)) return;
+          if (ziel) {
+            fokusImPanel.current = false;
+            return;
+          }
+          // Ohne neues Ziel: entweder verlässt der Besucher das Panel, oder das Element ist mit
+          // einem Zustandswechsel verschwunden. Erst nach dem Rendern entscheiden.
+          const weg = ereignis.target;
+          requestAnimationFrame(() => {
+            if (weg.isConnected) fokusImPanel.current = false;
+            else fokusAuffangen();
+          });
+        }}
       >
         <header className="nxc-kopf">
           <span className="nxc-avatar" aria-hidden="true">
@@ -382,9 +428,9 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
             amEnde.current = liste.scrollHeight - liste.scrollTop - liste.clientHeight < 48;
           }}
         >
-          {/* Abgeschaltet wird nichts übermittelt: dann steht hier auch kein Hinweis darauf. */}
-          {!abgeschaltet && <Hinweis />}
-          {leer && !abgeschaltet && (
+          {/* Übermittelt wird nur, wenn der Server Fragen annimmt: nur dann steht hier der Hinweis. */}
+          {bereit && <Hinweis />}
+          {leer && bereit && (
             <div className="nxc-start">
               <h3>Womit kann ich Ihnen weiterhelfen?</h3>
               <p>
@@ -396,7 +442,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
                   <li key={frage}>
                     <button
                       type="button"
-                      disabled={beschaeftigt || !online}
+                      disabled={!bereit || beschaeftigt || !online}
                       onClick={() => sende(frage)}
                     >
                       <span>{frage}</span>
@@ -415,6 +461,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
                   eintrag={eintrag}
                   letzter={index === eintraege.length - 1}
                   beschaeftigt={beschaeftigt}
+                  bereit={bereit}
                 />
               ))}
             </ol>
@@ -437,6 +484,38 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
                 Zum Kontaktformular
               </a>
             </div>
+          ) : !bereit ? (
+            <div className="nxc-aus" role="status">
+              {pruefung === "fehler" ? (
+                <>
+                  <p>
+                    <strong>Der Assistent ist gerade nicht erreichbar.</strong> Ihre Frage erreicht
+                    uns direkt über das Kontaktformular.
+                  </p>
+                  <div className="nxc-aktionen">
+                    <button
+                      type="button"
+                      className="nxc-knopf"
+                      onClick={() => void chat.pruefeZustand(true)}
+                    >
+                      Erneut prüfen
+                    </button>
+                    <a className="nxc-knopf nxc-knopf-leise" href="/kontakt">
+                      Zum Kontaktformular
+                    </a>
+                  </div>
+                </>
+              ) : (
+                <p className="nxc-wartet">
+                  <span className="nxc-punkte" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  Assistent wird verbunden …
+                </p>
+              )}
+            </div>
           ) : (
             <form className="nxc-eingabe" onSubmit={beiAbsenden}>
               <label className="nxc-sr" htmlFor={CHAT_EINGABE_ID}>
@@ -456,6 +535,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
               />
               {beschaeftigt ? (
                 <button
+                  key="stopp"
                   type="button"
                   className="nxc-senden nxc-stopp"
                   aria-label="Antwort abbrechen"
@@ -466,6 +546,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
                 </button>
               ) : (
                 <button
+                  key="senden"
                   type="submit"
                   className="nxc-senden"
                   aria-label="Frage senden"
@@ -485,7 +566,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
               )}
             </form>
           )}
-          {!abgeschaltet && (
+          {bereit && (
             <p className="nxc-recht">
               KI-Antworten können Fehler enthalten und sind unverbindlich. Keine sensiblen Daten
               eingeben. <a href="/ki-hinweise">KI-Hinweise</a> ·{" "}

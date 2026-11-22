@@ -114,6 +114,32 @@ Solange der Chat abgeschaltet ausgeliefert wird (`CHAT_AKTIV` nicht gesetzt), en
 Verlauf; gespeichert wird höchstens die Panel-Wahl. Die Rechtstexte beschreiben diese Speicherung
 noch nicht – das Nachziehen ist Sache des Inhabers und Voraussetzung für das Einschalten.
 
+## Auslieferung, Migrationen und Variablen
+
+`tools/deploy-live.sh` baut, setzt Zielname und D1-Binding in `.output/server/wrangler.json`,
+schreibt den Build-Stempel und ruft `wrangler deploy` auf. Es setzt dabei `keep_vars: true`
+(Cloudflare: „Whether Wrangler should keep variables configured in the dashboard on deploy“,
+developers.cloudflare.com/workers/wrangler/configuration/). Ohne diesen Schlüssel ersetzte jeder
+Deploy die im Dashboard gesetzten Klartext-Variablen (`SENDER_EMAIL`, `ANFRAGE_TO`, `CHAT_AKTIV`)
+durch die leere Liste der gebauten Konfiguration. Secrets bleiben bei einem Deploy ohnehin erhalten.
+
+Das Skript **wendet keine Migrationen an und setzt keine Variablen oder Secrets**. Beides geschieht
+von Hand und einzeln:
+
+- Migrationen unter `migrations/` jeweils genau einmal mit
+  `npx wrangler d1 execute nexify-main --remote --file migrations/<datei>.sql`.
+  `0003-chat-aufbewahrung.sql` enthält `ALTER TABLE … ADD COLUMN versuche` und bricht beim zweiten
+  Lauf ab. Vorher prüfen:
+  `npx wrangler d1 execute nexify-main --remote --command "SELECT name FROM pragma_table_info('chat_nachrichten') WHERE name = 'versuche'"`
+  – leeres Ergebnis heißt: noch nicht angewendet.
+- `GET /api/chat` meldet `aktiv: true` nur, wenn `CHAT_AKTIV` eingeschaltet ist, alle Bindings
+  stehen und die Spalte `versuche` existiert (Prüfung je Isolate zwischengespeichert, ein
+  Fehlschlag nur 60 s). Sonst `grund: "nicht_eingerichtet"` bzw. `"abgeschaltet"`.
+- Derselbe Zustand steht serverseitig im Seiten-HTML (`<html data-nxc-chat="an|aus">`, gesetzt in
+  `src/server.ts` vor dem Rendern). Bei `aus` liefert die Seite keinen Chat-Auslöser, kein Panel,
+  keinen Aufruf von `/api/chat` und keinen Eintrag im Sitzungsspeicher; die Knöpfe „Vorhaben
+  schildern“ der Startseite führen dann zu `/kontakt`.
+
 ## Prüfen
 
 - `npm test`: Cache-Regeln und Rückbau (`src/lib/pwa.test.ts`, `src/lib/pwa-client.test.ts`),

@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 
 export interface ShellChat {
   chatOpen: boolean;
-  openChat: () => void;
+  /** null, wenn der Chat abgeschaltet ist: Knöpfe, die ihn öffnen würden, führen dann zu /kontakt. */
+  openChat: (() => void) | null;
   closeChat: () => void;
 }
 import shellCSS from "../../styles/site-shell.css?url";
@@ -14,6 +15,7 @@ import {
 } from "@/lib/imported-site";
 import { InstallHint } from "@/components/pwa/InstallHint";
 import { useChatDock } from "@/lib/chat-dock";
+import { chatSchalterAn } from "@/lib/chat-schalter";
 import { ChatDock } from "../chat/ChatDock";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
@@ -32,8 +34,11 @@ export function NexifyShell({
   heroActionSelector?: string;
 }) {
   const isMobile = useImportedMobile();
+  // Vom Server ins HTML gerendert (src/lib/chat-schalter.ts). Aus: kein Auslöser, kein Panel, kein
+  // Aufruf von /api/chat, kein Sitzungsspeicher und keine Spalte ab 1200 px.
+  const chatAn = chatSchalterAn();
   const dock = useChatDock();
-  const chatOpen = dock.offen === true;
+  const chatOpen = chatAn && dock.offen === true;
   // Die Spalte neben der Seite gibt es nur, wenn das Panel angedockt offen ist (ab 1200 px).
   const docked = chatOpen && dock.breit === true;
   const { scrolled, heroActionVisible, footerVisible } = useShellSignals(heroActionSelector);
@@ -45,7 +50,7 @@ export function NexifyShell({
         docked ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"
       }
       id="atelier"
-      data-nxc={dock.offen === null ? "auto" : dock.offen ? "offen" : "zu"}
+      data-nxc={!chatAn ? "aus" : dock.offen === null ? "auto" : dock.offen ? "offen" : "zu"}
       data-hero-action-visible={heroActionSelector && heroActionVisible ? "true" : undefined}
       data-scrolled={scrolled ? "true" : "false"}
       data-chat-compact={isMobile ? undefined : "false"}
@@ -60,13 +65,17 @@ export function NexifyShell({
         <NexifyHeader />
         <main id="page-content" tabIndex={-1}>
           {typeof children === "function"
-            ? children({ chatOpen, openChat: dock.oeffne, closeChat: dock.schliesse })
+            ? children({
+                chatOpen,
+                openChat: chatAn ? dock.oeffne : null,
+                closeChat: dock.schliesse,
+              })
             : children}
         </main>
         <NexifyFooter />
         <InstallHint />
       </div>
-      <ChatDock dock={dock} />
+      {chatAn && <ChatDock dock={dock} />}
     </div>
   );
 }

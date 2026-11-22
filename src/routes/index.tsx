@@ -202,18 +202,22 @@ function Index() {
                 <h2 id="hc-finish-title">Woran arbeiten Sie gerade?</h2>
               </div>
               <div className={"hc-finish-next is-in"}>
-                <p>
-                  Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen
-                  für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.
-                </p>
+                {openChat ? (
+                  <p>
+                    Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen
+                    für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.
+                  </p>
+                ) : (
+                  <p>
+                    Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze im
+                    Kontaktformular genügen für den Anfang. Alles Weitere klären wir im Gespräch.
+                  </p>
+                )}
                 <div className={"hc-finish-actions"}>
-                  <button
-                    aria-controls="nexify-chat"
-                    aria-expanded={chatOpen}
-                    type="button"
+                  <VorhabenKnopf
+                    openChat={openChat}
+                    chatOpen={chatOpen}
                     className={"nexify-control primary-button hc-finish-primary"}
-                    data-variant="primary"
-                    onClick={openChat}
                   >
                     Vorhaben schildern
                     <svg
@@ -231,7 +235,7 @@ function Index() {
                     >
                       <path d="M4 12h16M13 5l7 7-7 7" />
                     </svg>
-                  </button>
+                  </VorhabenKnopf>
                 </div>
                 <small />
               </div>
@@ -318,7 +322,42 @@ function HomeFaq() {
   );
 }
 
-function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }) {
+/**
+ * „Vorhaben schildern“: öffnet den KI-Chat, wenn er eingeschaltet ist; sonst ein echter Link auf
+ * das Kontaktformular (der Server rendert dann keinen Chat, src/lib/chat-schalter.ts).
+ */
+function VorhabenKnopf({
+  openChat,
+  chatOpen,
+  className,
+  children,
+}: {
+  openChat: (() => void) | null;
+  chatOpen?: boolean;
+  className: string;
+  children: import("react").ReactNode;
+}) {
+  if (!openChat)
+    return (
+      <a href="/kontakt" className={className} data-variant="primary">
+        {children}
+      </a>
+    );
+  return (
+    <button
+      aria-controls="nexify-chat"
+      aria-expanded={chatOpen}
+      type="button"
+      className={className}
+      data-variant="primary"
+      onClick={openChat}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: (() => void) | null }) {
   return (
     <section className={"identity-hero"} aria-labelledby="home-headline">
       <div className={"identity-scene"}>
@@ -336,18 +375,15 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
             wissen vor dem Start, was enthalten ist.
           </p>
           <div className={"identity-links"}>
-            <button
-              aria-controls="nexify-chat"
-              type="button"
+            <VorhabenKnopf
+              openChat={onOpenChat}
               className={"nexify-control primary-button identity-primary-link"}
-              data-variant="primary"
-              onClick={onOpenChat}
             >
               <span>Vorhaben schildern</span>
               <span aria-hidden="true" className={"identity-primary-arrow"}>
                 →
               </span>
-            </button>
+            </VorhabenKnopf>
           </div>
         </div>
         <div className={"identity-media"}>
