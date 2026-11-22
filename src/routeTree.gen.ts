@@ -23,6 +23,7 @@ import { Route as LoesungenRouteImport } from './routes/loesungen'
 import { Route as PasswortVergessenRouteImport } from './routes/passwort-vergessen'
 import { Route as PortaleRouteImport } from './routes/portale'
 import { Route as PreiseAblaufRouteImport } from './routes/preise-ablauf'
+import { Route as RegionenRouteImport } from './routes/regionen'
 import { Route as RegistrierenRouteImport } from './routes/registrieren'
 import { Route as UnternehmenRouteImport } from './routes/unternehmen'
 import { Route as VertragsgrundlagenRouteImport } from './routes/vertragsgrundlagen'
@@ -36,6 +37,7 @@ import { Route as ProdukteNexAgenticAiflyRouteImport } from './routes/produkte_.
 import { Route as ProdukteNex2flyRouteImport } from './routes/produkte_.nex2fly'
 import { Route as ProdukteOneRouteImport } from './routes/produkte_.one'
 import { Route as ProdukteSkillsMcpRouteImport } from './routes/produkte_.skills-mcp'
+import { Route as RegionenLandRouteImport } from './routes/regionen_.$land'
 import { Route as WissenProjektVorbereitenRouteImport } from './routes/wissen_.projekt-vorbereiten'
 
 const IndexRoute = IndexRouteImport.update({
@@ -108,6 +110,11 @@ const PreiseAblaufRoute = PreiseAblaufRouteImport.update({
   path: '/preise-ablauf',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegionenRoute = RegionenRouteImport.update({
+  id: '/regionen',
+  path: '/regionen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegistrierenRoute = RegistrierenRouteImport.update({
   id: '/registrieren',
   path: '/registrieren',
@@ -174,6 +181,11 @@ const ProdukteSkillsMcpRoute = ProdukteSkillsMcpRouteImport.update({
   path: '/produkte/skills-mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegionenLandRoute = RegionenLandRouteImport.update({
+  id: '/regionen_/$land',
+  path: '/regionen/$land',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WissenProjektVorbereitenRoute =
   WissenProjektVorbereitenRouteImport.update({
     id: '/wissen_/projekt-vorbereiten',
@@ -196,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/regionen': typeof RegionenRoute
   '/registrieren': typeof RegistrierenRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -209,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/produkte/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte/one': typeof ProdukteOneRoute
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/regionen/$land': typeof RegionenLandRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesByTo {
@@ -226,6 +240,7 @@ export interface FileRoutesByTo {
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/regionen': typeof RegionenRoute
   '/registrieren': typeof RegistrierenRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -239,6 +254,7 @@ export interface FileRoutesByTo {
   '/produkte/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte/one': typeof ProdukteOneRoute
   '/produkte/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/regionen/$land': typeof RegionenLandRoute
   '/wissen/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRoutesById {
@@ -257,6 +273,7 @@ export interface FileRoutesById {
   '/passwort-vergessen': typeof PasswortVergessenRoute
   '/portale': typeof PortaleRoute
   '/preise-ablauf': typeof PreiseAblaufRoute
+  '/regionen': typeof RegionenRoute
   '/registrieren': typeof RegistrierenRoute
   '/unternehmen': typeof UnternehmenRoute
   '/vertragsgrundlagen': typeof VertragsgrundlagenRoute
@@ -270,6 +287,7 @@ export interface FileRoutesById {
   '/produkte_/nex2fly': typeof ProdukteNex2flyRoute
   '/produkte_/one': typeof ProdukteOneRoute
   '/produkte_/skills-mcp': typeof ProdukteSkillsMcpRoute
+  '/regionen_/$land': typeof RegionenLandRoute
   '/wissen_/projekt-vorbereiten': typeof WissenProjektVorbereitenRoute
 }
 export interface FileRouteTypes {
@@ -289,6 +307,7 @@ export interface FileRouteTypes {
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
+    | '/regionen'
     | '/registrieren'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -302,6 +321,7 @@ export interface FileRouteTypes {
     | '/produkte/nex2fly'
     | '/produkte/one'
     | '/produkte/skills-mcp'
+    | '/regionen/$land'
     | '/wissen/projekt-vorbereiten'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -319,6 +339,7 @@ export interface FileRouteTypes {
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
+    | '/regionen'
     | '/registrieren'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -332,6 +353,7 @@ export interface FileRouteTypes {
     | '/produkte/nex2fly'
     | '/produkte/one'
     | '/produkte/skills-mcp'
+    | '/regionen/$land'
     | '/wissen/projekt-vorbereiten'
   id:
     | '__root__'
@@ -349,6 +371,7 @@ export interface FileRouteTypes {
     | '/passwort-vergessen'
     | '/portale'
     | '/preise-ablauf'
+    | '/regionen'
     | '/registrieren'
     | '/unternehmen'
     | '/vertragsgrundlagen'
@@ -362,6 +385,7 @@ export interface FileRouteTypes {
     | '/produkte_/nex2fly'
     | '/produkte_/one'
     | '/produkte_/skills-mcp'
+    | '/regionen_/$land'
     | '/wissen_/projekt-vorbereiten'
   fileRoutesById: FileRoutesById
 }
@@ -380,6 +404,7 @@ export interface RootRouteChildren {
   PasswortVergessenRoute: typeof PasswortVergessenRoute
   PortaleRoute: typeof PortaleRoute
   PreiseAblaufRoute: typeof PreiseAblaufRoute
+  RegionenRoute: typeof RegionenRoute
   RegistrierenRoute: typeof RegistrierenRoute
   UnternehmenRoute: typeof UnternehmenRoute
   VertragsgrundlagenRoute: typeof VertragsgrundlagenRoute
@@ -393,6 +418,7 @@ export interface RootRouteChildren {
   ProdukteNex2flyRoute: typeof ProdukteNex2flyRoute
   ProdukteOneRoute: typeof ProdukteOneRoute
   ProdukteSkillsMcpRoute: typeof ProdukteSkillsMcpRoute
+  RegionenLandRoute: typeof RegionenLandRoute
   WissenProjektVorbereitenRoute: typeof WissenProjektVorbereitenRoute
 }
 
@@ -496,6 +522,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PreiseAblaufRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regionen': {
+      id: '/regionen'
+      path: '/regionen'
+      fullPath: '/regionen'
+      preLoaderRoute: typeof RegionenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/registrieren': {
       id: '/registrieren'
       path: '/registrieren'
@@ -587,6 +620,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProdukteSkillsMcpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regionen_/$land': {
+      id: '/regionen_/$land'
+      path: '/regionen/$land'
+      fullPath: '/regionen/$land'
+      preLoaderRoute: typeof RegionenLandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wissen_/projekt-vorbereiten': {
       id: '/wissen_/projekt-vorbereiten'
       path: '/wissen/projekt-vorbereiten'
@@ -612,6 +652,7 @@ const rootRouteChildren: RootRouteChildren = {
   PasswortVergessenRoute: PasswortVergessenRoute,
   PortaleRoute: PortaleRoute,
   PreiseAblaufRoute: PreiseAblaufRoute,
+  RegionenRoute: RegionenRoute,
   RegistrierenRoute: RegistrierenRoute,
   UnternehmenRoute: UnternehmenRoute,
   VertragsgrundlagenRoute: VertragsgrundlagenRoute,
@@ -625,6 +666,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProdukteNex2flyRoute: ProdukteNex2flyRoute,
   ProdukteOneRoute: ProdukteOneRoute,
   ProdukteSkillsMcpRoute: ProdukteSkillsMcpRoute,
+  RegionenLandRoute: RegionenLandRoute,
   WissenProjektVorbereitenRoute: WissenProjektVorbereitenRoute,
 }
 export const routeTree = rootRouteImport
