@@ -37,8 +37,7 @@ function Index() {
               <h1 id="page-title-company">Ein Ansprechpartner. Ein Agententeam.</h1>
               <p className={"identity-body"}>
                 NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung
-                und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir nennen das
-                AI FACTORY.
+                und Richtung vor. Die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -174,8 +173,8 @@ function Index() {
             <div className={"pc-section-body"}>
               <p>
                 NeXify AI steht für die Agenturarbeit: Websites, Shops, Portale, Apps und
-                KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich,
-                die Agenten NeX und AIFly ORACLE, die NeXify API.
+                KI-Abläufe. Dazu kommen eigene Produkte: die NeX AIFly Suite als Arbeitsbereich, die
+                Agenten NeX und AIFly ORACLE und die NeXify API. Suite und API gibt es auf Anfrage.
               </p>
             </div>
           </section>
@@ -265,10 +264,7 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>
-          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
-          finden Sie auf der jeweiligen Seite.
-        </p>
+        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/leistungen">

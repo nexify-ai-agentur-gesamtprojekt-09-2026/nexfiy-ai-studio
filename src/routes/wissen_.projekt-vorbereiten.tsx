@@ -62,7 +62,7 @@ function Index() {
                   data-variant="secondary"
                   href="/leistungsumfang"
                 >
-                  Pakete vergleichen
+                  Pakete ansehen
                 </a>
               </div>
             </div>
@@ -135,17 +135,19 @@ function Index() {
               </h2>
             </div>
             <div className={"pc-section-body"}>
-              <p>1. Was bieten Sie an, und für wen?</p>
-              <p>
-                2. Was soll sich ändern – mehr Anfragen, weniger Handarbeit, ein neuer Auftritt?
-              </p>
-              <p>3. Was funktioniert heute gut, und wo springen Kunden ab?</p>
-              <p>4. Welche Unterlagen, Inhalte und Beispiele gibt es schon?</p>
-              <p>5. Welchen Rahmen haben Sie für Budget und Termin?</p>
+              <ol>
+                <li>Was bieten Sie an, und für wen?</li>
+                <li>
+                  Was soll sich ändern: mehr Anfragen, weniger Handarbeit, ein neuer Auftritt?
+                </li>
+                <li>Was funktioniert heute gut, und wo springen Kunden ab?</li>
+                <li>Welche Unterlagen, Inhalte und Beispiele gibt es schon?</li>
+                <li>Welchen Rahmen haben Sie für Budget und Termin?</li>
+              </ol>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Drei Pakete. Ein klarer Umfang.
+                  Pakete ansehen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -220,7 +222,7 @@ function Index() {
                 </svg>
               </a>
               <a className={"hc-text-link"} href="/leistungsumfang">
-                Pakete vergleichen
+                Pakete ansehen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -256,11 +258,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-knowledge-start">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Kontakt</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -310,7 +312,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -359,7 +361,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Arbeitsweise</span>
           <h3>
             <a href="/wissen">
               So arbeiten wir.

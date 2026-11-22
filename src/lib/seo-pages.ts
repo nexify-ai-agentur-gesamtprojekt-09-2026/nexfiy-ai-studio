@@ -53,7 +53,7 @@ export const SEITEN: Seite[] = [
     titel: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen",
     kurz: "Startseite",
     beschreibung:
-      "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
+      "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Umfang und Kosten stehen vor dem Start fest.",
     typ: "start",
     index: true,
   },
@@ -159,7 +159,7 @@ export const SEITEN: Seite[] = [
     titel: "AIFly ORACLE – erst ordnen, dann handeln",
     kurz: "AIFly ORACLE",
     beschreibung:
-      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist in Vorbereitung.",
+      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist noch nicht aktiv.",
     typ: "produkt",
     index: true,
   },

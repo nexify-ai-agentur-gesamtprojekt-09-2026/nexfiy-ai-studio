@@ -76,9 +76,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Zum Beispiel: Eingehende Anfragen werden zugeordnet, oder die Angaben für ein
-                Angebot liegen fertig bereit. Gemeinsam sehen wir uns die Schritte an, die
-                beteiligten Systeme und die Stellen, an denen ein Mensch entscheidet.
+                Zum Beispiel: Eingehende Anfragen landen bei der zuständigen Person. Oder die
+                Angaben für ein Angebot liegen fertig bereit. Gemeinsam sehen wir uns die Schritte
+                an, die beteiligten Systeme und die Stellen, an denen ein Mensch entscheidet.
               </p>
               <p>
                 Dann legen wir Eingaben, Ergebnis und Ausnahmen fest, setzen um und prüfen an einem
@@ -88,7 +88,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Drei Pakete. Ein klarer Umfang.
+                  Pakete ansehen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -120,17 +120,17 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Eine Automatisierung ist so gut wie ihre Quellen. Deshalb steht fest, welche
+                Eine Automatisierung ist so gut wie ihre Quellen. Deshalb legen wir fest, welche
                 Dokumente und Daten sie nutzt, wer sie pflegt und wie Änderungen ankommen.
               </p>
               <p>
-                Fehler werden sichtbar gemeldet, Ausnahmen gehen an eine benannte Person. Auf welche
-                Systeme und Daten die KI zugreift, vereinbaren wir für Ihr Projekt im Angebot.
+                Fehler meldet sie sichtbar, Ausnahmen gehen an eine benannte Person. Auf welche
+                Systeme und Daten die KI zugreift, steht im Angebot für Ihr Projekt.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">
-                  Ihr Briefing in fünf Fragen.
+                  Briefing vorbereiten
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -183,7 +183,7 @@ function Index() {
                 </svg>
               </a>
               <a className={"hc-text-link"} href="/leistungsumfang">
-                Pakete vergleichen
+                Pakete ansehen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -251,7 +251,7 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
               data-variant="secondary"
               href="/leistungsumfang"
             >
-              Pakete vergleichen
+              Pakete ansehen
             </a>
           </div>
         </div>
@@ -275,10 +275,7 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>
-            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
-            einordnen können.
-          </p>
+          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -344,9 +341,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Wiederkehrende Schritte können gezielt unterstützt werden. Freigaben, Ausnahmen und
-                Zuständigkeiten bleiben sichtbar, statt in einer undurchsichtigen Automatisierung zu
-                verschwinden.
+                KI übernimmt gezielt wiederkehrende Schritte. Freigaben, Ausnahmen und
+                Zuständigkeiten bleiben dabei sichtbar.
               </p>
             </div>
           </details>
@@ -370,9 +366,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
-                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
-                Laufende Betreuung wird separat vereinbart.
+                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
+                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
+                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
               </p>
             </div>
           </details>
@@ -396,8 +392,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
-                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
+                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
+                ein etwaiges Werbebudget weisen wir getrennt aus.
               </p>
             </div>
           </details>
@@ -423,9 +419,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Erforderlich sind ein abgegrenzter Prozess, zulässige Datenquellen und berechtigte
-                Zugänge. KI-Ergebnisse können Fehler enthalten. Versand, Veröffentlichung und
-                kostenpflichtige Aktionen brauchen passende Freigaben.
+                Nötig sind ein abgegrenzter Ablauf, Datenquellen, die genutzt werden dürfen, und
+                berechtigte Zugänge. KI-Ergebnisse können Fehler enthalten. Versand,
+                Veröffentlichung und kostenpflichtige Aktionen brauchen deshalb Ihre Freigabe.
               </p>
             </div>
           </details>
@@ -449,9 +445,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
-                noch keine Beauftragung.
+                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
+                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
+                dadurch noch nicht.
               </p>
             </div>
           </details>
@@ -472,11 +468,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-automation">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Kontakt</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -526,7 +522,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -575,7 +571,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/leistungen">
               Website, System, Kampagne. Aus einer Hand.
@@ -624,7 +620,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/leistungen/websites">
               Eine Website, die Ihr Angebot erklärt.
