@@ -137,7 +137,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/kontakt">
-                  Ihr Projekt an die Factory
+                  Vorhaben schildern
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -256,11 +256,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-imprint">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Kontakt</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -310,7 +310,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/vertragsgrundlagen">
               Gute Zusammenarbeit hat klare Grundlagen.
@@ -360,7 +360,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.
@@ -410,7 +410,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/ki-hinweise">
               KI mit klarer Verantwortung.

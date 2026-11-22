@@ -55,7 +55,7 @@ function Index() {
                   data-variant="secondary"
                   href="/leistungsumfang"
                 >
-                  Pakete vergleichen
+                  Pakete ansehen
                 </a>
               </div>
             </div>
@@ -131,14 +131,14 @@ function Index() {
                 Gestaltung, Inhalte, Funktionen und der Umfang.
               </p>
               <p>
-                Ein Beispiel: Soll Ihre Website mehr passende Anfragen bringen, beginnen wir beim
-                Angebot und der Zielgruppe, dann kommen Seitenführung und Kontaktweg. So wissen Sie
+                Ein Beispiel: Soll Ihre Website mehr passende Anfragen bringen, beginnen wir bei
+                Angebot und Zielgruppe. Danach folgen Seitenführung und Kontaktweg. So wissen Sie
                 bei jedem Teil des Projekts, warum es ihn gibt.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">
-                  Ihr Briefing in fünf Fragen.
+                  Briefing vorbereiten
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -177,8 +177,8 @@ function Index() {
                 schriftlich fest.
               </p>
               <p>
-                Pflege und Aktualisierung übernehmen Sie selbst oder vereinbaren sie mit NeXify
-                Care.
+                Pflege und Aktualisierung übernehmen Sie selbst oder vereinbaren sie mit
+                NeXify&nbsp;Care.
               </p>
             </div>
           </section>
@@ -214,7 +214,7 @@ function Index() {
                 </svg>
               </a>
               <a className={"hc-text-link"} href="/leistungsumfang">
-                Pakete vergleichen
+                Pakete ansehen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -268,10 +268,7 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>
-          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
-          finden Sie auf der jeweiligen Seite.
-        </p>
+        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/wissen/projekt-vorbereiten">
