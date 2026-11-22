@@ -46,7 +46,7 @@ function Index() {
                   data-variant="primary"
                   href="/leistungsumfang"
                 >
-                  <span>Pakete ansehen</span>
+                  <span>Pakete vergleichen</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
@@ -130,18 +130,17 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Das Paket umfasst Kampagnenkonzept, Texte, Bild- oder Videomotive und die Zielseite.
-                Am Anfang stehen Ihr Angebot, Ihre Zielgruppe und die Reaktion, die Sie erreichen
-                wollen, etwa mehr passende Anfragen.
+                Kampagnenkonzept, Texte, Bild- oder Videomotive und die Zielseite. Am Anfang stehen
+                Ihr Angebot, Ihre Zielgruppe und die Reaktion, die Sie erreichen wollen – etwa mehr
+                passende Anfragen.
               </p>
               <p>
-                Der Auftrag nennt Kanäle, Formate und Lieferumfang. Weitere Varianten wählen Sie als
-                Option dazu.
+                Der Auftrag nennt Kanäle, Formate und Lieferumfang. Weitere Varianten sind Optionen.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Pakete ansehen
+                  Drei Pakete. Ein klarer Umfang.
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -178,8 +177,8 @@ function Index() {
               </p>
               <p>
                 Welche Messung zulässig und sinnvoll ist, legen wir vor dem Start fest. Ergebnisse
-                hängen von Angebot, Zielgruppe, Wettbewerb und Budget ab. Einen bestimmten Erfolg
-                sagen wir deshalb nicht zu.
+                hängen von Angebot, Zielgruppe, Wettbewerb und Budget ab; einen bestimmten Erfolg
+                sagen wir nicht zu.
               </p>
             </div>
           </section>
@@ -198,7 +197,7 @@ function Index() {
             <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
             <div className={"hc-finish-actions"}>
               <a className={"hc-finish-primary"} href="/leistungsumfang">
-                Pakete ansehen
+                Pakete vergleichen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -252,7 +251,10 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
+        <p>
+          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
+          finden Sie auf der jeweiligen Seite.
+        </p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/produkte/nex2fly">
@@ -432,7 +434,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -498,8 +503,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Anzeige und Zielseite sagen dasselbe. Gestaltung, Betreuung und Medienbudget sehen
-                Sie dabei getrennt.
+                Botschaft, Werbemittel und Zielseite erzählen dieselbe Geschichte. Gestaltung,
+                Betreuung und Medienbudget bleiben dabei getrennt nachvollziehbar.
               </p>
             </div>
           </details>
@@ -523,9 +528,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
-                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
-                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
+                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
+                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
+                Laufende Betreuung wird separat vereinbart.
               </p>
             </div>
           </details>
@@ -549,8 +554,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
-                ein etwaiges Werbebudget weisen wir getrennt aus.
+                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
+                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
@@ -576,9 +581,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Nötig sind ein klares Angebot, freigegebene Inhalte und vereinbarte Kanäle. Anzeigen
-                starten erst nach Ihrer Freigabe. Reichweite, Anfragen oder Umsatz garantieren wir
-                nicht.
+                Benötigt werden ein klares Angebot, freigegebene Inhalte und vereinbarte Kanäle.
+                Anzeigen starten erst nach Freigabe. Reichweite, Anfragen oder Umsatz werden nicht
+                garantiert.
               </p>
             </div>
           </details>
@@ -602,9 +607,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>

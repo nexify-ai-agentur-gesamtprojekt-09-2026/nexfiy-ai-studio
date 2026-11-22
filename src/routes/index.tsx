@@ -67,8 +67,9 @@ function Index() {
                   <h2 id="hc-process-title">Mit Pascal am Tisch.</h2>
                 </div>
                 <p>
-                  Sie sehen früh, welche Richtung entsteht, was enthalten ist und welche
-                  Entscheidung als Nächstes ansteht. Vier Schritte führen vom Gespräch zur Übergabe.
+                  Pascal begleitet Ihr Projekt vom ersten Gespräch bis zur Übergabe. Sie sehen früh,
+                  welche Richtung entsteht, was enthalten ist und welche Entscheidung als Nächstes
+                  gebraucht wird.
                 </p>
               </header>
               <figure className={"hc-plate hc-plate-process"}>
@@ -94,8 +95,8 @@ function Index() {
                 <li className={"is-in"}>
                   <h3>Sie erhalten einen klaren Leistungsrahmen.</h3>
                   <p>
-                    Leistungen, Ihre Mitwirkung, Termine, Optionen und Kosten stehen getrennt und
-                    verständlich im Angebot.
+                    Leistungen, Mitwirkung, Termine, sinnvolle Optionen und Kosten werden
+                    verständlich voneinander getrennt.
                   </p>
                 </li>
                 <li className={"is-in"}>
@@ -108,8 +109,8 @@ function Index() {
                 <li className={"is-in"}>
                   <h3>Wir prüfen, übergeben und bleiben erreichbar.</h3>
                   <p>
-                    Wir prüfen das vereinbarte Ergebnis und übergeben es nachvollziehbar. Pflege und
-                    Weiterentwicklung können Sie dazubuchen.
+                    Das vereinbarte Ergebnis wird geprüft und nachvollziehbar übergeben. Pflege und
+                    Weiterentwicklung können Sie passend ergänzen.
                   </p>
                 </li>
               </ol>
@@ -144,8 +145,8 @@ function Index() {
                     <strong>Individuell</strong>
                     <small>nach vereinbartem Umfang</small>
                     <p>
-                      Der Preis folgt dem Umfang, den wir mit Ihnen vereinbaren. Externe Kosten
-                      weisen wir getrennt aus.
+                      Konzept, Text, Design und technische Umsetzung werden nach dem vereinbarten
+                      Umfang geplant. Externe Kosten weisen wir separat aus.
                     </p>
                   </div>
                   <a className={"hc-text-link"} href="/preise-ablauf">
@@ -171,22 +172,22 @@ function Index() {
                   <div>
                     <h3>Entwicklung</h3>
                     <p>
-                      Konzept, Text, Design und Technik ordnen wir im Angebot einem konkreten
-                      Ergebnis zu.
+                      Konzept, Text, Design und technische Umsetzung werden im Angebot einem
+                      konkreten Ergebnis zugeordnet.
                     </p>
                   </div>
                   <div>
                     <h3>Betreuung danach</h3>
                     <p>
-                      Pflege, Weiterentwicklung und persönliche Unterstützung vereinbaren wir als
-                      eigenen Baustein.
+                      Pflege, Weiterentwicklung und persönliche Unterstützung werden als eigener,
+                      nachvollziehbarer Baustein vereinbart.
                     </p>
                   </div>
                   <div>
                     <h3>Externe Kosten</h3>
                     <p>
-                      Hosting, Software, KI-Nutzung sowie Medien- und Werbebudget weisen wir offen
-                      aus, nicht versteckt im Projektpreis.
+                      Hosting, Software, KI-Nutzung, Medien- und Werbebudget werden offen
+                      ausgewiesen statt im Projektpreis versteckt.
                     </p>
                   </div>
                 </div>
@@ -261,11 +262,11 @@ const HOME_FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "Was kostet ein Projekt?",
-    a: "Das steht im Angebot, das Sie vor dem Start erhalten. Es grenzt den Umfang klar ab und weist externe Kosten getrennt aus.",
+    a: "Vor dem Start erhalten Sie ein Angebot mit klar abgegrenztem Umfang. Konzept, Text, Design und technische Umsetzung werden nach diesem Umfang geplant; externe Kosten weisen wir separat aus.",
   },
   {
     q: "An wen richtet sich das Angebot?",
-    a: "An Unternehmen: Das Angebot richtet sich an Unternehmer im Sinne des §\u00a014\u00a0BGB (B2B). Die Zusammenarbeit läuft überwiegend online.",
+    a: "An Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz. Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB (B2B).",
   },
   {
     q: "Wie nehme ich Kontakt auf?",
@@ -370,8 +371,8 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: (() => void)
             Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.
           </p>
           <p className={"identity-body"}>
-            Die Zusammenarbeit läuft überwiegend online, vom ersten Gespräch bis zur Übergabe. Vor
-            dem Start wissen Sie, was enthalten ist.
+            Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Und Sie
+            wissen vor dem Start, was enthalten ist.
           </p>
           <div className={"identity-links"}>
             <VorhabenKnopf
@@ -425,8 +426,8 @@ function ImportedNavWoHaktEsGerade() {
             </svg>
           </h3>
           <p>
-            Wir ordnen Leistungen, Sprache und Design. So zeigt Ihre Website verständlich, was Sie
-            anbieten, und führt zur Anfrage.
+            Wir ordnen Leistungen, Sprache und Design so, dass eine Website Ihr Unternehmen
+            verständlich zeigt und den Weg zur Anfrage öffnet.
           </p>
           <small className={"hc-scene-value"}>
             Ziel: passende Gespräche mit den richtigen Kunden.
@@ -478,8 +479,8 @@ function ImportedNavWoHaktEsGerade() {
             </svg>
           </h3>
           <p>
-            Wir sehen uns mit Ihnen einen wiederkehrenden Vorgang an. Dann prüfen wir, wo Daten,
-            Freigaben und KI Ihrem Team Arbeit abnehmen.
+            Wir betrachten einen wiederkehrenden Vorgang vor Ort und prüfen, wo Daten, Freigaben und
+            KI Ihrem Team konkret Arbeit abnehmen können.
           </p>
           <small className={"hc-scene-value"}>
             Ziel: weniger Doppelarbeit und ein verlässlicherer Ablauf.
@@ -584,14 +585,14 @@ function ImportedSectionWasKNnenWir() {
             <div className={"hc-service-body"}>
               <ul>
                 <li>Positionierung, Seitenstruktur und klare Texte für Ihr Angebot</li>
-                <li>Art Direction und Webdesign, eigens für Ihr Unternehmen entworfen</li>
                 <li>
-                  Umsetzung für Telefon und Bildschirm, klarer Anfrageweg, persönliche Übergabe
+                  Individuelle Art Direction und Webdesign, eigens für Ihr Unternehmen entworfen
                 </li>
+                <li>Responsive Umsetzung, klarer Anfrageweg und persönliche Übergabe</li>
               </ul>
               <p className={"hc-caption"}>
-                Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen vereinbaren wir vor
-                dem Start fest.
+                Für Neugründung oder Relaunch. Umfang, Sprachen und Funktionen werden vor dem Start
+                fest vereinbart.
               </p>
               <a className={"hc-text-link"} href="/leistungen/websites">
                 Leistung und Umfang ansehen
@@ -689,14 +690,12 @@ function ImportedSectionWasKNnenWir() {
             </summary>
             <div className={"hc-service-body"}>
               <ul>
-                <li>Angebot, Zielgruppe und Suchanliegen klar herausarbeiten</li>
+                <li>Angebot, Zielgruppe und Suchintention präzise herausarbeiten</li>
                 <li>Landingpage, Inhalte und Werbemittel aus einem visuellen Konzept entwickeln</li>
-                <li>
-                  Suchmaschinen und KI-Antworten (SEO, GEO), lokale Signale und Auswertung abstimmen
-                </li>
+                <li>SEO, GEO, lokale Signale und Auswertung aufeinander abstimmen</li>
               </ul>
               <p className={"hc-caption"}>
-                Werbebudget, Plattformkosten und laufende Betreuung weisen wir getrennt aus.
+                Werbebudget, Plattformkosten und laufende Betreuung bleiben transparent getrennt.
               </p>
               <a className={"hc-text-link"} href="/loesungen">
                 Leistung und Umfang ansehen
@@ -762,10 +761,7 @@ function ImportedSectionEigeneWerkzeugeFR() {
           </figure>
           <div>
             <h3>NeX AIFly Suite</h3>
-            <p>
-              Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.
-              Zugang auf Anfrage.
-            </p>
+            <p>Ihr eigener Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.</p>
             <span className={"hc-text-link"}>
               Suite kennenlernen
               <svg

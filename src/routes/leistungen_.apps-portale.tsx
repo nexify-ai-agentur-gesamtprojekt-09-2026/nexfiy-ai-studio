@@ -74,9 +74,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Wer gibt etwas ein, wer prüft, und was ist der nächste Schritt? Aus den Antworten
-                entsteht ein Ablauf. Eingaben, Dokumente und der aktuelle Stand liegen darin an
-                einer Stelle.
+                Wer gibt etwas ein, wer prüft, und was ist der nächste Schritt? Aus diesen Fragen
+                wird ein Ablauf, in dem Eingaben, Dokumente und der Stand zusammenstehen.
               </p>
               <p>
                 Daraus entstehen die Ansichten für Ihre Nutzergruppen. Gestaltung und Technik planen
@@ -85,7 +84,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Pakete ansehen
+                  Drei Pakete. Ein klarer Umfang.
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -123,8 +122,8 @@ function Index() {
                 Zweck, Daten und Rechte fest. Rollen bestimmen, wer was sieht und entscheidet.
               </p>
               <p>
-                Datenübernahme, externe Dienste, Betrieb und spätere Erweiterungen stehen als eigene
-                Posten im Angebot. Voraussetzungen und Kosten kennen Sie, bevor wir sie umsetzen.
+                Datenübernahme, externe Dienste, Betrieb und spätere Erweiterungen sind eigene
+                Posten im Angebot – mit Voraussetzungen und Kosten, bevor wir sie umsetzen.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
@@ -182,7 +181,7 @@ function Index() {
                 </svg>
               </a>
               <a className={"hc-text-link"} href="/leistungsumfang">
-                Pakete ansehen
+                Pakete vergleichen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -250,7 +249,7 @@ function ImportedSectionPortaleUndAppsF() {
               data-variant="secondary"
               href="/leistungsumfang"
             >
-              Pakete ansehen
+              Pakete vergleichen
             </a>
           </div>
         </div>
@@ -274,7 +273,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -340,8 +342,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Eingaben, Dokumente und Bearbeitungsstand liegen bei einem Vorgang zusammen. Rollen
-                legen fest, wer was sieht und wer entscheidet.
+                Eingaben, Dokumente und Bearbeitungsstände werden an einem Vorgang zusammengeführt.
+                Rollen legen fest, wer welche Information sieht und welche Entscheidung trifft.
               </p>
             </div>
           </details>
@@ -365,9 +367,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
-                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
-                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
+                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
+                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
+                Laufende Betreuung wird separat vereinbart.
               </p>
             </div>
           </details>
@@ -391,8 +393,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
-                ein etwaiges Werbebudget weisen wir getrennt aus.
+                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
+                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
@@ -419,8 +421,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Vor der Umsetzung klären wir Rollen, Datenverantwortung und vorhandene Systeme.
-                Datenübernahme und jede Schnittstelle brauchen einen eigenen Umfang. Ob wir auf
-                fremde Systeme zugreifen können, klären wir vorab.
+                Datenübernahme und jede Schnittstelle brauchen einen eigenen Umfang; der Zugang zu
+                Fremdsystemen wird nicht vorausgesetzt.
               </p>
             </div>
           </details>
@@ -444,9 +446,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>
@@ -467,11 +469,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-apps-portals">Passende Themen</h2>
         </div>
-        <p>Diese Seiten führen das Thema weiter.</p>
+        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>Kontakt</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -521,7 +523,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Leistungen</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -570,7 +572,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Leistungen</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungen">
               Website, System, Kampagne. Aus einer Hand.
@@ -619,7 +621,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Leistungen</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungen/websites">
               Eine Website, die Ihr Angebot erklärt.

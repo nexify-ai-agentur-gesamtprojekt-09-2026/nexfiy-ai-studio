@@ -123,17 +123,10 @@ function Index() {
               <h2 id="content-scope-scope-customer-1-0-title">Welches Paket zu Ihnen passt</h2>
             </div>
             <div className={"pc-section-body"}>
-              <ul>
-                <li>
-                  <strong>Markenstart</strong> baut Ihren Marken- und Webauftritt.
-                </li>
-                <li>
-                  <strong>KI im Betrieb</strong> entlastet einen ausgewählten Ablauf.
-                </li>
-                <li>
-                  <strong>Wachstum</strong> verbindet Kampagne und Zielseite.
-                </li>
-              </ul>
+              <p>
+                Markenstart baut Ihren Marken- und Webauftritt. KI im Betrieb entlastet einen
+                ausgewählten Ablauf. Wachstum verbindet Kampagne und Zielseite.
+              </p>
               <p>
                 Im Gespräch klären wir, welcher Einstieg zu Ihrer Lage passt und was schon vorhanden
                 ist. Das Angebot nennt Ergebnisse, Ihre Mitwirkung, den Zeitrahmen und die Kosten,
@@ -174,9 +167,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Zusätzliche Inhalte, Sprachen, Anbindungen, Anzeigen und die Betreuung mit
-                NeXify&nbsp;Care stehen als eigene Posten im Angebot. So sehen Sie, was zum Start
-                gehört, was Sie später ergänzen können und welche laufenden Kosten entstehen.
+                Zusätzliche Inhalte, Sprachen, Anbindungen, Anzeigen und die Betreuung mit NeXify
+                Care stehen als eigene Posten im Angebot. So sehen Sie, was zum Start gehört und was
+                Sie später ergänzen können – samt laufender Kosten.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
@@ -252,7 +245,10 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
+        <p>
+          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
+          finden Sie auf der jeweiligen Seite.
+        </p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/leistungen/websites">
@@ -432,7 +428,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -473,8 +472,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Für Unternehmen, die vor dem Auftrag wissen wollen, welche Leistungen, Optionen und
-                Kosten auf sie zukommen.
+                Für Unternehmen, die vor einer Beauftragung Klarheit über Leistungen, Optionen und
+                Kosten benötigen.
               </p>
             </div>
           </details>
@@ -523,9 +522,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
-                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
-                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
+                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
+                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
+                Laufende Betreuung wird separat vereinbart.
               </p>
             </div>
           </details>
@@ -549,8 +548,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
-                ein etwaiges Werbebudget weisen wir getrennt aus.
+                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
+                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
@@ -576,8 +575,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Ein Paket umfasst nicht beliebig viele Leistungen. Verbindlich ist das abgestimmte
-                Angebot mit Umfang, Abnahme und Kosten.
+                Ein Projektpaket ist kein unbegrenzter Leistungsanspruch. Verbindlich ist die
+                gemeinsam abgestimmte Angebotsfassung mit Umfang, Abnahme und Kosten.
               </p>
             </div>
           </details>
@@ -601,9 +600,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>
