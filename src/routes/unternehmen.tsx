@@ -79,7 +79,7 @@ function Index() {
         </section>
         <nav className={"hc-anchors hc-container"} aria-label="Auf dieser Seite">
           <a href="#content-company-company-customer-1-0">
-            Pascal begleitet Ihr Projekt persönlich
+            Ein Ansprechpartner, überwiegend online
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -125,13 +125,14 @@ function Index() {
             <div>
               <span className={"hc-kicker"}>01 / 02</span>
               <h2 id="content-company-company-customer-1-0-title">
-                Pascal begleitet Ihr Projekt persönlich
+                Ein Ansprechpartner, überwiegend online
               </h2>
             </div>
             <div className={"pc-section-body"}>
               <p>
                 Im ersten Gespräch geht es um Ihr Unternehmen, Ihre Kunden und das Ergebnis, das Sie
-                erreichen wollen. Pascal Courbois bleibt Ihr Ansprechpartner bis zur Übergabe.
+                erreichen wollen. Ansprechpartner ist Pascal Courbois; die Zusammenarbeit läuft
+                überwiegend online.
               </p>
               <p>
                 Die Ausarbeitung tragen die KI-Agenten: NeX führt aus, AIFly ORACLE ordnet und

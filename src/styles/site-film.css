@@ -179,3 +179,17 @@
   line-height: 1.7;
   color: var(--color-atelier-platinum);
 }
+
+/* Ausgeblendeter Film (site-films.ts, `ausgeblendet`): Standbild im selben 16:9-Rahmen. */
+:root:root #atelier .atelier-film-standbild {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+:root:root #atelier .atelier-film-standbild > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}

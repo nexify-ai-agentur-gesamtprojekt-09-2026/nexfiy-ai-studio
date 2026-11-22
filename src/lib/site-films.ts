@@ -6,7 +6,14 @@ export interface SiteFilmData {
   poster: string;
   label: string;
   alt: string;
+  /** Gesprochener Text, Wort für Wort wie im Ton des Films (Barrierefreiheit). */
   transcript?: string;
+  /**
+   * Gesetzt: Der Film wird nicht ausgespielt. SiteFilm zeigt dann nur das Standbild, ohne Video,
+   * Bedienelemente und Transkript. Die Videodatei bleibt in public/site-assets/. Der Text nennt
+   * den Grund und was geschehen muss, bevor der Film wieder erscheint.
+   */
+  ausgeblendet?: string;
 }
 
 export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
@@ -17,6 +24,10 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     alt: "Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes",
     transcript:
       "Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität und zu einem fairen Preis. Erzählen Sie mir, woran Sie gerade arbeiten.",
+    // 2026-11-22: Der Ton enthält ein unbelegtes Qualitäts- und Preisversprechen. Ein geändertes
+    // Transkript würde vom Gesprochenen abweichen; deshalb bleibt es wortgleich und der Film aus.
+    ausgeblendet:
+      "Unbelegtes Qualitäts- und Preisversprechen im Ton; erst nach Neuvertonung durch Pascal wieder zeigen.",
   },
   angebot: {
     src: "/site-assets/e3638738b1263f00.mp4",

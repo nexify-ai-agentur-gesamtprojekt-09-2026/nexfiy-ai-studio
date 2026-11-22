@@ -60,8 +60,8 @@ export function NexifyFooter() {
               </span>
             </a>
             <p>
-              Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Persönlich begleitet von
-              Pascal Courbois.
+              Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Die Zusammenarbeit läuft
+              überwiegend online.
             </p>
             <a
               className={"nexify-control  footer-contact"}
