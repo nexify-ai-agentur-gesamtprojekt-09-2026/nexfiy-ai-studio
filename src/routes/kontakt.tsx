@@ -73,7 +73,7 @@ function Index() {
                   data-variant="secondary"
                   href="/leistungsumfang"
                 >
-                  Pakete vergleichen
+                  Pakete ansehen
                 </a>
               </div>
             </div>
@@ -153,7 +153,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Drei Pakete. Ein klarer Umfang.
+                  Pakete ansehen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -203,7 +203,7 @@ function Index() {
         >
           <div className={"hc-budget-story"}>
             <header className={"hc-section-heading"}>
-              <span className={"hc-kicker"}>NeXify AI</span>
+              <span className={"hc-kicker"}>Ohne Formular</span>
               <h2 id="contact-title-contact">Direkter Kontakt</h2>
             </header>
             <div className={"hc-costs"}>
@@ -244,7 +244,7 @@ function Index() {
             <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
             <div className={"hc-finish-actions"}>
               <a className={"hc-finish-primary"} href="/leistungsumfang">
-                Pakete vergleichen
+                Pakete ansehen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -316,11 +316,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-contact">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -369,7 +369,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.
@@ -420,7 +420,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Unternehmen</span>
           <h3>
             <a href="/unternehmen">
               Ein Ansprechpartner. Ein Agententeam.
@@ -443,8 +443,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und
-            Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir nennen das AI
-            FACTORY.
+            Richtung vor. Die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
           </p>
           <a
             aria-label="Ein Ansprechpartner. Ein Agententeam. – Seite ansehen"

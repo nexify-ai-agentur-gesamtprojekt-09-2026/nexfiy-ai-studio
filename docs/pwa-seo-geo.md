@@ -88,8 +88,8 @@ indexierbare Seiten. Eine `llms-full.txt` gibt es nicht: Die Seiteninhalte stehe
 Routendateien und lassen sich nicht sauber als Text herausziehen.
 
 Anschrift, Telefon, E-Mail, Rechtsform und Registernummer stehen in `src/lib/site-facts.ts`.
-`areaServed` nennt Deutschland, die Niederlande, Österreich und die Schweiz, weil die Startseite
-genau diese Länder nennt. Es gibt keine Standort- oder Länderseiten.
+`areaServed` gibt es nicht: Die Website nennt keine Länder als Zusage, die Zusammenarbeit läuft
+überwiegend online. Es gibt keine Standort- oder Länderseiten.
 
 ## Speicherung im Browser durch den Chat
 

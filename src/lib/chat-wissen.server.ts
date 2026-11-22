@@ -55,7 +55,7 @@ const REGELN = [
 ];
 
 const FAKTEN = [
-  "NeXify AI ist die Agentur von Pascal Courbois in Venlo (Niederlande). Pascal Courbois ist der persönliche Ansprechpartner vom ersten Gespräch bis zur Übergabe. Die Ausarbeitung tragen KI-Agenten (NeX führt aus, AIFly ORACLE ordnet); verantwortet wird das Ergebnis von Pascal Courbois. NeXify nennt das AI FACTORY.",
+  "NeXify AI ist die Agentur von Pascal Courbois in Venlo (Niederlande). Ansprechpartner ist Pascal Courbois; die Zusammenarbeit läuft überwiegend online. Die Ausarbeitung tragen KI-Agenten (NeX führt aus, AIFly ORACLE ordnet); verantwortet wird das Ergebnis von Pascal Courbois. NeXify nennt das AI FACTORY.",
   "Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB (B2B).",
   "Drei Leistungsfelder (/leistungen): 1. Marke & Web – Positionierung, Gestaltung, Texte und Website entstehen zusammen; Paket „Markenstart“ (/leistungen/websites). 2. Systeme & KI – Apps, Portale, Schnittstellen und KI, die einen benannten Schritt in einem Ablauf übernimmt, etwa Anfragen zuordnen, Unterlagen vorbereiten, Entwürfe schreiben; Entscheidungen bleiben beim Kunden; Paket „KI im Betrieb“ (/leistungen/agenten-automatisierung, /leistungen/apps-portale). 3. Wachstum & Kampagnen – Kampagnenidee, Werbemittel und Zielseite in einem Plan; Medienbudget und Kanäle legt der Kunde gesondert fest; Paket „Wachstum“ (/loesungen).",
   "Die drei Pakete und ihre Optionen (zusätzliche Inhalte, Sprachen, Anbindungen, Anzeigen, Betreuung mit NeXify Care) beschreibt /leistungsumfang.",

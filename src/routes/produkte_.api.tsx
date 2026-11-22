@@ -135,9 +135,8 @@ function Index() {
                 Fehlerfällen.
               </p>
               <p>
-                Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre Verbindung
-                eingerichtet. Den Zugang erhalten Sie im Rahmen eines Projekts, nicht über diese
-                Seite.
+                Für Ihre Verbindung richten wir Zugang und Berechtigungen ein und testen sie
+                nachvollziehbar. Den Zugang erhalten Sie auf Anfrage im Rahmen eines Projekts.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
@@ -174,9 +173,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Geplant ist ein Prepaid-Modell: Guthaben aufladen, mit Aufrufen verbrauchen. Ohne
-                Deckung soll keine Anfrage ausgeführt werden, damit keine Kosten entstehen, die Sie
-                nicht erwarten.
+                Geplant ist ein Prepaid-Modell: Sie laden Guthaben auf und verbrauchen es mit Ihren
+                Aufrufen. Ohne Guthaben soll keine Anfrage laufen. So entstehen keine Kosten, die
+                Sie nicht erwarten.
               </p>
               <p>
                 Die Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete
@@ -267,10 +266,7 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>
-            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
-            einordnen können.
-          </p>
+          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -362,9 +358,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
-                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
-                Laufende Betreuung wird separat vereinbart.
+                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
+                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
+                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
               </p>
             </div>
           </details>
@@ -388,9 +384,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Zugang, Umfang und Verbrauch stehen in Ihrem Produktangebot; die Tarife stehen noch
-                zur Freigabe. Individuelle Integrationsarbeit bieten wir nach dem vereinbarten
-                Umfang an.
+                Die Tarife sind noch nicht veröffentlicht. Zugang, Umfang und Verbrauch nennen wir
+                Ihnen im Angebot. Anpassungen an Ihre Systeme berechnen wir nach vereinbartem
+                Umfang.
               </p>
             </div>
           </details>
@@ -442,9 +438,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
-                noch keine Beauftragung.
+                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
+                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
+                dadurch noch nicht.
               </p>
             </div>
           </details>
@@ -465,11 +461,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-api">Passende Themen</h2>
         </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
+        <p>Diese Seiten führen das Thema weiter.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Kontakt</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -519,7 +515,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Produkte</span>
           <h3>
             <a href="/produkte/nex2fly">
               NeX AIFly Suite. Ihr KI-Arbeitsbereich.
@@ -568,7 +564,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Rechtliches</span>
           <h3>
             <a href="/vertragsgrundlagen">
               Gute Zusammenarbeit hat klare Grundlagen.
@@ -618,7 +614,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NeXify AI</span>
+          <span className={"hc-kicker"}>Leistungen</span>
           <h3>
             <a href="/loesungen">
               Kampagne und Zielseite aus einem Guss.
