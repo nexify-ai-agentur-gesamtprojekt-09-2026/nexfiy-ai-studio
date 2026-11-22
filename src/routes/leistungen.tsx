@@ -62,7 +62,7 @@ function Index() {
                   data-variant="primary"
                   href="/leistungsumfang"
                 >
-                  <span>Pakete vergleichen</span>
+                  <span>Pakete ansehen</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
@@ -152,8 +152,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Ihre Kunden verstehen auf den ersten Blick, was Sie anbieten und wie sie Sie
-                erreichen. Positionierung, Gestaltung, Texte und Website entstehen zusammen.
+                Ihre Kunden sollen schnell verstehen, was Sie anbieten und wie sie Sie erreichen.
+                Deshalb entwickeln wir Positionierung, Gestaltung, Texte und Website zusammen.
               </p>
               <p>
                 Das Paket Markenstart bündelt die Markenbasis und den Webauftritt. Weitere Seiten,
@@ -162,7 +162,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Drei Pakete. Ein klarer Umfang.
+                  Pakete ansehen
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -195,8 +195,8 @@ function Index() {
             <div className={"pc-section-body"}>
               <p>
                 Wiederkehrende Arbeit kostet Zeit: Anfragen sortieren, Unterlagen zusammensuchen,
-                Stände nachfragen. Wir bauen Apps, Portale und Schnittstellen und setzen KI dort
-                ein, wo sie einen benannten Schritt übernimmt.
+                Stände nachfragen. Wir bauen Apps, Portale und Schnittstellen. KI setzen wir dort
+                ein, wo sie einen klar benannten Schritt übernehmen kann.
               </p>
               <p>
                 Das Paket KI im Betrieb beginnt mit einem Ablauf – mit den Quellen und Rechten, die
@@ -261,7 +261,7 @@ function Index() {
             <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
             <div className={"hc-finish-actions"}>
               <a className={"hc-finish-primary"} href="/leistungsumfang">
-                Pakete vergleichen
+                Pakete ansehen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -351,10 +351,7 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>
-          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
-          finden Sie auf der jeweiligen Seite.
-        </p>
+        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/leistungen/websites">
@@ -534,10 +531,7 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>
-            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
-            einordnen können.
-          </p>
+          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -603,8 +597,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Ein Ansprechpartner hält Gestaltung, Umsetzung und Vermarktung zusammen. Sie
-                erhalten einen abgestimmten Lieferumfang statt einzelner, unverbundener Maßnahmen.
+                Ein Ansprechpartner hält Gestaltung, Umsetzung und Vermarktung zusammen. Statt
+                einzelner Maßnahmen erhalten Sie einen abgestimmten Auftrag.
               </p>
             </div>
           </details>
@@ -628,9 +622,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
-                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
-                Laufende Betreuung wird separat vereinbart.
+                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
+                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
+                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
               </p>
             </div>
           </details>
@@ -654,8 +648,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
-                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
+                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
+                ein etwaiges Werbebudget weisen wir getrennt aus.
               </p>
             </div>
           </details>
@@ -681,8 +675,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Benötigt werden Ihr Ziel, bestehende Unterlagen und eine entscheidungsberechtigte
-                Kontaktperson. Nicht jede Erweiterung gehört automatisch zum ersten Auftrag.
+                Wir brauchen Ihr Ziel, vorhandene Unterlagen und eine Person, die bei Ihnen
+                entscheiden darf. Erweiterungen gehören nicht automatisch zum ersten Auftrag.
               </p>
             </div>
           </details>
@@ -706,9 +700,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
-                noch keine Beauftragung.
+                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
+                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
+                dadurch noch nicht.
               </p>
             </div>
           </details>
