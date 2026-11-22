@@ -5,6 +5,7 @@ import {
   hinweisSchliessen,
   isIosSafari,
   runningStandalone,
+  sichererSpeicher,
 } from "@/lib/pwa-client";
 import { PWA_AKTIV } from "@/lib/pwa-config";
 import hintCSS from "../../styles/site-install.css?url";
@@ -45,7 +46,7 @@ export function InstallHint() {
 
   useEffect(() => {
     setGeschlossen(
-      hinweisGeschlossen(window.localStorage) ||
+      hinweisGeschlossen(sichererSpeicher(() => window.localStorage)) ||
         runningStandalone({
           matchMedia: (query) => window.matchMedia(query),
           navigator: navigator as Navigator & { standalone?: boolean },
@@ -75,7 +76,7 @@ export function InstallHint() {
   }
 
   function schliessen() {
-    hinweisSchliessen(window.localStorage);
+    hinweisSchliessen(sichererSpeicher(() => window.localStorage));
     setGeschlossen(true);
   }
 

@@ -76,12 +76,24 @@ async function precache() {
   );
 }
 
+// Der Cache ist nur ein Zusatz: fällt er aus (Speicher voll, gesperrt), zählt die Netzantwort.
 async function cacheFirst(request) {
-  const cache = await caches.open(STATIC);
-  const hit = await cache.match(request.url, { ignoreVary: true });
-  if (hit) return hit;
+  let cache = null;
+  try {
+    cache = await caches.open(STATIC);
+    const hit = await cache.match(request.url, { ignoreVary: true });
+    if (hit) return hit;
+  } catch {
+    cache = null;
+  }
   const response = await fetch(request);
-  if (storable(response)) await cache.put(request.url, response.clone());
+  if (cache && storable(response)) {
+    try {
+      await cache.put(request.url, response.clone());
+    } catch {
+      // Nicht gespeichert; die geladene Antwort geht trotzdem an die Seite.
+    }
+  }
   return response;
 }
 

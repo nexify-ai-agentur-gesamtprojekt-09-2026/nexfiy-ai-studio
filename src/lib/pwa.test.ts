@@ -54,20 +54,23 @@ function aufbau({
     ]),
   );
   const abrufe: Array<{ key: string; init: RequestInit }> = [];
-  const zustand = { online, skipWaiting: 0, unregister: 0 };
+  const zustand = { online, skipWaiting: 0, unregister: 0, cacheFehler: "" };
   const schluessel = (key: string | { url: string }) => {
     const url = new URL(typeof key === "string" ? key : key.url, ORIGIN);
     return url.pathname + url.search;
   };
   const caches = {
     async open(name: string) {
+      if (zustand.cacheFehler === "open") throw new Error("QuotaExceededError");
       if (!stores.has(name)) stores.set(name, new Map());
       const store = stores.get(name)!;
       return {
         async match(key: string) {
+          if (zustand.cacheFehler === "match") throw new Error("UnknownError");
           return store.get(schluessel(key))?.clone();
         },
         async put(key: string, response: Response) {
+          if (zustand.cacheFehler === "put") throw new Error("QuotaExceededError");
           store.set(schluessel(key), response);
         },
       };
@@ -281,6 +284,17 @@ describe("Service Worker: Cache-Regeln", () => {
     const zweite = await w.anfrage("/assets/index-abc123.js", { mode: "no-cors" });
     expect(await zweite?.text()).toBe("datei /assets/index-abc123.js");
     expect(w.eintraege(STATIC)).toContain("/assets/index-abc123.js");
+  });
+
+  it("fällt der Cache aus (voll, gesperrt), kommt die Netzantwort trotzdem an", async () => {
+    for (const fehler of ["put", "open", "match"]) {
+      const w = aufbau();
+      await w.lebenszyklus("install");
+      w.zustand.cacheFehler = fehler;
+      const datei = await w.anfrage("/assets/index-voll.js", { mode: "no-cors" });
+      expect(await datei?.text(), fehler).toBe("datei /assets/index-voll.js");
+      expect(w.eintraege(STATIC)).not.toContain("/assets/index-voll.js");
+    }
   });
 
   it("speichert weder 404 noch no-store, private, Umleitungen oder fremde Antworten", async () => {

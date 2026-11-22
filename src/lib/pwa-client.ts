@@ -83,6 +83,18 @@ export function isIosSafari(userAgent: string, maxTouchPoints = 0): boolean {
 /** Merkt die Ablehnung nur auf dem Gerät; kein Wert verlässt den Browser. */
 export const HINWEIS_SCHLUESSEL = "nexify-install-hinweis-geschlossen";
 
+/**
+ * Holt den Gerätespeicher, ohne zu werfen. Bei gesperrter Datenspeicherung wirft schon der
+ * Zugriff auf `window.localStorage` einen SecurityError; dann gibt es schlicht keinen Speicher.
+ */
+export function sichererSpeicher<T>(holen: () => T): T | undefined {
+  try {
+    return holen() ?? undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export function hinweisGeschlossen(storage: Pick<Storage, "getItem"> | undefined): boolean {
   try {
     return storage?.getItem(HINWEIS_SCHLUESSEL) === "1";

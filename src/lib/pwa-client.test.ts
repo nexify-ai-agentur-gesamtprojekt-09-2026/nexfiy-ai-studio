@@ -8,6 +8,7 @@ import {
   registerServiceWorker,
   retireServiceWorker,
   runningStandalone,
+  sichererSpeicher,
 } from "./pwa-client";
 
 const ORIGIN = "https://www.nexifyai.de";
@@ -120,5 +121,39 @@ describe("Installationshinweis: wann er sinnvoll ist", () => {
     expect(hinweisGeschlossen(gesperrt)).toBe(false);
     expect(() => hinweisSchliessen(gesperrt)).not.toThrow();
     expect(hinweisGeschlossen(undefined)).toBe(false);
+  });
+
+  it("gesperrte Datenspeicherung: schon der Zugriff auf localStorage darf nichts umreißen", () => {
+    const fenster = {
+      get localStorage(): Storage {
+        throw new DOMException("The operation is insecure.", "SecurityError");
+      },
+    };
+    const speicher = sichererSpeicher(() => fenster.localStorage);
+    expect(speicher).toBeUndefined();
+    expect(hinweisGeschlossen(speicher)).toBe(false);
+    expect(() => hinweisSchliessen(speicher)).not.toThrow();
+  });
+
+  it("der Installationshinweis greift nie ungeschützt auf den Speicher zu", async () => {
+    const { readFileSync, readdirSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const treffer: string[] = [];
+    const lauf = (ordner: string) => {
+      for (const eintrag of readdirSync(ordner, { withFileTypes: true })) {
+        const pfad = join(ordner, eintrag.name);
+        if (eintrag.isDirectory()) lauf(pfad);
+        else if (/\.tsx?$/.test(eintrag.name) && !/\.test\.|chat/i.test(eintrag.name)) {
+          readFileSync(pfad, "utf8")
+            .split("\n")
+            .forEach((zeile, nr) => {
+              if (/\b(?:local|session)Storage\b/.test(zeile) && !/sichererSpeicher\(/.test(zeile))
+                if (!/^\s*(?:\*|\/\/|\/\*)/.test(zeile)) treffer.push(`${pfad}:${nr + 1}`);
+            });
+        }
+      }
+    };
+    lauf(join(process.cwd(), "src"));
+    expect(treffer).toEqual([]);
   });
 });
