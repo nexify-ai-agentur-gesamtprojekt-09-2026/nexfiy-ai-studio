@@ -147,9 +147,13 @@ describe("Strukturierte Daten", () => {
     );
     expect([...UNTERNEHMEN.zielLaender]).toEqual(["DE", "NL", "AT", "CH"]);
     const [organisation] = graph(siteJsonLd()) as [Knoten];
-    expect(organisation["areaServed"]).toEqual(
-      ["DE", "NL", "AT", "CH"].map((name) => ({ "@type": "Country", name })),
-    );
+    // Ländernamen statt Kürzel; das Kürzel steht zusätzlich als Kennung dabei.
+    expect(organisation["areaServed"]).toEqual([
+      { "@type": "Country", name: "Deutschland", identifier: "DE" },
+      { "@type": "Country", name: "Niederlande", identifier: "NL" },
+      { "@type": "Country", name: "Österreich", identifier: "AT" },
+      { "@type": "Country", name: "Schweiz", identifier: "CH" },
+    ]);
   });
 
   it("nichts Unbelegtes: keine Bewertungen, Preise, Auszeichnungen oder Koordinaten", () => {

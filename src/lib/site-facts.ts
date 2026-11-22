@@ -31,6 +31,8 @@ export const UNTERNEHMEN = {
    * Land ohne sichtbare Nennung; Koordinaten stehen nirgends, deshalb gibt es kein `geo`.
    */
   zielLaender: ["DE", "NL", "AT", "CH"],
+  /** Dieselben Länder mit Namen, für strukturierte Daten (Suchmaschinen lesen Namen, keine Kürzel). */
+  zielLaenderNamen: { DE: "Deutschland", NL: "Niederlande", AT: "Österreich", CH: "Schweiz" },
 } as const;
 
 /**

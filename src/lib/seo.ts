@@ -30,7 +30,11 @@ export function seite(pfad: string): Seite {
 type JsonLd = Record<string, unknown>;
 
 const zielLaender = () =>
-  UNTERNEHMEN.zielLaender.map((code) => ({ "@type": "Country", name: code }));
+  UNTERNEHMEN.zielLaender.map((code) => ({
+    "@type": "Country",
+    name: UNTERNEHMEN.zielLaenderNamen[code],
+    identifier: code,
+  }));
 
 /**
  * Organisation und Website, auf jeder Seite gleich (src/routes/__root.tsx). Alle Angaben stehen

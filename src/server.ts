@@ -74,6 +74,10 @@ function withSecurityHeaders(response: Response): Response {
   const headers = new Headers(response.headers);
   for (const [name, value] of Object.entries(SECURITY_HEADERS))
     if (!headers.has(name)) headers.set(name, value);
+  // Seiten tragen sonst gar keine Cache-Angabe; Browser und Zwischenspeicher raten dann. Mit
+  // `no-cache` wird jede Seite vor dem Anzeigen neu geprüft – ein neuer Stand kommt sofort an.
+  if (!headers.has("cache-control") && (headers.get("content-type") ?? "").includes("text/html"))
+    headers.set("cache-control", "no-cache");
   // 204/304/101 duerfen keinen Body tragen, sonst wirft der Konstruktor.
   const nullBody = [101, 204, 205, 304].includes(response.status);
   return new Response(nullBody ? null : response.body, {

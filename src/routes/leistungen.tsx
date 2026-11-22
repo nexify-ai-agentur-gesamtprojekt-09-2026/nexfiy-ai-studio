@@ -362,7 +362,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/5c592a5dc791fcc3.webp"
               srcSet="/site-assets/b4c1010258293e22.webp 800w, /site-assets/55ecd78d79c41c10.webp 1280w, /site-assets/5c592a5dc791fcc3.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch"
               width="2000"
               height="1125"
@@ -416,7 +416,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/15fa9607b63661b1.webp"
               srcSet="/site-assets/b1c49cd9be2fd13d.webp 800w, /site-assets/28c1aab4293b944a.webp 1280w, /site-assets/15fa9607b63661b1.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei"
               width="2000"
               height="1125"
@@ -470,7 +470,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/4b45951db0b51136.webp"
               srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
               width="2000"
               height="1125"

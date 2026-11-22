@@ -214,6 +214,52 @@ describe("installierbare Web-App: /sw.js und /offline", () => {
     expect(csp).toContain("connect-src 'self'");
   });
 
+  it("jede Direktive der Sicherheitsrichtlinie ist eng: kein eval, kein Stern, keine fremde Quelle", async () => {
+    const csp = (await abruf("/")).headers.get("content-security-policy") ?? "";
+    const direktiven = new Map(
+      csp
+        .split(";")
+        .map((teil) => teil.trim().split(/\s+/))
+        .filter((teile) => teile[0])
+        .map((teile) => [teile[0] as string, teile.slice(1)]),
+    );
+    expect(direktiven.get("default-src")).toEqual(["'self'"]);
+    expect(direktiven.get("object-src")).toEqual(["'none'"]);
+    expect(direktiven.get("frame-ancestors")).toEqual(["'none'"]);
+    expect(direktiven.get("base-uri")).toEqual(["'self'"]);
+    expect(direktiven.get("form-action")).toEqual(["'self'"]);
+    expect(direktiven.has("upgrade-insecure-requests")).toBe(true);
+    const erlaubt = new Set(["'self'", "'none'", "'unsafe-inline'", "data:", "blob:"]);
+    for (const [name, quellen] of direktiven) {
+      for (const quelle of quellen) {
+        expect(erlaubt.has(quelle), `${name}: ${quelle}`).toBe(true);
+        expect(quelle, name).not.toMatch(/unsafe-eval|\*|^https?:/);
+      }
+    }
+    // data: und blob: nur dort, wo Bilder, Schriften und Worker sie brauchen – nie für Skripte.
+    expect(direktiven.get("script-src")).toEqual(["'self'", "'unsafe-inline'"]);
+    expect(direktiven.get("connect-src")).toEqual(["'self'"]);
+    // Dieselbe Richtlinie auf Fehlerseite, Weiterleitung und Schnittstelle.
+    for (const pfad of ["/gibt-es-nicht", "/login", "/api/anfrage", "/sw.js"])
+      expect((await abruf(pfad)).headers.get("content-security-policy"), pfad).toBe(csp);
+  });
+
+  it("Seiten werden vor dem Anzeigen neu geprüft (no-cache), gesetzte Angaben bleiben", async () => {
+    expect((await abruf("/")).headers.get("cache-control")).toBe("no-cache");
+    expect((await abruf("/gibt-es-nicht")).headers.get("cache-control")).toBe("no-cache");
+    // Die Schnittstelle setzt ihre eigene Angabe; sie wird nicht überschrieben.
+    const api = await server.fetch(
+      new Request("https://www.nexifyai.de/api/anfrage", {
+        method: "POST",
+        headers: { "content-type": "application/json", accept: "application/json" },
+        body: "{}",
+      }),
+      {},
+      {},
+    );
+    expect(api.headers.get("cache-control")).toBe("no-store");
+  });
+
   it("/sw.js und das Manifest bleiben ohne langes Zwischenspeichern", () => {
     const regeln = readFileSync(path.resolve(__dirname, "../public/_headers"), "utf8");
     expect(regeln).toMatch(/\/manifest\.webmanifest\n\s+cache-control: no-cache/);

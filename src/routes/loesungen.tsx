@@ -260,7 +260,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/produkte/nex2fly">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
               width="2000"
               height="1125"
@@ -314,7 +314,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/produkte/one">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal im Gespräch mit einer Person in Hygienekleidung an einer Produktionsanlage"
               width="2000"
               height="1125"
@@ -368,7 +368,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/produkte/api">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal und ein Gesprächspartner betrachten Pläne und ein technisches Modell auf einem Arbeitstisch"
               width="2000"
               height="1125"

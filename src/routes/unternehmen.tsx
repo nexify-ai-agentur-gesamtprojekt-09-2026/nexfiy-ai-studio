@@ -274,7 +274,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/leistungen">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier"
               width="2000"
               height="1125"
@@ -328,7 +328,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/wissen">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal geht mit NeX und AIFly ORACLE an einer Wand mit gerahmten Entwürfen entlang"
               width="2000"
               height="1125"
@@ -382,7 +382,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/kontakt">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes"
               width="2000"
               height="1125"

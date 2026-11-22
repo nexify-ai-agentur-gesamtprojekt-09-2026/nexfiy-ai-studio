@@ -109,7 +109,7 @@ export function NexifyHeader() {
                   </svg>
                 </a>
                 <a href="/produkte/one" {...here("/produkte/one")}>
-                  <span>NeX und AIFly ORACLE</span>
+                  <span>NeX Agentic AI</span>
                   <svg
                     className={"nx-zeichen"}
                     viewBox="0 0 24 24"
@@ -359,7 +359,7 @@ export function NexifyHeader() {
               </svg>
             </a>
             <a href="/produkte/one" {...here("/produkte/one")}>
-              <span>NeX und AIFly ORACLE</span>
+              <span>NeX Agentic AI</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"

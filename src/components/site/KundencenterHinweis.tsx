@@ -16,7 +16,7 @@ export function KundencenterHinweis() {
         data-variant="primary"
         href="/kontakt"
       >
-        Zur Kontaktseite
+        Zugang anfragen
       </a>
       <div className={"tk-actions"}>
         <p>
