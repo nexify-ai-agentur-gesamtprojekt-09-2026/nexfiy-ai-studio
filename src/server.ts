@@ -2,6 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
+import { legacyTeileklarRedirect } from "./lib/brand-routing";
 import { handleChat, type ChatBindings } from "./lib/chat-api";
 import { renderErrorPage } from "./lib/error-page";
 
@@ -104,6 +105,9 @@ export default {
       if (url.pathname === "/api/chat") {
         return withSecurityHeaders(await handleChat(request, env as ChatBindings));
       }
+      const brandRedirect = legacyTeileklarRedirect(url.toString(), request.method);
+      if (brandRedirect)
+        return withSecurityHeaders(Response.redirect(brandRedirect, 301));
       const target = PERMANENT_REDIRECTS[url.pathname];
       if (target)
         return withSecurityHeaders(
