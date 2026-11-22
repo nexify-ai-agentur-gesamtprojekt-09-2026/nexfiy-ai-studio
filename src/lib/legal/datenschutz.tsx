@@ -150,10 +150,12 @@ export const datenschutzSections: LegalSection[] = [
       </ul>,
       <p key="p2">
         Kann der Server eine Anfrage gerade nicht annehmen, bietet das Formular an, die fertige
-        Nachricht in Ihrem E-Mail-Programm zu öffnen. Die Angaben verlassen Ihr Gerät dann erst mit
-        dem Versand aus Ihrem Programm. Wenn Sie uns direkt per E-Mail oder Telefon kontaktieren,
-        verarbeiten wir die mitgeteilten Angaben zu denselben Zwecken und auf denselben
-        Rechtsgrundlagen.
+        Nachricht in Ihrem E-Mail-Programm zu öffnen. Ihre Angaben wurden zu diesem Zeitpunkt
+        bereits an unseren Server übermittelt; je nach Fehlerursache können sie dort auch schon
+        gespeichert sein (siehe oben, gleiche Zwecke und Fristen). Mit dem Versand aus Ihrem
+        E-Mail-Programm übermitteln Sie sie zusätzlich per E-Mail. Wenn Sie uns direkt per E-Mail
+        oder Telefon kontaktieren, verarbeiten wir die mitgeteilten Angaben zu denselben Zwecken und
+        auf denselben Rechtsgrundlagen.
       </p>,
     ],
   },
