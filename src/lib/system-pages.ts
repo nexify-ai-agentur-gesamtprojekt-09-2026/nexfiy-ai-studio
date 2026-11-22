@@ -30,6 +30,15 @@ export function suggestionsFor(pathname: string): PageSuggestion[] {
   return NEXIFY.filter((suggestion) => suggestion.to !== normalized);
 }
 
+/**
+ * Frühere Shop-Adressen dieser Domain (Inhaberentscheidung 22.11.2026): sie gibt es nicht mehr.
+ * Server und Fehlerseite fragen dieselbe Regel ab, damit beide denselben Pfadbereich meinen.
+ * Auch mit mehreren Schrägstrichen am Anfang, die Browser und Proxys durchreichen.
+ */
+export function isRetiredPath(pathname: string): boolean {
+  return /^\/+teileklar(\/|$)/i.test(pathname);
+}
+
 /** Shortens long or encoded paths for display without breaking the layout. */
 export function displayPath(pathname: string, max = 48): string {
   let decoded = pathname;

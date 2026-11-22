@@ -45,6 +45,9 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
     "/teileklar/kasse?utm_source=x&q=y",
     "/teileklar/bestellungen?email=erika%40firma.de",
     "/teileklar/kasse/?utm_source=x&q=y",
+    "//teileklar",
+    "//teileklar/kasse?utm_source=x&q=y",
+    "///teileklar//kasse/?utm_source=x",
     "/TEILEKLAR/shop",
   ];
 
@@ -59,6 +62,9 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
   it("reicht weder Querystring noch Schrägstrich-Variante an die Seitenausgabe weiter", async () => {
     gesehen.length = 0;
     await abruf("/teileklar/kasse/?utm_source=x&email=erika%40firma.de");
+    expect(gesehen).toEqual(["/teileklar/kasse"]);
+    gesehen.length = 0;
+    await abruf("//teileklar//kasse?utm_source=x&q=y");
     expect(gesehen).toEqual(["/teileklar/kasse"]);
   });
 

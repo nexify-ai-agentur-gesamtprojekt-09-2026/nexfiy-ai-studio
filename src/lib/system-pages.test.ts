@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { displayPath, suggestionsFor } from "./system-pages";
+import { displayPath, isRetiredPath, suggestionsFor } from "./system-pages";
 
 describe("not-found suggestions", () => {
   it("treats a removed shop address like any other missing address", () => {
@@ -16,6 +16,15 @@ describe("not-found suggestions", () => {
 
   it("never suggests the page the visitor is already on", () => {
     expect(suggestionsFor("/kontakt/").map((s) => s.to)).not.toContain("/kontakt");
+  });
+
+  it("recognises removed shop addresses, also with repeated leading slashes", () => {
+    expect(isRetiredPath("/teileklar")).toBe(true);
+    expect(isRetiredPath("/teileklar/kasse")).toBe(true);
+    expect(isRetiredPath("//teileklar/kasse")).toBe(true);
+    expect(isRetiredPath("/TEILEKLAR/shop")).toBe(true);
+    expect(isRetiredPath("/teileklarheit")).toBe(false);
+    expect(isRetiredPath("/kontakt")).toBe(false);
   });
 
   it("shortens very long addresses for display", () => {

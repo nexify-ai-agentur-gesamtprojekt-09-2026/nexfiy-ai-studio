@@ -1,3 +1,5 @@
+import { isRetiredPath } from "./system-pages";
+
 /**
  * Adressregeln des Worker-Einstiegs (`src/server.ts`), als reine Funktionen ohne Framework-Import,
  * damit sie im Testlauf ohne Worker-Runtime prüfbar sind.
@@ -57,13 +59,18 @@ export function withNoindexOnNotFound(response: Response): Response {
 /**
  * 2026-11-22 (Europe/Berlin): Frühere Shop-Adressen — `/teileklar` und alles darunter.
  * Sie laufen ohne Umweg in die normale Fehlerseite. Dafür bekommt das Framework die Adresse ohne
- * Schrägstrich am Ende und ohne Querystring: sonst antwortet es auf `/teileklar/` zuerst mit einer
- * Weiterleitung auf `/teileklar` und reicht dabei den Querystring weiter (nachgemessen: 307).
+ * Schrägstrich am Ende, ohne doppelte Schrägstriche und ohne Querystring: sonst antwortet es auf
+ * `/teileklar/` (307) oder `//teileklar` (308) zuerst mit einer Weiterleitung und reicht dabei den
+ * Querystring weiter (beides nachgemessen).
  * Rückgabe `null` heißt: keine frühere Shop-Adresse, normaler Weg.
  */
 export function retiredPathUrl(url: URL): URL | null {
-  if (!/^\/teileklar(\/|$)/i.test(url.pathname)) return null;
-  return new URL(url.pathname.replace(/\/+$/, ""), url.origin);
+  if (!isRetiredPath(url.pathname)) return null;
+  // Pfad ausdrücklich setzen statt `new URL(pfad, origin)`: ein Pfad mit zwei Schrägstrichen am
+  // Anfang würde dort als fremder Host gelesen.
+  const ziel = new URL(url.origin);
+  ziel.pathname = `/${url.pathname.split("/").filter(Boolean).join("/")}`;
+  return ziel;
 }
 
 /** Antwort für eine frühere Shop-Adresse: immer 404 mit noindex, nie mit Weiterleitungs-Headern. */

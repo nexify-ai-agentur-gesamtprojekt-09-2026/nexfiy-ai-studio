@@ -17,7 +17,7 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
-import { displayPath, suggestionsFor } from "@/lib/system-pages";
+import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function useDocumentTitle(title: string) {
@@ -47,12 +47,15 @@ function NotFoundComponent() {
           </p>
         }
         detail={
-          <p>
-            Angefragte Adresse:{" "}
-            <code className="rounded-md border border-border bg-secondary px-1.5 py-0.5 font-label text-[13px] text-foreground break-all">
-              {displayPath(pathname)}
-            </code>
-          </p>
+          // Frühere Shop-Adressen werden nicht wiederholt: die Seite nennt sie nicht mehr.
+          isRetiredPath(pathname) ? undefined : (
+            <p>
+              Angefragte Adresse:{" "}
+              <code className="rounded-md border border-border bg-secondary px-1.5 py-0.5 font-label text-[13px] text-foreground break-all">
+                {displayPath(pathname)}
+              </code>
+            </p>
+          )
         }
         actions={
           <>
