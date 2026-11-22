@@ -122,6 +122,34 @@ html.nxc-gesperrt body {
   color: var(--nxc-akzent);
 }
 
+/* Offenes Telefonmenü: der Auslöser liegt nicht darüber und ist dort nicht per Tab erreichbar. */
+#atelier:has(.site-header details.mobile-navigation[open]) #nexify-chat-ausloeser {
+  display: none;
+}
+/* Telefon: Auslöser als runder Knopf (Name bleibt für Screenreader). Im ersten Bildschirm liegt er
+   über keinem Bedienelement: Er erscheint erst, wenn die Seite gerollt ist, und auf der Startseite
+   erst, wenn „Vorhaben schildern“ im Kopfbereich nicht mehr sichtbar ist – der Knopf dort öffnet
+   denselben Chat. */
+@media (max-width: 767.98px) {
+  #atelier #nexify-chat-ausloeser {
+    min-height: 52px;
+    padding: 4px;
+    gap: 0;
+  }
+  #atelier #nexify-chat-ausloeser .nxc-ausloeser-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  #atelier[data-scrolled="false"] #nexify-chat-ausloeser,
+  #atelier[data-hero-action-visible="true"] #nexify-chat-ausloeser {
+    display: none;
+  }
+}
+
 /* ---------- Panel: Grundaufbau ---------- */
 
 #atelier #nexify-chat {
