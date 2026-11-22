@@ -78,7 +78,7 @@ describe("Leitplanken der Modellantwort", () => {
     expect(long.text).not.toMatch(/7 500|500 €|€/);
   });
 
-  it("erlaubt nur das Budget, das der Besucher selbst genannt hat", () => {
+  it("erlaubt nur die Wiederholung des Budgets, das der Besucher als Betrag genannt hat", () => {
     const allowed = visitorAmounts(
       [
         { role: "user", content: "Unser Budget liegt bei 8.000 €." },
@@ -87,18 +87,37 @@ describe("Leitplanken der Modellantwort", () => {
       "höchstens 10k",
     );
     expect([...allowed].sort()).toEqual(["10000", "8000"]);
+    const text = "Mit Ihrem Budget von 8.000 € planen wir den Kern.";
+    expect(run(text, { allowedAmounts: allowed }).text).toBe(text);
     expect(
-      run("Mit Ihrem Budget von 8.000 € planen wir den Kern.", { allowedAmounts: allowed }).text,
-    ).toBe("Mit Ihrem Budget von 8.000 € planen wir den Kern.");
-    expect(run("Bis 10k € ist das machbar.", { allowedAmounts: allowed }).violations).toHaveLength(
-      0,
-    );
+      run("Sie haben einen Rahmen von 10k € genannt.", { allowedAmounts: allowed }).violations,
+    ).toHaveLength(0);
     expect(
       run("Realistisch sind eher 12.000 €.", { allowedAmounts: allowed }).violations,
     ).toHaveLength(1);
-    // Eine beiläufige Zahl des Besuchers gibt keinen Tausenderbetrag frei.
+  });
+
+  it("macht aus einer Zahl des Besuchers nie einen Preis oder eine Zusage von NeXify", () => {
+    // Der Besucher fragt mit einem Betrag; die Bestätigung wäre ein erfundener Preis.
+    const allowed = visitorAmounts([], "Kostet eine Website bei Ihnen 5.000 €?");
+    expect([...allowed]).toEqual(["5000"]);
+    for (const text of [
+      "Ja, eine Website kostet 5.000 €.",
+      "Genau, der Preis liegt bei 5.000 Euro.",
+      "Für 5.000 € bekommen Sie eine Website.",
+      "5.000 € sind dafür realistisch.",
+      "Bis 5.000 € ist das machbar.",
+      "Ihr Budget von 5.000 € reicht für eine Website.",
+      "Mit Ihrem Budget von 5.000 € ist das möglich.",
+    ])
+      expect(hasUnapprovedAmount(text, allowed), text).toBe(true);
+    expect(hasUnapprovedAmount("Ihr genanntes Budget von 5.000 € nehme ich auf.", allowed)).toBe(
+      false,
+    );
+    // Eine beiläufige Zahl ist kein Betrag und gibt nichts frei.
+    expect([...visitorAmounts([], "Ich brauche 3 Seiten bis 2027 für 12 Mitarbeiter")]).toEqual([]);
     expect(
-      hasUnapprovedAmount("Das kostet 3.000 €.", visitorAmounts([], "Ich brauche 3 Seiten")),
+      hasUnapprovedAmount("Ihr Budget von 3 € notiere ich.", visitorAmounts([], "3 Seiten")),
     ).toBe(true);
   });
 
@@ -107,8 +126,82 @@ describe("Leitplanken der Modellantwort", () => {
     expect([...visitorAmounts([], "maximal 2.5 Mio")]).toEqual(["2500000"]);
     expect([...visitorAmounts([], "1.500k")]).toEqual(["1500000"]);
     const allowed = visitorAmounts([], "Budget 1,5k €");
-    expect(hasUnapprovedAmount("Mit 1.500 € planen wir den Kern.", allowed)).toBe(false);
-    expect(hasUnapprovedAmount("Das kostet 1.000 €.", allowed)).toBe(true);
+    expect(hasUnapprovedAmount("Ihr Budget von 1.500 € halte ich fest.", allowed)).toBe(false);
+    expect(hasUnapprovedAmount("Ihr Budget von 1.000 € halte ich fest.", allowed)).toBe(true);
+  });
+
+  it("erkennt Beträge mit Währungswörtern, Zeiträumen, Steuerzusätzen und in Worten", () => {
+    for (const text of [
+      "Das macht 4900 Euro.",
+      "Rechnen Sie mit 4.900 EUR.",
+      "etwa 5000 Dollar",
+      "rund 5.000 US-Dollar",
+      "ungefähr 4800 Franken",
+      "CHF 4'800",
+      "USD 5,000",
+      "ab 99 pro Monat",
+      "nur 1.200 pro Jahr",
+      "450 je Tag",
+      "120 pro Stunde",
+      "89/Monat",
+      "4.900,-",
+      "4.900,– für die Website",
+      "1.200 zzgl. MwSt",
+      "5.950 inkl. MwSt.",
+      "4.900 zuzüglich Mehrwertsteuer",
+      "Die Website kostet 4900.",
+      "Preis: 2.500",
+      "fünftausend Euro",
+      "viertausendneunhundert Euro",
+      "zwei- bis dreitausend Euro",
+      "eintausendfünfhundert Franken",
+      "fünfhundert pro Monat",
+      "Das kostet fünftausend.",
+      "ein paar tausend Euro",
+      "mehrere tausend",
+      "ein vierstelliger Betrag",
+      "im fünfstelligen Bereich",
+      "five thousand dollars",
+    ])
+      expect(hasUnapprovedAmount(text), text).toBe(true);
+    for (const text of [
+      "Wir arbeiten in drei Leistungsfeldern.",
+      "Ein Ansprechpartner und zwei Agenten.",
+      "Fünf Antworten genügen für ein Angebot.",
+      "Die Kosten kennen Sie vor dem Start.",
+      "Der Preis hängt vom Umfang ab.",
+      "Externe Kosten wie Hosting weisen wir getrennt aus.",
+      "In Dollar oder Euro rechnen wir im Angebot.",
+      "Ein Jahr Betreuung ist eine Option.",
+    ])
+      expect(hasUnapprovedAmount(text), text).toBe(false);
+  });
+
+  it("lässt sich nicht durch Markdown-Zeichen oder Zeilenumbrüche umgehen", () => {
+    for (const text of [
+      "Das kostet **4.900** €.",
+      "Das kostet 4.900 **€**.",
+      "Preis: `4.900` _Euro_",
+      "~~4.900~~ € netto",
+    ])
+      expect(hasUnapprovedAmount(text), text).toBe(true);
+    for (const text of [
+      "Eine Website kostet 4.900\n€ bei uns.\nWas planen Sie?",
+      "Eine Website liegt bei 4.900\n\nEuro, grob gesagt.\nWas planen Sie?",
+      "Der Betrag in €\n4.900 ist üblich.\nWas planen Sie?",
+      "Es sind 4.900\npro Monat.\nWas planen Sie?",
+      "Rechnen Sie mit fünftausend\nEuro.\nWas planen Sie?",
+      "Das kostet **4.900**\n**€**.\nWas planen Sie?",
+    ])
+      for (const size of [1, 3, 7, 400]) {
+        const guard = run(text, {}, size);
+        expect(guard.text, `${JSON.stringify(text)} / ${size}`).not.toMatch(/4\.900|fünftausend/);
+        expect(guard.violations).toContain("unapproved_amount");
+        expect(guard.text).toMatch(/Was planen Sie\?$/);
+      }
+    // Eine Zeile, die nur mit einer Zahl endet, bleibt erhalten, wenn kein Betrag daraus wird.
+    const harmlos = "Wir starten im Jahr 2027\nmit der Planung.";
+    for (const size of [1, 5, 400]) expect(run(harmlos, {}, size).text).toBe(harmlos);
   });
 
   it("gibt sich nie als Mensch aus", () => {
@@ -124,7 +217,33 @@ describe("Leitplanken der Modellantwort", () => {
     ])
       expect(claimsToBeHuman(text), text).toBe(true);
     for (const text of [
+      "Ich bin wirklich ein Mensch.",
+      "Ich bin tatsächlich eine echte Person.",
+      "Ich bin Ihr persönlicher Ansprechpartner.",
+      "Ich bin ein Kollege aus dem Team.",
+      "Ich bin echt.",
+      "Ich bin aus Fleisch und Blut.",
+      "Ich bin keine Maschine.",
+      "Ich bin kein Computer.",
+      "Ich bin weder eine KI noch ein Bot.",
+      "Mein Name ist Pascal.",
+      "Hier ist Pascal.",
+      "Hier spricht Pascal Courbois.",
+      "Sie sprechen mit einem Menschen.",
+      "Sie schreiben gerade mit Pascal.",
+      "Sie chatten mit einem echten Mitarbeiter.",
+      "Als Mensch verstehe ich das gut.",
+      "Keine KI, sondern ein Mensch antwortet Ihnen.",
+      "Ich bin **ein Mensch**.",
+      "I am really a human.",
+    ])
+      expect(claimsToBeHuman(text), text).toBe(true);
+    for (const text of [
       "Ich bin AIFly ORACLE, ein KI-System von NeXify AI.",
+      "Sie sprechen mit einem KI-System, nicht mit einem Menschen.",
+      "Ihr Ansprechpartner ist Pascal Courbois.",
+      "Ich bin kein Ersatz für das persönliche Gespräch.",
+      "Mit einem Menschen sprechen Sie über das Kontaktformular.",
       "Ich bin kein Mensch, sondern ein KI-System.",
       "Pascal führt das Gespräch persönlich.",
       "Sie brauchen keinen Chatbot, sondern ein Portal.",
@@ -164,12 +283,35 @@ describe("Leitplanken der Modellantwort", () => {
       "Verstanden: Sie möchten Ihre Website erneuern. Für wen ist sie vor allem gedacht?",
       "Dazu passt [Marke & Web](/leistungen/websites), z. B. für einen neuen Auftritt. Bis wann soll er stehen?",
       "Erste Zeile.\n\nZweite Zeile ohne Punkt",
-      "Ein `Code`-Wort bleibt Text.",
     ])
       for (const size of [1, 6, 50]) expect(run(text, {}, size).text).toBe(text);
     const guard = createOutputGuard();
     expect(guard.push("Erster Satz. Zweiter")).toBe("Erster Satz. ");
     expect(guard.push(" Satz.\n")).toBe("Zweiter Satz.\n");
+  });
+
+  it("entfernt auch ~~~-Blöcke und Inline-Code-Zeichen", () => {
+    for (const size of [1, 2, 5, 400]) {
+      const guard = run('Ergebnis:\n~~~json\n{"preis": "999 €"}\n~~~\nNoch Fragen?', {}, size);
+      expect(guard.text, `Stückelung ${size}`).not.toMatch(/~|preis|999/);
+      expect(guard.text).toMatch(/Noch Fragen\?$/);
+      expect(guard.blocks).toHaveLength(1);
+      expect(run("Ein `Code`-Wort bleibt Text.", {}, size).text).toBe("Ein Code-Wort bleibt Text.");
+    }
+    // Besteht die Antwort nur aus einem Block, bleibt kein sichtbarer Text.
+    expect(run("```js\nalert(1)\n```").text).toBe("");
+  });
+
+  it("prüft lange Antworten in linearer Zeit", () => {
+    const lang = "Wir planen sorgfältig und Schritt für Schritt. ".repeat(4000);
+    const beginn = performance.now();
+    const guard = createOutputGuard();
+    let laenge = 0;
+    for (let i = 0; i < lang.length; i += 16) laenge += guard.push(lang.slice(i, i + 16)).length;
+    laenge += guard.finish().length;
+    expect(laenge).toBe(lang.length);
+    // 188.000 Zeichen in 11.750 Stücken; quadratischer Aufwand läge weit über dieser Grenze.
+    expect(performance.now() - beginn).toBeLessThan(1500);
   });
 
   it("löst Datenblöcke aus dem sichtbaren Text", () => {

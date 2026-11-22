@@ -3,9 +3,14 @@
  *
  * Warum eine eigene Datei: Der Assistent darf nur sagen, was die Website tatsächlich anbietet.
  * Die Fakten unten sind aus den Seiteninhalten dieses Repos abgeleitet (Stand 22.11.2026) und
- * müssen bei inhaltlichen Änderungen der Seiten mitgezogen werden. Hier stehen keine Secrets und
- * keine internen Angaben – der Text gilt als öffentlich, auch wenn er nicht ausgegeben werden soll.
+ * müssen bei inhaltlichen Änderungen der Seiten mitgezogen werden. Hier stehen keine Secrets.
+ *
+ * Nur für den Server (`*.server.ts`): Systemvorgabe und Kennung dürfen nicht im Browser-Bundle
+ * landen. Was die Oberfläche braucht (Seitenliste, Kontaktadresse), steht in `chat-seiten.ts`;
+ * `chat-bundle.test.ts` prüft Importe und Build-Ergebnis.
  */
+
+import { CHAT_KONTAKT_MAIL } from "@/lib/chat-seiten";
 
 /** Modellvertrag des Projekts (config/llm-policy.json): exakt dieses Modell, Reasoning `high`, kein Ersatzmodell. */
 export const CHAT_MODELL = "deepseek/deepseek-v4.1-flash-1017";
@@ -16,37 +21,18 @@ export const CHAT_MODELL = "deepseek/deepseek-v4.1-flash-1017";
  * (Monorepo apps/web/lib/chat-llm.ts). Das ist dieselbe Route, kein Ersatzmodell.
  */
 export const CHAT_MODELL_ROUTERNAME = "openrouter/deepseek-v4.1-flash";
+/**
+ * Kennungen, unter denen der Router in seiner Antwort (`model`) genau dieses Modell ausweisen darf.
+ * Meldet er etwas anderes oder nichts, wird die Antwort verworfen (502) und der Vorfall protokolliert.
+ * Die beiden Kurzformen sind Schreibweisen desselben Modells ohne Routen-Präfix bzw. ohne Datum.
+ */
+export const CHAT_MODELL_ERLAUBT: readonly string[] = [
+  CHAT_MODELL,
+  CHAT_MODELL_ROUTERNAME,
+  "deepseek/deepseek-v4.1-flash",
+  "deepseek-v4.1-flash",
+];
 export const CHAT_REASONING = { effort: "high" } as const;
-
-/** Seiten, auf die der Assistent verweisen darf; die Oberfläche verlinkt ausschließlich diese Pfade. */
-export const CHAT_SEITEN: Record<string, string> = {
-  "/": "Startseite",
-  "/leistungen": "Leistungen im Überblick",
-  "/leistungen/websites": "Websites & Marke",
-  "/leistungen/agenten-automatisierung": "KI & Automatisierung",
-  "/leistungen/apps-portale": "Apps & Portale",
-  "/leistungsumfang": "Pakete und Leistungsumfang",
-  "/loesungen": "Kampagne und Zielseite",
-  "/preise-ablauf": "Preise & Ablauf",
-  "/wissen": "Arbeitsweise",
-  "/wissen/projekt-vorbereiten": "Projekt vorbereiten",
-  "/unternehmen": "Über NeXify AI",
-  "/portale": "Portale und Kundencenter",
-  "/produkte/nex2fly": "NeX AIFly Suite",
-  "/produkte/one": "Agenten NeX und AIFly ORACLE",
-  "/produkte/aifly-oracle": "AIFly ORACLE",
-  "/produkte/nex-agentic-aifly": "NeX Agentic AIFly",
-  "/produkte/api": "NeXify API",
-  "/produkte/skills-mcp": "Skills und MCP",
-  "/kontakt": "Kontakt",
-  "/ki-hinweise": "KI-Hinweise",
-  "/datenschutz": "Datenschutz",
-  "/vertragsgrundlagen": "Vertragsgrundlagen",
-  "/impressum": "Impressum",
-  "/barrierefreiheit": "Barrierefreiheit",
-};
-
-export const CHAT_KONTAKT_MAIL = "mail@nexifyai.cloud";
 
 /** Kennung, die nur im Regelwerk steht. Taucht sie in einer Antwort auf, wird die Antwort ersetzt. */
 export const CHAT_KANARIENWERT = "NXC-REGELWERK-7F3A";
@@ -101,6 +87,10 @@ const REGEL_MARKER = REGELN.map((regel) => normalisiert(regel).slice(0, 56));
 /** Standardantwort, wenn eine Ausgabe das Regelwerk wiedergeben würde. */
 export const CHAT_ERSATZANTWORT =
   "Dazu kann ich nichts sagen. Ich helfe Ihnen gern bei Fragen zu den Leistungen, Paketen und Produkten von NeXify AI oder beim Weg zur persönlichen Anfrage unter /kontakt.";
+
+/** Standardantwort, wenn das Modell geantwortet hat, aber nichts davon gezeigt werden darf. */
+export const CHAT_LEERANTWORT =
+  "Darauf habe ich keine Antwort, die ich Ihnen hier zeigen kann. Stellen Sie die Frage gern anders – oder schreiben Sie uns direkt über /kontakt.";
 
 /** True, wenn die Antwort die interne Kennung oder wörtliche Regelsätze enthält. */
 export function enthaeltRegelwerk(antwort: string): boolean {

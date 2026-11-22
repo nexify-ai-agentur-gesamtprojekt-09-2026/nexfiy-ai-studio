@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CHAT_KONTAKT_MAIL, CHAT_SEITEN } from "@/lib/chat-wissen";
+import { CHAT_KONTAKT_MAIL, CHAT_SEITEN } from "@/lib/chat-seiten";
 
 /**
  * Zeigt Chattext sicher an: Jede Ausgabe wird als React-Textknoten gesetzt, nie als HTML.

@@ -1,11 +1,12 @@
 /**
- * POST /api/chat — Gegenstelle für den KI-Chat der öffentlichen Website (B-159).
+ * /api/chat — Gegenstelle für den KI-Chat der öffentlichen Website (B-159).
  *
  * Warum vor dem Framework (in `src/server.ts`): der SSR-Wrapper reicht die Bindings nicht an
  * Framework-Routen durch; der Worker-Entry bekommt sie als zweites Argument.
  *
  * Vertrag:
- *   Anfrage  { message: string (2..1500), session_id?: string }      content-type: application/json
+ *   POST     { message: string (2..1500), session_id?: string, frage_id?: string }   (JSON)
+ *            `frage_id` kennzeichnet eine Frage; „Erneut senden“ schickt dieselbe Kennung.
  *   Antwort  ohne `accept: text/event-stream`:
  *            200 { ok: true, antwort, session_id, hinweis }
  *            mit `accept: text/event-stream` (so ruft die Oberfläche auf): 200 als Ereignisstrom
@@ -20,27 +21,40 @@
  *            415 falscher_inhaltstyp
  *            429 zu_viele_anfragen | sitzungslimit_erreicht | tageslimit_erreicht  (+ retry-after)
  *            502 upstream_fehler      504 upstream_zeit
- *            503 chat_not_configured (fail-closed) | chat_abgeschaltet (Binding CHAT_AKTIV=aus)
+ *            503 chat_abgeschaltet | chat_not_configured (fail-closed)
  *   GET      200 { ok: true, aktiv, grund }   Zustand für die Oberfläche, ohne Modellaufruf
  *
+ * Schalter: Der Chat ist AUS, solange das Binding `CHAT_AKTIV` nicht ausdrücklich `an`, `1`, `true`
+ * oder `on` lautet. Einschalten erst, wenn der Inhaber die Rechtstexte (Datenschutz, KI-Hinweise)
+ * zum Chat freigegeben hat.
+ *
+ * Nötige Bindings, sonst 503 `chat_not_configured` und nichts wird gespeichert:
+ *   DB (D1, mit migrations/0002 und 0003) · NINEROUTER_API_KEY · CHAT_IP_SCHLUESSEL (Geheimnis für
+ *   den IP-Kurzwert, mindestens 16 Zeichen). Optional: CHAT_BASE_URL (https), CHAT_TAGESLIMIT,
+ *   CHAT_AUFBEWAHRUNG_TAGE.
+ *
  * Modell: ausschließlich das Policy-Modell `CHAT_MODELL` mit Reasoning `high` über den 9Router,
- * gesendet unter dessen Routernamen `CHAT_MODELL_ROUTERNAME`. Es gibt keinen Ersatz und keine
+ * gesendet unter dessen Routernamen `CHAT_MODELL_ROUTERNAME`. Die Antwort muss eine der Kennungen
+ * aus `CHAT_MODELL_ERLAUBT` ausweisen, sonst wird sie verworfen. Es gibt keinen Ersatz und keine
  * zweite Anfrage: fällt der Anbieter aus, erfährt der Besucher das.
  * Leitplanken auf der Antwort: src/lib/chat-leitplanken.ts (Beträge, Menschenbehauptung, Blöcke)
  * und `enthaeltRegelwerk` (Wiedergabe des Regelwerks).
  *
- * Datenschutz: keine Roh-IP, nur SHA-256(IP|Tenant). Gespeichert werden Frage und Antwort mit
- * Sitzungskennung und Zeit – für den Gesprächsverlauf und die Begrenzung von Missbrauch.
+ * Datenschutz: keine Roh-IP. Gespeichert wird ein HMAC-SHA-256 über die IP (IPv6 auf /64 gekürzt)
+ * mit `CHAT_IP_SCHLUESSEL`, dazu Frage und Antwort mit Sitzungskennung und Zeit – für den
+ * Gesprächsverlauf und die Begrenzung von Missbrauch.
  * Aufbewahrung: siehe `raeumeChatAuf` und migrations/0003-chat-aufbewahrung.sql.
  */
 import { createOutputGuard, visitorAmounts, type GuidanceTurn } from "@/lib/chat-leitplanken";
 import {
   CHAT_ERSATZANTWORT,
+  CHAT_LEERANTWORT,
+  CHAT_MODELL_ERLAUBT,
   CHAT_MODELL_ROUTERNAME,
   CHAT_REASONING,
   CHAT_SYSTEMPROMPT,
   enthaeltRegelwerk,
-} from "@/lib/chat-wissen";
+} from "@/lib/chat-wissen.server";
 
 const TENANT = "nexifyai-platform";
 const BASIS_STANDARD = "https://ai-router.nexifyai.cloud";
@@ -80,8 +94,10 @@ type D1 = { prepare(sql: string): D1Stmt };
 export interface ChatBindings {
   DB?: D1;
   NINEROUTER_API_KEY?: string;
+  /** Geheimnis für den IP-Kurzwert (HMAC). Fehlt es, bleibt der Chat geschlossen. */
+  CHAT_IP_SCHLUESSEL?: string;
   CHAT_BASE_URL?: string;
-  /** Schalter ohne Deploy: "aus", "0", "false" oder "off" schaltet den Chat ab. Standard: an. */
+  /** Schalter ohne Deploy: nur `an`, `1`, `true` oder `on` schaltet ein. Standard: aus. */
   CHAT_AKTIV?: string;
   CHAT_TAGESLIMIT?: string;
   CHAT_AUFBEWAHRUNG_TAGE?: string;
@@ -108,15 +124,49 @@ function json(
   });
 }
 
-async function ipHash(request: Request): Promise<string> {
-  const ip = request.headers.get("cf-connecting-ip") ?? "0.0.0.0";
-  const daten = new TextEncoder().encode(`${ip}|${TENANT}`);
-  const digest = await crypto.subtle.digest("SHA-256", daten);
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+/**
+ * Adresse, über die der Kurzwert gebildet wird. IPv6 wird auf das /64-Präfix gekürzt: ein Anschluss
+ * verfügt meist über ein ganzes /64 und könnte die Limits sonst mit jeder Anfrage neu beginnen.
+ */
+export function ipFuerKurzwert(roh: string | null): string {
+  const ip = (roh ?? "").trim().toLowerCase();
+  if (!ip) return "0.0.0.0";
+  const eingebettet = /^(?:::ffff:)?(\d{1,3}(?:\.\d{1,3}){3})$/.exec(ip);
+  if (eingebettet?.[1]) return eingebettet[1];
+  if (!ip.includes(":")) return ip;
+  const [vorn = "", hinten] = ip.replace(/%.*$/, "").split("::");
+  const links = vorn ? vorn.split(":") : [];
+  const rechts = hinten ? hinten.split(":") : [];
+  const gruppen =
+    hinten === undefined
+      ? links
+      : [...links, ...Array(Math.max(0, 8 - links.length - rechts.length)).fill("0"), ...rechts];
+  const praefix = gruppen
+    .slice(0, 4)
+    .map((gruppe: string) => gruppe.replace(/^0+(?=.)/, "") || "0")
+    .join(":");
+  return `${praefix}::/64`;
 }
 
+/** HMAC statt bloßem Hash: Ohne das Geheimnis lässt sich der Kurzwert nicht durch Ausprobieren aller Adressen umkehren. */
+export async function ipKurzwert(request: Request, geheimnis: string): Promise<string> {
+  const kodierer = new TextEncoder();
+  const schluessel = await crypto.subtle.importKey(
+    "raw",
+    kodierer.encode(geheimnis),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const ip = ipFuerKurzwert(request.headers.get("cf-connecting-ip"));
+  const mac = await crypto.subtle.sign("HMAC", schluessel, kodierer.encode(`${TENANT}|${ip}`));
+  return [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+const KENNUNG = /^[A-Za-z0-9_-]{8,64}$/;
+
 function sitzungswert(roh: unknown): string {
-  if (typeof roh === "string" && /^[A-Za-z0-9_-]{16,64}$/.test(roh)) return roh;
+  if (typeof roh === "string" && roh.length >= 16 && KENNUNG.test(roh)) return roh;
   return crypto.randomUUID();
 }
 
@@ -157,6 +207,78 @@ function ganzzahl(roh: string | undefined, standard: number, max: number): numbe
   return Number.isInteger(wert) && wert > 0 && wert <= max ? wert : standard;
 }
 
+type Grenze = { fehler: string; warten: number };
+
+/** Gezählt werden Anbieteraufrufe (`versuche`), nicht Zeilen: jede Frage steht nur einmal in der Tabelle. */
+const ZAEHLE =
+  "SELECT COALESCE(SUM(versuche), 0) FROM chat_nachrichten WHERE tenant = ?2 AND rolle = 'user'";
+
+/**
+ * Prüfen und Reservieren in EINER Anweisung: Die Zeile entsteht nur, wenn alle Fenster noch Platz
+ * haben. D1 führt eine Anweisung atomar aus – gleichzeitige Anfragen können die Limits deshalb
+ * nicht gemeinsam überschreiten (bei „erst zählen, dann schreiben“ könnten sie es).
+ * Dieselbe Frage erneut (gleiche Kennung) erhöht `versuche`, statt eine zweite Zeile anzulegen.
+ */
+const RESERVIERE = `
+INSERT INTO chat_nachrichten (id, tenant, session_id, rolle, inhalt, ip_hash, created_at, versuche)
+SELECT ?1, ?2, ?3, 'user', ?4, ?5, ?6, 1
+WHERE (${ZAEHLE} AND created_at > ?7) < ?8
+  AND (${ZAEHLE} AND ip_hash = ?5 AND created_at > ?7) < ?9
+  AND (${ZAEHLE} AND ip_hash = ?5 AND created_at > ?10) < ?11
+  AND (${ZAEHLE} AND ip_hash = ?5 AND created_at > ?12) < ?13
+  AND (${ZAEHLE} AND session_id = ?3 AND created_at > ?7) < ?14
+ON CONFLICT(id) DO UPDATE SET
+  versuche = versuche + 1, inhalt = excluded.inhalt, created_at = excluded.created_at
+  WHERE chat_nachrichten.rolle = 'user' AND chat_nachrichten.ip_hash = excluded.ip_hash`;
+
+function aenderungen(ergebnis: unknown): number | null {
+  const e = ergebnis as { changes?: unknown; meta?: { changes?: unknown } } | null;
+  const wert = e?.meta?.changes ?? e?.changes;
+  return typeof wert === "number" ? wert : null;
+}
+
+type Fenster = { vorMinute: string; vorStunde: string; vorTag: string; gesamtProTag: number };
+
+function fenster(gesamtProTag: number, jetzt = Date.now()): Fenster {
+  return {
+    vorMinute: new Date(jetzt - 60_000).toISOString(),
+    vorStunde: new Date(jetzt - 3_600_000).toISOString(),
+    vorTag: new Date(jetzt - 86_400_000).toISOString(),
+    gesamtProTag,
+  };
+}
+
+/** true: reserviert. false: ein Limit ist erreicht. Wirft, wenn die Datenbank nicht antwortet. */
+async function reserviere(
+  db: D1,
+  zeile: { id: string; sessionId: string; nachricht: string; hash: string },
+  f: Fenster,
+): Promise<boolean> {
+  const ergebnis = await db
+    .prepare(RESERVIERE)
+    .bind(
+      zeile.id,
+      TENANT,
+      zeile.sessionId,
+      zeile.nachricht,
+      zeile.hash,
+      new Date().toISOString(),
+      f.vorTag,
+      f.gesamtProTag,
+      CHAT_LIMITS.jeIpProTag,
+      f.vorStunde,
+      CHAT_LIMITS.jeIpProStunde,
+      f.vorMinute,
+      CHAT_LIMITS.jeIpProMinute,
+      CHAT_LIMITS.jeSitzungProTag,
+    )
+    .run();
+  const anzahl = aenderungen(ergebnis);
+  // Ohne Rückmeldung über die Zeilenzahl lässt sich das Limit nicht belegen: dann lieber kein Chat.
+  if (anzahl === null) throw new Error("chat_db_ohne_aenderungszahl");
+  return anzahl > 0;
+}
+
 type Zaehler = {
   ip_minute: number | null;
   ip_stunde: number | null;
@@ -165,69 +287,98 @@ type Zaehler = {
   gesamt_tag: number | null;
 };
 
-type Grenze = { fehler: string; warten: number } | null;
-
-async function pruefeGrenzen(
-  db: D1,
-  hash: string,
-  sessionId: string,
-  gesamtProTag: number,
-): Promise<Grenze> {
-  const vorMinute = new Date(Date.now() - 60_000).toISOString();
-  const vorStunde = new Date(Date.now() - 3_600_000).toISOString();
-  const vorTag = new Date(Date.now() - 86_400_000).toISOString();
+/** Nur für die Meldung nach einer abgelehnten Reservierung: welches Fenster ist voll? */
+async function nenneGrenze(db: D1, hash: string, sessionId: string, f: Fenster): Promise<Grenze> {
   const z = await db
     .prepare(
       `SELECT
-         SUM(CASE WHEN ip_hash = ? AND created_at > ? THEN 1 ELSE 0 END) AS ip_minute,
-         SUM(CASE WHEN ip_hash = ? AND created_at > ? THEN 1 ELSE 0 END) AS ip_stunde,
-         SUM(CASE WHEN ip_hash = ? THEN 1 ELSE 0 END) AS ip_tag,
-         SUM(CASE WHEN session_id = ? THEN 1 ELSE 0 END) AS sitzung_tag,
-         COUNT(*) AS gesamt_tag
+         SUM(CASE WHEN ip_hash = ? AND created_at > ? THEN versuche ELSE 0 END) AS ip_minute,
+         SUM(CASE WHEN ip_hash = ? AND created_at > ? THEN versuche ELSE 0 END) AS ip_stunde,
+         SUM(CASE WHEN ip_hash = ? THEN versuche ELSE 0 END) AS ip_tag,
+         SUM(CASE WHEN session_id = ? THEN versuche ELSE 0 END) AS sitzung_tag,
+         SUM(versuche) AS gesamt_tag
        FROM chat_nachrichten
        WHERE tenant = ? AND rolle = 'user' AND created_at > ?`,
     )
-    .bind(hash, vorMinute, hash, vorStunde, hash, sessionId, TENANT, vorTag)
+    .bind(hash, f.vorMinute, hash, f.vorStunde, hash, sessionId, TENANT, f.vorTag)
     .first<Zaehler>();
-  if (!z) return null;
-  if ((z.gesamt_tag ?? 0) >= gesamtProTag) return { fehler: "tageslimit_erreicht", warten: 3600 };
-  if ((z.ip_tag ?? 0) >= CHAT_LIMITS.jeIpProTag)
+  if ((z?.gesamt_tag ?? 0) >= f.gesamtProTag)
     return { fehler: "tageslimit_erreicht", warten: 3600 };
-  if ((z.sitzung_tag ?? 0) >= CHAT_LIMITS.jeSitzungProTag)
+  if ((z?.ip_tag ?? 0) >= CHAT_LIMITS.jeIpProTag)
+    return { fehler: "tageslimit_erreicht", warten: 3600 };
+  if ((z?.sitzung_tag ?? 0) >= CHAT_LIMITS.jeSitzungProTag)
     return { fehler: "sitzungslimit_erreicht", warten: 3600 };
-  if ((z.ip_stunde ?? 0) >= CHAT_LIMITS.jeIpProStunde)
+  if ((z?.ip_stunde ?? 0) >= CHAT_LIMITS.jeIpProStunde)
     return { fehler: "zu_viele_anfragen", warten: 900 };
-  if ((z.ip_minute ?? 0) >= CHAT_LIMITS.jeIpProMinute)
-    return { fehler: "zu_viele_anfragen", warten: 60 };
-  return null;
+  return { fehler: "zu_viele_anfragen", warten: 60 };
+}
+
+/**
+ * Gibt eine Reservierung zurück, wenn der Anbieter nichts geliefert hat: Die Frage zählt dann
+ * nicht, und es bleibt keine unbeantwortete Zeile liegen.
+ */
+async function gibFrei(db: D1, id: string): Promise<void> {
+  await db
+    .prepare("DELETE FROM chat_nachrichten WHERE id = ? AND rolle = 'user' AND versuche <= 1")
+    .bind(id)
+    .run();
+  await db
+    .prepare(
+      "UPDATE chat_nachrichten SET versuche = versuche - 1 WHERE id = ? AND rolle = 'user' AND versuche > 1",
+    )
+    .bind(id)
+    .run();
 }
 
 type Nachricht = { role: "system" | "user" | "assistant"; content: string };
 
-/** Verlauf kommt ausschließlich aus der Datenbank: der Client kann keine Assistentenzeilen unterschieben. */
-async function ladeVerlauf(db: D1, sessionId: string): Promise<GuidanceTurn[]> {
+/**
+ * Verlauf kommt ausschließlich aus der Datenbank (der Client kann keine Assistentenzeilen
+ * unterschieben) und nur für dieselbe Sitzung UND denselben IP-Kurzwert: Wer eine fremde
+ * Sitzungskennung kennt, bekommt deren Gespräch nicht als Kontext. Fragen ohne Antwort
+ * (abgebrochen, Zeitlimit) werden nicht weitergegeben.
+ */
+async function ladeVerlauf(
+  db: D1,
+  sessionId: string,
+  hash: string,
+  ohneId: string,
+): Promise<GuidanceTurn[]> {
   const seit = new Date(Date.now() - VERLAUF_FENSTER_MS).toISOString();
   const { results } = await db
     .prepare(
-      "SELECT rolle, inhalt FROM chat_nachrichten WHERE tenant = ? AND session_id = ? AND created_at > ? ORDER BY created_at DESC LIMIT ?",
+      "SELECT rolle, inhalt FROM chat_nachrichten WHERE tenant = ? AND session_id = ? AND ip_hash = ? AND created_at > ? AND id <> ? AND id <> ? ORDER BY created_at DESC, rolle DESC LIMIT ?",
     )
-    .bind(TENANT, sessionId, seit, VERLAUF_NACHRICHTEN)
+    .bind(TENANT, sessionId, hash, seit, ohneId, `${ohneId}.a`, VERLAUF_NACHRICHTEN * 2)
     .all<{ rolle: string; inhalt: string }>();
-  return (results ?? [])
-    .reverse()
-    .filter((zeile) => zeile.rolle === "user" || zeile.rolle === "assistant")
-    .map((zeile) => ({
-      role: zeile.rolle as "user" | "assistant",
-      content: String(zeile.inhalt).slice(0, CHAT_MAX_ZEICHEN),
-    }));
+  const zeilen = (results ?? []).reverse();
+  const paare: GuidanceTurn[] = [];
+  for (let index = 0; index < zeilen.length - 1; index++) {
+    const frage = zeilen[index];
+    const antwort = zeilen[index + 1];
+    if (frage?.rolle !== "user" || antwort?.rolle !== "assistant") continue;
+    paare.push(
+      { role: "user", content: String(frage.inhalt).slice(0, CHAT_MAX_ZEICHEN) },
+      { role: "assistant", content: String(antwort.inhalt).slice(0, CHAT_MAX_ZEICHEN) },
+    );
+    index++;
+  }
+  return paare.slice(-VERLAUF_NACHRICHTEN);
 }
 
-function speichere(db: D1, sessionId: string, rolle: string, inhalt: string, hash: string) {
+/** Die Antwort gehört zur Frage (`<id>.a`); eine erneut gestellte Frage ersetzt ihre alte Antwort. */
+function speichereAntwort(
+  db: D1,
+  frageId: string,
+  sessionId: string,
+  inhalt: string,
+  hash: string,
+) {
   return db
     .prepare(
-      `INSERT INTO chat_nachrichten (id, tenant, session_id, rolle, inhalt, ip_hash, created_at) VALUES (?, ?, ?, '${rolle === "user" ? "user" : "assistant"}', ?, ?, ?)`,
+      "INSERT OR REPLACE INTO chat_nachrichten (id, tenant, session_id, rolle, inhalt, ip_hash, created_at, versuche) VALUES (?, ?, ?, 'assistant', ?, ?, ?, 1)",
     )
-    .bind(crypto.randomUUID(), TENANT, sessionId, inhalt, hash, new Date().toISOString())
+    .bind(`${frageId}.a`, TENANT, sessionId, inhalt, hash, new Date().toISOString())
     .run();
 }
 
@@ -257,9 +408,30 @@ class AnbieterFehler extends Error {
 }
 
 /**
+ * Der Router muss in seiner Antwort das Policy-Modell ausweisen. Meldet er ein anderes oder keines,
+ * wird abgebrochen – nie stillschweigend mit einem Ersatzmodell weitergearbeitet. Protokolliert
+ * wird nur die gemeldete Kennung, kein Inhalt.
+ */
+function pruefeModell(gemeldet: unknown): void {
+  if (typeof gemeldet === "string" && CHAT_MODELL_ERLAUBT.includes(gemeldet)) return;
+  console.error("chat_modell_abweichung", {
+    erwartet: CHAT_MODELL_ERLAUBT,
+    gemeldet: typeof gemeldet === "string" ? gemeldet.slice(0, 120) : null,
+  });
+  throw new AnbieterFehler("upstream_fehler");
+}
+
+type AnbieterTeil = {
+  error?: unknown;
+  model?: unknown;
+  choices?: Array<{ delta?: { content?: unknown }; message?: { content?: unknown } }>;
+};
+
+/**
  * Liest die Antwort des Routers als Strom und meldet jedes Textstück. Versteht beide Formen, die
  * der Router liefert: Ereignisstrom (`data: {…}`) und einen JSON-Rumpf, an den er ein
  * `data: [DONE]` hängt. Denkschritte des Modells (`reasoning`) werden nie weitergegeben.
+ * Text wird erst gemeldet, nachdem das Modell der Antwort geprüft ist.
  */
 async function leseAnbieter(
   antwort: Response,
@@ -271,23 +443,27 @@ async function leseAnbieter(
   const dekoder = new TextDecoder();
   let puffer = "";
   let form: "json" | "sse" | null = null;
+  let modellGeprueft = false;
   const zeile = (roh: string) => {
     const text = roh.trim();
     if (!text.startsWith("data:")) return;
     const nutzlast = text.slice(5).trim();
     if (!nutzlast || nutzlast === "[DONE]") return;
-    let teil: {
-      error?: unknown;
-      choices?: Array<{ delta?: { content?: unknown }; message?: { content?: unknown } }>;
-    };
+    let teil: AnbieterTeil;
     try {
-      teil = JSON.parse(nutzlast);
+      teil = JSON.parse(nutzlast) as AnbieterTeil;
     } catch {
       return;
     }
     if (teil.error) throw new AnbieterFehler("upstream_fehler");
+    if (teil.model !== undefined) {
+      pruefeModell(teil.model);
+      modellGeprueft = true;
+    }
     const stueck = teil.choices?.[0]?.delta?.content ?? teil.choices?.[0]?.message?.content;
-    if (typeof stueck === "string" && stueck) melde(stueck);
+    if (typeof stueck !== "string" || !stueck) return;
+    if (!modellGeprueft) pruefeModell(undefined);
+    melde(stueck);
   };
   for (;;) {
     const { done, value } = await leser.read();
@@ -312,14 +488,15 @@ async function leseAnbieter(
   }
   const marker = puffer.indexOf("\ndata:");
   const kern = (marker >= 0 ? puffer.slice(0, marker) : puffer).trim();
-  let ergebnis: { error?: unknown; choices?: Array<{ message?: { content?: unknown } }> };
+  let ergebnis: AnbieterTeil;
   try {
-    ergebnis = JSON.parse(kern);
+    ergebnis = JSON.parse(kern) as AnbieterTeil;
   } catch {
     throw new AnbieterFehler("upstream_fehler");
   }
   const text = ergebnis.choices?.[0]?.message?.content;
   if (ergebnis.error || typeof text !== "string") throw new AnbieterFehler("upstream_fehler");
+  pruefeModell(ergebnis.model);
   melde(text);
 }
 
@@ -329,6 +506,9 @@ type Lauf = {
   abbrechen(): void;
 };
 
+/** So viel Rohtext wird mit jedem neuen Stück erneut auf das Regelwerk geprüft (statt der ganzen Antwort). */
+const REGELWERK_FENSTER = 320;
+
 /** Ein einziger Aufruf an den Anbieter – kein Wiederholen, kein anderes Modell. */
 async function rufeAnbieter(
   basis: string,
@@ -336,6 +516,7 @@ async function rufeAnbieter(
   nachrichten: Nachricht[],
   strom: boolean,
   erlaubteBetraege: ReadonlySet<string>,
+  besucher: AbortSignal | undefined,
 ): Promise<Lauf> {
   const steuerung = new AbortController();
   let grund: "upstream_zeit" | null = null;
@@ -349,9 +530,16 @@ async function rufeAnbieter(
     clearTimeout(stille);
     stille = setTimeout(zeitAus, ZEIT_LEERLAUF_MS);
   };
-  const aufraeumen = () => {
+  // Verlässt der Besucher die Seite, endet auch der Aufruf beim Anbieter.
+  const besucherWeg = () => steuerung.abort();
+  if (besucher?.aborted) steuerung.abort();
+  else besucher?.addEventListener("abort", besucherWeg, { once: true });
+  /** Beendet den Anbieteraufruf in jedem Fall: Zeitgeber aus, Verbindung zu. */
+  const beende = () => {
     clearTimeout(gesamt);
     clearTimeout(stille);
+    besucher?.removeEventListener("abort", besucherWeg);
+    steuerung.abort();
   };
   const fehler = () => new AnbieterFehler(grund ?? "upstream_fehler");
 
@@ -373,34 +561,35 @@ async function rufeAnbieter(
       signal: steuerung.signal,
     });
   } catch {
-    aufraeumen();
+    beende();
     throw fehler();
   }
   if (!antwort.ok) {
-    aufraeumen();
-    steuerung.abort();
+    beende();
     throw fehler();
   }
   leerlauf();
 
   return {
-    abbrechen() {
-      aufraeumen();
-      steuerung.abort();
-    },
+    abbrechen: beende,
     async lies(melde) {
       // Rohtext des Modells; sichtbar wird nur, was die Leitplanken satzweise freigeben.
-      let roh = "";
+      let rohLaenge = 0;
+      let rohEnde = "";
+      let inhalt = false;
       let ersetzt = false;
       const leitplanke = createOutputGuard({ allowedAmounts: erlaubteBetraege });
       try {
         await leseAnbieter(
           antwort,
           (stueck) => {
-            if (ersetzt || roh.length >= MAX_ANTWORT_ZEICHEN) return;
-            const neu = stueck.slice(0, MAX_ANTWORT_ZEICHEN - roh.length);
-            roh += neu;
-            if (enthaeltRegelwerk(roh)) {
+            if (ersetzt || rohLaenge >= MAX_ANTWORT_ZEICHEN) return;
+            const neu = stueck.slice(0, MAX_ANTWORT_ZEICHEN - rohLaenge);
+            rohLaenge += neu.length;
+            inhalt ||= /\S/u.test(neu);
+            const pruefen = rohEnde + neu;
+            rohEnde = pruefen.slice(-REGELWERK_FENSTER);
+            if (enthaeltRegelwerk(pruefen)) {
               ersetzt = true;
               melde("ersetzen", CHAT_ERSATZANTWORT);
               steuerung.abort();
@@ -414,14 +603,19 @@ async function rufeAnbieter(
       } catch (ursache) {
         if (!ersetzt) throw ursache instanceof AnbieterFehler && !grund ? ursache : fehler();
       } finally {
-        aufraeumen();
+        // Auch nach einem Fehlerereignis oder einer Modellabweichung läuft beim Anbieter nichts weiter.
+        beende();
       }
       if (ersetzt) return CHAT_ERSATZANTWORT;
       const rest = leitplanke.finish();
       if (rest) melde("delta", rest);
       const fertig = leitplanke.text.trim();
-      if (!fertig) throw new AnbieterFehler("upstream_fehler");
-      return fertig;
+      if (fertig) return fertig;
+      // Das Modell hat nichts oder nur Leerraum geliefert: ein Anbieterfehler.
+      if (!inhalt) throw new AnbieterFehler("upstream_fehler");
+      // Es hat geliefert, aber nichts davon darf gezeigt werden (z. B. nur ein Datenblock).
+      melde("delta", CHAT_LEERANTWORT);
+      return CHAT_LEERANTWORT;
     },
   };
 }
@@ -430,18 +624,28 @@ function ereignis(name: string, daten: Record<string, unknown>): Uint8Array {
   return new TextEncoder().encode(`event: ${name}\ndata: ${JSON.stringify(daten)}\n\n`);
 }
 
-function abgeschaltet(b: ChatBindings): boolean {
-  return ["aus", "0", "false", "off", "nein"].includes((b.CHAT_AKTIV ?? "").trim().toLowerCase());
+/** Eingeschaltet ist der Chat nur auf ausdrückliche Anweisung; alles andere – auch kein Wert – heißt aus. */
+function eingeschaltet(b: ChatBindings): boolean {
+  return ["an", "1", "true", "on"].includes((b.CHAT_AKTIV ?? "").trim().toLowerCase());
+}
+
+function eingerichtet(b: ChatBindings): boolean {
+  return Boolean(
+    b.DB &&
+    b.NINEROUTER_API_KEY &&
+    (b.CHAT_IP_SCHLUESSEL ?? "").length >= 16 &&
+    basisUrl(b.CHAT_BASE_URL),
+  );
 }
 
 export async function handleChat(request: Request, argument?: ChatBindings): Promise<Response> {
   // GET: Zustand für die Oberfläche (kein Modellaufruf, keine Speicherung, keine Besucherdaten).
   if (request.method === "GET" || request.method === "HEAD") {
     const b = chatBindings(argument);
-    const bereit = Boolean(b.DB && b.NINEROUTER_API_KEY && basisUrl(b.CHAT_BASE_URL));
-    const aktiv = bereit && !abgeschaltet(b);
+    const an = eingeschaltet(b);
+    const aktiv = an && eingerichtet(b);
     return json(
-      { ok: true, aktiv, grund: aktiv ? null : bereit ? "abgeschaltet" : "nicht_eingerichtet" },
+      { ok: true, aktiv, grund: aktiv ? null : an ? "nicht_eingerichtet" : "abgeschaltet" },
       200,
     );
   }
@@ -460,11 +664,12 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
   if (rumpf === null) return json({ ok: false, fehler: "zu_gross" }, 413);
 
   const b = chatBindings(argument);
-  if (abgeschaltet(b)) return json({ ok: false, fehler: "chat_abgeschaltet" }, 503);
+  if (!eingeschaltet(b)) return json({ ok: false, fehler: "chat_abgeschaltet" }, 503);
   const basis = basisUrl(b.CHAT_BASE_URL);
   const schluessel = b.NINEROUTER_API_KEY;
-  // Fail-closed und vor jeder Speicherung: ohne Datenbank, Schlüssel oder gültige Route kein Chat.
-  if (!b.DB || !schluessel || !basis)
+  const ipGeheimnis = b.CHAT_IP_SCHLUESSEL;
+  // Fail-closed und vor jeder Speicherung: ohne Datenbank, Schlüssel, IP-Geheimnis oder gültige Route kein Chat.
+  if (!b.DB || !schluessel || !basis || !ipGeheimnis || !eingerichtet(b))
     return json({ ok: false, fehler: "chat_not_configured" }, 503);
   const db = b.DB;
 
@@ -474,10 +679,11 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
   } catch {
     return json({ ok: false, fehler: "ungueltiges_json" }, 400);
   }
-  // Nur `message` und `session_id` zählen; `model`, `messages`, `system` o. Ä. werden ignoriert.
+  // Nur `message`, `session_id` und `frage_id` zählen; `model`, `messages`, `system` o. Ä. werden ignoriert.
   const daten = (koerper && typeof koerper === "object" ? koerper : {}) as {
     message?: unknown;
     session_id?: unknown;
+    frage_id?: unknown;
   };
   const nachricht = typeof daten.message === "string" ? daten.message.trim() : "";
   if (nachricht.length < CHAT_MIN_ZEICHEN) {
@@ -493,23 +699,24 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
     );
   }
   const sessionId = sitzungswert(daten.session_id);
-  const hash = await ipHash(request);
+  const frageKennung =
+    typeof daten.frage_id === "string" && KENNUNG.test(daten.frage_id)
+      ? daten.frage_id
+      : crypto.randomUUID();
+  const frageId = `${sessionId}.${frageKennung}`;
 
+  let hash: string;
   let verlauf: GuidanceTurn[];
   try {
-    const grenze = await pruefeGrenzen(
-      db,
-      hash,
-      sessionId,
-      ganzzahl(b.CHAT_TAGESLIMIT, CHAT_LIMITS.gesamtProTag, 100_000),
-    );
-    if (grenze) {
+    hash = await ipKurzwert(request, ipGeheimnis);
+    const f = fenster(ganzzahl(b.CHAT_TAGESLIMIT, CHAT_LIMITS.gesamtProTag, 100_000));
+    if (!(await reserviere(db, { id: frageId, sessionId, nachricht, hash }, f))) {
+      const grenze = await nenneGrenze(db, hash, sessionId, f);
       return json({ ok: false, fehler: grenze.fehler, warten: grenze.warten }, 429, {
         "retry-after": String(grenze.warten),
       });
     }
-    verlauf = await ladeVerlauf(db, sessionId);
-    await speichere(db, sessionId, "user", nachricht, hash);
+    verlauf = await ladeVerlauf(db, sessionId, hash, frageId);
     const tage = ganzzahl(b.CHAT_AUFBEWAHRUNG_TAGE, CHAT_AUFBEWAHRUNG_STANDARD_TAGE, 3650);
     // Ein Fehler beim Aufräumen darf die Antwort nicht verhindern.
     await raeumeChatAuf(db, tage).catch(() => {});
@@ -523,6 +730,18 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
     { role: "user", content: nachricht },
   ];
   const alsStrom = (request.headers.get("accept") ?? "").includes("text/event-stream");
+  const fehlerAntwort = (ursache: unknown) => {
+    const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
+    return json(
+      { ok: false, fehler: art, session_id: sessionId },
+      art === "upstream_zeit" ? 504 : 502,
+    );
+  };
+  /** Hat der Anbieter nichts geliefert, zählt die Frage nicht und bleibt nicht unbeantwortet liegen. */
+  const ohneErgebnis = async (ursache: unknown) => {
+    if (ursache instanceof AnbieterFehler && ursache.art === "upstream_zeit") return;
+    await gibFrei(db, frageId).catch(() => {});
+  };
 
   let lauf: Lauf;
   try {
@@ -532,18 +751,16 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       nachrichten,
       alsStrom,
       visitorAmounts(verlauf, nachricht),
+      request.signal,
     );
   } catch (ursache) {
-    const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
-    return json(
-      { ok: false, fehler: art, session_id: sessionId },
-      art === "upstream_zeit" ? 504 : 502,
-    );
+    await ohneErgebnis(ursache);
+    return fehlerAntwort(ursache);
   }
 
   const ablegen = async (text: string) => {
     try {
-      await speichere(db, sessionId, "assistant", text, hash);
+      await speichereAntwort(db, frageId, sessionId, text, hash);
       return true;
     } catch {
       // Die Antwort ist erzeugt; eine fehlgeschlagene Ablage wird gemeldet, nicht verschwiegen.
@@ -566,25 +783,26 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
         200,
       );
     } catch (ursache) {
-      const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
-      return json(
-        { ok: false, fehler: art, session_id: sessionId },
-        art === "upstream_zeit" ? 504 : 502,
-      );
+      await ohneErgebnis(ursache);
+      return fehlerAntwort(ursache);
     }
   }
 
   let beendet = false;
+  let gezeigt = false;
   const strom = new ReadableStream<Uint8Array>({
     async start(steuerung) {
       steuerung.enqueue(ereignis("start", { session_id: sessionId }));
       try {
         const text = await lauf.lies((name, stueck) => {
+          gezeigt = true;
           if (!beendet) steuerung.enqueue(ereignis(name, { t: stueck }));
         });
         const gespeichert = await ablegen(text);
         if (!beendet) steuerung.enqueue(ereignis("ende", { hinweis: CHAT_HINWEIS, gespeichert }));
       } catch (ursache) {
+        // Abbruch durch den Besucher gibt nichts frei: Der Anbieter hat bereits gearbeitet.
+        if (!beendet && !gezeigt) await ohneErgebnis(ursache);
         const art = ursache instanceof AnbieterFehler ? ursache.art : "upstream_fehler";
         if (!beendet) steuerung.enqueue(ereignis("fehler", { fehler: art }));
       }
