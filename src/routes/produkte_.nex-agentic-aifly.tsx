@@ -376,8 +376,8 @@ function ImportedSectionPassendeThemen() {
             </a>
           </h3>
           <p>
-            AIFly ORACLE ist das KI-System, das Aufgaben ordnet und Ihnen im Chat dieser Website
-            antwortet. Schildern Sie Ihr Vorhaben – es zeigt Ihnen den passenden nächsten Schritt.
+            AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist in
+            Vorbereitung; Ihr Vorhaben schildern Sie bis dahin über das Kontaktformular.
           </p>
           <a
             aria-label="AIFly ORACLE. Erst ordnen, dann handeln. – Seite ansehen"

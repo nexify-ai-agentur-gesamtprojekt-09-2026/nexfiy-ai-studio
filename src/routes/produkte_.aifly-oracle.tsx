@@ -37,9 +37,8 @@ function Index() {
               </span>
               <h1 id="page-title-aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</h1>
               <p className={"identity-body"}>
-                AIFly ORACLE ist das KI-System, das Aufgaben ordnet und Ihnen im Chat dieser Website
-                antwortet. Schildern Sie Ihr Vorhaben – es zeigt Ihnen den passenden nächsten
-                Schritt.
+                AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist
+                in Vorbereitung; Ihr Vorhaben schildern Sie bis dahin über das Kontaktformular.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -116,7 +115,7 @@ function Index() {
             </svg>
           </a>
           <a href="#content-aifly-oracle-oracle-3-2">
-            Was Sie heute auf der Website erleben
+            Der Chat auf dieser Website
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -207,18 +206,17 @@ function Index() {
           >
             <div>
               <span className={"hc-kicker"}>03 / 03</span>
-              <h2 id="content-aifly-oracle-oracle-3-2-title">
-                Was Sie heute auf der Website erleben
-              </h2>
+              <h2 id="content-aifly-oracle-oracle-3-2-title">Der Chat auf dieser Website</h2>
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Im Chat hilft Ihnen AIFly ORACLE, Leistungen und passende Seiten zu finden und Ihre
-                Anfrage vorzubereiten. Es ist ein KI-System, kein Mensch, und kann sich irren.
+                Der Chat mit AIFly ORACLE ist in Vorbereitung. Er soll Ihnen helfen, Leistungen und
+                passende Seiten zu finden und Ihre Anfrage vorzubereiten. AIFly ORACLE ist ein
+                KI-System, kein Mensch, und kann sich irren.
               </p>
               <p>
-                Der Chat schließt keine Verträge, bucht keine Termine und löst keine Zahlungen aus.
-                Ihre Anfrage senden Sie selbst ab.
+                Auch dann gilt: Der Chat schließt keine Verträge, bucht keine Termine und löst keine
+                Zahlungen aus. Ihre Anfrage senden Sie selbst ab.
               </p>
             </div>
           </section>

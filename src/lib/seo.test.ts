@@ -310,3 +310,25 @@ it("Markenzusatz steht höchstens einmal im Titel", () => {
   for (const seite of SEITEN)
     expect(seitenTitel(seite).split(MARKENZUSATZ).length - 1).toBeLessThanOrEqual(1);
 });
+
+describe("Chat: keine Verfügbarkeitsbehauptung, solange er abgeschaltet ausgeliefert wird", () => {
+  const stellen = [
+    "public/llms.txt",
+    "public/manifest.webmanifest",
+    "src/lib/seo-pages.ts",
+    "src/routes/produkte_.aifly-oracle.tsx",
+    "src/routes/produkte_.nex-agentic-aifly.tsx",
+  ];
+  it.each(stellen)("%s behauptet nicht, ORACLE antworte im Chat dieser Website", (datei) => {
+    const text = lies(datei).replace(/\s+/g, " ");
+    expect(text).not.toMatch(/im Chat dieser Website antwortet/);
+    expect(text).not.toMatch(/gibt es als Chat auf dieser Website/);
+    expect(text).not.toMatch(/Im Chat hilft Ihnen/);
+    expect(text).not.toMatch(/mit dem KI-Assistenten AIFly ORACLE"/);
+  });
+  it("die ORACLE-Seite nennt den Chat ausdrücklich als in Vorbereitung", () => {
+    expect(lies("src/routes/produkte_.aifly-oracle.tsx").replace(/\s+/g, " ")).toMatch(
+      /Der Chat auf dieser Website ist in Vorbereitung/,
+    );
+  });
+});
