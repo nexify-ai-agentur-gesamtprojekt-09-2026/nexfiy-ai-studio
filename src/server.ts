@@ -8,10 +8,9 @@ import { renderErrorPage } from "./lib/error-page";
 import { offlineResponse, serviceWorkerResponse, type PwaBindings } from "./lib/pwa";
 import { OFFLINE_PATH, SW_PATH } from "./lib/pwa-config";
 import {
-  PERMANENT_REDIRECTS,
-  TEMPORARY_REDIRECTS,
   asRetiredResponse,
   retiredPathUrl,
+  weiterleitungFuer,
   withNoindexOnNotFound,
 } from "./lib/server-routing";
 
@@ -107,15 +106,14 @@ export default {
       if (url.pathname === SW_PATH)
         return withSecurityHeaders(serviceWorkerResponse(env as PwaBindings));
       if (url.pathname === OFFLINE_PATH) return withSecurityHeaders(offlineResponse());
-      const target = PERMANENT_REDIRECTS[url.pathname];
-      if (target)
+      // Kurzadressen in jeder Schreibweise (/ANMELDEN, /Registrieren): src/lib/server-routing.ts.
+      const weiter = weiterleitungFuer(url.pathname);
+      if (weiter)
         return withSecurityHeaders(
-          Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301),
-        );
-      const temporary = TEMPORARY_REDIRECTS[url.pathname];
-      if (temporary)
-        return withSecurityHeaders(
-          Response.redirect(new URL(`${temporary}${url.search}`, url.origin).toString(), 302),
+          Response.redirect(
+            new URL(`${weiter.ziel}${url.search}`, url.origin).toString(),
+            weiter.status,
+          ),
         );
       const handler = await getServerEntry();
       // Chat-Schalter fürs Seiten-HTML (src/lib/chat-schalter.ts): vor dem Rendern ermittelt, damit

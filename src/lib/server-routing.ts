@@ -52,6 +52,20 @@ export const TEMPORARY_REDIRECTS: Record<string, string> = {
 };
 
 /**
+ * Weiterleitung für einen Pfad, unabhängig von Groß- und Kleinschreibung (`/ANMELDEN`,
+ * `/Registrieren`, `/Preise`). Alle Schlüssel oben sind klein geschrieben; Ziele bleiben, wie sie
+ * stehen. `null`: keine Weiterleitung.
+ */
+export function weiterleitungFuer(pfad: string): { ziel: string; status: 301 | 302 } | null {
+  const schluessel = pfad.toLowerCase();
+  const dauerhaft = PERMANENT_REDIRECTS[schluessel];
+  if (dauerhaft) return { ziel: dauerhaft, status: 301 };
+  const vorlaeufig = TEMPORARY_REDIRECTS[schluessel];
+  if (vorlaeufig) return { ziel: vorlaeufig, status: 302 };
+  return null;
+}
+
+/**
  * 2026-11-22 (Europe/Berlin): Jede 404-Antwort trägt `X-Robots-Tag: noindex`.
  * Warum: Inhaberentscheidung vom 22.11.2026 — die früheren Shop-Adressen (/teileklar und alles
  *   darunter) gibt es auf dieser Domain nicht mehr. Sie antworten mit 404 über die normale

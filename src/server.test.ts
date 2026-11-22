@@ -49,6 +49,8 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
     "//teileklar/kasse?utm_source=x&q=y",
     "///teileklar//kasse/?utm_source=x",
     "/TEILEKLAR/shop",
+    "/TeileKlar",
+    "/TEILEKLAR/Werkstatt?x=1",
   ];
 
   it.each(ALTPFADE)("%s antwortet mit 404, noindex-Header und ohne Weiterleitung", async (pfad) => {
@@ -159,6 +161,27 @@ describe("Kontoadressen und /produkte", () => {
     expect((await abruf("/anmelden?von=mail")).headers.get("location")).toBe(
       "https://www.nexifyai.de/portale?von=mail",
     );
+  });
+
+  it.each([
+    ["/ANMELDEN", 302, "/portale"],
+    ["/Registrieren", 302, "/portale"],
+    ["/Passwort-Vergessen/", 302, "/portale"],
+    ["/PRODUKTE", 302, "/produkte/nex2fly"],
+    ["/Preise", 301, "/preise-ablauf"],
+    ["/KONTO/", 301, "/portale"],
+  ] as const)("%s leitet unabhängig von der Schreibweise weiter", async (pfad, status, ziel) => {
+    gesehen.length = 0;
+    const antwort = await abruf(`${pfad}?von=mail`);
+    expect(antwort.status).toBe(status);
+    expect(antwort.headers.get("location")).toBe(`https://www.nexifyai.de${ziel}?von=mail`);
+    expect(gesehen).toEqual([]);
+  });
+
+  it("alle Schlüssel der Weiterleitungstabellen sind klein geschrieben", async () => {
+    const { PERMANENT_REDIRECTS, TEMPORARY_REDIRECTS } = await import("./lib/server-routing");
+    for (const quelle of Object.keys({ ...PERMANENT_REDIRECTS, ...TEMPORARY_REDIRECTS }))
+      expect(quelle).toBe(quelle.toLowerCase());
   });
 
   it("keine Weiterleitung zeigt auf eine Adresse, die selbst weiterleitet", async () => {
