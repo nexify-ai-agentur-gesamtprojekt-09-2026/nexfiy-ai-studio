@@ -20,12 +20,78 @@
   text-decoration: none;
 }
 
-/* B2B-Hinweis in der Fußleiste: gleiche Größe wie seine Nachbarn. */
-#atelier .site-footer .footer-ai-note span {
+/* Untere Fußleiste: feste Ordnung statt frei umbrechender Reihen, die sich gegenseitig verdrängen.
+   Breit: links die Rechtslinks, rechts die beiden Hinweise (gleich groß, 13 px), darunter der
+   Aufklapper zu den Rechtsdokumenten. Schmal: alles untereinander, jede Zeile mindestens 44 px. */
+#atelier .site-footer.footer-refined .footer-legal {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  align-items: center;
+  gap: 0;
+}
+#atelier .site-footer .footer-legal-direct {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-5, 20px);
+  margin: 0;
+}
+#atelier .site-footer .footer-ai-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0;
+}
+#atelier .site-footer :is(.footer-legal-direct a, .footer-ai-note a, .footer-ai-note span) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-family: var(--font-text);
   font-size: 13px;
   font-weight: 400;
+  line-height: 1.4;
   color: var(--color-text-sekundaer);
+}
+/* Kurze Einträge brechen nie in sich um; nur der B2B-Satz darf auf sehr schmalen Telefonen
+   ausgewogen umbrechen. */
+#atelier .site-footer :is(.footer-legal-direct a, .footer-ai-note a) {
+  white-space: nowrap;
+}
+#atelier .site-footer .footer-ai-note span {
+  text-wrap: balance;
+}
+#atelier .site-footer.footer-refined .footer-legal-details {
+  max-width: 70ch;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  #atelier .site-footer .footer-ai-note {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: var(--space-5, 20px);
+  }
+  #atelier .site-footer .footer-ai-note span {
+    white-space: nowrap;
+  }
+}
+@media (min-width: 1024px) {
+  #atelier .site-footer.footer-refined .footer-legal {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--space-6, 32px);
+  }
+  #atelier .site-footer .footer-ai-note {
+    justify-self: end;
+    justify-content: flex-end;
+  }
+  #atelier .site-footer.footer-refined .footer-legal-details {
+    grid-column: 1 / -1;
+  }
+}
+/* Schwebt der Chat-Auslöser unten rechts, bleibt unter der Fußleiste ein Streifen in seiner Höhe frei. */
+#atelier:has(> #nexify-chat-ausloeser) .site-footer .footer-legal {
+  padding-bottom: 72px;
 }
 
 /* Sprungmarke des Anfrageformulars: Überschrift landet unter dem fixierten Kopf. */
