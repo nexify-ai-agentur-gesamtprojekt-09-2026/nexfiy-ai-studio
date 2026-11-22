@@ -119,9 +119,40 @@
   grid-column: 1 / -1;
 }
 
-/* „Passende Themen" im Zweierraster: eine letzte, einzelne Karte nimmt die ganze Zeile. */
-#atelier .home-concept .pc-related > ol > li:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
+/* „Passende Themen": Das aufgenommene Raster hat vier Spalten (breit), zwei (bis 1100 px Inhalt)
+   und eine (bis 420 px). Bei weniger als vier Karten füllen die Karten breit die ganze Zeile
+   gleichmäßig, statt Lücken oder eine einzelne halbe Karte in einer zweiten Reihe zu lassen. */
+#atelier .home-concept .pc-related > ol:has(> li:only-child) {
+  grid-template-columns: minmax(0, 1fr);
+}
+#atelier .home-concept .pc-related > ol:has(> li:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#atelier .home-concept .pc-related > ol:has(> li:nth-child(3):last-child) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+#atelier .home-concept .pc-related > ol > li {
+  max-width: none;
+}
+#atelier .home-concept .pc-related > ol > li:only-child p {
+  max-width: 70ch;
+}
+@container home (max-width: 1100px) {
+  #atelier .home-concept .pc-related > ol:has(> li:nth-child(3):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Zweierraster: eine letzte, einzelne Karte nimmt die ganze Zeile. */
+  #atelier .home-concept .pc-related > ol > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+@container home (max-width: 420px) {
+  #atelier
+    .home-concept
+    .pc-related
+    > ol:is(:has(> li:nth-child(2):last-child), :has(> li:nth-child(3):last-child)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* Titel der Aufklappzeilen: Wortabstände nicht zusammenziehen. */
