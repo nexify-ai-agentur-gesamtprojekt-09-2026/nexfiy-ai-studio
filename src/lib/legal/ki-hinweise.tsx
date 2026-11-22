@@ -1,5 +1,8 @@
-// 2026-11-19 19:27 (Europe/Berlin): KI-Hinweise nach EU AI Act Art. 50 eingesetzt (Freigabe Inhaber 19.11.2026).
-// Warum: Die Live-Seite nannte keine Kennzeichnung; der geprüfte Entwurf beschreibt Einsatz, Grenzen und Rückmeldung.
+// 2026-11-22 (Europe/Berlin): ENTWURF zur Freigabe durch den Inhaber – nicht freigegeben, keine
+//   Rechtsberatung. Stellen mit „[INHABER: …]" sind offen.
+// Warum: Der Website-Chat (src/components/chat/, Server src/lib/chat-api.ts) war in der Fassung vom
+//   19.11.2026 nicht als Einsatzort genannt. Er ist standardmäßig aus (`CHAT_AKTIV`); seine Antworten
+//   entstehen automatisch und werden nicht vorab von Menschen geprüft.
 import type { LegalSection } from "@/components/site/LegalSections";
 
 export const kiHinweiseSections: LegalSection[] = [
@@ -12,12 +15,44 @@ export const kiHinweiseSections: LegalSection[] = [
         <li>Entwurf und Überarbeitung von Texten dieser Website,</li>
         <li>Erstellung und Bearbeitung von Bildwelten,</li>
         <li>Unterstützung bei Konzeption, Recherche und Struktur von Projektunterlagen,</li>
+        <li>
+          den KI-Assistenten im Chat-Fenster dieser Website, sofern er eingeschaltet ist (derzeit
+          standardmäßig ausgeschaltet),
+        </li>
         <li>KI-Assistenten in Kundenprojekten, soweit dort gesondert ausgewiesen.</li>
       </ul>,
     ],
   },
   {
-    id: "content-ai-kennzeichnung-1",
+    id: "content-ai-chat-1",
+    title: "KI-Assistent auf dieser Website",
+    blocks: [
+      <p key="p1">Sofern der KI-Assistent im Chat-Fenster eingeschaltet ist, gilt:</p>,
+      <ul key="list">
+        <li>
+          Sie schreiben mit einem KI-System, nicht mit einem Menschen. Darauf weist das Chat-Fenster
+          vor der ersten Frage hin.
+        </li>
+        <li>
+          Die Antworten entstehen automatisch und werden <strong>nicht</strong> vor der Ausgabe von
+          einem Menschen geprüft. Sie können unvollständig oder falsch sein.
+        </li>
+        <li>
+          Der Assistent beantwortet Fragen zu unseren Leistungen auf Grundlage der Inhalte dieser
+          Website. Antworten sind keine Zusage, kein Angebot und keine Beratung; verbindliche
+          Auskünfte erhalten Sie über <a href="/kontakt">Kontakt</a>.
+        </li>
+        <li>
+          Eingesetzt wird ein Sprachmodell eines externen Anbieters [INHABER: Anbieter und Modell
+          nennen oder bewusst offenlassen]. Welche Daten dabei verarbeitet und wie lange sie
+          gespeichert werden, steht in der <a href="/datenschutz">Datenschutzerklärung</a>.
+        </li>
+        <li>Bitte geben Sie im Chat keine sensiblen Daten ein.</li>
+      </ul>,
+    ],
+  },
+  {
+    id: "content-ai-kennzeichnung-2",
     title: "Kennzeichnung nach Art. 50",
     blocks: [
       <ul key="list">
@@ -33,7 +68,8 @@ export const kiHinweiseSections: LegalSection[] = [
         <li>
           <strong>Direkte Interaktion:</strong> Wird auf einer Seite oder in einem Projekt ein
           KI-Assistent angeboten, weisen wir beim ersten Kontakt darauf hin, dass Sie mit einem
-          KI-System sprechen — nicht mit einem Menschen.
+          KI-System sprechen — nicht mit einem Menschen. Antworten des Website-Chats sind im
+          Chat-Fenster als KI-Antwort gekennzeichnet.
         </li>
         <li>
           <strong>Keine Kennzeichnungspflicht</strong> besteht, wenn KI nur unterstützend gewirkt
@@ -44,7 +80,7 @@ export const kiHinweiseSections: LegalSection[] = [
     ],
   },
   {
-    id: "content-ai-grenzen-2",
+    id: "content-ai-grenzen-3",
     title: "Was eine KI-Ausgabe nicht ist",
     blocks: [
       <p key="p1">
@@ -55,13 +91,14 @@ export const kiHinweiseSections: LegalSection[] = [
     ],
   },
   {
-    id: "content-ai-qualitaet-3",
+    id: "content-ai-qualitaet-4",
     title: "Grenzen und Qualitätssicherung",
     blocks: [
       <ul key="list">
         <li>
-          Ergebnisse können unvollständig oder falsch sein; sie werden vor Veröffentlichung oder
-          Übergabe geprüft.
+          Ergebnisse können unvollständig oder falsch sein. Veröffentlichte Texte und übergebene
+          Unterlagen werden vorher geprüft; Antworten des Website-Chats werden nicht vorab geprüft
+          (siehe oben).
         </li>
         <li>Quellen werden, wo möglich, auf Primärquellen zurückgeführt.</li>
         <li>
@@ -76,7 +113,7 @@ export const kiHinweiseSections: LegalSection[] = [
     ],
   },
   {
-    id: "content-ai-verantwortung-4",
+    id: "content-ai-verantwortung-5",
     title: "Verantwortung und Rückmeldung",
     blocks: [
       <p key="p1">
@@ -84,7 +121,7 @@ export const kiHinweiseSections: LegalSection[] = [
         Courbois. Wenn Sie eine KI-Kennzeichnung vermissen oder ein Ergebnis anzweifeln, melden Sie
         es an mail@nexifyai.cloud — wir prüfen und korrigieren.
       </p>,
-      <p key="p2">Stand: 19. November 2026.</p>,
+      <p key="p2">Stand: [INHABER: Datum der Freigabe].</p>,
     ],
   },
 ];
