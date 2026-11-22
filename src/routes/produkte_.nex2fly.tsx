@@ -163,9 +163,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Die NeX AIFly Suite hält zusammen, was zusammengehört: das Gespräch mit der KI, die
-                Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. So fangen Sie nicht
-                bei jeder Frage von vorn an.
+                In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI,
+                die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen
+                nicht bei jeder Frage von vorn an.
               </p>
               <p>
                 Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.
@@ -210,13 +210,13 @@ function Index() {
                 Bereich mitarbeitet.
               </p>
               <p>
-                Einige Werkzeuge schalten wir je Zugang frei, etwa den Versand per E-Mail oder die
-                Anbindung eines Kalenders. Welche das für Sie sind, klären wir bei der Einrichtung.
+                Einige Werkzeuge – etwa der Versand per E-Mail oder die Anbindung eines Kalenders –
+                werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/produkte/one">
-                  NeX Agentic AI ansehen
+                  Zwei Agenten. Eine klare Aufgabe.
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -248,8 +248,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Die Suite ist noch nicht frei buchbar, den Zugang gibt es auf Anfrage. Schildern
-                Sie, wofür Sie die Suite nutzen möchten. Wir nennen Ihnen den nächsten Schritt.
+                Die Suite ist noch nicht frei buchbar. Schildern Sie, wofür Sie sie nutzen möchten;
+                wir nennen Ihnen den nächsten Schritt.
               </p>
               <p>
                 Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für
@@ -401,7 +401,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -442,8 +445,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Für Unternehmen und Teams, die ihre Arbeit mit KI an einem eigenen, geschützten Ort
-                organisieren möchten.
+                Für Menschen und Teams, die KI-gestützte Arbeit in einer eigenen, zugeordneten
+                Arbeitsumgebung organisieren möchten.
               </p>
             </div>
           </details>
@@ -467,8 +470,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Gespräche, Aufgaben und Projektwissen stehen in einem gemeinsamen Zusammenhang. Sie
-                fangen nicht bei jeder Frage von vorn an.
+                Gespräche, Aufgaben und Projektwissen erhalten einen gemeinsamen Kontext. Sie fangen
+                nicht bei jeder Frage von vorn an. Welche Werkzeuge bereitstehen, zeigt Ihr
+                Arbeitsbereich.
               </p>
             </div>
           </details>
@@ -517,9 +521,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Tarife sind noch nicht veröffentlicht. Zugang, Umfang und Verbrauch nennen wir
-                Ihnen im Angebot. Anpassungen an Ihre Systeme berechnen wir nach vereinbartem
-                Umfang.
+                Zugang, Umfang und Verbrauch stehen in Ihrem Produktangebot; die Tarife stehen noch
+                zur Freigabe. Individuelle Integrationsarbeit bieten wir nach dem vereinbarten
+                Umfang an.
               </p>
             </div>
           </details>
@@ -545,9 +549,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Ein Konto allein schaltet die Suite noch nicht frei. KI-Budget und Verbindungen
-                bestätigen wir gesondert. Projekte anderer Kunden und interne Bereiche der Agentur
-                bleiben für Sie gesperrt.
+                Ein Konto allein aktiviert noch keinen Produktzugang. KI-Budget und berechtigte
+                Verbindungen werden separat bestätigt. Fremde Projekte und interne Agenturrollen
+                bleiben ausgeschlossen.
               </p>
             </div>
           </details>
@@ -571,9 +575,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>
@@ -594,11 +598,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-nex2fly">Passende Themen</h2>
         </div>
-        <p>Diese Seiten führen das Thema weiter.</p>
+        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>Kontakt</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -648,7 +652,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Kundencenter</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/portale">
               Stand des Kundencenters.
@@ -697,7 +701,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Produkte</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/one">
               Zwei Agenten. Eine klare Aufgabe.

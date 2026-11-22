@@ -136,11 +136,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-accessibility">Passende Themen</h2>
         </div>
-        <p>Diese Seiten führen das Thema weiter.</p>
+        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>Kontakt</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -190,7 +190,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Rechtliches</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/vertragsgrundlagen">
               Gute Zusammenarbeit hat klare Grundlagen.
@@ -240,7 +240,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Rechtliches</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/impressum">
               Impressum · NeXify AI by NeXify
@@ -289,7 +289,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Rechtliches</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.
