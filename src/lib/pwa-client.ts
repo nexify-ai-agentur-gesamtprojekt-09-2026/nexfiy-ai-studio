@@ -110,3 +110,15 @@ export function hinweisSchliessen(storage: Pick<Storage, "setItem"> | undefined)
     // Ohne Speicher gilt die Ablehnung für diesen Seitenaufruf.
   }
 }
+
+/**
+ * Der Hinweis verschwindet beim Schließen aus der Seite; ohne Zutun fiele der Tastaturfokus
+ * damit auf den Seitenanfang zurück. Er geht stattdessen auf das letzte Element der Fußzeile
+ * direkt über dem Hinweis, ersatzweise auf den Inhalt. Die Seite scrollt dabei nicht.
+ */
+export function fokusNachSchliessen(): void {
+  const ziel =
+    document.querySelector<HTMLElement>(".site-footer .footer-legal-details summary") ??
+    document.getElementById("page-content");
+  ziel?.focus({ preventScroll: true });
+}

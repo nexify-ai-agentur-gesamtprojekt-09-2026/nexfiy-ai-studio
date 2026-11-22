@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import {
+  fokusNachSchliessen,
   hinweisGeschlossen,
   hinweisSchliessen,
   isIosSafari,
@@ -72,11 +73,13 @@ export function InstallHint() {
     } catch {
       // Das Ergebnis gehört dem Browser und dem Besucher.
     }
+    fokusNachSchliessen();
     setGeschlossen(true);
   }
 
   function schliessen() {
     hinweisSchliessen(sichererSpeicher(() => window.localStorage));
+    fokusNachSchliessen();
     setGeschlossen(true);
   }
 

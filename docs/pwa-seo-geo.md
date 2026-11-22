@@ -26,8 +26,9 @@ Offline-Seite. Ein Fehler im Cache-Speicher (voll, gesperrt) verhindert deshalb 
 aus dem Netz. Nie beantwortet werden `/api/*`, `/.well-known/*`, Konto- und Kundencenter-Adressen, alles außer
 GET, Bereichsanfragen und fremde Ursprünge. Keine Push-Benachrichtigungen, kein Hintergrund-Sync.
 
-Jeder Build bekommt eine eigene Kennung (`vite.config.ts`, `__NEXIFY_BUILD_ID__`) und damit eigene
-Cache-Namen. Ein neuer Worker übernimmt sofort und löscht beim Aktivieren die Caches der
+Die Kennung des Builds (`vite.config.ts`, `__NEXIFY_BUILD_ID__`) entsteht aus dem Commit und dem
+Inhalt der Worker-Dateien (`src/lib/build-id.ts`), nicht aus der Uhrzeit: ein geänderter Stand
+bekommt eigene Cache-Namen, ein unveränderter behält seine. Ein neuer Worker übernimmt sofort und löscht beim Aktivieren die Caches der
 Vorgänger. `/sw.js` wird mit `Cache-Control: no-cache` ausgeliefert.
 
 ### Rückbau
@@ -41,7 +42,10 @@ Zwei Wege, beide ohne Zutun der Besucher:
 2. **Ohne Build:** beim Worker die Variable `PWA_ABSCHALTEN=1` setzen (Cloudflare, Einstellungen
    des Workers). `/sw.js` liefert sofort den Abschalt-Worker. Die Seite meldet ihn bei jedem
    Aufruf erneut an, er entfernt sich jeweils wieder – gedacht als Sofortmaßnahme, bis Weg 1
-   ausgeliefert ist.
+   ausgeliefert ist. Was bei diesem Weg bleibt: Das Manifest (`/manifest.webmanifest`) wird
+   weiter ausgeliefert und der Installationshinweis kann weiter erscheinen, weil beide im
+   ausgelieferten Build stecken. Eine bereits installierte Web-App startet weiter, nur ohne
+   Offline-Seite. Erst Weg 1 nimmt Hinweis und Anmeldung zurück.
 
 Der Browser prüft `/sw.js` bei jeder Navigation; der Rückbau greift beim nächsten Seitenaufruf
 eines Besuchers. `/sw.js` muss dafür erreichbar bleiben und darf nicht mit 404 antworten.

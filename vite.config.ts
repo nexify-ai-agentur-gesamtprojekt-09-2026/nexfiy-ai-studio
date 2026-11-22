@@ -15,6 +15,8 @@ import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
+import { buildId } from "./src/lib/build-id";
+
 export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
@@ -33,9 +35,10 @@ export default defineConfig(({ command }) => ({
     viteReact(),
   ],
   css: { transformer: "lightningcss" },
-  // Kennung des Builds für den Service Worker: jeder Build bekommt eigene Cache-Namen, alte
-  // Caches räumt der Worker beim Aktivieren ab (src/lib/pwa.ts).
-  define: { __NEXIFY_BUILD_ID__: JSON.stringify(Date.now().toString(36)) },
+  // Kennung des Builds für den Service Worker: aus Commit und Inhalt der Worker-Dateien
+  // (src/lib/build-id.ts). Ein geänderter Stand bekommt eigene Cache-Namen, alte Caches räumt
+  // der Worker beim Aktivieren ab (src/lib/pwa.ts); ein unveränderter Stand behält seine.
+  define: { __NEXIFY_BUILD_ID__: JSON.stringify(buildId()) },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },
     dedupe: [
