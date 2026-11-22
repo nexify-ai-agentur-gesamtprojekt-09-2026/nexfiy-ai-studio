@@ -32,8 +32,18 @@ from datetime import datetime
 def git(*a):
     return subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
 now = datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%:z")
+# 2026-11-22 12:25 (Europe/Berlin), B-206: Der Stempel belegte bisher nur den Commit, nicht den
+# Zustand des Arbeitsbaums. Ein Deploy mit uncommitteten Aenderungen war damit von einem
+# sauberen Deploy nicht unterscheidbar ("Ob der Deploy den committeten oder den Arbeitsbaum-Stand
+# gebaut hat, ist nicht belegt"). Ab hier steht beides im Artefakt: Commit UND dirty-Liste.
+# Der Stempel selbst wird beim Schreiben veraendert und zaehlt deshalb nicht als Aenderung.
+_dirty_raw = [l for l in git("status", "--porcelain").splitlines() if l.strip()]
+_dirty = [l for l in _dirty_raw if "nexify-build.json" not in l]
 stamp = {
     "domain": "www.nexifyai.de",
+    "worktree_dirty": bool(_dirty),
+    "worktree_dirty_files": len(_dirty),
+    "worktree_dirty_sample": _dirty[:10],
     "source_repo": "nexifyai-dev/nexfiy-ai-studio",
     "source_path": "/opt/nexifyai/repos/nexfiy-ai-studio",
     "commit": git("rev-parse", "HEAD"),
