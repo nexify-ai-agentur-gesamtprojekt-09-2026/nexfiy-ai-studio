@@ -1,0 +1,77 @@
+/* Hinweis auf die installierbare Web-App (src/components/pwa/InstallHint.tsx). Steht im
+   Seitenfluss unter der Fußzeile; Farben und Schriften sind die Marken-Tokens aus styles.css. */
+.nx-install {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem 1.25rem;
+  margin: 0;
+  /* Seitlich bündig mit der Fußzeile darüber. */
+  padding: 1.125rem max(clamp(1.5rem, 3.55vw, 3.2rem), env(safe-area-inset-right))
+    calc(1.125rem + env(safe-area-inset-bottom))
+    max(clamp(1.5rem, 3.55vw, 3.2rem), env(safe-area-inset-left));
+  border-top: 1px solid var(--border-strong, rgb(255 255 255 / 18%));
+  background: var(--secondary, #262a28);
+  color: var(--foreground, #f1ede6);
+  font-family: var(--font-brand-text, Inter, system-ui, sans-serif);
+}
+.nx-install-zeichen {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+.nx-install-text {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+.nx-install h2 {
+  margin: 0;
+  font: 600 1rem/1.3 var(--font-brand-display, Inter, system-ui, sans-serif);
+  letter-spacing: -0.02em;
+  color: inherit;
+}
+.nx-install p {
+  margin: 0.25rem 0 0;
+  max-width: 62ch;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground, #b9c0b9);
+}
+.nx-install-aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.nx-install-knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.125rem;
+  border: 1px solid var(--border-strong, rgb(255 255 255 / 18%));
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: 600 0.875rem/1 var(--font-brand-text, Inter, system-ui, sans-serif);
+  cursor: pointer;
+}
+.nx-install-knopf.is-haupt {
+  border-color: var(--brand-signal, #c5f24a);
+  background: var(--brand-signal, #c5f24a);
+  color: var(--primary-foreground, #14170f);
+}
+.nx-install-knopf:hover {
+  border-color: var(--foreground, #f1ede6);
+}
+.nx-install-knopf:focus-visible {
+  outline: 2px solid var(--ring, #c5f24a);
+  outline-offset: 3px;
+}
+
+/* Schmale Ansicht: Unten rechts liegt der Knopf, der den Chat wieder öffnet (56 px). Die Knöpfe
+   des Hinweises bleiben links davon. */
+@media (max-width: 767px) {
+  .nx-install-aktionen {
+    padding-right: 4.5rem;
+  }
+}

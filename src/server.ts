@@ -4,6 +4,8 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
 import { handleChat, type ChatBindings } from "./lib/chat-api";
 import { renderErrorPage } from "./lib/error-page";
+import { offlineResponse, serviceWorkerResponse, type PwaBindings } from "./lib/pwa";
+import { OFFLINE_PATH, SW_PATH } from "./lib/pwa-config";
 import {
   PERMANENT_REDIRECTS,
   TEMPORARY_REDIRECTS,
@@ -63,7 +65,7 @@ function isH3SwallowedErrorBody(body: string): boolean {
 // bleibt auf 'self' — object-src/frame-ancestors dicht.
 const SECURITY_HEADERS: Record<string, string> = {
   "content-security-policy":
-    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests",
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests",
   "x-content-type-options": "nosniff",
   "referrer-policy": "strict-origin-when-cross-origin",
 };
@@ -95,6 +97,11 @@ export default {
       if (url.pathname === "/api/chat") {
         return withSecurityHeaders(await handleChat(request, env as ChatBindings));
       }
+      // 2026-11-22 (Europe/Berlin): Installierbare Web-App. Service Worker und Offline-Seite
+      // beantwortet der Worker selbst (Regeln, Rückbau-Schalter und Tests: src/lib/pwa.ts).
+      if (url.pathname === SW_PATH)
+        return withSecurityHeaders(serviceWorkerResponse(env as PwaBindings));
+      if (url.pathname === OFFLINE_PATH) return withSecurityHeaders(offlineResponse());
       const target = PERMANENT_REDIRECTS[url.pathname];
       if (target)
         return withSecurityHeaders(

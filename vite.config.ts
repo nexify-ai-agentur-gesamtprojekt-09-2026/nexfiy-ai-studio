@@ -33,6 +33,9 @@ export default defineConfig(({ command }) => ({
     viteReact(),
   ],
   css: { transformer: "lightningcss" },
+  // Kennung des Builds für den Service Worker: jeder Build bekommt eigene Cache-Namen, alte
+  // Caches räumt der Worker beim Aktivieren ab (src/lib/pwa.ts).
+  define: { __NEXIFY_BUILD_ID__: JSON.stringify(Date.now().toString(36)) },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },
     dedupe: [

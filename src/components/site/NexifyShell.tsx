@@ -13,6 +13,7 @@ import {
   useLoopingVideos,
   useShellSignals,
 } from "@/lib/imported-site";
+import { InstallHint } from "@/components/pwa/InstallHint";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
@@ -58,6 +59,7 @@ export function NexifyShell({
           {typeof children === "function" ? children({ chatOpen, openChat, closeChat }) : children}
         </main>
         <NexifyFooter />
+        <InstallHint />
       </div>
       {!chatOpen && (
         <button

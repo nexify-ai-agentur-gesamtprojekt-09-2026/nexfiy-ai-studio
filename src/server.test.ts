@@ -125,3 +125,56 @@ describe("Kurzadressen des Kundencenters", () => {
     );
   });
 });
+
+describe("installierbare Web-App: /sw.js und /offline", () => {
+  it("/sw.js kommt vom Worker selbst: JavaScript, immer frisch geprüft, mit fetch-Ereignis", async () => {
+    gesehen.length = 0;
+    const antwort = await abruf("/sw.js");
+    expect(antwort.status).toBe(200);
+    expect(antwort.headers.get("content-type")).toContain("text/javascript");
+    expect(antwort.headers.get("cache-control")).toBe("no-cache");
+    // Wurzel-Scope ohne Zusatzheader: die Datei liegt in der Wurzel.
+    expect(antwort.headers.get("service-worker-allowed")).toBeNull();
+    expect(antwort.headers.get("x-content-type-options")).toBe("nosniff");
+    const skript = await antwort.text();
+    expect(skript).toContain('addEventListener("fetch"');
+    expect(skript).not.toContain("__NEXIFY_SW_VERSION__");
+    expect(gesehen).toEqual([]);
+  });
+
+  it("Rückbau ohne neuen Build: die Worker-Variable PWA_ABSCHALTEN liefert den Abschalt-Worker", async () => {
+    const antwort = await server.fetch(
+      new Request("https://www.nexifyai.de/sw.js"),
+      { PWA_ABSCHALTEN: "1" },
+      {},
+    );
+    const skript = await antwort.text();
+    expect(antwort.headers.get("cache-control")).toBe("no-cache");
+    expect(skript).toContain("registration.unregister()");
+    expect(skript).toContain("caches.delete");
+    expect(skript).not.toContain('addEventListener("fetch"');
+  });
+
+  it("/offline ist eine fertige Seite mit noindex, ohne Umweg über die Seitenausgabe", async () => {
+    gesehen.length = 0;
+    const antwort = await abruf("/offline");
+    expect(antwort.status).toBe(200);
+    expect(antwort.headers.get("content-type")).toContain("text/html");
+    expect(antwort.headers.get("x-robots-tag")).toBe("noindex");
+    expect(await antwort.text()).toContain("Sie sind offline.");
+    expect(gesehen).toEqual([]);
+  });
+
+  it("die Sicherheitsrichtlinie erlaubt Worker und Manifest nur vom eigenen Ursprung", async () => {
+    const csp = (await abruf("/")).headers.get("content-security-policy") ?? "";
+    expect(csp).toContain("worker-src 'self'");
+    expect(csp).toContain("manifest-src 'self'");
+    expect(csp).toContain("connect-src 'self'");
+  });
+
+  it("/sw.js und das Manifest bleiben ohne langes Zwischenspeichern", () => {
+    const regeln = readFileSync(path.resolve(__dirname, "../public/_headers"), "utf8");
+    expect(regeln).toMatch(/\/manifest\.webmanifest\n\s+cache-control: no-cache/);
+    expect(regeln).not.toMatch(/^\/sw\.js/m);
+  });
+});

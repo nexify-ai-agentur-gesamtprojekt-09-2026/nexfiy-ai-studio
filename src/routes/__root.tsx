@@ -17,6 +17,7 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
+import { PwaRegistration } from "@/components/pwa/PwaRegistration";
 import { siteJsonLd } from "@/lib/seo";
 import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
 
@@ -221,6 +222,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* Installierbare Web-App: meldet nach dem Laden den Service Worker an (nur Produktion). */}
+      <PwaRegistration />
     </QueryClientProvider>
   );
 }
