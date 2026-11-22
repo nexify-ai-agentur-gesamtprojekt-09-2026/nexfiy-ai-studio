@@ -5,7 +5,8 @@ import capturedCSS from "../styles/pages/passwort-vergessen.css?url";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/passwort-vergessen")({
-  head: () => pageHead("/passwort-vergessen", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
+  head: () =>
+    pageHead("/passwort-vergessen", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -29,7 +30,7 @@ function ImportedSectionPasswortVergessen() {
   return (
     <section className={"hc-container nx-konto-buehne"} aria-labelledby="auth-forgot-title">
       <div className={"nx-konto-blatt"}>
-        <nav className={"pc-breadcrumb"} aria-label="Brotkrumennavigation">
+        <nav className={"pc-breadcrumb"} aria-label="Sie sind hier">
           <ol>
             <li>
               <a href="/">Startseite</a>
@@ -46,101 +47,20 @@ function ImportedSectionPasswortVergessen() {
       <aside className={"nx-konto-szene"} aria-labelledby="auth-forgot-szene">
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img
-                  className={"atelier-film-fallback"}
-                  src="/site-assets/4b45951db0b51136.webp"
-                  alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
-                  aria-hidden="false"
-                  width="1280"
-                  height="720"
-                />
-                <video
-                  src="/site-assets/b82843cf77d572df.mp4"
-                  poster="/site-assets/4b45951db0b51136.webp"
-                  width="1280"
-                  height="720"
-                  preload="metadata"
-                  playsInline
-                  muted
-                  aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE"
-                />
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Film abspielen">
-                    <svg
-                      className={"atelier-playback-icon"}
-                      viewBox="0 0 20 20"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        aria-hidden="true"
-                        focusable="false"
-                      >
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_pbsnmlb_-volume">
-                        Lautstärke
-                        <input
-                          id="_R_pbsnmlb_-volume"
-                          type="range"
-                          min="0"
-                          max="1"
-                          step="0.05"
-                          defaultValue="0.8"
-                        />
-                      </label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0)" }} />
-                </div>
-              </div>
-            </div>
+            {/* Standbild statt Film: die Hinweisseite braucht keine 1,3 MB Bewegtbild. */}
+            <img
+              alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+              src="/site-assets/4b45951db0b51136.webp"
+            />
           </figure>
         </div>
         <div className={"nx-konto-nutzen"}>
           <span className={"hc-kicker"} id="auth-forgot-szene">
-            NEXIFY AI<span aria-hidden="true"> / </span>Geplant im Kundencenter
+            NeXify AI<span aria-hidden="true"> / </span>Geplant im Kundencenter
           </span>
           <ul>
             <li>
@@ -183,56 +103,5 @@ function ImportedSectionPasswortVergessen() {
         </div>
       </aside>
     </section>
-  );
-}
-
-function ImportedNavSeitenBersicht() {
-  return (
-    <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
-      <div className={"footer-overview-group"}>
-        <h3>Leistungen</h3>
-        <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
-        <a href="/leistungen/websites">Eine Website, die Ihr Angebot erklärt.</a>
-        <a href="/leistungen/agenten-automatisierung">Routine abgeben. Kontrolle behalten.</a>
-        <a href="/leistungen/apps-portale">Portale und Apps für Ihren Ablauf.</a>
-        <a href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Produkte</h3>
-        <a href="/loesungen">Kampagne und Zielseite aus einem Guss.</a>
-        <a href="/preise-ablauf">Sie kennen die Kosten vor dem Start.</a>
-        <a href="/produkte/nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</a>
-        <a href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.</a>
-        <a href="/produkte/api">NeXify API. KI in Ihrer Anwendung.</a>
-        <a href="/produkte/aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</a>
-        <a href="/produkte/nex-agentic-aifly">NeX Agentic AIFly. Der Agent, der ausführt.</a>
-        <a href="/produkte/skills-mcp">Skills und MCP. Ihre Werkzeuge, angebunden.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Wissen und Unternehmen</h3>
-        <a href="/">Ein Gespräch. Ein Projekt, das passt.</a>
-        <a href="/wissen">So arbeiten wir.</a>
-        <a href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.</a>
-        <a href="/unternehmen">Ein Ansprechpartner. Ein Agententeam.</a>
-        <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Kundencenter</h3>
-        <a href="/portale">Stand des Kundencenters.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Rechtliches</h3>
-        <a href="/impressum">Impressum · NeXify AI by NeXify</a>
-        <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.</a>
-        <a href="/vertragsgrundlagen">Gute Zusammenarbeit hat klare Grundlagen.</a>
-        <a href="/ki-hinweise">KI mit klarer Verantwortung.</a>
-        <a href="/barrierefreiheit">Qualität soll zugänglich sein.</a>
-        <a href="/cookies">Sie wählen, was zusätzlich aktiv wird.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Weitere Seiten</h3>
-        <a href="/portale">Portale. Ihr Zugang, Ihr Bereich.</a>
-      </div>
-    </nav>
   );
 }

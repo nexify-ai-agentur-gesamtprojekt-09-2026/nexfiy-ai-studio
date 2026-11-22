@@ -170,7 +170,7 @@ export const SEITEN: Seite[] = [
     titel: "NeXify API – KI in Ihrer Anwendung",
     kurz: "NeXify API",
     beschreibung:
-      "Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben.",
+      "Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die Schnittstelle nach Ihrem Datenfluss.",
     typ: "produkt",
     index: true,
   },
@@ -187,10 +187,10 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/portale",
     datei: "portale.tsx",
-    titel: "Portale – Ihr Zugang, Ihr Bereich",
-    kurz: "Portale",
+    titel: "Kundencenter – in Einrichtung",
+    kurz: "Kundencenter",
     beschreibung:
-      "Kunden und Partner erhalten je einen eigenen, geschützten Bereich. Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich.",
+      "Kunden und Partner sollen je einen eigenen, geschützten Bereich erhalten. Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich.",
     typ: "info",
     index: true,
   },

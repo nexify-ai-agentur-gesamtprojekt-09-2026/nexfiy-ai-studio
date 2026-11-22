@@ -39,7 +39,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht
+                NeXify AI<span aria-hidden="true"> / </span>Informationen und Recht
               </span>
               <h1 id="page-title-accessibility">Qualität soll zugänglich sein.</h1>
               <p className={"identity-body"}>
@@ -70,7 +70,6 @@ function Index() {
           </div>
         </section>
         <LegalSections sections={barrierefreiheitSections} />
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container is-plain"}
@@ -126,61 +125,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionPassendeThemen() {
   return (
     <section
@@ -196,7 +140,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -246,7 +190,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/vertragsgrundlagen">
               Gute Zusammenarbeit hat klare Grundlagen.
@@ -296,7 +240,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/impressum">
               Impressum · NeXify AI by NeXify
@@ -345,7 +289,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.

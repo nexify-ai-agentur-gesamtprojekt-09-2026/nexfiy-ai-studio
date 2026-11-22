@@ -4,7 +4,8 @@ import capturedCSS from "../styles/pages/produkte.aifly-oracle.css?url";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/aifly-oracle")({
-  head: () => pageHead("/produkte/aifly-oracle", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
+  head: () =>
+    pageHead("/produkte/aifly-oracle", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -32,7 +33,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen
+                NeXify AI<span aria-hidden="true"> / </span>Produkte
               </span>
               <h1 id="page-title-aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</h1>
               <p className={"identity-body"}>
@@ -44,9 +45,9 @@ function Index() {
                 <a
                   className={"nexify-control primary-button identity-primary-link"}
                   data-variant="primary"
-                  href="/ki-hinweise"
+                  href="/kontakt"
                 >
-                  <span>KI-Hinweise lesen</span>
+                  <span>Vorhaben schildern</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
@@ -155,9 +156,7 @@ function Index() {
                 ORACLE nutzt.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/ki-hinweise">
                   KI-Hinweise lesen
                   <svg
@@ -224,21 +223,20 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-aifly-oracle"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-aifly-oracle">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
             <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
             <div className={"hc-finish-actions"}>
-              <a className={"hc-finish-primary"} href="/ki-hinweise">
-                KI-Hinweise lesen
+              <a className={"hc-finish-primary"} href="/kontakt">
+                Vorhaben schildern
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -273,8 +271,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <a className={"hc-text-link"} href="/kontakt">
-                Vorhaben schildern
+              <a className={"hc-text-link"} href="/ki-hinweise">
+                KI-Hinweise lesen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -291,84 +289,11 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Terminwunsch nennen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
             </div>
           </div>
         </section>
       </div>
     </NexifyShell>
-  );
-}
-
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
   );
 }
 
@@ -387,7 +312,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/ki-hinweise">
               KI mit klarer Verantwortung.
@@ -437,7 +362,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/nex-agentic-aifly">
               NeX Agentic AIFly. Der Agent, der ausführt.
@@ -486,7 +411,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -536,7 +461,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/unternehmen">
               Ein Ansprechpartner. Ein Agententeam.

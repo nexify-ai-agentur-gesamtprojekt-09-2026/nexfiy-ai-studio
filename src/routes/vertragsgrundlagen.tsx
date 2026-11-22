@@ -4,7 +4,8 @@ import capturedCSS from "../styles/pages/vertragsgrundlagen.css?url";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/vertragsgrundlagen")({
-  head: () => pageHead("/vertragsgrundlagen", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
+  head: () =>
+    pageHead("/vertragsgrundlagen", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -32,7 +33,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht
+                NeXify AI<span aria-hidden="true"> / </span>Informationen und Recht
               </span>
               <h1 id="page-title-terms">Gute Zusammenarbeit hat klare Grundlagen.</h1>
               <p className={"identity-body"}>
@@ -118,9 +119,7 @@ function Index() {
                 Entwurf ist noch keine bestätigte Beauftragung.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/kontakt">
                   Ihr Projekt an die Factory
                   <svg
@@ -161,7 +160,6 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container is-plain"}
@@ -217,61 +215,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionPassendeThemen() {
   return (
     <section
@@ -287,7 +230,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -337,7 +280,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.
@@ -387,7 +330,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/impressum">
               Impressum · NeXify AI by NeXify
@@ -436,7 +379,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/ki-hinweise">
               KI mit klarer Verantwortung.

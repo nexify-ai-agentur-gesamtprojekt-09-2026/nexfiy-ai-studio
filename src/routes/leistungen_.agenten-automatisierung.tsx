@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
+import { SiteFilm } from "@/components/SiteFilm";
 import capturedCSS from "../styles/pages/leistungen.agenten-automatisierung.css?url";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungen_/agenten-automatisierung")({
   head: () =>
     pageHead("/leistungen/agenten-automatisierung", {
-      links: [
-        { rel: "stylesheet", href: capturedCSS },
-      ],
+      links: [{ rel: "stylesheet", href: capturedCSS }],
     }),
   staticData: {
     importedDocument: {
@@ -87,9 +86,7 @@ function Index() {
                 nächsten.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
                   Drei Pakete. Ein klarer Umfang.
                   <svg
@@ -131,9 +128,7 @@ function Index() {
                 Systeme und Daten die KI zugreift, vereinbaren wir für Ihr Projekt im Angebot.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/wissen/projekt-vorbereiten">
                   Ihr Briefing in fünf Fragen.
                   <svg
@@ -156,7 +151,6 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionKlarheitVorDemErsten />
         <ImportedSectionPassendeThemen />
         <section
@@ -164,7 +158,7 @@ function Index() {
           aria-labelledby="finish-title-automation"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-automation">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -206,42 +200,6 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Angebot anfragen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Kampagne besprechen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
             </div>
           </div>
         </section>
@@ -262,7 +220,7 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
                 <span aria-hidden="true">/</span>
               </li>
               <li>
-                <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
+                <a href="/leistungen">Leistungen</a>
               </li>
               <li className={"visually-hidden"}>
                 <span aria-current="page">Routine abgeben. Kontrolle behalten.</span>
@@ -270,7 +228,7 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
             </ol>
           </nav>
           <span className={"hc-kicker"}>
-            NEXIFY AI<span aria-hidden="true"> / </span>Leistungen
+            NeXify AI<span aria-hidden="true"> / </span>Leistungen
           </span>
           <h1 id="page-title-automation">Routine abgeben. Kontrolle behalten.</h1>
           <p className={"identity-body"}>
@@ -299,155 +257,10 @@ function ImportedSectionRoutineAbgebenKontrolleBehalten() {
         </div>
         <div className={"identity-media"}>
           <figure className={"identity-hero-photo"}>
-            <div className={"atelier-film atelier-film-hero"}>
-              <div className={"atelier-film-picture"}>
-                <img
-                  className={"atelier-film-fallback"}
-                  src="/site-assets/15fa9607b63661b1.webp"
-                  alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei"
-                  aria-hidden="false"
-                  width="1280"
-                  height="720"
-                  fetchPriority="high"
-                />
-                <video
-                  src="/site-assets/8b4870140b46d3f8.mp4"
-                  poster="/site-assets/15fa9607b63661b1.webp"
-                  width="1280"
-                  height="720"
-                  preload="metadata"
-                  playsInline
-                  muted
-                  aria-label="Markenszene mit Pascal, NeX und AIFly ORACLE"
-                />
-                <div className={"atelier-film-controls"}>
-                  <button type="button" aria-label="Film abspielen">
-                    <svg
-                      className={"atelier-playback-icon"}
-                      viewBox="0 0 20 20"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z" />
-                    </svg>
-                    <span>Abspielen</span>
-                  </button>
-                  <button type="button" aria-label="Film mit Ton starten">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M4 9h4l5-4v14l-5-4H4Z" />
-                      <path d="m17 9 5 6m0-6-5 6" />
-                    </svg>
-                    <span>Ton an</span>
-                  </button>
-                  <details className={"atelier-volume"}>
-                    <summary aria-label="Lautstärke">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="20"
-                        height="20"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        aria-hidden="true"
-                        focusable="false"
-                      >
-                        <path d="M3 12h8m6 0h4" strokeLinecap="round" />
-                        <circle cx="14" cy="12" r="3" />
-                      </svg>
-                      <span className={"visually-hidden"}>Lautstärke</span>
-                    </summary>
-                    <div>
-                      <label htmlFor="_R_239bsnmlb_-volume">
-                        Lautstärke
-                        <input
-                          id="_R_239bsnmlb_-volume"
-                          type="range"
-                          min="0"
-                          max="1"
-                          step="0.05"
-                          defaultValue="0.8"
-                        />
-                      </label>
-                    </div>
-                  </details>
-                </div>
-                <div className={"atelier-film-progress"} aria-hidden="true">
-                  <span style={{ transform: "scaleX(0)" }} data-site-import-responsive="530" />
-                </div>
-              </div>
-            </div>
+            <SiteFilm film="fertigung" eager />
           </figure>
         </div>
       </div>
-    </section>
-  );
-}
-
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
     </section>
   );
 }
@@ -460,7 +273,7 @@ function ImportedSectionKlarheitVorDemErsten() {
     >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
+          <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
           <p>
             Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
@@ -487,31 +300,6 @@ function ImportedSectionKlarheitVorDemErsten() {
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was ist es?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                KI übernimmt bei uns einen benannten Schritt in Ihrem Ablauf: Anfragen zuordnen,
-                Unterlagen vorbereiten, Entwürfe schreiben. Entscheidungen bleiben bei Ihnen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
@@ -559,38 +347,6 @@ function ImportedSectionKlarheitVorDemErsten() {
                 Wiederkehrende Schritte können gezielt unterstützt werden. Freigaben, Ausnahmen und
                 Zuständigkeiten bleiben sichtbar, statt in einer undurchsichtigen Automatisierung zu
                 verschwinden.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was gehört dazu?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Zum Beispiel: Eingehende Anfragen werden zugeordnet, oder die Angaben für ein
-                Angebot liegen fertig bereit. Gemeinsam sehen wir uns die Schritte an, die
-                beteiligten Systeme und die Stellen, an denen ein Mensch entscheidet. Dann legen wir
-                Eingaben, Ergebnis und Ausnahmen fest, setzen um und prüfen an einem echten
-                Arbeitsfall. Erst wenn dieser Ablauf verlässlich läuft, planen wir den nächsten.
-                Eine Automatisierung ist so gut wie ihre Quellen. Deshalb steht fest, welche
-                Dokumente und Daten sie nutzt, wer sie pflegt und wie Änderungen ankommen. Fehler
-                werden sichtbar gemeldet, Ausnahmen gehen an eine benannte Person. Auf welche
-                Systeme und Daten die KI zugreift, vereinbaren wir für Ihr Projekt im Angebot.
               </p>
             </div>
           </details>
@@ -694,7 +450,7 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
                 noch keine Beauftragung.
               </p>
             </div>
@@ -720,7 +476,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -770,7 +526,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -819,7 +575,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungen">
               Website, System, Kampagne. Aus einer Hand.
@@ -868,7 +624,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungen/websites">
               Eine Website, die Ihr Angebot erklärt.
@@ -918,58 +674,5 @@ function ImportedSectionPassendeThemen() {
         </li>
       </ol>
     </section>
-  );
-}
-
-function ImportedNavSeitenBersicht() {
-  return (
-    <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
-      <div className={"footer-overview-group"}>
-        <h3>Leistungen</h3>
-        <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
-        <a href="/leistungen/websites">Eine Website, die Ihr Angebot erklärt.</a>
-        <a href="/leistungen/agenten-automatisierung" aria-current="page">
-          Routine abgeben. Kontrolle behalten.
-        </a>
-        <a href="/leistungen/apps-portale">Portale und Apps für Ihren Ablauf.</a>
-        <a href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Produkte</h3>
-        <a href="/loesungen">Kampagne und Zielseite aus einem Guss.</a>
-        <a href="/preise-ablauf">Sie kennen die Kosten vor dem Start.</a>
-        <a href="/produkte/nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</a>
-        <a href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.</a>
-        <a href="/produkte/api">NeXify API. KI in Ihrer Anwendung.</a>
-        <a href="/produkte/aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</a>
-        <a href="/produkte/nex-agentic-aifly">NeX Agentic AIFly. Der Agent, der ausführt.</a>
-        <a href="/produkte/skills-mcp">Skills und MCP. Ihre Werkzeuge, angebunden.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Wissen und Unternehmen</h3>
-        <a href="/">Ein Gespräch. Ein Projekt, das passt.</a>
-        <a href="/wissen">So arbeiten wir.</a>
-        <a href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.</a>
-        <a href="/unternehmen">Ein Ansprechpartner. Ein Agententeam.</a>
-        <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Kundencenter</h3>
-        <a href="/portale">Stand des Kundencenters.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Rechtliches</h3>
-        <a href="/impressum">Impressum · NeXify AI by NeXify</a>
-        <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.</a>
-        <a href="/vertragsgrundlagen">Gute Zusammenarbeit hat klare Grundlagen.</a>
-        <a href="/ki-hinweise">KI mit klarer Verantwortung.</a>
-        <a href="/barrierefreiheit">Qualität soll zugänglich sein.</a>
-        <a href="/cookies">Sie wählen, was zusätzlich aktiv wird.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Weitere Seiten</h3>
-        <a href="/portale">Portale. Ihr Zugang, Ihr Bereich.</a>
-      </div>
-    </nav>
   );
 }

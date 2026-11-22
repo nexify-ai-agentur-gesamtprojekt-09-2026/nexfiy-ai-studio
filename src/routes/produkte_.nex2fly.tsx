@@ -32,12 +32,12 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen
+                NeXify AI<span aria-hidden="true"> / </span>Produkte
               </span>
               <h1 id="page-title-nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</h1>
               <p className={"identity-body"}>
                 Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-                Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+                Bereich. Den Zugang richten wir persönlich mit Ihnen ein.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -114,7 +114,7 @@ function Index() {
             </svg>
           </a>
           <a href="#content-nex2fly-nex2fly-customer-3-2">
-            24 Stunden testen
+            So erhalten Sie Zugang
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -171,9 +171,7 @@ function Index() {
                 Die Suite ist ein eigenes Produkt. Einen Agenturauftrag brauchen Sie dafür nicht.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/kontakt">
                   Zugang anfragen
                   <svg
@@ -216,9 +214,7 @@ function Index() {
                 werden je Zugang eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/produkte/one">
                   Zwei Agenten. Eine klare Aufgabe.
                   <svg
@@ -248,12 +244,12 @@ function Index() {
           >
             <div>
               <span className={"hc-kicker"}>03 / 04</span>
-              <h2 id="content-nex2fly-nex2fly-customer-3-2-title">24 Stunden testen</h2>
+              <h2 id="content-nex2fly-nex2fly-customer-3-2-title">So erhalten Sie Zugang</h2>
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Der Test dauert 24 Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung
-                selbst starten. So lernen Sie Ihren Arbeitsbereich in Ruhe kennen.
+                Die Suite ist noch nicht frei buchbar. Schildern Sie, wofür Sie sie nutzen möchten;
+                wir nennen Ihnen den nächsten Schritt.
               </p>
               <p>
                 Die Nutzung von KI-Modellen hat ein eigenes Budget. Welche Modelle und Kosten für
@@ -284,7 +280,6 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionKlarheitVorDemErsten />
         <ImportedSectionPassendeThemen />
         <section
@@ -292,7 +287,7 @@ function Index() {
           aria-labelledby="finish-title-nex2fly"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-nex2fly">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -396,61 +391,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionKlarheitVorDemErsten() {
   return (
     <section
@@ -459,7 +399,7 @@ function ImportedSectionKlarheitVorDemErsten() {
     >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
+          <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
           <p>
             Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
@@ -486,31 +426,6 @@ function ImportedSectionKlarheitVorDemErsten() {
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was ist es?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-                Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
@@ -564,44 +479,6 @@ function ImportedSectionKlarheitVorDemErsten() {
           <details className={"hc-service-detail"}>
             <summary>
               <span>
-                <strong className={"hc-service-name"}>Was gehört dazu?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                In der NeX AIFly Suite bleibt zusammen, was zusammengehört: das Gespräch mit der KI,
-                die Aufgabe daraus, das Dokument dazu und das Wissen Ihres Projekts. Sie fangen
-                nicht bei jeder Frage von vorn an. Die Suite ist ein eigenes Produkt. Einen
-                Agenturauftrag brauchen Sie dafür nicht. Aus einem Gespräch wird eine Aufgabe, aus
-                der Aufgabe ein Ergebnis, das Sie weiterverwenden können. Sie legen fest, welche
-                Quellen die KI nutzt und wer in Ihrem Bereich mitarbeitet. Einige Werkzeuge – etwa
-                der Versand per E-Mail oder die Anbindung eines Kalenders – werden je Zugang
-                eingeschaltet. Was für Sie bereitsteht, zeigt Ihr Arbeitsbereich. Der Test dauert 24
-                Stunden und beginnt erst, wenn Sie ihn nach der Aktivierung selbst starten. So
-                lernen Sie Ihren Arbeitsbereich in Ruhe kennen. Die Nutzung von KI-Modellen hat ein
-                eigenes Budget. Welche Modelle und Kosten für Ihren Zugang gelten, sehen Sie, bevor
-                Sie sie nutzen. Ihr Zugang gilt für Ihren Arbeitsbereich. Er gibt keinen Zugriff auf
-                Projekte anderer Kunden oder auf die Agentur. Sie bestimmen, welche Personen bei
-                Ihnen mitarbeiten. Ein Konto allein öffnet noch keinen Arbeitsbereich: Er wird nach
-                Ihrer Bestätigung aktiviert.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
                 <strong className={"hc-service-name"}>Wie läuft es ab?</strong>
               </span>
               <svg
@@ -619,9 +496,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
-                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
-                Laufende Betreuung wird separat vereinbart.
+                Sie schildern, wofür Sie die Suite nutzen möchten. Wir klären Zugang und Umfang mit
+                Ihnen und richten Ihren Bereich ein.
               </p>
             </div>
           </details>
@@ -673,9 +549,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Ein Konto allein aktiviert noch keinen Produktzugang. Testphase, KI-Budget und
-                berechtigte Verbindungen werden separat bestätigt. Fremde Projekte und interne
-                Agenturrollen bleiben ausgeschlossen.
+                Ein Konto allein aktiviert noch keinen Produktzugang. KI-Budget und berechtigte
+                Verbindungen werden separat bestätigt. Fremde Projekte und interne Agenturrollen
+                bleiben ausgeschlossen.
               </p>
             </div>
           </details>
@@ -700,7 +576,7 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
                 noch keine Beauftragung.
               </p>
             </div>
@@ -726,7 +602,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -776,7 +652,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/portale">
               Stand des Kundencenters.
@@ -825,7 +701,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/one">
               Zwei Agenten. Eine klare Aufgabe.

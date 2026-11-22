@@ -266,7 +266,7 @@ const HOME_FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "Wie nehme ich Kontakt auf?",
-    a: "Über das Kontaktformular auf /kontakt oder das Erstgespräch. Wir melden uns mit einer Rückmeldung zu Ihrem Vorhaben.",
+    a: "Über das Kontaktformular, per E-Mail oder telefonisch. Sie erhalten eine persönliche Rückmeldung zu Ihrem Vorhaben.",
   },
 ];
 
@@ -295,14 +295,21 @@ function HomeFaq() {
         </div>
         <p>Kurze Antworten auf die Fragen, die im ersten Gespräch am häufigsten kommen.</p>
       </header>
-      <ol>
+      {/* Karten wie die übrigen Abschnitte der Seite (Stile: site-korrekturen.css). Die Reihenfolge
+          trägt keine Bedeutung, deshalb eine Liste ohne Ziffern. */}
+      <ul className={"nx-faq"}>
         {HOME_FAQ.map(({ q, a }) => (
           <li key={q} className={"is-in"}>
             <h3>{q}</h3>
             <p>{a}</p>
+            {q === HOME_FAQ.at(-1)?.q ? (
+              <a className={"hc-text-link"} href="/kontakt">
+                Zum Kontaktformular
+              </a>
+            ) : null}
           </li>
         ))}
-      </ol>
+      </ul>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
@@ -790,7 +797,10 @@ function ImportedSectionEigeneWerkzeugeFR() {
           </figure>
           <div>
             <h3>NeXify API</h3>
-            <p>KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.</p>
+            <p>
+              KI-Funktionen von NeXify in Ihrer eigenen Anwendung. Den Zugang erhalten Sie im
+              Projekt.
+            </p>
             <span className={"hc-text-link"}>
               API ansehen
               <svg
