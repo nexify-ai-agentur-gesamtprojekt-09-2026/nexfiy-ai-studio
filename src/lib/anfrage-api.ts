@@ -17,7 +17,7 @@ import {
   liesAnfrageBody,
   pruefeAnfrage,
 } from "@/lib/anfrage";
-import type { InquiryKind, InquiryValues } from "@/lib/inquiry";
+import type { InquiryValues } from "@/lib/inquiry";
 
 const TENANT = "nexifyai-platform";
 
@@ -110,9 +110,8 @@ function erfolgAntwort(alsJson: boolean, nummer: string, doppelt: boolean) {
   );
 }
 
-function mailText(art: InquiryKind, werte: InquiryValues, nummer: string, zeit: string): string {
-  const kopf =
-    art === "partner" ? "TEILEKLAR-Partneranfrage" : "Projektanfrage über das Kontaktformular";
+function mailText(werte: InquiryValues, nummer: string, zeit: string): string {
+  const kopf = "Projektanfrage über das Kontaktformular";
   return [
     `${kopf} ${nummer}`,
     `Eingang: ${zeit}`,
@@ -129,7 +128,6 @@ function mailText(art: InquiryKind, werte: InquiryValues, nummer: string, zeit: 
 }
 
 async function benachrichtige(
-  art: InquiryKind,
   werte: InquiryValues,
   nummer: string,
   zeit: string,
@@ -140,10 +138,7 @@ async function benachrichtige(
   const empfaenger = bindings.ANFRAGE_TO;
   if (!schluessel || !absender || !empfaenger) return { status: "nicht_konfiguriert", id: null };
 
-  const betreff =
-    art === "partner"
-      ? `TEILEKLAR Partneranfrage: ${werte.company || werte.name}`
-      : `Projektanfrage von ${werte.name}${werte.company ? ` (${werte.company})` : ""}`;
+  const betreff = `Projektanfrage von ${werte.name}${werte.company ? ` (${werte.company})` : ""}`;
 
   try {
     const antwort = await fetch("https://api.resend.com/emails", {
@@ -158,7 +153,7 @@ async function benachrichtige(
         to: [empfaenger],
         reply_to: werte.email,
         subject: `[${nummer}] ${betreff}`,
-        text: mailText(art, werte, nummer, zeit),
+        text: mailText(werte, nummer, zeit),
       }),
     });
     if (!antwort.ok) return { status: `fehler_${antwort.status}`, id: null };
@@ -286,7 +281,7 @@ export async function handleAnfrage(
     return fehlerAntwort(alsJson, { fehler: "Die Anfrage konnte nicht gespeichert werden." }, 500);
   }
 
-  const benachrichtigung = await benachrichtige(art, werte, nummer, zeit, bindings);
+  const benachrichtigung = await benachrichtige(werte, nummer, zeit, bindings);
   await db
     .prepare("UPDATE anfragen SET notification_status = ?, notification_id = ? WHERE nummer = ?")
     .bind(benachrichtigung.status, benachrichtigung.id, nummer)

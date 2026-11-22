@@ -1,8 +1,8 @@
 /**
- * Inquiry forms (contact, TEILEKLAR partner): field rules, German error messages and the e-mail hand-off.
+ * Inquiry form (contact): field rules, German error messages and the e-mail hand-off.
  * Pure functions only, so the rules are testable and the page markup stays a thin view.
  */
-export type InquiryKind = "contact" | "partner";
+export type InquiryKind = "contact";
 
 export interface InquiryValues {
   name: string;
@@ -40,12 +40,6 @@ const PROFILES: Record<InquiryKind, InquiryProfile> = {
     subject: (values) =>
       `Projektanfrage von ${values.name}${values.company ? ` (${values.company})` : ""}`,
     intro: "Guten Tag Pascal,\n\nich möchte mein Vorhaben mit Ihnen besprechen.",
-  },
-  partner: {
-    companyRequired: true,
-    companyLabel: "Werkstatt / Betrieb",
-    subject: (values) => `TEILEKLAR Partneranfrage: ${values.company || values.name}`,
-    intro: "Guten Tag,\n\nwir möchten TEILEKLAR-Partnerwerkstatt werden.",
   },
 };
 
@@ -95,7 +89,7 @@ export function validateInquiryField(
       return undefined;
     case "company":
       if (PROFILES[kind].companyRequired && !values.company)
-        return "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.";
+        return "Bitte nennen Sie Ihr Unternehmen.";
       return undefined;
     case "message":
       if (!values.message) return "Bitte beschreiben Sie kurz Ihr Anliegen.";

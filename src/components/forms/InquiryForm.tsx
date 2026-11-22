@@ -37,7 +37,7 @@ export interface InquiryFormProps {
 }
 
 /**
- * Inquiry form in the captured TEILEKLAR/NeXify markup (tk-form, tk-field, tk-check). Valid inquiries open the
+ * Inquiry form in the captured NeXify markup (tk-form, tk-field, tk-check). Valid inquiries open the
  * visitor's e-mail program with the finished message to the NeXify inbox; this copy has no own form backend.
  */
 export function InquiryForm({
