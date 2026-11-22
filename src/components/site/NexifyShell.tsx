@@ -8,18 +8,17 @@ export interface ShellChat {
 import shellCSS from "../../styles/site-shell.css?url";
 import {
   useAtelierFilms,
-  useChatPanel,
   useImportedMobile,
   useLoopingVideos,
   useShellSignals,
 } from "@/lib/imported-site";
+import { ChatDock, useChatDock } from "../chat/ChatDock";
 import { GlassLensFilters } from "./GlassLensFilters";
 import { NexifyFooter } from "./NexifyFooter";
 import { NexifyHeader } from "./NexifyHeader";
-import { OracleAside } from "./OracleAside";
 
 /**
- * Page frame of every NeXify page: header, footer, AIFly ORACLE panel and the scroll/footer signals the
+ * Page frame of every NeXify page: header, footer, KI-Chat (ChatDock) and the scroll/footer signals the
  * imported styles react to. Routes pass only their page body.
  */
 export function NexifyShell({
@@ -31,17 +30,20 @@ export function NexifyShell({
   heroActionSelector?: string;
 }) {
   const isMobile = useImportedMobile();
-  const { chatOpen, openChat, closeChat, reopenRef } = useChatPanel(!isMobile);
-  const { scrolled, heroActionVisible, footerVisible, viewportHeight } =
-    useShellSignals(heroActionSelector);
+  const dock = useChatDock();
+  const chatOpen = dock.offen === true;
+  // Die Spalte neben der Seite gibt es nur, wenn das Panel angedockt offen ist (ab 1200 px).
+  const docked = chatOpen && dock.breit === true;
+  const { scrolled, heroActionVisible, footerVisible } = useShellSignals(heroActionSelector);
   useAtelierFilms();
   useLoopingVideos();
   return (
     <div
       className={
-        chatOpen ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"
+        docked ? "workspace-shell site-nexify is-open" : "workspace-shell site-nexify is-closed"
       }
       id="atelier"
+      data-nxc={dock.offen === null ? "auto" : dock.offen ? "offen" : "zu"}
       data-hero-action-visible={heroActionSelector && heroActionVisible ? "true" : undefined}
       data-scrolled={scrolled ? "true" : "false"}
       data-chat-compact={isMobile ? undefined : "false"}
@@ -55,38 +57,13 @@ export function NexifyShell({
         </a>
         <NexifyHeader />
         <main id="page-content" tabIndex={-1}>
-          {typeof children === "function" ? children({ chatOpen, openChat, closeChat }) : children}
+          {typeof children === "function"
+            ? children({ chatOpen, openChat: dock.oeffne, closeChat: dock.schliesse })
+            : children}
         </main>
         <NexifyFooter />
       </div>
-      {!chatOpen && (
-        <button
-          ref={reopenRef}
-          aria-expanded="false"
-          aria-controls="aifly-panel"
-          type="button"
-          className="nexify-control secondary-button reopen-chat"
-          data-variant="secondary"
-          onClick={openChat}
-        >
-          <span className="aifly-symbol oracle-companion" data-state="idle" aria-hidden="true">
-            <img
-              alt=""
-              width="34"
-              height="34"
-              decoding="async"
-              src="/site-assets/9176c58a16ff634a.png"
-            />
-          </span>
-          Ihr Projekt mit NeXify
-        </button>
-      )}
-      <OracleAside
-        open={chatOpen}
-        isMobile={isMobile}
-        viewportHeight={viewportHeight}
-        onClose={closeChat}
-      />
+      <ChatDock dock={dock} />
     </div>
   );
 }

@@ -34,7 +34,8 @@ use the editor.
 ## Project rules
 
 - Pages are imported copies of nexifyai.cloud: each page keeps its markup in its own route file and its original styles in `src/styles/captured.css` (home) or `src/styles/pages/<page>.css` (full captures under `.site-import/`), because edits elsewhere break the clone's cascade.
-- Shared page behaviour (chat panel, header menus, scroll/footer shell attributes, film players) lives in `src/lib/imported-site.ts` so every imported route behaves the same; routes only wire its hooks into their JSX.
+- Shared page behaviour (header menus, scroll/footer shell attributes, film players) lives in `src/lib/imported-site.ts` so every imported route behaves the same; routes only wire its hooks into their JSX.
+- The public KI chat is one feature in its own files: UI `src/components/chat/` with styles `src/styles/site-chat.css` (own `nxc-` classes, never the imported `aifly-panel` rules), browser logic `src/lib/chat-client.ts`, server `src/lib/chat-api.ts` with guardrails `src/lib/chat-leitplanken.ts`; what the assistant may say is defined once in `src/lib/chat-wissen.ts` and must follow the page contents.
 - The copy is independent of the live site: never write back to or link assets from the original domain; downloaded media lives in `public/site-assets/` and `public/glass/`.
 
 - Brand films render only through `src/components/SiteFilm.tsx` with data from `src/lib/site-films.ts` and styles in `src/styles/site-film.css`, so every page shows identical players and a film is defined once.
