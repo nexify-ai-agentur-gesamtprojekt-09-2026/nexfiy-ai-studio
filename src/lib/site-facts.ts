@@ -32,3 +32,10 @@ export const UNTERNEHMEN = {
    */
   zielLaender: ["DE", "NL", "AT", "CH"],
 } as const;
+
+/**
+ * Markenzeichen für Kopf- und Fußzeile: 192 px als WebP (rund 10 kB) statt der 512er PNG
+ * (152 kB), die für 40 bis 96 px Darstellung auf jeder Seite geladen wurde. Die große Datei
+ * bleibt für Stellen, die sie brauchen (Offline-Seite, Web-App-Hinweis).
+ */
+export const LOGO_KLEIN = "/site-assets/9176c58a16ff634a-192.webp";

@@ -89,7 +89,7 @@ export function InstallHint() {
       <link rel="stylesheet" href={hintCSS} precedence="site-install" />
       <img
         className="nx-install-zeichen"
-        src="/site-assets/9176c58a16ff634a.png"
+        src="/site-assets/9176c58a16ff634a-192.webp"
         alt=""
         width="40"
         height="40"

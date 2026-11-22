@@ -1,0 +1,126 @@
+/* Gemeinsame Korrekturen am Seitenrahmen und an Bausteinen, die auf vielen Seiten vorkommen.
+   Geladen von der Fußzeile (NexifyFooter), also auf jeder Seite genau einmal. Die aufgenommenen
+   Seitenstile (captured.css, pages/*.css) bleiben unverändert; hier steht nur, was sie für alle
+   Seiten gleich richten soll. Chat-Panel und Wieder-öffnen-Knopf gehören nicht hierher. */
+
+/* Gruppentitel im Produktmenü: früher <h2> vor der H1 der Seite, jetzt Absatz mit gleichem Bild. */
+#atelier .site-header .megamenu-group .megamenu-title {
+  margin: 0 0 var(--space-2);
+  font: 500 13px/1.5 var(--font-text);
+  color: var(--color-text-sekundaer);
+}
+
+/* Telefonmenü: der Weg zum Gespräch steht oben als Knopf. */
+#atelier .site-header .mobile-navigation-panel .mobile-navigation-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  margin: 0 0 var(--space-3, 12px);
+  text-decoration: none;
+}
+
+/* B2B-Hinweis in der Fußleiste: gleiche Größe wie seine Nachbarn. */
+#atelier .site-footer .footer-ai-note span {
+  font-family: var(--font-text);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-sekundaer);
+}
+
+/* Sprungmarke des Anfrageformulars: Überschrift landet unter dem fixierten Kopf. */
+#atelier #anfrage {
+  scroll-margin-top: 7rem;
+}
+
+/* „Auf dieser Seite": Einträge dürfen umbrechen, statt ineinanderzulaufen (Rechtsseiten mit
+   fünf und mehr Ankern). Lange Wörter trennen sauber statt mitten im Wort. */
+#atelier .home-concept .hc-anchors {
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+  row-gap: 4px;
+  /* Feste Rundung: mit 999 px wird eine mehrzeilige Leiste zur Blase. */
+  border-radius: 30px;
+}
+#atelier .home-concept .hc-anchors a {
+  flex: 0 1 auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+/* Zweierraster auf schmalen Breiten: ein letzter, einzelner Eintrag nimmt die ganze Zeile. */
+#atelier .home-concept .hc-anchors a:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* „Passende Themen" im Zweierraster: eine letzte, einzelne Karte nimmt die ganze Zeile. */
+#atelier .home-concept .pc-related > ol > li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* Titel der Aufklappzeilen: Wortabstände nicht zusammenziehen. */
+#atelier .home-concept .hc-service-name {
+  letter-spacing: 0;
+  word-spacing: 0.06em;
+}
+
+/* Zweiter Knopf im Seitenkopf: als Schaltfläche erkennbar, nicht als loser Text. */
+#atelier .home-concept .identity-copy .identity-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid color-mix(in oklab, var(--color-text-sekundaer) 28%, transparent);
+  border-radius: 999px;
+  background: rgb(30 33 34 / 0.91);
+  text-decoration: none;
+}
+#atelier .home-concept .identity-copy .identity-secondary-link:hover {
+  border-color: color-mix(in oklab, var(--color-text-sekundaer) 55%, transparent);
+}
+
+/* Hinweis unter den Knöpfen des Seitenkopfs (Preisseite). */
+#atelier .home-concept .identity-copy .identity-note {
+  margin-top: var(--space-4, 16px);
+  font-size: 14px;
+  color: var(--color-text-sekundaer);
+}
+
+/* Häufige Fragen der Startseite: Karten statt nummerierter Liste. */
+#atelier .home-concept .nx-faq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+#atelier .home-concept .nx-faq > li {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid color-mix(in oklab, var(--color-text-sekundaer) 18%, transparent);
+  border-radius: 28px;
+  background: rgb(30 33 34 / 0.6);
+}
+#atelier .home-concept .nx-faq h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.3;
+}
+#atelier .home-concept .nx-faq p {
+  margin: 0;
+}
+#atelier .home-concept .nx-faq .hc-text-link {
+  margin-top: 12px;
+}
+
+@media (max-width: 767px) {
+  #atelier .home-concept .nx-faq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Eine Stufe zwischen H2 und H3 (beide standen mobil auf 24 px). */
+  #atelier .home-concept :is(.hc-section-heading, .hc-intro, .hc-finish-heading) h2 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+}

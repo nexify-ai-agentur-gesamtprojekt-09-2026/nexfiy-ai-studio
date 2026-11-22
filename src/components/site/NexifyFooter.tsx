@@ -1,10 +1,13 @@
 import { useCurrentPage } from "@/hooks/use-current-page";
+import { LOGO_KLEIN } from "@/lib/site-facts";
+import korrekturenCSS from "../../styles/site-korrekturen.css?url";
 
 /** NeXify site footer, shared by every NeXify page; the link to the current page is marked for assistive tech. */
 export function NexifyFooter() {
   const here = useCurrentPage();
   return (
     <footer className={"site-footer structured-footer footer-refined"}>
+      <link rel="stylesheet" href={korrekturenCSS} precedence="site-korrekturen" />
       <div className={"footer-inner"}>
         <div className={"footer-invitation"}>
           <div>
@@ -40,10 +43,10 @@ export function NexifyFooter() {
               <span className={"nx-logo"} data-groesse="s">
                 <span className={"nx-logo-figur"} aria-hidden="true">
                   <img
-                    src="/site-assets/9176c58a16ff634a.png"
+                    src={LOGO_KLEIN}
                     alt=""
-                    width="512"
-                    height="512"
+                    width="192"
+                    height="192"
                     decoding="async"
                     draggable="false"
                   />
@@ -76,10 +79,19 @@ export function NexifyFooter() {
                 NeX AIFly Suite
               </a>
               <a href="/produkte/one" {...here("/produkte/one")}>
-                NeX Agentic AI
+                NeX und AIFly ORACLE
               </a>
               <a href="/produkte/api" {...here("/produkte/api")}>
                 NeXify API
+              </a>
+              <a href="/produkte/aifly-oracle" {...here("/produkte/aifly-oracle")}>
+                AIFly ORACLE
+              </a>
+              <a href="/produkte/nex-agentic-aifly" {...here("/produkte/nex-agentic-aifly")}>
+                NeX Agentic AIFly
+              </a>
+              <a href="/produkte/skills-mcp" {...here("/produkte/skills-mcp")}>
+                Skills und MCP
               </a>
             </nav>
             <nav aria-label={"Leistungen & Zusammenarbeit"}>
@@ -100,7 +112,7 @@ export function NexifyFooter() {
                 Landingpages &amp; Kampagnen
               </a>
               <a href="/preise-ablauf" {...here("/preise-ablauf")}>
-                Preise &amp; Zusammenarbeit
+                Preise &amp; Ablauf
               </a>
             </nav>
             <nav aria-label="NeXify AI">
@@ -133,7 +145,7 @@ export function NexifyFooter() {
                 Barrierefreiheit
               </a>
               <a href="/cookies" {...here("/cookies")}>
-                Datenschutzeinstellungen
+                Cookies &amp; Speicherung
               </a>
             </nav>
           </div>
@@ -143,7 +155,7 @@ export function NexifyFooter() {
             NeXify AI <span aria-hidden="true">·</span> Chat it. Automate it.
           </span>
           <details className={"footer-overview"}>
-            <summary aria-expanded="false" aria-controls="_R_8lbH1_">
+            <summary>
               <span>Seitenübersicht</span>
               <span className={"footer-overview-marker"} aria-hidden="true">
                 +
@@ -174,15 +186,15 @@ export function NexifyFooter() {
                   <a href="/leistungsumfang" {...here("/leistungsumfang")}>
                     Drei Pakete. Ein klarer Umfang.
                   </a>
-                </div>
-                <div className={"footer-overview-group"}>
-                  <h3>Produkte</h3>
                   <a href="/loesungen" {...here("/loesungen")}>
                     Kampagne und Zielseite aus einem Guss.
                   </a>
                   <a href="/preise-ablauf" {...here("/preise-ablauf")}>
                     Sie kennen die Kosten vor dem Start.
                   </a>
+                </div>
+                <div className={"footer-overview-group"}>
+                  <h3>Produkte</h3>
                   <a href="/produkte/nex2fly" {...here("/produkte/nex2fly")}>
                     NeX AIFly Suite. Ihr KI-Arbeitsbereich.
                   </a>
@@ -244,13 +256,7 @@ export function NexifyFooter() {
                     Qualität soll zugänglich sein.
                   </a>
                   <a href="/cookies" {...here("/cookies")}>
-                    Sie wählen, was zusätzlich aktiv wird.
-                  </a>
-                </div>
-                <div className={"footer-overview-group"}>
-                  <h3>Weitere Seiten</h3>
-                  <a href="/portale" {...here("/portale")}>
-                    Portale. Ihr Zugang, Ihr Bereich.
+                    Cookies und Speicherung
                   </a>
                 </div>
               </nav>
@@ -274,9 +280,7 @@ export function NexifyFooter() {
             <span>Angebot für Unternehmer gemäß § 14 BGB (B2B).</span>
           </p>
           <details className={"footer-legal-details"}>
-            <summary aria-expanded="false" aria-controls="_R_8lb_">
-              Hinweise zu den Rechtsdokumenten
-            </summary>
+            <summary>Hinweise zu den Rechtsdokumenten</summary>
             <div id="_R_8lb_">
               <p>
                 Die Seiten zu Anbieterinformationen und Datenschutz sind direkt erreichbar.
@@ -289,41 +293,6 @@ export function NexifyFooter() {
             </div>
           </details>
         </div>
-      </div>
-      <div className={"footer-utilities"}>
-        <details className={"diagnostic-consent"}>
-          <summary>Fehlerdiagnose-Einstellungen</summary>
-          <div className={"diagnostic-consent-content"}>
-            <p>
-              Optional: Fehlerdiagnose mit PostHog. Mit Ihrer Zustimmung können technische
-              Fehlerstellen, Fehlertyp und App-Version übermittelt werden. Eingaben und Fehlertexte
-              werden entfernt. Keine Marketing- oder Klickerfassung und keine Sitzungsaufzeichnung.
-            </p>
-            <p>Bei einer Übertragung erhält der Dienst Netzwerkdaten wie Ihre IP-Adresse.</p>
-            <p>
-              Ihre Auswahl gilt nur bis zum Neuladen und wird nicht gespeichert. Ablehnen schränkt
-              die Seitenfunktionen nicht ein.
-            </p>
-            <p className={"diagnostic-consent-status"} role="status" aria-live="polite">
-              Aus · noch keine Auswahl
-            </p>
-            <div
-              className={"diagnostic-consent-actions"}
-              role="group"
-              aria-label="Fehlerdiagnose-Einstellungen"
-            >
-              <button type="button" className={"\x6futline-button"}>
-                Zulassen
-              </button>
-              <button type="button" className={"\x6futline-button"}>
-                Ablehnen
-              </button>
-            </div>
-            <a href="/datenschutz" {...here("/datenschutz")}>
-              Datenschutzhinweise
-            </a>
-          </div>
-        </details>
       </div>
     </footer>
   );
