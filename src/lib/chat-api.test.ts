@@ -200,7 +200,8 @@ async function ereignisse(res: Response) {
 
 /** Wartet mit echter Ereignisschleife, bis der Anbieter gerufen wurde (auch unter Fake-Timern). */
 async function bisAufruf(mock: ReturnType<typeof vi.fn>) {
-  for (let i = 0; i < 2000 && mock.mock.calls.length === 0; i++)
+  const frist = Date.now() + 10_000;
+  while (mock.mock.calls.length === 0 && Date.now() < frist)
     await new Promise((weiter) => setImmediate(weiter));
   expect(mock).toHaveBeenCalled();
 }
@@ -657,191 +658,203 @@ describe("handleChat: Fragen, Wiederholung und Verlauf", () => {
   });
 });
 
-describe("handleChat: ein gestarteter Anbieteraufruf zählt immer (kein Umgehen durch Abbrechen)", () => {
-  const stueck = (text: string) =>
-    `data: ${JSON.stringify({ model: CHAT_MODELL_ROUTERNAME, choices: [{ delta: { content: text } }] })}\n\n`;
+describe(
+  "handleChat: ein gestarteter Anbieteraufruf zählt immer (kein Umgehen durch Abbrechen)",
+  { timeout: 20_000 },
+  () => {
+    const stueck = (text: string) =>
+      `data: ${JSON.stringify({ model: CHAT_MODELL_ROUTERNAME, choices: [{ delta: { content: text } }] })}\n\n`;
 
-  /** Anbieter, der die Antwort beginnt und dann offen lässt, bis sein Signal abbricht. */
-  function arbeitenderAnbieter(erstes = stueck("Erster Satz. ")) {
-    return vi.fn(async (_url: string, init: RequestInit) => {
-      const strom = new ReadableStream<Uint8Array>({
-        start(c) {
-          c.enqueue(new TextEncoder().encode(erstes));
-          init.signal?.addEventListener("abort", () => {
-            try {
-              c.error(new Error("abgebrochen"));
-            } catch {
-              // bereits geschlossen
-            }
-          });
-        },
+    /** Anbieter, der die Antwort beginnt und dann offen lässt, bis sein Signal abbricht. */
+    function arbeitenderAnbieter(erstes = stueck("Erster Satz. ")) {
+      return vi.fn(async (_url: string, init: RequestInit) => {
+        const strom = new ReadableStream<Uint8Array>({
+          start(c) {
+            c.enqueue(new TextEncoder().encode(erstes));
+            init.signal?.addEventListener("abort", () => {
+              try {
+                c.error(new Error("abgebrochen"));
+              } catch {
+                // bereits geschlossen
+              }
+            });
+          },
+        });
+        return new Response(strom, {
+          status: 200,
+          headers: { "content-type": "text/event-stream" },
+        });
       });
-      return new Response(strom, { status: 200, headers: { "content-type": "text/event-stream" } });
-    });
-  }
-  /** Anbieter, der noch keine Antwortkopfzeilen geschickt hat, als der Abbruch kommt. */
-  function wartenderAnbieter() {
-    return vi.fn(
-      (_url: string, init: RequestInit) =>
-        new Promise<Response>((_, ablehnen) => {
-          init.signal?.addEventListener("abort", () => ablehnen(new Error("abgebrochen")));
-        }),
-    );
-  }
-  const versuche = () => db.zeilen("rolle = 'user'").reduce((summe, z) => summe + z.versuche, 0);
-
-  /** Nach acht abgebrochenen Versuchen muss der neunte in derselben Minute abgelehnt werden. */
-  async function achtMalDannGesperrt(
-    mock: ReturnType<typeof vi.fn>,
-    einVersuch: (nr: number) => Promise<void>,
-  ) {
-    vi.stubGlobal("fetch", mock);
-    for (let nr = 0; nr < CHAT_LIMITS.jeIpProMinute; nr++) {
-      await einVersuch(nr);
-      expect(versuche(), `nach Abbruch ${nr + 1}`).toBe(nr + 1);
     }
-    expect(mock).toHaveBeenCalledTimes(CHAT_LIMITS.jeIpProMinute);
-    expect(db.zeilen("rolle = 'user'")).toHaveLength(CHAT_LIMITS.jeIpProMinute);
-    const neunter = await handleChat(anfrage({ message: "Neunter Versuch" }), bindings(db));
-    expect(neunter.status).toBe(429);
-    expect(await neunter.json()).toMatchObject({ fehler: "zu_viele_anfragen" });
-    expect(mock).toHaveBeenCalledTimes(CHAT_LIMITS.jeIpProMinute);
-  }
+    /** Anbieter, der noch keine Antwortkopfzeilen geschickt hat, als der Abbruch kommt. */
+    function wartenderAnbieter() {
+      return vi.fn(
+        (_url: string, init: RequestInit) =>
+          new Promise<Response>((_, ablehnen) => {
+            // Wie echtes fetch: ein bereits abgebrochenes Signal lehnt sofort ab.
+            if (init.signal?.aborted) ablehnen(new Error("abgebrochen"));
+            init.signal?.addEventListener("abort", () => ablehnen(new Error("abgebrochen")));
+          }),
+      );
+    }
+    const versuche = () => db.zeilen("rolle = 'user'").reduce((summe, z) => summe + z.versuche, 0);
 
-  async function abbruchPerSignal(mock: ReturnType<typeof vi.fn>, nr: number, kopf = {}) {
-    const besucher = new AbortController();
-    const laufend = handleChat(
-      anfrage({ message: `Frage ${nr}` }, { signal: besucher.signal, kopf }),
-      bindings(db),
-    );
-    for (let i = 0; i < 2000 && mock.mock.calls.length <= nr; i++)
-      await new Promise((weiter) => setImmediate(weiter));
-    besucher.abort();
-    return laufend;
-  }
+    /** Nach acht abgebrochenen Versuchen muss der neunte in derselben Minute abgelehnt werden. */
+    async function achtMalDannGesperrt(
+      mock: ReturnType<typeof vi.fn>,
+      einVersuch: (nr: number) => Promise<void>,
+    ) {
+      vi.stubGlobal("fetch", mock);
+      for (let nr = 0; nr < CHAT_LIMITS.jeIpProMinute; nr++) {
+        await einVersuch(nr);
+        expect(versuche(), `nach Abbruch ${nr + 1}`).toBe(nr + 1);
+      }
+      expect(mock).toHaveBeenCalledTimes(CHAT_LIMITS.jeIpProMinute);
+      expect(db.zeilen("rolle = 'user'")).toHaveLength(CHAT_LIMITS.jeIpProMinute);
+      const neunter = await handleChat(anfrage({ message: "Neunter Versuch" }), bindings(db));
+      expect(neunter.status).toBe(429);
+      expect(await neunter.json()).toMatchObject({ fehler: "zu_viele_anfragen" });
+      expect(mock).toHaveBeenCalledTimes(CHAT_LIMITS.jeIpProMinute);
+    }
 
-  it("JSON-Pfad: Abbruch während der Verarbeitung gibt die Reservierung nicht zurück", async () => {
-    const mock = arbeitenderAnbieter();
-    await achtMalDannGesperrt(mock, async (nr) => {
-      const res = await abbruchPerSignal(mock, nr);
-      expect(res.status).toBe(499);
-      expect(await res.json()).toMatchObject({ fehler: "besucher_abbruch" });
-    });
-  });
-
-  it("JSON-Pfad: Abbruch, bevor der Anbieter geantwortet hat, zählt ebenfalls", async () => {
-    const mock = wartenderAnbieter();
-    await achtMalDannGesperrt(mock, async (nr) => {
-      expect((await abbruchPerSignal(mock, nr)).status).toBe(499);
-    });
-  });
-
-  it("Strom: Abbruch vor Beginn des Stroms zählt", async () => {
-    const mock = wartenderAnbieter();
-    await achtMalDannGesperrt(mock, async (nr) => {
-      const res = await abbruchPerSignal(mock, nr, { accept: "text/event-stream" });
-      expect(res.status).toBe(499);
-    });
-  });
-
-  it("Strom: Abbruch nach dem Start, bevor Text sichtbar war, zählt", async () => {
-    // Das erste Stück endet nicht an einer Satzgrenze: die Leitplanke hat noch nichts freigegeben.
-    const mock = arbeitenderAnbieter(stueck("Ein unfertiger Satz ohne"));
-    await achtMalDannGesperrt(mock, async (nr) => {
-      const res = await handleChat(anfrage({ message: `Frage ${nr}` }, STROM), bindings(db));
-      const leser = res.body!.getReader();
-      const erstes = new TextDecoder().decode((await leser.read()).value);
-      expect(erstes).toContain("event: start");
-      await leser.cancel();
-    });
-  });
-
-  it("Strom: Abbruch nach sichtbarem Text zählt", async () => {
-    const mock = arbeitenderAnbieter();
-    await achtMalDannGesperrt(mock, async (nr) => {
-      const res = await handleChat(anfrage({ message: `Frage ${nr}` }, STROM), bindings(db));
-      const leser = res.body!.getReader();
-      let text = "";
-      while (!text.includes("event: delta"))
-        text += new TextDecoder().decode((await leser.read()).value);
-      await leser.cancel();
-    });
-  });
-
-  it("Strom: Abbruch der Anfrage selbst (ohne cancel) vor sichtbarem Text zählt", async () => {
-    const mock = arbeitenderAnbieter(stueck("Ein unfertiger Satz ohne"));
-    await achtMalDannGesperrt(mock, async (nr) => {
+    async function abbruchPerSignal(mock: ReturnType<typeof vi.fn>, nr: number, kopf = {}) {
       const besucher = new AbortController();
-      const res = await handleChat(
-        anfrage({ message: `Frage ${nr}` }, { ...STROM, signal: besucher.signal }),
+      const laufend = handleChat(
+        anfrage({ message: `Frage ${nr}` }, { signal: besucher.signal, kopf }),
         bindings(db),
       );
-      const leser = res.body!.getReader();
-      await leser.read();
+      // Erst abbrechen, wenn der Anbieter wirklich gerufen wurde – unabhängig von der Last des Testlaufs.
+      const frist = Date.now() + 10_000;
+      while (mock.mock.calls.length <= nr && Date.now() < frist)
+        await new Promise((weiter) => setImmediate(weiter));
+      expect(mock.mock.calls.length).toBe(nr + 1);
       besucher.abort();
-      let ende = "";
-      for (;;) {
-        const { done, value } = await leser.read();
-        if (done) break;
-        ende += new TextDecoder().decode(value);
-      }
-      expect(ende).toContain("besucher_abbruch");
+      return laufend;
+    }
+
+    it("JSON-Pfad: Abbruch während der Verarbeitung gibt die Reservierung nicht zurück", async () => {
+      const mock = arbeitenderAnbieter();
+      await achtMalDannGesperrt(mock, async (nr) => {
+        const res = await abbruchPerSignal(mock, nr);
+        expect(res.status).toBe(499);
+        expect(await res.json()).toMatchObject({ fehler: "besucher_abbruch" });
+      });
     });
-  });
 
-  it("zählt auch Netzfehler, Fehlerereignis im Strom, Modellabweichung und leere Antwort", async () => {
-    const faelle: [string, () => Promise<Response>][] = [
-      ["Netzfehler", () => Promise.reject(new TypeError("Verbindung abgerissen"))],
-      [
-        "Fehlerereignis",
-        async () =>
-          new Response('data: {"error":{"message":"x"}}\n\n', {
-            status: 200,
-            headers: { "content-type": "text/event-stream" },
-          }),
-      ],
-      [
-        "Modellabweichung",
-        async () =>
-          new Response(
-            JSON.stringify({ model: "fremd/modell", choices: [{ message: { content: "x" } }] }),
-            { status: 200 },
-          ),
-      ],
-      [
-        "leere Antwort",
-        async () =>
-          new Response(
-            JSON.stringify({
-              model: CHAT_MODELL_ROUTERNAME,
-              choices: [{ message: { content: " " } }],
+    it("JSON-Pfad: Abbruch, bevor der Anbieter geantwortet hat, zählt ebenfalls", async () => {
+      const mock = wartenderAnbieter();
+      await achtMalDannGesperrt(mock, async (nr) => {
+        expect((await abbruchPerSignal(mock, nr)).status).toBe(499);
+      });
+    });
+
+    it("Strom: Abbruch vor Beginn des Stroms zählt", async () => {
+      const mock = wartenderAnbieter();
+      await achtMalDannGesperrt(mock, async (nr) => {
+        const res = await abbruchPerSignal(mock, nr, { accept: "text/event-stream" });
+        expect(res.status).toBe(499);
+      });
+    });
+
+    it("Strom: Abbruch nach dem Start, bevor Text sichtbar war, zählt", async () => {
+      // Das erste Stück endet nicht an einer Satzgrenze: die Leitplanke hat noch nichts freigegeben.
+      const mock = arbeitenderAnbieter(stueck("Ein unfertiger Satz ohne"));
+      await achtMalDannGesperrt(mock, async (nr) => {
+        const res = await handleChat(anfrage({ message: `Frage ${nr}` }, STROM), bindings(db));
+        const leser = res.body!.getReader();
+        const erstes = new TextDecoder().decode((await leser.read()).value);
+        expect(erstes).toContain("event: start");
+        await leser.cancel();
+      });
+    });
+
+    it("Strom: Abbruch nach sichtbarem Text zählt", async () => {
+      const mock = arbeitenderAnbieter();
+      await achtMalDannGesperrt(mock, async (nr) => {
+        const res = await handleChat(anfrage({ message: `Frage ${nr}` }, STROM), bindings(db));
+        const leser = res.body!.getReader();
+        let text = "";
+        while (!text.includes("event: delta"))
+          text += new TextDecoder().decode((await leser.read()).value);
+        await leser.cancel();
+      });
+    });
+
+    it("Strom: Abbruch der Anfrage selbst (ohne cancel) vor sichtbarem Text zählt", async () => {
+      const mock = arbeitenderAnbieter(stueck("Ein unfertiger Satz ohne"));
+      await achtMalDannGesperrt(mock, async (nr) => {
+        const besucher = new AbortController();
+        const res = await handleChat(
+          anfrage({ message: `Frage ${nr}` }, { ...STROM, signal: besucher.signal }),
+          bindings(db),
+        );
+        const leser = res.body!.getReader();
+        await leser.read();
+        besucher.abort();
+        let ende = "";
+        for (;;) {
+          const { done, value } = await leser.read();
+          if (done) break;
+          ende += new TextDecoder().decode(value);
+        }
+        expect(ende).toContain("besucher_abbruch");
+      });
+    });
+
+    it("zählt auch Netzfehler, Fehlerereignis im Strom, Modellabweichung und leere Antwort", async () => {
+      const faelle: [string, () => Promise<Response>][] = [
+        ["Netzfehler", () => Promise.reject(new TypeError("Verbindung abgerissen"))],
+        [
+          "Fehlerereignis",
+          async () =>
+            new Response('data: {"error":{"message":"x"}}\n\n', {
+              status: 200,
+              headers: { "content-type": "text/event-stream" },
             }),
-            { status: 200 },
-          ),
-      ],
-    ];
-    let erwartet = 0;
-    for (const [name, antwort] of faelle) {
-      vi.stubGlobal("fetch", vi.fn(antwort));
-      const res = await handleChat(anfrage({ message: `Frage ${name}` }), bindings(db));
-      expect(res.status, name).toBe(502);
-      erwartet += 1;
-      expect(versuche(), name).toBe(erwartet);
-    }
-  });
+        ],
+        [
+          "Modellabweichung",
+          async () =>
+            new Response(
+              JSON.stringify({ model: "fremd/modell", choices: [{ message: { content: "x" } }] }),
+              { status: 200 },
+            ),
+        ],
+        [
+          "leere Antwort",
+          async () =>
+            new Response(
+              JSON.stringify({
+                model: CHAT_MODELL_ROUTERNAME,
+                choices: [{ message: { content: " " } }],
+              }),
+              { status: 200 },
+            ),
+        ],
+      ];
+      let erwartet = 0;
+      for (const [name, antwort] of faelle) {
+        vi.stubGlobal("fetch", vi.fn(antwort));
+        const res = await handleChat(anfrage({ message: `Frage ${name}` }), bindings(db));
+        expect(res.status, name).toBe(502);
+        erwartet += 1;
+        expect(versuche(), name).toBe(erwartet);
+      }
+    });
 
-  it("erstattet nur, wenn der Anbieter mit Fehlerstatus abgelehnt hat", async () => {
-    for (const status of [400, 401, 429, 500, 503]) {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn(async () => new Response("abgelehnt", { status })),
-      );
-      const res = await handleChat(anfrage({ message: `Frage ${status}` }), bindings(db));
-      expect(res.status).toBe(502);
-      expect(versuche(), String(status)).toBe(0);
-    }
-  });
-});
+    it("erstattet nur, wenn der Anbieter mit Fehlerstatus abgelehnt hat", async () => {
+      for (const status of [400, 401, 429, 500, 503]) {
+        vi.stubGlobal(
+          "fetch",
+          vi.fn(async () => new Response("abgelehnt", { status })),
+        );
+        const res = await handleChat(anfrage({ message: `Frage ${status}` }), bindings(db));
+        expect(res.status).toBe(502);
+        expect(versuche(), String(status)).toBe(0);
+      }
+    });
+  },
+);
 
 describe("handleChat: Anbieteraufruf", () => {
   it("sendet den festen Routernamen des Policy-Modells mit Reasoning high", async () => {
@@ -1183,6 +1196,93 @@ describe("handleChat: Antwort als Strom", () => {
     expect(JSON.stringify(liste)).not.toContain("geheime Überlegung");
     expect(liste.at(-1)).toMatchObject({ name: "ende", daten: { gespeichert: true } });
     expect(db.zeilen("rolle = 'assistant'")[0]?.inhalt).toBe("Gern. NeXify AI baut Websites.");
+  });
+});
+
+describe("handleChat: vorzeitig beendeter Anbieter-Strom", () => {
+  const stueck = (text: string, mehr: Record<string, unknown> = {}) =>
+    `data: ${JSON.stringify({ model: CHAT_MODELL_ROUTERNAME, choices: [{ delta: { content: text }, ...mehr }] })}\n\n`;
+  const anbieter = (rumpf: string) =>
+    vi.fn(
+      async (_url: string, _init: RequestInit) =>
+        new Response(rumpf, { status: 200, headers: { "content-type": "text/event-stream" } }),
+    );
+  const BRUCHSTUECK = stueck("Erster Satz. ") + stueck("Zweiter Satz bricht");
+
+  it("meldet ein Bruchstück nicht als fertige Antwort und speichert es nicht als Kontext", async () => {
+    vi.stubGlobal("fetch", anbieter(BRUCHSTUECK));
+    const liste = await ereignisse(
+      await handleChat(
+        anfrage({ message: "Erste Frage", session_id: SITZUNG }, STROM),
+        bindings(db),
+      ),
+    );
+    expect(liste.some((e) => e.name === "ende")).toBe(false);
+    expect(liste.at(-1)).toMatchObject({
+      name: "fehler",
+      daten: { fehler: "upstream_unvollstaendig" },
+    });
+    expect(db.zeilen("rolle = 'assistant'")).toHaveLength(0);
+    // Der Aufruf zählt weiter gegen die Limits.
+    const fragen = db.zeilen("rolle = 'user'");
+    expect(fragen).toHaveLength(1);
+    expect(fragen[0]?.versuche).toBe(1);
+
+    // Die Folgefrage bekommt weder das Bruchstück noch die unbeantwortete Frage als Verlauf.
+    const fetchMock = anbieterJson("Antwort");
+    vi.stubGlobal("fetch", fetchMock);
+    await handleChat(anfrage({ message: "Zweite Frage", session_id: SITZUNG }), bindings(db));
+    const { body } = gesendet(fetchMock);
+    expect(body.messages).toHaveLength(2);
+    expect(JSON.stringify(body)).not.toContain("Erster Satz");
+  });
+
+  it("antwortet ohne Strom mit 502 statt mit dem Bruchstück", async () => {
+    vi.stubGlobal("fetch", anbieter(BRUCHSTUECK));
+    const res = await handleChat(anfrage({ message: "Hallo" }), bindings(db));
+    expect(res.status).toBe(502);
+    const rumpf = await res.text();
+    expect(rumpf).toContain("upstream_unvollstaendig");
+    expect(rumpf).not.toContain("Erster Satz");
+    expect(db.zeilen("rolle = 'assistant'")).toHaveLength(0);
+    expect(db.zeilen("rolle = 'user'")[0]?.versuche).toBe(1);
+  });
+
+  it("gilt als vollständig mit data: [DONE] oder mit finish_reason", async () => {
+    for (const ende of [
+      "data: [DONE]\n\n",
+      stueck("", { finish_reason: "stop" }),
+      stueck(" Ende.", { finish_reason: "stop" }),
+    ]) {
+      db = neueDb();
+      vi.stubGlobal("fetch", anbieter(stueck("Erster Satz. ") + stueck("Zweiter Satz.") + ende));
+      const liste = await ereignisse(
+        await handleChat(anfrage({ message: "Hallo" }, STROM), bindings(db)),
+      );
+      expect(liste.at(-1)).toMatchObject({ name: "ende", daten: { gespeichert: true } });
+      expect(db.zeilen("rolle = 'assistant'")[0]?.inhalt).toMatch(/^Erster Satz\. Zweiter Satz\./);
+    }
+  });
+
+  it("meldet gespeichert: false, wenn die Ablage der Antwort scheitert", async () => {
+    vi.stubGlobal("fetch", anbieterStrom(["Gern. ", "Das geht.\n"]));
+    const kaputt = {
+      prepare(sql: string) {
+        const stmt = db.DB.prepare(sql);
+        if (!/INSERT OR REPLACE/.test(sql)) return stmt;
+        return {
+          ...stmt,
+          bind: () => ({ run: async () => Promise.reject(new Error("D1 nicht erreichbar")) }),
+        };
+      },
+    };
+    const liste = await ereignisse(
+      await handleChat(
+        anfrage({ message: "Hallo" }, STROM),
+        bindings(db, { DB: kaputt as unknown as NonNullable<ChatBindings["DB"]> }),
+      ),
+    );
+    expect(liste.at(-1)).toMatchObject({ name: "ende", daten: { gespeichert: false } });
   });
 });
 

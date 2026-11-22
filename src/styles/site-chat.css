@@ -552,6 +552,16 @@ html.nxc-gesperrt body {
   }
 }
 
+/* Randnotiz unter einer Antwort, z. B. wenn sie nicht gespeichert werden konnte. */
+#atelier #nexify-chat .nxc-randnotiz {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--nxc-linie);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--nxc-leise);
+}
+
 #atelier #nexify-chat .nxc-n-stoerung {
   align-self: stretch;
   max-width: 100%;

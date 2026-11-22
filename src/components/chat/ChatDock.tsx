@@ -124,6 +124,12 @@ function Eintrag({
           <ChatText text={eintrag.text} />
         </div>
       )}
+      {eintrag.ohneAblage && (
+        <p className="nxc-randnotiz">
+          Diese Antwort konnte nicht gespeichert werden. Bei Folgefragen liegt sie dem Assistenten
+          nicht vor – nennen Sie das Wichtige bitte noch einmal.
+        </p>
+      )}
       {(ohneAntwort || unvollstaendig) && (
         <div className="nxc-stoerung">
           <p>

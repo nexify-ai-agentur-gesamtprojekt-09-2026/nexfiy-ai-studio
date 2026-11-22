@@ -20,7 +20,8 @@
  *            405 methode_nicht_erlaubt                        413 zu_gross
  *            415 falscher_inhaltstyp
  *            429 zu_viele_anfragen | sitzungslimit_erreicht | tageslimit_erreicht  (+ retry-after)
- *            502 upstream_fehler      504 upstream_zeit      499 besucher_abbruch
+ *            502 upstream_fehler | upstream_unvollstaendig (Anbieter-Strom riss vor seinem Ende ab)
+ *            504 upstream_zeit        499 besucher_abbruch
  *            Ein gestarteter Anbieteraufruf zählt immer gegen die Limits; erstattet wird nur,
  *            wenn der Anbieter mit Fehlerstatus abgelehnt hat, bevor er eine Antwort begann.
  *            503 chat_abgeschaltet | chat_not_configured (fail-closed)
@@ -412,7 +413,8 @@ export async function raeumeChatAuf(db: D1, tage: number, jetzt: Date = new Date
  */
 class AnbieterFehler extends Error {
   constructor(
-    readonly art: "upstream_fehler" | "upstream_zeit" | "besucher_abbruch",
+    readonly art:
+      "upstream_fehler" | "upstream_zeit" | "upstream_unvollstaendig" | "besucher_abbruch",
     readonly erstattbar = false,
   ) {
     super(art);
@@ -436,7 +438,11 @@ function pruefeModell(gemeldet: unknown): void {
 type AnbieterTeil = {
   error?: unknown;
   model?: unknown;
-  choices?: Array<{ delta?: { content?: unknown }; message?: { content?: unknown } }>;
+  choices?: Array<{
+    delta?: { content?: unknown };
+    message?: { content?: unknown };
+    finish_reason?: unknown;
+  }>;
 };
 
 /**
@@ -456,10 +462,13 @@ async function leseAnbieter(
   let puffer = "";
   let form: "json" | "sse" | null = null;
   let modellGeprueft = false;
+  /** Der Anbieter hat sein Ende gemeldet: `data: [DONE]` oder ein Stück mit `finish_reason`. */
+  let abgeschlossen = false;
   const zeile = (roh: string) => {
     const text = roh.trim();
     if (!text.startsWith("data:")) return;
     const nutzlast = text.slice(5).trim();
+    if (nutzlast === "[DONE]") abgeschlossen = true;
     if (!nutzlast || nutzlast === "[DONE]") return;
     let teil: AnbieterTeil;
     try {
@@ -472,6 +481,7 @@ async function leseAnbieter(
       pruefeModell(teil.model);
       modellGeprueft = true;
     }
+    if (teil.choices?.[0]?.finish_reason) abgeschlossen = true;
     const stueck = teil.choices?.[0]?.delta?.content ?? teil.choices?.[0]?.message?.content;
     if (typeof stueck !== "string" || !stueck) return;
     if (!modellGeprueft) pruefeModell(undefined);
@@ -496,6 +506,9 @@ async function leseAnbieter(
   puffer += dekoder.decode();
   if (form === "sse") {
     zeile(puffer);
+    // Reißt der Strom ab, bevor der Anbieter sein Ende gemeldet hat, ist die Antwort ein Bruchstück:
+    // Sie wird nicht als fertig gemeldet und nicht als Kontext für Folgefragen gespeichert.
+    if (!abgeschlossen) throw new AnbieterFehler("upstream_unvollstaendig");
     return;
   }
   const marker = puffer.indexOf("\ndata:");

@@ -19,6 +19,7 @@ const MAX_EINTRAEGE = 60;
 export type ChatFehler =
   | "offline"
   | "netz"
+  | "unvollstaendig"
   | "zeit"
   | "limit_kurz"
   | "limit_tag"
@@ -32,6 +33,7 @@ export const CHAT_FEHLERTEXT: Record<ChatFehler, string> = {
   offline:
     "Sie sind offline. Sobald die Verbindung wieder steht, können Sie die Frage erneut senden.",
   netz: "Die Verbindung wurde unterbrochen, bevor die Antwort vollständig war.",
+  unvollstaendig: "Der KI-Dienst hat die Antwort vorzeitig beendet.",
   zeit: "Die Antwort hat zu lange gedauert und wurde abgebrochen.",
   limit_kurz: "Das waren viele Fragen in kurzer Zeit. Bitte versuchen Sie es etwas später erneut.",
   limit_tag: "Das Tageskontingent des KI-Assistenten ist für heute erreicht.",
@@ -46,6 +48,7 @@ export const CHAT_FEHLERTEXT: Record<ChatFehler, string> = {
 export const CHAT_WIEDERHOLBAR: ReadonlySet<ChatFehler> = new Set([
   "offline",
   "netz",
+  "unvollstaendig",
   "zeit",
   "limit_kurz",
   "nicht_verfuegbar",
@@ -67,6 +70,7 @@ function fehlerAusAntwort(status: number, fehler: unknown): ChatFehler {
   }
   if (status === 503) return "nicht_verfuegbar";
   if (status === 504 || fehler === "upstream_zeit") return "zeit";
+  if (fehler === "upstream_unvollstaendig") return "unvollstaendig";
   if (status === 502 || fehler === "upstream_fehler") return "anbieter";
   if (status === 413 || fehler === "zu_lang") return "zu_lang";
   return "unbekannt";
@@ -87,7 +91,12 @@ export interface SendeOptionen {
  * Sendet eine Frage und liefert die Antwort stückweise. Wirft `ChatAbbruch` mit der Ursache;
  * `signal` bricht ab (Besucher drückt Stopp).
  */
-export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void> {
+export interface SendeErgebnis {
+  /** false: Der Server konnte die Antwort nicht ablegen; sie fehlt ihm bei Folgefragen als Kontext. */
+  gespeichert: boolean;
+}
+
+export async function sendeChatNachricht(optionen: SendeOptionen): Promise<SendeErgebnis> {
   if (typeof navigator !== "undefined" && navigator.onLine === false)
     throw new ChatAbbruch("offline");
 
@@ -122,7 +131,13 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
 
     const typ = antwort.headers.get("content-type") ?? "";
     if (!antwort.ok || !typ.includes("text/event-stream")) {
-      let daten: { ok?: unknown; fehler?: unknown; antwort?: unknown; session_id?: unknown } = {};
+      let daten: {
+        ok?: unknown;
+        fehler?: unknown;
+        antwort?: unknown;
+        session_id?: unknown;
+        speicherung?: unknown;
+      } = {};
       try {
         daten = (await antwort.json()) as typeof daten;
       } catch {
@@ -131,7 +146,7 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
       if (typeof daten.session_id === "string") optionen.beiSitzung(daten.session_id);
       if (antwort.ok && daten.ok === true && typeof daten.antwort === "string" && daten.antwort) {
         optionen.beiText(daten.antwort);
-        return;
+        return { gespeichert: daten.speicherung !== "fehlgeschlagen" };
       }
       throw new ChatAbbruch(fehlerAusAntwort(antwort.ok ? 500 : antwort.status, daten.fehler));
     }
@@ -141,11 +156,12 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
     const dekoder = new TextDecoder();
     let puffer = "";
     let beendet = false;
+    let gespeichert = true;
     const verarbeite = (block: string) => {
       const name = /^event: ?(.*)$/m.exec(block)?.[1]?.trim();
       const roh = /^data: ?(.*)$/m.exec(block)?.[1];
       if (!name || roh === undefined) return;
-      let daten: { t?: unknown; session_id?: unknown; fehler?: unknown };
+      let daten: { t?: unknown; session_id?: unknown; fehler?: unknown; gespeichert?: unknown };
       try {
         daten = JSON.parse(roh) as typeof daten;
       } catch {
@@ -155,8 +171,10 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
         optionen.beiSitzung(daten.session_id);
       else if (name === "delta" && typeof daten.t === "string") optionen.beiText(daten.t);
       else if (name === "ersetzen" && typeof daten.t === "string") optionen.beiErsatz(daten.t);
-      else if (name === "ende") beendet = true;
-      else if (name === "fehler") throw new ChatAbbruch(fehlerAusAntwort(502, daten.fehler));
+      else if (name === "ende") {
+        beendet = true;
+        gespeichert = daten.gespeichert !== false;
+      } else if (name === "fehler") throw new ChatAbbruch(fehlerAusAntwort(502, daten.fehler));
     };
     // Abbruch beendet auch das Lesen, selbst wenn die Laufzeit den Strom nicht selbst abreißt.
     const beendeLesen = () => void leser.cancel().catch(() => {});
@@ -179,6 +197,7 @@ export async function sendeChatNachricht(optionen: SendeOptionen): Promise<void>
     if (puffer.trim()) verarbeite(puffer);
     // Strom ohne Abschluss: Die Antwort ist nicht vollständig und wird nicht als fertig gezeigt.
     if (!beendet) throw new ChatAbbruch("netz");
+    return { gespeichert };
   } finally {
     clearTimeout(uhr);
     optionen.signal.removeEventListener("abort", weiterreichen);
@@ -204,6 +223,8 @@ export interface ChatEintrag {
   /** `laeuft`: Antwort trifft ein · `abgebrochen`: unvollständig · `fehler`: keine Antwort. */
   status: "fertig" | "laeuft" | "abgebrochen" | "fehler";
   fehler?: ChatFehler;
+  /** true: Die Antwort ist sichtbar, liegt dem Assistenten bei Folgefragen aber nicht vor. */
+  ohneAblage?: boolean;
 }
 
 export interface ChatZustand {
@@ -325,7 +346,7 @@ async function frage(nachricht: string, frageId: string): Promise<void> {
     ],
   });
   try {
-    await sendeChatNachricht({
+    const ergebnis = await sendeChatNachricht({
       nachricht,
       frageId,
       sessionId: zustand.sessionId,
@@ -335,7 +356,12 @@ async function frage(nachricht: string, frageId: string): Promise<void> {
         aendereEintrag(antwortId, (e) => ({ ...e, text: e.text + stueck }), false),
       beiErsatz: (text) => aendereEintrag(antwortId, (e) => ({ ...e, text })),
     });
-    aendereEintrag(antwortId, (e) => ({ ...e, text: e.text.trim(), status: "fertig" }));
+    aendereEintrag(antwortId, (e) => ({
+      ...e,
+      text: e.text.trim(),
+      status: "fertig",
+      ...(ergebnis.gespeichert ? {} : { ohneAblage: true }),
+    }));
   } catch (ursache) {
     const art = ursache instanceof ChatAbbruch ? ursache.art : "unbekannt";
     aendereEintrag(antwortId, (e) => {

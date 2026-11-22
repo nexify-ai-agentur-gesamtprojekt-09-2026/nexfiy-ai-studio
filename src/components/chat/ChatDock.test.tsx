@@ -260,6 +260,49 @@ describe("ChatDock", () => {
     expect(dialog).toHaveTextContent("Die Antwort ist unvollständig.");
   });
 
+  it("sagt dem Besucher, wenn die Antwort nicht gespeichert werden konnte", async () => {
+    const mitAblage = (gespeichert: boolean) => () =>
+      strom([
+        ["start", { session_id: "sitzung-0123456789abcdef" }],
+        ["delta", { t: gespeichert ? "Zweite Antwort." : "Erste Antwort." }],
+        ["ende", { hinweis: "KI", gespeichert }],
+      ]);
+    stelleFetch([mitAblage(false), mitAblage(true)]);
+    const dialog = await oeffne();
+    await frage("Erste Frage");
+    await waitFor(() =>
+      expect(dialog.querySelector('.nxc-n-ki[data-status="fertig"]')).not.toBeNull(),
+    );
+    const karten = () => [...dialog.querySelectorAll<HTMLElement>(".nxc-n-ki")];
+    expect(karten()[0]).toHaveTextContent("Erste Antwort.");
+    expect(karten()[0]).toHaveTextContent(/konnte nicht gespeichert werden/);
+    expect(karten()[0]).toHaveTextContent(/liegt sie dem Assistenten nicht vor/);
+    await frage("Zweite Frage");
+    await waitFor(() => expect(karten()).toHaveLength(2));
+    await waitFor(() => expect(karten()[1]).toHaveAttribute("data-status", "fertig"));
+    // Eine gespeicherte Antwort trägt den Hinweis nicht.
+    expect(karten()[1]).not.toHaveTextContent(/gespeichert/);
+  });
+
+  it("zeigt eine vom KI-Dienst vorzeitig beendete Antwort als unvollständig", async () => {
+    stelleFetch([
+      () =>
+        strom([
+          ["start", { session_id: "sitzung-0123456789abcdef" }],
+          ["delta", { t: "Erster Satz. " }],
+          ["fehler", { fehler: "upstream_unvollstaendig" }],
+        ]),
+    ]);
+    const dialog = await oeffne();
+    await frage("Hallo zusammen");
+    await waitFor(() =>
+      expect(dialog.querySelector(".nxc-n-ki")).toHaveAttribute("data-status", "abgebrochen"),
+    );
+    expect(dialog).toHaveTextContent("Die Antwort ist unvollständig.");
+    expect(dialog).toHaveTextContent("Der KI-Dienst hat die Antwort vorzeitig beendet.");
+    expect(screen.getByRole("button", { name: "Erneut senden" })).toBeInTheDocument();
+  });
+
   it("ersetzt die Ausgabe, wenn der Server es verlangt", async () => {
     stelleFetch([
       () =>
