@@ -54,7 +54,7 @@ export const SEITEN: Seite[] = [
     titel: "Leistungen: Website, System, Kampagne",
     kurz: "Leistungen",
     beschreibung:
-      "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal.",
+      "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang, überwiegend online.",
     typ: "info",
     index: true,
   },
