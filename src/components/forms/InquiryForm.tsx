@@ -192,7 +192,7 @@ export function InquiryForm({
             <strong className="inquiry-nummer">{form.nummer}</strong>. Wir melden uns persönlich.
           </p>
           <div className="tk-actions">
-            <button type="button" className="hc-text-link" onClick={form.editAgain}>
+            <button type="button" className="hc-text-link" onClick={form.startNew}>
               Weitere Anfrage stellen
             </button>
           </div>

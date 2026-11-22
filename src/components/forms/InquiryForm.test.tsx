@@ -81,6 +81,21 @@ describe("Anfrageformular: Fehlerzustand ist keine Sackgasse", () => {
     await screen.findByRole("heading", { name: "Anfrage eingegangen." });
     expect(screen.getByText("NX-20261122-ABCDEF")).toBeInTheDocument();
   });
+
+  it("„Weitere Anfrage stellen“ beginnt mit einem leeren Formular", async () => {
+    vi.stubGlobal("fetch", async () => Response.json({ ok: true, nummer: "NX-20261122-ABCDEF" }));
+    const { container } = formular();
+    ausfuellen();
+    fireEvent.submit(container.querySelector("form")!);
+    fireEvent.click(await screen.findByRole("button", { name: "Weitere Anfrage stellen" }));
+    await waitFor(() => expect(screen.queryByText("NX-20261122-ABCDEF")).toBeNull());
+    expect(screen.getByLabelText(/^Name/)).toHaveValue("");
+    expect(screen.getByLabelText(/^E-Mail/)).toHaveValue("");
+    expect(screen.getByLabelText(/^Ihr Anliegen/)).toHaveValue("");
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
+    expect(screen.getByLabelText(/^Name/)).toHaveFocus();
+    expect(container.querySelector('[aria-invalid="true"]')).toBeNull();
+  });
 });
 
 describe("Anfrageformular: ohne JavaScript und gegen automatische Einträge", () => {

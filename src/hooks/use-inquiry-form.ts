@@ -104,6 +104,17 @@ export function useInquiryForm(kind: InquiryKind) {
     setFehler(null);
   }, []);
 
+  /** Nach einer eingegangenen Anfrage: leeres Formular für die nächste, ohne alte Meldungen. */
+  const startNew = useCallback(() => {
+    formRef.current?.reset();
+    focusTarget.current = "name";
+    setErrors({});
+    setAttempts(0);
+    setMail(null);
+    setNummer(null);
+    setFehler(null);
+  }, []);
+
   const errorId = useCallback((field: InquiryField) => `${baseId}-${field}-error`, [baseId]);
   const inputId = useCallback((field: InquiryField) => `${baseId}-${field}`, [baseId]);
 
@@ -135,6 +146,7 @@ export function useInquiryForm(kind: InquiryKind) {
     onSubmit,
     onChange,
     editAgain,
+    startNew,
     fieldProps,
     errorId,
     inputId,
