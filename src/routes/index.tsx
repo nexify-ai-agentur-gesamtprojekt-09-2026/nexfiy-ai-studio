@@ -265,7 +265,7 @@ const HOME_FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "An wen richtet sich das Angebot?",
-    a: "An Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz. Das Angebot richtet sich an Unternehmer im Sinne des §\u00a014\u00a0BGB (B2B).",
+    a: "An Unternehmen: Das Angebot richtet sich an Unternehmer im Sinne des §\u00a014\u00a0BGB (B2B). Die Zusammenarbeit läuft überwiegend online.",
   },
   {
     q: "Wie nehme ich Kontakt auf?",
@@ -370,8 +370,8 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: (() => void)
             Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht.
           </p>
           <p className={"identity-body"}>
-            Pascal begleitet Ihr Projekt persönlich, vom ersten Gespräch bis zur Übergabe. Vor dem
-            Start wissen Sie, was enthalten ist.
+            Die Zusammenarbeit läuft überwiegend online, vom ersten Gespräch bis zur Übergabe. Vor
+            dem Start wissen Sie, was enthalten ist.
           </p>
           <div className={"identity-links"}>
             <VorhabenKnopf
@@ -478,7 +478,7 @@ function ImportedNavWoHaktEsGerade() {
             </svg>
           </h3>
           <p>
-            Wir sehen uns einen wiederkehrenden Vorgang vor Ort an. Dann prüfen wir, wo Daten,
+            Wir sehen uns mit Ihnen einen wiederkehrenden Vorgang an. Dann prüfen wir, wo Daten,
             Freigaben und KI Ihrem Team Arbeit abnehmen.
           </p>
           <small className={"hc-scene-value"}>

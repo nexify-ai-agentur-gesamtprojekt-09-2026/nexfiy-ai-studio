@@ -141,19 +141,14 @@ describe("Strukturierte Daten", () => {
     expect(UNTERNEHMEN.land).toBe("NL");
   });
 
-  it("Zielgebiet: nur Länder, die die Startseite sichtbar nennt", () => {
-    expect(lies("src/routes/index.tsx")).toContain(
-      "Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz",
-    );
-    expect([...UNTERNEHMEN.zielLaender]).toEqual(["DE", "NL", "AT", "CH"]);
-    const [organisation] = graph(siteJsonLd()) as [Knoten];
-    // Ländernamen statt Kürzel; das Kürzel steht zusätzlich als Kennung dabei.
-    expect(organisation["areaServed"]).toEqual([
-      { "@type": "Country", name: "Deutschland", identifier: "DE" },
-      { "@type": "Country", name: "Niederlande", identifier: "NL" },
-      { "@type": "Country", name: "Österreich", identifier: "AT" },
-      { "@type": "Country", name: "Schweiz", identifier: "CH" },
-    ]);
+  it("Zielgebiet: keine Länder- oder Vor-Ort-Zusagen, auch nicht in strukturierten Daten", () => {
+    const start = lies("src/routes/index.tsx");
+    expect(start).not.toContain("Deutschland, den Niederlanden, Österreich und der Schweiz");
+    expect(start).not.toMatch(/vor Ort/i);
+    expect(start).toContain("Die Zusammenarbeit läuft überwiegend online");
+    expect(JSON.stringify(siteJsonLd())).not.toContain("areaServed");
+    for (const seite of SEITEN)
+      expect(JSON.stringify(pageJsonLd(seite.pfad)), seite.pfad).not.toContain("areaServed");
   });
 
   it("nichts Unbelegtes: keine Bewertungen, Preise, Auszeichnungen oder Koordinaten", () => {
@@ -203,7 +198,7 @@ describe("Strukturierte Daten", () => {
     const leistungen = knoten.filter((k) => k["@type"] === "Service");
     expect(leistungen).toHaveLength(seite.pfad.startsWith("/leistungen/") ? 1 : 0);
     for (const leistung of leistungen) {
-      for (const feld of ["name", "serviceType", "description", "url", "provider", "areaServed"])
+      for (const feld of ["name", "serviceType", "description", "url", "provider"])
         expect(leistung[feld], feld).toBeTruthy();
       expect(leistung["provider"]).toEqual({ "@id": `${SITE_ORIGIN}/#organisation` });
     }

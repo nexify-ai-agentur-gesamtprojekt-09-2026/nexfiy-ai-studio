@@ -44,7 +44,7 @@ export const SEITEN: Seite[] = [
     titel: "NeXify AI – Websites, Apps, Shops und KI für Ihr Unternehmen",
     kurz: "Startseite",
     beschreibung:
-      "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
+      "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Umfang und Kosten stehen vor dem Start fest.",
     typ: "start",
     index: true,
   },
