@@ -12,6 +12,8 @@ export const TEILEKLAR_REDIRECTS: Record<string, string> = {
   "/teileklar/gutscheine": "https://teileklar.shop/shop",
   "/teileklar/bestellungen": "https://teileklar.shop/kundenportal",
   "/teileklar/termine": "https://teileklar.shop/werkstatt-partner",
+  "/teileklar/partner-werden": "https://teileklar.shop/partner-werden",
+  "/teileklar/batterie-berater": "https://teileklar.shop/batterie-berater",
 };
 
 /** Ziel für einen TEILEKLAR-Pfad; alles Unbekannte auf die Startseite des Shops. */

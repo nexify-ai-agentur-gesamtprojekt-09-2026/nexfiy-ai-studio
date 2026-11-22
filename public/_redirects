@@ -5,6 +5,8 @@
 # Seiten abbilden (vorher 301 auf 404: /werkstatt /kategorien /suche /rechtliches
 # /fahrzeug-und-passung). Erste Regel gewinnt, daher VOR dem Splat.
 /teileklar/werkstatt            https://teileklar.shop/werkstatt-partner  301
+/teileklar/partner-werden       https://teileklar.shop/partner-werden     301
+/teileklar/batterie-berater     https://teileklar.shop/batterie-berater   301
 /teileklar/fahrzeug-und-passung https://teileklar.shop/fitment-checker    301
 /teileklar/kategorien           https://teileklar.shop/shop               301
 /teileklar/suche                https://teileklar.shop/shop               301
