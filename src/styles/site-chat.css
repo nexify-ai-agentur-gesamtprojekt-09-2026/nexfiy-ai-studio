@@ -1,0 +1,785 @@
+/* KI-Chat der NeXify-Seiten (src/components/chat/ChatDock.tsx).
+   Eigene Klassen (nxc-…) und eigene Kennungen, damit keine Regel der importierten Seiten-Stylesheets
+   greift. Ab 1200 px steht das Panel als Spalte neben der Seite, darunter ist es ein Dialog. */
+
+#atelier.workspace-shell {
+  --nxc-breite: clamp(360px, 28vw, 440px);
+  --nxc-akzent: #c0ee38;
+  --nxc-auf-akzent: #111312;
+  --nxc-grund: #1b1e1d;
+  --nxc-flaeche: #242826;
+  --nxc-erhoben: #2d3230;
+  --nxc-linie: rgba(255, 255, 255, 0.1);
+  --nxc-linie-stark: rgba(255, 255, 255, 0.2);
+  --nxc-text: #f3f0ea;
+  --nxc-leise: #bcc1bd;
+  --nxc-warnung: #f2c063;
+}
+
+/* ---------- Seitenraster: die Spalte gibt es nur, wenn das Panel angedockt offen ist ---------- */
+
+#atelier.workspace-shell[data-nxc] {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 1200px) {
+  #atelier.workspace-shell[data-nxc="offen"],
+  html:not([data-nxc-vorliebe="zu"]) #atelier.workspace-shell[data-nxc="auto"] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--nxc-breite);
+    column-gap: 0;
+  }
+}
+
+/* Vor der Hydration („auto“) entscheidet nur die Fensterbreite. */
+#atelier[data-nxc="auto"] > #nexify-chat {
+  display: none;
+}
+@media (min-width: 1200px) {
+  html:not([data-nxc-vorliebe="zu"]) #atelier[data-nxc="auto"] > #nexify-chat {
+    display: flex;
+  }
+  html:not([data-nxc-vorliebe="zu"]) #atelier[data-nxc="auto"] > #nexify-chat-ausloeser {
+    display: none;
+  }
+}
+
+html.nxc-gesperrt,
+html.nxc-gesperrt body {
+  overflow: hidden;
+}
+
+/* ---------- Auslöser ---------- */
+
+#atelier #nexify-chat-ausloeser {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  padding: 6px 20px 6px 6px;
+  border: 1px solid var(--nxc-linie-stark);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(52, 58, 55, 0.94), rgba(30, 34, 32, 0.96));
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  color: var(--nxc-text);
+  font: 600 14px/1.2 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+#atelier #nexify-chat-ausloeser:hover {
+  border-color: var(--nxc-akzent);
+  transform: translateY(-1px);
+}
+#atelier #nexify-chat-ausloeser:focus-visible {
+  outline: 2px solid var(--nxc-akzent);
+  outline-offset: 3px;
+}
+#atelier #nexify-chat-ausloeser .nxc-ausloeser-bild {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(192, 238, 56, 0.28),
+    rgba(192, 238, 56, 0.06)
+  );
+  box-shadow: inset 0 0 0 1px rgba(192, 238, 56, 0.45);
+}
+#atelier #nexify-chat-ausloeser img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+#atelier #nexify-chat-ausloeser .nxc-ausloeser-text {
+  display: grid;
+  gap: 2px;
+}
+#atelier #nexify-chat-ausloeser strong {
+  font-weight: 650;
+  color: var(--nxc-text);
+}
+#atelier #nexify-chat-ausloeser small {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--nxc-akzent);
+}
+
+/* ---------- Panel: Grundaufbau ---------- */
+
+#atelier #nexify-chat {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: var(--nxc-text);
+  font: 400 15px/1.55 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  background:
+    radial-gradient(120% 60% at 100% 0%, rgba(192, 238, 56, 0.07), transparent 60%),
+    linear-gradient(180deg, #232725, var(--nxc-grund) 38%);
+  outline: none;
+}
+#atelier #nexify-chat[hidden] {
+  display: none;
+}
+#atelier #nexify-chat *,
+#atelier #nexify-chat *::before,
+#atelier #nexify-chat *::after {
+  box-sizing: border-box;
+}
+/* Keine automatische Silbentrennung: Antworten sollen nicht mitten im Wort brechen. */
+#atelier #nexify-chat,
+#atelier #nexify-chat * {
+  -webkit-hyphens: manual !important;
+  hyphens: manual !important;
+}
+#atelier #nexify-chat :is(h2, h3, p, ul, ol, li) {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+#atelier #nexify-chat :is(ul, ol) {
+  list-style: none;
+}
+#atelier #nexify-chat a {
+  color: var(--nxc-akzent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  min-height: 0;
+  display: inline;
+}
+#atelier #nexify-chat a:hover {
+  color: #d8f77d;
+}
+#atelier #nexify-chat :is(a, button, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--nxc-akzent);
+  outline-offset: 2px;
+}
+#atelier #nexify-chat .nxc-sr,
+#atelier #nexify-chat-ausloeser .nxc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+#atelier #nexify-chat .nxc-marke {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  min-width: 24px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 5px;
+  background: var(--nxc-akzent);
+  color: var(--nxc-auf-akzent);
+  font: 700 11px/1 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0.04em;
+}
+
+/* Angedockt: ruhige Spalte, die mit der Seite steht und nichts verdeckt. */
+@media (min-width: 1200px) {
+  #atelier #nexify-chat {
+    position: sticky;
+    top: 0;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    height: 100vh;
+    height: 100dvh;
+    border-left: 1px solid var(--nxc-linie);
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.03);
+  }
+  #atelier #nexify-chat .nxc-rund .nxc-nur-dialog {
+    display: none;
+  }
+}
+
+/* Dialog: Tablet als Bogen von rechts, Telefon bildschirmfüllend. */
+@media (max-width: 1199.98px) {
+  #atelier #nexify-chat {
+    position: fixed;
+    z-index: 61;
+    top: var(--nxc-sicht-oben, 0px);
+    right: 0;
+    width: min(100vw, 440px);
+    height: var(--nxc-sicht-hoehe, 100dvh);
+    max-height: var(--nxc-sicht-hoehe, 100dvh);
+    border-left: 1px solid var(--nxc-linie-stark);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+    animation: nxc-herein 0.2s ease-out;
+  }
+  #atelier #nexify-chat .nxc-rund .nxc-nur-spalte {
+    display: none;
+  }
+  #atelier .nxc-schleier {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(9, 11, 10, 0.62);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    animation: nxc-ein 0.2s ease-out;
+  }
+}
+@media (max-width: 767.98px) {
+  #atelier #nexify-chat {
+    left: 0;
+    width: 100%;
+    border-left: 0;
+    box-shadow: none;
+  }
+}
+@keyframes nxc-herein {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+@keyframes nxc-ein {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ---------- Kopf ---------- */
+
+#atelier #nexify-chat .nxc-kopf {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 14px 18px;
+  border-bottom: 1px solid var(--nxc-linie);
+  background: rgba(255, 255, 255, 0.02);
+}
+#atelier #nexify-chat .nxc-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    rgba(192, 238, 56, 0.26),
+    rgba(192, 238, 56, 0.05)
+  );
+  box-shadow: inset 0 0 0 1px rgba(192, 238, 56, 0.4);
+}
+#atelier #nexify-chat .nxc-avatar img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+#atelier #nexify-chat .nxc-kopf-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+#atelier #nexify-chat .nxc-kopf h2 {
+  font: 650 17px/1.25 var(--font-display, "Plus Jakarta Sans", Inter, sans-serif);
+  color: var(--nxc-text);
+}
+#atelier #nexify-chat .nxc-kopf-text p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--nxc-leise);
+}
+#atelier #nexify-chat .nxc-rund {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--nxc-linie);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--nxc-text);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+#atelier #nexify-chat .nxc-rund:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--nxc-linie-stark);
+}
+#atelier #nexify-chat .nxc-rund span {
+  display: grid;
+}
+
+/* ---------- Verlauf ---------- */
+
+#atelier #nexify-chat .nxc-verlauf {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px 18px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--nxc-linie-stark) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+#atelier #nexify-chat .nxc-verlauf:focus-visible {
+  outline-offset: -3px;
+}
+#atelier #nexify-chat .nxc-hinweis {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border: 1px solid var(--nxc-linie);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--nxc-leise);
+}
+#atelier #nexify-chat .nxc-hinweis .nxc-marke {
+  margin-top: 1px;
+}
+#atelier #nexify-chat .nxc-hinweis strong {
+  color: var(--nxc-text);
+  font-weight: 600;
+}
+
+#atelier #nexify-chat .nxc-start {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+#atelier #nexify-chat .nxc-start h3 {
+  font: 650 22px/1.2 var(--font-display, "Plus Jakarta Sans", Inter, sans-serif);
+  color: var(--nxc-text);
+  text-wrap: balance;
+}
+#atelier #nexify-chat .nxc-start > p {
+  color: var(--nxc-leise);
+  font-size: 14px;
+}
+#atelier #nexify-chat .nxc-einstiege {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+#atelier #nexify-chat .nxc-einstiege button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 10px 14px 10px 16px;
+  border: 1px solid var(--nxc-linie);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: var(--nxc-text);
+  font: 500 14px/1.35 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+  text-align: left;
+  text-transform: none;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+#atelier #nexify-chat .nxc-einstiege button svg {
+  flex: none;
+  color: var(--nxc-akzent);
+}
+#atelier #nexify-chat .nxc-einstiege button:hover:not(:disabled) {
+  border-color: rgba(192, 238, 56, 0.6);
+  background: rgba(192, 238, 56, 0.08);
+  transform: translateX(2px);
+}
+#atelier #nexify-chat .nxc-einstiege button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#atelier #nexify-chat .nxc-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+#atelier #nexify-chat .nxc-n {
+  max-width: 92%;
+}
+#atelier #nexify-chat .nxc-n-user {
+  align-self: flex-end;
+  max-width: 86%;
+  padding: 10px 14px;
+  border: 1px solid rgba(192, 238, 56, 0.35);
+  border-radius: 16px 16px 4px 16px;
+  background: rgba(192, 238, 56, 0.11);
+}
+#atelier #nexify-chat .nxc-n-user p {
+  white-space: pre-wrap;
+}
+#atelier #nexify-chat .nxc-n-ki {
+  align-self: flex-start;
+  padding: 12px 14px 13px;
+  border: 1px solid var(--nxc-linie);
+  border-radius: 4px 16px 16px 16px;
+  background: var(--nxc-flaeche);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+#atelier #nexify-chat .nxc-absender {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--nxc-akzent);
+}
+#atelier #nexify-chat .nxc-absender span {
+  font-weight: 500;
+  color: var(--nxc-leise);
+}
+#atelier #nexify-chat .nxc-text {
+  display: grid;
+  gap: 10px;
+}
+#atelier #nexify-chat .nxc-text :is(ul, ol) {
+  display: grid;
+  gap: 6px;
+  padding-left: 20px;
+}
+#atelier #nexify-chat .nxc-text ul {
+  list-style: disc;
+}
+#atelier #nexify-chat .nxc-text ol {
+  list-style: decimal;
+}
+#atelier #nexify-chat .nxc-text li::marker {
+  color: var(--nxc-akzent);
+}
+#atelier #nexify-chat .nxc-text strong {
+  font-weight: 650;
+}
+#atelier #nexify-chat .nxc-n-ki[data-status="laeuft"] .nxc-text > :last-child::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -2px;
+  border-radius: 2px;
+  background: var(--nxc-akzent);
+  animation: nxc-blink 1s steps(2, start) infinite;
+}
+#atelier #nexify-chat .nxc-wartet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--nxc-leise);
+  font-size: 14px;
+}
+#atelier #nexify-chat .nxc-punkte {
+  display: inline-flex;
+  gap: 4px;
+}
+#atelier #nexify-chat .nxc-punkte i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--nxc-akzent);
+  animation: nxc-puls 1.2s ease-in-out infinite;
+}
+#atelier #nexify-chat .nxc-punkte i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+#atelier #nexify-chat .nxc-punkte i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes nxc-puls {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+@keyframes nxc-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+#atelier #nexify-chat .nxc-n-stoerung {
+  align-self: stretch;
+  max-width: 100%;
+}
+#atelier #nexify-chat .nxc-stoerung {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(242, 192, 99, 0.45);
+  border-left-width: 3px;
+  border-radius: 12px;
+  background: rgba(242, 192, 99, 0.08);
+  font-size: 14px;
+}
+#atelier #nexify-chat .nxc-n-ki .nxc-stoerung {
+  margin-top: 10px;
+}
+#atelier #nexify-chat .nxc-stoerung strong {
+  color: var(--nxc-warnung);
+  font-weight: 650;
+}
+#atelier #nexify-chat .nxc-aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#atelier #nexify-chat .nxc-knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 16px;
+  border: 1px solid var(--nxc-akzent);
+  border-radius: 999px;
+  background: var(--nxc-akzent);
+  color: var(--nxc-auf-akzent);
+  font: 650 14px/1.2 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none;
+  cursor: pointer;
+}
+#atelier #nexify-chat .nxc-knopf:hover {
+  background: #d3f56a;
+  color: var(--nxc-auf-akzent);
+}
+#atelier #nexify-chat .nxc-knopf-leise {
+  background: transparent;
+  color: var(--nxc-text);
+  border-color: var(--nxc-linie-stark);
+}
+#atelier #nexify-chat .nxc-knopf-leise:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--nxc-text);
+}
+
+/* ---------- Fuß: Eingabe unten fest ---------- */
+
+#atelier #nexify-chat .nxc-fuss {
+  flex: none;
+  display: grid;
+  gap: 8px;
+  padding: 12px 18px max(12px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--nxc-linie);
+  background: rgba(20, 23, 22, 0.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+#atelier #nexify-chat .nxc-band {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(242, 192, 99, 0.12);
+  color: var(--nxc-warnung);
+  font-size: 13px;
+  font-weight: 600;
+}
+#atelier #nexify-chat .nxc-eingabe {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--nxc-linie-stark);
+  border-radius: 26px;
+  background: var(--nxc-erhoben);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.15s ease;
+}
+#atelier #nexify-chat .nxc-eingabe:focus-within {
+  border-color: var(--nxc-akzent);
+}
+#atelier #nexify-chat .nxc-eingabe textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  min-height: 44px;
+  max-height: 140px;
+  margin: 0;
+  padding: 11px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--nxc-text);
+  /* 16 px: sonst vergrößert iOS die Seite beim Fokus. */
+  font: 400 16px/1.4 var(--font-text, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+  resize: none;
+  overflow-y: auto;
+}
+/* Der Fokus zeigt sich am Rahmen des Eingabefelds (:focus-within), nicht als zweiter Kasten darin. */
+#atelier #nexify-chat .nxc-eingabe textarea:is(:focus, :focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+#atelier #nexify-chat .nxc-eingabe:focus-within {
+  box-shadow: 0 0 0 2px rgba(192, 238, 56, 0.35);
+}
+#atelier #nexify-chat .nxc-eingabe textarea::placeholder {
+  color: #a3a9a5;
+  opacity: 1;
+}
+#atelier #nexify-chat .nxc-senden {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--nxc-akzent);
+  color: var(--nxc-auf-akzent);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+#atelier #nexify-chat .nxc-senden:hover:not(:disabled) {
+  background: #d3f56a;
+  transform: scale(1.04);
+}
+#atelier #nexify-chat .nxc-senden:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: #a3a9a5;
+  cursor: not-allowed;
+}
+#atelier #nexify-chat .nxc-stopp {
+  background: var(--nxc-text);
+}
+#atelier #nexify-chat .nxc-stopp svg {
+  fill: currentColor;
+}
+#atelier #nexify-chat .nxc-zaehler {
+  position: absolute;
+  right: 60px;
+  top: -20px;
+  font-size: 12px;
+  color: var(--nxc-leise);
+  font-variant-numeric: tabular-nums;
+}
+#atelier #nexify-chat .nxc-aus {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 12px 14px;
+  border: 1px solid rgba(242, 192, 99, 0.45);
+  border-left-width: 3px;
+  border-radius: 12px;
+  background: rgba(242, 192, 99, 0.08);
+  font-size: 14px;
+}
+#atelier #nexify-chat .nxc-aus strong {
+  color: var(--nxc-warnung);
+}
+#atelier #nexify-chat .nxc-recht {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--nxc-leise);
+}
+/* Wenig Höhe (Bildschirmtastatur, Querformat): der Hinweis steht weiterhin oben im Verlauf. */
+@media (max-height: 520px) {
+  #atelier #nexify-chat .nxc-recht {
+    display: none;
+  }
+  #atelier #nexify-chat .nxc-kopf {
+    padding-top: max(8px, env(safe-area-inset-top));
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  #atelier #nexify-chat .nxc-verlauf {
+    padding-inline: 14px;
+  }
+  #atelier #nexify-chat .nxc-fuss {
+    padding-inline: 12px;
+  }
+  #atelier #nexify-chat .nxc-kopf {
+    padding-left: 14px;
+    gap: 10px;
+  }
+  #atelier #nexify-chat .nxc-start h3 {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #atelier #nexify-chat,
+  #atelier #nexify-chat *,
+  #atelier .nxc-schleier,
+  #atelier #nexify-chat-ausloeser {
+    animation: none !important;
+    transition: none !important;
+  }
+  #atelier #nexify-chat .nxc-punkte i {
+    opacity: 0.8;
+  }
+}
+@media (forced-colors: active) {
+  #atelier #nexify-chat .nxc-senden,
+  #atelier #nexify-chat .nxc-knopf,
+  #atelier #nexify-chat-ausloeser {
+    border: 1px solid ButtonText;
+  }
+}
