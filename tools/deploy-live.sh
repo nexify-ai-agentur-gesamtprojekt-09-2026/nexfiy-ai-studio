@@ -3,6 +3,11 @@
 # Grund: `npm run build` erzeugt .output/server/wrangler.json ohne Zielname und ohne D1-Binding.
 # Ohne Override entsteht ein neuer Worker "nexify-ai-agentur-gesamtprojekt-..." ohne DB.
 # Nutzung: tools/deploy-live.sh [--dry-run]
+#
+# Was dieses Skript NICHT tut (bewusst, damit ein Deploy nie Daten oder Zugänge verändert):
+#   - keine D1-Migrationen anwenden (migrations/*.sql einzeln und von Hand, siehe docs/pwa-seo-geo.md)
+#   - keine Variablen oder Secrets setzen (CHAT_AKTIV, SENDER_EMAIL, ANFRAGE_TO, NINEROUTER_API_KEY,
+#     CHAT_IP_SCHLUESSEL … werden im Cloudflare-Dashboard oder mit `wrangler secret put` gepflegt)
 set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
@@ -33,6 +38,12 @@ d["d1_databases"] = [{
     "database_name": "nexify-main",
     "database_id": "2dbf4047-20ee-4a68-a258-26ee9eb100e4",
 }]
+# 2026-11-22 (Europe/Berlin): Ohne `keep_vars` ersetzt `wrangler deploy` die im Dashboard gesetzten
+# Klartext-Variablen durch die (leere) Liste dieser Konfiguration – SENDER_EMAIL, ANFRAGE_TO und
+# später CHAT_AKTIV wären nach jedem Deploy weg. Beleg: developers.cloudflare.com/workers/wrangler/
+# configuration/ („Top-level only keys“: keep_vars – „Whether Wrangler should keep variables
+# configured in the dashboard on deploy“; Abschnitt „Source of truth“). Secrets löscht ein Deploy nie.
+d["keep_vars"] = True
 json.dump(d, open(p, "w"), indent=2)
 PY
 
