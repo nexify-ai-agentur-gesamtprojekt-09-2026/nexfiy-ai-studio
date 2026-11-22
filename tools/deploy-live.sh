@@ -11,6 +11,7 @@
 #   - DEPLOY_HOST setzt das Stempelfeld "host" (Standard: Ausgabe von `hostname`).
 #   - DEPLOY_SKIP_BUILD=1 verwendet einen bereits gebauten und getesteten Stand in .output/,
 #     statt neu zu bauen (CI: genau das geprüfte Artefakt wird ausgeliefert).
+#   - DEPLOY_APP_DIR: Verzeichnis des auszuliefernden Anwendungsstands (CI); Standard: dieses Repo.
 #   - WRANGLER_VERSION legt die Wrangler-Version fest (CI); ohne Angabe wie bisher `npx wrangler`.
 #   - Nach dem Deploy wird über die Cloudflare-API geprüft, dass der Worker das D1-Binding DB hat.
 #
@@ -19,7 +20,15 @@
 #   - keine Variablen oder Secrets setzen (CHAT_AKTIV, SENDER_EMAIL, ANFRAGE_TO, NINEROUTER_API_KEY,
 #     CHAT_IP_SCHLUESSEL … werden im Cloudflare-Dashboard oder mit `wrangler secret put` gepflegt)
 set -euo pipefail
-ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+# 2026-11-22 (Europe/Berlin): DEPLOY_APP_DIR (optional) ist der Anwendungsstand, der gebaut und
+# ausgeliefert wird. In CI liegt das Werkzeug (dieses Skript, aus dem Workflow-Commit) getrennt vom
+# Anwendungsstand (festgelegter SHA, z. B. ein älterer main-Commit beim Rückweg). Ohne Angabe wie
+# bisher: das Repository, in dem dieses Skript liegt.
+if [ -n "${DEPLOY_APP_DIR:-}" ]; then
+  ROOT_DIR="$(cd "$DEPLOY_APP_DIR" && pwd)"
+else
+  ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+fi
 cd "$ROOT_DIR"
 
 # 2026-11-22 13:04: Nur pruefen, nichts bauen/deployen.
@@ -107,7 +116,7 @@ stamp = {
     "worktree_dirty_sample": _dirty[:10],
     # In GitHub Actions stehen hier Repository und Arbeitsverzeichnis des Laufs.
     "source_repo": os.environ.get("GITHUB_REPOSITORY") or "nexifyai-dev/nexfiy-ai-studio",
-    "source_path": os.environ.get("GITHUB_WORKSPACE") or "/opt/nexifyai/repos/nexfiy-ai-studio",
+    "source_path": os.environ.get("DEPLOY_APP_DIR") or os.environ.get("GITHUB_WORKSPACE") or "/opt/nexifyai/repos/nexfiy-ai-studio",
     "commit": git("rev-parse", "HEAD"),
     "commit_short": git("rev-parse", "--short=10", "HEAD"),
     "commit_subject": git("log", "-1", "--pretty=%s"),
