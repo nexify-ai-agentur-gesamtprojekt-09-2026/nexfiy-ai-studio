@@ -26,13 +26,12 @@ export const UNTERNEHMEN = {
   kvkNummer: "90483944",
   ustId: "NL865786276B01",
   /**
-   * Interne Bezugsliste der Länder, aus denen Anfragen erwartet werden. Seit 22.11.2026 nennt die
-   * Website keine Länder mehr als Zusage (Startseite: Zusammenarbeit überwiegend online, ohne
-   * Länder- oder Vor-Ort-Zusagen). Deshalb steht die Liste auch nicht als `areaServed` in den
-   * strukturierten Daten. Koordinaten stehen nirgends, deshalb gibt es kein `geo`.
+   * Länder, die die Website selbst als Zielgebiet nennt (Startseite, Abschnitt „Häufige Fragen":
+   * „Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz"). Kein weiteres
+   * Land ohne sichtbare Nennung; Koordinaten stehen nirgends, deshalb gibt es kein `geo`.
    */
   zielLaender: ["DE", "NL", "AT", "CH"],
-  /** Dieselben Länder mit Namen (nicht in strukturierten Daten veröffentlicht, siehe oben). */
+  /** Dieselben Länder mit Namen, für strukturierte Daten (Suchmaschinen lesen Namen, keine Kürzel). */
   zielLaenderNamen: { DE: "Deutschland", NL: "Niederlande", AT: "Österreich", CH: "Schweiz" },
 } as const;
 

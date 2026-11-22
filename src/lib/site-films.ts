@@ -16,7 +16,7 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     label: "Pascal im Studio",
     alt: "Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes",
     transcript:
-      "Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen; Umfang und Kosten stehen vor dem Start im Angebot. Erzählen Sie mir, woran Sie gerade arbeiten.",
+      "Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität und zu einem fairen Preis. Erzählen Sie mir, woran Sie gerade arbeiten.",
   },
   angebot: {
     src: "/site-assets/e3638738b1263f00.mp4",
