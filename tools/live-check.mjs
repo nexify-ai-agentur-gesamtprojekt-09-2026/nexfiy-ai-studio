@@ -27,12 +27,13 @@ const AUTH_PAGES = {
   "/registrieren": ["email", "password"],
   "/passwort-vergessen": ["email"],
 };
-// Erwartete Marken-Weiterleitungen: eigene Domain, eigene CI (Mandantentrennung).
-// 2026-11-21 22:40 (Europe/Berlin): /teileklar leitet live auf teileklar.shop um —
-// die Referenz-Aufnahme zeigt noch die NeXify-Portalhuelle. Ohne diese Zuordnung
-// meldete der Check 0,0 % Ankerdeckung als "kritischen Design-Drift", obwohl die
-// Strecke korrekt ist. Nicht gelistete Fremd-Domains bleiben ein Fehler.
-const EXPECTED_EXTERNAL = { "/teileklar": "teileklar.shop" };
+// 2026-11-22 (Europe/Berlin): Keine erwarteten Weiterleitungen auf fremde Domains mehr.
+// Inhaberentscheidung vom 22.11.2026: die Agenturseite leitet nicht in einen Shop um.
+// Jede Fremd-Domain als Ziel ist damit ein Fehler. Die Zuordnung bleibt als leere Tabelle,
+// damit eine kuenftige, bewusst entschiedene Ausnahme an genau einer Stelle steht.
+const EXPECTED_EXTERNAL = {};
+// Fruehere Shop-Adressen: 404 mit "X-Robots-Tag: noindex", ohne Location — auch mit Querystring.
+const RETIRED_PATHS = ["/teileklar", "/teileklar/shop", "/teileklar/kasse?utm_source=x&q=y"];
 
 // Gilt fuer die Strecke selbst und alle Unterpfade (/teileklar/shop usw.).
 function expectedExternalHost(route) {
@@ -79,9 +80,15 @@ async function get(url, opts = {}) {
       headers: { "user-agent": "nexify-live-check/1.0", accept: "text/html" },
     });
     const body = res.headers.get("content-type")?.includes("text/html") ? await res.text() : "";
-    return { status: res.status, location: res.headers.get("location"), body, finalUrl: res.url };
+    return {
+      status: res.status,
+      location: res.headers.get("location"),
+      robots: res.headers.get("x-robots-tag"),
+      body,
+      finalUrl: res.url,
+    };
   } catch (err) {
-    return { status: `FEHLER ${err.name}`, location: null, body: "" };
+    return { status: `FEHLER ${err.name}`, location: null, robots: null, body: "" };
   } finally {
     clearTimeout(timer);
   }
@@ -189,6 +196,19 @@ if (!loginOk)
     kind: "Weiterleitung",
     detail: `${login.status} -> ${login.location || "-"}`,
   });
+
+for (const alt of RETIRED_PATHS) {
+  const res = await get(BASE + alt, { redirect: "manual" });
+  const noindex = String(res.robots || "")
+    .toLowerCase()
+    .includes("noindex");
+  if (res.status !== 404 || res.location || !noindex)
+    problems.push({
+      route: alt,
+      kind: "Altpfad",
+      detail: `erwartet 404 + noindex ohne Location, erhalten ${res.status} · location=${res.location || "-"} · x-robots-tag=${res.robots || "-"}`,
+    });
+}
 
 console.log(`Live-Check ${BASE} · ${routes.length} Routen · ${new Date().toISOString()}`);
 console.log(

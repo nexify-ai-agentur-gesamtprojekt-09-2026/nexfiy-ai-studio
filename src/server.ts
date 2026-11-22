@@ -4,6 +4,7 @@ import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
 import { handleChat, type ChatBindings } from "./lib/chat-api";
 import { renderErrorPage } from "./lib/error-page";
+import { PERMANENT_REDIRECTS, withNoindexOnNotFound } from "./lib/server-routing";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -45,22 +46,6 @@ function isH3SwallowedErrorBody(body: string): boolean {
     return false;
   }
 }
-
-// 2026-11-19 19:45 (Europe/Berlin): Dauerhafte Weiterleitungen für kurze Adressen.
-// Warum: /preise ist laut Kanalvorgabe der Einstieg für Angebotsanfragen (SOUL §0c), die Seite
-//   selbst heißt /preise-ablauf — /preise lief deshalb ins Leere (404). Ein 301 hält gesetzte
-//   Links und den Suchindex zusammen, ohne eine zweite Preisseite zu pflegen.
-const PERMANENT_REDIRECTS: Record<string, string> = {
-  "/preise": "/preise-ablauf",
-  "/preise/": "/preise-ablauf",
-  // 2026-11-21 01:40 ([ADDRESS]): /login -> /anmelden (Seite heisst hier so).
-  "/login": "/anmelden",
-  "/login/": "/anmelden",
-  // 2026-11-21 02:30 ([ADDRESS]/Berlin): Backend-CTAs und alte Mails zeigten auf /konto (HTTP 404).
-  // Der Kundenbereich heisst hier /portale; der Redirect haelt alte Links am Leben.
-  "/konto": "/portale",
-  "/konto/": "/portale",
-};
 
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
@@ -111,7 +96,9 @@ export default {
         );
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
+      return withSecurityHeaders(
+        withNoindexOnNotFound(await normalizeCatastrophicSsrResponse(response)),
+      );
     } catch (error) {
       console.error(error);
       return withSecurityHeaders(

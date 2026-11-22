@@ -1,19 +1,5 @@
-# 2026-11-21 18:45 ([ADDRESS]): teileklar ist ein eigener Mandant mit eigener Domain.
-# Warum: 13 teileklar-Seiten liefen unter www.nexifyai.de und waren indexiert (Inhaberbefund).
-# Regel: [PERSON_NAME]. Dauerredirect auf die Mandanten-Domain.
-# 2026-11-21 20:30: Ziele, die es auf teileklar.shop NICHT gibt, explizit auf vorhandene
-# Seiten abbilden (vorher 301 auf 404: /werkstatt /kategorien /suche /rechtliches
-# /fahrzeug-und-passung). Erste Regel gewinnt, daher VOR dem Splat.
-/teileklar/werkstatt            https://teileklar.shop/werkstatt-partner  301
-/teileklar/fahrzeug-und-passung https://teileklar.shop/fitment-checker    301
-/teileklar/kategorien           https://teileklar.shop/shop               301
-/teileklar/suche                https://teileklar.shop/shop               301
-/teileklar/rechtliches          https://teileklar.shop/impressum          301
-/teileklar/warenkorb            https://teileklar.shop/shop               301
-/teileklar/kasse                https://teileklar.shop/shop               301
-/teileklar/gutscheine           https://teileklar.shop/shop               301
-/teileklar/bestellungen         https://teileklar.shop/kundenportal       301
-/teileklar/termine              https://teileklar.shop/werkstatt-partner  301
-# Rest auf die Mandanten-Startseite (200) statt auf einen 404-Pfad (:splat).
-/teileklar/*            https://teileklar.shop/         301
-/teileklar              https://teileklar.shop/         301
+# 2026-11-22 (Europe/Berlin): Keine Weiterleitungen auf fremde Domains.
+# Inhaberentscheidung vom 22.11.2026: Die Agenturseite leitet nicht mehr in einen Shop um.
+# Alte Shop-Adressen antworten mit 404 und "X-Robots-Tag: noindex" (gesetzt in src/server.ts);
+# Querystrings werden nirgendwohin durchgereicht. Kurzadressen derselben Domain stehen in
+# src/lib/server-routing.ts.
