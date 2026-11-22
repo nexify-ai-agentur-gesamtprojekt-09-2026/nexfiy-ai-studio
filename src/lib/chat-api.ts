@@ -81,7 +81,10 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
   const daten = (koerper ?? {}) as { message?: unknown; session_id?: unknown };
   const nachricht = typeof daten.message === "string" ? daten.message.trim() : "";
   if (nachricht.length < MIN_ZEICHEN) {
-    return json({ ok: false, fehler: "feld_fehlt", felder: { message: "Bitte eine Nachricht eingeben." } }, 400);
+    return json(
+      { ok: false, fehler: "feld_fehlt", felder: { message: "Bitte eine Nachricht eingeben." } },
+      400,
+    );
   }
   if (nachricht.length > MAX_ZEICHEN) {
     return json(
@@ -155,12 +158,28 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
     await b.DB.prepare(
       "INSERT INTO chat_nachrichten (id, tenant, session_id, rolle, inhalt, ip_hash, created_at) VALUES (?, ?, ?, 'assistant', ?, ?, ?)",
     )
-      .bind(crypto.randomUUID(), TENANT, sessionId, antwortText.slice(0, 4000), hash, new Date().toISOString())
+      .bind(
+        crypto.randomUUID(),
+        TENANT,
+        sessionId,
+        antwortText.slice(0, 4000),
+        hash,
+        new Date().toISOString(),
+      )
       .run();
   } catch {
     // Die Antwort ist bereits erzeugt; die Speicherung ist fuer den Betrieb nicht kritisch,
     // wird aber nicht stillschweigend als Erfolg gemeldet.
-    return json({ ok: true, antwort: antwortText, session_id: sessionId, hinweis: "KI-generierte Antwort", speicherung: "fehlgeschlagen" }, 200);
+    return json(
+      {
+        ok: true,
+        antwort: antwortText,
+        session_id: sessionId,
+        hinweis: "KI-generierte Antwort",
+        speicherung: "fehlgeschlagen",
+      },
+      200,
+    );
   }
 
   return json(
@@ -168,7 +187,8 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       ok: true,
       antwort: antwortText,
       session_id: sessionId,
-      hinweis: "KI-generierte Antwort (Art. 50 KI-VO). Keine Rechtsberatung, keine Preis- oder Terminzusage.",
+      hinweis:
+        "KI-generierte Antwort (Art. 50 KI-VO). Keine Rechtsberatung, keine Preis- oder Terminzusage.",
     },
     200,
   );
