@@ -164,7 +164,11 @@ for (const route of routes) {
     status,
     canonical: hasCanonical,
     h1: hasH1,
-    coverage: external ? `extern:${external}` : coverage === null ? "—" : (coverage * 100).toFixed(1) + "%",
+    coverage: external
+      ? `extern:${external}`
+      : coverage === null
+        ? "—"
+        : (coverage * 100).toFixed(1) + "%",
     missing: missing.length,
   });
 }

@@ -80,7 +80,12 @@ a{color:#c0ee38}code{color:#c0ee38;font-size:1.05em}p{margin:.5rem 0}</style></h
   });
 }
 
-function fehlerAntwort(alsJson: boolean, inhalt: Antwort, status: number, extra: Record<string, string> = {}) {
+function fehlerAntwort(
+  alsJson: boolean,
+  inhalt: Antwort,
+  status: number,
+  extra: Record<string, string> = {},
+) {
   if (alsJson) return json(inhalt, status, extra);
   const felder = inhalt.felder
     ? `<ul>${Object.values(inhalt.felder)
@@ -107,9 +112,7 @@ function erfolgAntwort(alsJson: boolean, nummer: string, doppelt: boolean) {
 
 function mailText(art: InquiryKind, werte: InquiryValues, nummer: string, zeit: string): string {
   const kopf =
-    art === "partner"
-      ? "TEILEKLAR-Partneranfrage"
-      : "Projektanfrage über das Kontaktformular";
+    art === "partner" ? "TEILEKLAR-Partneranfrage" : "Projektanfrage über das Kontaktformular";
   return [
     `${kopf} ${nummer}`,
     `Eingang: ${zeit}`,
@@ -191,7 +194,8 @@ export async function handleAnfrage(
 
   const typ = (request.headers.get("content-type") ?? "").toLowerCase();
   const alsJson =
-    typ.includes("application/json") || (request.headers.get("accept") ?? "").includes("application/json");
+    typ.includes("application/json") ||
+    (request.headers.get("accept") ?? "").includes("application/json");
 
   const body = await liesAnfrageBody(request);
   if (!body.ok) {
@@ -203,7 +207,11 @@ export async function handleAnfrage(
   const art = anfrageArt(body.daten);
   const { werte, felder } = pruefeAnfrage(art, body.daten);
   if (Object.keys(felder).length > 0) {
-    return fehlerAntwort(alsJson, { fehler: "Bitte prüfen Sie die markierten Felder.", felder }, 422);
+    return fehlerAntwort(
+      alsJson,
+      { fehler: "Bitte prüfen Sie die markierten Felder.", felder },
+      422,
+    );
   }
 
   const db = bindings.DB;

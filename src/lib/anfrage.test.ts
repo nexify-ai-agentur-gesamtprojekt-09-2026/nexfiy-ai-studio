@@ -25,9 +25,9 @@ function formRequest(rumpf: string): Request {
 
 describe("anfrageNummer", () => {
   it("bildet NX-JJJJMMTT-Hex aus Datum und Zufall", () => {
-    expect(anfrageNummer(new Date("2026-11-22T09:00:00Z"), new Uint8Array([0xaa, 0xbb, 0xcc]))).toBe(
-      "NX-20261122-AABBCC",
-    );
+    expect(
+      anfrageNummer(new Date("2026-11-22T09:00:00Z"), new Uint8Array([0xaa, 0xbb, 0xcc])),
+    ).toBe("NX-20261122-AABBCC");
   });
 });
 

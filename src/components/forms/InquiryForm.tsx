@@ -47,7 +47,9 @@ export function InquiryForm({
   privacyHref,
   messageLabel = "Ihr Anliegen",
   submitLabel = "Anfrage senden",
-  successTitle = "Fast geschafft.",
+  // Der Versand geht an den Server; "Fast geschafft." war die Copy des E-Mail-Handoffs und ist
+  // nach dem belegten Eingang falsch.
+  successTitle = "Anfrage eingegangen.",
   successBody,
 }: InquiryFormProps) {
   const form = useInquiryForm(kind);

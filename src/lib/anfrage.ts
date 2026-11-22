@@ -36,7 +36,9 @@ async function sha256Hex(text: string): Promise<string> {
 export function anfrageNummer(jetzt: Date = new Date(), zufall?: Uint8Array): string {
   const tag = jetzt.toISOString().slice(0, 10).replace(/-/g, "");
   const bytes = zufall ?? crypto.getRandomValues(new Uint8Array(3));
-  const teil = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
+  const teil = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0"))
+    .join("")
+    .toUpperCase();
   return `NX-${tag}-${teil}`;
 }
 
@@ -61,7 +63,8 @@ export function anfrageSchluesselAusHeader(wert: string | null): string | null {
   return /^[A-Za-z0-9._:-]{8,128}$/.test(sauber) ? sauber : null;
 }
 
-export type BodyErgebnis = { ok: true; daten: AnfrageRoh } | { ok: false; grund: "zu_gross" | "unlesbar" };
+export type BodyErgebnis =
+  { ok: true; daten: AnfrageRoh } | { ok: false; grund: "zu_gross" | "unlesbar" };
 
 /**
  * Liest `application/json` (JS-Weg) und `application/x-www-form-urlencoded` (Formular ohne JS).
@@ -96,7 +99,10 @@ export function anfrageArt(daten: AnfrageRoh): InquiryKind {
 }
 
 /** Normalisiert + prueft in einem Schritt und liefert die Feldmeldungen des Formulars. */
-export function pruefeAnfrage(art: InquiryKind, daten: AnfrageRoh): {
+export function pruefeAnfrage(
+  art: InquiryKind,
+  daten: AnfrageRoh,
+): {
   werte: InquiryValues;
   felder: Record<string, string>;
 } {

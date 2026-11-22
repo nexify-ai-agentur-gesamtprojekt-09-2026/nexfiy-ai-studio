@@ -2,6 +2,15 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+# Nicht oeffentlich: Auth-Flows und Kundenkonten (kein Index)
+Disallow: /registrieren
+Disallow: /passwort-vergessen
+Disallow: /teileklar/kasse
+Disallow: /teileklar/warenkorb
+Disallow: /teileklar/bestellungen
+Disallow: /teileklar/termine
+Disallow: /teileklar/gutscheine
+
 # KI-Crawler ausdruecklich erlaubt (Agentur-Seite will zitiert werden)
 User-agent: GPTBot
 Allow: /
