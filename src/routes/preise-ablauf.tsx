@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/preise-ablauf.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/preise-ablauf")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/preise-ablauf")],
-    meta: [
-      { title: "Sie kennen die Kosten vor dem Start. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung danach und externe Kosten sind getrennt ausgewiesen",
-      },
-    ],
-  }),
+  head: () => pageHead("/preise-ablauf", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -42,18 +32,12 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen
+                NeXify AI<span aria-hidden="true"> / </span>Zusammenarbeit
               </span>
               <h1 id="page-title-pricing">Sie kennen die Kosten vor dem Start.</h1>
               <p className={"identity-body"}>
                 Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung
                 danach und externe Kosten sind getrennt ausgewiesen.
-              </p>
-              {/* 2026-11-22 03:04 (Europe/Berlin): B2B-Abgrenzung nach § 14 BGB. */}
-              <p className={"identity-body"}>
-                Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB. Genannte Preise und
-                Leistungen gelten für geschäftliche Auftraggeber; Umsatzsteuer wird gesondert
-                ausgewiesen.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -74,6 +58,13 @@ function Index() {
                   Pakete vergleichen
                 </a>
               </div>
+              {/* 2026-11-22 (Europe/Berlin): B2B-Abgrenzung nach § 14 BGB. Steht unter den Knöpfen,
+                  damit der Weg zum Kontakt auf dem ersten Bildschirm bleibt. Die Seite nennt
+                  keine Preise; der Satz spricht deshalb von Angeboten. */}
+              <p className={"identity-body identity-note"}>
+                Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB. Angebote gelten für
+                geschäftliche Auftraggeber; die Umsatzsteuer wird gesondert ausgewiesen.
+              </p>
             </div>
             <div className={"identity-media"}>
               <figure className={"identity-hero-photo"}>
@@ -154,9 +145,7 @@ function Index() {
                 statt im Projektpreis versteckt.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
                   Drei Pakete. Ein klarer Umfang.
                   <svg
@@ -203,16 +192,14 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionDerPassendeEinstieg />
         <ImportedSectionKlarheitVorDemErsten />
-        <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-pricing"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-pricing">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -254,102 +241,11 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Angebot anfragen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Terminwunsch nennen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
             </div>
           </div>
         </section>
       </div>
     </NexifyShell>
-  );
-}
-
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
   );
 }
 
@@ -373,7 +269,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/leistungsumfang">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal hört einer Person am Besprechungstisch zu; NeX und AIFly ORACLE begleiten das Gespräch"
               width="2000"
               height="1125"
@@ -427,7 +323,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/leistungen">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier"
               width="2000"
               height="1125"
@@ -481,7 +377,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/kontakt">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes"
               width="2000"
               height="1125"
@@ -546,7 +442,7 @@ function ImportedSectionKlarheitVorDemErsten() {
     >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
+          <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
           <p>
             Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
@@ -573,31 +469,6 @@ function ImportedSectionKlarheitVorDemErsten() {
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was ist es?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Vor jedem Auftrag steht ein Angebot mit abgegrenztem Umfang. Entwicklung, Betreuung
-                danach und externe Kosten sind getrennt ausgewiesen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
@@ -644,36 +515,6 @@ function ImportedSectionKlarheitVorDemErsten() {
               <p>
                 Sie können den Einstieg priorisieren und Erweiterungen bewusst wählen. Externe
                 Kosten werden nicht als Bestandteil eines unklaren Pauschalpreises versteckt.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was gehört dazu?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Entwicklung: Konzept, Texte, Gestaltung und Technik für das vereinbarte Ergebnis –
-                einmalig. Betreuung danach: Pflege und Weiterentwicklung, wenn Sie sie wünschen.
-                Externe Kosten: Hosting, Software, KI-Nutzung und Werbebudget, offen ausgewiesen
-                statt im Projektpreis versteckt. Sind Budget oder Zeit begrenzt, legen wir gemeinsam
-                fest, welches Ergebnis Sie zuerst brauchen. Daraus wird ein abgegrenzter Einstieg;
-                alles Weitere steht als Option daneben. Sie entscheiden auf Grundlage des Angebots.
-                Zusätzliche Arbeit stimmen wir mit Ihnen ab, bevor sie entsteht.
               </p>
             </div>
           </details>
@@ -750,8 +591,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Der Tagessatz ist kein Gesamtpreis. Benötigte Tage, Fremdkosten, Steuern und
-                laufende Leistungen werden im konkreten Angebot ausgewiesen.
+                Ein Angebot nennt den Gesamtaufwand. Fremdkosten, Steuern und laufende Leistungen
+                weist es getrennt aus.
               </p>
             </div>
           </details>
@@ -776,230 +617,13 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
                 noch keine Beauftragung.
               </p>
             </div>
           </details>
         </div>
       </div>
-    </section>
-  );
-}
-
-function ImportedSectionPassendeThemen() {
-  return (
-    <section
-      className={"hc-section hc-container hc-process pc-related"}
-      aria-labelledby="related-title-pricing"
-    >
-      <header className={"hc-section-heading hc-process-heading"}>
-        <div>
-          <span className={"hc-kicker"}>Weiterführende Seiten</span>
-          <h2 id="related-title-pricing">Passende Themen</h2>
-        </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
-      </header>
-      <ol>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/kontakt">
-              Schildern Sie Ihr Vorhaben.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Eine neue Website, ein Shop, ein Ablauf, der Zeit kostet, oder eine Kampagne: Ein paar
-            Sätze genügen. Pascal Courbois klärt mit Ihnen, was Sie brauchen und wie der nächste
-            Schritt aussieht.
-          </p>
-          <a
-            aria-label="Schildern Sie Ihr Vorhaben. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/kontakt"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/leistungsumfang">
-              Drei Pakete. Ein klarer Umfang.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Markenstart, KI im Betrieb oder Wachstum: Aus Ihrem Ziel wird ein Auftrag mit benannten
-            Ergebnissen, wählbaren Optionen und Kosten, die Sie vor dem Start kennen.
-          </p>
-          <a
-            aria-label="Drei Pakete. Ein klarer Umfang. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/leistungsumfang"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/loesungen">
-              Kampagne und Zielseite aus einem Guss.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Wer auf Ihre Anzeige klickt, soll auf der Zielseite finden, was die Anzeige verspricht.
-            Wir entwickeln Botschaft, Werbemittel und Zielseite zusammen – mit einem Ziel, das Sie
-            benennen.
-          </p>
-          <a
-            aria-label="Kampagne und Zielseite aus einem Guss. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/loesungen"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/produkte/nex2fly">
-              NeX AIFly Suite. Ihr KI-Arbeitsbereich.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
-          </p>
-          <a
-            aria-label="NeX AIFly Suite. Ihr KI-Arbeitsbereich. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/produkte/nex2fly"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-      </ol>
     </section>
   );
 }

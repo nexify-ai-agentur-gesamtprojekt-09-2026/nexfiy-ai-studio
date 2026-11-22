@@ -10,14 +10,16 @@
 import {
   ANFRAGE_FENSTER_SEKUNDEN,
   ANFRAGE_MAX_JE_FENSTER,
+  ANFRAGE_NICHT_ANGENOMMEN,
   anfrageArt,
   anfrageDedupKey,
   anfrageNummer,
   anfrageSchluesselAusHeader,
+  koederGefuellt,
   liesAnfrageBody,
   pruefeAnfrage,
 } from "@/lib/anfrage";
-import type { InquiryKind, InquiryValues } from "@/lib/inquiry";
+import type { InquiryValues } from "@/lib/inquiry";
 
 const TENANT = "nexifyai-platform";
 
@@ -105,14 +107,13 @@ function erfolgAntwort(alsJson: boolean, nummer: string, doppelt: boolean) {
   return seite(
     "Anfrage eingegangen",
     `<p>Ihre Anfrage liegt bei uns unter der Nummer <code>${nummer}</code>.</p>
-     <p>Wir melden uns persönlich. Eine Kopie geht zusätzlich per E-Mail ein.</p>`,
+     <p>Wir melden uns persönlich unter der angegebenen E-Mail-Adresse.</p>`,
     200,
   );
 }
 
-function mailText(art: InquiryKind, werte: InquiryValues, nummer: string, zeit: string): string {
-  const kopf =
-    art === "partner" ? "TEILEKLAR-Partneranfrage" : "Projektanfrage über das Kontaktformular";
+function mailText(werte: InquiryValues, nummer: string, zeit: string): string {
+  const kopf = "Projektanfrage über das Kontaktformular";
   return [
     `${kopf} ${nummer}`,
     `Eingang: ${zeit}`,
@@ -129,7 +130,6 @@ function mailText(art: InquiryKind, werte: InquiryValues, nummer: string, zeit: 
 }
 
 async function benachrichtige(
-  art: InquiryKind,
   werte: InquiryValues,
   nummer: string,
   zeit: string,
@@ -140,10 +140,7 @@ async function benachrichtige(
   const empfaenger = bindings.ANFRAGE_TO;
   if (!schluessel || !absender || !empfaenger) return { status: "nicht_konfiguriert", id: null };
 
-  const betreff =
-    art === "partner"
-      ? `TEILEKLAR Partneranfrage: ${werte.company || werte.name}`
-      : `Projektanfrage von ${werte.name}${werte.company ? ` (${werte.company})` : ""}`;
+  const betreff = `Projektanfrage von ${werte.name}${werte.company ? ` (${werte.company})` : ""}`;
 
   try {
     const antwort = await fetch("https://api.resend.com/emails", {
@@ -158,7 +155,7 @@ async function benachrichtige(
         to: [empfaenger],
         reply_to: werte.email,
         subject: `[${nummer}] ${betreff}`,
-        text: mailText(art, werte, nummer, zeit),
+        text: mailText(werte, nummer, zeit),
       }),
     });
     if (!antwort.ok) return { status: `fehler_${antwort.status}`, id: null };
@@ -204,6 +201,12 @@ export async function handleAnfrage(
       : fehlerAntwort(alsJson, { fehler: "Die Anfrage war nicht lesbar." }, 400);
   }
 
+  // Köderfeld gefüllt: nichts speichern, nichts versenden. Ein Mensch, dessen Browser das Feld
+  // doch gefüllt hat, erfährt den Weg per E-Mail (steht auf der Fehlerseite und im Formular).
+  if (koederGefuellt(body.daten)) {
+    return fehlerAntwort(alsJson, { fehler: ANFRAGE_NICHT_ANGENOMMEN }, 422);
+  }
+
   const art = anfrageArt(body.daten);
   const { werte, felder } = pruefeAnfrage(art, body.daten);
   if (Object.keys(felder).length > 0) {
@@ -216,11 +219,9 @@ export async function handleAnfrage(
 
   const db = bindings.DB;
   if (!db) {
-    return fehlerAntwort(
-      alsJson,
-      { fehler: "Der Anfrage-Eingang ist nicht mit dem Speicher verbunden." },
-      503,
-    );
+    // Die Ursache gehört ins Protokoll, nicht auf die Seite des Besuchers.
+    console.error("[anfrage] Speicherbindung DB fehlt – Anfrage nicht angenommen.");
+    return fehlerAntwort(alsJson, { fehler: ANFRAGE_NICHT_ANGENOMMEN }, 503);
   }
 
   const ip = request.headers.get("cf-connecting-ip") ?? "";
@@ -286,7 +287,7 @@ export async function handleAnfrage(
     return fehlerAntwort(alsJson, { fehler: "Die Anfrage konnte nicht gespeichert werden." }, 500);
   }
 
-  const benachrichtigung = await benachrichtige(art, werte, nummer, zeit, bindings);
+  const benachrichtigung = await benachrichtige(werte, nummer, zeit, bindings);
   await db
     .prepare("UPDATE anfragen SET notification_status = ?, notification_id = ? WHERE nummer = ?")
     .bind(benachrichtigung.status, benachrichtigung.id, nummer)

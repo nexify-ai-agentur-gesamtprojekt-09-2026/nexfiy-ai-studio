@@ -25,11 +25,12 @@
 :root:root #atelier .atelier-film.atelier-film .atelier-film-controls button,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary,
 :root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
-  width: 30px;
-  min-width: 30px;
-  max-width: 30px;
-  height: 30px;
-  min-height: 30px;
+  /* Trefferfläche mindestens 44 × 44 px; das Symbol selbst bleibt klein. */
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  height: 44px;
+  min-height: 44px;
   padding: 0;
   gap: 0;
   margin: 0;
@@ -80,11 +81,11 @@
   }
   .atelier-film .atelier-film-controls button,
   :root:root #atelier .atelier-film.atelier-film .atelier-volume summary {
-    width: 28px;
-    min-width: 28px;
-    max-width: 28px;
-    height: 28px;
-    min-height: 28px;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    height: 44px;
+    min-height: 44px;
   }
   .atelier-film .atelier-film-controls svg {
     width: 13px;

@@ -2,37 +2,21 @@ import { SiteFilm } from "../components/SiteFilm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungen.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungen")({
-  head: () => ({
-    links: [
-      { rel: "stylesheet", href: capturedCSS },
-      {
-        rel: "preload",
-        as: "image",
-        href: "/site-assets/5c592a5dc791fcc3.webp",
-        fetchPriority: "high",
-      },
-      canonicalLink("/leistungen"),
-    ],
-    meta: [
-      { title: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal.",
-      },
-      { property: "og:title", content: "Website, System, Kampagne. Aus einer Hand. · NeXify AI" },
-      {
-        property: "og:description",
-        content:
-          "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead("/leistungen", {
+      links: [
+        { rel: "stylesheet", href: capturedCSS },
+        {
+          rel: "preload",
+          as: "image",
+          href: "/site-assets/5c592a5dc791fcc3.webp",
+          fetchPriority: "high",
+        },
+      ],
+    }),
   staticData: {
     importedDocument: {
       html: {
@@ -64,7 +48,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Leistungen
+                NeXify AI<span aria-hidden="true"> / </span>Leistungen
               </span>
               <h1 id="page-title-services">Website, System, Kampagne. Aus einer Hand.</h1>
               <p className={"identity-body"}>
@@ -176,9 +160,7 @@ function Index() {
                 Inhalte und Sprachen kommen als Optionen dazu.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
                   Drei Pakete. Ein klarer Umfang.
                   <svg
@@ -221,9 +203,7 @@ function Index() {
                 Sie dafür zulassen.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/kontakt">
                   Vorhaben schildern
                   <svg
@@ -267,16 +247,14 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionDerPassendeEinstieg />
         <ImportedSectionKlarheitVorDemErsten />
-        <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-services"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-services">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -362,61 +340,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionDerPassendeEinstieg() {
   return (
     <section
@@ -439,7 +362,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/5c592a5dc791fcc3.webp"
               srcSet="/site-assets/b4c1010258293e22.webp 800w, /site-assets/55ecd78d79c41c10.webp 1280w, /site-assets/5c592a5dc791fcc3.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal bespricht gedruckte Entwürfe und Materialmuster mit einem Gesprächspartner am Tisch"
               width="2000"
               height="1125"
@@ -493,7 +416,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/15fa9607b63661b1.webp"
               srcSet="/site-assets/b1c49cd9be2fd13d.webp 800w, /site-assets/28c1aab4293b944a.webp 1280w, /site-assets/15fa9607b63661b1.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage; NeX und AIFly ORACLE sind dabei"
               width="2000"
               height="1125"
@@ -547,7 +470,7 @@ function ImportedSectionDerPassendeEinstieg() {
             <img
               src="/site-assets/4b45951db0b51136.webp"
               srcSet="/site-assets/5764558ff1c73ead.webp 800w, /site-assets/fba47bfd29e56755.webp 1280w, /site-assets/4b45951db0b51136.webp 1920w"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal und eine Gesprächspartnerin schauen gemeinsam auf ein Tablet; NeX und AIFly ORACLE begleiten sie"
               width="2000"
               height="1125"
@@ -609,7 +532,7 @@ function ImportedSectionKlarheitVorDemErsten() {
     >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
+          <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
           <p>
             Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
@@ -636,32 +559,6 @@ function ImportedSectionKlarheitVorDemErsten() {
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was ist es?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Drei Leistungsfelder, ein Ansprechpartner: Wir bauen Ihren Auftritt, entlasten Ihre
-                Abläufe und bringen Ihr Angebot zu den richtigen Kunden. Sie wählen, wo wir
-                anfangen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
@@ -708,40 +605,6 @@ function ImportedSectionKlarheitVorDemErsten() {
               <p>
                 Ein Ansprechpartner hält Gestaltung, Umsetzung und Vermarktung zusammen. Sie
                 erhalten einen abgestimmten Lieferumfang statt einzelner, unverbundener Maßnahmen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was gehört dazu?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Ihre Kunden verstehen auf den ersten Blick, was Sie anbieten und wie sie Sie
-                erreichen. Positionierung, Gestaltung, Texte und Website entstehen zusammen. Das
-                Paket Markenstart bündelt die Markenbasis und den Webauftritt. Weitere Seiten,
-                Inhalte und Sprachen kommen als Optionen dazu. Wiederkehrende Arbeit kostet Zeit:
-                Anfragen sortieren, Unterlagen zusammensuchen, Stände nachfragen. Wir bauen Apps,
-                Portale und Schnittstellen und setzen KI dort ein, wo sie einen benannten Schritt
-                übernimmt. Das Paket KI im Betrieb beginnt mit einem Ablauf – mit den Quellen und
-                Rechten, die Sie dafür zulassen. Anzeige und Zielseite sollten dasselbe versprechen.
-                Das Paket Wachstum verbindet Kampagnenidee, Werbemittel und Zielseite in einem Plan.
-                Medienbudget und Kanäle legen Sie gesondert fest. Welche Auswertung möglich ist,
-                steht im Angebot.
               </p>
             </div>
           </details>
@@ -844,228 +707,13 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
                 noch keine Beauftragung.
               </p>
             </div>
           </details>
         </div>
       </div>
-    </section>
-  );
-}
-
-function ImportedSectionPassendeThemen() {
-  return (
-    <section
-      className={"hc-section hc-container hc-process pc-related"}
-      aria-labelledby="related-title-services"
-    >
-      <header className={"hc-section-heading hc-process-heading"}>
-        <div>
-          <span className={"hc-kicker"}>Weiterführende Seiten</span>
-          <h2 id="related-title-services">Passende Themen</h2>
-        </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
-      </header>
-      <ol>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/leistungsumfang">
-              Drei Pakete. Ein klarer Umfang.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Markenstart, KI im Betrieb oder Wachstum: Aus Ihrem Ziel wird ein Auftrag mit benannten
-            Ergebnissen, wählbaren Optionen und Kosten, die Sie vor dem Start kennen.
-          </p>
-          <a
-            aria-label="Drei Pakete. Ein klarer Umfang. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/leistungsumfang"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/leistungen/websites">
-              Eine Website, die Ihr Angebot erklärt.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Besucher sollen verstehen, was Sie anbieten, und wissen, wie sie anfragen. Mit dem Paket
-            Markenstart entstehen Gestaltung, Texte und Technik aus einem Konzept.
-          </p>
-          <a
-            aria-label="Eine Website, die Ihr Angebot erklärt. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/leistungen/websites"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/leistungen/agenten-automatisierung">
-              Routine abgeben. Kontrolle behalten.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            KI übernimmt bei uns einen benannten Schritt in Ihrem Ablauf: Anfragen zuordnen,
-            Unterlagen vorbereiten, Entwürfe schreiben. Entscheidungen bleiben bei Ihnen.
-          </p>
-          <a
-            aria-label="Routine abgeben. Kontrolle behalten. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/leistungen/agenten-automatisierung"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/leistungen/apps-portale">
-              Portale und Apps für Ihren Ablauf.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Kundenportal, interne Anwendung oder Partnerbereich: ein Ort für den Vorgang, statt
-            Postfach, Telefon und Listen. Jeder sieht, was er sehen soll.
-          </p>
-          <a
-            aria-label="Portale und Apps für Ihren Ablauf. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/leistungen/apps-portale"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-      </ol>
     </section>
   );
 }

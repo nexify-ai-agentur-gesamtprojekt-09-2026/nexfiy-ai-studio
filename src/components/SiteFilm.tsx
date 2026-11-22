@@ -4,7 +4,11 @@ import { SITE_FILMS, type SiteFilmId } from "../lib/site-films";
 
 const PLAY_PATH = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";
 
-/** One brand film with the site-wide discreet controls. Behaviour is wired by useAtelierFilms(). */
+/**
+ * One brand film with the site-wide discreet controls. Behaviour is wired by useAtelierFilms().
+ * `eager` lädt nur das Standbild sofort; der Film selbst holt zuerst nur seine Metadaten
+ * (`preload="metadata"`), damit kein Megabyte Video vor dem ersten Bild geladen wird.
+ */
 export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: boolean }) {
   const data = SITE_FILMS[film];
   const volumeId = `${useId()}-volume`;
@@ -27,7 +31,7 @@ export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: bo
           poster={data.poster}
           width={1280}
           height={720}
-          preload={eager ? "auto" : "metadata"}
+          preload="metadata"
           playsInline
           muted
           aria-label={data.label}

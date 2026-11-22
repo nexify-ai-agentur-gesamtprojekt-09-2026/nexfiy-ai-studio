@@ -16,6 +16,19 @@ export const ANFRAGE_MAX_BYTES = 16 * 1024;
 export const ANFRAGE_FENSTER_SEKUNDEN = 10 * 60;
 export const ANFRAGE_MAX_JE_FENSTER = 5;
 
+/** Meldung an Besucher, wenn der Eingang nicht annehmen kann. Ohne technische Ursache. */
+export const ANFRAGE_NICHT_ANGENOMMEN = "Die Anfrage konnte gerade nicht angenommen werden.";
+
+/**
+ * Köderfeld gegen automatische Einträge: für Menschen unsichtbar und leer. Ist es gefüllt, wird
+ * die Anfrage nicht gespeichert. Der Name klingt nach einem echten Feld, damit Skripte ihn füllen.
+ */
+export const KOEDER_FELD = "website";
+export function koederGefuellt(daten: AnfrageRoh): boolean {
+  const wert = daten[KOEDER_FELD];
+  return typeof wert === "string" && wert.trim() !== "";
+}
+
 export type AnfrageRoh = Record<string, unknown>;
 
 export interface AnfrageAntwort {
@@ -93,9 +106,12 @@ export async function liesAnfrageBody(request: Request): Promise<BodyErgebnis> {
   return { ok: false, grund: "unlesbar" };
 }
 
-/** Art aus dem Rumpf; alles ausser `partner` bleibt die Kontaktanfrage. */
-export function anfrageArt(daten: AnfrageRoh): InquiryKind {
-  return daten["kind"] === "partner" ? "partner" : "contact";
+/**
+ * Es gibt nur noch die Kontaktanfrage. Der `kind`-Wert aus dem Rumpf wird nicht mehr ausgewertet:
+ * ein alter Client, der noch eine frühere Art sendet, landet als normale Kontaktanfrage.
+ */
+export function anfrageArt(_daten: AnfrageRoh): InquiryKind {
+  return "contact";
 }
 
 /** Normalisiert + prueft in einem Schritt und liefert die Feldmeldungen des Formulars. */
@@ -123,6 +139,7 @@ export async function sendeAnfrage(
   art: InquiryKind,
   werte: InquiryValues,
   timeoutMs = 12_000,
+  koeder = "",
 ): Promise<AnfrageErgebnis> {
   try {
     const antwort = await fetch(ANFRAGE_PFAD, {
@@ -132,12 +149,13 @@ export async function sendeAnfrage(
         accept: "application/json",
         "idempotency-key": crypto.randomUUID(),
       },
-      body: JSON.stringify({ ...werte, consent: werte.consent, kind: art }),
+      body: JSON.stringify({ ...werte, consent: werte.consent, kind: art, [KOEDER_FELD]: koeder }),
       signal: AbortSignal.timeout(timeoutMs),
     });
     const daten = (await antwort.json().catch(() => ({}))) as AnfrageAntwort;
     if (antwort.ok && daten.nummer) return { nummer: daten.nummer, fehler: null };
-    return { nummer: null, fehler: daten.fehler ?? `Eingang antwortete mit ${antwort.status}.` };
+    // Kein Statuscode und keine Technik an Besucher: die Ursache steht im Protokoll des Workers.
+    return { nummer: null, fehler: daten.fehler ?? ANFRAGE_NICHT_ANGENOMMEN };
   } catch {
     return { nummer: null, fehler: null };
   }

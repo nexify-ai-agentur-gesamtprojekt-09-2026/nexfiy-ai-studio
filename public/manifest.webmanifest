@@ -1,21 +1,60 @@
 {
+  "id": "/",
   "name": "NeXify AI",
   "short_name": "NeXify",
   "description": "Websites, Apps, Shops und KI für Ihr Unternehmen.",
   "lang": "de",
-  "start_url": "/",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "background_color": "#1b1e1d",
   "theme_color": "#1b1e1d",
+  "categories": ["business"],
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "/icons/icon-maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/startseite-breit.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Startseite von NeXify AI"
+    },
+    {
+      "src": "/screenshots/startseite-schmal.jpg",
+      "sizes": "780x1688",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Startseite von NeXify AI auf dem Smartphone"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Kontakt",
+      "description": "Vorhaben schildern",
+      "url": "/kontakt?source=pwa-shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Leistungen",
+      "description": "Website, System, Kampagne",
+      "url": "/leistungen?source=pwa-shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

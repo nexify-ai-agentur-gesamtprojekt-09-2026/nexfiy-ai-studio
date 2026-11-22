@@ -2,9 +2,17 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { handleAnfrage, type AnfrageBindings } from "./lib/anfrage-api";
-import { handleChat, type ChatBindings } from "./lib/chat-api";
+import { ermittleChatZustand, handleChat, type ChatBindings } from "./lib/chat-api";
+import { setzeChatSchalter } from "./lib/chat-schalter";
 import { renderErrorPage } from "./lib/error-page";
-import { teileklarTarget } from "./lib/teileklar-redirects";
+import { offlineResponse, serviceWorkerResponse, type PwaBindings } from "./lib/pwa";
+import { OFFLINE_PATH, SW_PATH } from "./lib/pwa-config";
+import {
+  asRetiredResponse,
+  retiredPathUrl,
+  weiterleitungFuer,
+  withNoindexOnNotFound,
+} from "./lib/server-routing";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -47,22 +55,6 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
-// 2026-11-19 19:45 (Europe/Berlin): Dauerhafte Weiterleitungen für kurze Adressen.
-// Warum: /preise ist laut Kanalvorgabe der Einstieg für Angebotsanfragen (SOUL §0c), die Seite
-//   selbst heißt /preise-ablauf — /preise lief deshalb ins Leere (404). Ein 301 hält gesetzte
-//   Links und den Suchindex zusammen, ohne eine zweite Preisseite zu pflegen.
-const PERMANENT_REDIRECTS: Record<string, string> = {
-  "/preise": "/preise-ablauf",
-  "/preise/": "/preise-ablauf",
-  // 2026-11-21 01:40 ([ADDRESS]): /login -> /anmelden (Seite heisst hier so).
-  "/login": "/anmelden",
-  "/login/": "/anmelden",
-  // 2026-11-21 02:30 ([ADDRESS]/Berlin): Backend-CTAs und alte Mails zeigten auf /konto (HTTP 404).
-  // Der Kundenbereich heisst hier /portale; der Redirect haelt alte Links am Leben.
-  "/konto": "/portale",
-  "/konto/": "/portale",
-};
-
 // Hosting compresses every response at the edge. Never compress a body (gzip, brotli,
 // CompressionStream) or set content-encoding here or in a server route: the body gets encoded
 // twice and renders garbled.
@@ -73,7 +65,7 @@ const PERMANENT_REDIRECTS: Record<string, string> = {
 // bleibt auf 'self' — object-src/frame-ancestors dicht.
 const SECURITY_HEADERS: Record<string, string> = {
   "content-security-policy":
-    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests",
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests",
   "x-content-type-options": "nosniff",
   "referrer-policy": "strict-origin-when-cross-origin",
 };
@@ -82,6 +74,10 @@ function withSecurityHeaders(response: Response): Response {
   const headers = new Headers(response.headers);
   for (const [name, value] of Object.entries(SECURITY_HEADERS))
     if (!headers.has(name)) headers.set(name, value);
+  // Seiten tragen sonst gar keine Cache-Angabe; Browser und Zwischenspeicher raten dann. Mit
+  // `no-cache` wird jede Seite vor dem Anzeigen neu geprüft – ein neuer Stand kommt sofort an.
+  if (!headers.has("cache-control") && (headers.get("content-type") ?? "").includes("text/html"))
+    headers.set("cache-control", "no-cache");
   // 204/304/101 duerfen keinen Body tragen, sonst wirft der Konstruktor.
   const nullBody = [101, 204, 205, 304].includes(response.status);
   return new Response(nullBody ? null : response.body, {
@@ -91,13 +87,17 @@ function withSecurityHeaders(response: Response): Response {
   });
 }
 
+const LOKALE_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]"]);
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const url = new URL(request.url);
       // 2026-11-22 12:55 (Europe/Berlin): http://www.nexifyai.de lieferte 200 statt TLS-Weiterleitung.
       // Der Worker ist die letzte Instanz vor der Antwort; hier dauerhaft auf https umleiten.
-      if (url.protocol === "http:") {
+      // Merge 22.11.2026: lokale Prüfgerüste (localhost, 127.0.0.1, ::1) bleiben auf http, sonst
+      // liefe jede lokale Abnahme in eine Umleitung auf einen Host ohne TLS.
+      if (url.protocol === "http:" && !LOKALE_HOSTS.has(url.hostname)) {
         url.protocol = "https:";
         return Response.redirect(url.toString(), 301);
       }
@@ -111,16 +111,44 @@ export default {
       if (url.pathname === "/api/chat") {
         return withSecurityHeaders(await handleChat(request, env as ChatBindings));
       }
-      const target = PERMANENT_REDIRECTS[url.pathname];
-      if (target)
+      // 2026-11-22 (Europe/Berlin): Installierbare Web-App. Service Worker und Offline-Seite
+      // beantwortet der Worker selbst (Regeln, Rückbau-Schalter und Tests: src/lib/pwa.ts).
+      if (url.pathname === SW_PATH)
+        return withSecurityHeaders(serviceWorkerResponse(env as PwaBindings));
+      if (url.pathname === OFFLINE_PATH) return withSecurityHeaders(offlineResponse());
+      // Kurzadressen in jeder Schreibweise (/ANMELDEN, /Registrieren): src/lib/server-routing.ts.
+      const weiter = weiterleitungFuer(url.pathname);
+      if (weiter)
         return withSecurityHeaders(
-          Response.redirect(new URL(`${target}${url.search}`, url.origin).toString(), 301),
+          Response.redirect(
+            new URL(`${weiter.ziel}${url.search}`, url.origin).toString(),
+            weiter.status,
+          ),
         );
-      const teileklar = teileklarTarget(url.pathname);
-      if (teileklar) return withSecurityHeaders(Response.redirect(teileklar, 301));
       const handler = await getServerEntry();
+      // Chat-Schalter fürs Seiten-HTML (src/lib/chat-schalter.ts): vor dem Rendern ermittelt, damit
+      // die Seite ohne Zusatzanfrage weiß, ob es einen Chat gibt. Im Zweifel aus.
+      setzeChatSchalter(
+        await ermittleChatZustand(env as ChatBindings).then(
+          (zustand) => zustand.aktiv,
+          () => false,
+        ),
+      );
+      const retired = retiredPathUrl(url);
+      if (retired) {
+        const response = await handler.fetch(
+          new Request(retired, { method: "GET", headers: request.headers }),
+          env,
+          ctx,
+        );
+        return withSecurityHeaders(
+          asRetiredResponse(await normalizeCatastrophicSsrResponse(response)),
+        );
+      }
       const response = await handler.fetch(request, env, ctx);
-      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
+      return withSecurityHeaders(
+        withNoindexOnNotFound(await normalizeCatastrophicSsrResponse(response)),
+      );
     } catch (error) {
       console.error(error);
       return withSecurityHeaders(

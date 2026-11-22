@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/unternehmen.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/unternehmen")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/unternehmen")],
-    meta: [
-      { title: "Ein Ansprechpartner. Ein Agententeam. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir.",
-      },
-    ],
-  }),
+  head: () => pageHead("/unternehmen", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -42,7 +32,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen
+                NeXify AI<span aria-hidden="true"> / </span>NeXify kennenlernen
               </span>
               <h1 id="page-title-company">Ein Ansprechpartner. Ein Agententeam.</h1>
               <p className={"identity-body"}>
@@ -149,9 +139,7 @@ function Index() {
                 Leistungen vereinbart sind.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/impressum">
                   Impressum lesen
                   <svg
@@ -189,22 +177,16 @@ function Index() {
                 KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich,
                 die Agenten NeX und AIFly ORACLE, die NeXify API.
               </p>
-              <p>
-                TEILEKLAR.shop ist unsere eigene Marke für Auto und Motorrad. Dort zeigen wir im
-                eigenen Shop, was wir für Kunden bauen.
-              </p>
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionDerPassendeEinstieg />
-        <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-company"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-company">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -246,8 +228,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <a className={"hc-text-link"} href="/anmelden">
-                Anmelden
+              <a className={"hc-text-link"} href="/portale">
+                Kundencenter
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -272,61 +254,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionDerPassendeEinstieg() {
   return (
     <section
@@ -347,7 +274,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/leistungen">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal mit Layouttafeln, Modellen, NeX und AIFly ORACLE im Atelier"
               width="2000"
               height="1125"
@@ -401,7 +328,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/wissen">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal geht mit NeX und AIFly ORACLE an einer Wand mit gerahmten Entwürfen entlang"
               width="2000"
               height="1125"
@@ -455,7 +382,7 @@ function ImportedSectionDerPassendeEinstieg() {
         <a className={"hc-gallery-card"} href="/kontakt">
           <figure className={"hc-art"}>
             <img
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, 520px"
               alt="Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes"
               width="2000"
               height="1125"
@@ -509,226 +436,5 @@ function ImportedSectionDerPassendeEinstieg() {
         </a>
       </nav>
     </section>
-  );
-}
-
-function ImportedSectionPassendeThemen() {
-  return (
-    <section
-      className={"hc-section hc-container hc-process pc-related"}
-      aria-labelledby="related-title-company"
-    >
-      <header className={"hc-section-heading hc-process-heading"}>
-        <div>
-          <span className={"hc-kicker"}>Weiterführende Seiten</span>
-          <h2 id="related-title-company">Passende Themen</h2>
-        </div>
-        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
-      </header>
-      <ol>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/kontakt">
-              Schildern Sie Ihr Vorhaben.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Eine neue Website, ein Shop, ein Ablauf, der Zeit kostet, oder eine Kampagne: Ein paar
-            Sätze genügen. Pascal Courbois klärt mit Ihnen, was Sie brauchen und wie der nächste
-            Schritt aussieht.
-          </p>
-          <a
-            aria-label="Schildern Sie Ihr Vorhaben. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/kontakt"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/impressum">
-              Impressum · NeXify AI by NeXify
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Anbieter dieser Website ist NeXify AI by NeXify, Inhaber Pascal Courbois, eine
-            Eenmanszaak nach niederländischem Recht mit Anschrift in Venlo.
-          </p>
-          <a
-            aria-label="Impressum · NeXify AI by NeXify – Seite ansehen"
-            className={"hc-text-link"}
-            href="/impressum"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
-          <h3>
-            <a href="/anmelden">
-              Anmelden und weiterarbeiten.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Melden Sie sich an, um in Ihren Bereich zu gelangen: Projekt, NeX AIFly Suite oder
-            Partnerbereich.
-          </p>
-          <a
-            aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/anmelden"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-      </ol>
-    </section>
-  );
-}
-
-function ImportedNavSeitenBersicht() {
-  return (
-    <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
-      <div className={"footer-overview-group"}>
-        <h3>Leistungen</h3>
-        <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
-        <a href="/leistungen/websites">Eine Website, die Ihr Angebot erklärt.</a>
-        <a href="/leistungen/agenten-automatisierung">Routine abgeben. Kontrolle behalten.</a>
-        <a href="/leistungen/apps-portale">Portale und Apps für Ihren Ablauf.</a>
-        <a href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Produkte</h3>
-        <a href="/loesungen">Kampagne und Zielseite aus einem Guss.</a>
-        <a href="/preise-ablauf">Sie kennen die Kosten vor dem Start.</a>
-        <a href="/produkte/nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</a>
-        <a href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.</a>
-        <a href="/produkte/api">NeXify API. KI in Ihrer Anwendung.</a>
-        <a href="/produkte/aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</a>
-        <a href="/produkte/nex-agentic-aifly">NeX Agentic AIFly. Der Agent, der ausführt.</a>
-        <a href="/produkte/skills-mcp">Skills und MCP. Ihre Werkzeuge, angebunden.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Wissen und Unternehmen</h3>
-        <a href="/">Ein Gespräch. Ein Projekt, das passt.</a>
-        <a href="/wissen">So arbeiten wir.</a>
-        <a href="/wissen/projekt-vorbereiten">Ihr Briefing in fünf Fragen.</a>
-        <a href="/unternehmen" aria-current="page">
-          Ein Ansprechpartner. Ein Agententeam.
-        </a>
-        <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Konto</h3>
-        <a href="/anmelden">Anmelden und weiterarbeiten.</a>
-        <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Rechtliches</h3>
-        <a href="/impressum">Impressum · NeXify AI by NeXify</a>
-        <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.</a>
-        <a href="/vertragsgrundlagen">Gute Zusammenarbeit hat klare Grundlagen.</a>
-        <a href="/ki-hinweise">KI mit klarer Verantwortung.</a>
-        <a href="/barrierefreiheit">Qualität soll zugänglich sein.</a>
-        <a href="/cookies">Sie wählen, was zusätzlich aktiv wird.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Weitere Seiten</h3>
-        <a href="/portale">Portale. Ihr Zugang, Ihr Bereich.</a>
-      </div>
-    </nav>
   );
 }

@@ -27,12 +27,6 @@ describe("inquiry rules", () => {
     expect(validateInquiry("contact", valid)).toEqual({});
   });
 
-  it("requires the workshop name on the partner form", () => {
-    expect(validateInquiry("partner", valid).company).toBe(
-      "Bitte nennen Sie Ihre Werkstatt oder Ihren Betrieb.",
-    );
-  });
-
   it("rejects an e-mail address without a domain", () => {
     expect(validateInquiry("contact", { ...valid, email: "erika@firma" }).email).toMatch(/prüfen/);
   });
@@ -71,12 +65,6 @@ describe("inquiry e-mail hand-off", () => {
     expect(mail.subject).toBe("Projektanfrage von Erika Muster (Muster GmbH)");
     expect(mail.body).toContain("E-Mail: erika@firma.de");
     expect(mail.shortened).toBe(false);
-  });
-
-  it("names the workshop in partner requests", () => {
-    expect(buildInquiryMail("partner", { ...valid, company: "KFZ Berger" }).subject).toBe(
-      "TEILEKLAR Partneranfrage: KFZ Berger",
-    );
   });
 
   it("keeps very long messages within the mail-link limit", () => {

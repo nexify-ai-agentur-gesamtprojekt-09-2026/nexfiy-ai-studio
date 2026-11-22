@@ -3,37 +3,21 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/captured.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    links: [
-      { rel: "stylesheet", href: capturedCSS },
-      {
-        rel: "preload",
-        as: "image",
-        href: "/site-assets/05c51cdebbdd2aa6.webp",
-        fetchPriority: "high",
-      },
-      canonicalLink("/"),
-    ],
-    meta: [
-      { title: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
-      },
-      { property: "og:title", content: "Ein Gespräch. Ein Projekt, das passt. · NeXify AI" },
-      {
-        property: "og:description",
-        content:
-          "Websites, Apps, Shops und KI – aus dem, was Ihr Unternehmen wirklich braucht. Persönlich begleitet von Pascal.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead("/", {
+      links: [
+        { rel: "stylesheet", href: capturedCSS },
+        {
+          rel: "preload",
+          as: "image",
+          href: "/site-assets/05c51cdebbdd2aa6.webp",
+          fetchPriority: "high",
+        },
+      ],
+    }),
   staticData: {
     importedDocument: {
       html: {
@@ -218,18 +202,22 @@ function Index() {
                 <h2 id="hc-finish-title">Woran arbeiten Sie gerade?</h2>
               </div>
               <div className={"hc-finish-next is-in"}>
-                <p>
-                  Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen
-                  für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.
-                </p>
+                {openChat ? (
+                  <p>
+                    Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze genügen
+                    für den Anfang. Sie entscheiden, ob daraus eine persönliche Anfrage wird.
+                  </p>
+                ) : (
+                  <p>
+                    Website, Shop oder ein Ablauf, der jeden Tag Zeit kostet: Ein paar Sätze im
+                    Kontaktformular genügen für den Anfang. Alles Weitere klären wir im Gespräch.
+                  </p>
+                )}
                 <div className={"hc-finish-actions"}>
-                  <button
-                    aria-controls="aifly-panel"
-                    aria-expanded={chatOpen}
-                    type="button"
+                  <VorhabenKnopf
+                    openChat={openChat}
+                    chatOpen={chatOpen}
                     className={"nexify-control primary-button hc-finish-primary"}
-                    data-variant="primary"
-                    onClick={openChat}
                   >
                     Vorhaben schildern
                     <svg
@@ -247,7 +235,7 @@ function Index() {
                     >
                       <path d="M4 12h16M13 5l7 7-7 7" />
                     </svg>
-                  </button>
+                  </VorhabenKnopf>
                 </div>
                 <small />
               </div>
@@ -282,7 +270,7 @@ const HOME_FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "Wie nehme ich Kontakt auf?",
-    a: "Über das Kontaktformular auf /kontakt oder das Erstgespräch. Wir melden uns mit einer Rückmeldung zu Ihrem Vorhaben.",
+    a: "Über das Kontaktformular, per E-Mail oder telefonisch. Sie erhalten eine persönliche Rückmeldung zu Ihrem Vorhaben.",
   },
 ];
 
@@ -311,14 +299,21 @@ function HomeFaq() {
         </div>
         <p>Kurze Antworten auf die Fragen, die im ersten Gespräch am häufigsten kommen.</p>
       </header>
-      <ol>
+      {/* Karten wie die übrigen Abschnitte der Seite (Stile: site-korrekturen.css). Die Reihenfolge
+          trägt keine Bedeutung, deshalb eine Liste ohne Ziffern. */}
+      <ul className={"nx-faq"}>
         {HOME_FAQ.map(({ q, a }) => (
           <li key={q} className={"is-in"}>
             <h3>{q}</h3>
             <p>{a}</p>
+            {q === HOME_FAQ.at(-1)?.q ? (
+              <a className={"hc-text-link"} href="/kontakt">
+                Zum Kontaktformular
+              </a>
+            ) : null}
           </li>
         ))}
-      </ol>
+      </ul>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
@@ -327,7 +322,42 @@ function HomeFaq() {
   );
 }
 
-function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }) {
+/**
+ * „Vorhaben schildern“: öffnet den KI-Chat, wenn er eingeschaltet ist; sonst ein echter Link auf
+ * das Kontaktformular (der Server rendert dann keinen Chat, src/lib/chat-schalter.ts).
+ */
+function VorhabenKnopf({
+  openChat,
+  chatOpen,
+  className,
+  children,
+}: {
+  openChat: (() => void) | null;
+  chatOpen?: boolean;
+  className: string;
+  children: import("react").ReactNode;
+}) {
+  if (!openChat)
+    return (
+      <a href="/kontakt" className={className} data-variant="primary">
+        {children}
+      </a>
+    );
+  return (
+    <button
+      aria-controls="nexify-chat"
+      aria-expanded={chatOpen}
+      type="button"
+      className={className}
+      data-variant="primary"
+      onClick={openChat}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: (() => void) | null }) {
   return (
     <section className={"identity-hero"} aria-labelledby="home-headline">
       <div className={"identity-scene"}>
@@ -345,18 +375,15 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
             wissen vor dem Start, was enthalten ist.
           </p>
           <div className={"identity-links"}>
-            <button
-              aria-controls="aifly-panel"
-              type="button"
+            <VorhabenKnopf
+              openChat={onOpenChat}
               className={"nexify-control primary-button identity-primary-link"}
-              data-variant="primary"
-              onClick={onOpenChat}
             >
               <span>Vorhaben schildern</span>
               <span aria-hidden="true" className={"identity-primary-arrow"}>
                 →
               </span>
-            </button>
+            </VorhabenKnopf>
           </div>
         </div>
         <div className={"identity-media"}>
@@ -460,64 +487,6 @@ function ImportedNavWoHaktEsGerade() {
           </small>
           <span className={"hc-text-link"}>
             KI im Arbeitsablauf
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </span>
-        </a>
-      </article>
-      <article
-        className={"hc-gallery-card is-in"}
-        data-site-import-scroll-header={
-          '{"desktop":{"added":["is-in"],"removed":[],"threshold":1296}}'
-        }
-      >
-        <div className={"identity-media hc-art hc-art-2"}>
-          <figure className={"identity-hero-photo"}>
-            <SiteFilm film="teileklar" />
-          </figure>
-        </div>
-        <a className={"hc-gallery-link"} href="/teileklar">
-          <span className={"hc-scene-context"}>Automotive &amp; Logistik</span>
-          <h3>
-            Das richtige Teil. Der richtige Weg.
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 19 19 5M5 5h14v14" />
-            </svg>
-          </h3>
-          <p>
-            TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in
-            einem verständlichen Anfrageweg zusammenkommen.
-          </p>
-          <small className={"hc-scene-value"}>
-            Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage.
-          </small>
-          <span className={"hc-text-link"}>
-            TEILEKLAR entdecken
             <svg
               className={"hc-arrow"}
               viewBox="0 0 24 24"
@@ -772,8 +741,8 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <h2 id="hc-products-title">Eigene Werkzeuge für konkrete Arbeit.</h2>
         </div>
         <p>
-          Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben
-          je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.
+          Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE und die NeXify API haben je eine
+          eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.
         </p>
       </header>
       <div className={"hc-products"}>
@@ -864,45 +833,12 @@ function ImportedSectionEigeneWerkzeugeFR() {
           </figure>
           <div>
             <h3>NeXify API</h3>
-            <p>KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.</p>
+            <p>
+              KI-Funktionen von NeXify in Ihrer eigenen Anwendung. Den Zugang erhalten Sie im
+              Projekt.
+            </p>
             <span className={"hc-text-link"}>
               API ansehen
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M4 12h16M13 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </a>
-        <a className={"hc-product is-in"} href="/teileklar">
-          <figure className={"hc-product-art"}>
-            <img
-              src="/site-assets/506495187c091a6f.webp"
-              srcSet="/site-assets/3be13e6036057b5f.webp 800w, /site-assets/5467e1d560fa9ec8.webp 1280w, /site-assets/506495187c091a6f.webp 1920w"
-              sizes="(max-width: 900px) 100vw, 50vw"
-              width="2000"
-              height="1125"
-              alt="Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons; begleitet von NeX und AIFly ORACLE"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-          <div>
-            <h3>TEILEKLAR</h3>
-            <p>Unsere eigene Marke: Zubehör und Teile für Auto und Motorrad, mit klaren Angaben.</p>
-            <span className={"hc-text-link"}>
-              Zu TEILEKLAR
               <svg
                 className={"hc-arrow"}
                 viewBox="0 0 24 24"

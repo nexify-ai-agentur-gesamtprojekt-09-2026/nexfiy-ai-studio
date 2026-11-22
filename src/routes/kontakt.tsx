@@ -3,37 +3,21 @@ import { InquiryForm } from "../components/forms/InquiryForm";
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/kontakt.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/kontakt")({
-  head: () => ({
-    links: [
-      { rel: "stylesheet", href: capturedCSS },
-      {
-        rel: "preload",
-        as: "image",
-        href: "/site-assets/05c51cdebbdd2aa6.webp",
-        fetchPriority: "high",
-      },
-      canonicalLink("/kontakt"),
-    ],
-    meta: [
-      { title: "Schildern Sie Ihr Vorhaben. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Beschreiben Sie Ihr Vorhaben in wenigen Sätzen – Pascal meldet sich persönlich mit einem klaren nächsten Schritt.",
-      },
-      { property: "og:title", content: "Schildern Sie Ihr Vorhaben. · NeXify AI" },
-      {
-        property: "og:description",
-        content:
-          "Beschreiben Sie Ihr Vorhaben in wenigen Sätzen – Pascal meldet sich persönlich mit einem klaren nächsten Schritt.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead("/kontakt", {
+      links: [
+        { rel: "stylesheet", href: capturedCSS },
+        {
+          rel: "preload",
+          as: "image",
+          href: "/site-assets/05c51cdebbdd2aa6.webp",
+          fetchPriority: "high",
+        },
+      ],
+    }),
   staticData: {
     importedDocument: {
       html: {
@@ -65,7 +49,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>NeXify kennenlernen
+                NeXify AI<span aria-hidden="true"> / </span>NeXify kennenlernen
               </span>
               <h1 id="page-title-contact">Schildern Sie Ihr Vorhaben.</h1>
               <p className={"identity-body"}>
@@ -77,20 +61,20 @@ function Index() {
                 <a
                   className={"nexify-control primary-button identity-primary-link"}
                   data-variant="primary"
-                  href="/leistungsumfang"
+                  href="#anfrage"
                 >
-                  <span>Pakete vergleichen</span>
+                  <span>Anfrage schreiben</span>
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
                 </a>
-                <button
-                  type="button"
+                <a
                   className={"nexify-control secondary-button identity-secondary-link"}
                   data-variant="secondary"
+                  href="/leistungsumfang"
                 >
-                  Angebot anfragen
-                </button>
+                  Pakete vergleichen
+                </a>
               </div>
             </div>
             <div className={"identity-media"}>
@@ -138,7 +122,7 @@ function Index() {
             </svg>
           </a>
         </nav>
-        <section className={"hc-container pc-supplement"}>
+        <section className={"hc-container pc-supplement"} id="anfrage">
           <InquiryForm
             kind="contact"
             title="Anfrage senden"
@@ -167,9 +151,7 @@ function Index() {
                 kein Muss. Was fehlt, klären wir im Gespräch.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  Pascal<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
                   Drei Pakete. Ein klarer Umfang.
                   <svg
@@ -209,8 +191,8 @@ function Index() {
                 Leistungen und Kosten. Erst wenn Sie es annehmen, entsteht ein Auftrag.
               </p>
               <p>
-                Nach dem Absenden öffnet sich Ihr E-Mail-Programm mit der fertigen Anfrage. Sie
-                können uns auch direkt schreiben.
+                Nach dem Absenden erhalten Sie eine Anfrage-Nummer. Sie können uns auch direkt
+                schreiben.
               </p>
             </div>
           </section>
@@ -221,7 +203,7 @@ function Index() {
         >
           <div className={"hc-budget-story"}>
             <header className={"hc-section-heading"}>
-              <span className={"hc-kicker"}>NEXIFY AI</span>
+              <span className={"hc-kicker"}>NeXify AI</span>
               <h2 id="contact-title-contact">Direkter Kontakt</h2>
             </header>
             <div className={"hc-costs"}>
@@ -249,14 +231,13 @@ function Index() {
             </div>
           </div>
         </section>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-contact"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-contact">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -280,8 +261,8 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Angebot anfragen
+              <a className={"hc-text-link"} href="#anfrage">
+                Anfrage schreiben
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -297,43 +278,7 @@ function Index() {
                 >
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Terminwunsch nennen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Kampagne besprechen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
+              </a>
               <a className={"hc-text-link"} href="/datenschutz">
                 Datenschutz lesen
                 <svg
@@ -360,61 +305,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionPassendeThemen() {
   return (
     <section
@@ -430,7 +320,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -479,7 +369,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/datenschutz">
               Ihre Daten. Ein klarer Zweck.
@@ -503,7 +393,8 @@ function ImportedSectionPassendeThemen() {
           <p>
             Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und
             Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung getrennt auszuweisen.
-            Die vollständige Datenschutzerklärung ist noch in Prüfung.
+            Verantwortlicher, Zwecke, Rechtsgrundlagen und Fristen stehen in der
+            Datenschutzerklärung.
           </p>
           <a
             aria-label="Ihre Daten. Ein klarer Zweck. – Seite ansehen"
@@ -529,7 +420,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/unternehmen">
               Ein Ansprechpartner. Ein Agententeam.

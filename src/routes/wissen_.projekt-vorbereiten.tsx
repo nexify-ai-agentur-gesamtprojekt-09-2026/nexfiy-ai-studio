@@ -1,20 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/wissen.projekt-vorbereiten.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/wissen_/projekt-vorbereiten")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/wissen/projekt-vorbereiten")],
-    meta: [
-      { title: "Ihr Briefing in fünf Fragen. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Sie brauchen kein fertiges Konzept. Fünf Antworten genügen, damit aus Ihrer Idee ein Angebot werden kann",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead("/wissen/projekt-vorbereiten", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -40,7 +31,7 @@ function Index() {
                     <span aria-hidden="true">/</span>
                   </li>
                   <li>
-                    <a href="/wissen">So arbeiten wir.</a>
+                    <a href="/wissen">Arbeitsweise</a>
                   </li>
                   <li className={"visually-hidden"}>
                     <span aria-current="page">Ihr Briefing in fünf Fragen.</span>
@@ -48,7 +39,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Wissen und Orientierung
+                NeXify AI<span aria-hidden="true"> / </span>Arbeitsweise
               </span>
               <h1 id="page-title-knowledge-start">Ihr Briefing in fünf Fragen.</h1>
               <p className={"identity-body"}>
@@ -152,9 +143,7 @@ function Index() {
               <p>4. Welche Unterlagen, Inhalte und Beispiele gibt es schon?</p>
               <p>5. Welchen Rahmen haben Sie für Budget und Termin?</p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  AIFly ORACLE · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
                   Drei Pakete. Ein klarer Umfang.
                   <svg
@@ -200,14 +189,13 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionPassendeThemen />
         <section
           className={"hc-section hc-finish hc-container"}
           aria-labelledby="finish-title-knowledge-start"
         >
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-knowledge-start">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -249,102 +237,11 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Angebot anfragen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Terminwunsch nennen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
             </div>
           </div>
         </section>
       </div>
     </NexifyShell>
-  );
-}
-
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
   );
 }
 
@@ -363,7 +260,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -413,7 +310,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/leistungsumfang">
               Drei Pakete. Ein klarer Umfang.
@@ -462,7 +359,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/wissen">
               So arbeiten wir.
@@ -512,59 +409,5 @@ function ImportedSectionPassendeThemen() {
         </li>
       </ol>
     </section>
-  );
-}
-
-function ImportedNavSeitenBersicht() {
-  return (
-    <nav aria-label="Seitenübersicht" className={"footer-overview-columns"}>
-      <div className={"footer-overview-group"}>
-        <h3>Leistungen</h3>
-        <a href="/leistungen">Website, System, Kampagne. Aus einer Hand.</a>
-        <a href="/leistungen/websites">Eine Website, die Ihr Angebot erklärt.</a>
-        <a href="/leistungen/agenten-automatisierung">Routine abgeben. Kontrolle behalten.</a>
-        <a href="/leistungen/apps-portale">Portale und Apps für Ihren Ablauf.</a>
-        <a href="/leistungsumfang">Drei Pakete. Ein klarer Umfang.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Produkte</h3>
-        <a href="/loesungen">Kampagne und Zielseite aus einem Guss.</a>
-        <a href="/preise-ablauf">Sie kennen die Kosten vor dem Start.</a>
-        <a href="/produkte/nex2fly">NeX AIFly Suite. Ihr KI-Arbeitsbereich.</a>
-        <a href="/produkte/one">Zwei Agenten. Eine klare Aufgabe.</a>
-        <a href="/produkte/api">NeXify API. KI in Ihrer Anwendung.</a>
-        <a href="/produkte/aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</a>
-        <a href="/produkte/nex-agentic-aifly">NeX Agentic AIFly. Der Agent, der ausführt.</a>
-        <a href="/produkte/skills-mcp">Skills und MCP. Ihre Werkzeuge, angebunden.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Wissen und Unternehmen</h3>
-        <a href="/">Ein Gespräch. Ein Projekt, das passt.</a>
-        <a href="/wissen">So arbeiten wir.</a>
-        <a href="/wissen/projekt-vorbereiten" aria-current="page">
-          Ihr Briefing in fünf Fragen.
-        </a>
-        <a href="/unternehmen">Ein Ansprechpartner. Ein Agententeam.</a>
-        <a href="/kontakt">Schildern Sie Ihr Vorhaben.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Konto</h3>
-        <a href="/anmelden">Anmelden und weiterarbeiten.</a>
-        <a href="/registrieren">NeX AIFly Suite. In Ruhe testen.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Rechtliches</h3>
-        <a href="/impressum">Impressum · NeXify AI by NeXify</a>
-        <a href="/datenschutz">Ihre Daten. Ein klarer Zweck.</a>
-        <a href="/vertragsgrundlagen">Gute Zusammenarbeit hat klare Grundlagen.</a>
-        <a href="/ki-hinweise">KI mit klarer Verantwortung.</a>
-        <a href="/barrierefreiheit">Qualität soll zugänglich sein.</a>
-        <a href="/cookies">Sie wählen, was zusätzlich aktiv wird.</a>
-      </div>
-      <div className={"footer-overview-group"}>
-        <h3>Weitere Seiten</h3>
-        <a href="/portale">Portale. Ihr Zugang, Ihr Bereich.</a>
-      </div>
-    </nav>
   );
 }

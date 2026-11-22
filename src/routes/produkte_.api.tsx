@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.api.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/api")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/api")],
-    meta: [
-      { title: "NeXify API. KI in Ihrer Anwendung. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das.",
-      },
-    ],
-  }),
+  head: () => pageHead("/produkte/api", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -42,13 +32,13 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Produkte und Lösungen
+                NeXify AI<span aria-hidden="true"> / </span>Produkte
               </span>
               <h1 id="page-title-api">NeXify API. KI in Ihrer Anwendung.</h1>
               <p className={"identity-body"}>
                 Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-                Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab
-                aufladen.
+                Schnittstelle nach Ihrem Datenfluss. Den Zugang erhalten Sie im Rahmen eines
+                Projekts.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -150,9 +140,7 @@ function Index() {
                 Seite.
               </p>
               <div className={"hc-service-detail pc-module"}>
-                <span className={"hc-caption"}>
-                  NeX · KI-Assistent<span aria-hidden="true"> · </span>Ihr nächster Schritt
-                </span>
+                <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/kontakt">
                   Vorhaben schildern
                   <svg
@@ -186,9 +174,9 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf und verbrauchen es
-                mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt, damit keine Kosten
-                entstehen, die Sie nicht erwarten.
+                Geplant ist ein Prepaid-Modell: Guthaben aufladen, mit Aufrufen verbrauchen. Ohne
+                Deckung soll keine Anfrage ausgeführt werden, damit keine Kosten entstehen, die Sie
+                nicht erwarten.
               </p>
               <p>
                 Die Tarife stehen noch zur Freigabe. Vor der Nutzung vereinbaren wir erwartete
@@ -197,12 +185,11 @@ function Index() {
             </div>
           </section>
         </div>
-        <ImportedSectionDieFACTORYEntdeckenMit />
         <ImportedSectionKlarheitVorDemErsten />
         <ImportedSectionPassendeThemen />
         <section className={"hc-section hc-finish hc-container"} aria-labelledby="finish-title-api">
           <div className={"hc-finish-heading"}>
-            <span className={"hc-kicker"}>Im Detail</span>
+            <span className={"hc-kicker"}>Ihr nächster Schritt</span>
             <h2 id="finish-title-api">Wie möchten Sie fortfahren?</h2>
           </div>
           <div className={"hc-finish-next"}>
@@ -244,42 +231,6 @@ function Index() {
                   <path d="M4 12h16M13 5l7 7-7 7" />
                 </svg>
               </a>
-              <button type="button" className={"hc-text-link"}>
-                Angebot anfragen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
-              <button type="button" className={"hc-text-link"}>
-                Terminwunsch nennen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </button>
               <a className={"hc-text-link"} href="/vertragsgrundlagen">
                 Vertragsgrundlagen lesen
                 <svg
@@ -306,61 +257,6 @@ function Index() {
   );
 }
 
-function ImportedSectionDieFACTORYEntdeckenMit() {
-  return (
-    <section
-      className={"hc-container pc-guide"}
-      aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-    >
-      <details className={"hc-service-detail"}>
-        <summary>
-          <span>
-            <strong className={"hc-service-name"}>
-              Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-            </strong>
-          </span>
-          <svg
-            className={"hc-disclosure-icon"}
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14m-7-7v14" />
-          </svg>
-        </summary>
-        <div className={"hc-service-body"}>
-          <p>
-            Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-            jeden Bereich auch direkt öffnen.
-          </p>
-          <a className={"hc-text-link"} href="/kontakt">
-            Passenden Einstieg wählen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </details>
-    </section>
-  );
-}
-
 function ImportedSectionKlarheitVorDemErsten() {
   return (
     <section
@@ -369,7 +265,7 @@ function ImportedSectionKlarheitVorDemErsten() {
     >
       <div className={"hc-service-layout"}>
         <header className={"hc-section-heading"}>
-          <span className={"hc-kicker"}>Acht Fragen zu Ihrem Vorhaben</span>
+          <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
           <p>
             Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
@@ -396,32 +292,6 @@ function ImportedSectionKlarheitVorDemErsten() {
         </header>
         <div className={"hc-service-list"}>
           <details className={"hc-service-detail"} open>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was ist es?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Binden Sie KI-Funktionen von NeXify in Ihre eigene Software ein. Wir beschreiben die
-                Schnittstelle nach Ihrem Datenfluss; genutzt wird über ein Guthaben, das Sie vorab
-                aufladen.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
             <summary>
               <span>
                 <strong className={"hc-service-name"}>Für wen ist es geeignet?</strong>
@@ -469,38 +339,6 @@ function ImportedSectionKlarheitVorDemErsten() {
                 NeXify-Funktionen können gezielt in Ihren Datenfluss eingeordnet werden. Ein
                 definierter Schnittstellenvertrag macht Eingaben, Ergebnisse und Fehlerwege
                 nachvollziehbar.
-              </p>
-            </div>
-          </details>
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>Was gehört dazu?</strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Welche Anwendung sendet welche Anfrage, welches Ergebnis brauchen Sie, und wer darf
-                zugreifen? Daraus beschreiben wir die Schnittstelle mit Datenformaten und
-                Fehlerfällen. Zugang, Berechtigungen und ein nachvollziehbarer Test werden für Ihre
-                Verbindung eingerichtet. Den Zugang erhalten Sie im Rahmen eines Projekts, nicht
-                über diese Seite. Die API ist als Prepaid-Angebot angelegt: Sie laden Guthaben auf
-                und verbrauchen es mit Ihren Aufrufen. Ohne Deckung wird keine Anfrage ausgeführt,
-                damit keine Kosten entstehen, die Sie nicht erwarten. Die Tarife stehen noch zur
-                Freigabe. Vor der Nutzung vereinbaren wir erwartete Aufrufe, Grenzen und Abrechnung
-                mit Ihnen.
               </p>
             </div>
           </details>
@@ -605,7 +443,7 @@ function ImportedSectionKlarheitVorDemErsten() {
             <div className={"hc-service-body"}>
               <p>
                 Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
-                Systeme und Ihre wichtigste Frage. Sie erhalten eine Vorgangsnummer; die Anfrage ist
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
                 noch keine Beauftragung.
               </p>
             </div>
@@ -631,7 +469,7 @@ function ImportedSectionPassendeThemen() {
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -681,7 +519,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/nex2fly">
               NeX AIFly Suite. Ihr KI-Arbeitsbereich.
@@ -704,7 +542,7 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             Gespräche, Aufgaben, Dokumente und Projektwissen an einem Ort – in Ihrem eigenen
-            Bereich. Lernen Sie die Suite in einem Test über 24 Stunden kennen.
+            Bereich. Den Zugang richten wir persönlich mit Ihnen ein.
           </p>
           <a
             aria-label="NeX AIFly Suite. Ihr KI-Arbeitsbereich. – Seite ansehen"
@@ -730,7 +568,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/vertragsgrundlagen">
               Gute Zusammenarbeit hat klare Grundlagen.
@@ -780,7 +618,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>NEXIFY AI</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/loesungen">
               Kampagne und Zielseite aus einem Guss.

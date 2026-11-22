@@ -1,6 +1,7 @@
 import { useId, type ReactNode } from "react";
 import formsCSS from "../../styles/site-forms.css?url";
 import { useInquiryForm } from "@/hooks/use-inquiry-form";
+import { KOEDER_FELD } from "@/lib/anfrage";
 import { CopyButton } from "@/components/system/CopyButton";
 import {
   INQUIRY_RECIPIENT,
@@ -37,8 +38,9 @@ export interface InquiryFormProps {
 }
 
 /**
- * Inquiry form in the captured TEILEKLAR/NeXify markup (tk-form, tk-field, tk-check). Valid inquiries open the
- * visitor's e-mail program with the finished message to the NeXify inbox; this copy has no own form backend.
+ * Inquiry form in the captured NeXify markup (tk-form, tk-field, tk-check). Valid inquiries go to
+ * the server ingress (`/api/anfrage`) and return an inquiry number. Only when that path fails does
+ * the visitor get the finished message for their own e-mail program, with a way back to the form.
  */
 export function InquiryForm({
   kind,
@@ -80,7 +82,7 @@ export function InquiryForm({
         className="tk-form"
         action="/api/anfrage"
         method="post"
-        noValidate
+        noValidate={form.bereit}
         aria-labelledby={titleId}
         hidden={form.mail !== null || form.nummer !== null}
       >
@@ -113,7 +115,7 @@ export function InquiryForm({
             />
             {error("email")}
           </div>
-          <div className="tk-field">
+          <div className="tk-field is-wide">
             {label("company", companyLabel)}
             <input {...form.fieldProps("company")} autoComplete="organization" maxLength={120} />
             {error("company")}
@@ -123,6 +125,23 @@ export function InquiryForm({
             <textarea {...form.fieldProps("message")} rows={5} maxLength={4000} />
             {error("message")}
           </div>
+        </div>
+        {/* Köderfeld gegen automatische Einträge: nicht sichtbar, nicht per Tastatur erreichbar. */}
+        <div
+          className="tk-koeder"
+          aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+        >
+          <label>
+            Dieses Feld bitte leer lassen
+            <input
+              type="text"
+              name={KOEDER_FELD}
+              tabIndex={-1}
+              autoComplete="off"
+              defaultValue=""
+            />
+          </label>
         </div>
         <div className="tk-consent">
           <label className="tk-check">
@@ -173,52 +192,61 @@ export function InquiryForm({
             <strong className="inquiry-nummer">{form.nummer}</strong>. Wir melden uns persönlich.
           </p>
           <div className="tk-actions">
-            <button type="button" className="hc-text-link" onClick={form.editAgain}>
+            <button type="button" className="hc-text-link" onClick={form.startNew}>
               Weitere Anfrage stellen
             </button>
           </div>
         </section>
       ) : null}
 
-      {form.fehler ? (
+      {form.fehler && !form.mail ? (
         <p className="inquiry-summary" role="alert">
           {ERROR_ICON}
           {form.fehler}
-          {form.mail ? (
-            <>
-              {" "}
-              <a className="hc-text-link" href={form.mail.href}>
-                E-Mail jetzt öffnen
-              </a>
-            </>
-          ) : null}
         </p>
       ) : null}
 
-      {form.mail && !form.fehler ? (
+      {/* Rückfall per E-Mail. Mit Fehlermeldung ist nichts gesendet: der Block sagt das zuerst,
+          zeigt den Weg per E-Mail und führt mit „Angaben bearbeiten“ zurück ins Formular. */}
+      {form.mail ? (
         <section className="tk-success inquiry-handoff" aria-labelledby={handoffTitleId}>
-          <span className="inquiry-handoff-mark" aria-hidden="true">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              focusable="false"
-            >
-              <path d="m5 12.5 4.5 4.5L19 7.5" />
-            </svg>
-          </span>
+          {form.fehler ? null : (
+            <span className="inquiry-handoff-mark" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                focusable="false"
+              >
+                <path d="m5 12.5 4.5 4.5L19 7.5" />
+              </svg>
+            </span>
+          )}
           <h2 id={handoffTitleId} ref={form.handoffRef} tabIndex={-1}>
-            {successTitle}
+            {form.fehler ? "Anfrage noch nicht gesendet." : successTitle}
           </h2>
+          {form.fehler ? (
+            <p className="inquiry-summary" role="alert">
+              {ERROR_ICON}
+              {form.fehler}
+            </p>
+          ) : null}
           <p>
-            {successBody ?? (
+            {form.fehler ? (
               <>
-                Ihr E-Mail-Programm öffnet sich mit der fertigen Anfrage an {INQUIRY_RECIPIENT}.
-                Bitte dort nur noch auf „Senden“ tippen – wir melden uns persönlich.
+                Öffnen Sie Ihr E-Mail-Programm mit der fertigen Anfrage an {INQUIRY_RECIPIENT} und
+                tippen Sie dort auf „Senden“. Ihre Angaben bleiben im Formular erhalten.
               </>
+            ) : (
+              (successBody ?? (
+                <>
+                  Ihr E-Mail-Programm öffnet sich mit der fertigen Anfrage an {INQUIRY_RECIPIENT}.
+                  Bitte dort nur noch auf „Senden“ tippen – wir melden uns persönlich.
+                </>
+              ))
             )}
           </p>
           {form.mail.shortened ? (
@@ -237,7 +265,7 @@ export function InquiryForm({
               data-variant="primary"
               href={form.mail.href}
             >
-              E-Mail erneut öffnen
+              {form.fehler ? "E-Mail jetzt öffnen" : "E-Mail erneut öffnen"}
             </a>
             <CopyButton
               className="hc-text-link"

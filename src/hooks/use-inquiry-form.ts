@@ -12,7 +12,7 @@ import {
   type InquiryKind,
   type InquiryMail,
 } from "@/lib/inquiry";
-import { sendeAnfrage } from "@/lib/anfrage";
+import { KOEDER_FELD, sendeAnfrage } from "@/lib/anfrage";
 import { copyText } from "@/lib/clipboard";
 
 /**
@@ -31,6 +31,10 @@ export function useInquiryForm(kind: InquiryKind) {
   const [nummer, setNummer] = useState<string | null>(null);
   const [senden, setSenden] = useState(false);
   const [fehler, setFehler] = useState<string | null>(null);
+  // Ohne JavaScript prüft der Browser die Pflichtfelder selbst (`required`). Erst wenn die Seite
+  // läuft, übernimmt die eigene Prüfung mit Meldungen am Feld – dann schaltet `noValidate` ein.
+  const [bereit, setBereit] = useState(false);
+  useEffect(() => setBereit(true), []);
 
   useEffect(() => {
     const target = focusTarget.current;
@@ -55,7 +59,8 @@ export function useInquiryForm(kind: InquiryKind) {
 
       setFehler(null);
       setSenden(true);
-      const ergebnis = await sendeAnfrage(kind, values);
+      const koeder = String(new FormData(event.currentTarget).get(KOEDER_FELD) ?? "");
+      const ergebnis = await sendeAnfrage(kind, values, undefined, koeder);
       setSenden(false);
 
       if (ergebnis.nummer) {
@@ -99,6 +104,17 @@ export function useInquiryForm(kind: InquiryKind) {
     setFehler(null);
   }, []);
 
+  /** Nach einer eingegangenen Anfrage: leeres Formular für die nächste, ohne alte Meldungen. */
+  const startNew = useCallback(() => {
+    formRef.current?.reset();
+    focusTarget.current = "name";
+    setErrors({});
+    setAttempts(0);
+    setMail(null);
+    setNummer(null);
+    setFehler(null);
+  }, []);
+
   const errorId = useCallback((field: InquiryField) => `${baseId}-${field}-error`, [baseId]);
   const inputId = useCallback((field: InquiryField) => `${baseId}-${field}`, [baseId]);
 
@@ -107,6 +123,7 @@ export function useInquiryForm(kind: InquiryKind) {
       id: inputId(field),
       name: field,
       "aria-invalid": errors[field] ? ("true" as const) : ("false" as const),
+      required: isInquiryFieldRequired(kind, field) || undefined,
       "aria-required": isInquiryFieldRequired(kind, field) || undefined,
       "aria-describedby": errors[field] ? errorId(field) : undefined,
     }),
@@ -125,9 +142,11 @@ export function useInquiryForm(kind: InquiryKind) {
     nummer,
     senden,
     fehler,
+    bereit,
     onSubmit,
     onChange,
     editAgain,
+    startNew,
     fieldProps,
     errorId,
     inputId,

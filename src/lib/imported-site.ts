@@ -8,8 +8,9 @@ import {
 } from "react";
 
 /**
- * Shared behaviour for the imported nexifyai.cloud pages (chat panel, header menus,
- * scroll-driven shell attributes and the "atelier" film players). Markup stays in each route.
+ * Shared behaviour for the imported nexifyai.cloud pages (header menus, scroll-driven shell
+ * attributes and the "atelier" film players). Markup stays in each route. The chat lives in
+ * src/components/chat/ChatDock.tsx and src/lib/chat-client.ts.
  */
 
 const PHONE_QUERY = "(max-width: 767px)";
@@ -57,14 +58,10 @@ export function useShellSignals(heroActionSelector?: string) {
   const [scrolled, setScrolled] = useState(false);
   const [heroActionVisible, setHeroActionVisible] = useState(Boolean(heroActionSelector));
   const [footerVisible, setFooterVisible] = useState(false);
-  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    const onResize = () => setViewportHeight(window.innerHeight);
     onScroll();
-    onResize();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize);
     const observers: IntersectionObserver[] = [];
     const heroAction = heroActionSelector ? document.querySelector(heroActionSelector) : null;
     if (heroAction) {
@@ -84,43 +81,10 @@ export function useShellSignals(heroActionSelector?: string) {
     }
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
       observers.forEach((observer) => observer.disconnect());
     };
   }, [heroActionSelector]);
-  return { scrolled, heroActionVisible, footerVisible, viewportHeight };
-}
-
-/** Chat panel open state; `defaultOpen` applies until the visitor toggles it. */
-export function useChatPanel(defaultOpen: boolean) {
-  const [preference, setPreference] = useState<boolean | null>(null);
-  const chatOpen = preference ?? defaultOpen;
-  const reopenRef = useRef<HTMLButtonElement>(null);
-  const focusAfterToggle = useRef<"composer" | "launcher" | null>(null);
-  const openChat = () => {
-    focusAfterToggle.current = "composer";
-    setPreference(true);
-  };
-  const closeChat = () => {
-    focusAfterToggle.current = "launcher";
-    setPreference(false);
-  };
-  useEffect(() => {
-    const target = focusAfterToggle.current;
-    focusAfterToggle.current = null;
-    if (target === "composer") document.getElementById("orientation-message")?.focus();
-    if (target === "launcher") reopenRef.current?.focus();
-  }, [chatOpen]);
-  useEffect(() => {
-    if (!chatOpen) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !document.querySelector(".site-header details[open]"))
-        closeChat();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [chatOpen]);
-  return { chatOpen, openChat, closeChat, reopenRef };
+  return { scrolled, heroActionVisible, footerVisible };
 }
 
 export type HeaderMenu = "products" | "mobile";
@@ -154,41 +118,6 @@ export function useHeaderMenus() {
     setOpenMenu((current) => (current === menu ? null : menu));
   };
   return { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu };
-}
-
-export function fitComposer(textarea: HTMLTextAreaElement) {
-  textarea.style.height = "auto";
-  textarea.style.height = textarea.scrollHeight + "px";
-}
-
-/** Sizes the chat composer like the original whenever the panel opens or the viewport changes. */
-export function useComposerFit(open: boolean, ...deps: unknown[]) {
-  const composerRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    if (open && composerRef.current) fitComposer(composerRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, ...deps]);
-  // Like the original, a panel that is open on page load starts scrolled to its latest entry.
-  const openOnLoad = useRef(open);
-  useEffect(() => {
-    const log = composerRef.current
-      ?.closest(".public-orientation")
-      ?.querySelector<HTMLElement>(".orientation-content");
-    if (!openOnLoad.current || !log) return;
-    const toLatest = () => {
-      log.scrollTop = log.scrollHeight;
-    };
-    toLatest();
-    const frame = requestAnimationFrame(toLatest);
-    const timer = window.setTimeout(toLatest, 400);
-    window.addEventListener("load", toLatest, { once: true });
-    return () => {
-      cancelAnimationFrame(frame);
-      window.clearTimeout(timer);
-      window.removeEventListener("load", toLatest);
-    };
-  }, []);
-  return composerRef;
 }
 
 const PLAY_ICON = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.7.7 0 0 1 6 16.2Z";

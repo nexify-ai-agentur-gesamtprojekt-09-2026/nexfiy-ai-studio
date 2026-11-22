@@ -37,7 +37,7 @@ export default tseslint.config(
     },
   },
   eslintPluginPrettier,
-  // 2026-11-19 20:30 (Europe/Berlin): src/routes/*.tsx sind aus Lovable-HTML generiert
+  // 2026-11-19 20:30 (Europe/Berlin): src/routes/*.tsx sind aus importiertem HTML generiert
   // (eine JSX-Zeile pro Seite). Prettier meldete dort 12.512 Umbruch-Fehler und hat das
   // Lint-Gate dauerhaft rot gehalten — echte Codefehler gingen im Rauschen unter.
   // Formatierung dieser Dateien bleibt Sache des Generators; alle anderen Regeln greifen.

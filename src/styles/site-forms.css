@@ -1,4 +1,4 @@
-/* Inquiry forms (contact, TEILEKLAR partner): field errors, summary and the e-mail hand-off state.
+/* Inquiry forms (contact): field errors, summary and the e-mail hand-off state.
    Loaded once by <InquiryForm>; scoped to the #atelier shell like the captured page styles. */
 :root:root #atelier .tk-form[hidden] {
   display: none;

@@ -1,20 +1,42 @@
+import { useEffect } from "react";
 import { useHeaderMenus } from "@/lib/imported-site";
 import { useCurrentPage } from "@/hooks/use-current-page";
+import { LOGO_KLEIN } from "@/lib/site-facts";
 
 /** NeXify site header (brand, main and product navigation, phone menu, language, theme, call to action), shared by every NeXify page. */
 export function NexifyHeader() {
   const { openMenu, productsSummary, mobileSummary, toggleMenu, closeMenu } = useHeaderMenus();
   const here = useCurrentPage();
+  // Offenes Telefonmenü: Inhalt und Fußzeile dahinter sind nicht erreichbar (`inert`), damit die
+  // Tabulatortaste im Menü bleibt und nicht in verdeckte Bereiche läuft. Wird das Fenster so
+  // breit, dass der Menüknopf verschwindet, gilt das Menü als geschlossen.
+  const mobilOffen = openMenu === "mobile";
+  useEffect(() => {
+    if (!mobilOffen) return;
+    const dahinter = Array.from(
+      document.querySelectorAll<HTMLElement>("#page-content, .site-footer"),
+    );
+    const setzen = () => {
+      const sichtbar = mobileSummary.current ? mobileSummary.current.offsetParent !== null : true;
+      for (const element of dahinter) element.inert = sichtbar;
+    };
+    setzen();
+    window.addEventListener("resize", setzen);
+    return () => {
+      window.removeEventListener("resize", setzen);
+      for (const element of dahinter) element.inert = false;
+    };
+  }, [mobilOffen, mobileSummary]);
   return (
     <header className={"site-header"}>
       <a aria-label="NeXify AI · Startseite" className={"brand"} href="/" {...here("/")}>
         <span className={"nx-logo"}>
           <span className={"nx-logo-figur"} aria-hidden="true">
             <img
-              src="/site-assets/9176c58a16ff634a.png"
+              src={LOGO_KLEIN}
               alt=""
-              width="512"
-              height="512"
+              width="192"
+              height="192"
               decoding="async"
               draggable="false"
             />
@@ -45,9 +67,9 @@ export function NexifyHeader() {
           </summary>
           <div className={"product-navigation-menu"} id="_R_14lb_-products">
             <div className={"megamenu-heading"}>
-              <p>Marke, Systeme und Wachstum – verbunden durch die FACTORY.</p>
+              <p>Marke, Systeme und Wachstum – aus einer Hand.</p>
               <a href="/leistungen" {...here("/leistungen")}>
-                Leistungen der FACTORY
+                Alle Leistungen
                 <svg
                   className={"nx-zeichen"}
                   viewBox="0 0 24 24"
@@ -67,7 +89,7 @@ export function NexifyHeader() {
             </div>
             <div className={"megamenu-columns"}>
               <div className={"megamenu-group"}>
-                <h2>NeXify AI</h2>
+                <p className={"megamenu-title"}>Produkte</p>
                 <a href="/produkte/nex2fly" {...here("/produkte/nex2fly")}>
                   <span>NeX AIFly Suite</span>
                   <svg
@@ -105,7 +127,61 @@ export function NexifyHeader() {
                   </svg>
                 </a>
                 <a href="/produkte/api" {...here("/produkte/api")}>
-                  <span>API &amp; Integrationen</span>
+                  <span>NeXify API</span>
+                  <svg
+                    className={"nx-zeichen"}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+                <a href="/produkte/aifly-oracle" {...here("/produkte/aifly-oracle")}>
+                  <span>AIFly ORACLE</span>
+                  <svg
+                    className={"nx-zeichen"}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+                <a href="/produkte/nex-agentic-aifly" {...here("/produkte/nex-agentic-aifly")}>
+                  <span>NeX Agentic AIFly</span>
+                  <svg
+                    className={"nx-zeichen"}
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+                <a href="/produkte/skills-mcp" {...here("/produkte/skills-mcp")}>
+                  <span>Skills und MCP</span>
                   <svg
                     className={"nx-zeichen"}
                     viewBox="0 0 24 24"
@@ -124,66 +200,9 @@ export function NexifyHeader() {
                 </a>
               </div>
               <div className={"megamenu-group"}>
-                <h2>TEILEKLAR</h2>
-                <a href="/teileklar" {...here("/teileklar")}>
-                  <span>TEILEKLAR entdecken</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-                <a href="/teileklar/werkstatt" {...here("/teileklar/werkstatt")}>
-                  <span>Werkstattprofile</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-                <a href="/teileklar/partner-werden" {...here("/teileklar/partner-werden")}>
-                  <span>Werkstattpartner werden</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-              </div>
-              <div className={"megamenu-group"}>
-                <h2>Projekt &amp; Wachstum</h2>
+                <p className={"megamenu-title"}>Projekt &amp; Wachstum</p>
                 <a href="/loesungen" {...here("/loesungen")}>
-                  <span>Kampagne und Zielseite aus einem Guss.</span>
+                  <span>Landingpages &amp; Kampagnen</span>
                   <svg
                     className={"nx-zeichen"}
                     viewBox="0 0 24 24"
@@ -219,7 +238,7 @@ export function NexifyHeader() {
                   </svg>
                 </a>
                 <a href="/leistungsumfang" {...here("/leistungsumfang")}>
-                  <span>Projektstart</span>
+                  <span>Pakete &amp; Umfang</span>
                   <svg
                     className={"nx-zeichen"}
                     viewBox="0 0 24 24"
@@ -258,8 +277,8 @@ export function NexifyHeader() {
             </div>
             <div className={"megamenu-bottom"}>
               <span>Ihr Projekt verdient einen klaren Rahmen.</span>
-              <a href="/leistungsumfang" {...here("/leistungsumfang")}>
-                Projektumfang festlegen
+              <a href="/kontakt" {...here("/kontakt")}>
+                Projektgespräch anfragen
                 <svg
                   className={"nx-zeichen"}
                   viewBox="0 0 24 24"
@@ -299,11 +318,15 @@ export function NexifyHeader() {
             <i />
           </span>
         </summary>
-        <nav
-          className={"mobile-navigation-panel"}
-          id="_R_14lb_-mobile"
-          aria-label="Hauptnavigation"
-        >
+        <nav className={"mobile-navigation-panel"} id="_R_14lb_-mobile" aria-label="Menü">
+          <a
+            className={"nexify-control primary-button mobile-navigation-cta"}
+            data-variant="primary"
+            href="/kontakt"
+            {...here("/kontakt")}
+          >
+            Projektgespräch anfragen
+          </a>
           <div className={"mobile-primary-links"}>
             <a href="/leistungen" {...here("/leistungen")}>
               Leistungen
@@ -316,7 +339,7 @@ export function NexifyHeader() {
             </a>
           </div>
           <div className={"megamenu-group"}>
-            <h2>NeXify AI</h2>
+            <p className={"megamenu-title"}>Produkte</p>
             <a href="/produkte/nex2fly" {...here("/produkte/nex2fly")}>
               <span>NeX AIFly Suite</span>
               <svg
@@ -354,7 +377,61 @@ export function NexifyHeader() {
               </svg>
             </a>
             <a href="/produkte/api" {...here("/produkte/api")}>
-              <span>API &amp; Integrationen</span>
+              <span>NeXify API</span>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="/produkte/aifly-oracle" {...here("/produkte/aifly-oracle")}>
+              <span>AIFly ORACLE</span>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="/produkte/nex-agentic-aifly" {...here("/produkte/nex-agentic-aifly")}>
+              <span>NeX Agentic AIFly</span>
+              <svg
+                className={"nx-zeichen"}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="/produkte/skills-mcp" {...here("/produkte/skills-mcp")}>
+              <span>Skills und MCP</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"
@@ -373,66 +450,9 @@ export function NexifyHeader() {
             </a>
           </div>
           <div className={"megamenu-group"}>
-            <h2>TEILEKLAR</h2>
-            <a href="/teileklar" {...here("/teileklar")}>
-              <span>TEILEKLAR entdecken</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/teileklar/werkstatt" {...here("/teileklar/werkstatt")}>
-              <span>Werkstattprofile</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/teileklar/partner-werden" {...here("/teileklar/partner-werden")}>
-              <span>Werkstattpartner werden</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-          <div className={"megamenu-group"}>
-            <h2>Projekt &amp; Wachstum</h2>
+            <p className={"megamenu-title"}>Projekt &amp; Wachstum</p>
             <a href="/loesungen" {...here("/loesungen")}>
-              <span>Kampagne und Zielseite aus einem Guss.</span>
+              <span>Landingpages &amp; Kampagnen</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"
@@ -468,7 +488,7 @@ export function NexifyHeader() {
               </svg>
             </a>
             <a href="/leistungsumfang" {...here("/leistungsumfang")}>
-              <span>Projektstart</span>
+              <span>Pakete &amp; Umfang</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"
@@ -505,27 +525,9 @@ export function NexifyHeader() {
             </a>
           </div>
           <div className={"megamenu-group"}>
-            <h2>Ihr Konto</h2>
-            <a href="/anmelden" {...here("/anmelden")}>
-              <span>Anmelden und weiterarbeiten.</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/registrieren" {...here("/registrieren")}>
-              <span>NeX AIFly Suite. In Ruhe testen.</span>
+            <p className={"megamenu-title"}>Kundencenter</p>
+            <a href="/portale" {...here("/portale")}>
+              <span>Stand des Kundencenters.</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"

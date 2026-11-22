@@ -1,40 +1,55 @@
-<!-- LOVABLE:BEGIN -->
+# Arbeitsregeln für dieses Repository
 
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
+Die Seite wird aus diesem Repository gebaut und als Cloudflare Worker ausgeliefert
+(`tools/deploy-live.sh`). Der Zweig `main` ist der Auslieferungsstand.
 
-## What Lovable manages
+## Schutzregeln
 
-Rules outside this block are the project's own. Change the pieces below in
-Lovable, not by hand. With the [Lovable MCP](https://mcp.lovable.dev)
-connected, `send_message` asks Lovable to do it; otherwise ask the user to
-use the editor.
+- **Veröffentlichte Historie nicht umschreiben.** Kein Force-Push, kein Rebase, Amend oder Squash
+  bereits gepushter Commits. Jeder gepushte Zweig bleibt in einem lauffähigen Zustand.
+- **Generierte Dateien nicht von Hand ändern.** Eine Datei, deren Kopf sie als automatisch
+  erzeugt ausweist (zum Beispiel `src/routeTree.gen.ts`), entsteht durch den Build neu.
+- **Datenbank.** Vorhandene Migrationen unter `migrations/` und Bestandsdaten nicht ändern.
+- **Geheimnisse.** Keine Schlüssel, Tokens oder Passwörter im Repository. Zugangsdaten liegen als
+  Bindings und Secrets beim Worker.
 
-- **Database.** Do not add or edit `supabase/migrations/` or `drizzle/`.
-  Ask Lovable to change the schema.
-- **Generated files.** Do not edit a file whose header says it is automatically
-  generated.
-- **AI gateway.** Keep model calls on Lovable's gateway, and keep
-  `LOVABLE_API_KEY` out of browser code.
-- **Connectors.** Lovable provides native connectors. `list_connectors` shows
-  which are enabled; `add_connector` only returns the dashboard link. When a
-  connector is enabled, calls go through the connector gateway and need
-  `LOVABLE_API_KEY`. When Lovable does not provide one, users can bring their
-  own key and store it in Secrets.
-- **Secrets.** Lovable manages them. Do not put secret values in the repo.
+## Projektregeln
 
-<!-- LOVABLE:END -->
-
-## Project rules
-
-- Pages are imported copies of nexifyai.cloud: each page keeps its markup in its own route file and its original styles in `src/styles/captured.css` (home) or `src/styles/pages/<page>.css` (full captures under `.site-import/`), because edits elsewhere break the clone's cascade.
-- Shared page behaviour (chat panel, header menus, scroll/footer shell attributes, film players) lives in `src/lib/imported-site.ts` so every imported route behaves the same; routes only wire its hooks into their JSX.
-- The copy is independent of the live site: never write back to or link assets from the original domain; downloaded media lives in `public/site-assets/` and `public/glass/`.
-
-- Brand films render only through `src/components/SiteFilm.tsx` with data from `src/lib/site-films.ts` and styles in `src/styles/site-film.css`, so every page shows identical players and a film is defined once.
+- Die Seiten sind übernommene Kopien des früheren Auftritts: jede Seite hält ihr Markup in der
+  eigenen Routendatei und ihre ursprünglichen Stile in `src/styles/captured.css` (Startseite) oder
+  `src/styles/pages/<seite>.css` (vollständige Aufnahmen unter `.site-import/`). Änderungen an
+  anderer Stelle brechen die Kaskade der Aufnahme. Aufgenommene Klassen wie `tk-form`,
+  `tk-field`, `tk-auth` werden deshalb nicht umbenannt.
+- Gemeinsames Seitenverhalten (Kopfmenüs, Scroll- und Fuß-Attribute der Hülle, Filmplayer) liegt
+  in `src/lib/imported-site.ts`, damit sich jede Seite gleich verhält; Routen binden nur dessen
+  Hooks in ihr JSX ein.
+- Der öffentliche KI-Chat ist ein Baustein in eigenen Dateien: Oberfläche `src/components/chat/`
+  mit Stilen in `src/styles/site-chat.css` (eigene `nxc-`-Klassen, nie die aufgenommenen
+  `aifly-panel`-Regeln), Browserlogik `src/lib/chat-client.ts` und `src/lib/chat-dock.ts`, Server
+  `src/lib/chat-api.ts` mit Leitplanken `src/lib/chat-leitplanken.ts`. Was der Assistent sagen
+  darf, steht einmal in `src/lib/chat-wissen.server.ts` und folgt den Seiteninhalten. Diese Datei
+  ist nur für den Server: Systemvorgabe und Kennung dürfen nie ins Browser-Bundle
+  (`src/lib/chat-bundle.test.ts` prüft das); der Browser bekommt Seitenliste und Kontaktadresse
+  aus `src/lib/chat-seiten.ts`.
+- Der Chat ist standardmäßig AUS: `/api/chat` antwortet nur, wenn die Worker-Variable `CHAT_AKTIV`
+  genau `an`, `1`, `true` oder `on` lautet; sonst zeigt die Oberfläche „Der Assistent ist derzeit
+  nicht verfügbar“ mit dem Weg zu `/kontakt`. Einschalten erst, nachdem der Inhaber die
+  Rechtstexte (`/datenschutz`, `/ki-hinweise`) zum Chat freigegeben hat. Nötig sind außerdem das
+  D1-Binding `DB` mit `migrations/0002-chat.sql` und `0003-chat-aufbewahrung.sql` sowie die
+  Secrets `NINEROUTER_API_KEY` und `CHAT_IP_SCHLUESSEL` (HMAC-Schlüssel für den IP-Kurzwert,
+  mindestens 16 Zeichen; nicht beiläufig wechseln, Limits und gespeicherter Verlauf hängen
+  daran). Fehlt eines davon, bleibt der Chat geschlossen (503). Ein Cron ist nicht eingerichtet:
+  alte Chatzeilen werden gelöscht, während Fragen gestellt werden (Standard 30 Tage,
+  `CHAT_AUFBEWAHRUNG_TAGE`, Inhaberentscheidung), sonst von Hand wie in Migration 0003 beschrieben.
+- Der Chat legt im Browser nur Sitzungsspeicher an (`sessionStorage`, Schlüssel `nexify-chat-v1`):
+  Verlauf, Sitzungskennung und die Wahl „Panel angedockt offen“. Er endet mit dem Tab, setzt kein
+  Cookie und ist für die vom Besucher gewünschte Funktion nötig. Jeder Zugriff ist gegen
+  `SecurityError` gekapselt; Einzelheiten in `docs/pwa-seo-geo.md`.
+- Die Kopie ist unabhängig vom früheren Auftritt: nie dorthin zurückschreiben und keine Assets von
+  der ursprünglichen Domain einbinden. Heruntergeladene Medien liegen in `public/site-assets/` und
+  `public/glass/`.
+- Markenfilme laufen nur über `src/components/SiteFilm.tsx` mit Daten aus `src/lib/site-films.ts`
+  und Stilen in `src/styles/site-film.css`, damit jede Seite denselben Player zeigt und ein Film
+  genau einmal definiert ist.
+- Adressregeln des Workers (Kurzadressen, stillgelegte Pfade, Antwort-Header) stehen in
+  `src/lib/server-routing.ts` und sind durch `src/server.test.ts` abgedeckt.

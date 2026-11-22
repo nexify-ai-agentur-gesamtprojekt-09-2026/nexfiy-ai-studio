@@ -107,10 +107,10 @@ export const datenschutzSections: LegalSection[] = [
     title: "Eingabefelder und Speicherung",
     blocks: [
       <p key="p1">
-        Einzelne Seiten zeigen Eingabefelder (zum Beispiel Anmeldung, Registrierung, Fahrzeug- und
-        Reifendaten). Diese Felder sind derzeit nicht an einen Server angebunden: Ihre Eingaben
-        verbleiben im Browser und werden nicht übertragen oder gespeichert. Sobald eine Übertragung
-        aktiviert wird, ergänzen wir diese Erklärung vorher.
+        Einzelne Seiten zeigen Eingabefelder (zum Beispiel Anmeldung, Registrierung). Diese Felder
+        sind derzeit nicht an einen Server angebunden: Ihre Eingaben verbleiben im Browser und
+        werden nicht übertragen oder gespeichert. Sobald eine Übertragung aktiviert wird, ergänzen
+        wir diese Erklärung vorher.
       </p>,
       <p key="p2">
         Cookies zu Analyse- oder Werbezwecken setzt diese Website nicht. Gespeichert wird
@@ -139,9 +139,9 @@ export const datenschutzSections: LegalSection[] = [
     blocks: [
       <p key="p1">
         Schriftarten und Bilder werden von unserem eigenen Server ausgeliefert. Google Fonts oder
-        vergleichbare Dienste werden nicht eingebunden. Verlinkungen zu externen Seiten (zum
-        Beispiel TEILEKLAR.shop) führen erst nach Ihrem Klick dorthin; für die Datenverarbeitung auf
-        der Zielseite ist deren Anbieter verantwortlich.
+        vergleichbare Dienste werden nicht eingebunden. Verlinkungen zu externen Seiten führen erst
+        nach Ihrem Klick dorthin; für die Datenverarbeitung auf der Zielseite ist deren Anbieter
+        verantwortlich.
       </p>,
       <p key="p2">
         Texte und Bilder dieser Website entstehen mit Unterstützung von KI und werden vor

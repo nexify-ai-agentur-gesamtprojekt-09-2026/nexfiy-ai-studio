@@ -1,22 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/cookies.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { LegalSections } from "@/components/site/LegalSections";
 import { cookiesSections } from "@/lib/legal/cookies";
 
 export const Route = createFileRoute("/cookies")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/cookies")],
-    meta: [
-      { title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die.",
-      },
-    ],
-  }),
+  head: () => pageHead("/cookies", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
@@ -44,7 +34,7 @@ function Index() {
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
-                NEXIFY AI<span aria-hidden="true"> / </span>Informationen und Recht
+                NeXify AI<span aria-hidden="true"> / </span>Informationen und Recht
               </span>
               <h1 id="page-title-cookies">Sie wählen, was zusätzlich aktiv wird.</h1>
               <p className={"identity-body"}>
@@ -76,56 +66,6 @@ function Index() {
         </section>
         <LegalSections sections={cookiesSections} />
         <section
-          className={"hc-container pc-guide"}
-          aria-label="Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE"
-        >
-          <details className={"hc-service-detail"}>
-            <summary>
-              <span>
-                <strong className={"hc-service-name"}>
-                  Die FACTORY entdecken · mit Pascal, NeX und AIFly ORACLE
-                </strong>
-              </span>
-              <svg
-                className={"hc-disclosure-icon"}
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14m-7-7v14" />
-              </svg>
-            </summary>
-            <div className={"hc-service-body"}>
-              <p>
-                Die Seitenführung verbindet unsere Leistungen, Produkte und Projektwege. Sie können
-                jeden Bereich auch direkt öffnen.
-              </p>
-              <a className={"hc-text-link"} href="/kontakt">
-                Passenden Einstieg wählen
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </a>
-            </div>
-          </details>
-        </section>
-        <section
           className={"hc-section hc-container hc-process pc-related"}
           aria-labelledby="related-title-cookies"
         >
@@ -138,7 +78,7 @@ function Index() {
           </header>
           <ol>
             <li>
-              <span className={"hc-kicker"}>NEXIFY AI</span>
+              <span className={"hc-kicker"}>NeXify AI</span>
               <h3>
                 <a href="/kontakt">
                   Schildern Sie Ihr Vorhaben.
@@ -188,7 +128,7 @@ function Index() {
               </a>
             </li>
             <li>
-              <span className={"hc-kicker"}>NEXIFY AI</span>
+              <span className={"hc-kicker"}>NeXify AI</span>
               <h3>
                 <a href="/vertragsgrundlagen">
                   Gute Zusammenarbeit hat klare Grundlagen.
@@ -238,7 +178,7 @@ function Index() {
               </a>
             </li>
             <li>
-              <span className={"hc-kicker"}>NEXIFY AI</span>
+              <span className={"hc-kicker"}>NeXify AI</span>
               <h3>
                 <a href="/impressum">
                   Impressum · NeXify AI by NeXify
@@ -287,7 +227,7 @@ function Index() {
               </a>
             </li>
             <li>
-              <span className={"hc-kicker"}>NEXIFY AI</span>
+              <span className={"hc-kicker"}>NeXify AI</span>
               <h3>
                 <a href="/datenschutz">
                   Ihre Daten. Ein klarer Zweck.

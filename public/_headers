@@ -18,3 +18,13 @@
 
 /glass/*
   cache-control: public, max-age=604800
+
+# 2026-11-22 (Europe/Berlin): Dateien der installierbaren Web-App.
+# Das Manifest wird bei jedem Abruf neu geprüft, damit geänderte Namen, Farben oder Icons
+# ankommen. /sw.js steht hier bewusst nicht: der Worker liefert die Datei selbst aus
+# (src/lib/pwa.ts) und setzt dort "cache-control: no-cache".
+/manifest.webmanifest
+  cache-control: no-cache
+
+/screenshots/*
+  cache-control: public, max-age=604800

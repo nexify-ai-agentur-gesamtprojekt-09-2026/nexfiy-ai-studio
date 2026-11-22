@@ -1,0 +1,31 @@
+-- 0003-chat-aufbewahrung.sql — Zeitindex, Versuchszähler und Aufräumweg für den KI-Chat.
+-- Anwenden (einmal, VOR dem Einschalten des Chats):
+--   npx wrangler d1 execute nexify-main --remote --file migrations/0003-chat-aufbewahrung.sql
+-- Ohne diese Migration schlägt die Reservierung in /api/chat fehl und der Chat antwortet 503;
+-- GET /api/chat meldet dann `aktiv: false, grund: "nicht_eingerichtet"`.
+--
+-- GENAU EINMAL anwenden: ALTER TABLE … ADD COLUMN ist nicht wiederholbar; ein zweiter Lauf bricht
+-- mit "duplicate column name: versuche" ab (die Datenbank bleibt dabei unverändert). Vorher prüfen:
+--   npx wrangler d1 execute nexify-main --remote --command \
+--     "SELECT name FROM pragma_table_info('chat_nachrichten') WHERE name = 'versuche'"
+--   Leeres Ergebnis: Migration fehlt, jetzt anwenden. Eine Zeile `versuche`: bereits angewendet.
+--
+-- versuche: Jede Frage steht nur einmal in der Tabelle; „Erneut senden“ erhöht den Zähler. Die
+--   Limits zählen SUM(versuche), also tatsächliche Anbieteraufrufe. Prüfen und Reservieren laufen
+--   in einer einzigen Anweisung (RESERVIERE in src/lib/chat-api.ts).
+-- chat_tenant_zeit: Limits und Aufräumen filtern nach Zeit.
+--
+-- Aufbewahrung (ersetzt den Hinweis "Loeschroutine" in 0002, die es nie gab):
+--   automatisch  /api/chat löscht bei jeder gespeicherten Frage alle Zeilen, die älter sind als die
+--                Frist (raeumeChatAuf in src/lib/chat-api.ts). Vorschlag: 30 Tage; mit dem Binding
+--                CHAT_AUFBEWAHRUNG_TAGE=<Tage> anpassbar. Die Frist ist eine Inhaberentscheidung.
+--                Ein Cron ist nicht eingerichtet: Ohne neue Fragen wird auch nichts gelöscht. Bleibt
+--                der Chat längere Zeit ungenutzt oder abgeschaltet, von Hand aufräumen (nächste Zeile)
+--                oder später einen Cron-Trigger ergänzen.
+--   von Hand     npx wrangler d1 execute nexify-main --remote --command \
+--                "DELETE FROM chat_nachrichten WHERE created_at < strftime('%Y-%m-%dT%H:%M:%fZ','now','-30 days')"
+--   Auskunft/Löschung zu einer Sitzung:
+--                "DELETE FROM chat_nachrichten WHERE session_id = '<Sitzungskennung>'"
+
+ALTER TABLE chat_nachrichten ADD COLUMN versuche INTEGER NOT NULL DEFAULT 1;
+CREATE INDEX IF NOT EXISTS chat_tenant_zeit ON chat_nachrichten (tenant, created_at);

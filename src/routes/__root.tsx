@@ -17,8 +17,10 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
-import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { PwaRegistration } from "@/components/pwa/PwaRegistration";
+import { siteJsonLd } from "@/lib/seo";
+import { CHAT_SCHALTER_ATTRIBUT, chatSchalterAn } from "@/lib/chat-schalter";
+import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
 
 function useDocumentTitle(title: string) {
   useEffect(() => {
@@ -32,14 +34,13 @@ function useDocumentTitle(title: string) {
 
 function NotFoundComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const area = siteAreaFor(pathname);
   useDocumentTitle("Seite nicht gefunden · NeXify AI");
   return (
     <>
       <meta name="robots" content="noindex" />
       <StatusPage
         code="404"
-        kicker={area === "teileklar" ? "TEILEKLAR.shop · Fehler 404" : "NeXify AI · Fehler 404"}
+        kicker="NeXify AI · Fehler 404"
         title="Diese Seite gibt es hier nicht."
         description={
           <p>
@@ -48,18 +49,21 @@ function NotFoundComponent() {
           </p>
         }
         detail={
-          <p>
-            Angefragte Adresse:{" "}
-            <code className="rounded-md border border-border bg-secondary px-1.5 py-0.5 font-label text-[13px] text-foreground break-all">
-              {displayPath(pathname)}
-            </code>
-          </p>
+          // Frühere Shop-Adressen werden nicht wiederholt: die Seite nennt sie nicht mehr.
+          isRetiredPath(pathname) ? undefined : (
+            <p>
+              Angefragte Adresse:{" "}
+              <code className="rounded-md border border-border bg-secondary px-1.5 py-0.5 font-label text-[13px] text-foreground break-all">
+                {displayPath(pathname)}
+              </code>
+            </p>
+          )
         }
         actions={
           <>
             <Button asChild variant="brand" size="xl">
-              <Link to={area === "teileklar" ? "/teileklar" : "/"}>
-                {area === "teileklar" ? "Zum Schaufenster" : "Zur Startseite"}
+              <Link to="/">
+                Zur Startseite
                 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>
@@ -77,9 +81,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
   useDocumentTitle("Kurze Störung · NeXify AI");
 
   return (
@@ -167,7 +168,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      // 2026-11-22 (Europe/Berlin): /favicon.ico ist das Originalzeichen des NeXify-Auftritts
+      // (16, 32 und 48 px), dieselbe Datei wie public/site-assets/6515657575db596f.ico.
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
     ],
@@ -192,79 +195,21 @@ function RootShell({ children }: { children: ReactNode }) {
     select: (matches) => matches.at(-1)?.staticData.importedDocument,
   });
   return (
-    <html lang="de" {...importedDocument?.html}>
+    <html
+      lang="de"
+      // Chat an oder aus, vom Server gerendert (src/lib/chat-schalter.ts); im Browser von hier gelesen.
+      {...{ [CHAT_SCHALTER_ATTRIBUT]: chatSchalterAn() ? "an" : "aus" }}
+      {...importedDocument?.html}
+    >
       <head>
         <style href="site-import-inline" precedence="imported-inline">
           {"@layer imported-inline;"}
         </style>
         <script
           type="application/ld+json"
-          // 2026-11-19 22:40 (Europe/Berlin): strukturierte Daten fuer Organisation + Website.
-          // Korrigiert: Telefon war maskiert, E-Mail wich vom Impressum ab, sameAs zeigte auf
-          // sich selbst, und der Block stand doppelt (Skript zweimal gelaufen).
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Organization",
-                  "@id": "https://www.nexifyai.de/#organisation",
-                  name: "NeXify AI",
-                  legalName: "NeXify AI by NeXify",
-                  url: "https://www.nexifyai.de/",
-                  logo: "https://www.nexifyai.de/icons/icon-512.png",
-                  email: "mail@nexifyai.cloud",
-                  telephone: "+31 6 133 188 56",
-                  founder: { "@type": "Person", name: "Pascal Courbois" },
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: "Graaf van Loonstraat 1E",
-                    postalCode: "5921 JA",
-                    addressLocality: "Venlo",
-                    addressCountry: "NL",
-                  },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "WebSite",
-                  "@id": "https://www.nexifyai.de/#website",
-                  url: "https://www.nexifyai.de/",
-                  name: "NeXify AI",
-                  inLanguage: "de-DE",
-                  publisher: { "@id": "https://www.nexifyai.de/#organisation" },
-                },
-                // 2026-11-22 03:00 (Europe/Berlin): Leistungsangebot als Service-Entitaeten.
-                // Quelle: eigene Leistungsseiten /leistungen/*; nur dort belegte Angebote.
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-websites",
-                  name: "Websites & Markenauftritt",
-                  serviceType: "Webdesign und Website-Entwicklung",
-                  url: "https://www.nexifyai.de/leistungen/websites",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-apps",
-                  name: "Apps & Portale",
-                  serviceType: "Softwareentwicklung für Web-Apps und Portale",
-                  url: "https://www.nexifyai.de/leistungen/apps-portale",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-ki",
-                  name: "Automatisierung & KI",
-                  serviceType: "KI-Agenten und Prozessautomatisierung",
-                  url: "https://www.nexifyai.de/leistungen/agenten-automatisierung",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-              ],
-            }),
-          }}
+          // Organisation und Website, auf jeder Seite gleich. Angaben und Regeln stehen in
+          // src/lib/seo.ts (siteJsonLd); Seite, Pfad und Leistung liefert jede Route selbst.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
         />
         <HeadContent />
       </head>
@@ -283,6 +228,8 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      {/* Installierbare Web-App: meldet nach dem Laden den Service Worker an (nur Produktion). */}
+      <PwaRegistration />
     </QueryClientProvider>
   );
 }
