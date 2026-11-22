@@ -208,7 +208,7 @@ function Index() {
                 </p>
                 <div className={"hc-finish-actions"}>
                   <button
-                    aria-controls="aifly-panel"
+                    aria-controls="nexify-chat"
                     aria-expanded={chatOpen}
                     type="button"
                     className={"nexify-control primary-button hc-finish-primary"}
@@ -337,7 +337,7 @@ function ImportedSectionEinGesprChEin({ onOpenChat }: { onOpenChat: () => void }
           </p>
           <div className={"identity-links"}>
             <button
-              aria-controls="aifly-panel"
+              aria-controls="nexify-chat"
               type="button"
               className={"nexify-control primary-button identity-primary-link"}
               data-variant="primary"

@@ -91,6 +91,29 @@ Anschrift, Telefon, E-Mail, Rechtsform und Registernummer stehen in `src/lib/sit
 `areaServed` nennt Deutschland, die Niederlande, Österreich und die Schweiz, weil die Startseite
 genau diese Länder nennt. Es gibt keine Standort- oder Länderseiten.
 
+## Speicherung im Browser durch den Chat
+
+Der KI-Chat (`src/lib/chat-client.ts`, `src/lib/chat-dock.ts`) setzt kein Cookie und nutzt keinen
+dauerhaften Speicher. Er legt ausschließlich im Sitzungsspeicher des Tabs (`sessionStorage`) einen
+Eintrag `nexify-chat-v1` an – und erst, wenn der Besucher den Chat benutzt:
+
+| Inhalt                         | Zweck                                                       |
+| ------------------------------ | ----------------------------------------------------------- |
+| Verlauf (Fragen und Antworten) | Gespräch bleibt beim Seitenwechsel und Neuladen sichtbar    |
+| Sitzungskennung des Servers    | Folgefragen gehören zum selben Gespräch                     |
+| Wahl „Panel angedockt offen“   | Panel steht auf der nächsten Seite ohne Sprung wieder offen |
+
+Der Eintrag endet mit dem Schließen des Tabs; „Neues Gespräch“ leert Verlauf und Sitzungskennung
+sofort. Er ist für die vom Besucher gewünschte Funktion erforderlich. Jeder Zugriff läuft über
+`sichererSpeicher` (gesperrte Datenspeicherung wirft sonst einen SecurityError); ohne Speicher
+arbeitet der Chat weiter, nur ohne Ablage. Das feste Inline-Skript vor der Hydration liest allein
+die Panel-Wahl und steht selbst in `try/catch`. Der Service Worker beantwortet `/api/*` nie; der
+Chat braucht keine Lockerung der Content-Security-Policy (`connect-src 'self'`).
+
+Solange der Chat abgeschaltet ausgeliefert wird (`CHAT_AKTIV` nicht gesetzt), entsteht kein
+Verlauf; gespeichert wird höchstens die Panel-Wahl. Die Rechtstexte beschreiben diese Speicherung
+noch nicht – das Nachziehen ist Sache des Inhabers und Voraussetzung für das Einschalten.
+
 ## Prüfen
 
 - `npm test`: Cache-Regeln und Rückbau (`src/lib/pwa.test.ts`, `src/lib/pwa-client.test.ts`),

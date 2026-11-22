@@ -9,9 +9,7 @@ import { describe, expect, it } from "vitest";
  * ein Formular absendet noch einen Klick-Handler trägt. Ziele gehören in einen Link.
  */
 const WURZEL = join(process.cwd(), "src");
-const ORDNER = ["routes", join("components", "site")];
-// Das Chat-Panel wird in einem eigenen Zweig ersetzt; seine Dateien bleiben hier unberührt.
-const AUSNAHMEN = new Set(["OracleAside.tsx", "NexifyShell.tsx"]);
+const ORDNER = ["routes", join("components", "site"), join("components", "chat")];
 
 export function handlerloseKnoepfe(quelle: string): string[] {
   const funde: string[] = [];
@@ -40,7 +38,7 @@ describe("Keine Schaltfläche ohne Verhalten", () => {
     let dateien = 0;
     for (const ordner of ORDNER) {
       for (const name of readdirSync(join(WURZEL, ordner))) {
-        if (!name.endsWith(".tsx") || name.includes(".test.") || AUSNAHMEN.has(name)) continue;
+        if (!name.endsWith(".tsx") || name.includes(".test.")) continue;
         dateien += 1;
         for (const tag of handlerloseKnoepfe(readFileSync(join(WURZEL, ordner, name), "utf8")))
           funde.push(`${ordner}/${name}: ${tag}`);

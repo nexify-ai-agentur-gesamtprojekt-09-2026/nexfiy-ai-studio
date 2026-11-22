@@ -135,7 +135,7 @@ describe("Installationshinweis: wann er sinnvoll ist", () => {
     expect(() => hinweisSchliessen(speicher)).not.toThrow();
   });
 
-  it("der Installationshinweis greift nie ungeschützt auf den Speicher zu", async () => {
+  it("Installationshinweis und Chat greifen nie ungeschützt auf den Speicher zu", async () => {
     const { readFileSync, readdirSync } = await import("node:fs");
     const { join } = await import("node:path");
     const treffer: string[] = [];
@@ -143,10 +143,13 @@ describe("Installationshinweis: wann er sinnvoll ist", () => {
       for (const eintrag of readdirSync(ordner, { withFileTypes: true })) {
         const pfad = join(ordner, eintrag.name);
         if (eintrag.isDirectory()) lauf(pfad);
-        else if (/\.tsx?$/.test(eintrag.name) && !/\.test\.|chat/i.test(eintrag.name)) {
+        else if (/\.tsx?$/.test(eintrag.name) && !/\.test\./.test(eintrag.name)) {
           readFileSync(pfad, "utf8")
             .split("\n")
             .forEach((zeile, nr) => {
+              // Einzige weitere erlaubte Form: ein festes Inline-Skript, das vor der Hydration läuft
+              // und deshalb keinen Helfer nutzen kann – es muss selbst vollständig in try/catch stehen.
+              if (/^\s*'try\{[^']*\}catch\(e\)\{\}';?\s*$/.test(zeile)) return;
               if (/\b(?:local|session)Storage\b/.test(zeile) && !/sichererSpeicher\(/.test(zeile))
                 if (!/^\s*(?:\*|\/\/|\/\*)/.test(zeile)) treffer.push(`${pfad}:${nr + 1}`);
             });
