@@ -303,11 +303,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-skills-mcp">Passende Themen</h2>
         </div>
-        <p>Diese Seiten führen das Thema weiter.</p>
+        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>Produkte</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/api">
               NeXify API. KI in Ihrer Anwendung.
@@ -356,7 +356,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Produkte</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/nex-agentic-aifly">
               NeX Agentic AIFly. Der Agent, der ausführt.
@@ -405,7 +405,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Kontakt</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -455,7 +455,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Unternehmen</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/unternehmen">
               Ein Ansprechpartner. Ein Agententeam.
@@ -478,7 +478,8 @@ function ImportedSectionPassendeThemen() {
           </h3>
           <p>
             NeXify AI ist die Agentur von Pascal Courbois in Venlo. Pascal gibt Idee, Gestaltung und
-            Richtung vor. Die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
+            Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus. Wir nennen das AI
+            FACTORY.
           </p>
           <a
             aria-label="Ein Ansprechpartner. Ein Agententeam. – Seite ansehen"

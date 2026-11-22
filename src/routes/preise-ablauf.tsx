@@ -55,15 +55,15 @@ function Index() {
                   data-variant="secondary"
                   href="/leistungsumfang"
                 >
-                  Pakete ansehen
+                  Pakete vergleichen
                 </a>
               </div>
               {/* 2026-11-22 (Europe/Berlin): B2B-Abgrenzung nach § 14 BGB. Steht unter den Knöpfen,
                   damit der Weg zum Kontakt auf dem ersten Bildschirm bleibt. Die Seite nennt
                   keine Preise; der Satz spricht deshalb von Angeboten. */}
               <p className={"identity-body identity-note"}>
-                Das Angebot richtet sich an Unternehmer im Sinne des §&nbsp;14&nbsp;BGB. Die
-                Umsatzsteuer weisen wir gesondert aus.
+                Das Angebot richtet sich an Unternehmer im Sinne des § 14 BGB. Angebote gelten für
+                geschäftliche Auftraggeber; die Umsatzsteuer wird gesondert ausgewiesen.
               </p>
             </div>
             <div className={"identity-media"}>
@@ -135,24 +135,19 @@ function Index() {
               </h2>
             </div>
             <div className={"pc-section-body"}>
-              <ul>
-                <li>
-                  <strong>Entwicklung:</strong> Konzept, Texte, Gestaltung und Technik für das
-                  vereinbarte Ergebnis, einmalig berechnet.
-                </li>
-                <li>
-                  <strong>Betreuung danach:</strong> Pflege und Weiterentwicklung, wenn Sie sie
-                  wünschen.
-                </li>
-                <li>
-                  <strong>Externe Kosten:</strong> Hosting, Software, KI-Nutzung und Werbebudget,
-                  offen ausgewiesen statt im Projektpreis versteckt.
-                </li>
-              </ul>
+              <p>
+                Entwicklung: Konzept, Texte, Gestaltung und Technik für das vereinbarte Ergebnis –
+                einmalig.
+              </p>
+              <p>Betreuung danach: Pflege und Weiterentwicklung, wenn Sie sie wünschen.</p>
+              <p>
+                Externe Kosten: Hosting, Software, KI-Nutzung und Werbebudget, offen ausgewiesen
+                statt im Projektpreis versteckt.
+              </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/leistungsumfang">
-                  Pakete ansehen
+                  Drei Pakete. Ein klarer Umfang.
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -187,7 +182,7 @@ function Index() {
             <div className={"pc-section-body"}>
               <p>
                 Sind Budget oder Zeit begrenzt, legen wir gemeinsam fest, welches Ergebnis Sie
-                zuerst brauchen. Daraus wird ein abgegrenzter Einstieg. Alles Weitere steht als
+                zuerst brauchen. Daraus wird ein abgegrenzter Einstieg; alles Weitere steht als
                 Option daneben.
               </p>
               <p>
@@ -229,7 +224,7 @@ function Index() {
                 </svg>
               </a>
               <a className={"hc-text-link"} href="/leistungsumfang">
-                Pakete ansehen
+                Pakete vergleichen
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -265,7 +260,10 @@ function ImportedSectionDerPassendeEinstieg() {
           <span className={"hc-kicker"}>Ihr nächster Schritt</span>
           <h2 id="page-showcase-title">Der passende Einstieg.</h2>
         </div>
-        <p>Jede Seite beschreibt Umfang, Ablauf und den nächsten Schritt für ihren Bereich.</p>
+        <p>
+          Wählen Sie den Bereich, der zu Ihrem Vorhaben passt. Umfang, Ablauf und nächste Schritte
+          finden Sie auf der jeweiligen Seite.
+        </p>
       </header>
       <nav className={"hc-gallery"} aria-label="Der passende Einstieg.">
         <a className={"hc-gallery-card"} href="/leistungsumfang">
@@ -446,7 +444,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -512,8 +513,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie legen fest, womit Sie beginnen, und wählen Erweiterungen bewusst. Externe Kosten
-                verstecken wir nicht in einem Pauschalpreis.
+                Sie können den Einstieg priorisieren und Erweiterungen bewusst wählen. Externe
+                Kosten werden nicht als Bestandteil eines unklaren Pauschalpreises versteckt.
               </p>
             </div>
           </details>
@@ -537,9 +538,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
-                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
-                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
+                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
+                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
+                Laufende Betreuung wird separat vereinbart.
               </p>
             </div>
           </details>
@@ -563,8 +564,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Kosten stehen im Angebot, bevor Sie zusagen. Hosting, Software, KI-Nutzung und
-                ein etwaiges Werbebudget weisen wir getrennt aus.
+                Der Aufwand und die Kosten werden für Ihr Vorhaben im Angebot festgelegt. Hosting,
+                Software, KI-Verbrauch und gegebenenfalls Medienbudget werden separat ausgewiesen.
               </p>
             </div>
           </details>
@@ -615,9 +616,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>

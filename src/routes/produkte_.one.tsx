@@ -138,7 +138,7 @@ function Index() {
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>Ihr nächster Schritt</span>
                 <a className={"hc-text-link"} href="/produkte/api">
-                  NeXify API ansehen
+                  NeXify API. KI in Ihrer Anwendung.
                   <svg
                     className={"hc-arrow"}
                     viewBox="0 0 24 24"
@@ -170,8 +170,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                AIFly ORACLE ist dafür da, Zuständigkeiten und Abhängigkeiten zu ordnen. Für jeden
-                Schritt halten wir fest, ob er vorbereitet, geprüft oder ausgeführt ist.
+                AIFly ORACLE ist dafür da, Zuständigkeiten und Abhängigkeiten zu ordnen. Ein
+                Arbeitsstand zeigt, ob etwas vorbereitet, geprüft oder ausgeführt ist.
               </p>
               <p>
                 Veröffentlichen und Versenden bleiben Ihre Entscheidung. Ein Entwurf ist noch kein
@@ -262,7 +262,10 @@ function ImportedSectionKlarheitVorDemErsten() {
         <header className={"hc-section-heading"}>
           <span className={"hc-kicker"}>Sechs Fragen zu Ihrem Vorhaben</span>
           <h2 id="page-questions-title">Klarheit vor dem ersten Schritt.</h2>
-          <p>Kurze Antworten zu Eignung, Ablauf, Kosten und Grenzen.</p>
+          <p>
+            Die Antworten beschreiben Umfang, Ablauf und Grenzen – damit Sie Ihr Vorhaben sicher
+            einordnen können.
+          </p>
           <a className={"hc-text-link"} href="/kontakt">
             Vorhaben beschreiben
             <svg
@@ -328,8 +331,8 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Agenten zerlegen Aufgaben in prüfbare Schritte. Recherche, Entwurf, Freigabe und
-                Ausführung bleiben unterscheidbar.
+                Aufgaben werden in prüfbare Schritte zerlegt. Sie unterscheiden Recherche, Entwurf,
+                Freigabe und tatsächliche Ausführung.
               </p>
             </div>
           </details>
@@ -353,9 +356,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Sie schildern Ihr Vorhaben, Pascal klärt mit Ihnen Ziel, Grundlagen und Umfang.
-                Danach erhalten Sie ein Angebot. Nach Ihrer Freigabe setzen wir um, prüfen das
-                Ergebnis und übergeben es. Betreuung danach vereinbaren wir separat.
+                Sie beschreiben Ihr Vorhaben. Pascal klärt Ziel, vorhandene Grundlagen und Umfang
+                mit Ihnen. Danach folgen Angebot, Ihre Freigabe, Umsetzung, Prüfung und Übergabe.
+                Laufende Betreuung wird separat vereinbart.
               </p>
             </div>
           </details>
@@ -379,9 +382,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Tarife sind noch nicht veröffentlicht. Zugang, Umfang und Verbrauch nennen wir
-                Ihnen im Angebot. Anpassungen an Ihre Systeme berechnen wir nach vereinbartem
-                Umfang.
+                Zugang, Umfang und Verbrauch stehen in Ihrem Produktangebot; die Tarife stehen noch
+                zur Freigabe. Individuelle Integrationsarbeit bieten wir nach dem vereinbarten
+                Umfang an.
               </p>
             </div>
           </details>
@@ -407,8 +410,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Die Agenten handeln nur in dem Rahmen, den Sie freigeben: Werkzeuge, Datenzugriffe
-                und Budget. Ein Entwurf ist noch keine ausgeführte Aktion.
+                Die Produktbeschreibung ist keine pauschale Ausführungsvollmacht. Werkzeuge,
+                Datenzugriffe und Budgets müssen freigegeben sein; ein Entwurf ist keine ausgeführte
+                Aktion.
               </p>
             </div>
           </details>
@@ -432,9 +436,9 @@ function ImportedSectionKlarheitVorDemErsten() {
             </summary>
             <div className={"hc-service-body"}>
               <p>
-                Schildern Sie Ihr Vorhaben im Kontaktformular: Ihr Ziel, was schon vorhanden ist,
-                und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer. Ein Auftrag entsteht
-                dadurch noch nicht.
+                Beschreiben Sie Ihr Vorhaben über das Kontaktformular. Nennen Sie Ziel, vorhandene
+                Systeme und Ihre wichtigste Frage. Sie erhalten eine Anfrage-Nummer; die Anfrage ist
+                noch keine Beauftragung.
               </p>
             </div>
           </details>
@@ -455,11 +459,11 @@ function ImportedSectionPassendeThemen() {
           <span className={"hc-kicker"}>Weiterführende Seiten</span>
           <h2 id="related-title-one">Passende Themen</h2>
         </div>
-        <p>Diese Seiten führen das Thema weiter.</p>
+        <p>Wählen Sie den nächsten Schritt, der zu Ihrem Vorhaben passt.</p>
       </header>
       <ol>
         <li>
-          <span className={"hc-kicker"}>Kontakt</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/kontakt">
               Schildern Sie Ihr Vorhaben.
@@ -509,7 +513,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Produkte</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/nex2fly">
               NeX AIFly Suite. Ihr KI-Arbeitsbereich.
@@ -558,7 +562,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Produkte</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/produkte/api">
               NeXify API. KI in Ihrer Anwendung.
@@ -607,7 +611,7 @@ function ImportedSectionPassendeThemen() {
           </a>
         </li>
         <li>
-          <span className={"hc-kicker"}>Leistungen</span>
+          <span className={"hc-kicker"}>NeXify AI</span>
           <h3>
             <a href="/loesungen">
               Kampagne und Zielseite aus einem Guss.
