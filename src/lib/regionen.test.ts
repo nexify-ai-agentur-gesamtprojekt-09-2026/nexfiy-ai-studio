@@ -9,6 +9,8 @@ import {
   BUNDESLAENDER,
   FEIERTAG_NAMEN,
   LAENDERSEITEN_INDEXIERT,
+  TEILWEISE_ZUSATZ,
+  feiertagKurz,
   type FeiertagId,
 } from "./regionen-daten";
 import { SEITEN, canonicalUrl, pageJsonLd, seitenTitel } from "./seo";
@@ -127,6 +129,22 @@ describe("Datentabelle der Bundesländer", () => {
     expect(von("DE-TH")).toContain("weltkindertag");
     expect(von("DE-HE")).toEqual(["fronleichnam"]);
     expect(von("DE-NW")).toEqual(["fronleichnam", "allerheiligen"]);
+  });
+
+  it("Kurzform kennzeichnet jede Teilgeltung, landesweite Tage bleiben ohne Zusatz", () => {
+    const teilweise = BUNDESLAENDER.flatMap((land) => land.feiertage.filter((t) => t.teilweise));
+    expect(teilweise.length).toBeGreaterThanOrEqual(4); // BY ×2, SN, TH
+    for (const land of BUNDESLAENDER)
+      for (const t of land.feiertage)
+        expect(feiertagKurz(t).endsWith(TEILWEISE_ZUSATZ), `${land.name}: ${t.id}`).toBe(
+          Boolean(t.teilweise),
+        );
+  });
+
+  it("die Übersicht nennt Feiertage nur über die Kurzform, nie den bloßen Namen", () => {
+    const quelle = lies("src/routes/regionen.tsx");
+    expect(quelle).toContain("land.feiertage.map(feiertagKurz)");
+    expect(quelle).not.toMatch(/FEIERTAG_NAMEN/);
   });
 
   it("Datenschutzaufsicht: eigene Behörde je Land mit HTTPS-Adresse", () => {
@@ -301,6 +319,21 @@ describe.skipIf(!existsSync(SERVER))("Gebauter Worker: Regionalseiten", () => {
         if (!land.feiertage.some((t) => t.id === id))
           expect(text, `${land.name}: ${name}`).not.toContain(name);
     }
+  });
+
+  it("die Übersicht kennzeichnet Feiertage mit Teilgeltung als „(teilweise)“", async () => {
+    const text = hauptText((await abruf("/regionen")).html);
+    for (const land of BUNDESLAENDER)
+      for (const t of land.feiertage) {
+        const name = FEIERTAG_NAMEN[t.id];
+        // Ausschnitt der Karte dieses Landes: vom Ländernamen bis „Aufsicht:".
+        const karte =
+          text.slice(text.indexOf(`${land.name} Zusätzlich frei:`)).split("Aufsicht:")[0] ?? "";
+        expect(karte, land.name).toContain(name);
+        expect(karte.includes(name + TEILWEISE_ZUSATZ), `${land.name}: ${name}`).toBe(
+          Boolean(t.teilweise),
+        );
+      }
   });
 
   it("die Übersicht verlinkt alle 16 Länder, unbekannte Länder sind 404 mit noindex", async () => {

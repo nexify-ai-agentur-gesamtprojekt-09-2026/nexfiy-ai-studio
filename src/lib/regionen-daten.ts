@@ -329,6 +329,13 @@ export const FEIERTAG_NAMEN: Record<FeiertagId, string> = {
   "buss-und-bettag": "Buß- und Bettag",
 };
 
+/** Kurzform für Übersichten: ein Tag mit Teilgeltung trägt immer den Zusatz „(teilweise)". */
+export const TEILWEISE_ZUSATZ = " (teilweise)";
+
+export function feiertagKurz(tag: LandFeiertag): string {
+  return FEIERTAG_NAMEN[tag.id] + (tag.teilweise ? TEILWEISE_ZUSATZ : "");
+}
+
 /** Titel ohne Markenzusatz; mit „ · NeXify AI" höchstens 60 Zeichen (geprüft in seo.test.ts). */
 export function landTitel(land: Bundesland): string {
   return `Websites und KI für ${land.name}`;

@@ -8,7 +8,7 @@ import {
 } from "@/components/site/RegionenBausteine";
 import capturedCSS from "../styles/pages/wissen.projekt-vorbereiten.css?url";
 import regionenCSS from "../styles/site-regionen.css?url";
-import { BUNDESLAENDER, FEIERTAG_NAMEN } from "@/lib/regionen-daten";
+import { BUNDESLAENDER, feiertagKurz } from "@/lib/regionen-daten";
 import { pageHead, seite } from "@/lib/seo";
 
 export const Route = createFileRoute("/regionen")({
@@ -139,8 +139,7 @@ function Regionen() {
                   <a className={"nxr-land"} href={`/regionen/${land.slug}`}>
                     <span className={"nxr-land-name"}>{land.name}</span>
                     <span className={"nxr-land-fakt"}>
-                      Zusätzlich frei:{" "}
-                      {land.feiertage.map((tag) => FEIERTAG_NAMEN[tag.id]).join(", ")}
+                      Zusätzlich frei: {land.feiertage.map(feiertagKurz).join(", ")}
                     </span>
                     <span className={"nxr-land-fakt"}>Aufsicht: {land.aufsicht.kurz}</span>
                   </a>
@@ -154,6 +153,10 @@ function Regionen() {
               Tage, die zusätzlich zu den bundesweiten Feiertagen gelten und auf einen Werktag
               fallen können. Datenschutzaufsicht: Websites der Behörden, abgerufen am 22. November
               2026.
+            </p>
+            <p>
+              „(teilweise)“ heißt: Der Tag gilt nicht im ganzen Land, sondern nur in bestimmten
+              Gemeinden. Wo genau, steht auf der Seite des Landes.
             </p>
             <p>
               Diese Angaben helfen bei der Planung und ersetzen keine Rechtsberatung. Verbindlich
