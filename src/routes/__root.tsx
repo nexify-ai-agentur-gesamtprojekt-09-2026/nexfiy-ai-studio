@@ -17,7 +17,7 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
-import { displayPath, siteAreaFor, suggestionsFor } from "@/lib/system-pages";
+import { displayPath, suggestionsFor } from "@/lib/system-pages";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function useDocumentTitle(title: string) {
@@ -32,14 +32,13 @@ function useDocumentTitle(title: string) {
 
 function NotFoundComponent() {
   const pathname = useLocation({ select: (location) => location.pathname });
-  const area = siteAreaFor(pathname);
   useDocumentTitle("Seite nicht gefunden · NeXify AI");
   return (
     <>
       <meta name="robots" content="noindex" />
       <StatusPage
         code="404"
-        kicker={area === "teileklar" ? "TEILEKLAR.shop · Fehler 404" : "NeXify AI · Fehler 404"}
+        kicker="NeXify AI · Fehler 404"
         title="Diese Seite gibt es hier nicht."
         description={
           <p>
@@ -58,8 +57,8 @@ function NotFoundComponent() {
         actions={
           <>
             <Button asChild variant="brand" size="xl">
-              <Link to={area === "teileklar" ? "/teileklar" : "/"}>
-                {area === "teileklar" ? "Zum Schaufenster" : "Zur Startseite"}
+              <Link to="/">
+                Zur Startseite
                 <ArrowRight aria-hidden="true" />
               </Link>
             </Button>

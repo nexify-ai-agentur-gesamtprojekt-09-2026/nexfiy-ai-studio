@@ -81,12 +81,6 @@ export function NexifyFooter() {
               <a href="/produkte/api" {...here("/produkte/api")}>
                 NeXify API
               </a>
-              <a href="/teileklar" {...here("/teileklar")}>
-                TEILEKLAR
-              </a>
-              <a href="/teileklar/partner-werden" {...here("/teileklar/partner-werden")}>
-                Partner werden
-              </a>
             </nav>
             <nav aria-label={"Leistungen & Zusammenarbeit"}>
               <h2>Leistungen &amp; Zusammenarbeit</h2>
@@ -151,9 +145,6 @@ export function NexifyFooter() {
           <span className={"footer-claim"}>
             NeXify AI <span aria-hidden="true">·</span> Chat it. Automate it.
           </span>
-          <a className={"footer-crosslink"} href="/teileklar" {...here("/teileklar")}>
-            TEILEKLAR <span aria-hidden="true">→</span>
-          </a>
           <details className={"footer-overview"}>
             <summary aria-expanded="false" aria-controls="_R_8lbH1_">
               <span>Seitenübersicht</span>

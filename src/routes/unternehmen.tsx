@@ -189,10 +189,6 @@ function Index() {
                 KI-Abläufe. Dazu kommen eigene Produkte – die NeX AIFly Suite als Arbeitsbereich,
                 die Agenten NeX und AIFly ORACLE, die NeXify API.
               </p>
-              <p>
-                TEILEKLAR.shop ist unsere eigene Marke für Auto und Motorrad. Dort zeigen wir im
-                eigenen Shop, was wir für Kunden bauen.
-              </p>
             </div>
           </section>
         </div>

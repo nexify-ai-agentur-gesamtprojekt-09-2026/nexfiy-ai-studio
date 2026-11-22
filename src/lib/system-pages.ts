@@ -1,19 +1,11 @@
 /** Content for the system pages (not found, error): which existing pages to suggest for a requested path. */
-export type SuggestedPath =
-  | "/"
-  | "/leistungen"
-  | "/kontakt"
-  | "/teileklar"
-  | "/teileklar/werkstatt"
-  | "/teileklar/partner-werden";
+export type SuggestedPath = "/" | "/leistungen" | "/kontakt";
 
 export interface PageSuggestion {
   to: SuggestedPath;
   label: string;
   description: string;
 }
-
-export type SiteArea = "nexify" | "teileklar";
 
 const NEXIFY: PageSuggestion[] = [
   {
@@ -33,33 +25,9 @@ const NEXIFY: PageSuggestion[] = [
   },
 ];
 
-const TEILEKLAR: PageSuggestion[] = [
-  {
-    to: "/teileklar",
-    label: "Schaufenster",
-    description: "Zubehör für Auto und Motorrad mit klaren Angaben zu Passung und Preis.",
-  },
-  {
-    to: "/teileklar/werkstatt",
-    label: "Werkstatt finden",
-    description: "Werkstätten in Ihrer Nähe, gesucht nach PLZ oder Ort.",
-  },
-  {
-    to: "/teileklar/partner-werden",
-    label: "Partner werden",
-    description: "Vollständige Aufträge für Ihre Werkstatt.",
-  },
-];
-
-/** TEILEKLAR paths get shop suggestions, everything else the NeXify pages. */
-export function siteAreaFor(pathname: string): SiteArea {
-  return /^\/teileklar(\/|$)/.test(pathname) ? "teileklar" : "nexify";
-}
-
 export function suggestionsFor(pathname: string): PageSuggestion[] {
   const normalized = pathname.replace(/\/+$/, "") || "/";
-  const list = siteAreaFor(normalized) === "teileklar" ? TEILEKLAR : NEXIFY;
-  return list.filter((suggestion) => suggestion.to !== normalized);
+  return NEXIFY.filter((suggestion) => suggestion.to !== normalized);
 }
 
 /** Shortens long or encoded paths for display without breaking the layout. */

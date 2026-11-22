@@ -1,4 +1,4 @@
-/* Shared page shell (NeXify and TEILEKLAR): phone sizing of the chat panel. Previously repeated per page
+/* Shared page shell: phone sizing of the chat panel. Previously repeated per page
    as generated [data-site-import-responsive] rules; one semantic copy now serves every page. */
 @media (max-width: 767px) {
   :root #atelier #aifly-panel {

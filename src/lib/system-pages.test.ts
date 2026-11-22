@@ -1,21 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { displayPath, siteAreaFor, suggestionsFor } from "./system-pages";
+import { displayPath, suggestionsFor } from "./system-pages";
 
 describe("not-found suggestions", () => {
-  it("suggests TEILEKLAR pages for a missing TEILEKLAR address", () => {
+  it("treats a removed shop address like any other missing address", () => {
     expect(suggestionsFor("/teileklar/warenkorb").map((s) => s.to)).toEqual([
-      "/teileklar",
-      "/teileklar/werkstatt",
-      "/teileklar/partner-werden",
+      "/",
+      "/leistungen",
+      "/kontakt",
     ]);
   });
 
   it("suggests the NeXify pages for any other missing address", () => {
     expect(suggestionsFor("/impressum").map((s) => s.to)).toEqual(["/", "/leistungen", "/kontakt"]);
-  });
-
-  it("does not treat a look-alike path as TEILEKLAR", () => {
-    expect(siteAreaFor("/teileklarheit")).toBe("nexify");
   });
 
   it("never suggests the page the visitor is already on", () => {

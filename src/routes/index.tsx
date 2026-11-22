@@ -478,64 +478,6 @@ function ImportedNavWoHaktEsGerade() {
           </span>
         </a>
       </article>
-      <article
-        className={"hc-gallery-card is-in"}
-        data-site-import-scroll-header={
-          '{"desktop":{"added":["is-in"],"removed":[],"threshold":1296}}'
-        }
-      >
-        <div className={"identity-media hc-art hc-art-2"}>
-          <figure className={"identity-hero-photo"}>
-            <SiteFilm film="teileklar" />
-          </figure>
-        </div>
-        <a className={"hc-gallery-link"} href="/teileklar">
-          <span className={"hc-scene-context"}>Automotive &amp; Logistik</span>
-          <h3>
-            Das richtige Teil. Der richtige Weg.
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M5 19 19 5M5 5h14v14" />
-            </svg>
-          </h3>
-          <p>
-            TEILEKLAR zeigt als eigene Produktwelt, wie Fahrzeug, Teil, Passung und Werkstatt in
-            einem verständlichen Anfrageweg zusammenkommen.
-          </p>
-          <small className={"hc-scene-value"}>
-            Ziel: mehr Klarheit vor der nächsten Teile- oder Werkstattfrage.
-          </small>
-          <span className={"hc-text-link"}>
-            TEILEKLAR entdecken
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </span>
-        </a>
-      </article>
     </nav>
   );
 }
@@ -772,8 +714,8 @@ function ImportedSectionEigeneWerkzeugeFR() {
           <h2 id="hc-products-title">Eigene Werkzeuge für konkrete Arbeit.</h2>
         </div>
         <p>
-          Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE, die NeXify API und TEILEKLAR haben
-          je eine eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.
+          Die NeX AIFly Suite, die Agenten NeX und AIFly ORACLE und die NeXify API haben je eine
+          eigene Aufgabe. Wir sagen Ihnen offen, was zu Ihrem Vorhaben passt.
         </p>
       </header>
       <div className={"hc-products"}>
@@ -867,42 +809,6 @@ function ImportedSectionEigeneWerkzeugeFR() {
             <p>KI-Funktionen von NeXify in Ihrer eigenen Anwendung, genutzt über ein Guthaben.</p>
             <span className={"hc-text-link"}>
               API ansehen
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M4 12h16M13 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </a>
-        <a className={"hc-product is-in"} href="/teileklar">
-          <figure className={"hc-product-art"}>
-            <img
-              src="/site-assets/506495187c091a6f.webp"
-              srcSet="/site-assets/3be13e6036057b5f.webp 800w, /site-assets/5467e1d560fa9ec8.webp 1280w, /site-assets/506495187c091a6f.webp 1920w"
-              sizes="(max-width: 900px) 100vw, 50vw"
-              width="2000"
-              height="1125"
-              alt="Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons; begleitet von NeX und AIFly ORACLE"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-          <div>
-            <h3>TEILEKLAR</h3>
-            <p>Unsere eigene Marke: Zubehör und Teile für Auto und Motorrad, mit klaren Angaben.</p>
-            <span className={"hc-text-link"}>
-              Zu TEILEKLAR
               <svg
                 className={"hc-arrow"}
                 viewBox="0 0 24 24"

@@ -124,63 +124,6 @@ export function NexifyHeader() {
                 </a>
               </div>
               <div className={"megamenu-group"}>
-                <h2>TEILEKLAR</h2>
-                <a href="/teileklar" {...here("/teileklar")}>
-                  <span>TEILEKLAR entdecken</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-                <a href="/teileklar/werkstatt" {...here("/teileklar/werkstatt")}>
-                  <span>Werkstattprofile</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-                <a href="/teileklar/partner-werden" {...here("/teileklar/partner-werden")}>
-                  <span>Werkstattpartner werden</span>
-                  <svg
-                    className={"nx-zeichen"}
-                    viewBox="0 0 24 24"
-                    width="18"
-                    height="18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </a>
-              </div>
-              <div className={"megamenu-group"}>
                 <h2>Projekt &amp; Wachstum</h2>
                 <a href="/loesungen" {...here("/loesungen")}>
                   <span>Kampagne und Zielseite aus einem Guss.</span>
@@ -355,63 +298,6 @@ export function NexifyHeader() {
             </a>
             <a href="/produkte/api" {...here("/produkte/api")}>
               <span>API &amp; Integrationen</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-          <div className={"megamenu-group"}>
-            <h2>TEILEKLAR</h2>
-            <a href="/teileklar" {...here("/teileklar")}>
-              <span>TEILEKLAR entdecken</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/teileklar/werkstatt" {...here("/teileklar/werkstatt")}>
-              <span>Werkstattprofile</span>
-              <svg
-                className={"nx-zeichen"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-            <a href="/teileklar/partner-werden" {...here("/teileklar/partner-werden")}>
-              <span>Werkstattpartner werden</span>
               <svg
                 className={"nx-zeichen"}
                 viewBox="0 0 24 24"

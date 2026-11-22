@@ -11,7 +11,7 @@ export const Route = createFileRoute("/portale")({
       {
         name: "description",
         content:
-          "Kunden, Partner und Werkstätten haben je einen eigenen, geschützten Bereich. Hier finden Sie Ihren Einstieg",
+          "Kunden und Partner haben je einen eigenen, geschützten Bereich. Hier finden Sie Ihren Einstieg",
       },
     ],
   }),
@@ -46,8 +46,8 @@ function Index() {
               </span>
               <h1 id="page-title-portals">Portale. Ihr Zugang, Ihr Bereich.</h1>
               <p className={"identity-body"}>
-                Kunden, Partner und Werkstätten haben je einen eigenen, geschützten Bereich. Hier
-                finden Sie Ihren Einstieg.
+                Kunden und Partner haben je einen eigenen, geschützten Bereich. Hier finden Sie
+                Ihren Einstieg.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -59,13 +59,6 @@ function Index() {
                   <span aria-hidden="true" className={"identity-primary-arrow"}>
                     →
                   </span>
-                </a>
-                <a
-                  className={"nexify-control secondary-button identity-secondary-link"}
-                  data-variant="secondary"
-                  href="/teileklar/partner-werden"
-                >
-                  Partner werden
                 </a>
               </div>
             </div>
@@ -156,8 +149,7 @@ function Index() {
             <div className={"pc-section-body"}>
               <p>
                 Der Kundenbereich ist für Projektstand, Dokumente und Anfragen gedacht. Der
-                Partnerbereich richtet sich an Partner von NeXify AI. Werkstätten arbeiten im
-                Partnerportal von TEILEKLAR, unserer eigenen Shop-Marke.
+                Partnerbereich richtet sich an Partner von NeXify AI.
               </p>
               <div className={"hc-service-detail pc-module"}>
                 <span className={"hc-caption"}>
@@ -235,42 +227,6 @@ function Index() {
             <div className={"hc-finish-actions"}>
               <a className={"hc-finish-primary"} href="/anmelden">
                 Anmelden
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a className={"hc-text-link"} href="/teileklar/partner-werden">
-                Partner werden
-                <svg
-                  className={"hc-arrow"}
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M4 12h16M13 5l7 7-7 7" />
-                </svg>
-              </a>
-              <a className={"hc-text-link"} href="/teileklar">
-                TEILEKLAR entdecken
                 <svg
                   className={"hc-arrow"}
                   viewBox="0 0 24 24"
@@ -430,104 +386,6 @@ function ImportedSectionPassendeThemen() {
             aria-label="Anmelden und weiterarbeiten. – Seite ansehen"
             className={"hc-text-link"}
             href="/anmelden"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>TEILEKLAR</span>
-          <h3>
-            <a href="/teileklar/partner-werden">
-              Werkstatt? Werden Sie Partner.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Kunden kaufen das Teil bei TEILEKLAR und suchen jemanden für den Einbau. Stellen Sie
-            Ihren Betrieb vor – wir besprechen, wie eine Zusammenarbeit aussieht.
-          </p>
-          <a
-            aria-label="Werkstatt? Werden Sie Partner. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/teileklar/partner-werden"
-          >
-            Seite ansehen
-            <svg
-              className={"hc-arrow"}
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path d="M4 12h16M13 5l7 7-7 7" />
-            </svg>
-          </a>
-        </li>
-        <li>
-          <span className={"hc-kicker"}>TEILEKLAR</span>
-          <h3>
-            <a href="/teileklar">
-              TEILEKLAR. Für Auto und Motorrad.
-              <svg
-                className={"hc-arrow"}
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 19 19 5M5 5h14v14" />
-              </svg>
-            </a>
-          </h3>
-          <p>
-            Zubehör und Teile mit klaren Angaben: Originalfotos des Lieferanten, Preise inklusive
-            Mehrwertsteuer und Versandkosten, die Sie vor dem Kauf sehen.
-          </p>
-          <a
-            aria-label="TEILEKLAR. Für Auto und Motorrad. – Seite ansehen"
-            className={"hc-text-link"}
-            href="/teileklar"
           >
             Seite ansehen
             <svg
