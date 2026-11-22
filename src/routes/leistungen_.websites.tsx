@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungen.websites.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungen_/websites")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/leistungen/websites")],
-    meta: [
-      { title: "Eine Website, die Ihr Angebot erklärt. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Eine Seitenstruktur, die den Fragen Ihrer Kunden folgt. Texte, die Ihr Angebot in klaren Sätzen sagen. Eine Gestaltung, die eigens für Ihr Unternehmen.",
-      },
-    ],
-  }),
+  head: () => pageHead("/leistungen/websites", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

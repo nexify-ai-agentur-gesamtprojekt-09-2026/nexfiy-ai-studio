@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/impressum.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/impressum")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/impressum")],
-    meta: [
-      { title: "Impressum · NeXify AI by NeXify · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Anbieter dieser Website ist NeXify AI by NeXify, Inhaber Pascal Courbois, eine Eenmanszaak nach niederländischem Recht mit Anschrift in Venlo",
-      },
-    ],
-  }),
+  head: () => pageHead("/impressum", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

@@ -17,6 +17,7 @@ import { ArrowRight, RotateCcw } from "lucide-react";
 import appCss from "../styles.css?url";
 import { StatusPage } from "@/components/system/StatusPage";
 import { Button } from "@/components/ui/button";
+import { siteJsonLd } from "@/lib/seo";
 import { displayPath, isRetiredPath, suggestionsFor } from "@/lib/system-pages";
 
 function useDocumentTitle(title: string) {
@@ -199,72 +200,9 @@ function RootShell({ children }: { children: ReactNode }) {
         </style>
         <script
           type="application/ld+json"
-          // 2026-11-19 22:40 (Europe/Berlin): strukturierte Daten fuer Organisation + Website.
-          // Korrigiert: Telefon war maskiert, E-Mail wich vom Impressum ab, sameAs zeigte auf
-          // sich selbst, und der Block stand doppelt (Skript zweimal gelaufen).
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Organization",
-                  "@id": "https://www.nexifyai.de/#organisation",
-                  name: "NeXify AI",
-                  legalName: "NeXify AI by NeXify",
-                  url: "https://www.nexifyai.de/",
-                  logo: "https://www.nexifyai.de/icons/icon-512.png",
-                  email: "mail@nexifyai.cloud",
-                  telephone: "+31 6 133 188 56",
-                  founder: { "@type": "Person", name: "Pascal Courbois" },
-                  address: {
-                    "@type": "PostalAddress",
-                    streetAddress: "Graaf van Loonstraat 1E",
-                    postalCode: "5921 JA",
-                    addressLocality: "Venlo",
-                    addressCountry: "NL",
-                  },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "WebSite",
-                  "@id": "https://www.nexifyai.de/#website",
-                  url: "https://www.nexifyai.de/",
-                  name: "NeXify AI",
-                  inLanguage: "de-DE",
-                  publisher: { "@id": "https://www.nexifyai.de/#organisation" },
-                },
-                // 2026-11-22 03:00 (Europe/Berlin): Leistungsangebot als Service-Entitaeten.
-                // Quelle: eigene Leistungsseiten /leistungen/*; nur dort belegte Angebote.
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-websites",
-                  name: "Websites & Markenauftritt",
-                  serviceType: "Webdesign und Website-Entwicklung",
-                  url: "https://www.nexifyai.de/leistungen/websites",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-apps",
-                  name: "Apps & Portale",
-                  serviceType: "Softwareentwicklung für Web-Apps und Portale",
-                  url: "https://www.nexifyai.de/leistungen/apps-portale",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-                {
-                  "@type": "Service",
-                  "@id": "https://www.nexifyai.de/#service-ki",
-                  name: "Automatisierung & KI",
-                  serviceType: "KI-Agenten und Prozessautomatisierung",
-                  url: "https://www.nexifyai.de/leistungen/agenten-automatisierung",
-                  provider: { "@id": "https://www.nexifyai.de/#organisation" },
-                  areaServed: ["DE", "NL", "AT", "CH"],
-                },
-              ],
-            }),
-          }}
+          // Organisation und Website, auf jeder Seite gleich. Angaben und Regeln stehen in
+          // src/lib/seo.ts (siteJsonLd); Seite, Pfad und Leistung liefert jede Route selbst.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
         />
         <HeadContent />
       </head>

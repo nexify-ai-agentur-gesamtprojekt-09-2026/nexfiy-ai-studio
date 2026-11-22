@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/wissen.projekt-vorbereiten.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/wissen_/projekt-vorbereiten")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/wissen/projekt-vorbereiten")],
-    meta: [
-      { title: "Ihr Briefing in fünf Fragen. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Sie brauchen kein fertiges Konzept. Fünf Antworten genügen, damit aus Ihrer Idee ein Angebot werden kann",
-      },
-    ],
-  }),
+  head: () => pageHead("/wissen/projekt-vorbereiten", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

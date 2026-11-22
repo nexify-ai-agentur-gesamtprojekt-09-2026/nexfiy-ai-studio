@@ -1,22 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/datenschutz.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { LegalSections } from "@/components/site/LegalSections";
 import { datenschutzSections } from "@/lib/legal/datenschutz";
 
 export const Route = createFileRoute("/datenschutz")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/datenschutz")],
-    meta: [
-      { title: "Ihre Daten. Ein klarer Zweck. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Vertrauen braucht nachvollziehbaren Umgang mit Informationen. Für Website, Anfragen und Arbeitsbereiche sind Zweck, Verantwortlichkeit und Aufbewahrung.",
-      },
-    ],
-  }),
+  head: () => pageHead("/datenschutz", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

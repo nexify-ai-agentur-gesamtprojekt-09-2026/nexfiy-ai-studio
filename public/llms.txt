@@ -1,38 +1,61 @@
 # NeXify AI
 
-> Agentur fuer Websites, Apps, Shops und KI-Automatisierung. Ein Ansprechpartner,
-> klarer Umfang, Umsetzung aus einer Hand. Sitz Venlo (NL), Projektbetreuung im DACH-Raum.
+> NeXify AI ist die Agentur von Pascal Courbois in Venlo (Niederlande). Sie baut für Unternehmen
+> Websites, Apps und Portale, Automatisierung mit KI sowie Kampagnen mit Zielseite – mit einem
+> Ansprechpartner und einem Angebot, dessen Umfang vor dem Start feststeht.
 
-## Seiten
+Wer: NeXify AI by NeXify, Inhaber Pascal Courbois, Eenmanszaak nach niederländischem Recht,
+Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande (KvK 90483944).
+Für wen: Unternehmen in Deutschland, den Niederlanden, Österreich und der Schweiz; das Angebot
+richtet sich an Unternehmer im Sinne des § 14 BGB (B2B).
+Sprache der Website: Deutsch.
 
-- [https://www.nexifyai.de/](https://www.nexifyai.de/)
-- [https://www.nexifyai.de/barrierefreiheit](https://www.nexifyai.de/barrierefreiheit)
-- [https://www.nexifyai.de/cookies](https://www.nexifyai.de/cookies)
-- [https://www.nexifyai.de/datenschutz](https://www.nexifyai.de/datenschutz)
-- [https://www.nexifyai.de/impressum](https://www.nexifyai.de/impressum)
-- [https://www.nexifyai.de/ki-hinweise](https://www.nexifyai.de/ki-hinweise)
-- [https://www.nexifyai.de/kontakt](https://www.nexifyai.de/kontakt)
-- [https://www.nexifyai.de/leistungen](https://www.nexifyai.de/leistungen)
-- [https://www.nexifyai.de/leistungen/agenten-automatisierung](https://www.nexifyai.de/leistungen/agenten-automatisierung)
-- [https://www.nexifyai.de/leistungen/apps-portale](https://www.nexifyai.de/leistungen/apps-portale)
-- [https://www.nexifyai.de/leistungen/websites](https://www.nexifyai.de/leistungen/websites)
-- [https://www.nexifyai.de/leistungsumfang](https://www.nexifyai.de/leistungsumfang)
-- [https://www.nexifyai.de/loesungen](https://www.nexifyai.de/loesungen)
-- [https://www.nexifyai.de/portale](https://www.nexifyai.de/portale)
-- [https://www.nexifyai.de/preise-ablauf](https://www.nexifyai.de/preise-ablauf)
-- [https://www.nexifyai.de/produkte/aifly-oracle](https://www.nexifyai.de/produkte/aifly-oracle)
-- [https://www.nexifyai.de/produkte/api](https://www.nexifyai.de/produkte/api)
-- [https://www.nexifyai.de/produkte/nex-agentic-aifly](https://www.nexifyai.de/produkte/nex-agentic-aifly)
-- [https://www.nexifyai.de/produkte/nex2fly](https://www.nexifyai.de/produkte/nex2fly)
-- [https://www.nexifyai.de/produkte/one](https://www.nexifyai.de/produkte/one)
-- [https://www.nexifyai.de/produkte/skills-mcp](https://www.nexifyai.de/produkte/skills-mcp)
-- [https://www.nexifyai.de/unternehmen](https://www.nexifyai.de/unternehmen)
-- [https://www.nexifyai.de/vertragsgrundlagen](https://www.nexifyai.de/vertragsgrundlagen)
-- [https://www.nexifyai.de/wissen](https://www.nexifyai.de/wissen)
-- [https://www.nexifyai.de/wissen/projekt-vorbereiten](https://www.nexifyai.de/wissen/projekt-vorbereiten)
+## Leistungen
+
+- [Leistungen im Überblick](https://www.nexifyai.de/leistungen): Website, System, Kampagne aus einer Hand.
+- [Websites](https://www.nexifyai.de/leistungen/websites): Seitenstruktur, Texte, Gestaltung und Technik aus einem Konzept (Paket Markenstart).
+- [Apps und Portale](https://www.nexifyai.de/leistungen/apps-portale): Kundenportal, interne Anwendung oder Partnerbereich für einen Vorgang.
+- [Agenten und Automatisierung](https://www.nexifyai.de/leistungen/agenten-automatisierung): KI übernimmt einen benannten Schritt in einem Ablauf; Entscheidungen bleiben beim Auftraggeber.
+- [Kampagnen](https://www.nexifyai.de/loesungen): Botschaft, Werbemittel und Zielseite werden zusammen entwickelt (Paket Wachstum).
+- [Leistungsumfang](https://www.nexifyai.de/leistungsumfang): die drei Pakete Markenstart, KI im Betrieb und Wachstum.
+- [Preise und Ablauf](https://www.nexifyai.de/preise-ablauf): Angebot mit abgegrenztem Umfang vor jedem Auftrag; externe Kosten getrennt ausgewiesen.
+
+## Produkte
+
+Verfügbarkeit: Den KI-Assistenten AIFly ORACLE gibt es als Chat auf dieser Website. Zugang zu
+den übrigen Produkten gibt es auf Anfrage beziehungsweise im Rahmen eines Projekts; eine
+Selbstanmeldung gibt es derzeit nicht. Zugang, Umfang und Verbrauch stehen im jeweiligen
+Produktangebot.
+
+- [NeX AIFly Suite](https://www.nexifyai.de/produkte/nex2fly): KI-Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen.
+- [NeX Agentic AI](https://www.nexifyai.de/produkte/one): AIFly ORACLE ordnet, NeX führt aus – benannte Arbeitsschritte im Auftrag.
+- [AIFly ORACLE](https://www.nexifyai.de/produkte/aifly-oracle): KI-System, das Aufgaben ordnet und im Chat dieser Website antwortet.
+- [NeX Agentic AIFly](https://www.nexifyai.de/produkte/nex-agentic-aifly): Agent für klar umrissene Aufgaben mit zugelassenen Werkzeugen.
+- [NeXify API](https://www.nexifyai.de/produkte/api): KI-Funktionen von NeXify in eigener Software, Nutzung über Guthaben.
+- [Skills und MCP](https://www.nexifyai.de/produkte/skills-mcp): wiederholbare Arbeitsweisen für Agenten und Anbindung eigener Systeme.
+
+## Kundencenter
+
+- [Portale](https://www.nexifyai.de/portale): Das NeXify-Kundencenter ist in Einrichtung. Zugänge werden persönlich je Kunde vergeben; eine Anmeldung ist noch nicht möglich.
+
+## Unternehmen und Arbeitsweise
+
+- [Startseite](https://www.nexifyai.de/)
+- [Unternehmen](https://www.nexifyai.de/unternehmen): Pascal Courbois gibt Idee, Gestaltung und Richtung vor; die KI-Agenten NeX und AIFly ORACLE arbeiten aus.
+- [So arbeiten wir](https://www.nexifyai.de/wissen): vom ersten Gespräch bis zur Übergabe.
+- [Projekt vorbereiten](https://www.nexifyai.de/wissen/projekt-vorbereiten): fünf Fragen als Briefing.
 
 ## Kontakt
 
-- Website: https://www.nexifyai.de/kontakt
+- [Kontaktformular](https://www.nexifyai.de/kontakt)
 - Telefon: +31 6 133 188 56
 - E-Mail: mail@nexifyai.cloud
+
+## Rechtliches
+
+- [Impressum](https://www.nexifyai.de/impressum)
+- [Datenschutz](https://www.nexifyai.de/datenschutz)
+- [Cookies](https://www.nexifyai.de/cookies)
+- [KI-Hinweise](https://www.nexifyai.de/ki-hinweise)
+- [Barrierefreiheit](https://www.nexifyai.de/barrierefreiheit)
+- [Vertragsgrundlagen](https://www.nexifyai.de/vertragsgrundlagen)

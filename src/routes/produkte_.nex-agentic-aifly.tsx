@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.nex-agentic-aifly.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/nex-agentic-aifly")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/nex-agentic-aifly")],
-    meta: [
-      { title: "NeX Agentic AIFly. Der Agent, der ausführt. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Vor jedem Einsatz steht fest, was entstehen soll, welche Quellen und Werkzeuge NeX verwenden darf und wer das Ergebnis prüft. Dann arbeitet NeX die Schritte.",
-      },
-    ],
-  }),
+  head: () => pageHead("/produkte/nex-agentic-aifly", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

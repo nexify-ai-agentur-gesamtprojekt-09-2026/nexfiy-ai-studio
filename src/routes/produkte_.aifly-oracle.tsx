@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/produkte.aifly-oracle.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/produkte_/aifly-oracle")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/produkte/aifly-oracle")],
-    meta: [
-      { title: "AIFly ORACLE. Erst ordnen, dann handeln. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "AIFly ORACLE ist das KI-System, das Aufgaben ordnet und Ihnen im Chat dieser Website antwortet. Schildern Sie Ihr Vorhaben – es zeigt Ihnen den passenden.",
-      },
-    ],
-  }),
+  head: () => pageHead("/produkte/aifly-oracle", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

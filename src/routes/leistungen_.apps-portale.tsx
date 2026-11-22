@@ -1,20 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungen.apps-portale.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungen_/apps-portale")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/leistungen/apps-portale")],
-    meta: [
-      { title: "Portale und Apps für Ihren Ablauf. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Wer gibt etwas ein, wer prüft, und was ist der nächste Schritt? Aus diesen Fragen wird ein Ablauf, in dem Eingaben, Dokumente und der Stand zusammenstehen",
-      },
-    ],
-  }),
+  head: () => pageHead("/leistungen/apps-portale", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

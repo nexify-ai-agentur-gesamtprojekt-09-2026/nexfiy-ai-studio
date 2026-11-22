@@ -1,23 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/leistungen.agenten-automatisierung.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/leistungen_/agenten-automatisierung")({
-  head: () => ({
-    links: [
-      { rel: "stylesheet", href: capturedCSS },
-      canonicalLink("/leistungen/agenten-automatisierung"),
-    ],
-    meta: [
-      { title: "Routine abgeben. Kontrolle behalten. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Zum Beispiel: Eingehende Anfragen werden zugeordnet, oder die Angaben für ein Angebot liegen fertig bereit. Gemeinsam sehen wir uns die Schritte an, die.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead("/leistungen/agenten-automatisierung", {
+      links: [
+        { rel: "stylesheet", href: capturedCSS },
+      ],
+    }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

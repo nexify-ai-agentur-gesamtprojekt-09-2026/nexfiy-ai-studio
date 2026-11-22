@@ -1,20 +1,19 @@
+# NeXify AI – Regeln für Suchmaschinen und KI-Crawler.
+#
+# Alle Seiten dürfen abgerufen werden; gesperrt ist nur die Schnittstelle unter /api/.
+# KI-Crawler sind bewusst erlaubt (die Agentur will zitiert werden) und deshalb namentlich
+# genannt. Sie stehen in derselben Gruppe wie alle anderen: Eine eigene Gruppe je Crawler würde
+# die Regeln der Gruppe "*" für ihn aufheben, also auch die Sperre von /api/.
+#
+# Die Hinweisseiten des Kundencenters (/anmelden, /registrieren, /passwort-vergessen) und
+# /offline sind hier nicht gesperrt: Sie tragen "noindex". Das wirkt nur, wenn die Seite
+# abgerufen werden darf.
+
 User-agent: *
-Allow: /
-Disallow: /api/
-
-# Kundencenter in Einrichtung: die drei Hinweisseiten gehoeren nicht in den Index
-Disallow: /anmelden
-Disallow: /registrieren
-Disallow: /passwort-vergessen
-
-# KI-Crawler ausdruecklich erlaubt (Agentur-Seite will zitiert werden)
 User-agent: GPTBot
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
 
 Sitemap: https://www.nexifyai.de/sitemap.xml

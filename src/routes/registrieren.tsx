@@ -2,20 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import { KundencenterHinweis } from "@/components/site/KundencenterHinweis";
 import capturedCSS from "../styles/pages/registrieren.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/registrieren")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/registrieren")],
-    meta: [
-      { title: "Kundencenter – in Einrichtung · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde.",
-      },
-    ],
-  }),
+  head: () => pageHead("/registrieren", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

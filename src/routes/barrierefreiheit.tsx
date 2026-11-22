@@ -1,22 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/barrierefreiheit.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { LegalSections } from "@/components/site/LegalSections";
 import { barrierefreiheitSections } from "@/lib/legal/barrierefreiheit";
 
 export const Route = createFileRoute("/barrierefreiheit")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/barrierefreiheit")],
-    meta: [
-      { title: "Qualität soll zugänglich sein. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Gutes Design trägt auch bei Tastaturbedienung, größerem Text und reduzierter Bewegung. Wir entwickeln diese Zugänglichkeit weiter; eine umfassend bestätigte.",
-      },
-    ],
-  }),
+  head: () => pageHead("/barrierefreiheit", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },

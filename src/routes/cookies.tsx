@@ -1,22 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { NexifyShell } from "@/components/site/NexifyShell";
 import capturedCSS from "../styles/pages/cookies.css?url";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { LegalSections } from "@/components/site/LegalSections";
 import { cookiesSections } from "@/lib/legal/cookies";
 
 export const Route = createFileRoute("/cookies")({
-  head: () => ({
-    links: [{ rel: "stylesheet", href: capturedCSS }, canonicalLink("/cookies")],
-    meta: [
-      { title: "Sie wählen, was zusätzlich aktiv wird. · NeXify AI" },
-      {
-        name: "description",
-        content:
-          "Notwendige Funktionen und optionale Messung haben unterschiedliche Aufgaben. Verständliche Einstellungen sollen vor optionaler Verarbeitung greifen. Die.",
-      },
-    ],
-  }),
+  head: () => pageHead("/cookies", { links: [{ rel: "stylesheet", href: capturedCSS }] }),
   staticData: {
     importedDocument: {
       html: { lang: "de", style: { colorScheme: "dark" } as import("react").CSSProperties },
