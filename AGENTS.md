@@ -18,7 +18,7 @@ Die Seite wird aus diesem Repository gebaut und als Cloudflare Worker ausgeliefe
 - Die Seiten sind übernommene Kopien des früheren Auftritts: jede Seite hält ihr Markup in der
   eigenen Routendatei und ihre ursprünglichen Stile in `src/styles/captured.css` (Startseite) oder
   `src/styles/pages/<seite>.css` (vollständige Aufnahmen unter `.site-import/`). Änderungen an
-  anderer Stelle brechen die Kaskade der Aufnahme. Aufgenommene Klassen wie `tk-shop`, `tk-form`,
+  anderer Stelle brechen die Kaskade der Aufnahme. Aufgenommene Klassen wie `tk-form`,
   `tk-field`, `tk-auth` werden deshalb nicht umbenannt.
 - Gemeinsames Seitenverhalten (Chat-Panel, Kopfmenüs, Scroll- und Fuß-Attribute der Hülle,
   Filmplayer) liegt in `src/lib/imported-site.ts`, damit sich jede Seite gleich verhält; Routen

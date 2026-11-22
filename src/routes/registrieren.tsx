@@ -18,7 +18,7 @@ export const Route = createFileRoute("/registrieren")({
 function Index() {
   return (
     <NexifyShell>
-      <div className={"home-concept page-concept tk-shop nx-konto"}>
+      <div className={"home-concept page-concept nx-konto-rahmen nx-konto"}>
         <ImportedSectionKontoErstellen />
       </div>
     </NexifyShell>
