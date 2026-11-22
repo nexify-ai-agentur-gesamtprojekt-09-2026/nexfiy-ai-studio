@@ -30,3 +30,10 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* 2026-11-22 (Europe/Berlin): Das Produkt-Menü hat zwei Gruppen statt drei. Das aufgenommene
+   Raster ist dreispaltig und ließ rechts eine leere Spalte stehen; bei genau zwei Gruppen teilen
+   sie sich die Breite. Greift nur in diesem Fall, jede andere Anzahl behält das alte Raster. */
+#atelier .megamenu-columns:has(> .megamenu-group:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
