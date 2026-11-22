@@ -1,5 +1,5 @@
 /** Every brand film of the site, defined once and reused by each page that shows it. */
-export type SiteFilmId = "studio" | "angebot" | "fertigung" | "teileklar";
+export type SiteFilmId = "studio" | "angebot" | "fertigung";
 
 export interface SiteFilmData {
   src: string;
@@ -29,11 +29,5 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     poster: "/site-assets/15fa9607b63661b1.webp",
     label: "Mehr Zeit für die Arbeit, die zählt.",
     alt: "Markeninszenierung: Pascal bespricht Unterlagen mit einem Mitarbeiter an einer Fertigungsanlage",
-  },
-  teileklar: {
-    src: "/site-assets/086cadaa7ccbfdc9.mp4",
-    poster: "/site-assets/506495187c091a6f.webp",
-    label: "Das richtige Teil. Der richtige Weg.",
-    alt: "Markeninszenierung: Pascal und eine Mitarbeiterin im Gespräch an einer Förderanlage mit Kartons",
   },
 };

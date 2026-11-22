@@ -1,7 +1,7 @@
 # Roadmap
 
 - [x] Startseite von nexifyai.cloud kopieren
-- [x] Seiten übernehmen: /leistungen, /kontakt, /teileklar, /teileklar/werkstatt, /teileklar/partner-werden
+- [x] Seiten übernehmen: /leistungen, /kontakt
 - [x] Menü-/Footer-Links auf die neuen Seiten verknüpfen und prüfen (Desktop + Handy)
 - [x] Qualitätsanspruch (Ziel vom 14.11.): Seiten mit Original abgeglichen, Bedienelemente geprüft, keine Konsolenfehler
 - [x] Videos auf Unterseiten verteilen (ein Film pro Seite, nur oben automatisch)
@@ -23,5 +23,4 @@
 - [ ] Produkte: /produkte/nex2fly, /produkte/one, /produkte/api, /produkte/aifly-oracle, /produkte/nex-agentic-aifly, /produkte/skills-mcp
 - [ ] Angebot & Wissen: /loesungen, /preise-ablauf, /leistungsumfang, /leistungen/websites, /leistungen/agenten-automatisierung, /leistungen/apps-portale, /wissen, /wissen/projekt-vorbereiten, /unternehmen, /portale
 - [ ] Konto: /anmelden, /registrieren
-- [ ] TEILEKLAR: /teileklar/rechtliches, /shop, /kategorien, /kategorie, /produkt, /fahrzeug-und-passung, /suche, /warenkorb, /kasse, /bestellungen, /termine, /gutscheine, /reifenrechner, /batterie-berater
 - [ ] Neue Seiten an gemeinsame Bausteine anschließen (Stylesheet-Datei, Filme, Formulare, Menüs) und Links prüfen
