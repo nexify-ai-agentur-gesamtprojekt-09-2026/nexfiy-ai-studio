@@ -33,6 +33,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # PR-Head statt Merge-Stand prüfen: die Abdeckung wird GitHub Code Quality für genau diesen
+          # Commit gemeldet (so in der GitHub-Doku). Den Merge-Stand sichert die Branch-Regel
+          # "Require branches to be up to date before merging".
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           # Volle Historie: src/lib/seo.test.ts vergleicht Sitemap-Daten mit dem Git-Stand der Seiten.
           fetch-depth: 0
           persist-credentials: false
