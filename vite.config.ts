@@ -71,5 +71,15 @@ export default defineConfig(({ command }) => ({
   },
   // 2026-11-19 20:46 (Europe/Berlin): Dev-Port fest auf 5173. `hermes verify` wartet auf 5173;
   // ein ausweichender Port meldete dauerhaft readiness=false (falsches Rot).
-  server: { host: "::", port: 5173, strictPort: true },
+  // In GitHub Codespaces kommt die Vorschau über <name>-5173.<Weiterleitungsdomain>; Vite lässt
+  // fremde Hostnamen sonst nicht zu (HTTP 403). Nur diese Domain wird erlaubt, sonst bleibt alles wie bisher.
+  server: {
+    host: "::",
+    port: 5173,
+    strictPort: true,
+    ...(process.env["CODESPACES"] === "true" &&
+    process.env["GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"]
+      ? { allowedHosts: [`.${process.env["GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"]}`] }
+      : {}),
+  },
 }));
