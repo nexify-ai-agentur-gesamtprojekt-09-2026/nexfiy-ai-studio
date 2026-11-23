@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "standard": "node tools/standard-pruefung.mjs",
     "deploy:cf": "bash tools/deploy-live.sh --skip-build"
   },
   "overrides": {

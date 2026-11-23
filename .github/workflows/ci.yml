@@ -46,6 +46,12 @@ jobs:
         with:
           node-version: "22"
 
+      # Unternehmensstandard (docs/unternehmensstandard.md): gepinnte Actions, minimale Rechte,
+      # keine Geheimnisdateien oder Tokens, gleiche Versionen wie der Dev-Container. Ohne
+      # Abhängigkeiten, deshalb vor der Installation.
+      - name: Unternehmensstandard
+        run: npm run standard
+
       - name: Bun einrichten
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
@@ -78,7 +84,9 @@ jobs:
         run: npx vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=cobertura --coverage.reporter=text-summary --coverage.reportsDirectory=coverage
 
       - name: Testabdeckung an Code Quality melden
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        # Nicht für PRs aus Forks und nicht für Dependabot: deren GITHUB_TOKEN ist nur lesend, der
+        # Upload schlüge fehl und hielte den Pflicht-Check rot.
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && github.actor != 'dependabot[bot]'
         uses: actions/upload-code-coverage@2b21a77928be8d5168c2b9581a67f2adbebacc52 # v1.4.4
         with:
           file: coverage/cobertura-coverage.xml

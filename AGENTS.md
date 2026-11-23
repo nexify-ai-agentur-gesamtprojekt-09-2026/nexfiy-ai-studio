@@ -5,6 +5,9 @@ Die Seite wird aus diesem Repository gebaut und als Cloudflare Worker ausgeliefe
 geht über GitHub Actions (`.github/workflows/deploy-live.yml`) automatisch live, nach Pflicht-CI
 (`.github/workflows/ci.yml`), mit Smoke-Test und automatischem Rollback (`docs/auslieferung.md`).
 
+Verbindlicher Unternehmensstandard (Zweige, Sicherheit, Qualität, Inhalte, Betrieb):
+`docs/unternehmensstandard.md`. Die prüfbaren Regeln setzt `npm run standard` in der CI durch.
+
 ## Schutzregeln
 
 - **Veröffentlichte Historie nicht umschreiben.** Kein Force-Push, kein Rebase, Amend oder Squash
