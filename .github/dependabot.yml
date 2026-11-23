@@ -33,3 +33,9 @@ updates:
       # Kleine Updates gesammelt in einem PR; Hauptversionen einzeln, weil sie Prüfung brauchen.
       klein:
         update-types: ["minor", "patch"]
+    ignore:
+      # TypeScript 7 (nativer Compiler) wird von typescript-eslint/Tooling noch nicht unterstützt:
+      # PR #21 (5.9.3 → 7.0.2) brach Lint/Typprüfung ab (23.11.2026). Wieder freigeben, sobald
+      # typescript-eslint TS 7 offiziell unterstützt.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
