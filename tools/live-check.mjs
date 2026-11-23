@@ -173,7 +173,14 @@ async function get(url, opts = {}) {
 const files = (await readdir(ROUTE_DIR)).filter(
   (f) => f.endsWith(".tsx") && !f.startsWith("__root"),
 );
-const routes = [...new Set(files.map(toUrl))].sort();
+// Vorlagen mit Platzhalter ($land) gelten für jede Seite aus der Seitentabelle, die sie nutzt.
+const routeFile = new Map();
+for (const f of files) {
+  if (f.includes("$"))
+    for (const s of SEITEN.filter((s) => s.datei === f)) routeFile.set(s.pfad, f);
+  else routeFile.set(toUrl(f), f);
+}
+const routes = [...routeFile.keys()].sort();
 
 const problems = []; // {route, kind, detail}
 const drifts = []; // {route, coverage, missing}
@@ -181,7 +188,7 @@ const rows = [];
 const BASE_HOST = new URL(BASE).host;
 
 for (const route of routes) {
-  const file = files.find((f) => toUrl(f) === route);
+  const file = routeFile.get(route);
   if (AUTH_PAGES.includes(route)) {
     const direkt = await get(BASE + route, { redirect: "manual" });
     if (direkt.status !== 200) {

@@ -1,0 +1,86 @@
+# 2026-11-23 (Europe/Berlin): Pflichtprüfung für jeden Pull Request gegen main und jeden Push auf
+# main. Ohne Environment, ohne Secrets, nur Leserecht. Der Job "Prüfen" ist als Pflicht-Check im
+# Branch-Schutz von main eingetragen (docs/auslieferung.md); ein PR lässt sich erst mergen, wenn
+# er grün ist. Nach dem Merge liefert .github/workflows/deploy-live.yml automatisch aus und prüft
+# denselben Commit dort vor dem Deploy noch einmal (siehe docs/auslieferung.md).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  # Neuere Commits desselben PRs brechen ältere Prüfläufe ab; auf main läuft jeder Push durch.
+  group: ci-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  pruefen:
+    name: Prüfen
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      # Nur für den Upload der Testabdeckung an GitHub Code Quality.
+      code-quality: write
+    steps:
+      # Action-Versionen per Commit-SHA gepinnt (wie in deploy-live.yml).
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # PR-Head statt Merge-Stand prüfen: die Abdeckung wird GitHub Code Quality für genau diesen
+          # Commit gemeldet (so in der GitHub-Doku). Den Merge-Stand sichert die Branch-Regel
+          # "Require branches to be up to date before merging".
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          # Volle Historie: src/lib/seo.test.ts vergleicht Sitemap-Daten mit dem Git-Stand der Seiten.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.4"
+
+      - name: Abhängigkeiten installieren
+        run: bun install --frozen-lockfile
+
+      - name: Skripte (Syntax)
+        run: |
+          set -euo pipefail
+          for f in tools/*.sh; do bash -n "$f"; echo "bash -n OK: $f"; done
+          for f in tools/*.mjs; do node --check "$f"; echo "node --check OK: $f"; done
+          python3 -m py_compile tools/wrangler-config.py
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      - name: Tests (Quellen)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # Letzter Testlauf mit Abdeckung (Cobertura-XML für GitHub Code Quality).
+      - name: Tests (mit Build-Ausgabe, Abdeckung)
+        run: npx vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=cobertura --coverage.reporter=text-summary --coverage.reportsDirectory=coverage
+
+      - name: Testabdeckung an Code Quality melden
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-code-coverage@2b21a77928be8d5168c2b9581a67f2adbebacc52 # v1.4.4
+        with:
+          file: coverage/cobertura-coverage.xml
+          language: TypeScript
+          label: code-coverage/vitest

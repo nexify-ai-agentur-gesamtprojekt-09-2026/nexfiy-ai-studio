@@ -9,9 +9,16 @@
  * verspricht nichts, was dort nicht steht. Titel höchstens 60 Zeichen (mit Markenzusatz),
  * Beschreibung höchstens 160.
  *
- * Diese Datei bleibt ohne Importe und ohne Laufzeit-TypeScript, damit Node sie für die Sitemap
- * direkt lesen kann.
+ * Diese Datei bleibt ohne Laufzeit-TypeScript und importiert nur die Datentabelle der
+ * Regionalseiten (ebenfalls ohne Importe), damit Node sie für die Sitemap direkt lesen kann.
  */
+
+import {
+  BUNDESLAENDER,
+  LAENDERSEITEN_INDEXIERT,
+  landBeschreibung,
+  landTitel,
+} from "./regionen-daten.ts";
 
 export type SeitenTyp =
   "start" | "leistung" | "produkt" | "info" | "kontakt" | "unternehmen" | "recht" | "konto";
@@ -33,6 +40,8 @@ export interface Seite {
   eltern?: string;
   /** Nur Leistungsseiten: Angaben für die Service-Auszeichnung. */
   leistung?: { name: string; art: string };
+  /** Nur Regionalseiten: das Gebiet, um das es auf der Seite geht (kein Firmenstandort). */
+  region?: { name: string; code: string };
 }
 
 export const MARKENZUSATZ = " · NeXify AI";
@@ -54,7 +63,7 @@ export const SEITEN: Seite[] = [
     titel: "Leistungen: Website, System, Kampagne",
     kurz: "Leistungen",
     beschreibung:
-      "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang und persönlicher Begleitung durch Pascal.",
+      "Websites, Automatisierung mit KI und Kampagnen aus einer Hand – mit klarem Umfang, überwiegend online.",
     typ: "info",
     index: true,
   },
@@ -295,6 +304,29 @@ export const SEITEN: Seite[] = [
     typ: "recht",
     index: true,
   },
+  {
+    pfad: "/regionen",
+    datei: "regionen.tsx",
+    titel: "Regionen: Feiertage und Aufsicht je Bundesland",
+    kurz: "Regionen",
+    beschreibung:
+      "Für jedes Bundesland die zusätzlichen Feiertage und die zuständige Datenschutzaufsicht. Die Zusammenarbeit mit NeXify AI läuft überwiegend online.",
+    typ: "info",
+    index: true,
+  },
+  // Eine Seite je Bundesland aus einer Routenvorlage und der Datentabelle
+  // src/lib/regionen-daten.ts. Indexierung erst nach Inhaberfreigabe (LAENDERSEITEN_INDEXIERT).
+  ...BUNDESLAENDER.map((land): Seite => ({
+    pfad: `/regionen/${land.slug}`,
+    datei: "regionen_.$land.tsx",
+    titel: landTitel(land),
+    kurz: land.name,
+    beschreibung: landBeschreibung(land),
+    typ: "info",
+    index: LAENDERSEITEN_INDEXIERT,
+    eltern: "/regionen",
+    region: { name: land.name, code: land.code },
+  })),
   // Kontoseiten: Das Kundencenter wird eingerichtet. Die drei Seiten erklären nur den Stand und
   // gehören weder in den Suchindex noch in die Sitemap.
   {

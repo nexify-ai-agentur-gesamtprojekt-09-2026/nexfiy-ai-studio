@@ -60,8 +60,8 @@ export function NexifyFooter() {
               </span>
             </a>
             <p>
-              Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Persönlich begleitet von
-              Pascal Courbois.
+              Websites, digitale Abläufe und Kampagnen für Ihr Unternehmen. Die Zusammenarbeit läuft
+              überwiegend online.
             </p>
             <a
               className={"nexify-control  footer-contact"}
@@ -122,6 +122,9 @@ export function NexifyFooter() {
               </a>
               <a href="/kontakt" {...here("/kontakt")}>
                 Kontakt
+              </a>
+              <a href="/regionen" {...here("/regionen")}>
+                Regionen in Deutschland
               </a>
               <a href="/portale" {...here("/portale")}>
                 Kundencenter
@@ -230,6 +233,9 @@ export function NexifyFooter() {
                   </a>
                   <a href="/kontakt" {...here("/kontakt")}>
                     Schildern Sie Ihr Vorhaben.
+                  </a>
+                  <a href="/regionen" {...here("/regionen")}>
+                    Feiertage und Aufsicht je Bundesland.
                   </a>
                 </div>
                 <div className={"footer-overview-group"}>

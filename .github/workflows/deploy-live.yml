@@ -1,0 +1,370 @@
+# Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio).
+# Normalfall (2026-11-23): jeder Push auf main (also jeder Merge eines grünen PRs) liefert
+# automatisch aus, ohne menschliche Freigabe. Von Hand (Actions -> "Deploy live" -> "Run workflow",
+# nur von main): Rückweg auf einen älteren main-Commit oder Probelauf (dry_run).
+# Zugangsdaten: Account-API-Token (Cloudflare, personenunabhängig) als Secret CLOUDFLARE_API_TOKEN
+# und Variable CLOUDFLARE_ACCOUNT_ID im Environment "production" (ohne Required reviewers).
+# Ebenfalls akzeptiert (so im Environment angelegt): Secrets API_TOKEN_CLOUDFLARE und KONTO_ID_CLOUDFLARE.
+# Vier Jobs, nur "deploy" kennt das Cloudflare-Token, nur "melden" darf Issues schreiben:
+#   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
+#              (Push: github.sha; von Hand: Eingabe ref) und zeigt SHA, Betreff, Autor, Datum.
+#   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus und führt dieselben
+#              Prüfungen wie ci.yml aus (lint/tsc/test/build/test). Nur wenn sie grün sind, läuft
+#              "deploy" (needs). Lädt .output/ samt sha256-Liste als Artefakt hoch.
+#   deploy     (Environment "production"): checkt nur das Deploy-Werkzeug aus dem Workflow-Commit
+#              (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und liefert mit
+#              tools/deploy-live.sh aus. Das Skript hält die aktive Worker-Version fest, prüft
+#              Binding DB, Readback und Smoke-Test und setzt bei einem Fehler automatisch auf die
+#              vorige Version zurück; der Job bleibt dann rot.
+#              Aus dem Anwendungsstand läuft hier kein Code; das Worker-Bundle wird nur hochgeladen.
+#              Die wrangler.json aus dem Artefakt schreibt tools/wrangler-config.py per Allowlist neu.
+#   melden     (nur bei Fehlschlag, issues: write): legt ein Issue mit Label deploy-fehler an oder
+#              ergänzt das offene.
+# Einrichtung und Rückweg: docs/auslieferung.md
+name: Deploy live
+
+# Workers Builds (Cloudflare) darf nicht zusätzlich verbunden sein, sonst wird doppelt ausgeliefert.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "main oder ein vollständiger 40-stelliger Commit-SHA aus der main-Historie (Rollback)"
+        required: true
+        default: main
+        type: string
+      dry_run:
+        description: "Nur prüfen (wrangler deploy --dry-run), nichts ausliefern"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+# Immer nur eine Auslieferung gleichzeitig. Ein laufender Lauf wird nie abgebrochen; GitHub hält
+# höchstens einen wartenden Lauf, ein neuerer Push ersetzt also einen noch wartenden älteren.
+concurrency:
+  group: deploy-live
+  cancel-in-progress: false
+
+jobs:
+  aufloesen:
+    name: Commit festlegen
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      sha: ${{ steps.sha.outputs.sha }}
+      betreff: ${{ steps.sha.outputs.betreff }}
+    steps:
+      # Action-Versionen per Commit-SHA gepinnt; SHA = Tag laut `git ls-remote --tags` der offiziellen Repos (2026-11-22).
+      - name: Checkout main (volle Historie)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Eingabe auf SHA aus der main-Historie auflösen
+        id: sha
+        env:
+          # Push: der gepushte Commit; von Hand: die Eingabe ref.
+          EINGABE: ${{ inputs.ref || github.sha }}
+          ANLASS: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          if [ "$EINGABE" = "main" ]; then
+            sha="$(git rev-parse --verify 'origin/main^{commit}')"
+          elif printf '%s' "$EINGABE" | grep -Eqx '[0-9a-f]{40}'; then
+            if ! sha="$(git rev-parse --verify --quiet "${EINGABE}^{commit}")"; then
+              echo "::error::Commit $EINGABE existiert nicht im Repository."
+              exit 1
+            fi
+          else
+            echo "::error::Eingabe ref muss 'main' oder ein vollständiger 40-stelliger Commit-SHA (Kleinbuchstaben) sein."
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$sha" origin/main; then
+            echo "::error::Commit $sha gehört nicht zur Historie von main; keine Auslieferung."
+            exit 1
+          fi
+          {
+            echo "## Auszuliefernder Stand"
+            echo ""
+            echo "| Feld | Wert |"
+            echo "| --- | --- |"
+            echo "| Anlass | \`$ANLASS\` |"
+            echo "| Eingabe | \`$EINGABE\` |"
+            echo "| Commit | \`$sha\` |"
+            feld() { git log -1 --format="$1" "$sha" | sed 's/|/\\|/g'; }
+            echo "| Betreff | $(feld %s) |"
+            echo "| Autor | $(feld %an) |"
+            echo "| Datum | $(feld %cI) |"
+            if [ "$sha" != "$(git rev-parse origin/main)" ]; then
+              echo ""
+              echo "**Achtung:** älterer main-Commit (Rollback oder bereits überholter Push), nicht der aktuelle Stand von main."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "betreff=$(git log -1 --format=%s "$sha")" >> "$GITHUB_OUTPUT"
+          echo "Auszuliefern: $sha"
+
+  bauen:
+    name: Prüfen und bauen
+    needs: aufloesen
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    outputs:
+      liste_sha256: ${{ steps.liste.outputs.liste_sha256 }}
+    steps:
+      - name: Checkout Anwendungsstand (festgelegter Commit)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.aufloesen.outputs.sha }}
+          # Volle Historie: src/lib/seo.test.ts vergleicht Sitemap-Daten mit dem Git-Stand.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Ausgecheckten Commit prüfen
+        env:
+          SOLL: ${{ needs.aufloesen.outputs.sha }}
+        run: |
+          ist="$(git rev-parse HEAD)"
+          if [ -z "$SOLL" ] || [ "$ist" != "$SOLL" ]; then
+            echo "::error::Ausgecheckt ist $ist, festgelegt war ${SOLL:-leer}; Abbruch."
+            exit 1
+          fi
+          echo "Ausgecheckt: $ist"
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.4"
+
+      - name: Abhängigkeiten installieren
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      - name: Tests (Quellen)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests (mit Build-Ausgabe)
+        run: npm test
+
+      - name: Arbeitsbaum-Status und sha256-Liste festhalten
+        id: liste
+        run: |
+          set -euo pipefail
+          mkdir -p deploy-meta
+          git status --porcelain -- . ':(exclude)deploy-meta' > deploy-meta/worktree-status.txt
+          find .output -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum > deploy-meta/output.sha256
+          echo "liste_sha256=$(sha256sum deploy-meta/output.sha256 | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          echo "Dateien im Artefakt: $(wc -l < deploy-meta/output.sha256)"
+
+      - name: Artefakt hochladen
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: build-${{ needs.aufloesen.outputs.sha }}
+          path: |
+            .output/
+            deploy-meta/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy:
+    name: Ausliefern
+    needs: [aufloesen, bauen]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    environment:
+      name: production
+      url: https://www.nexifyai.de
+    outputs:
+      vorher: ${{ steps.deploy.outputs.vorher }}
+      nachher: ${{ steps.deploy.outputs.nachher }}
+      ergebnis: ${{ steps.deploy.outputs.ergebnis }}
+      entscheidung: ${{ steps.deploy.outputs.entscheidung }}
+      rollback: ${{ steps.deploy.outputs.rollback }}
+    steps:
+      - name: Checkout Deploy-Werkzeug (Workflow-Commit)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          path: werkzeug
+          persist-credentials: false
+
+      - name: Werkzeug-Commit prüfen
+        env:
+          SOLL: ${{ github.sha }}
+        run: |
+          ist="$(git -C werkzeug rev-parse HEAD)"
+          if [ "$ist" != "$SOLL" ]; then
+            echo "::error::Werkzeug: ausgecheckt ist $ist, erwartet $SOLL; Abbruch."
+            exit 1
+          fi
+          echo "Werkzeug: $ist"
+
+      - name: Artefakt laden
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: build-${{ needs.aufloesen.outputs.sha }}
+          path: app
+
+      - name: Artefakt prüfen (sha256)
+        working-directory: app
+        env:
+          LISTE_SHA256: ${{ needs.bauen.outputs.liste_sha256 }}
+        run: |
+          set -euo pipefail
+          ist="$(sha256sum deploy-meta/output.sha256 | cut -d' ' -f1)"
+          if [ -z "$LISTE_SHA256" ] || [ "$ist" != "$LISTE_SHA256" ]; then
+            echo "::error::sha256-Liste weicht vom Build-Job ab; Abbruch."
+            exit 1
+          fi
+          sha256sum --check --quiet --strict deploy-meta/output.sha256
+          liste="$(wc -l < deploy-meta/output.sha256)"
+          gefunden="$(find .output -type f | wc -l)"
+          if [ "$liste" != "$gefunden" ]; then
+            echo "::error::.output enthält $gefunden Dateien, die Liste $liste; Abbruch."
+            exit 1
+          fi
+          echo "Artefakt geprüft: $liste Dateien"
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      # Ohne Token klar abbrechen (vor jedem Deploy, live bleibt unverändert; "melden" legt ein
+      # Issue an). Der Wert wird nie ausgegeben, geprüft wird nur, ob er gesetzt ist.
+      - name: Zugangsdaten vorhanden?
+        if: inputs.dry_run != true
+        env:
+          TOKEN_GESETZT: ${{ (secrets.CLOUDFLARE_API_TOKEN || secrets.API_TOKEN_CLOUDFLARE) != '' }}
+          KONTO: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.KONTO_ID_CLOUDFLARE }}
+        run: |
+          fehlt=""
+          [ "$TOKEN_GESETZT" = "true" ] || fehlt="$fehlt Secret CLOUDFLARE_API_TOKEN (oder API_TOKEN_CLOUDFLARE)"
+          [ -n "$KONTO" ] || fehlt="$fehlt Variable CLOUDFLARE_ACCOUNT_ID (oder Secret KONTO_ID_CLOUDFLARE)"
+          if [ -n "$fehlt" ]; then
+            echo "::error title=Auslieferung nicht eingerichtet::Im Environment production fehlt:$fehlt. Einmalige Einrichtung: docs/auslieferung.md, Abschnitt 'Einmalige Einrichtung'. Live ist unverändert."
+            {
+              echo "## Auslieferung nicht eingerichtet"
+              echo ""
+              echo "Im Environment \`production\` fehlt:$fehlt."
+              echo "Einrichtung: \`docs/auslieferung.md\`, Abschnitt Einmalige Einrichtung. Live ist unverändert."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Zugangsdaten vorhanden."
+
+      # Rückweg-Anker, Binding-Prüfung, Readback, Smoke-Test, automatischer Rollback und die
+      # Job-Zusammenfassung erledigt tools/deploy-live.sh selbst (für alle Wege gleich).
+      - name: Ausliefern
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.API_TOKEN_CLOUDFLARE }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.KONTO_ID_CLOUDFLARE }}
+          DEPLOY_HOST: github-actions
+          # Werkzeug aus werkzeug/, ausgeliefert wird das geprüfte Artefakt unter app/.output/.
+          DEPLOY_APP_DIR: ${{ github.workspace }}/app
+          # Commit-Angaben für Stempel und Readback (kein Git-Checkout der Anwendung in diesem Job).
+          DEPLOY_COMMIT: ${{ needs.aufloesen.outputs.sha }}
+          DEPLOY_COMMIT_SUBJECT: ${{ needs.aufloesen.outputs.betreff }}
+          DEPLOY_WORKTREE_STATUS_FILE: ${{ github.workspace }}/app/deploy-meta/worktree-status.txt
+          # Wrangler ist keine Projektabhängigkeit; Version fest (npm, veröffentlicht 2026-11-05).
+          WRANGLER_VERSION: "4.158.0"
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            werkzeug/tools/deploy-live.sh --dry-run --skip-build
+          else
+            werkzeug/tools/deploy-live.sh --skip-build
+          fi
+
+  melden:
+    name: Fehler melden
+    needs: [aufloesen, bauen, deploy]
+    if: ${{ failure() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Einziger Job mit Schreibrecht, und nur auf Issues; kein Checkout, kein Repository-Code.
+    permissions:
+      issues: write
+    steps:
+      - name: Issue anlegen oder ergänzen (Label deploy-fehler)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ANLASS: ${{ github.event_name }}
+          SHA: ${{ needs.aufloesen.outputs.sha || github.sha }}
+          BETREFF: ${{ needs.aufloesen.outputs.betreff }}
+          J_AUFLOESEN: ${{ needs.aufloesen.result }}
+          J_BAUEN: ${{ needs.bauen.result }}
+          J_DEPLOY: ${{ needs.deploy.result }}
+          VORHER: ${{ needs.deploy.outputs.vorher }}
+          NACHHER: ${{ needs.deploy.outputs.nachher }}
+          ERGEBNIS: ${{ needs.deploy.outputs.ergebnis }}
+          ENTSCHEIDUNG: ${{ needs.deploy.outputs.entscheidung }}
+          ROLLBACK: ${{ needs.deploy.outputs.rollback }}
+        run: |
+          set -euo pipefail
+          gh label create deploy-fehler --color B60205 \
+            --description "Auslieferung fehlgeschlagen" 2>/dev/null || true
+          if [ "$ROLLBACK" = "ok" ]; then
+            lage="Rollback auf die vorige Worker-Version ist erfolgt; live läuft wieder der vorige Stand."
+          elif [ "$ENTSCHEIDUNG" = "rollback" ] || [ "$ENTSCHEIDUNG" = "unmoeglich" ]; then
+            lage="ACHTUNG: fehlerhafte Version ist live und der automatische Rollback ist nicht gelungen. Rückweg von Hand (docs/auslieferung.md)."
+          elif [ "$J_DEPLOY" = "skipped" ] || [ -z "$ERGEBNIS" ]; then
+            lage="Vor dem Deploy abgebrochen; live ist unverändert."
+          else
+            lage="Live-Version unverändert oder Lage unklar; Protokoll prüfen."
+          fi
+          {
+            echo "Automatische Auslieferung (Deploy live) fehlgeschlagen."
+            echo ""
+            echo "**Lage:** $lage"
+            echo ""
+            echo "| Feld | Wert |"
+            echo "| --- | --- |"
+            echo "| Lauf | $LAUF |"
+            echo "| Anlass | \`$ANLASS\` |"
+            echo "| Commit | \`$SHA\` |"
+            echo "| Betreff | $(printf '%s' "$BETREFF" | sed 's/|/\\|/g') |"
+            echo "| Jobs | aufloesen=$J_AUFLOESEN, bauen=$J_BAUEN, deploy=$J_DEPLOY |"
+            echo "| Worker-Version vorher / nachher | \`${VORHER:--}\` / \`${NACHHER:--}\` |"
+            echo "| Ergebnis der Prüfungen | ${ERGEBNIS:--} |"
+            echo "| Rollback-Entscheidung / Rollback | ${ENTSCHEIDUNG:--} / ${ROLLBACK:--} |"
+          } > bericht.md
+          offen="$(gh issue list --label deploy-fehler --state open --limit 1 --json number --jq '.[0].number // empty')"
+          if [ -n "$offen" ]; then
+            gh issue comment "$offen" --body-file bericht.md
+            echo "Issue #$offen ergänzt."
+          else
+            gh issue create --title "Auslieferung fehlgeschlagen: ${SHA:0:10}" --label deploy-fehler --body-file bericht.md
+          fi

@@ -12,6 +12,23 @@ const PLAY_PATH = "M6 3.8a.7.7 0 0 1 1.05-.6l9.2 6.2a.7.7 0 0 1 0 1.2l-9.2 6.2A.
 export function SiteFilm({ film, eager = false }: { film: SiteFilmId; eager?: boolean }) {
   const data = SITE_FILMS[film];
   const volumeId = `${useId()}-volume`;
+  // Ausgeblendeter Film: nur das Standbild, kein Video, kein Ton, kein Transkript. Bewusst ohne
+  // die Klasse `atelier-film`, damit useAtelierFilms() hier nichts verdrahtet.
+  if (data.ausgeblendet)
+    return (
+      <div className="atelier-film-standbild" data-film={film}>
+        <link rel="stylesheet" href={filmCSS} precedence="site-film" />
+        <img
+          src={data.poster}
+          alt={data.alt}
+          width={1280}
+          height={720}
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
+          decoding="async"
+        />
+      </div>
+    );
   return (
     <div className="atelier-film atelier-film-hero" data-film={film}>
       <link rel="stylesheet" href={filmCSS} precedence="site-film" />
