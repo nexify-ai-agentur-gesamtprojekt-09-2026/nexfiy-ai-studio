@@ -1,8 +1,9 @@
 # 2026-11-23 (Europe/Berlin): Pflichtprüfung für jeden Pull Request gegen main und jeden Push auf
-# main. Ohne Environment, ohne Secrets, nur Leserecht. Der Job "Prüfen" ist als Pflicht-Check im
-# Branch-Schutz von main eingetragen (docs/auslieferung.md); ein PR lässt sich erst mergen, wenn
-# er grün ist. Nach dem Merge liefert .github/workflows/deploy-live.yml automatisch aus und prüft
-# denselben Commit dort vor dem Deploy noch einmal (siehe docs/auslieferung.md).
+# main. Ohne Environment, ohne Secrets, nur Leserecht. Der Job "Prüfen" soll als Pflicht-Check im
+# Branch-Schutz von main stehen (docs/auslieferung.md, Abschnitt 3); Stand 23.11.2026 ist das noch
+# nicht eingerichtet (docs/unternehmensstandard.md, OFFEN S2). Nach dem Merge liefert
+# .github/workflows/deploy-live.yml automatisch aus und prüft denselben Commit dort vor dem Deploy
+# noch einmal (siehe docs/auslieferung.md).
 name: CI
 
 on:
@@ -65,7 +66,9 @@ jobs:
           set -euo pipefail
           for f in tools/*.sh; do bash -n "$f"; echo "bash -n OK: $f"; done
           for f in tools/*.mjs; do node --check "$f"; echo "node --check OK: $f"; done
-          python3 -m py_compile tools/wrangler-config.py
+          # compile() statt py_compile: kein __pycache__ im Arbeitsbaum (gleich wie in deploy-live.yml).
+          python3 -I -c 'import sys; compile(open(sys.argv[1], encoding="utf-8").read(), sys.argv[1], "exec")' tools/wrangler-config.py
+          echo "python3 compile OK: tools/wrangler-config.py"
 
       - name: Lint
         run: npm run lint

@@ -96,8 +96,8 @@ function repo(dateien: Record<string, string | null>) {
   return root;
 }
 
-function pruefe(root: string) {
-  const r = spawnSync("node", [PRUEFUNG, `--root=${root}`], { encoding: "utf8" });
+function pruefe(root: string, ...extra: string[]) {
+  const r = spawnSync("node", [PRUEFUNG, `--root=${root}`, ...extra], { encoding: "utf8" });
   return { code: r.status, aus: `${r.stdout}${r.stderr}` };
 }
 
@@ -324,5 +324,42 @@ describe("Standard-Prüfung im Git-Arbeitsbaum", () => {
     r = pruefe(root);
     expect(r.code).toBe(1);
     expect(r.aus).toContain("[sitemap-nicht-eingecheckt] public/sitemap.xml");
+  });
+});
+
+describe("Standard-Prüfung --nur-geheimnisse (Rückweg auf Stände vor dem Standard)", () => {
+  // Stand wie 8d73146: ohne Pflichtdoku, Workflows und Dev-Container, mit eingecheckter Sitemap.
+  const alterStand = () => ({
+    "README.md": "# alt\n",
+    "public/sitemap.xml": "<urlset/>\n",
+    ".github/workflows/deploy-live.yml": "name: alt\non: push\njobs:\n  a:\n    runs-on: x\n",
+  });
+
+  it("alter Stand besteht nur die Geheimnisprüfung, nicht den vollen Standard", () => {
+    const root = repo(alterStand());
+    const voll = pruefe(root);
+    expect(voll.code).toBe(1);
+    expect(voll.aus).toContain("[pflicht-doku]");
+    const nur = pruefe(root, "--nur-geheimnisse");
+    expect(nur.aus).toContain("Standard-Prüfung (nur Geheimnisse) bestanden");
+    expect(nur.code).toBe(0);
+  });
+
+  it.each([
+    ["Token", { "notiz.md": `x ${FAKE.cfat}\n` }, "[keine-tokens] notiz.md:1"],
+    ["privater Schlüssel", { "a.txt": `${FAKE.pem}\n` }, "[keine-tokens] a.txt:1"],
+    ["versionierte .env", { ".env": "A=1\n" }, "[keine-geheimnisdateien] .env"],
+    ["Schlüsseldatei", { "k/server.pem": "x\n" }, "[keine-geheimnisdateien] k/server.pem"],
+  ])("Gegenprobe: %s hält auch --nur-geheimnisse rot", (_n, aenderung, erwartet) => {
+    const r = pruefe(repo({ ...alterStand(), ...aenderung }), "--nur-geheimnisse");
+    expect(r.code).toBe(1);
+    expect(r.aus).toContain(erwartet);
+    expect(r.aus).not.toContain(FAKE.cfat);
+  });
+
+  it("unbekannte Option bricht ab statt still voll oder gar nicht zu prüfen", () => {
+    const r = pruefe(repo(alterStand()), "--nur-geheimnis");
+    expect(r.code).toBe(2);
+    expect(r.aus).toContain("unbekannte Option --nur-geheimnis");
   });
 });
