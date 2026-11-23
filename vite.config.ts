@@ -30,8 +30,17 @@ export default defineConfig(({ command }) => ({
       // Der Server-Einstieg ist src/server.ts (Adressregeln, Fehlerseite, Sicherheits-Header).
       server: { entry: "server" },
     }),
-    // Nur im Build: erzeugt .output/ als Cloudflare-Worker samt wrangler.json.
-    ...(command === "build" ? [nitro({ defaultPreset: "cloudflare-module" })] : []),
+    // Nur im Build: erzeugt .output/ als Cloudflare-Worker samt wrangler.json. Der Name muss der
+    // des bestehenden Workers sein: Cloudflare Workers Builds bricht sonst ab, und ohne Namen
+    // erfände Nitro einen aus dem Repository (tools/deploy-live.sh setzt ihn zusätzlich fest).
+    ...(command === "build"
+      ? [
+          nitro({
+            defaultPreset: "cloudflare-module",
+            cloudflare: { wrangler: { name: "nexfiy-ai-studio" } },
+          }),
+        ]
+      : []),
     viteReact(),
   ],
   css: { transformer: "lightningcss" },

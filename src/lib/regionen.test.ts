@@ -4,6 +4,8 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { beforeAll, describe, expect, it } from "vitest";
 
+import { buildSitemap } from "../../tools/generate-sitemap.mjs";
+
 import { feiertagImJahr, naechsterTermin, ostersonntag } from "./feiertage";
 import {
   BUNDESLAENDER,
@@ -219,7 +221,7 @@ describe("Seitentabelle, Sitemap und llms.txt", () => {
   });
 
   it("die Sitemap führt die Übersicht und Länderseiten genau dann, wenn freigegeben", () => {
-    const sitemap = lies("public/sitemap.xml");
+    const sitemap = buildSitemap();
     expect(sitemap).toContain(`<loc>${canonicalUrl("/regionen")}</loc>`);
     for (const seite of LAENDER)
       expect(sitemap.includes(`<loc>${canonicalUrl(seite.pfad)}</loc>`), seite.pfad).toBe(
