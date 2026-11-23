@@ -43,9 +43,9 @@ export const kiHinweiseSections: LegalSection[] = [
           Auskünfte erhalten Sie über <a href="/kontakt">Kontakt</a>.
         </li>
         <li>
-          Eingesetzt wird ein Sprachmodell eines externen Anbieters [INHABER: Anbieter und Modell
-          nennen oder bewusst offenlassen]. Welche Daten dabei verarbeitet und wie lange sie
-          gespeichert werden, steht in der <a href="/datenschutz">Datenschutzerklärung</a>.
+          Eingesetzt wird das Sprachmodell DeepSeek V4.1 Flash eines externen Anbieters, angebunden
+          über OpenRouter. Welche Daten dabei verarbeitet und wie lange sie gespeichert werden,
+          steht in der <a href="/datenschutz">Datenschutzerklärung</a>.
         </li>
         <li>Bitte geben Sie im Chat keine sensiblen Daten ein.</li>
       </ul>,

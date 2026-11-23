@@ -10,6 +10,9 @@
 //     (src/components/ui/sidebar.tsx ist nicht eingebunden).
 //   - KI-Chat: standardmäßig aus (`CHAT_AKTIV`), speichert bei Betrieb in D1 (migrations/0002, 0003).
 //   - Konto-/Anmeldeadressen leiten auf /portale um (src/lib/server-routing.ts).
+// 2026-11-23: D1-Region gemessen (Cloudflare-API, Datenbank nexify-main: running_in_region EEUR,
+//   jurisdiction null); Chat-Frist = Code-Standard CHAT_AUFBEWAHRUNG_STANDARD_TAGE (chat-api.ts);
+//   Modell/Route aus chat-wissen.server.ts (CHAT_MODELL, CHAT_MODELL_ROUTERNAME).
 import type { LegalSection } from "@/components/site/LegalSections";
 
 export const datenschutzSections: LegalSection[] = [
@@ -79,8 +82,8 @@ export const datenschutzSections: LegalSection[] = [
           Personenbezug führen wir nicht.
         </li>
         <li>
-          <strong>Speicherort der Datenbank:</strong> [INHABER: Region bzw. Standortvorgabe der
-          D1-Datenbank angeben, z. B. „EU“, sofern so eingerichtet].
+          <strong>Speicherort der Datenbank:</strong> Cloudflare-Region Osteuropa („EEUR“). Eine
+          Bindung an die Rechtsordnung der EU (Cloudflare „jurisdiction“) ist nicht eingerichtet.
         </li>
         <li>
           <strong>Drittland:</strong> Übermittlung in die USA auf Grundlage des EU-US Data Privacy
@@ -186,9 +189,10 @@ export const datenschutzSections: LegalSection[] = [
         <li>
           <strong>Übermittlung:</strong> Zur Beantwortung werden Ihre Nachricht und der bisherige
           Verlauf der Sitzung an einen KI-Router [INHABER: Betreiber des Routers unter
-          ai-router.nexifyai.cloud angeben] und von dort an den Modellanbieter [INHABER: Anbieter,
-          Sitz, Drittland-Grundlage und Auftragsverarbeitungsvertrag angeben] übermittelt. Der
-          Kurzwert Ihrer IP-Adresse wird dabei nicht übermittelt.
+          ai-router.nexifyai.cloud angeben] und von dort über die Route von OpenRouter an das
+          Sprachmodell DeepSeek V4.1 Flash übermittelt [INHABER: Sitz von OpenRouter, tatsächlich
+          rechnender Modellanbieter, Drittland-Grundlage und Auftragsverarbeitungsvertrag angeben].
+          Der Kurzwert Ihrer IP-Adresse wird dabei nicht übermittelt.
         </li>
         <li>
           <strong>Rechtsgrundlage:</strong> [INHABER: Art. 6 Abs. 1 lit. f DSGVO (Interesse an einer
@@ -196,8 +200,8 @@ export const datenschutzSections: LegalSection[] = [
           (vorvertragliche Anfrage) festlegen].
         </li>
         <li>
-          <strong>Speicherdauer:</strong> [INHABER: 30 Tage bestätigen] – ältere Einträge werden
-          gelöscht, sobald neue Fragen gestellt werden; ohne neue Fragen löschen wir von Hand.
+          <strong>Speicherdauer:</strong> 30 Tage – ältere Einträge werden gelöscht, sobald neue
+          Fragen gestellt werden; ohne neue Fragen löschen wir von Hand.
         </li>
       </ul>,
       <p key="p2">
