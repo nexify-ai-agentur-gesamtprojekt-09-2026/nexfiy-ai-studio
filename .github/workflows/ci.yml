@@ -24,6 +24,10 @@ jobs:
     name: Prüfen
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
+      # Nur für den Upload der Testabdeckung an GitHub Code Quality.
+      code-quality: write
     steps:
       # Action-Versionen per Commit-SHA gepinnt (wie in deploy-live.yml).
       - name: Checkout
@@ -65,5 +69,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Tests (mit Build-Ausgabe)
-        run: npm test
+      # Letzter Testlauf mit Abdeckung (Cobertura-XML für GitHub Code Quality).
+      - name: Tests (mit Build-Ausgabe, Abdeckung)
+        run: npx vitest run --coverage.enabled --coverage.provider=v8 --coverage.reporter=cobertura --coverage.reporter=text-summary --coverage.reportsDirectory=coverage
+
+      - name: Testabdeckung an Code Quality melden
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-code-coverage@2b21a77928be8d5168c2b9581a67f2adbebacc52 # v1.4.4
+        with:
+          file: coverage/cobertura-coverage.xml
+          language: TypeScript
+          label: code-coverage/vitest
