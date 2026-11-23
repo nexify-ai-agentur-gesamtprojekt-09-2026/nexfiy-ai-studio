@@ -150,12 +150,44 @@ describe("Deploy live: Unternehmensstandard beim Rückweg auf ältere main-Commi
     git(root, "add", "-A");
     git(root, "commit", "-qm", "anwendung");
     const soll = git(root, "rev-parse", "HEAD");
+    // Später eingeführter Standard (wie 718fda2): der Anwendungsstand liegt davor.
+    git(root, "commit", "-q", "--allow-empty", "-m", "standard eingeführt");
+    const seit = git(root, "rev-parse", "HEAD");
+    git(root, "checkout", "-q", soll);
     const temp = tmp("runner-");
     const summary = join(temp, "summary.md");
     writeFileSync(summary, "");
-    const env = { SOLL: soll, WERKZEUG: werkzeug, RUNNER_TEMP: temp, GITHUB_STEP_SUMMARY: summary };
-    return { root, env, summary };
+    const env = {
+      SOLL: soll,
+      WERKZEUG: werkzeug,
+      STANDARD_SEIT: seit,
+      RUNNER_TEMP: temp,
+      GITHUB_STEP_SUMMARY: summary,
+    };
+    return { root, env, summary, git: (...a: string[]) => git(root, ...a) };
   }
+
+  it("Einführungs-Commit im Workflow ist 718fda2", () => {
+    expect(jobZeilen(DEPLOY, "bauen")).toContain(
+      "          STANDARD_SEIT: 718fda21a636980b2363aac341f51a4d94e80a9f",
+    );
+  });
+
+  it("Gegenprobe: Stand nach Einführung des Standards ohne Skript bleibt rot", () => {
+    const u = repoMit({ "package.json": JSON.stringify({ name: "neu", scripts: {} }) });
+    u.git("checkout", "-q", u.env.STANDARD_SEIT);
+    const r = bash(SCHRITT(), u.root, { ...u.env, SOLL: u.env.STANDARD_SEIT });
+    expect(r.code).toBe(1);
+    expect(r.aus).toContain("enthält den Standard");
+    expect(r.aus).not.toContain("(nur Geheimnisse) bestanden");
+  });
+
+  it("Gegenprobe: unbekannter Einführungs-Commit bricht ab", () => {
+    const u = repoMit({ "package.json": JSON.stringify({ name: "alt" }) });
+    const r = bash(SCHRITT(), u.root, { ...u.env, STANDARD_SEIT: "f".repeat(40) });
+    expect(r.code).toBe(1);
+    expect(r.aus).toContain("nicht in der Historie");
+  });
 
   const ALT_PAKET = JSON.stringify({ name: "alt", scripts: { build: "vite build" } });
 
@@ -232,6 +264,7 @@ describe("Deploy live: Lage im Fehler-Issue", () => {
       ERGEBNIS: "",
       ENTSCHEIDUNG: "",
       ROLLBACK: "",
+      ZUGANG: "",
       STEMPEL_URL: "https://example.invalid/.well-known/nexify-build.json",
       ...env,
     });
@@ -242,11 +275,35 @@ describe("Deploy live: Lage im Fehler-Issue", () => {
     };
   }
 
+  it("Zugangsdaten fehlen: vor dem Deploy abgebrochen, live unverändert, kein Stempel-Abruf", () => {
+    const m = melden({ ZUGANG: "fehlt" }, JSON.stringify({ commit: SHA }));
+    expect(m.bericht).toContain("Vor dem Deploy abgebrochen: Zugangsdaten fehlen");
+    expect(m.bericht).toContain("live ist unverändert");
+    expect(m.bericht).not.toContain("Ergebnis unbekannt");
+    expect(m.log).not.toContain("curl ");
+  });
+
+  it("Schritt Zugangsdaten meldet zugang=fehlt bzw. ok an den Job", () => {
+    const block = runBlock(DEPLOY, "deploy", "Zugangsdaten vorhanden?");
+    const basis = tmp("zugang-");
+    const aus = join(basis, "output");
+    const env = { GITHUB_OUTPUT: aus, GITHUB_STEP_SUMMARY: join(basis, "s.md") };
+    expect(bash(block, basis, { ...env, TOKEN_GESETZT: "false", KONTO: "" }).code).toBe(1);
+    expect(readFileSync(aus, "utf8")).toBe("zugang=fehlt\n");
+    writeFileSync(aus, "");
+    expect(bash(block, basis, { ...env, TOKEN_GESETZT: "true", KONTO: "k" }).code).toBe(0);
+    expect(readFileSync(aus, "utf8")).toBe("zugang=ok\n");
+    expect(jobZeilen(DEPLOY, "deploy")).toContain(
+      "      zugang: ${{ steps.zugang.outputs.zugang }}",
+    );
+  });
+
   it("deploy ohne Ergebnis (z. B. Zeitlimit nach wrangler deploy): Ergebnis unbekannt, Stempel gelesen", () => {
     const m = melden({}, JSON.stringify({ commit: SHA }));
     expect(m.bericht).toContain("Ergebnis unbekannt");
     expect(m.bericht).not.toContain("live ist unverändert");
-    expect(m.bericht).toContain("= auszuliefernder Commit");
+    expect(m.bericht).toContain("live meldet den auszuliefernden Commit");
+    expect(m.bericht).not.toContain("angekommen");
     expect(m.log).toContain("curl ");
     expect(m.log).toContain("gh issue create");
   });

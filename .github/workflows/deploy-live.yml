@@ -12,7 +12,7 @@
 #              Prüfungen wie ci.yml aus (standard/Syntax der Skripte/lint/tsc/test/build/test). Nur
 #              wenn sie grün sind, läuft "deploy" (needs). Lädt .output/ samt sha256-Liste als
 #              Artefakt hoch. Rückweg auf einen main-Commit vor dem Standard (ohne Skript
-#              "standard", älter als 49bcd8d): Geheimnisprüfung mit dem Werkzeug aus github.sha.
+#              "standard", vor 718fda2): Geheimnisprüfung mit dem Werkzeug aus github.sha.
 #   deploy     (Environment "production"): checkt nur das Deploy-Werkzeug aus dem Workflow-Commit
 #              (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und liefert mit
 #              tools/deploy-live.sh aus. Das Skript hält die aktive Worker-Version fest, prüft
@@ -151,19 +151,31 @@ jobs:
           node-version: "22"
 
       # Der Anwendungsstand bringt seinen Standard selbst mit (`npm run standard`). Ältere
-      # main-Commits (Rückweg, vor 49bcd8d) haben das Skript nicht; dann prüft das Werkzeug aus
+      # main-Commits (Rückweg, vor 718fda2) haben das Skript nicht; dann prüft das Werkzeug aus
       # dem Workflow-Commit nur Geheimnisdateien und Token-Muster, und die Lücke steht als
       # Warnung im Lauf. Pflichtdoku und Workflows gehören zum damaligen Stand und werden dort
       # nicht nachträglich verlangt (der Workflow selbst kommt ohnehin aus github.sha).
+      # Der Rückfall gilt nur für Commits vor der Einführung des Standards (STANDARD_SEIT); fehlt
+      # das Skript in einem Stand, der ihn schon enthält, bleibt der Schritt rot.
       - name: Unternehmensstandard
         env:
           SOLL: ${{ needs.aufloesen.outputs.sha }}
           WERKZEUG: ${{ github.sha }}
+          # 718fda2 „Unternehmensstandard verbindlich machen …“ (über PR #19, Merge 49bcd8d).
+          STANDARD_SEIT: 718fda21a636980b2363aac341f51a4d94e80a9f
         run: |
           set -euo pipefail
           if node -e 'const s = require("./package.json").scripts || {}; process.exit(s.standard ? 0 : 1)'; then
             npm run standard
           else
+            if ! git cat-file -e "${STANDARD_SEIT}^{commit}" 2>/dev/null; then
+              echo "::error::Einführungs-Commit des Standards $STANDARD_SEIT nicht in der Historie; Abbruch."
+              exit 1
+            fi
+            if git merge-base --is-ancestor "$STANDARD_SEIT" "$SOLL"; then
+              echo "::error title=Unternehmensstandard::Commit $SOLL enthält den Standard ($STANDARD_SEIT), aber kein Skript 'standard'; Abbruch."
+              exit 1
+            fi
             echo "::warning title=Unternehmensstandard::Commit $SOLL hat kein Skript 'standard' (älter als der Standard). Geprüft werden nur Geheimnisdateien und Token-Muster, mit tools/standard-pruefung.mjs aus dem Werkzeug-Stand $WERKZEUG."
             if ! git cat-file -e "${WERKZEUG}:tools/standard-pruefung.mjs" 2>/dev/null; then
               echo "::error::tools/standard-pruefung.mjs fehlt im Werkzeug-Stand $WERKZEUG; Abbruch."
@@ -252,6 +264,7 @@ jobs:
       ergebnis: ${{ steps.deploy.outputs.ergebnis }}
       entscheidung: ${{ steps.deploy.outputs.entscheidung }}
       rollback: ${{ steps.deploy.outputs.rollback }}
+      zugang: ${{ steps.zugang.outputs.zugang }}
     steps:
       - name: Checkout Deploy-Werkzeug (Workflow-Commit)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -305,6 +318,7 @@ jobs:
       # Ohne Token klar abbrechen (vor jedem Deploy, live bleibt unverändert; "melden" legt ein
       # Issue an). Der Wert wird nie ausgegeben, geprüft wird nur, ob er gesetzt ist.
       - name: Zugangsdaten vorhanden?
+        id: zugang
         if: inputs.dry_run != true
         env:
           TOKEN_GESETZT: ${{ (secrets.CLOUDFLARE_API_TOKEN || secrets.API_TOKEN_CLOUDFLARE) != '' }}
@@ -321,8 +335,11 @@ jobs:
               echo "Im Environment \`production\` fehlt:$fehlt."
               echo "Einrichtung: \`docs/auslieferung.md\`, Abschnitt Einmalige Einrichtung. Live ist unverändert."
             } >> "$GITHUB_STEP_SUMMARY"
+            # Für "melden": eindeutige Lage (vor dem Deploy, live unverändert).
+            echo "zugang=fehlt" >> "$GITHUB_OUTPUT"
             exit 1
           fi
+          echo "zugang=ok" >> "$GITHUB_OUTPUT"
           echo "Zugangsdaten vorhanden."
 
       # Rückweg-Anker, Binding-Prüfung, Readback, Smoke-Test, automatischer Rollback und die
@@ -377,6 +394,7 @@ jobs:
           ERGEBNIS: ${{ needs.deploy.outputs.ergebnis }}
           ENTSCHEIDUNG: ${{ needs.deploy.outputs.entscheidung }}
           ROLLBACK: ${{ needs.deploy.outputs.rollback }}
+          ZUGANG: ${{ needs.deploy.outputs.zugang }}
           # Nur lesend, ohne Zugangsdaten: der öffentliche Build-Stempel.
           STEMPEL_URL: https://www.nexifyai.de/.well-known/nexify-build.json
         run: |
@@ -390,6 +408,8 @@ jobs:
             lage="ACHTUNG: fehlerhafte Version ist live und der automatische Rollback ist nicht gelungen. Rückweg von Hand (docs/auslieferung.md)."
           elif [ "$J_DEPLOY" = "skipped" ]; then
             lage="Vor dem Deploy abgebrochen (Job deploy nicht gestartet); live ist unverändert."
+          elif [ "$ZUGANG" = "fehlt" ]; then
+            lage="Vor dem Deploy abgebrochen: Zugangsdaten fehlen im Environment production; live ist unverändert. Einrichtung: docs/auslieferung.md, Abschnitt Einmalige Einrichtung."
           elif [ -z "$ERGEBNIS" ]; then
             # Das Deploy-Skript meldet sein Ergebnis erst am Ende. Fehlt es, kann der Job vor
             # wrangler deploy (Zugangsdaten, Artefakt, Rückweg-Anker) oder danach (Zeitlimit,
@@ -407,7 +427,7 @@ jobs:
             if ! printf '%s' "$gelesen" | grep -Eqx '[0-9a-f]{40}'; then
               live="nicht lesbar"
             elif [ "$gelesen" = "$SHA" ]; then
-              live="\`${gelesen:0:10}\` = auszuliefernder Commit (Deploy ist angekommen; Binding und Smoke-Test von Hand prüfen)"
+              live="\`${gelesen:0:10}\` = auszuliefernder Commit (live meldet den auszuliefernden Commit; Binding und Smoke-Test von Hand prüfen)"
             else
               live="\`${gelesen:0:10}\`, nicht der auszuliefernde Commit (live vermutlich unverändert)"
             fi
