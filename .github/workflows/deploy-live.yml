@@ -9,7 +9,7 @@
 #   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
 #              (Push: github.sha; von Hand: Eingabe ref) und zeigt SHA, Betreff, Autor, Datum.
 #   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus und führt dieselben
-#              Prüfungen wie ci.yml aus (lint/tsc/test/build/test). Nur wenn sie grün sind, läuft
+#              Prüfungen wie ci.yml aus (standard/lint/tsc/test/build/test). Nur wenn sie grün sind, läuft
 #              "deploy" (needs). Lädt .output/ samt sha256-Liste als Artefakt hoch.
 #   deploy     (Environment "production"): checkt nur das Deploy-Werkzeug aus dem Workflow-Commit
 #              (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und liefert mit
@@ -147,6 +147,9 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
+
+      - name: Unternehmensstandard
+        run: npm run standard
 
       - name: Bun einrichten
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
