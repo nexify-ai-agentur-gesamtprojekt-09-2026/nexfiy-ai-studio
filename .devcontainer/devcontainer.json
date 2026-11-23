@@ -1,0 +1,28 @@
+// Entwicklungsumgebung für GitHub Codespaces (und lokale Dev Container).
+// Gleiche Versionen wie die CI (.github/workflows/ci.yml): Node 22, Bun 1.4.4.
+// Keine Secrets hier ablegen. Zugangsdaten für die Auslieferung liegen nur im
+// GitHub-Environment "production"; im Codespace wird nicht ausgeliefert.
+{
+  "name": "nexfiy-ai-studio",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+  },
+  // Läuft auch im Prebuild: Bun installieren und Abhängigkeiten vorab laden.
+  "onCreateCommand": "curl -fsSL https://bun.sh/install | bash -s 'bun-v1.4.4' && ~/.bun/bin/bun install --frozen-lockfile",
+  // Läuft im Prebuild bei jedem Push erneut: Abhängigkeiten aktuell halten.
+  "updateContentCommand": "~/.bun/bin/bun install --frozen-lockfile",
+  "remoteEnv": { "PATH": "${containerEnv:PATH}:/home/node/.bun/bin" },
+  "forwardPorts": [3000, 5173],
+  "portsAttributes": {
+    "3000": { "label": "Vorschau (vite dev)", "onAutoForward": "notify" },
+    "5173": { "label": "Vorschau (vite dev)", "onAutoForward": "notify" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "vitest.explorer"]
+    },
+    "codespaces": { "openFiles": ["AGENTS.md", "docs/auslieferung.md"] }
+  },
+  "hostRequirements": { "cpus": 2, "memory": "8gb" }
+}
