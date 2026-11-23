@@ -9,7 +9,8 @@ es für CI.
 
 Der Schutz ist mehrstufig:
 
-1. Pflicht-CI vor dem Merge.
+1. Pflicht-CI vor dem Merge (als Merge-Sperre erst, sobald der Branch-Schutz nach Abschnitt 3
+   eingerichtet ist; Stand 23.11.2026 fehlt er, `docs/unternehmensstandard.md`, OFFEN S2).
 2. Dieselben Prüfungen noch einmal auf dem auszuliefernden Commit.
 3. Prüfsummen des Build-Artefakts und Allowlist für die Wrangler-Konfiguration.
 4. Nach dem Deploy: Binding-Prüfung, Readback und Smoke-Test.
@@ -19,12 +20,17 @@ Der Schutz ist mehrstufig:
 
 1. Die Änderung kommt als Pull Request gegen `main`.
 2. Der Workflow **CI** (`.github/workflows/ci.yml`, Job „Prüfen“) läuft auf jedem PR:
+   - `npm run standard` (Unternehmensstandard, `tools/standard-pruefung.mjs`);
    - Installation aus dem Lockfile;
    - Syntaxprüfung der Skripte unter `tools/`;
    - `npm run lint` und `npx tsc --noEmit`;
    - `npm test`, dann `npm run build`, dann erneut `npm test` mit Build-Ausgabe.
 
-   Der Branch-Schutz lässt den Merge erst zu, wenn „Prüfen“ grün ist.
+   Der Branch-Schutz lässt den Merge erst zu, wenn „Prüfen“ grün ist, **sobald er eingerichtet
+   ist** (Abschnitt 3; offen als S2 in `docs/unternehmensstandard.md`). Bis dahin verlangt das
+   Ruleset weder PR noch Check: ein direkter Push auf `main` geht ohne vorherigen CI-Lauf in
+   „Deploy live“, dort prüft nur „Prüfen und bauen“ vor dem Deploy.
+
 3. Nach dem Merge startet der Push auf `main` den Workflow **Deploy live**
    (`.github/workflows/deploy-live.yml`). Der Job „Prüfen und bauen“ prüft genau diesen Commit
    noch einmal wie die CI. Nur wenn er grün ist, läuft „Ausliefern“ (`needs`).
@@ -80,8 +86,14 @@ Alle Wege nutzen `tools/deploy-live.sh` und prüfen deshalb gleich, einschließl
 
 1. Er checkt genau diesen SHA mit voller Historie aus (die Sitemap braucht die Git-Daten) und
    prüft, dass `HEAD` stimmt.
-2. Er führt `bun install --frozen-lockfile`, lint, `tsc --noEmit`, `npm test`, `npm run build`
-   und noch einmal `npm test` aus.
+2. Er führt dieselben Prüfungen wie die CI aus: `npm run standard`, `bun install
+--frozen-lockfile`, Syntaxprüfung der Skripte unter `tools/`, lint, `tsc --noEmit`,
+   `npm test`, `npm run build` und noch einmal `npm test` (ohne Abdeckungs-Upload).
+   - **Älterer main-Commit ohne Skript `standard`** (vor `49bcd8d`, etwa beim Rückweg auf
+     `8d73146`): statt `npm run standard` prüft `tools/standard-pruefung.mjs --nur-geheimnisse`
+     aus dem Workflow-Commit (`github.sha`) nur Geheimnisdateien und Token-Muster. Lauf und
+     Zusammenfassung zeigen das als Warnung. Pflichtdoku und Workflows gehören zum damaligen
+     Stand und werden dort nicht nachträglich verlangt.
 3. Er hält den Arbeitsbaum-Status und eine sha256-Liste aller Dateien unter `.output/` fest und
    lädt beides als Artefakt `build-<sha>` hoch.
 
@@ -96,7 +108,16 @@ Alle Wege nutzen `tools/deploy-live.sh` und prüfen deshalb gleich, einschließl
    kein Code; Wrangler lädt das gebaute Bundle nur hoch.
 
 Mit `dry_run` (nur von Hand) läuft alles bis `wrangler deploy --dry-run`. Es wird nichts
-ausgeliefert, und das Skript verlangt keine Zugangsdaten.
+ausgeliefert, und das Skript verlangt keine Zugangsdaten. Token und Konto-ID werden im Probelauf
+gar nicht in die Umgebung gesetzt.
+
+**Job „Fehler melden“** (nur bei Fehlschlag, `issues: write`, kein Checkout): schreibt die Lage
+ins Issue. „Vor dem Deploy abgebrochen; live ist unverändert“ steht nur, wenn „Ausliefern“ gar
+nicht gestartet ist. Endet „Ausliefern“ ohne Ergebnis des Deploy-Skripts (etwa Zeitlimit oder
+Abbruch nach `wrangler deploy`), heißt es „Ergebnis unbekannt; Live-Stand prüfen“. In diesem
+und jedem anderen unklaren Fall liest der Job den öffentlichen Stempel
+`/.well-known/nexify-build.json` lesend und vermerkt im Issue, ob live der auszuliefernde Commit
+läuft.
 
 ## Was das Deploy-Skript tut
 
@@ -225,6 +246,8 @@ Im Fehlerfall setzt der Lauf selbst auf die vorige Worker-Version zurück. Von H
   from“ **`main`** wählen, `ref` = vollständiger SHA des letzten guten main-Commits, dann
   **Run workflow**.
   - Gebaut, geprüft und ausgeliefert wird dieser Stand, mit Smoke-Test und Auto-Rollback.
+    Auch main-Commits vor dem Standard (vor `49bcd8d`, etwa `8d73146`) gehen, siehe „Prüfen und
+    bauen“.
   - `dry_run` anhaken für einen Probelauf.
 - **Dauerhaft:** den verursachenden Merge per Revert-PR rückgängig machen. Ein Rollback allein
   hält nur bis zum nächsten Merge.

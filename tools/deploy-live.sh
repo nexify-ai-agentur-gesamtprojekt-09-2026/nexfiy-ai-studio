@@ -105,7 +105,7 @@ export STEMPEL_COMMIT="$COMMIT" STEMPEL_SUBJECT="$COMMIT_SUBJECT" STEMPEL_STATUS
 # 2026-11-22 13:04: Nur pruefen, nichts bauen/deployen.
 if [ "$MODUS" = "--verify-only" ]; then
   want="$(commit_short)"
-  got="$(curl -sL --max-time 10 "$LIVE_BASE/.well-known/nexify-build.json" | python3 -c 'import json,sys
+  got="$(curl -sL --max-time 10 "$LIVE_BASE/.well-known/nexify-build.json" | python3 -I -c 'import json,sys
 try: print(json.load(sys.stdin).get("commit_short",""))
 except Exception: print("")' 2>/dev/null)"
   if [ "$got" = "$want" ]; then
@@ -164,7 +164,7 @@ export DEPLOY_HOST="${DEPLOY_HOST:-$(hostname 2>/dev/null || uname -n)}"
 # Grund (gemessen): public/.well-known/nexify-build.json wurde von Hand gepflegt und blieb zwei Commits
 # hinter HEAD zurueck -> G-205 (P0) meldete dauerhaft FAIL, obwohl der Seiteninhalt identisch war.
 # Ein Stempel, der den Commit behauptet, muss von diesem Commit selbst erzeugt werden.
-python3 - <<'PY'
+python3 -I - <<'PY'
 import json, os
 from datetime import datetime
 now = datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%:z")
@@ -214,7 +214,7 @@ PY
 verify_live_stamp() {
   local want="$1" url="$LIVE_BASE/.well-known/nexify-build.json" got
   for _ in 1 2 3 4 5 6; do
-    got="$(curl -sL --max-time 10 "$url" | python3 -c 'import json,sys
+    got="$(curl -sL --max-time 10 "$url" | python3 -I -c 'import json,sys
 try: print(json.load(sys.stdin).get("commit_short",""))
 except Exception: print("")' 2>/dev/null)"
     if [ "$got" = "$want" ]; then
@@ -239,7 +239,7 @@ verify_d1_binding() {
     echo "BINDING FAIL: Cloudflare-API nicht erreichbar" >&2
     return 1
   fi
-  printf '%s' "$antwort" | python3 -c 'import json,sys
+  printf '%s' "$antwort" | python3 -I -c 'import json,sys
 try:
     d = json.load(sys.stdin)
 except Exception:

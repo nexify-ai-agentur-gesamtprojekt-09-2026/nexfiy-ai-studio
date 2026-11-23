@@ -3,7 +3,12 @@
 // Läuft in .github/workflows/ci.yml (Job "Prüfen") und im Build-Job von deploy-live.yml sowie
 // lokal als `npm run standard`. Exit 0 = alle Regeln erfüllt, Exit 1 = mindestens ein Verstoß.
 //
-// Aufruf: node tools/standard-pruefung.mjs [--root=<verzeichnis>]
+// Aufruf: node tools/standard-pruefung.mjs [--root=<verzeichnis>] [--nur-geheimnisse]
+//
+// --nur-geheimnisse: nur die Regeln `keine-geheimnisdateien` und `keine-tokens`. Für den Build-Job
+// von deploy-live.yml beim Rückweg auf einen main-Commit, der älter als der Standard ist (ohne
+// Skript `standard`): Pflichtdoku und Workflows gehören zum damaligen Stand, Geheimnisse dürfen
+// aber auch dort nie stehen. Das Skript kommt dann aus dem Werkzeug-Stand (github.sha).
 //
 // Dateiliste: in einem Git-Arbeitsbaum alle versionierten und alle neuen, nicht ignorierten
 // Dateien (`git ls-files --cached --others --exclude-standard`); sonst ein Durchlauf des
@@ -249,11 +254,43 @@ export function devcontainerVersionen(text) {
   return { node, bun };
 }
 
-export function pruefe(root) {
+/** Keine Geheimnisdateien und keine Tokens nach bekannten Mustern im Inhalt. */
+function pruefeGeheimnisse(root, dateien, verstoss) {
+  for (const datei of dateien) {
+    const name = basename(datei);
+    for (const { muster, grund } of VERBOTENE_NAMEN) {
+      if (muster.test(name)) verstoss("keine-geheimnisdateien", datei, `${grund} ist versioniert`);
+    }
+  }
+  for (const datei of dateien) {
+    const pfad = join(root, datei);
+    let puffer;
+    try {
+      if (statSync(pfad).size > MAX_GROESSE) continue;
+      puffer = readFileSync(pfad);
+    } catch {
+      continue;
+    }
+    if (puffer.subarray(0, 8000).includes(0)) continue; // Binärdatei
+    const text = puffer.toString("utf8");
+    for (const { name, muster } of TOKEN_MUSTER) {
+      if (!muster.test(text)) continue;
+      const nr = text.slice(0, text.search(muster)).split("\n").length;
+      verstoss("keine-tokens", `${datei}:${nr}`, `${name} gefunden (Wert nicht ausgegeben)`);
+    }
+  }
+}
+
+export function pruefe(root, { nurGeheimnisse = false } = {}) {
   const verstoesse = [];
   const verstoss = (regel, ort, text) => verstoesse.push({ regel, ort, text });
   const { quelle, dateien } = dateiListe(root);
   const menge = new Set(dateien);
+
+  if (nurGeheimnisse) {
+    pruefeGeheimnisse(root, dateien, verstoss);
+    return { quelle, anzahlDateien: dateien.length, anzahlWorkflows: 0, verstoesse };
+  }
 
   // Pflichtdateien.
   for (const datei of PFLICHT_DATEIEN) {
@@ -261,12 +298,9 @@ export function pruefe(root) {
       verstoss("pflicht-doku", datei, "Pflichtdatei fehlt");
   }
 
-  // Verbotene Dateien und eingecheckte Sitemap.
+  // Verbotene Dateien und Tokens (wie mit --nur-geheimnisse), eingecheckte Sitemap.
+  pruefeGeheimnisse(root, dateien, verstoss);
   for (const datei of dateien) {
-    const name = basename(datei);
-    for (const { muster, grund } of VERBOTENE_NAMEN) {
-      if (muster.test(name)) verstoss("keine-geheimnisdateien", datei, `${grund} ist versioniert`);
-    }
     if (datei === "public/sitemap.xml")
       verstoss(
         "sitemap-nicht-eingecheckt",
@@ -325,42 +359,36 @@ export function pruefe(root) {
     }
   }
 
-  // Keine Tokens nach bekannten Mustern im Inhalt.
-  for (const datei of dateien) {
-    const pfad = join(root, datei);
-    let puffer;
-    try {
-      if (statSync(pfad).size > MAX_GROESSE) continue;
-      puffer = readFileSync(pfad);
-    } catch {
-      continue;
-    }
-    if (puffer.subarray(0, 8000).includes(0)) continue; // Binärdatei
-    const text = puffer.toString("utf8");
-    for (const { name, muster } of TOKEN_MUSTER) {
-      if (!muster.test(text)) continue;
-      const nr = text.slice(0, text.search(muster)).split("\n").length;
-      verstoss("keine-tokens", `${datei}:${nr}`, `${name} gefunden (Wert nicht ausgegeben)`);
-    }
-  }
-
   return { quelle, anzahlDateien: dateien.length, anzahlWorkflows: workflows.length, verstoesse };
 }
 
 function main() {
-  const arg = process.argv.slice(2).find((a) => a.startsWith("--root="));
+  const argumente = process.argv.slice(2);
+  for (const a of argumente) {
+    if (!a.startsWith("--root=") && a !== "--nur-geheimnisse") {
+      console.error(
+        `Standard-Prüfung: unbekannte Option ${a} (erlaubt: --root=, --nur-geheimnisse)`,
+      );
+      process.exit(2);
+    }
+  }
+  const arg = argumente.find((a) => a.startsWith("--root="));
   const root = resolve(arg ? arg.slice("--root=".length) : process.cwd());
-  const ergebnis = pruefe(root);
+  const nurGeheimnisse = argumente.includes("--nur-geheimnisse");
+  const ergebnis = pruefe(root, { nurGeheimnisse });
+  const titel = nurGeheimnisse ? "Standard-Prüfung (nur Geheimnisse)" : "Standard-Prüfung";
   if (ergebnis.verstoesse.length) {
     console.error(
-      `Standard-Prüfung: ${ergebnis.verstoesse.length} Verstoß/Verstöße (docs/unternehmensstandard.md)`,
+      `${titel}: ${ergebnis.verstoesse.length} Verstoß/Verstöße (docs/unternehmensstandard.md)`,
     );
     for (const v of ergebnis.verstoesse) console.error(`  [${v.regel}] ${v.ort}: ${v.text}`);
     process.exit(1);
   }
   console.log(
-    `Standard-Prüfung bestanden: ${ergebnis.anzahlDateien} Dateien (${ergebnis.quelle}), ` +
-      `${ergebnis.anzahlWorkflows} Workflows.`,
+    nurGeheimnisse
+      ? `${titel} bestanden: ${ergebnis.anzahlDateien} Dateien (${ergebnis.quelle}).`
+      : `${titel} bestanden: ${ergebnis.anzahlDateien} Dateien (${ergebnis.quelle}), ` +
+          `${ergebnis.anzahlWorkflows} Workflows.`,
   );
 }
 
