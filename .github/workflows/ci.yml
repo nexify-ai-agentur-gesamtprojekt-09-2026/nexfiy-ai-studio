@@ -1,8 +1,8 @@
 # 2026-11-23 (Europe/Berlin): Pflichtprüfung für jeden Pull Request gegen main und jeden Push auf
 # main. Ohne Environment, ohne Secrets, nur Leserecht. Der Job "Prüfen" ist als Pflicht-Check im
 # Branch-Schutz von main eingetragen (docs/auslieferung.md); ein PR lässt sich erst mergen, wenn
-# er grün ist. Nach dem Merge liefert Cloudflare Workers Builds automatisch aus
-# (Deploy-Command `npm run deploy:cf`, siehe docs/auslieferung.md).
+# er grün ist. Nach dem Merge liefert .github/workflows/deploy-live.yml automatisch aus und prüft
+# denselben Commit dort vor dem Deploy noch einmal (siehe docs/auslieferung.md).
 name: CI
 
 on:
@@ -29,6 +29,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # Volle Historie: src/lib/seo.test.ts vergleicht Sitemap-Daten mit dem Git-Stand der Seiten.
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Node.js einrichten

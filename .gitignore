@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 .output
+# Entsteht im Build (tools/generate-sitemap.mjs), nicht von Hand pflegen.
+/public/sitemap.xml
 .vinxi
 .tanstack/**
 .nitro

@@ -1,19 +1,20 @@
-# Notfall- und Rückweg-Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio).
-# Normalfall seit 2026-11-23: Cloudflare Workers Builds liefert jeden Merge nach main selbst aus
-# (docs/auslieferung.md); dieser Workflow startet deshalb NUR von Hand (Actions -> "Deploy live"
-# -> "Run workflow", nur von main), z. B. für einen Rückweg auf einen älteren main-Commit, einen
-# Probelauf oder wenn Workers Builds gestört ist. Optional: er braucht das Environment
-# "production" mit Secret CLOUDFLARE_API_TOKEN und Variable CLOUDFLARE_ACCOUNT_ID.
+# Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio).
+# Normalfall (2026-11-23): jeder Push auf main (also jeder Merge eines grünen PRs) liefert
+# automatisch aus, ohne menschliche Freigabe. Von Hand (Actions -> "Deploy live" -> "Run workflow",
+# nur von main): Rückweg auf einen älteren main-Commit oder Probelauf (dry_run).
+# Zugangsdaten: Account-API-Token (Cloudflare, personenunabhängig) als Secret CLOUDFLARE_API_TOKEN
+# und Variable CLOUDFLARE_ACCOUNT_ID im Environment "production" (ohne Required reviewers).
 # Vier Jobs, nur "deploy" kennt das Cloudflare-Token, nur "melden" darf Issues schreiben:
 #   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
-#              und zeigt SHA, Betreff, Autor, Datum in der Zusammenfassung.
-#   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus, lint/tsc/test/build/test,
-#              lädt .output/ samt sha256-Liste als Artefakt hoch.
+#              (Push: github.sha; von Hand: Eingabe ref) und zeigt SHA, Betreff, Autor, Datum.
+#   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus und führt dieselben
+#              Prüfungen wie ci.yml aus (lint/tsc/test/build/test). Nur wenn sie grün sind, läuft
+#              "deploy" (needs). Lädt .output/ samt sha256-Liste als Artefakt hoch.
 #   deploy     (Environment "production"): checkt nur das Deploy-Werkzeug aus dem Workflow-Commit
 #              (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und liefert mit
 #              tools/deploy-live.sh aus. Das Skript hält die aktive Worker-Version fest, prüft
 #              Binding DB, Readback und Smoke-Test und setzt bei einem Fehler automatisch auf die
-#              vorige Version zurück (gleicher Ablauf wie in Workers Builds und auf dem Server).
+#              vorige Version zurück; der Job bleibt dann rot.
 #              Aus dem Anwendungsstand läuft hier kein Code; das Worker-Bundle wird nur hochgeladen.
 #              Die wrangler.json aus dem Artefakt schreibt tools/wrangler-config.py per Allowlist neu.
 #   melden     (nur bei Fehlschlag, issues: write): legt ein Issue mit Label deploy-fehler an oder
@@ -21,8 +22,10 @@
 # Einrichtung und Rückweg: docs/auslieferung.md
 name: Deploy live
 
-# Kein push-Trigger: sonst liefen Workers Builds und dieser Workflow doppelt.
+# Workers Builds (Cloudflare) darf nicht zusätzlich verbunden sein, sonst wird doppelt ausgeliefert.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       ref:
@@ -39,8 +42,8 @@ on:
 permissions:
   contents: read
 
-# Immer nur ein Lauf gleichzeitig. Ein laufender Lauf wird nie abgebrochen; GitHub hält höchstens
-# einen wartenden Lauf, ein neuer Start ersetzt also einen noch wartenden älteren.
+# Immer nur eine Auslieferung gleichzeitig. Ein laufender Lauf wird nie abgebrochen; GitHub hält
+# höchstens einen wartenden Lauf, ein neuerer Push ersetzt also einen noch wartenden älteren.
 concurrency:
   group: deploy-live
   cancel-in-progress: false
@@ -68,7 +71,8 @@ jobs:
       - name: Eingabe auf SHA aus der main-Historie auflösen
         id: sha
         env:
-          EINGABE: ${{ inputs.ref }}
+          # Push: der gepushte Commit; von Hand: die Eingabe ref.
+          EINGABE: ${{ inputs.ref || github.sha }}
           ANLASS: ${{ github.event_name }}
         run: |
           set -euo pipefail
@@ -101,7 +105,7 @@ jobs:
             echo "| Datum | $(feld %cI) |"
             if [ "$sha" != "$(git rev-parse origin/main)" ]; then
               echo ""
-              echo "**Achtung:** älterer main-Commit (Rollback), nicht der aktuelle Stand von main."
+              echo "**Achtung:** älterer main-Commit (Rollback oder bereits überholter Push), nicht der aktuelle Stand von main."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
@@ -123,6 +127,8 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ needs.aufloesen.outputs.sha }}
+          # Volle Historie: src/lib/seo.test.ts vergleicht Sitemap-Daten mit dem Git-Stand.
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Ausgecheckten Commit prüfen
@@ -252,6 +258,29 @@ jobs:
         with:
           node-version: "22"
 
+      # Ohne Token klar abbrechen (vor jedem Deploy, live bleibt unverändert; "melden" legt ein
+      # Issue an). Der Wert wird nie ausgegeben, geprüft wird nur, ob er gesetzt ist.
+      - name: Zugangsdaten vorhanden?
+        if: inputs.dry_run != true
+        env:
+          TOKEN_GESETZT: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+          KONTO: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          fehlt=""
+          [ "$TOKEN_GESETZT" = "true" ] || fehlt="$fehlt Secret CLOUDFLARE_API_TOKEN"
+          [ -n "$KONTO" ] || fehlt="$fehlt Variable CLOUDFLARE_ACCOUNT_ID"
+          if [ -n "$fehlt" ]; then
+            echo "::error title=Auslieferung nicht eingerichtet::Im Environment production fehlt:$fehlt. Einmalige Einrichtung: docs/auslieferung.md, Abschnitt 'Einmalige Einrichtung'. Live ist unverändert."
+            {
+              echo "## Auslieferung nicht eingerichtet"
+              echo ""
+              echo "Im Environment \`production\` fehlt:$fehlt."
+              echo "Einrichtung: \`docs/auslieferung.md\`, Abschnitt Einmalige Einrichtung. Live ist unverändert."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Zugangsdaten vorhanden."
+
       # Rückweg-Anker, Binding-Prüfung, Readback, Smoke-Test, automatischer Rollback und die
       # Job-Zusammenfassung erledigt tools/deploy-live.sh selbst (für alle Wege gleich).
       - name: Ausliefern
@@ -316,7 +345,7 @@ jobs:
             lage="Live-Version unverändert oder Lage unklar; Protokoll prüfen."
           fi
           {
-            echo "Auslieferung über GitHub Actions (Deploy live) fehlgeschlagen."
+            echo "Automatische Auslieferung (Deploy live) fehlgeschlagen."
             echo ""
             echo "**Lage:** $lage"
             echo ""

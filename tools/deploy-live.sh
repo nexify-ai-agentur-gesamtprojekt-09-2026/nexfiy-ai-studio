@@ -4,12 +4,13 @@
 # Ohne Override entsteht ein neuer Worker "nexify-ai-agentur-gesamtprojekt-..." ohne DB.
 # Nutzung: tools/deploy-live.sh [--dry-run | --verify-only] [--skip-build]
 #
-# 2026-11-23 (Europe/Berlin): Ein Skript für alle drei Wege, damit jeder gleich prüft:
-#   - Cloudflare Workers Builds (Normalfall: Merge nach main = live). Deploy-Command
-#     `bash tools/deploy-live.sh --skip-build`. Erkennung über WORKERS_CI=1; Commit aus
-#     WORKERS_CI_COMMIT_SHA, Token und Konto-ID stellt Cloudflare in der Umgebung bereit.
-#   - GitHub Actions (.github/workflows/deploy-live.yml, nur von Hand: Notfall/Rückweg).
+# 2026-11-23 (Europe/Berlin): Ein Skript für alle Wege, damit jeder gleich prüft:
+#   - GitHub Actions (Normalfall: Merge nach main = live, .github/workflows/deploy-live.yml),
+#     Account-API-Token aus dem Environment "production".
 #   - Server (Notfall), Zugangsdaten aus /etc/nexifyai/hermes.env.
+#   - Cloudflare Workers Builds (dokumentierte Alternative, nicht neben GitHub Actions
+#     verbinden): Deploy-Command `npm run deploy:cf`. Erkennung über WORKERS_CI=1; Commit aus
+#     WORKERS_CI_COMMIT_SHA.
 #   Ablauf: aktive Worker-Version als Rückweg-Anker festhalten (ohne Anker kein Deploy),
 #   wrangler deploy, Binding DB prüfen, Readback des Stempels, Smoke-Test der Hauptpfade
 #   (tools/deploy-pruefung.mjs). Schlägt etwas davon fehl: automatischer Rollback auf den Anker

@@ -27,7 +27,7 @@
  * Inhaberfreigabe für den Suchindex. Solange `false`, sind die 16 Länderseiten erreichbar und
  * verlinkt, tragen aber `noindex, follow` und stehen nicht in Sitemap und llms.txt. Auf `true`
  * erst, wenn die Freigabe laut config/seo-workflow.json vorliegt (Keyword-Messung, Seitenzweck,
- * fachlicher Review); danach `node tools/generate-sitemap.mjs` ausführen.
+ * fachlicher Review); die Sitemap erzeugt danach der nächste Build (`npm run build`).
  */
 export const LAENDERSEITEN_INDEXIERT = false;
 
