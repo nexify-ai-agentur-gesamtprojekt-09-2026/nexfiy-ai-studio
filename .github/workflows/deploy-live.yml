@@ -4,6 +4,7 @@
 # nur von main): Rückweg auf einen älteren main-Commit oder Probelauf (dry_run).
 # Zugangsdaten: Account-API-Token (Cloudflare, personenunabhängig) als Secret CLOUDFLARE_API_TOKEN
 # und Variable CLOUDFLARE_ACCOUNT_ID im Environment "production" (ohne Required reviewers).
+# Ebenfalls akzeptiert (so im Environment angelegt): Secrets API_TOKEN_CLOUDFLARE und KONTO_ID_CLOUDFLARE.
 # Vier Jobs, nur "deploy" kennt das Cloudflare-Token, nur "melden" darf Issues schreiben:
 #   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
 #              (Push: github.sha; von Hand: Eingabe ref) und zeigt SHA, Betreff, Autor, Datum.
@@ -263,12 +264,12 @@ jobs:
       - name: Zugangsdaten vorhanden?
         if: inputs.dry_run != true
         env:
-          TOKEN_GESETZT: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
-          KONTO: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          TOKEN_GESETZT: ${{ (secrets.CLOUDFLARE_API_TOKEN || secrets.API_TOKEN_CLOUDFLARE) != '' }}
+          KONTO: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.KONTO_ID_CLOUDFLARE }}
         run: |
           fehlt=""
-          [ "$TOKEN_GESETZT" = "true" ] || fehlt="$fehlt Secret CLOUDFLARE_API_TOKEN"
-          [ -n "$KONTO" ] || fehlt="$fehlt Variable CLOUDFLARE_ACCOUNT_ID"
+          [ "$TOKEN_GESETZT" = "true" ] || fehlt="$fehlt Secret CLOUDFLARE_API_TOKEN (oder API_TOKEN_CLOUDFLARE)"
+          [ -n "$KONTO" ] || fehlt="$fehlt Variable CLOUDFLARE_ACCOUNT_ID (oder Secret KONTO_ID_CLOUDFLARE)"
           if [ -n "$fehlt" ]; then
             echo "::error title=Auslieferung nicht eingerichtet::Im Environment production fehlt:$fehlt. Einmalige Einrichtung: docs/auslieferung.md, Abschnitt 'Einmalige Einrichtung'. Live ist unverändert."
             {
@@ -286,8 +287,8 @@ jobs:
       - name: Ausliefern
         id: deploy
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.API_TOKEN_CLOUDFLARE }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.KONTO_ID_CLOUDFLARE }}
           DEPLOY_HOST: github-actions
           # Werkzeug aus werkzeug/, ausgeliefert wird das geprüfte Artefakt unter app/.output/.
           DEPLOY_APP_DIR: ${{ github.workspace }}/app
