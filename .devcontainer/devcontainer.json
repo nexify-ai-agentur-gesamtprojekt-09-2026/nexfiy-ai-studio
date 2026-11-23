@@ -13,9 +13,8 @@
   // Läuft im Prebuild bei jedem Push erneut: Abhängigkeiten aktuell halten.
   "updateContentCommand": "~/.bun/bin/bun install --frozen-lockfile",
   "remoteEnv": { "PATH": "${containerEnv:PATH}:/home/node/.bun/bin" },
-  "forwardPorts": [3000, 5173],
+  "forwardPorts": [5173],
   "portsAttributes": {
-    "3000": { "label": "Vorschau (vite dev)", "onAutoForward": "notify" },
     "5173": { "label": "Vorschau (vite dev)", "onAutoForward": "notify" }
   },
   "customizations": {
