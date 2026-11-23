@@ -1,172 +1,247 @@
 # Auslieferung von www.nexifyai.de
 
-Die Seite läuft als Cloudflare Worker `nexfiy-ai-studio`. Ausgeliefert wird auf zwei Wegen, die
-beide `tools/deploy-live.sh` verwenden und deshalb gleich prüfen:
+Die Seite läuft als Cloudflare Worker `nexfiy-ai-studio`. Stand 2026-11-23: **Ein Merge nach
+`main` geht automatisch live**, ohne Handarbeit, ohne Freigabe und ohne Secrets in GitHub.
+Inhaber-Vorgabe: Bestpraxis, kein Mensch im Ablauf. Die Auslieferung übernimmt
+**Cloudflare Workers Builds**, die GitHub-Integration von Cloudflare. Cloudflare verwaltet das
+Build-Token selbst, deshalb muss bei einer Token-Rotation niemand etwas in GitHub nachtragen.
 
-- **GitHub Actions** (`.github/workflows/deploy-live.yml`, Name „Deploy live“): nur von Hand
-  gestartet, jeder Lauf wartet auf die Freigabe des Inhabers.
-- **Server** (`tools/deploy-live.sh` direkt): lädt die Zugangsdaten aus
-  `/etc/nexifyai/hermes.env`.
+Der Schutz kommt aus fünf Stufen: Pflicht-CI vor dem Merge, Tests auf dem gebauten Stand im
+Cloudflare-Build, Binding-Prüfung, Readback und Smoke-Test nach dem Deploy und zuletzt ein
+automatischer Rollback auf die vorige Worker-Version.
 
-Es gibt keine automatische Auslieferung bei Push oder Merge.
+## Normalablauf
 
-## Was ein Lauf tut
+1. Änderung als Pull Request gegen `main`.
+2. Workflow **CI** (`.github/workflows/ci.yml`, Job „Prüfen“) läuft auf jedem PR:
+   - Installation aus dem Lockfile;
+   - Syntaxprüfung der Skripte unter `tools/`;
+   - `npm run lint` und `npx tsc --noEmit`;
+   - `npm test`, `npm run build`, danach `npm test` erneut mit Build-Ausgabe.
 
-Der Workflow läuft nur von `main` aus und hat zwei Jobs:
+   Der Branch-Schutz lässt den Merge erst zu, wenn „Prüfen“ grün ist.
+3. Merge. Cloudflare Workers Builds sieht den Push auf `main` und führt aus:
+   - **Build-Command** `bun install --frozen-lockfile && npm run build && npm test`;
+   - **Deploy-Command** `npm run deploy:cf`, also `bash tools/deploy-live.sh --skip-build`.
+4. `tools/deploy-live.sh` liefert aus, prüft live und setzt bei einem Fehler selbst auf die vorige
+   Version zurück. Die Einzelheiten stehen unter „Was das Deploy-Skript tut“. Am Ende des
+   Build-Protokolls steht eine kurze Tabelle: Commit, Worker-Version vorher und nachher, Deploy,
+   Binding, Readback, Smoke-Test und Rollback. Die letzte Zeile lautet
+   `AUSLIEFERUNG OK: <commit> live als <version>` oder `AUSLIEFERUNG FEHLGESCHLAGEN: …`.
+5. Ein fehlgeschlagener Build erscheint im Cloudflare-Dashboard unter Workers & Pages →
+   `nexfiy-ai-studio` → **Deployments** → **Builds** als fehlgeschlagen. Ist der Fehler nach dem
+   Deploy aufgetreten, ist live bereits wieder die vorige Version aktiv.
 
-**Job „Commit festlegen“** (`aufloesen`, ohne Environment, ohne Secrets, nur Leserecht):
+Schlägt schon der Build-Command fehl (Installation, Build oder Tests), wird nichts ausgeliefert;
+live bleibt der vorige Stand.
 
-1. Checkout von `main` mit voller Historie.
-2. Die Eingabe `ref` wird auf einen festen 40-stelligen SHA aufgelöst. Erlaubt sind `main`, also
-   der Kopf von `main` beim Start, oder ein vollständiger Commit-SHA. Danach prüft
-   `git merge-base --is-ancestor <sha> origin/main`, dass der Commit zur Historie von `main` gehört
-   (aktueller Stand oder Rückweg auf einen früheren main-Commit). Alles andere bricht ab:
-   Zweignamen, Kurz-SHAs, Commits außerhalb von `main`.
-3. SHA, Betreff, Autor und Datum stehen in der **Zusammenfassung** des Laufs. Ist es nicht der
-   aktuelle Kopf von `main`, steht dort ein Rollback-Hinweis.
+### Weitere Wege (optional, nur Notfall)
 
-**Job „Prüfen und bauen“** (`bauen`, ohne Environment, ohne Secrets, nur Leserecht):
+Beide Wege nutzen ebenfalls `tools/deploy-live.sh` und prüfen deshalb gleich, Rollback
+eingeschlossen.
 
-1. Checkout genau des festgelegten SHA, ohne gespeicherte Git-Zugangsdaten. Danach prüft der Job,
-   dass `git rev-parse HEAD` diesen SHA meldet.
-2. `bun install --frozen-lockfile`, `npm run lint`, `npx tsc --noEmit`, `npm test`.
-3. `npm run build`, danach `npm test` erneut. Jetzt laufen auch die Prüfungen der Build-Ausgabe
-   (`src/test/build-ausgabe.test.ts`, `src/test/ssr-ausgabe.test.ts`, `src/lib/chat-bundle.test.ts`).
-4. Der Job hält den Arbeitsbaum-Status (`git status --porcelain`) und eine sha256-Liste aller
-   Dateien unter `.output/` fest. Die Prüfsumme dieser Liste gibt er als Job-Output weiter.
-5. `.output/` und die Metadaten werden als Artefakt `build-<sha>` hochgeladen
-   (Aufbewahrung 1 Tag).
+- **GitHub Actions „Deploy live“** (`.github/workflows/deploy-live.yml`): nur von Hand, für einen
+  Rückweg auf einen älteren main-Commit, einen Probelauf (`dry_run`) oder wenn Workers Builds
+  gestört ist. Er braucht das GitHub-Environment `production` mit Token und Konto-ID (siehe
+  „Optional: GitHub Actions als Notfallweg“). Ohne diese Einrichtung bricht er vor dem Deploy ab.
+  Schlägt ein Lauf fehl, legt der Job „Fehler melden“ ein Issue mit dem Label `deploy-fehler`
+  an, oder er ergänzt das offene Issue (Recht nur `issues: write`).
+- **Server:** `tools/deploy-live.sh` direkt auf dem Server, Zugangsdaten aus
+  `/etc/nexifyai/hermes.env`. Einzelprüfungen: `node tools/deploy-pruefung.mjs smoke`,
+  `tools/worker-version.sh aktiv`, `tools/worker-version.sh rollback <VERSION_ID>`.
 
-**Job „Ausliefern“** (`deploy`, Environment `production`, wartet auf Freigabe):
+## Was das Deploy-Skript tut
 
-1. Checkout nur des Deploy-Werkzeugs nach `werkzeug/`, und zwar aus dem Workflow-Commit
-   (`github.sha`, der Kopf von `main` beim Start). Der Job prüft, dass HEAD diesem Commit
-   entspricht. Ein Rückweg auf einen älteren Commit läuft dadurch mit dem aktuellen,
-   CI-fähigen Skript.
-2. Das Artefakt wird nach `app/` geladen. Die Prüfsumme der sha256-Liste muss dem Output des
-   Build-Jobs entsprechen. Danach muss jede Datei zur Liste passen und die Anzahl der Dateien
-   stimmen.
-3. `werkzeug/tools/deploy-live.sh` wird mit diesen Angaben aufgerufen:
-   - `DEPLOY_APP_DIR=app` und `DEPLOY_SKIP_BUILD=1`.
-   - Commit, Betreff und Arbeitsbaum-Status kommen als `DEPLOY_COMMIT`,
-     `DEPLOY_COMMIT_SUBJECT` und `DEPLOY_WORKTREE_STATUS_FILE` aus den vorigen Jobs. Einen
-     Git-Checkout der Anwendung gibt es in diesem Job nicht.
+`tools/deploy-live.sh` ist für alle drei Wege dasselbe Skript.
 
-   Die `wrangler.json` aus dem Artefakt verwendet das Skript nicht ungefiltert.
-   `tools/wrangler-config.py` schreibt sie nach einer Allowlist neu, in ein frisches Verzeichnis
-   außerhalb des Artefakts:
-   - Übernommen werden nur `main`, `compatibility_date`, `compatibility_flags`, `no_bundle`,
-     `rules` und `assets` (`binding`, `directory`). Alle anderen Schlüssel werden verworfen und
-     im Protokoll gemeldet, zum Beispiel `build.command`, das Wrangler sonst bei `deploy` in einer
-     Shell ausführt.
-   - Fest vorgegeben sind `name`, `d1_databases` und `keep_vars`. `no_bundle` muss `true` sein.
-   - `main` und `assets.directory` müssen innerhalb von `.output/` liegen.
-   - Das Skript bricht ab, wenn im Artefakt `.env*`, `.dev.vars*`, `.wrangler` oder weitere
-     Wrangler-Konfigurationen liegen. Über `.env` ließen sich sonst etwa
-     `CLOUDFLARE_API_BASE_URL` oder `CLOUDFLARE_API_HEADERS` setzen.
+**Commit bestimmen.** Das Skript nimmt den ersten vorhandenen Wert:
 
-   Wrangler läuft im selben frischen Verzeichnis. Die sha256-Liste reicht dafür nicht aus: Sie
-   belegt nur, dass das Artefakt zwischen Build- und Deploy-Job unverändert blieb. Der Build-Job
-   führt aber Repository-Code aus und könnte die Datei selbst so erzeugen. Dieselbe Prüfung
-   gilt auf dem Server.
+1. `DEPLOY_COMMIT` (GitHub-Artefakt);
+2. `WORKERS_CI_COMMIT_SHA`, das Workers Builds setzt; ist dort git vorhanden, muss
+   `git rev-parse HEAD` denselben SHA melden, sonst gibt es keinen Deploy;
+3. `git rev-parse HEAD`.
 
-   Das Skript setzt den Worker-Namen `nexfiy-ai-studio`, das D1-Binding `DB` (`nexify-main`) und
-   `keep_vars: true`. Es schreibt den Build-Stempel (`host: github-actions`, zusätzlich
-   `run_url`) und ruft `wrangler deploy` auf (Version im Workflow fest). Aus dem
-   Anwendungsstand läuft in diesem Job kein Code: Wrangler lädt das gebaute Worker-Bundle nur
-   hoch. Nur dieser Schritt kennt das Token.
-4. Über die Cloudflare-API prüft das Skript, dass der Worker das Binding `DB` vom Typ `d1` trägt
-   (`GET /accounts/<Konto>/workers/scripts/nexfiy-ai-studio/settings`, `result.bindings`).
-5. Readback: `https://www.nexifyai.de/.well-known/nexify-build.json` muss den ausgelieferten
-   Commit (`commit_short`) melden, sonst schlägt der Lauf fehl.
+Betreff und Arbeitsbaum-Status kommen aus git, wenn es vorhanden ist. Ohne git bleiben sie leer.
 
-Mit `dry_run` läuft alles bis `wrangler deploy --dry-run`; es wird nichts ausgeliefert und es
-werden keine Zugangsdaten verlangt (die Freigabe ist trotzdem nötig, weil der Job im Environment
-`production` läuft).
+**Build.** Mit `--skip-build` oder `DEPLOY_SKIP_BUILD=1` nutzt das Skript das fertige `.output/`.
+In Workers Builds hat der Build-Command gebaut und getestet.
 
-**Nicht Teil des Laufs:** D1-Migrationen werden nie angewendet (`migrations/*.sql` einzeln und
-von Hand, siehe `docs/pwa-seo-geo.md`). Variablen und Secrets des Workers (z. B. `CHAT_AKTIV`,
-`NINEROUTER_API_KEY`) werden nicht gesetzt; `keep_vars: true` lässt die im Dashboard gesetzten
-Variablen stehen, Secrets löscht ein Deploy nie.
+**Konfiguration.** Das Skript nutzt die `wrangler.json` aus dem Build nicht ungefiltert.
+`tools/wrangler-config.py` schreibt sie nach einer Allowlist neu, in ein frisches Verzeichnis
+außerhalb von `.output/`:
+
+- Übernommen werden nur `main`, `compatibility_date`, `compatibility_flags`, `no_bundle`, `rules`
+  und `assets` (`binding`, `directory`). Alle anderen Schlüssel werden verworfen und gemeldet,
+  zum Beispiel `build.command`, das Wrangler sonst in einer Shell ausführt.
+- Fest vorgegeben sind `name: nexfiy-ai-studio`, das D1-Binding `DB` (`nexify-main`) und
+  `keep_vars: true`.
+- Pfade müssen innerhalb von `.output/` liegen. Liegen dort `.env*`, `.dev.vars*` oder `.wrangler`,
+  bricht das Skript ab.
+
+Auch der Build selbst trägt den Namen: `vite.config.ts` gibt ihn Nitro mit
+(`cloudflare.wrangler.name`). Workers Builds verlangt, dass der Name in der Konfiguration dem
+verbundenen Worker entspricht.
+
+**Zugangsdaten.** Gebraucht werden `CLOUDFLARE_API_TOKEN` und `CLOUDFLARE_ACCOUNT_ID`. In
+Workers Builds stellt Cloudflare sie bereit. Auf dem Server kommen sie aus `hermes.env`, in
+GitHub aus dem Environment. Fehlt eines, bricht das Skript vor dem Deploy ab und meldet „FEHLER:
+Zugangsdaten fehlen …“. Die Werte erscheinen nie im Protokoll, und der Token geht über stdin an
+`curl`.
+
+**Stempel.** Das Skript schreibt `/.well-known/nexify-build.json`: Commit, Betreff,
+Arbeitsbaum-Status, Weg (`host`: `cloudflare-workers-builds`, `github-actions` oder der
+Servername) und in Workers Builds die Build-UUID als `build_id`.
+
+**Auslieferung.** Die Schritte laufen in dieser Reihenfolge:
+
+1. **Rückweg-Anker.** `tools/worker-version.sh aktiv` liest die aktive Worker-Version über
+   `GET /accounts/<Konto>/workers/scripts/nexfiy-ai-studio/deployments` und hält sie fest. Ist
+   sie nicht lesbar, gibt es keinen Deploy.
+2. `wrangler deploy` mit fester Wrangler-Version (4.158.0, auf allen Wegen gleich).
+3. **Binding.** Der Worker muss `DB` vom Typ `d1` tragen
+   (`GET …/workers/scripts/nexfiy-ai-studio/settings`).
+4. **Readback.** Der Stempel auf `https://www.nexifyai.de` muss den Commit melden
+   (`commit_short`).
+5. **Smoke-Test** (`tools/deploy-pruefung.mjs smoke`):
+   - `/`, `/leistungen`, `/kontakt`, `/impressum`, `/datenschutz` und `/regionen` liefern
+     HTTP 200; eine Weiterleitung zählt als Fehler;
+   - `/teileklar` liefert 404 mit `X-Robots-Tag: noindex` und ohne `Location`;
+   - jede Prüfung hat drei Versuche.
+6. **Bewertung** (`tools/deploy-pruefung.mjs entscheidung`). Sind Schritt 2 bis 5 bestanden, ist
+   der Lauf fertig. Sonst liest das Skript die aktive Version erneut:
+   - Sie ist gleich dem Anker: Es wurde nichts ausgeliefert, ein Rollback ist nicht nötig.
+   - Sie ist eine andere oder nicht lesbar: `wrangler rollback <Anker> --name nexfiy-ai-studio`.
+     Danach prüft das Skript, dass der Anker wieder aktiv ist, und wiederholt den Smoke-Test.
+   - Es gibt keinen gültigen Anker: kein automatischer Rollback, das Skript meldet das
+     ausdrücklich.
+
+   In jedem Fehlerfall endet das Skript mit Exit 1, also als fehlgeschlagener Build, auch nach
+   einem gelungenen Rollback.
+
+`--dry-run` läuft bis `wrangler deploy --dry-run`. Es liefert nichts aus und verlangt keine
+Zugangsdaten. `--verify-only` prüft nur Readback und Smoke-Test.
+
+**Nicht Teil der Auslieferung:**
+
+- D1-Migrationen werden nie angewendet; `migrations/*.sql` laufen einzeln und von Hand, siehe
+  `docs/pwa-seo-geo.md`.
+- Variablen und Secrets des Workers (z. B. `CHAT_AKTIV`, `NINEROUTER_API_KEY`) setzt das Skript
+  nicht. `keep_vars: true` lässt die im Dashboard gesetzten Variablen stehen, und ein Deploy
+  löscht nie Secrets.
 
 ## Einmalige Einrichtung durch den Inhaber
 
-### 1. Cloudflare-API-Token anlegen (minimale Rechte)
+Es gibt nur zwei Handgriffe: Workers Builds im Cloudflare-Dashboard verbinden und den
+Branch-Schutz in GitHub setzen. Danach ist kein Mensch mehr nötig. In GitHub werden keine
+Secrets gepflegt.
 
-Cloudflare-Dashboard → **Manage Account** → **Account API Tokens** → **Create Token** →
-benutzerdefiniertes Token:
+### 1. Cloudflare Workers Builds verbinden
 
-- **Scope:** „Specified Workers“ → nur `nexfiy-ai-studio`.
-- **Rolle:** **Editor** für diesen Worker.
-- Keine weiteren Rechte: keine Zone-Rechte, kein D1, kein Admin.
+Cloudflare-Dashboard → **Workers & Pages** → Worker **`nexfiy-ai-studio`** → **Settings** →
+**Builds** → **Connect**:
 
-Belege (Cloudflare-Doku, abgerufen 2026-11-22):
+1. **Git-Konto:** GitHub wählen. Beim ersten Mal die **Cloudflare-GitHub-App** autorisieren und
+   für die Organisation **`nexify-ai-agentur-gesamtprojekt-09-2026`** installieren. Zugriff
+   „Only select repositories“ → **`nexfiy-ai-studio`**.
+2. **Repository:** `nexify-ai-agentur-gesamtprojekt-09-2026/nexfiy-ai-studio`.
+3. **Branch:** `main`.
+4. **Build-Command:**
 
-- developers.cloudflare.com/workers/authorization/workers/: `wrangler deploy` und
-  `wrangler rollback` für einen bestehenden Worker brauchen **Editor** für diesen Worker. Editor
-  darf auch die Worker-Einstellungen lesen (nötig für die Binding-Prüfung). Für ein Deploy mit
-  D1-Binding sind **keine eigenen D1-Rechte** nötig; D1-Rechte braucht nur, wer die Datenbank
-  direkt abfragt. **Workers Routes Write** ist nur nötig, wenn ein Deploy Routes oder Custom
-  Domains ändert; `tools/deploy-live.sh` setzt keine Routes, deshalb entfällt es. Einen neuen
-  Worker anlegen dürfte nur ein Admin auf Produktebene; das Token kann also nicht versehentlich
-  einen zweiten Worker erzeugen.
-- developers.cloudflare.com/workers/authorization/: Wrangler mit Account-Token braucht
-  `CLOUDFLARE_API_TOKEN` und `CLOUDFLARE_ACCOUNT_ID` in der Umgebung.
+   ```
+   bun install --frozen-lockfile && npm run build && npm test
+   ```
 
-Wenn das Konto die Worker-Rollen noch nicht anbietet: ersatzweise ein Token mit nur
-**Account → Workers Scripts → Edit**, auf dieses eine Konto beschränkt (Vorlage „Edit Cloudflare
-Workers“ ohne die Zone- und Speicherrechte).
+5. **Deploy-Command:**
 
-### 2. Environment `production` in GitHub
+   ```
+   npm run deploy:cf
+   ```
 
-Repository → **Settings** → **Environments** → **New environment** → Name `production`:
+6. **Root directory:** leer lassen (Repository-Wurzel).
+7. **API token:** die Vorgabe lassen. Cloudflare erzeugt und verwaltet das Token selbst.
+8. **Build variables** (unter „Variables and secrets“; keine Secrets nötig):
 
-1. **Required reviewers** einschalten und den Inhaber eintragen. Optional „Prevent self-review“
-   nur, wenn eine zweite Person freigibt (sonst kann der Inhaber seine eigenen Läufe nicht
-   freigeben).
-2. **Deployment branches and tags:** „Selected branches and tags“ → `main` (verhindert
-   Läufe von anderen Zweigen; der Workflow muss dann von `main` gestartet werden).
-3. **Environment secrets** → **Add environment secret**: Name `CLOUDFLARE_API_TOKEN`, Wert =
-   Token aus Schritt 1.
-4. **Environment variables** → **Add environment variable**: Name `CLOUDFLARE_ACCOUNT_ID`,
-   Wert = Cloudflare-Konto-ID (keine geheime Angabe).
+   | Name | Wert | Zweck |
+   | --- | --- | --- |
+   | `SKIP_DEPENDENCY_INSTALL` | `1` | Installation nur über den Build-Command, streng nach `bun.lock` |
+   | `NODE_VERSION` | `22` | dieselbe Node-Version wie in der CI |
 
-Fehlt Token oder Konto-ID, bricht `tools/deploy-live.sh` vor dem Deploy mit
-„FEHLER: Zugangsdaten fehlen …“ ab.
+9. **Connect** bzw. **Save**.
+10. Unter **Settings → Builds → Branch control**: Production branch `main`,
+    **Enable Preview Builds aus**. Andere Zweige bauen so nichts; PRs prüft die CI in GitHub.
 
-## Ablauf einer Auslieferung
+Belege, Cloudflare-Doku, abgerufen 2026-11-23:
 
-1. GitHub → **Actions** → **Deploy live** → **Run workflow**.
-2. Bei „Use workflow from“ **`main`** wählen. Für `ref` gilt: `main` für den aktuellen Stand oder
-   ein vollständiger SHA eines früheren main-Commits für einen Rückweg. Bei Bedarf `dry_run`
-   anhaken. Dann **Run workflow**.
-3. Den Lauf öffnen. Der Job „Commit festlegen“ ist durchgelaufen, in der **Zusammenfassung**
-   stehen SHA, Betreff, Autor und Datum. Prüfen, ob genau dieser Commit ausgeliefert werden soll.
-4. Ist „Prüfen und bauen“ grün, steht der Job „Ausliefern“ auf „Waiting“. **Review deployments** →
-   `production` anhaken → **Approve and deploy**. Ohne Freigabe läuft nichts. Ein zweiter Lauf
-   wartet, bis der erste fertig ist (`concurrency: deploy-live`).
-5. Im Protokoll stehen am Ende `BINDING OK: DB (d1)` und `READBACK OK: live=<commit>`.
+- `developers.cloudflare.com/workers/ci-cd/builds/`: „Settings → Builds → Connect“. Der
+  Worker-Name im Dashboard muss dem `name` in der Wrangler-Konfiguration entsprechen.
+- `…/builds/configuration/`: Build- und Deploy-Command. Workers Builds erzeugt standardmäßig
+  selbst ein API-Token. Vorgegebene Variablen sind `WORKERS_CI=1`, `WORKERS_CI_COMMIT_SHA`,
+  `WORKERS_CI_BRANCH` und `WORKERS_CI_BUILD_UUID`.
+- `…/builds/build-image/`: Standard ist Node 24, `NODE_VERSION` überschreibt es. Bun 1.4.4 ist
+  dabei, git und curl sind vorinstalliert, `SKIP_DEPENDENCY_INSTALL` schaltet die automatische
+  Installation ab.
+- `…/builds/build-branches/`: Branch control, „Enable Preview Builds“.
 
-Die Sperre, dass nur von `main` aus ausgeliefert wird, setzt die Environment-Regel
-„Deployment branches: main“ durch. Die `if`-Bedingungen im Workflow sind nur eine zusätzliche
-Absicherung, denn die Workflow-Datei eines anderen Zweigs könnte sie entfernen.
+**Was das Cloudflare-Token tatsächlich braucht.** Geprüft in `tools/deploy-live.sh` und
+`tools/worker-version.sh`: `wrangler deploy`, `wrangler rollback`, `GET …/settings` (Binding)
+und `GET …/deployments` (aktive Version). Das Skript ruft D1 nie auf, **D1-Rechte sind also
+nicht nötig**. Das von Workers Builds erzeugte Token enthält „Workers Scripts (edit)“ und
+deckt damit alles ab.
 
-Nachprüfen jederzeit: `tools/deploy-live.sh --verify-only` (auf dem passenden Commit) oder
-`curl -s https://www.nexifyai.de/.well-known/nexify-build.json`.
+**Erster Lauf.** Nach dem Verbinden einen beliebigen Merge nach `main` abwarten, oder unter
+**Deployments → Builds** einen Build für `main` neu starten. Im Build-Protokoll sollte am Ende
+`AUSLIEFERUNG OK` stehen.
+
+### 2. Branch-Schutz für `main` in GitHub
+
+Repository → **Settings** → **Rules** → **Rulesets** → **New ruleset** → **New branch ruleset**:
+
+1. Name `main`, **Enforcement status** „Active“, **Target branches** → „Include default branch“.
+2. **Require a pull request before merging** einschalten (Anzahl Freigaben: 0 genügt).
+3. **Require status checks to pass** einschalten → **Add checks** → `Prüfen` (aus Workflow
+   „CI“; erscheint in der Auswahl, sobald CI einmal gelaufen ist).
+   **Require branches to be up to date before merging** einschalten.
+4. **Block force pushes** einschalten.
+
+Danach landet auf `main` nur, was „Prüfen“ bestanden hat, und jeder Merge geht automatisch live.
+
+### Optional: GitHub Actions als Notfallweg
+
+Nur einrichten, wenn der Notfallweg „Deploy live“ in GitHub gewünscht ist. Repository →
+**Settings** → **Environments** → **New environment** `production`:
+
+- **Deployment branches:** nur `main`;
+- **Environment secret** `CLOUDFLARE_API_TOKEN`: ein eigenes Account-Token mit
+  „Account → Workers Scripts → Edit“, auf dieses Konto beschränkt;
+- **Environment variable** `CLOUDFLARE_ACCOUNT_ID`;
+- **Required reviewers** nicht nötig.
+
+Wird das Token rotiert, muss es hier nachgetragen werden; der Normalweg ist davon nicht
+betroffen.
+
+## Prüfen, was live ist
+
+- `curl -s https://www.nexifyai.de/.well-known/nexify-build.json`: die Felder `commit` und
+  `build_id`.
+- `node tools/deploy-pruefung.mjs smoke --commit=<erste 10 Zeichen des SHA>`.
+- `tools/deploy-live.sh --verify-only` auf dem passenden Commit.
 
 ## Rückweg
 
-Ein fehlerhafter Stand wird auf die vorige Worker-Version zurückgesetzt:
+Im Fehlerfall setzt das Deploy-Skript selbst auf die vorige Worker-Version zurück (siehe oben).
+Von Hand gibt es diese Wege:
 
-- **Wrangler:** `npx wrangler rollback --name nexfiy-ai-studio` (vorige Version) oder
-  `npx wrangler rollback <VERSION_ID> --name nexfiy-ai-studio`; Versionen listet
-  `npx wrangler deployments list --name nexfiy-ai-studio`. Das Token aus Schritt 1 reicht dafür
-  (Editor).
-- **Dashboard:** Workers & Pages → `nexfiy-ai-studio` → **Deployments** → frühere Version →
-  **Rollback**.
-- Alternativ den Workflow mit dem vollständigen SHA des vorigen guten main-Commits als `ref`
-  erneut laufen lassen. Gebaut und geprüft wird dann dieser Stand, das Deploy-Skript kommt aber
-  aus dem aktuellen `main`.
+- **Dashboard (ohne Werkzeuge):** Workers & Pages → `nexfiy-ai-studio` → **Deployments** →
+  frühere Version → **Rollback**.
+- **Fehler dauerhaft beheben:** den verursachenden Merge per Revert-PR rückgängig machen. Nach dem
+  Merge liefert Workers Builds den korrigierten Stand automatisch aus. Ein Rollback allein hält
+  nur bis zum nächsten Merge.
+- **Wrangler oder Server:** `tools/worker-version.sh rollback <VERSION_ID>`. Diesen Befehl oder
+  `npx wrangler rollback --name nexfiy-ai-studio` mit Zugangsdaten ausführen. Die Versionen
+  listet `npx wrangler deployments list --name nexfiy-ai-studio`.
+- **GitHub Actions** (nur mit optionalem Environment): **Actions** → **Deploy live** → **Run
+  workflow** von `main`, `ref` = vollständiger SHA des letzten guten main-Commits. Gebaut,
+  geprüft und ausgeliefert wird dieser Stand, mit Smoke-Test und Auto-Rollback.
 
 Ein Rollback setzt nur den Code zurück; D1-Daten und Secrets bleiben unverändert. Danach meldet
 der Build-Stempel wieder den älteren Commit.

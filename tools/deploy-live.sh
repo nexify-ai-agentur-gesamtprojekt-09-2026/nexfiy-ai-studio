@@ -2,20 +2,33 @@
 # 2026-11-22 03:20 (Europe/Berlin): Deploy der Live-Site auf den bestehenden Worker.
 # Grund: `npm run build` erzeugt .output/server/wrangler.json ohne Zielname und ohne D1-Binding.
 # Ohne Override entsteht ein neuer Worker "nexify-ai-agentur-gesamtprojekt-..." ohne DB.
-# Nutzung: tools/deploy-live.sh [--dry-run]
+# Nutzung: tools/deploy-live.sh [--dry-run | --verify-only] [--skip-build]
+#
+# 2026-11-23 (Europe/Berlin): Ein Skript für alle drei Wege, damit jeder gleich prüft:
+#   - Cloudflare Workers Builds (Normalfall: Merge nach main = live). Deploy-Command
+#     `bash tools/deploy-live.sh --skip-build`. Erkennung über WORKERS_CI=1; Commit aus
+#     WORKERS_CI_COMMIT_SHA, Token und Konto-ID stellt Cloudflare in der Umgebung bereit.
+#   - GitHub Actions (.github/workflows/deploy-live.yml, nur von Hand: Notfall/Rückweg).
+#   - Server (Notfall), Zugangsdaten aus /etc/nexifyai/hermes.env.
+#   Ablauf: aktive Worker-Version als Rückweg-Anker festhalten (ohne Anker kein Deploy),
+#   wrangler deploy, Binding DB prüfen, Readback des Stempels, Smoke-Test der Hauptpfade
+#   (tools/deploy-pruefung.mjs). Schlägt etwas davon fehl: automatischer Rollback auf den Anker
+#   (tools/worker-version.sh rollback), Exit 1. Ergebnis als kurze Tabelle im Protokoll, in
+#   GitHub Actions zusätzlich in der Job-Zusammenfassung.
 #
 # 2026-11-22 (Europe/Berlin): Läuft auf dem Server und in GitHub Actions (.github/workflows/deploy-live.yml).
 #   - Zugangsdaten: /etc/nexifyai/hermes.env wird geladen, wenn vorhanden (Server). Sonst müssen
 #     CLOUDFLARE_API_TOKEN und CLOUDFLARE_ACCOUNT_ID in der Umgebung stehen (CI); fehlt eines, bricht
 #     das Skript vor dem Deploy ab. --dry-run braucht keine Zugangsdaten.
 #   - DEPLOY_HOST setzt das Stempelfeld "host" (Standard: Ausgabe von `hostname`).
-#   - DEPLOY_SKIP_BUILD=1 verwendet einen bereits gebauten und getesteten Stand in .output/,
+#   - --skip-build oder DEPLOY_SKIP_BUILD=1 verwendet einen bereits gebauten und getesteten Stand in .output/,
 #     statt neu zu bauen (CI: genau das geprüfte Artefakt wird ausgeliefert).
 #   - DEPLOY_COMMIT (40 Zeichen), DEPLOY_COMMIT_SUBJECT, DEPLOY_WORKTREE_STATUS_FILE: Commit-Angaben
 #     für Stempel und Readback, wenn DEPLOY_APP_DIR kein Git-Checkout ist (CI: nur das gebaute
-#     .output/ als Artefakt). Ohne DEPLOY_COMMIT wie bisher aus `git` im Anwendungsstand.
+#     .output/ als Artefakt). Ohne DEPLOY_COMMIT: WORKERS_CI_COMMIT_SHA (Workers Builds), sonst
+#     wie bisher aus `git` im Anwendungsstand.
 #   - DEPLOY_APP_DIR: Verzeichnis des auszuliefernden Anwendungsstands (CI); Standard: dieses Repo.
-#   - WRANGLER_VERSION legt die Wrangler-Version fest (CI); ohne Angabe wie bisher `npx wrangler`.
+#   - WRANGLER_VERSION legt die Wrangler-Version fest; Standard 4.158.0 (auf allen Wegen gleich).
 #   - Nach dem Deploy wird über die Cloudflare-API geprüft, dass der Worker das D1-Binding DB hat.
 #
 # Was dieses Skript NICHT tut (bewusst, damit ein Deploy nie Daten oder Zugänge verändert):
@@ -24,6 +37,14 @@
 #     CHAT_IP_SCHLUESSEL … werden im Cloudflare-Dashboard oder mit `wrangler secret put` gepflegt)
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+MODUS=""
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run|--verify-only) MODUS="$arg" ;;
+    --skip-build) DEPLOY_SKIP_BUILD=1 ;;
+    *) echo "FEHLER: unbekannte Option $arg (erlaubt: --dry-run, --verify-only, --skip-build)" >&2; exit 2 ;;
+  esac
+done
 # 2026-11-22 (Europe/Berlin): DEPLOY_APP_DIR (optional) ist der Anwendungsstand, der gebaut und
 # ausgeliefert wird. In CI liegt das Werkzeug (dieses Skript, aus dem Workflow-Commit) getrennt vom
 # Anwendungsstand (festgelegter SHA, z. B. ein älterer main-Commit beim Rückweg). Ohne Angabe wie
@@ -34,30 +55,63 @@ else
   ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 fi
 cd "$ROOT_DIR"
+# Live-Adresse für Readback und Smoke-Test; nur die Tests setzen eine andere (lokaler Server).
+LIVE_BASE="${LIVE_BASE:-https://www.nexifyai.de}"
+export LIVE_BASE
 
-# 2026-11-22 (Europe/Berlin): Kurz-Commit für Readback; aus DEPLOY_COMMIT, sonst aus git.
-commit_short() {
-  if [ -n "${DEPLOY_COMMIT:-}" ]; then
-    printf '%s\n' "${DEPLOY_COMMIT:0:10}"
-  else
-    git rev-parse --short=10 HEAD
+# 2026-11-23 (Europe/Berlin): Commit, Betreff und Arbeitsbaum-Status für Stempel und Readback.
+# Reihenfolge: DEPLOY_COMMIT (GitHub-Artefakt), WORKERS_CI_COMMIT_SHA (Workers Builds), git.
+# git ist nur nötig, wenn keine der Variablen gesetzt ist.
+hat_git() { command -v git >/dev/null 2>&1 && git -C "$ROOT_DIR" rev-parse --git-dir >/dev/null 2>&1; }
+COMMIT="${DEPLOY_COMMIT:-${WORKERS_CI_COMMIT_SHA:-}}"
+if [ -n "$COMMIT" ]; then
+  if ! printf '%s' "$COMMIT" | grep -Eqx '[0-9a-f]{40}'; then
+    echo "FEHLER: Commit (DEPLOY_COMMIT/WORKERS_CI_COMMIT_SHA) muss ein vollständiger 40-stelliger SHA sein." >&2
+    exit 1
   fi
-}
-if [ -n "${DEPLOY_COMMIT:-}" ] && ! printf '%s' "$DEPLOY_COMMIT" | grep -Eqx '[0-9a-f]{40}'; then
-  echo "FEHLER: DEPLOY_COMMIT muss ein vollständiger 40-stelliger SHA sein." >&2
+  # Workers Builds: der ausgecheckte Stand muss der gemeldete Commit sein.
+  if [ -z "${DEPLOY_COMMIT:-}" ] && hat_git; then
+    kopf="$(git -C "$ROOT_DIR" rev-parse HEAD)"
+    if [ "$kopf" != "$COMMIT" ]; then
+      echo "FEHLER: ausgecheckt ist $kopf, WORKERS_CI_COMMIT_SHA meldet $COMMIT; kein Deploy." >&2
+      exit 1
+    fi
+  fi
+elif hat_git; then
+  COMMIT="$(git -C "$ROOT_DIR" rev-parse HEAD)"
+else
+  echo "FEHLER: kein Commit bekannt (weder DEPLOY_COMMIT, WORKERS_CI_COMMIT_SHA noch git)." >&2
   exit 1
 fi
+COMMIT_SHORT="${COMMIT:0:10}"
+commit_short() { printf '%s\n' "$COMMIT_SHORT"; }
+if [ -n "${DEPLOY_COMMIT_SUBJECT:-}" ] || [ -n "${DEPLOY_COMMIT:-}" ]; then
+  COMMIT_SUBJECT="${DEPLOY_COMMIT_SUBJECT:-}"
+elif hat_git; then
+  COMMIT_SUBJECT="$(git -C "$ROOT_DIR" log -1 --format=%s "$COMMIT" 2>/dev/null || true)"
+else
+  COMMIT_SUBJECT=""
+fi
+if [ -n "${DEPLOY_WORKTREE_STATUS_FILE:-}" ]; then
+  WORKTREE_STATUS="$(cat "$DEPLOY_WORKTREE_STATUS_FILE")"
+elif hat_git; then
+  WORKTREE_STATUS="$(git -C "$ROOT_DIR" status --porcelain)"
+else
+  WORKTREE_STATUS=""
+fi
+export STEMPEL_COMMIT="$COMMIT" STEMPEL_SUBJECT="$COMMIT_SUBJECT" STEMPEL_STATUS="$WORKTREE_STATUS"
 
 # 2026-11-22 13:04: Nur pruefen, nichts bauen/deployen.
-if [ "${1:-}" = "--verify-only" ]; then
+if [ "$MODUS" = "--verify-only" ]; then
   want="$(commit_short)"
-  got="$(curl -sL --max-time 10 https://www.nexifyai.de/.well-known/nexify-build.json | python3 -c 'import json,sys
+  got="$(curl -sL --max-time 10 "$LIVE_BASE/.well-known/nexify-build.json" | python3 -c 'import json,sys
 try: print(json.load(sys.stdin).get("commit_short",""))
 except Exception: print("")' 2>/dev/null)"
   if [ "$got" = "$want" ]; then
     echo "READBACK OK: live=$got"
-    curl -sL -o /dev/null -w 'Seite: HTTP %{http_code}, %{size_download} B\n' --max-time 15 https://www.nexifyai.de
-    exit 0
+    curl -sL -o /dev/null -w 'Seite: HTTP %{http_code}, %{size_download} B\n' --max-time 15 "$LIVE_BASE"
+    node "$SCRIPT_DIR/deploy-pruefung.mjs" smoke
+    exit $?
   fi
   echo "READBACK FAIL: live=${got:-unbekannt} erwartet=$want" >&2
   exit 1
@@ -86,43 +140,40 @@ python3 -I "$SCRIPT_DIR/wrangler-config.py" "$ROOT_DIR/.output" "$WRANGLER_DIR/w
 # Die Werte werden nie ausgegeben.
 HERMES_ENV="/etc/nexifyai/hermes.env"
 if [ -f "$HERMES_ENV" ]; then
-  set -a; . "$HERMES_ENV"; set +a
+  set -a
+  # shellcheck disable=SC1090
+  . "$HERMES_ENV"
+  set +a
 fi
-if [ "${1:-}" != "--dry-run" ]; then
+if [ "$MODUS" != "--dry-run" ]; then
   fehlend=""
   [ -n "${CLOUDFLARE_API_TOKEN:-}" ] || fehlend="$fehlend CLOUDFLARE_API_TOKEN"
   [ -n "${CLOUDFLARE_ACCOUNT_ID:-}" ] || fehlend="$fehlend CLOUDFLARE_ACCOUNT_ID"
   if [ -n "$fehlend" ]; then
-    echo "FEHLER: Zugangsdaten fehlen:$fehlend. Weder $HERMES_ENV noch die Umgebung liefern sie; kein Deploy." >&2
+    echo "FEHLER: Zugangsdaten fehlen:$fehlend. Weder $HERMES_ENV noch die Umgebung (Workers Builds, GitHub-Environment) liefern sie; kein Deploy." >&2
     exit 1
   fi
 fi
-export DEPLOY_HOST="${DEPLOY_HOST:-$(hostname)}"
+if [ -z "${DEPLOY_HOST:-}" ] && [ "${WORKERS_CI:-}" = "1" ]; then
+  DEPLOY_HOST="cloudflare-workers-builds"
+fi
+export DEPLOY_HOST="${DEPLOY_HOST:-$(hostname 2>/dev/null || uname -n)}"
 
 # 2026-11-22 04:05 (Europe/Berlin): Der Build-Stempel wird beim Deploy aus dem Quellstand erzeugt.
 # Grund (gemessen): public/.well-known/nexify-build.json wurde von Hand gepflegt und blieb zwei Commits
 # hinter HEAD zurueck -> G-205 (P0) meldete dauerhaft FAIL, obwohl der Seiteninhalt identisch war.
 # Ein Stempel, der den Commit behauptet, muss von diesem Commit selbst erzeugt werden.
 python3 - <<'PY'
-import json, os, subprocess
+import json, os
 from datetime import datetime
-def git(*a):
-    return subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
 now = datetime.now().astimezone().strftime("%Y-%m-%dT%H:%M:%S%:z")
-# 2026-11-22 12:25 (Europe/Berlin), B-206: Der Stempel belegte bisher nur den Commit, nicht den
-# Zustand des Arbeitsbaums. Ein Deploy mit uncommitteten Aenderungen war damit von einem
-# sauberen Deploy nicht unterscheidbar ("Ob der Deploy den committeten oder den Arbeitsbaum-Stand
-# gebaut hat, ist nicht belegt"). Ab hier steht beides im Artefakt: Commit UND dirty-Liste.
+# 2026-11-22 12:25 (Europe/Berlin), B-206: Der Stempel belegt Commit UND Zustand des Arbeitsbaums
+# (dirty-Liste); ein Deploy mit uncommitteten Aenderungen ist so von einem sauberen unterscheidbar.
 # Der Stempel selbst wird beim Schreiben veraendert und zaehlt deshalb nicht als Aenderung.
-# 2026-11-22 (Europe/Berlin): Mit DEPLOY_COMMIT (CI-Artefakt) kommen Commit, Betreff und
-# Arbeitsbaum-Status aus dem Build-Job statt aus einem Git-Checkout.
-_commit = os.environ.get("DEPLOY_COMMIT", "")
-if _commit:
-    _status_file = os.environ.get("DEPLOY_WORKTREE_STATUS_FILE", "")
-    _status = open(_status_file, encoding="utf-8").read() if _status_file else ""
-else:
-    _status = git("status", "--porcelain")
-_dirty_raw = [l for l in _status.splitlines() if l.strip()]
+# 2026-11-23 (Europe/Berlin): Commit, Betreff und Status kommen aus dem Shell-Teil oben
+# (DEPLOY_COMMIT, WORKERS_CI_COMMIT_SHA oder git); hier wird kein git mehr aufgerufen.
+_commit = os.environ["STEMPEL_COMMIT"]
+_dirty_raw = [l for l in os.environ.get("STEMPEL_STATUS", "").splitlines() if l.strip()]
 _dirty = [l for l in _dirty_raw if "nexify-build.json" not in l]
 stamp = {
     "domain": "www.nexifyai.de",
@@ -131,11 +182,12 @@ stamp = {
     "worktree_dirty_sample": _dirty[:10],
     # In GitHub Actions stehen hier Repository und Arbeitsverzeichnis des Laufs.
     "source_repo": os.environ.get("GITHUB_REPOSITORY") or "nexifyai-dev/nexfiy-ai-studio",
-    "source_path": os.environ.get("DEPLOY_APP_DIR") or os.environ.get("GITHUB_WORKSPACE") or "/opt/nexifyai/repos/nexfiy-ai-studio",
-    "commit": _commit or git("rev-parse", "HEAD"),
-    "commit_short": _commit[:10] if _commit else git("rev-parse", "--short=10", "HEAD"),
-    "commit_subject": os.environ.get("DEPLOY_COMMIT_SUBJECT", "") if _commit else git("log", "-1", "--pretty=%s"),
-    "build_id": "",
+    "source_path": os.environ.get("DEPLOY_APP_DIR") or os.environ.get("GITHUB_WORKSPACE") or os.getcwd(),
+    "commit": _commit,
+    "commit_short": _commit[:10],
+    "commit_subject": os.environ.get("STEMPEL_SUBJECT", ""),
+    # Workers Builds: Kennung des Builds im Cloudflare-Dashboard.
+    "build_id": os.environ.get("WORKERS_CI_BUILD_UUID", ""),
     "deployed_at": now,
     "host": os.environ["DEPLOY_HOST"],
     "served_by": "cloudflare worker nexfiy-ai-studio (.de)",
@@ -159,14 +211,14 @@ PY
 # 2026-11-22 13:02 (Europe/Berlin): Nach dem Deploy wird der Live-Stempel gegen den
 # gerade gebauten Commit geprueft. Ein Deploy ohne Readback ist nur eine Behauptung.
 verify_live_stamp() {
-  local want="$1" url="https://www.nexifyai.de/.well-known/nexify-build.json" i got
-  for i in 1 2 3 4 5 6; do
+  local want="$1" url="$LIVE_BASE/.well-known/nexify-build.json" got
+  for _ in 1 2 3 4 5 6; do
     got="$(curl -sL --max-time 10 "$url" | python3 -c 'import json,sys
 try: print(json.load(sys.stdin).get("commit_short",""))
 except Exception: print("")' 2>/dev/null)"
     if [ "$got" = "$want" ]; then
       echo "READBACK OK: live=$got"
-      curl -sL -o /dev/null -w 'Seite: HTTP %{http_code}, %{size_download} B\n' --max-time 15 https://www.nexifyai.de
+      curl -sL -o /dev/null -w 'Seite: HTTP %{http_code}, %{size_download} B\n' --max-time 15 "$LIVE_BASE"
       return 0
     fi
     sleep 3
@@ -201,20 +253,103 @@ else:
     print("BINDING FAIL: kein Binding name=DB,type=d1; vorhanden: %s" % sorted((x.get("name"), x.get("type")) for x in b), file=sys.stderr); sys.exit(1)'
 }
 
-# 2026-11-22 (Europe/Berlin): Ohne WRANGLER_VERSION unverändert `npx wrangler`; CI pinnt die Version.
-if [ -n "${WRANGLER_VERSION:-}" ]; then
-  WRANGLER=(npx --yes "wrangler@${WRANGLER_VERSION}")
-else
-  WRANGLER=(npx wrangler)
-fi
+# 2026-11-23 (Europe/Berlin): Wrangler-Version auf allen Wegen fest (npm, veröffentlicht 2026-11-05).
+WRANGLER_VERSION="${WRANGLER_VERSION:-4.158.0}"
+export WRANGLER_VERSION
+WRANGLER=(npx --yes "wrangler@${WRANGLER_VERSION}")
 
 cd "$WRANGLER_DIR"
-if [ "${1:-}" = "--dry-run" ]; then
+if [ "$MODUS" = "--dry-run" ]; then
   "${WRANGLER[@]}" deploy --dry-run --config "$WRANGLER_DIR/wrangler.json"
   exit $?
 fi
-"${WRANGLER[@]}" deploy --config "$WRANGLER_DIR/wrangler.json"
 
+# 2026-11-23 (Europe/Berlin): Rückweg-Anker. Ohne bekannte aktive Version kein Deploy
+# (fail-closed): ein fehlerhafter Stand ließe sich sonst nicht automatisch zurücknehmen.
+if ! VORHER="$("$SCRIPT_DIR/worker-version.sh" aktiv)"; then
+  echo "FEHLER: aktive Worker-Version nicht lesbar; ohne Rückweg-Anker kein Deploy." >&2
+  exit 1
+fi
+echo "Aktiv vor dem Deploy: $VORHER"
+
+ERG_DEPLOY=fehler; ERG_BINDING=-; ERG_READBACK=-; ERG_SMOKE=-
+ERG_ROLLBACK=-; ERG_SMOKE_ROLLBACK=-; NACHHER=""
+SMOKE_MD="$WRANGLER_DIR/smoke.md"; SMOKE_RB_MD="$WRANGLER_DIR/smoke-rollback.md"
+
+if "${WRANGLER[@]}" deploy --config "$WRANGLER_DIR/wrangler.json"; then
+  ERG_DEPLOY=ok
+  cd "$ROOT_DIR"
+  if verify_d1_binding; then ERG_BINDING=ok; else ERG_BINDING=fehler; fi
+  if verify_live_stamp "$(commit_short)"; then ERG_READBACK=ok; else ERG_READBACK=fehler; fi
+  if node "$SCRIPT_DIR/deploy-pruefung.mjs" smoke --markdown > "$SMOKE_MD"; then
+    ERG_SMOKE=ok
+  else
+    ERG_SMOKE=fehler
+  fi
+fi
 cd "$ROOT_DIR"
-verify_d1_binding
-verify_live_stamp "$(commit_short)"
+
+if [ "$ERG_DEPLOY" = ok ] && [ "$ERG_BINDING" = ok ] && [ "$ERG_READBACK" = ok ] && [ "$ERG_SMOKE" = ok ]; then
+  ERGEBNIS=ok
+else
+  ERGEBNIS=fehler
+fi
+NACHHER="$("$SCRIPT_DIR/worker-version.sh" aktiv 2>/dev/null || true)"
+ENTSCHEIDUNG="$(node "$SCRIPT_DIR/deploy-pruefung.mjs" entscheidung \
+  --vorher="$VORHER" --aktuell="$NACHHER" --ergebnis="$ERGEBNIS")"
+if [ "$ENTSCHEIDUNG" = rollback ]; then
+  echo "FEHLER: Auslieferung fehlgeschlagen; automatischer Rollback auf $VORHER." >&2
+  if ROLLBACK_GRUND="Automatischer Rollback: Auslieferung von $COMMIT_SHORT fehlgeschlagen" \
+      "$SCRIPT_DIR/worker-version.sh" rollback "$VORHER"; then
+    ERG_ROLLBACK=ok
+    if node "$SCRIPT_DIR/deploy-pruefung.mjs" smoke --markdown > "$SMOKE_RB_MD"; then
+      ERG_SMOKE_ROLLBACK=ok
+    else
+      ERG_SMOKE_ROLLBACK=fehler
+    fi
+  else
+    ERG_ROLLBACK=fehler
+  fi
+  NACHHER="$("$SCRIPT_DIR/worker-version.sh" aktiv 2>/dev/null || true)"
+elif [ "$ENTSCHEIDUNG" = unmoeglich ]; then
+  echo "FEHLER: Auslieferung fehlgeschlagen und kein Rückweg-Anker; Rollback von Hand (docs/auslieferung.md)." >&2
+fi
+
+# Kurze Tabelle statt seitenlanger Protokolle; in GitHub Actions zusätzlich als Zusammenfassung.
+zusammenfassung() {
+  echo "## Auslieferung"
+  echo ""
+  echo "| Feld | Wert |"
+  echo "| --- | --- |"
+  echo "| Commit | \`$COMMIT\` |"
+  echo "| Weg | \`$DEPLOY_HOST\` |"
+  echo "| Worker-Version vorher | \`$VORHER\` |"
+  echo "| Worker-Version nachher | \`${NACHHER:--}\` |"
+  echo "| wrangler deploy | $ERG_DEPLOY |"
+  echo "| Binding DB (d1) | $ERG_BINDING |"
+  echo "| Readback Stempel | $ERG_READBACK |"
+  echo "| Smoke-Test | $ERG_SMOKE |"
+  echo "| Rollback-Entscheidung | $ENTSCHEIDUNG |"
+  echo "| Rollback | $ERG_ROLLBACK |"
+  echo "| Smoke-Test nach Rollback | $ERG_SMOKE_ROLLBACK |"
+  if [ -s "$SMOKE_MD" ]; then echo ""; echo "### Smoke-Test"; echo ""; cat "$SMOKE_MD"; fi
+  if [ -s "$SMOKE_RB_MD" ]; then echo ""; echo "### Smoke-Test nach Rollback"; echo ""; cat "$SMOKE_RB_MD"; fi
+}
+echo ""
+zusammenfassung
+if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then zusammenfassung >> "$GITHUB_STEP_SUMMARY"; fi
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+  {
+    echo "vorher=$VORHER"
+    echo "nachher=$NACHHER"
+    echo "ergebnis=$ERGEBNIS"
+    echo "entscheidung=$ENTSCHEIDUNG"
+    echo "rollback=$ERG_ROLLBACK"
+  } >> "$GITHUB_OUTPUT"
+fi
+if [ "$ERGEBNIS" = ok ]; then
+  echo "AUSLIEFERUNG OK: $COMMIT_SHORT live als ${NACHHER:-unbekannt}"
+  exit 0
+fi
+echo "AUSLIEFERUNG FEHLGESCHLAGEN: Rollback=$ERG_ROLLBACK (Entscheidung $ENTSCHEIDUNG)" >&2
+exit 1

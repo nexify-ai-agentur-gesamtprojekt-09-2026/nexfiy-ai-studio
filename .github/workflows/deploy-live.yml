@@ -1,20 +1,27 @@
-# Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio) mit menschlicher Freigabe.
-# Startet nur von Hand (Actions -> "Deploy live" -> "Run workflow") und nur von main aus.
-# Drei Jobs, nur der letzte kennt das Cloudflare-Token:
+# Notfall- und Rückweg-Auslieferung von www.nexifyai.de (Cloudflare Worker nexfiy-ai-studio).
+# Normalfall seit 2026-11-23: Cloudflare Workers Builds liefert jeden Merge nach main selbst aus
+# (docs/auslieferung.md); dieser Workflow startet deshalb NUR von Hand (Actions -> "Deploy live"
+# -> "Run workflow", nur von main), z. B. für einen Rückweg auf einen älteren main-Commit, einen
+# Probelauf oder wenn Workers Builds gestört ist. Optional: er braucht das Environment
+# "production" mit Secret CLOUDFLARE_API_TOKEN und Variable CLOUDFLARE_ACCOUNT_ID.
+# Vier Jobs, nur "deploy" kennt das Cloudflare-Token, nur "melden" darf Issues schreiben:
 #   aufloesen  (ohne Environment/Secrets): legt den Commit als festen SHA aus der main-Historie fest
 #              und zeigt SHA, Betreff, Autor, Datum in der Zusammenfassung.
 #   bauen      (ohne Environment/Secrets): checkt genau diesen SHA aus, lint/tsc/test/build/test,
 #              lädt .output/ samt sha256-Liste als Artefakt hoch.
-#   deploy     (Environment "production", wartet auf Freigabe): checkt nur das Deploy-Werkzeug aus
-#              dem Workflow-Commit (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und
-#              liefert mit tools/deploy-live.sh aus. Hier läuft kein Code aus dem Anwendungsstand;
-#              das gebaute Worker-Bundle wird von wrangler nur hochgeladen.
-#              Die wrangler.json aus dem Artefakt schreibt tools/wrangler-config.py per Allowlist neu
-#              (kein build.command, keine .env/.wrangler im Artefakt, Pfade nur innerhalb .output/).
-# Die Deploy-Logik liegt ausschließlich in tools/deploy-live.sh (Server und CI prüfen gleich).
+#   deploy     (Environment "production"): checkt nur das Deploy-Werkzeug aus dem Workflow-Commit
+#              (github.sha) aus, lädt das Artefakt, prüft die sha256-Liste und liefert mit
+#              tools/deploy-live.sh aus. Das Skript hält die aktive Worker-Version fest, prüft
+#              Binding DB, Readback und Smoke-Test und setzt bei einem Fehler automatisch auf die
+#              vorige Version zurück (gleicher Ablauf wie in Workers Builds und auf dem Server).
+#              Aus dem Anwendungsstand läuft hier kein Code; das Worker-Bundle wird nur hochgeladen.
+#              Die wrangler.json aus dem Artefakt schreibt tools/wrangler-config.py per Allowlist neu.
+#   melden     (nur bei Fehlschlag, issues: write): legt ein Issue mit Label deploy-fehler an oder
+#              ergänzt das offene.
 # Einrichtung und Rückweg: docs/auslieferung.md
 name: Deploy live
 
+# Kein push-Trigger: sonst liefen Workers Builds und dieser Workflow doppelt.
 on:
   workflow_dispatch:
     inputs:
@@ -32,6 +39,8 @@ on:
 permissions:
   contents: read
 
+# Immer nur ein Lauf gleichzeitig. Ein laufender Lauf wird nie abgebrochen; GitHub hält höchstens
+# einen wartenden Lauf, ein neuer Start ersetzt also einen noch wartenden älteren.
 concurrency:
   group: deploy-live
   cancel-in-progress: false
@@ -60,6 +69,7 @@ jobs:
         id: sha
         env:
           EINGABE: ${{ inputs.ref }}
+          ANLASS: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ "$EINGABE" = "main" ]; then
@@ -82,6 +92,7 @@ jobs:
             echo ""
             echo "| Feld | Wert |"
             echo "| --- | --- |"
+            echo "| Anlass | \`$ANLASS\` |"
             echo "| Eingabe | \`$EINGABE\` |"
             echo "| Commit | \`$sha\` |"
             feld() { git log -1 --format="$1" "$sha" | sed 's/|/\\|/g'; }
@@ -92,8 +103,6 @@ jobs:
               echo ""
               echo "**Achtung:** älterer main-Commit (Rollback), nicht der aktuelle Stand von main."
             fi
-            echo ""
-            echo "Freigeben nur, wenn dieser Commit ausgeliefert werden soll."
           } >> "$GITHUB_STEP_SUMMARY"
           echo "sha=$sha" >> "$GITHUB_OUTPUT"
           echo "betreff=$(git log -1 --format=%s "$sha")" >> "$GITHUB_OUTPUT"
@@ -181,10 +190,18 @@ jobs:
     needs: [aufloesen, bauen]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    permissions:
+      contents: read
     environment:
       name: production
       url: https://www.nexifyai.de
+    outputs:
+      vorher: ${{ steps.deploy.outputs.vorher }}
+      nachher: ${{ steps.deploy.outputs.nachher }}
+      ergebnis: ${{ steps.deploy.outputs.ergebnis }}
+      entscheidung: ${{ steps.deploy.outputs.entscheidung }}
+      rollback: ${{ steps.deploy.outputs.rollback }}
     steps:
       - name: Checkout Deploy-Werkzeug (Workflow-Commit)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -235,14 +252,16 @@ jobs:
         with:
           node-version: "22"
 
+      # Rückweg-Anker, Binding-Prüfung, Readback, Smoke-Test, automatischer Rollback und die
+      # Job-Zusammenfassung erledigt tools/deploy-live.sh selbst (für alle Wege gleich).
       - name: Ausliefern
+        id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           DEPLOY_HOST: github-actions
           # Werkzeug aus werkzeug/, ausgeliefert wird das geprüfte Artefakt unter app/.output/.
           DEPLOY_APP_DIR: ${{ github.workspace }}/app
-          DEPLOY_SKIP_BUILD: "1"
           # Commit-Angaben für Stempel und Readback (kein Git-Checkout der Anwendung in diesem Job).
           DEPLOY_COMMIT: ${{ needs.aufloesen.outputs.sha }}
           DEPLOY_COMMIT_SUBJECT: ${{ needs.aufloesen.outputs.betreff }}
@@ -252,7 +271,70 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           if [ "$DRY_RUN" = "true" ]; then
-            werkzeug/tools/deploy-live.sh --dry-run
+            werkzeug/tools/deploy-live.sh --dry-run --skip-build
           else
-            werkzeug/tools/deploy-live.sh
+            werkzeug/tools/deploy-live.sh --skip-build
+          fi
+
+  melden:
+    name: Fehler melden
+    needs: [aufloesen, bauen, deploy]
+    if: ${{ failure() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Einziger Job mit Schreibrecht, und nur auf Issues; kein Checkout, kein Repository-Code.
+    permissions:
+      issues: write
+    steps:
+      - name: Issue anlegen oder ergänzen (Label deploy-fehler)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          LAUF: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ANLASS: ${{ github.event_name }}
+          SHA: ${{ needs.aufloesen.outputs.sha || github.sha }}
+          BETREFF: ${{ needs.aufloesen.outputs.betreff }}
+          J_AUFLOESEN: ${{ needs.aufloesen.result }}
+          J_BAUEN: ${{ needs.bauen.result }}
+          J_DEPLOY: ${{ needs.deploy.result }}
+          VORHER: ${{ needs.deploy.outputs.vorher }}
+          NACHHER: ${{ needs.deploy.outputs.nachher }}
+          ERGEBNIS: ${{ needs.deploy.outputs.ergebnis }}
+          ENTSCHEIDUNG: ${{ needs.deploy.outputs.entscheidung }}
+          ROLLBACK: ${{ needs.deploy.outputs.rollback }}
+        run: |
+          set -euo pipefail
+          gh label create deploy-fehler --color B60205 \
+            --description "Auslieferung fehlgeschlagen" 2>/dev/null || true
+          if [ "$ROLLBACK" = "ok" ]; then
+            lage="Rollback auf die vorige Worker-Version ist erfolgt; live läuft wieder der vorige Stand."
+          elif [ "$ENTSCHEIDUNG" = "rollback" ] || [ "$ENTSCHEIDUNG" = "unmoeglich" ]; then
+            lage="ACHTUNG: fehlerhafte Version ist live und der automatische Rollback ist nicht gelungen. Rückweg von Hand (docs/auslieferung.md)."
+          elif [ "$J_DEPLOY" = "skipped" ] || [ -z "$ERGEBNIS" ]; then
+            lage="Vor dem Deploy abgebrochen; live ist unverändert."
+          else
+            lage="Live-Version unverändert oder Lage unklar; Protokoll prüfen."
+          fi
+          {
+            echo "Auslieferung über GitHub Actions (Deploy live) fehlgeschlagen."
+            echo ""
+            echo "**Lage:** $lage"
+            echo ""
+            echo "| Feld | Wert |"
+            echo "| --- | --- |"
+            echo "| Lauf | $LAUF |"
+            echo "| Anlass | \`$ANLASS\` |"
+            echo "| Commit | \`$SHA\` |"
+            echo "| Betreff | $(printf '%s' "$BETREFF" | sed 's/|/\\|/g') |"
+            echo "| Jobs | aufloesen=$J_AUFLOESEN, bauen=$J_BAUEN, deploy=$J_DEPLOY |"
+            echo "| Worker-Version vorher / nachher | \`${VORHER:--}\` / \`${NACHHER:--}\` |"
+            echo "| Ergebnis der Prüfungen | ${ERGEBNIS:--} |"
+            echo "| Rollback-Entscheidung / Rollback | ${ENTSCHEIDUNG:--} / ${ROLLBACK:--} |"
+          } > bericht.md
+          offen="$(gh issue list --label deploy-fehler --state open --limit 1 --json number --jq '.[0].number // empty')"
+          if [ -n "$offen" ]; then
+            gh issue comment "$offen" --body-file bericht.md
+            echo "Issue #$offen ergänzt."
+          else
+            gh issue create --title "Auslieferung fehlgeschlagen: ${SHA:0:10}" --label deploy-fehler --body-file bericht.md
           fi

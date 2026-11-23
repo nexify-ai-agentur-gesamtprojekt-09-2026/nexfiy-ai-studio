@@ -1,0 +1,67 @@
+# 2026-11-23 (Europe/Berlin): Pflichtprüfung für jeden Pull Request gegen main und jeden Push auf
+# main. Ohne Environment, ohne Secrets, nur Leserecht. Der Job "Prüfen" ist als Pflicht-Check im
+# Branch-Schutz von main eingetragen (docs/auslieferung.md); ein PR lässt sich erst mergen, wenn
+# er grün ist. Nach dem Merge liefert Cloudflare Workers Builds automatisch aus
+# (Deploy-Command `npm run deploy:cf`, siehe docs/auslieferung.md).
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  # Neuere Commits desselben PRs brechen ältere Prüfläufe ab; auf main läuft jeder Push durch.
+  group: ci-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  pruefen:
+    name: Prüfen
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      # Action-Versionen per Commit-SHA gepinnt (wie in deploy-live.yml).
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: "1.4.4"
+
+      - name: Abhängigkeiten installieren
+        run: bun install --frozen-lockfile
+
+      - name: Skripte (Syntax)
+        run: |
+          set -euo pipefail
+          for f in tools/*.sh; do bash -n "$f"; echo "bash -n OK: $f"; done
+          for f in tools/*.mjs; do node --check "$f"; echo "node --check OK: $f"; done
+          python3 -m py_compile tools/wrangler-config.py
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typprüfung
+        run: npx tsc --noEmit
+
+      - name: Tests (Quellen)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests (mit Build-Ausgabe)
+        run: npm test

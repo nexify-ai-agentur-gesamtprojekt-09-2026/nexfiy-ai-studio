@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy:cf": "bash tools/deploy-live.sh --skip-build"
   },
   "overrides": {
     "rolldown": "1.2.1"

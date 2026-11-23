@@ -1,7 +1,9 @@
 # Arbeitsregeln für dieses Repository
 
 Die Seite wird aus diesem Repository gebaut und als Cloudflare Worker ausgeliefert
-(`tools/deploy-live.sh`). Der Zweig `main` ist der Auslieferungsstand.
+(`tools/deploy-live.sh`). Der Zweig `main` ist der Auslieferungsstand: jeder Merge nach `main`
+geht über Cloudflare Workers Builds automatisch live, nach Pflicht-CI (`.github/workflows/ci.yml`),
+mit Smoke-Test und automatischem Rollback (`docs/auslieferung.md`).
 
 ## Schutzregeln
 
