@@ -796,35 +796,6 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       : crypto.randomUUID();
   const frageId = `${sessionId}.${frageKennung}`;
 
-  // Kontaktfragen deterministisch beantworten: Adresse und Rufnummer sind öffentlich, das Modell
-  // sieht sie wegen der Maskierung des Routers aber nicht (siehe chat-kontakt.ts).
-  const kontakt = kontaktAntwort(nachricht);
-  if (kontakt) {
-    const alsEreignisstrom = (request.headers.get("accept") ?? "").includes("text/event-stream");
-    if (!alsEreignisstrom) {
-      return json(
-        { ok: true, antwort: kontakt, session_id: sessionId, hinweis: CHAT_HINWEIS, gespeichert: false },
-        200,
-      );
-    }
-    const strom = new ReadableStream<Uint8Array>({
-      start(steuerung) {
-        steuerung.enqueue(ereignis("start", { session_id: sessionId }));
-        steuerung.enqueue(ereignis("delta", { t: kontakt }));
-        steuerung.enqueue(ereignis("ende", { hinweis: CHAT_HINWEIS, gespeichert: false }));
-        steuerung.close();
-      },
-    });
-    return new Response(strom, {
-      status: 200,
-      headers: {
-        "content-type": "text/event-stream; charset=utf-8",
-        "cache-control": "no-store, no-transform",
-        "x-accel-buffering": "no",
-      },
-    });
-  }
-
   let hash: string;
   let verlauf: GuidanceTurn[];
   try {
@@ -842,6 +813,45 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
     await raeumeChatAuf(db, tage).catch(() => {});
   } catch {
     return json({ ok: false, fehler: "chat_not_configured" }, 503);
+  }
+
+  // Kontaktfragen deterministisch beantworten: Adresse und Rufnummer sind öffentlich, das Modell
+  // sieht sie wegen der Maskierung des Routers aber nicht (siehe chat-kontakt.ts). Die Antwort
+  // wird wie jede andere gespeichert, damit der Verlauf für Folgefragen vollständig bleibt.
+  const kontakt = kontaktAntwort(nachricht);
+  if (kontakt) {
+    const gespeichert = await speichereAntwort(db, frageId, sessionId, kontakt, hash)
+      .then(() => true)
+      .catch(() => false);
+    const alsEreignisstrom = (request.headers.get("accept") ?? "").includes("text/event-stream");
+    if (!alsEreignisstrom) {
+      return json(
+        {
+          ok: true,
+          antwort: kontakt,
+          session_id: sessionId,
+          hinweis: CHAT_HINWEIS,
+          ...(gespeichert ? {} : { speicherung: "fehlgeschlagen" }),
+        },
+        200,
+      );
+    }
+    const strom = new ReadableStream<Uint8Array>({
+      start(steuerung) {
+        steuerung.enqueue(ereignis("start", { session_id: sessionId }));
+        steuerung.enqueue(ereignis("delta", { t: kontakt }));
+        steuerung.enqueue(ereignis("ende", { hinweis: CHAT_HINWEIS, gespeichert }));
+        steuerung.close();
+      },
+    });
+    return new Response(strom, {
+      status: 200,
+      headers: {
+        "content-type": "text/event-stream; charset=utf-8",
+        "cache-control": "no-store, no-transform",
+        "x-accel-buffering": "no",
+      },
+    });
   }
 
   const nachrichten: Nachricht[] = [
