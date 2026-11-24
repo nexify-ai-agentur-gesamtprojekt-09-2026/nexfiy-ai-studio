@@ -364,8 +364,11 @@ describe("Leitplanken der Modellantwort", () => {
     const klein = stueck.repeat(1000);
     const gross = klein.repeat(4);
     messen(klein); // Aufwaermen (JIT, Cache)
-    const tKlein = messen(klein);
-    const tGross = messen(gross);
+    // Drei Laeufe, der schnellste zaehlt: So fallen Lastspitzen der Testmaschine nicht ins Gewicht,
+    // ein quadratischer Aufwand bleibt mit Faktor ~16 trotzdem klar ueber der Grenze.
+    const schnellster = (text: string) => Math.min(messen(text), messen(text), messen(text));
+    const tKlein = schnellster(klein);
+    const tGross = schnellster(gross);
     // linear ~4x, quadratisch ~16x; Faktor 8 mit Untergrenze faengt Messrauschen ab.
     expect(tGross).toBeLessThan(Math.max(400, tKlein * 8));
   });
