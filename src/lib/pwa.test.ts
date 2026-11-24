@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { runInNewContext } from "node:vm";
 import { describe, expect, it } from "vitest";
 

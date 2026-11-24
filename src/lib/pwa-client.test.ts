@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from "vitest";
 
 import {
@@ -142,8 +143,11 @@ describe("Installationshinweis: wann er sinnvoll ist", () => {
     const lauf = (ordner: string) => {
       for (const eintrag of readdirSync(ordner, { withFileTypes: true })) {
         const pfad = join(ordner, eintrag.name);
-        if (eintrag.isDirectory()) lauf(pfad);
-        else if (/\.tsx?$/.test(eintrag.name) && !/\.test\./.test(eintrag.name)) {
+        // src/test/ ist Testinfrastruktur (Setup, Fixtures) und wird nie ausgeliefert.
+        if (eintrag.isDirectory()) {
+          if (pfad.endsWith(`${join("src", "test")}`)) continue;
+          lauf(pfad);
+        } else if (/\.tsx?$/.test(eintrag.name) && !/\.test\./.test(eintrag.name)) {
           readFileSync(pfad, "utf8")
             .split("\n")
             .forEach((zeile, nr) => {

@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+    // Ohne URL hat jsdom keinen localStorage (opake Origin); die PWA-Tests lesen/schreiben ihn.
+    environmentOptions: { jsdom: { url: "https://www.nexifyai.de/" } },
+    // Der Host laeuft mit NODE_ENV=production; dann laedt React den Produktionsbuild ohne
+    // React.act und jede Komponentensuite faellt mit "React.act is not a function".
+    env: { NODE_ENV: "test" },
+    // Drei Suiten booten den gebauten Worker; 5 s Standard reichen dafuer nicht.
+    testTimeout: 20_000,
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.{test,spec}.{ts,tsx}"],

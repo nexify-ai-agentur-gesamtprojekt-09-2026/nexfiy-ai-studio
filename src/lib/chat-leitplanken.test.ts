@@ -1,3 +1,4 @@
+// @vitest-environment node
 /**
  * Übernommen aus dem Monorepo `apps/web/auth/tests/chat-guidance.test.mjs` (Leitplanken-Fälle),
  * ohne Briefing, Mehrsprachigkeit der Hinweise und TEILEKLAR.
@@ -347,15 +348,26 @@ describe("Leitplanken der Modellantwort", () => {
   });
 
   it("prüft lange Antworten in linearer Zeit", () => {
-    const lang = "Wir planen sorgfältig und Schritt für Schritt. ".repeat(4000);
-    const beginn = performance.now();
-    const guard = createOutputGuard();
-    let laenge = 0;
-    for (let i = 0; i < lang.length; i += 16) laenge += guard.push(lang.slice(i, i + 16)).length;
-    laenge += guard.finish().length;
-    expect(laenge).toBe(lang.length);
-    // 188.000 Zeichen in 11.750 Stücken; quadratischer Aufwand läge weit über dieser Grenze.
-    expect(performance.now() - beginn).toBeLessThan(1500);
+    // Absolute Millisekunden sind maschinenabhaengig (belasteter Host: 1,8 s statt 1,5 s bei
+    // gleicher Arbeit). Geprueft wird die Skalierung: vierfache Datenmenge darf nicht in
+    // quadratischer Zeit verarbeitet werden.
+    const stueck = "Wir planen sorgfältig und Schritt für Schritt. ";
+    const messen = (text: string) => {
+      const beginn = performance.now();
+      const guard = createOutputGuard();
+      let laenge = 0;
+      for (let i = 0; i < text.length; i += 16) laenge += guard.push(text.slice(i, i + 16)).length;
+      laenge += guard.finish().length;
+      expect(laenge).toBe(text.length);
+      return performance.now() - beginn;
+    };
+    const klein = stueck.repeat(1000);
+    const gross = klein.repeat(4);
+    messen(klein); // Aufwaermen (JIT, Cache)
+    const tKlein = messen(klein);
+    const tGross = messen(gross);
+    // linear ~4x, quadratisch ~16x; Faktor 8 mit Untergrenze faengt Messrauschen ab.
+    expect(tGross).toBeLessThan(Math.max(400, tKlein * 8));
   });
 
   it("löst Datenblöcke aus dem sichtbaren Text", () => {
