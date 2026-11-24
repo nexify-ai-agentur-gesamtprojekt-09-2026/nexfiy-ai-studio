@@ -149,6 +149,17 @@ export const datenschutzSections: LegalSection[] = [
         Trainingszwecken findet dabei nicht statt. Die Kennzeichnung richtet sich nach Art. 50 EU AI
         Act; Einzelheiten stehen unter <a href="/ki-hinweise">KI-Hinweise</a>.
       </p>,
+      <p key="p3">
+        Der KI-Chat auf dieser Website beantwortet Fragen zu unseren Leistungen. Dabei werden Ihre
+        Nachricht, die Antwort, eine Sitzungskennung, der Zeitpunkt und ein Kurzwert Ihrer
+        IP-Adresse (HMAC, kein Klartext) gespeichert. Die Speicherung dient dem Gesprächsverlauf und
+        der Begrenzung von Missbrauch; sie liegt bei unserem Hosting-Anbieter Cloudflare und wird
+        nach 30 Tagen gelöscht, spätestens bei der nächsten Anfrage. Zur Beantwortung wird Ihre
+        Frage über unseren Router an einen Modell-Anbieter übermittelt. Eine Verwendung Ihrer
+        Eingaben zu Trainingszwecken erfolgt durch uns nicht. Rechtsgrundlage ist unser berechtigtes
+        Interesse an der Beantwortung Ihrer Anfrage (Art. 6 Abs. 1 lit. f DSGVO). Bitte geben Sie
+        keine Passwörter und keine besonderen Kategorien personenbezogener Daten ein.
+      </p>,
     ],
   },
   {
