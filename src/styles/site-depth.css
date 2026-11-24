@@ -66,7 +66,6 @@
       box-shadow 0.34s var(--nx-depth-ease),
       background-color 0.34s var(--nx-depth-ease);
     transform: translateY(0);
-    will-change: transform;
   }
 
   #atelier .home-concept :is(
@@ -153,10 +152,18 @@
   }
 }
 
-/* ---- Typografie: ruhige Umbrüche wie im Original, nur sauberer gesetzt ---- */
-#atelier :is(h1, h2, h3) {
-  text-wrap: balance;
+/* ---- Handlungsflächen: ein weicher Wurfschatten, kein harter Rahmen ---- */
+#atelier .home-concept :is(.nexify-control.primary-button, .hc-text-link) {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 8px 18px -10px rgba(0, 0, 0, 0.75),
+    0 20px 36px -24px rgba(0, 0, 0, 0.9);
 }
-#atelier :is(p, li) {
-  text-wrap: pretty;
+@media (hover: hover) and (pointer: fine) {
+  #atelier .home-concept :is(.nexify-control.primary-button, .hc-text-link) {
+    transition: transform 0.24s var(--nx-depth-ease), box-shadow 0.24s var(--nx-depth-ease);
+  }
+  #atelier .home-concept :is(.nexify-control.primary-button, .hc-text-link):hover {
+    transform: translateY(-1px);
+  }
 }
