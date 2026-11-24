@@ -40,6 +40,19 @@ describe("Kontakt-Platzhalter in Modellantworten", () => {
     }
   });
 
+  it("setzt verstümmelte Fragmente der veröffentlichten Nummer gerade", () => {
+    for (const fragment of [
+      "Telefon 133 188 56 steht im Impressum.",
+      "Telefon +49 133 188 56 steht im Impressum.",
+      "Telefon [PERSON_NAME] 133 188 56 steht im Impressum.",
+      "Telefon +31 6 133 188 56 steht im Impressum.",
+    ]) {
+      expect(ersetzeKontaktPlatzhalter(fragment)).toBe(
+        `Telefon ${CHAT_KONTAKT_TEL} steht im Impressum.`,
+      );
+    }
+  });
+
   it("ersetzt mehrere Platzhalter in einem Satz", () => {
     expect(ersetzeKontaktPlatzhalter("E-Mail: [EMAIL], Telefon: [TELEFON]")).toBe(
       `E-Mail: ${CHAT_KONTAKT_MAIL}, Telefon: ${CHAT_KONTAKT_TEL}`,
