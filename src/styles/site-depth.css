@@ -180,3 +180,15 @@
     inset 0 2px 8px rgba(0, 0, 0, 0.38),
     0 0 0 2px rgba(215, 245, 130, 0.45);
 }
+
+/* ---- Kopfleiste beim Scrollen: rechte Kante auf der Seitenspalte, mehr Innenabstand ---- */
+@media (min-width: 1000px) {
+  #atelier[data-scrolled="true"] .site-header {
+    padding-left: calc(var(--layout-page-padding) + 32px);
+    padding-right: calc(var(--layout-page-padding) + 32px);
+    gap: 24px;
+  }
+  #atelier[data-scrolled="true"] .site-header::before {
+    inset: 12px var(--layout-page-padding);
+  }
+}
