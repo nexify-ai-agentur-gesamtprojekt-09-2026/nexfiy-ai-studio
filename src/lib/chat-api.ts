@@ -50,6 +50,7 @@
  */
 import { createOutputGuard, visitorAmounts, type GuidanceTurn } from "@/lib/chat-leitplanken";
 import { ersetzeKontaktPlatzhalter } from "@/lib/chat-platzhalter";
+import { kontaktAntwort } from "@/lib/chat-kontakt";
 import {
   CHAT_ERSATZANTWORT,
   CHAT_LEERANTWORT,
@@ -794,6 +795,35 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       ? daten.frage_id
       : crypto.randomUUID();
   const frageId = `${sessionId}.${frageKennung}`;
+
+  // Kontaktfragen deterministisch beantworten: Adresse und Rufnummer sind öffentlich, das Modell
+  // sieht sie wegen der Maskierung des Routers aber nicht (siehe chat-kontakt.ts).
+  const kontakt = kontaktAntwort(nachricht);
+  if (kontakt) {
+    const alsEreignisstrom = (request.headers.get("accept") ?? "").includes("text/event-stream");
+    if (!alsEreignisstrom) {
+      return json(
+        { ok: true, antwort: kontakt, session_id: sessionId, hinweis: CHAT_HINWEIS, gespeichert: false },
+        200,
+      );
+    }
+    const strom = new ReadableStream<Uint8Array>({
+      start(steuerung) {
+        steuerung.enqueue(ereignis("start", { session_id: sessionId }));
+        steuerung.enqueue(ereignis("delta", { t: kontakt }));
+        steuerung.enqueue(ereignis("ende", { hinweis: CHAT_HINWEIS, gespeichert: false }));
+        steuerung.close();
+      },
+    });
+    return new Response(strom, {
+      status: 200,
+      headers: {
+        "content-type": "text/event-stream; charset=utf-8",
+        "cache-control": "no-store, no-transform",
+        "x-accel-buffering": "no",
+      },
+    });
+  }
 
   let hash: string;
   let verlauf: GuidanceTurn[];
