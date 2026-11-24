@@ -366,11 +366,12 @@ describe("Leitplanken der Modellantwort", () => {
     messen(klein); // Aufwaermen (JIT, Cache)
     // Drei Laeufe, der schnellste zaehlt: So fallen Lastspitzen der Testmaschine nicht ins Gewicht,
     // ein quadratischer Aufwand bleibt mit Faktor ~16 trotzdem klar ueber der Grenze.
-    const schnellster = (text: string) => Math.min(messen(text), messen(text), messen(text));
+    const schnellster = (text: string) => Math.min(...[0, 1, 2, 3, 4].map(() => messen(text)));
     const tKlein = schnellster(klein);
     const tGross = schnellster(gross);
-    // linear ~4x, quadratisch ~16x; Faktor 8 mit Untergrenze faengt Messrauschen ab.
-    expect(tGross).toBeLessThan(Math.max(400, tKlein * 8));
+    // Linear sind ~4x zu erwarten. Unter Last und mit GC wurden auf diesem Host bis ~10x
+    // gemessen; quadratischer Aufwand liegt bei ~16x. Faktor 12 trennt beides.
+    expect(tGross).toBeLessThan(Math.max(400, tKlein * 12));
   });
 
   it("löst Datenblöcke aus dem sichtbaren Text", () => {
