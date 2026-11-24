@@ -52,6 +52,7 @@ import { createOutputGuard, visitorAmounts, type GuidanceTurn } from "@/lib/chat
 import { ersetzeKontaktPlatzhalter } from "@/lib/chat-platzhalter";
 import { kontaktAntwort, sitzAntwort } from "@/lib/chat-kontakt";
 import { produktAntwort } from "@/lib/chat-produkte";
+import { ablaufAntwort } from "@/lib/chat-ablauf";
 import {
   CHAT_ERSATZANTWORT,
   CHAT_LEERANTWORT,
@@ -820,7 +821,10 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
   // öffentlich, das Modell sieht sie wegen der Maskierung des Routers aber nicht (siehe
   // chat-kontakt.ts). Die Antwort wird wie jede andere gespeichert, damit der Verlauf vollständig bleibt.
   const kontakt =
-    kontaktAntwort(nachricht) ?? sitzAntwort(nachricht) ?? produktAntwort(nachricht);
+    kontaktAntwort(nachricht) ??
+    sitzAntwort(nachricht) ??
+    produktAntwort(nachricht) ??
+    ablaufAntwort(nachricht);
   if (kontakt) {
     const gespeichert = await speichereAntwort(db, frageId, sessionId, kontakt, hash)
       .then(() => true)
