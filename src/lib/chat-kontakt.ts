@@ -32,10 +32,10 @@ export function kontaktAntwort(nachricht: string): string | null {
 
   const teile: string[] = [];
   if (mail) teile.push(`Per E-Mail erreichen Sie NeXify AI unter ${CHAT_KONTAKT_MAIL}.`);
-  if (telefon) teile.push("Die Telefonnummer steht im Impressum: /impressum.");
+  if (telefon) teile.push("Die Telefonnummer steht hier: /impressum.");
   if (!mail && !telefon) {
     teile.push(`Per E-Mail: ${CHAT_KONTAKT_MAIL}.`);
-    teile.push("Die Telefonnummer steht im Impressum: /impressum.");
+    teile.push("Die Telefonnummer steht hier: /impressum.");
   }
   teile.push("Für Ihr Anliegen: /kontakt.");
   return teile.join(" ");
