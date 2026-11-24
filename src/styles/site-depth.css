@@ -152,3 +152,11 @@
     transform: none;
   }
 }
+
+/* ---- Typografie: ruhige Umbrüche wie im Original, nur sauberer gesetzt ---- */
+#atelier :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+#atelier :is(p, li) {
+  text-wrap: pretty;
+}

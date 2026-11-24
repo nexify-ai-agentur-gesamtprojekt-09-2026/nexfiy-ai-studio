@@ -304,7 +304,19 @@ describe("Sitemap, robots.txt und llms.txt", () => {
     const agenten = zeilen
       .filter((z) => z.startsWith("User-agent:"))
       .map((z) => z.slice(11).trim());
-    expect(agenten).toEqual(["*", "GPTBot", "ClaudeBot", "PerplexityBot"]);
+    expect(agenten).toEqual([
+      "*",
+      "GPTBot",
+      "OAI-SearchBot",
+      "ChatGPT-User",
+      "ClaudeBot",
+      "Claude-SearchBot",
+      "PerplexityBot",
+      "Perplexity-User",
+      "Google-Extended",
+      "Applebot",
+      "Applebot-Extended",
+    ]);
     expect(zeilen.findIndex((z) => z.startsWith("Allow:"))).toBe(agenten.length);
   });
 

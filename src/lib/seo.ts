@@ -153,6 +153,21 @@ export function pageJsonLd(pfad: string): JsonLd {
         item: canonicalUrl(glied.pfad),
       })),
     });
+  // Produktseiten: eigene Software, im Web nutzbar. Kein `offers` – es gibt keinen Online-Verkauf;
+  // Zugang und Umfang werden persönlich vereinbart.
+  if (eintrag.typ === "produkt")
+    graph.push({
+      "@type": "SoftwareApplication",
+      "@id": `${url}#software`,
+      name: eintrag.kurz,
+      description: eintrag.beschreibung,
+      url,
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: "KI-Assistent",
+      operatingSystem: "Web",
+      inLanguage: SPRACHE,
+      provider: { "@id": ORGANISATION_ID },
+    });
   if (eintrag.leistung)
     graph.push({
       "@type": "Service",
