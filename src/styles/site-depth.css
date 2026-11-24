@@ -192,3 +192,12 @@
     inset: 12px var(--layout-page-padding);
   }
 }
+
+/* Mobile: symmetrischer Innenabstand im gescrollten Kopf (vorher 32/24). */
+@media (max-width: 999px) {
+  #atelier[data-scrolled="true"] .site-header {
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 8px;
+  }
+}
