@@ -27,9 +27,21 @@ const TEL_PLATZHALTER =
  */
 const TEL_FRAGMENT = /(?:\+?\d{1,3}[\s/-]*)?(?:\[PERSON_NAME\][\s/-]*)?(?:6[\s/-]*)?133[\s/-]*188[\s/-]*56/g;
 
+/**
+ * Sitzangaben: Der Router maskiert Ortsnamen, das Modell rät dann einen Ort (gemessen: „Vaals“,
+ * „Kleve“, „Ludwigshafen“). Jede Sitzangabe wird auf den veröffentlichten Sitz zurückgesetzt.
+ */
+const SITZ_ANGABE =
+  /(\b(?:Sitz|sitzt|niedergelassen|ansässig)\b[^.\n]{0,24}?\bin\s+)([A-ZÄÖÜ][\wäöüß-]*)(?:\s*\([^)]{0,30}\))?(?:,\s*(?:Niederlande|Deutschland))?/gu;
+
+/** Falsche Domain (gemessen: „nexify.ai“); die Website ist www.nexifyai.de. */
+const FALSCHE_DOMAIN = /\b(?:www\.)?nexify\.ai\b/giu;
+
 export function ersetzeKontaktPlatzhalter(text: string): string {
   return text
     .replace(MAIL_PLATZHALTER, CHAT_KONTAKT_MAIL)
     .replace(TEL_PLATZHALTER, CHAT_KONTAKT_TEL)
-    .replace(TEL_FRAGMENT, CHAT_KONTAKT_TEL);
+    .replace(TEL_FRAGMENT, CHAT_KONTAKT_TEL)
+    .replace(SITZ_ANGABE, "$1Venlo (Niederlande)")
+    .replace(FALSCHE_DOMAIN, "www.nexifyai.de");
 }
