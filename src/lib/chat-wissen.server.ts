@@ -10,7 +10,7 @@
  * `chat-bundle.test.ts` prüft Importe und Build-Ergebnis.
  */
 
-import { CHAT_KONTAKT_MAIL } from "@/lib/chat-seiten";
+import { CHAT_KONTAKT_MAIL, CHAT_KONTAKT_TEL } from "@/lib/chat-seiten";
 
 /** Modellvertrag des Projekts (config/llm-policy.json): exakt dieses Modell, Reasoning `high`, kein Ersatzmodell. */
 export const CHAT_MODELL = "deepseek/deepseek-v4.1-flash-1017";
@@ -64,7 +64,7 @@ const FAKTEN = [
   "Vorbereitung (/wissen/projekt-vorbereiten): Ein fertiges Konzept ist nicht nötig. Hilfreich sind: Was bietet das Unternehmen an, wen will es erreichen, was soll sich ändern; ein ungefährer Zeit- und Budgetrahmen und vorhandene Unterlagen sind kein Muss.",
   "Produkte: NeX AIFly Suite – ein KI-Arbeitsbereich für Gespräche, Aufgaben, Dokumente und Projektwissen (/produkte/nex2fly). Die Agenten NeX und AIFly ORACLE (/produkte/one, /produkte/aifly-oracle, /produkte/nex-agentic-aifly). NeXify API (/produkte/api). Skills und MCP zur Anbindung von Werkzeugen (/produkte/skills-mcp). Einzelheiten stehen auf den Produktseiten; Zugang und Umfang werden persönlich geklärt.",
   "Kundencenter und Zugänge (/portale): Das NeXify-Kundencenter wird derzeit eingerichtet. Eine Anmeldung ist noch nicht möglich, eine Selbstregistrierung gibt es nicht. Zugänge werden persönlich je Kunde vergeben; Anfrage über /kontakt.",
-  `Kontakt: Kontaktformular unter /kontakt oder E-Mail an ${CHAT_KONTAKT_MAIL}.`,
+  `Kontakt: Kontaktformular unter /kontakt, E-Mail an ${CHAT_KONTAKT_MAIL}, Telefon ${CHAT_KONTAKT_TEL} (steht auch im /impressum).`,
   "Rechtliches und Hinweise: /ki-hinweise, /datenschutz, /vertragsgrundlagen, /impressum, /barrierefreiheit.",
   "Dieser Chat: Antworten werden von einem KI-Sprachmodell erzeugt, können fehlerhaft sein und sind keine verbindliche Auskunft, kein Angebot und keine Zusage.",
 ];

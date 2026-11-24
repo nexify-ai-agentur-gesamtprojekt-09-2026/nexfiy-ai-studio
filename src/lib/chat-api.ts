@@ -49,6 +49,7 @@
  * Aufbewahrung: siehe `raeumeChatAuf` und migrations/0003-chat-aufbewahrung.sql.
  */
 import { createOutputGuard, visitorAmounts, type GuidanceTurn } from "@/lib/chat-leitplanken";
+import { ersetzeKontaktPlatzhalter } from "@/lib/chat-platzhalter";
 import {
   CHAT_ERSATZANTWORT,
   CHAT_LEERANTWORT,
@@ -629,7 +630,10 @@ async function rufeAnbieter(
       let rohEnde = "";
       let inhalt = false;
       let ersetzt = false;
-      const leitplanke = createOutputGuard({ allowedAmounts: erlaubteBetraege });
+      const leitplanke = createOutputGuard({
+        allowedAmounts: erlaubteBetraege,
+        repair: ersetzeKontaktPlatzhalter,
+      });
       try {
         await leseAnbieter(
           antwort,

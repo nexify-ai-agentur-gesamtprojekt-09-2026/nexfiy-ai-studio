@@ -32,3 +32,6 @@ export const CHAT_SEITEN: Record<string, string> = {
 };
 
 export const CHAT_KONTAKT_MAIL = "mail@nexifyai.cloud";
+
+/** Im Impressum veröffentlichte Rufnummer; nur für die Kontaktauskunft im Chat. */
+export const CHAT_KONTAKT_TEL = "+31 6 133 188 56";

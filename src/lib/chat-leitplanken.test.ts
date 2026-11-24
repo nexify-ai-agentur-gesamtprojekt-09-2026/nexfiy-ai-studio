@@ -378,6 +378,18 @@ describe("Leitplanken der Modellantwort", () => {
     expect(guard.blocks).toHaveLength(1);
   });
 
+  it("gibt reparierten Text aus (Kontakt-Platzhalter des Routers)", () => {
+    const guard = createOutputGuard({
+      repair: (text) => text.replace("[EMAIL]", "mail@nexifyai.cloud"),
+    });
+    const text = "Schreiben Sie an [EMAIL]. Danke.";
+    let sichtbar = "";
+    for (let i = 0; i < text.length; i += 5) sichtbar += guard.push(text.slice(i, i + 5));
+    sichtbar += guard.finish();
+    expect(sichtbar).toBe("Schreiben Sie an mail@nexifyai.cloud. Danke.");
+    expect(sichtbar).not.toContain("[EMAIL]");
+  });
+
   it("ersetzt den Geviertstrich durch den Halbgeviertstrich der Website", () => {
     expect(germanDashes("bringen — mehr Anfragen")).toBe("bringen – mehr Anfragen");
     expect(germanDashes("Auftritt—oder beides")).toBe("Auftritt – oder beides");

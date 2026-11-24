@@ -246,9 +246,14 @@ const ABBREVIATION =
  * Inline-Code-Zeichen entfernt.
  */
 export function createOutputGuard(
-  options: { allowedAmounts?: ReadonlySet<string> } = {},
+  options: {
+    allowedAmounts?: ReadonlySet<string>;
+    /** Wird auf jeden freigegebenen Text angewandt (z. B. Kontakt-Platzhalter des Routers). */
+    repair?: (text: string) => string;
+  } = {},
 ): OutputGuard {
   const allowed = options.allowedAmounts ?? new Set<string>();
+  const reparieren = options.repair;
   const blocks: GuardedBlock[] = [];
   const violations: GuardViolation[] = [];
   let pending = "";
@@ -434,6 +439,7 @@ export function createOutputGuard(
     if (!released || released.endsWith("\n\n")) text = text.replace(/^\n+/u, "");
     else if (released.endsWith("\n")) text = text.replace(/^\n{2,}/u, "\n");
     text = text.replace(/\n{3,}/gu, "\n\n");
+    if (reparieren) text = reparieren(text);
     released += text;
     return text;
   };
