@@ -1,5 +1,5 @@
 /**
- * Deterministische Antwort auf Kontaktfragen (E-Mail, Telefon, Weg zu NeXify).
+ * Deterministische Antworten auf Kontakt- und Standortfragen (E-Mail, Telefon, Sitz, Anschrift).
  *
  * Warum nicht über das Modell: Der Router maskiert E-Mail-Adressen und Rufnummern in der
  * Anfrage (gemessen am 24.11.2026). Das Modell sieht die veröffentlichten Werte nicht und
@@ -39,4 +39,23 @@ export function kontaktAntwort(nachricht: string): string | null {
   }
   teile.push("Für Ihr Anliegen: /kontakt.");
   return teile.join(" ");
+}
+
+const SITZ_WORT = /\b(sitz\w*|firmensitz|hauptsitz|standort|anschrift|postanschrift|venlo|niederlande[n]?)\b/iu;
+const ADRESSE_WORT = /\badresse\b/iu;
+const WO_FRAGE = /\bwo\b[^.!?]{0,40}\b(nexify|sie|euch|ihr|unternehmen|firma|agentur)\b/iu;
+const ORT_FRAGE = /\b(wo|wohin|woher|welche[rsn]?|lautet|nenn\w*|sitzt|ansässig|befindet)\b/iu;
+
+/**
+ * Beantwortet Fragen nach Sitz oder Anschrift deterministisch. Nötig, weil der Router Ortsnamen
+ * maskiert: Das Modell sieht „Venlo“ nicht und rät dann einen Ort (gemessen: „Kleve (Deutschland)“).
+ */
+export function sitzAntwort(nachricht: string): string | null {
+  const text = nachricht.trim();
+  if (!text) return null;
+  if (MAIL_WORT.test(text)) return null; // „E-Mail-Adresse“ ist keine Standortfrage.
+  const sitz = SITZ_WORT.test(text) || ADRESSE_WORT.test(text) || WO_FRAGE.test(text);
+  if (!sitz) return null;
+  if (!ORT_FRAGE.test(text) && text.split(/\s+/u).length > 3) return null;
+  return "NeXify AI ist in Venlo (Niederlande) ansässig. Die vollständige Anschrift steht im Impressum: /impressum.";
 }

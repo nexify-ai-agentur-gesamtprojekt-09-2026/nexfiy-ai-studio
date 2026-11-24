@@ -50,7 +50,7 @@
  */
 import { createOutputGuard, visitorAmounts, type GuidanceTurn } from "@/lib/chat-leitplanken";
 import { ersetzeKontaktPlatzhalter } from "@/lib/chat-platzhalter";
-import { kontaktAntwort } from "@/lib/chat-kontakt";
+import { kontaktAntwort, sitzAntwort } from "@/lib/chat-kontakt";
 import {
   CHAT_ERSATZANTWORT,
   CHAT_LEERANTWORT,
@@ -815,10 +815,10 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
     return json({ ok: false, fehler: "chat_not_configured" }, 503);
   }
 
-  // Kontaktfragen deterministisch beantworten: Adresse und Rufnummer sind öffentlich, das Modell
-  // sieht sie wegen der Maskierung des Routers aber nicht (siehe chat-kontakt.ts). Die Antwort
-  // wird wie jede andere gespeichert, damit der Verlauf für Folgefragen vollständig bleibt.
-  const kontakt = kontaktAntwort(nachricht);
+  // Kontakt- und Standortfragen deterministisch beantworten: Adresse, Rufnummer und Sitz sind
+  // öffentlich, das Modell sieht sie wegen der Maskierung des Routers aber nicht (siehe
+  // chat-kontakt.ts). Die Antwort wird wie jede andere gespeichert, damit der Verlauf vollständig bleibt.
+  const kontakt = kontaktAntwort(nachricht) ?? sitzAntwort(nachricht);
   if (kontakt) {
     const gespeichert = await speichereAntwort(db, frageId, sessionId, kontakt, hash)
       .then(() => true)

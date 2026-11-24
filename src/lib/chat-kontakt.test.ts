@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { kontaktAntwort } from "@/lib/chat-kontakt";
+import { kontaktAntwort, sitzAntwort } from "@/lib/chat-kontakt";
 import { CHAT_KONTAKT_MAIL, CHAT_KONTAKT_TEL } from "@/lib/chat-seiten";
 
 describe("Kontaktfragen ohne Modell", () => {
@@ -36,6 +36,26 @@ describe("Kontaktfragen ohne Modell", () => {
     expect(antwort).toContain(CHAT_KONTAKT_MAIL);
     expect(antwort).toContain("/impressum");
     expect(antwort).toContain("/kontakt");
+  });
+
+  it("beantwortet Sitz- und Anschriftfragen mit Venlo (Niederlande)", () => {
+    for (const frage of [
+      "Wo sitzt NeXify AI?",
+      "Wo ist NeXify?",
+      "Wie lautet die Anschrift?",
+      "Welchen Firmensitz haben Sie?",
+    ]) {
+      const antwort = sitzAntwort(frage);
+      expect(antwort).toContain("Venlo (Niederlande)");
+      expect(antwort).toContain("/impressum");
+      expect(antwort).not.toContain("Deutschland");
+      expect(antwort).not.toContain("Kleve");
+    }
+  });
+
+  it("verwechselt E-Mail-Adressen nicht mit Standortfragen", () => {
+    expect(sitzAntwort("Welche E-Mail-Adresse haben Sie?")).toBeNull();
+    expect(sitzAntwort("Was kostet eine Website?")).toBeNull();
   });
 
   it("greift nicht bei Aussagen oder anderen Themen", () => {
