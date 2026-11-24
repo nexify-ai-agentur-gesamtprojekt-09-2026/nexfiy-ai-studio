@@ -1,6 +1,7 @@
 import { useCurrentPage } from "@/hooks/use-current-page";
 import { LOGO_KLEIN } from "@/lib/site-facts";
 import korrekturenCSS from "../../styles/site-korrekturen.css?url";
+import depthCSS from "../../styles/site-depth.css?url";
 
 /** NeXify site footer, shared by every NeXify page; the link to the current page is marked for assistive tech. */
 export function NexifyFooter() {
@@ -8,6 +9,7 @@ export function NexifyFooter() {
   return (
     <footer className={"site-footer structured-footer footer-refined"}>
       <link rel="stylesheet" href={korrekturenCSS} precedence="site-korrekturen" />
+      <link rel="stylesheet" href={depthCSS} precedence="site-depth" />
       <div className={"footer-inner"}>
         <div className={"footer-invitation"}>
           <div>
