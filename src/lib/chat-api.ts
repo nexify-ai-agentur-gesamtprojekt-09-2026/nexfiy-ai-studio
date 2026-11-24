@@ -588,15 +588,29 @@ async function rufeAnbieter(
         stream: strom,
       }),
       // Nie mit dem Serverschlüssel einer Weiterleitung folgen.
-      redirect: "error",
+      // Workers kennt nur "follow" | "manual": "error" wirft sofort (TypeError). "manual" plus
+      // ausdrückliche 3xx-Prüfung darunter leistet dasselbe — nie mit dem Serverschlüssel folgen.
+      redirect: "manual",
       signal: steuerung.signal,
     });
-  } catch {
+  } catch (e) {
     beende();
+    // Diagnose: Name und Kurztext des Wurfs, kein Inhalt und kein Schlüssel.
+    console.error("chat_anbieter_wurf", {
+      name: e && typeof e === "object" && "name" in e ? String((e as { name?: unknown }).name) : null,
+      text: String(e).slice(0, 200),
+    });
     throw fehler();
   }
-  if (!antwort.ok) {
+  if (!antwort.ok || (antwort.status >= 300 && antwort.status < 400)) {
     beende();
+    // Nur Status und Herkunft, kein Inhalt: macht 401/403/1042 unterscheidbar.
+    console.error("chat_upstream_status", {
+      status: antwort.status,
+      server: antwort.headers.get("server"),
+      mit: antwort.headers.get("cf-mitigated"),
+      ray: antwort.headers.get("cf-ray") ? "ja" : null,
+    });
     // Der Anbieter hat mit Fehlerstatus abgelehnt, ohne eine Antwort zu beginnen: der einzige
     // Fall, in dem die Reservierung zurückgegeben wird. Ein Abbruch oder Zeitlimit, das zufällig
     // gleichzeitig eintrat, geht vor.
@@ -827,7 +841,9 @@ export async function handleChat(request: Request, argument?: ChatBindings): Pro
       nachrichten,
       alsStrom,
       visitorAmounts(verlauf, nachricht),
-      request.signal,
+      // Ein bereits abgebrochenes Signal sagt nichts über einen künftigen Abbruch: durchreichen
+      // hieße, den Anbieteraufruf sofort zu verwerfen (Worker-Adapter liefern das gelegentlich).
+      request.signal?.aborted ? undefined : request.signal,
     );
   } catch (ursache) {
     await erstatteFallsAbgelehnt(ursache);

@@ -889,11 +889,20 @@ describe("handleChat: Anbieteraufruf", () => {
     await handleChat(anfrage({ message: "Was bietet NeXify AI?" }), bindings(db));
     const { url, init, body } = gesendet(fetchMock);
     expect(url).toBe("https://ai-router.nexifyai.cloud/v1/chat/completions");
-    expect(init.redirect).toBe("error");
+    expect(init.redirect).toBe("manual");
     expect(body.model).toBe(CHAT_MODELL_ROUTERNAME);
     expect(body.reasoning).toEqual({ effort: "high" });
     expect(body.stream).toBe(false);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("folgt keiner Weiterleitung des Anbieters: manual plus 3xx gilt als Fehler", async () => {
+    const fetchMock = vi.fn(async () => new Response("", { status: 302, headers: { location: "https://beispiel.invalid/" } }));
+    vi.stubGlobal("fetch", fetchMock);
+    const res = await handleChat(anfrage({ message: "Frage" }), bindings(db));
+    expect(res.status).toBe(502);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(gesendet(fetchMock).init.redirect).toBe("manual");
   });
 
   it("lässt weder den Client noch eine Variable Modell, Systemvorgabe oder Verlauf bestimmen", async () => {
