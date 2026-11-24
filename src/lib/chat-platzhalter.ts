@@ -32,7 +32,7 @@ const TEL_FRAGMENT = /(?:\+?\d{1,3}[\s/-]*)?(?:\[PERSON_NAME\][\s/-]*)?(?:6[\s/-
  * „Kleve“, „Ludwigshafen“). Jede Sitzangabe wird auf den veröffentlichten Sitz zurückgesetzt.
  */
 const SITZ_ANGABE =
-  /(\b(?:Sitz|sitzt|niedergelassen|ansässig)\b[^.\n]{0,24}?\bin\s+)([A-ZÄÖÜ][\wäöüß-]*)(?:\s*\([^)]{0,30}\))?(?:,\s*(?:Niederlande|Deutschland))?/gu;
+  /(\b(?:Sitz|sitzt|niedergelassen|ansässig)\b[^.\n]{0,24}?(?:\bin\s+|:\s*))(?:[A-ZÄÖÜ][\wäöüß-]*|\[[A-ZÄÖÜ_]+\])(?:\s*\([^)]{0,30}\))?(?:,\s*(?:Niederlande|Deutschland))?/gu;
 
 /** Falsche Domain (gemessen: „nexify.ai“); die Website ist www.nexifyai.de. */
 const FALSCHE_DOMAIN = /\b(?:www\.)?nexify\.ai\b/giu;

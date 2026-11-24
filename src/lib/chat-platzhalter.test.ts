@@ -59,6 +59,8 @@ describe("Kontakt-Platzhalter in Modellantworten", () => {
       "Der Sitz ist in Kleve (Deutschland).",
       "NeXify sitzt in Ludwigshafen.",
       "Das Unternehmen ist ansässig in Aachen.",
+      "NeXify AI hat seinen Sitz in [ADDRESS].",
+      "Sitz: [PERSON_NAME], Niederlande.",
     ]) {
       expect(ersetzeKontaktPlatzhalter(text)).toContain("Venlo (Niederlande)");
       expect(ersetzeKontaktPlatzhalter(text)).not.toMatch(/Vaals|Kleve|Ludwigshafen|Aachen/);
