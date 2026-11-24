@@ -57,5 +57,5 @@ export function sitzAntwort(nachricht: string): string | null {
   const sitz = SITZ_WORT.test(text) || ADRESSE_WORT.test(text) || WO_FRAGE.test(text);
   if (!sitz) return null;
   if (!ORT_FRAGE.test(text) && text.split(/\s+/u).length > 3) return null;
-  return "NeXify AI ist in Venlo (Niederlande) ansässig. Die vollständige Anschrift steht im Impressum: /impressum.";
+  return "NeXify AI ist in Venlo (Niederlande) ansässig. Die vollständige Anschrift steht hier: /impressum.";
 }
