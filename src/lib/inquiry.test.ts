@@ -18,6 +18,19 @@ const valid: InquiryValues = {
 };
 
 describe("inquiry rules", () => {
+  it("weist Felder oberhalb der Obergrenzen ab", () => {
+    const zuLang = (werte: Partial<InquiryValues>) =>
+      validateInquiry("contact", { ...valid, ...werte });
+
+    expect(zuLang({ name: "A".repeat(101) }).name).toContain("höchstens 100");
+    expect(zuLang({ name: "A".repeat(100) }).name).toBeUndefined();
+    expect(zuLang({ company: "B".repeat(161) }).company).toContain("höchstens 160");
+    expect(zuLang({ message: "C".repeat(4001) }).message).toContain("höchstens 4000");
+    expect(zuLang({ message: "C".repeat(4000) }).message).toBeUndefined();
+    const lange = "a".repeat(155) + "@firma.de";
+    expect(zuLang({ email: lange }).email).toContain("höchstens 160");
+  });
+
   it("requires name, e-mail, message and consent on the contact form", () => {
     const errors = validateInquiry("contact", normalizeInquiry({}));
     expect(Object.keys(errors)).toEqual(["name", "email", "message", "consent"]);

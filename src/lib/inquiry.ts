@@ -48,6 +48,12 @@ export function isInquiryFieldRequired(kind: InquiryKind, field: InquiryField): 
 }
 
 export const MIN_MESSAGE_LENGTH = 10;
+/* Obergrenzen: bisher standen sie nur im Browser (maxlength). Serverseitig fehlte jede Grenze,
+   dadurch passen mehrere Kilobyte in ein Feld von 16 KB Rumpf und in den Betreff der Mail. */
+export const MAX_NAME_LENGTH = 100;
+export const MAX_EMAIL_LENGTH = 160;
+export const MAX_COMPANY_LENGTH = 160;
+export const MAX_MESSAGE_LENGTH = 4000;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function normalizeInquiry(raw: Partial<Record<InquiryField, unknown>>): InquiryValues {
@@ -81,20 +87,28 @@ export function validateInquiryField(
     case "name":
       if (!values.name) return "Bitte geben Sie Ihren Namen an.";
       if (values.name.length < 2) return "Bitte geben Sie Ihren vollständigen Namen an.";
+      if (values.name.length > MAX_NAME_LENGTH)
+        return `Bitte kürzen Sie den Namen auf höchstens ${MAX_NAME_LENGTH} Zeichen.`;
       return undefined;
     case "email":
       if (!values.email) return "Bitte geben Sie Ihre E-Mail-Adresse an.";
       if (!EMAIL_PATTERN.test(values.email))
         return "Bitte prüfen Sie die E-Mail-Adresse, zum Beispiel name@firma.de.";
+      if (values.email.length > MAX_EMAIL_LENGTH)
+        return `Bitte kürzen Sie die E-Mail-Adresse auf höchstens ${MAX_EMAIL_LENGTH} Zeichen.`;
       return undefined;
     case "company":
       if (PROFILES[kind].companyRequired && !values.company)
         return "Bitte nennen Sie Ihr Unternehmen.";
+      if (values.company.length > MAX_COMPANY_LENGTH)
+        return `Bitte kürzen Sie den Unternehmensnamen auf höchstens ${MAX_COMPANY_LENGTH} Zeichen.`;
       return undefined;
     case "message":
       if (!values.message) return "Bitte beschreiben Sie kurz Ihr Anliegen.";
       if (values.message.length < MIN_MESSAGE_LENGTH)
         return "Ein, zwei Sätze genügen – bitte etwas ausführlicher.";
+      if (values.message.length > MAX_MESSAGE_LENGTH)
+        return `Bitte kürzen Sie die Nachricht auf höchstens ${MAX_MESSAGE_LENGTH} Zeichen.`;
       return undefined;
     case "consent":
       if (!values.consent) return "Bitte stimmen Sie zu, damit wir Ihre Anfrage bearbeiten dürfen.";

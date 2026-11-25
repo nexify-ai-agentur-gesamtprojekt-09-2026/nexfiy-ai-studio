@@ -51,7 +51,11 @@ const MONEY_PATTERNS: readonly RegExp[] = [
 ];
 
 const NUMBER_WORD = String.raw`(?:null|ein|eine|einen|einem|eins|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwoelf|zwanzig|dreißig|dreissig|vierzig|fünfzig|fuenfzig|sechzig|siebzig|achtzig|neunzig|hundert|tausend|zehntausend|hunderttausend|million|millionen|one|two|three|four|five|six|seven|eight|nine|ten|twenty|thirty|forty|fifty|hundred|thousand)`;
-const NUMBER_WORDS = String.raw`\b(?:${NUMBER_WORD}|und|and|halb|einhalb|anderthalb|komma|[\s-])*${NUMBER_WORD}(?:${NUMBER_WORD}|und|and|halb|einhalb|komma|[\s-])*`;
+/* 2026-11-25: vorher beidseitig unbegerenzt (`*`). Bei Text wie 'eins und eins und ...' ohne
+   Waehrungsangabe backtrackte die Regel ueberquadratisch (gemessen: 2.000 Zeichen 341 ms,
+   4.000 Zeichen 2.459 ms). Jetzt 8 Glieder je Seite - Betraege in Worten bleiben erfasst
+   ('eine Million zweihunderttausend Euro' = 3 Glieder), die Laufzeit ist linear. */
+const NUMBER_WORDS = String.raw`\b(?:${NUMBER_WORD}|und|and|halb|einhalb|anderthalb|komma|[\s-]){0,8}${NUMBER_WORD}(?:${NUMBER_WORD}|und|and|halb|einhalb|komma|[\s-]){0,8}`;
 /** Beträge in Worten: nie freigegeben, weil sie sich keiner Zahl des Besuchers zuordnen lassen. */
 const WORD_MONEY_PATTERNS: readonly RegExp[] = [
   new RegExp(String.raw`${NUMBER_WORDS}\s?${CURRENCY}`, "iu"),

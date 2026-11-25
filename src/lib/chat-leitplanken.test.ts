@@ -23,6 +23,19 @@ function run(text: string, options: { allowedAmounts?: ReadonlySet<string> } = {
 }
 
 describe("Leitplanken der Modellantwort", () => {
+  it("prüft 4.000 kritische Zeichen in unter 100 ms (keine entartete Wiederholung)", () => {
+    const text = "eins und ".repeat(400);
+    const start = performance.now();
+    hasUnapprovedAmount(text, new Set());
+    const dauer = performance.now() - start;
+    expect(dauer).toBeLessThan(100);
+  });
+
+  it("erkennt Beträge in Worten auch nach der Begrenzung", () => {
+    expect(hasUnapprovedAmount("Das kostet eine Million zweihunderttausend Euro.", new Set())).toBe(true);
+    expect(hasUnapprovedAmount("Zwei drei vier fünf sechs sieben acht neun Euro pro Monat.", new Set())).toBe(true);
+  });
+
   it("lässt keinen nicht freigegebenen Betrag zum Besucher", () => {
     for (const text of [
       "Das kostet 4.900 €.",
