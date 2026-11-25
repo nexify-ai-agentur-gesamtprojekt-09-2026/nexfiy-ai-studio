@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { execFile, spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { createServer, type Server } from "node:http";
