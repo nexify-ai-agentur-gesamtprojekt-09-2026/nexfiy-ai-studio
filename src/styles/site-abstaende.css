@@ -44,3 +44,16 @@
   :root { --nx-card: 20px; --nx-sec: 44px; --nx-gut: 18px; }
   #atelier .hc-gallery-card.hc-gallery-card { padding-inline: 18px !important; }
 }
+
+/* Textkoerper in Leistungskarten: hatte links 0 px, Text klebte am Rand */
+#atelier .hc-service-body {
+  padding: 8px 32px 32px !important;
+}
+/* Abschluss-Karte und Hero-Buehne auf dieselbe Skala */
+#atelier .hc-finish-next { padding: var(--nx-card) !important; }
+#atelier .identity-scene { padding: clamp(32px, 4vw, 64px) var(--nx-gut) !important; }
+
+@media (max-width: 640px) {
+  #atelier .hc-service-body { padding: 6px 20px 20px !important; }
+  #atelier .identity-scene { padding: 24px 18px !important; }
+}
