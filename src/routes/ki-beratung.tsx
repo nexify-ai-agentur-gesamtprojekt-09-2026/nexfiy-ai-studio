@@ -153,17 +153,19 @@ function Index() {
               meist sind es zwei oder drei Bereiche, die zusammengehören.
             </p>
           </div>
-          <div className={"hc-gallery"}>
+          <ol className={"hc-service-list"}>
             {BERATUNG_BEREICHE.map((b, i) => (
-              <article className={"hc-gallery-card"} key={b.titel}>
-                <span className={"hc-art"} aria-hidden="true">
+              <li className={"hc-service-detail"} key={b.titel}>
+                <span className={"hc-caption"} aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className={"hc-service-name"}>{b.titel}</h3>
-                <p className={"hc-service-body"}>{b.nutzen}</p>
-              </article>
+                <div>
+                  <h3 className={"hc-service-name"}>{b.titel}</h3>
+                  <p className={"hc-service-body"}>{b.nutzen}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
 
         <section className={"hc-section hc-container"} aria-labelledby="kb-zielgruppen">
@@ -208,7 +210,7 @@ function Index() {
           <ol className={"hc-service-list"}>
             {BERATUNG_ABLAUF.map((s, i) => (
               <li className={"hc-service-detail"} key={s.titel}>
-                <span className={"hc-art"} aria-hidden="true">
+                <span className={"hc-caption"} aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>
@@ -225,7 +227,7 @@ function Index() {
             <ul className={"hc-service-list"}>
               {BERATUNG_TAGESTEILE.map((te) => (
                 <li className={"hc-service-detail"} key={te.titel}>
-                  <span className={"hc-art"}>{te.minuten} Minuten</span>
+                  <span className={"hc-caption"}>{te.minuten} Minuten</span>
                   <div>
                     <h3 className={"hc-service-name"}>{te.titel}</h3>
                     <p className={"hc-service-body"}>{te.text}</p>
