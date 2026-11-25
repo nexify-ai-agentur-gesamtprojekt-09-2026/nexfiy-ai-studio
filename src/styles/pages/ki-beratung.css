@@ -292,3 +292,144 @@
   height: 1px;
   opacity: 0;
 }
+
+/* --- Beratungsformular: eigene Regeln, weil die vorhandenen Formularstile an #atelier gebunden sind --- */
+@media (min-width: 60rem) {
+  .kb-anfrage .kb-zwei {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.kb-anfrage .tk-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.kb-anfrage .tk-form-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+}
+
+.kb-anfrage .tk-form-intro {
+  margin: 0;
+  color: color-mix(in oklab, #ffffff 66%, transparent);
+}
+
+.kb-anfrage .tk-field {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.kb-anfrage fieldset.tk-field {
+  border: 0;
+  padding: 0;
+}
+
+.kb-anfrage .tk-field-label,
+.kb-anfrage legend.tk-field-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: color-mix(in oklab, #ffffff 82%, transparent);
+  padding: 0;
+  margin: 0;
+}
+
+.kb-anfrage :is(input.tk-input, select.tk-input, textarea.tk-input) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid color-mix(in oklab, #ffffff 22%, transparent);
+  border-radius: 0.5rem;
+  background: color-mix(in oklab, #ffffff 6%, #121514);
+  color: inherit;
+  font: inherit;
+}
+
+.kb-anfrage :is(input.tk-input, select.tk-input, textarea.tk-input):focus-visible {
+  outline: 2px solid #c0ee38;
+  outline-offset: 2px;
+  border-color: #c0ee38;
+}
+
+.kb-anfrage .tk-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.kb-anfrage .tk-check {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.kb-anfrage .tk-check.grid {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.4rem 1rem;
+}
+
+.kb-anfrage .tk-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: color-mix(in oklab, #ffffff 84%, transparent);
+}
+
+.kb-anfrage .tk-check-label input {
+  margin-top: 0.15rem;
+  accent-color: #c0ee38;
+  flex: 0 0 auto;
+}
+
+.kb-anfrage .tk-consent {
+  margin-top: 0.25rem;
+}
+
+.kb-anfrage .tk-field-hinweis {
+  font-size: 0.78rem;
+  color: color-mix(in oklab, #ffffff 55%, transparent);
+}
+
+.kb-anfrage .tk-field-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #ffb4a2;
+}
+
+.kb-anfrage .tk-field-error svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: 0 0 auto;
+}
+
+.kb-anfrage .tk-form-fehler {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #ffb4a2;
+  border-radius: 0.5rem;
+  color: #ffd9d0;
+  background: color-mix(in oklab, #ffb4a2 10%, transparent);
+}
+
+.kb-anfrage .tk-form-fehler p {
+  margin: 0;
+}
+
+.kb-anfrage .tk-submit {
+  justify-self: start;
+  margin-top: 0.25rem;
+}
+
+.kb-anfrage .tk-form-hinweis {
+  margin: 0;
+  font-size: 0.82rem;
+  color: color-mix(in oklab, #ffffff 55%, transparent);
+}
+
+.kb-anfrage .tk-form-erfolg h3 {
+  margin-top: 0;
+}
