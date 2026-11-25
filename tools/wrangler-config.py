@@ -23,6 +23,7 @@ geschrieben; `main` und `assets.directory` zeigen dort als absolute Pfade auf da
 Nutzung: wrangler-config.py <.output-Verzeichnis> <Zieldatei>
 """
 
+import datetime
 import json
 import os
 import re
@@ -97,6 +98,19 @@ def neu_schreiben(output_dir, ziel):
     datum = ein.get("compatibility_date")
     if not isinstance(datum, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", datum):
         raise Abbruch("compatibility_date fehlt oder hat kein Datumsformat")
+    # 2026-11-26: Nitro setzt das Datum aus dem lokalen Kalendertag. Zwischen 00:00 und 01:00
+    # Europe/Berlin liegt dieser einen Tag vor dem UTC-Tag, und die Cloudflare-API weist den
+    # Deploy ab ("Can't set compatibility date in the future", code 10021). Gemessen
+    # 25.11.2026 23:29 UTC / 26.11. 00:29 CET: Build 2026-11-26, Upload scheiterte, live unverändert.
+    # Deshalb auf den heutigen UTC-Tag begrenzen; Vergangenheit bleibt unangetastet.
+    heute_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    if datum > heute_utc:
+        print(
+            f"WRANGLER-KONFIG: compatibility_date {datum} liegt vor dem UTC-Tag {heute_utc} "
+            f"— auf {heute_utc} begrenzt (Cloudflare lehnt Zukunftsdaten ab)",
+            file=sys.stderr,
+        )
+        datum = heute_utc
     aus["compatibility_date"] = datum
 
     flags = ein.get("compatibility_flags", [])

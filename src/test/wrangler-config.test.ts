@@ -122,4 +122,26 @@ describe("wrangler-config.py (Allowlist für wrangler.json)", () => {
       expect(r.stderr).toMatch(/verbotene|verbotenes/);
     }
   });
+
+  it("begrenzt ein compatibility_date in der Zukunft auf den heutigen UTC-Tag", () => {
+    // Cloudflare weist Zukunftsdaten ab (code 10021). Nitro setzt das Datum aus dem lokalen
+    // Kalendertag; zwischen 00:00 und 01:00 Europe/Berlin ist das der Folgetag in UTC.
+    const heuteUtc = new Date().toISOString().slice(0, 10);
+    const morgen = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+    const { output, ziel } = artefakt({ ...NITRO, compatibility_date: morgen });
+    const r = lauf(output, ziel);
+    expect(r.status, r.stderr).toBe(0);
+    const neu = JSON.parse(readFileSync(ziel, "utf8"));
+    expect(neu.compatibility_date).toBe(heuteUtc);
+    expect(r.stderr).toContain(`auf ${heuteUtc} begrenzt`);
+  });
+
+  it("lässt ein compatibility_date in der Vergangenheit unverändert", () => {
+    const { output, ziel } = artefakt({ ...NITRO, compatibility_date: "2020-01-01" });
+    const r = lauf(output, ziel);
+    expect(r.status, r.stderr).toBe(0);
+    const neu = JSON.parse(readFileSync(ziel, "utf8"));
+    expect(neu.compatibility_date).toBe("2020-01-01");
+    expect(r.stderr).not.toContain("begrenzt");
+  });
 });
