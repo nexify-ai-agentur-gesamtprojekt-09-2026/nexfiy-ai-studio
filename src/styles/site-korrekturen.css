@@ -294,7 +294,10 @@
  * Jetzt ausgeschlossen wird nur, was eigene Gestalt hat (.hc-text-link, .button).
  */
 :root:root #atelier main :is(p, li) a[href]:not(.hc-text-link):not(.button) {
-  text-decoration: underline;
+  /* !important ist hier begruendet: die seiteneigene CSS-Datei setzt
+     "#atelier :is(a, ...)" mit text-decoration: none !important (nachgemessen).
+     Ohne dieselbe Prioritaet bleibt die Unterstreichung wirkungslos. */
+  text-decoration: underline !important;
   text-decoration-thickness: from-font;
   text-underline-offset: 0.18em;
 }
