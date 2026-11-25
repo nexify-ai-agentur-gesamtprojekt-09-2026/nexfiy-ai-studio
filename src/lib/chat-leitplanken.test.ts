@@ -23,12 +23,14 @@ function run(text: string, options: { allowedAmounts?: ReadonlySet<string> } = {
 }
 
 describe("Leitplanken der Modellantwort", () => {
-  it("prüft 4.000 kritische Zeichen in unter 100 ms (keine entartete Wiederholung)", () => {
-    const text = "eins und ".repeat(400);
+  it("prüft 8.000 kritische Zeichen in unter 500 ms (keine entartete Wiederholung)", () => {
+    // Vor der Begrenzung: 8.000 Zeichen dauerten 23.975 ms, 4.000 Zeichen 3.357 ms (gemessen 25.11.2026).
+    // Grenze bewusst weit: unter paralleler Last schwankt die Laufzeit (12 ms allein, 187 ms unter Last).
+    const text = "eins und ".repeat(889);
     const start = performance.now();
     hasUnapprovedAmount(text, new Set());
     const dauer = performance.now() - start;
-    expect(dauer).toBeLessThan(100);
+    expect(dauer).toBeLessThan(500);
   });
 
   it("erkennt Beträge in Worten auch nach der Begrenzung", () => {
