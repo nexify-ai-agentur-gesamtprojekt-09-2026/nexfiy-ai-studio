@@ -110,8 +110,12 @@ export async function liesAnfrageBody(request: Request): Promise<BodyErgebnis> {
  * Es gibt nur noch die Kontaktanfrage. Der `kind`-Wert aus dem Rumpf wird nicht mehr ausgewertet:
  * ein alter Client, der noch eine frühere Art sendet, landet als normale Kontaktanfrage.
  */
-export function anfrageArt(_daten: AnfrageRoh): InquiryKind {
-  return "contact";
+/**
+ * Anfrageart aus dem Rumpf. Ohne Angabe gilt "contact"; nur die ausdrücklich bekannte zweite Art
+ * wird übernommen, damit ein manipulierter Wert nicht in die Datenbank gelangt.
+ */
+export function anfrageArt(daten: AnfrageRoh): InquiryKind {
+  return daten["art"] === "beratung" ? "beratung" : "contact";
 }
 
 /** Normalisiert + prueft in einem Schritt und liefert die Feldmeldungen des Formulars. */

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  anfrageArt,
   anfrageDedupKey,
   anfrageNummer,
   anfrageSchluesselAusHeader,
@@ -81,5 +82,14 @@ describe("anfrageSchluesselAusHeader", () => {
     );
     expect(anfrageSchluesselAusHeader("kurz")).toBeNull();
     expect(anfrageSchluesselAusHeader(null)).toBeNull();
+  });
+});
+
+describe("anfrageArt", () => {
+  it("erkennt die Beratungsanfrage und lässt fremde Werte nicht durch", () => {
+    expect(anfrageArt({ art: "beratung" })).toBe("beratung");
+    expect(anfrageArt({ art: "contact" })).toBe("contact");
+    expect(anfrageArt({ art: "admin" })).toBe("contact");
+    expect(anfrageArt({})).toBe("contact");
   });
 });
