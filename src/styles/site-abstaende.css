@@ -92,15 +92,19 @@
 }
 .hc-product-art img, .hc-product-art video { border-radius: 0 !important; }
 
-/* Bildplatten: 5-px-Rahmen entfaellt, Bild bis zur Plattenrundung */
+/* Bildplatten: der 5-px-Rahmen entfaellt ganz - die Platte enthaelt nur das Bild
+   (kein figcaption), also traegt sie keinen Innenabstand mehr. */
+.hc-plate { padding: 0 !important; }
 .hc-plate > img,
 .hc-plate > video,
-.hc-plate > picture {
-  margin: -5px -5px 0 !important;
-  width: calc(100% + 10px) !important;
+.hc-plate > picture,
+.hc-plate img,
+.hc-plate video {
+  width: 100% !important;
+  max-width: none !important;
   border-radius: 0 !important;
+  display: block !important;
 }
-.hc-plate img, .hc-plate video { border-radius: 0 !important; }
 
 @media (max-width: 640px) {
   .hc-gallery-card > .identity-media,
