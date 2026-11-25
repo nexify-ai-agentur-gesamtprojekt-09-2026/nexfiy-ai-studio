@@ -27,18 +27,17 @@ function Index() {
                     <a href="/">Startseite</a>
                   </li>
                   <li className={"visually-hidden"}>
-                    <span aria-current="page">Kundencenter. In Einrichtung.</span>
+                    <span aria-current="page">Kundencenter. Zugang auf Anfrage.</span>
                   </li>
                 </ol>
               </nav>
               <span className={"hc-kicker"}>
                 NeXify AI<span aria-hidden="true"> / </span>NeXify kennenlernen
               </span>
-              <h1 id="page-title-portals">Kundencenter. In Einrichtung.</h1>
+              <h1 id="page-title-portals">Kundencenter. Zugang auf Anfrage.</h1>
               <p className={"identity-body"}>
-                Kunden und Partner sollen je einen eigenen, geschützten Bereich erhalten. Das
-                NeXify-Kundencenter wird derzeit eingerichtet. Zugänge vergeben wir persönlich je
-                Kunde.
+                Kunden und Partner erhalten je einen eigenen, geschützten Bereich. Zugänge vergeben wir
+                persönlich je Kunde; eine Selbstregistrierung gibt es nicht.
               </p>
               <div className={"identity-links"}>
                 <a

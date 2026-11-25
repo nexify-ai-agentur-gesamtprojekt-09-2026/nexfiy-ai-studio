@@ -37,8 +37,8 @@ function Index() {
               </span>
               <h1 id="page-title-aifly-oracle">AIFly ORACLE. Erst ordnen, dann handeln.</h1>
               <p className={"identity-body"}>
-                AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist
-                in Vorbereitung; Ihr Vorhaben schildern Sie bis dahin über das Kontaktformular.
+                AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist live und beantwortet Fragen zu Leistungen und Seiten; Ihr
+                Vorhaben schildern Sie jederzeit über das Kontaktformular.
               </p>
               <div className={"identity-links"}>
                 <a
@@ -210,8 +210,8 @@ function Index() {
             </div>
             <div className={"pc-section-body"}>
               <p>
-                Der Chat mit AIFly ORACLE ist in Vorbereitung. Er soll Ihnen helfen, Leistungen und
-                passende Seiten zu finden und Ihre Anfrage vorzubereiten. AIFly ORACLE ist ein
+                Der Chat auf dieser Website ist live. Er hilft Ihnen, Leistungen und passende Seiten zu
+                finden und Ihre Anfrage vorzubereiten. AIFly ORACLE ist ein
                 KI-System, kein Mensch, und kann sich irren.
               </p>
               <p>

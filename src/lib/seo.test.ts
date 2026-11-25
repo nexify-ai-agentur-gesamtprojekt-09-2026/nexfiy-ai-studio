@@ -364,7 +364,7 @@ describe("Sitemap, robots.txt und llms.txt", () => {
     for (const adresse of adressen) expect(erlaubt.has(adresse), adresse).toBe(true);
     expect(new Set(adressen).size).toBe(adressen.length);
     expect(llms).not.toMatch(/teileklar|shop|werkstatt/i);
-    expect(llms).toContain("Kundencenter ist in Einrichtung");
+    expect(llms).toContain("Kundencenter: Zugang auf Anfrage");
     for (const angabe of [
       KONTAKT.telefon,
       KONTAKT.email,
@@ -396,9 +396,9 @@ describe("Chat: keine Verfügbarkeitsbehauptung, solange er abgeschaltet ausgeli
     expect(text).not.toMatch(/Im Chat hilft Ihnen/);
     expect(text).not.toMatch(/mit dem KI-Assistenten AIFly ORACLE"/);
   });
-  it("die ORACLE-Seite nennt den Chat ausdrücklich als in Vorbereitung", () => {
+  it("die ORACLE-Seite nennt den Chat ausdrücklich als live", () => {
     expect(lies("src/routes/produkte_.aifly-oracle.tsx").replace(/\s+/g, " ")).toMatch(
-      /Der Chat auf dieser Website ist in Vorbereitung/,
+      /Der Chat auf dieser Website ist live/,
     );
   });
 });

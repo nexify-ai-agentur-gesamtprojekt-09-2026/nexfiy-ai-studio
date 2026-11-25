@@ -159,7 +159,7 @@ export const SEITEN: Seite[] = [
     titel: "AIFly ORACLE – erst ordnen, dann handeln",
     kurz: "AIFly ORACLE",
     beschreibung:
-      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website ist in Vorbereitung.",
+      "AIFly ORACLE ist das KI-System, das Aufgaben ordnet. Der Chat auf dieser Website beantwortet Fragen zu Leistungen und Seiten.",
     typ: "produkt",
     index: true,
   },
@@ -196,10 +196,10 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/portale",
     datei: "portale.tsx",
-    titel: "Kundencenter – in Einrichtung",
+    titel: "Kundencenter – Zugang auf Anfrage",
     kurz: "Kundencenter",
     beschreibung:
-      "Kunden und Partner sollen je einen eigenen, geschützten Bereich erhalten. Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich.",
+      "Kunden und Partner sollen je einen eigenen, geschützten Bereich erhalten. Zugänge vergeben wir persönlich je Kunde; eine Selbstregistrierung gibt es nicht.",
     typ: "info",
     index: true,
   },
@@ -332,17 +332,17 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/anmelden",
     datei: "anmelden.tsx",
-    titel: "Anmelden – Kundencenter in Einrichtung",
+    titel: "Anmelden – Kundencenter: Zugang auf Anfrage",
     kurz: "Anmelden",
     beschreibung:
-      "Anmeldung: Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde.",
+      "Anmeldung: Eine Selbstregistrierung gibt es nicht; Zugänge vergeben wir persönlich je Kunde.",
     typ: "konto",
     index: false,
   },
   {
     pfad: "/registrieren",
     datei: "registrieren.tsx",
-    titel: "Registrieren – Kundencenter in Einrichtung",
+    titel: "Registrieren – Kundencenter: Zugang auf Anfrage",
     kurz: "Registrieren",
     beschreibung:
       "Registrierung: Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde.",
@@ -352,7 +352,7 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/passwort-vergessen",
     datei: "passwort-vergessen.tsx",
-    titel: "Passwort vergessen – Kundencenter in Einrichtung",
+    titel: "Passwort vergessen – Zugang auf Anfrage",
     kurz: "Passwort vergessen",
     beschreibung:
       "Passwort zurücksetzen: Das NeXify-Kundencenter wird derzeit eingerichtet; Zugänge vergeben wir persönlich je Kunde.",
