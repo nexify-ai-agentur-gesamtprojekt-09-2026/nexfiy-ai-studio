@@ -10,7 +10,8 @@ const SUITE = /\bsuite\b/iu;
 const AGENTEN = /\b(agent(?:en|ic)?|aifly\s*oracle|nex)\b/iu;
 const API = /\bapi\b/iu;
 const SKILLS = /\b(mcp|skills)\b/iu;
-const FRAGE = /\b(was|wie|welche[nsr]?|erkl\w*|beschreib\w*|ist|sind|gibt es|kann man|wofür|wozu)\b/iu;
+const FRAGE =
+  /\b(was|wie|welche[nsr]?|erkl\w*|beschreib\w*|ist|sind|gibt es|kann man|wofür|wozu)\b/iu;
 
 export function produktAntwort(nachricht: string): string | null {
   const text = nachricht.trim();

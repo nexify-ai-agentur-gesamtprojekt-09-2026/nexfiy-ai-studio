@@ -1,24 +1,21 @@
+# NeXify AI — www.nexifyai.de
+# KI-Crawler sind ausdruecklich erlaubt: die Seite soll zitiert werden.
+# Eine einzige Gruppe — die Sperre von /api/ gilt damit auch fuer die namentlich Genannten.
+# Fruehere Kassen-, Warenkorb- und Kontopfade stehen hier absichtlich NICHT: sie antworten mit
+# 404 und X-Robots-Tag noindex. Eine Sperre wuerde verhindern, dass dieser noindex gelesen wird.
+
 User-agent: *
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
-
-# Nicht oeffentlich: Auth-Flows und Kundenkonten (kein Index)
-Disallow: /registrieren
-Disallow: /passwort-vergessen
-Disallow: /teileklar/kasse
-Disallow: /teileklar/warenkorb
-Disallow: /teileklar/bestellungen
-Disallow: /teileklar/termine
-Disallow: /teileklar/gutscheine
-
-# KI-Crawler ausdruecklich erlaubt (Agentur-Seite will zitiert werden)
-User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
 
 Sitemap: https://www.nexifyai.de/sitemap.xml

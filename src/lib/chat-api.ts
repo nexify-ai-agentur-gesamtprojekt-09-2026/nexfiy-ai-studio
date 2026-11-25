@@ -601,7 +601,8 @@ async function rufeAnbieter(
     beende();
     // Diagnose: Name und Kurztext des Wurfs, kein Inhalt und kein Schlüssel.
     console.error("chat_anbieter_wurf", {
-      name: e && typeof e === "object" && "name" in e ? String((e as { name?: unknown }).name) : null,
+      name:
+        e && typeof e === "object" && "name" in e ? String((e as { name?: unknown }).name) : null,
       text: String(e).slice(0, 200),
     });
     throw fehler();

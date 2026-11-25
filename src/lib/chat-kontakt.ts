@@ -41,7 +41,8 @@ export function kontaktAntwort(nachricht: string): string | null {
   return teile.join(" ");
 }
 
-const SITZ_WORT = /\b(sitz\w*|firmensitz|hauptsitz|standort|anschrift|postanschrift|venlo|niederlande[n]?)\b/iu;
+const SITZ_WORT =
+  /\b(sitz\w*|firmensitz|hauptsitz|standort|anschrift|postanschrift|venlo|niederlande[n]?)\b/iu;
 const ADRESSE_WORT = /\badresse\b/iu;
 const WO_FRAGE = /\bwo\b[^.!?]{0,40}\b(nexify|sie|euch|ihr|unternehmen|firma|agentur)\b/iu;
 const ORT_FRAGE = /\b(wo|wohin|woher|welche[rsn]?|lautet|nenn\w*|sitzt|ansässig|befindet)\b/iu;

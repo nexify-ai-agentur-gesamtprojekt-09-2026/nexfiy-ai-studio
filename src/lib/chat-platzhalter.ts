@@ -25,7 +25,8 @@ const TEL_PLATZHALTER =
  * dann etwa ein falsches Länderkennzeichen. Erkannt wird der unverwechselbare Rumpf 133 188 56,
  * ersetzt wird der gesamte Ausdruck durch die veröffentlichte Nummer.
  */
-const TEL_FRAGMENT = /(?:\+?\d{1,3}[\s/-]*)?(?:\[PERSON_NAME\][\s/-]*)?(?:6[\s/-]*)?133[\s/-]*188[\s/-]*56/g;
+const TEL_FRAGMENT =
+  /(?:\+?\d{1,3}[\s/-]*)?(?:\[PERSON_NAME\][\s/-]*)?(?:6[\s/-]*)?133[\s/-]*188[\s/-]*56/g;
 
 /**
  * Sitzangaben: Der Router maskiert Ortsnamen, das Modell rät dann einen Ort (gemessen: „Vaals“,

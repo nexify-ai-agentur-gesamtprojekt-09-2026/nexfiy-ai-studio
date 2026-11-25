@@ -897,7 +897,10 @@ describe("handleChat: Anbieteraufruf", () => {
   });
 
   it("folgt keiner Weiterleitung des Anbieters: manual plus 3xx gilt als Fehler", async () => {
-    const fetchMock = vi.fn(async () => new Response("", { status: 302, headers: { location: "https://beispiel.invalid/" } }));
+    const fetchMock = vi.fn(
+      async () =>
+        new Response("", { status: 302, headers: { location: "https://beispiel.invalid/" } }),
+    );
     vi.stubGlobal("fetch", fetchMock);
     const res = await handleChat(anfrage({ message: "Frage" }), bindings(db));
     expect(res.status).toBe(502);
