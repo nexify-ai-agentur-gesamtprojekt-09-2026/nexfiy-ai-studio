@@ -43,7 +43,12 @@ export function NexifyFooter() {
         </div>
         <div className={"footer-main"}>
           <div className={"footer-brand-block"}>
-            <a aria-label="Zur Startseite" className={"brand"} href="/" {...here("/")}>
+            <a
+              aria-label="NeXify AI Chat it. Automate it. – zur Startseite"
+              className={"brand"}
+              href="/"
+              {...here("/")}
+            >
               <span className={"nx-logo"} data-groesse="s">
                 <span className={"nx-logo-figur"} aria-hidden="true">
                   <img

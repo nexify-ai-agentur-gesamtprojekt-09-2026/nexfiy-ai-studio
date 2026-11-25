@@ -240,3 +240,49 @@
   margin-inline: 0;
   padding-inline: var(--layout-page-padding);
 }
+
+/**
+ * 2026-11-25, 14:40 Uhr: Kontrast der Kopf-Schaltflaeche "Projektgespraech anfragen".
+ *
+ * Eigene Messung am gerenderten Pixel (nicht am Stylesheet): Text rgb(236,239,236) auf
+ * durchscheinendem Untergrund rgb(102,110,112) = 3,84:1 — Soll 4,5:1 (WCAG 2.2, 1.4.3).
+ * Ursache: --as-switch-body ist eine Glasflaeche (--as-glass-clear), der Kontrast haengt
+ * damit vom Seitenhintergrund ab; auf der Startseite 14,6:1, auf /leistungen 3,84:1.
+ * Die Flaeche wird deshalb nahezu deckend; die Rueckmeldung bei Hover/Druck kommt weiter
+ * ueber den Schatten. Bei 0,94 Deckung bleibt der schlechteste Fall ueber 12:1.
+ */
+#atelier .site-header .header-cta {
+  background-color: rgba(18, 20, 19, 0.94);
+}
+#atelier .site-header .header-cta:is(:hover, :focus-visible) {
+  background-color: rgba(18, 20, 19, 0.97);
+}
+#atelier .site-header .header-cta:active {
+  background-color: rgba(18, 20, 19, 0.99);
+}
+
+/**
+ * 2026-11-25, 14:40 Uhr: Feldgrenzen der Formulare (WCAG 2.2, 1.4.11).
+ *
+ * Gemessen auf /kontakt: Fuellfarbe = Seitenhintergrund rgb(27,30,29), Randfarbe transparent,
+ * einziger Hinweis ein Inset-Strich mit 1,11:1 — Soll 3:1 fuer die Feldgrenze.
+ * Ein 1-px-Rand mit 45 % Helligkeit ergibt gemischt etwa rgb(121,124,122) auf rgb(27,30,29) = 3,9:1.
+ */
+:root:root
+  #atelier
+  .tk-form
+  :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  border: 1px solid rgba(236, 239, 236, 0.45);
+}
+
+/**
+ * 2026-11-25, 14:40 Uhr: Links im Fliesstext (WCAG 2.2, 1.4.1).
+ *
+ * Gemessen auf /datenschutz: Linkfarbe rgb(168,199,106) gegen Fliesstext rgb(205,211,207)
+ * = 1,25:1, ohne Unterstreichung — Farbe allein ist kein zulaessiges Merkmal.
+ */
+:root:root #atelier main :is(p, li) > a[href]:not([class]) {
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
+}

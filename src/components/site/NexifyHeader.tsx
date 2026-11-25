@@ -29,7 +29,12 @@ export function NexifyHeader() {
   }, [mobilOffen, mobileSummary]);
   return (
     <header className={"site-header"}>
-      <a aria-label="NeXify AI · Startseite" className={"brand"} href="/" {...here("/")}>
+      <a
+        aria-label="NeXify AI Chat it. Automate it. – Startseite"
+        className={"brand"}
+        href="/"
+        {...here("/")}
+      >
         <span className={"nx-logo"}>
           <span className={"nx-logo-figur"} aria-hidden="true">
             <img

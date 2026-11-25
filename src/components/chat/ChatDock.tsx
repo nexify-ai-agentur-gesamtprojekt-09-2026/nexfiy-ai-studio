@@ -231,6 +231,23 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
     return () => window.removeEventListener("keydown", beiTaste);
   }, [dialog, schliesse]);
 
+  // Nach dem Schliessen zurueck auf den Ausloeser (WCAG 2.2, 2.4.3). Ohne das bleibt der Fokus
+  // im geschlossenen Panel bzw. auf <body>; Tastaturnutzende beginnen wieder am Seitenanfang.
+  const warOffen = useRef(false);
+  useEffect(() => {
+    if (offen) {
+      warOffen.current = true;
+      return;
+    }
+    if (!warOffen.current) return;
+    warOffen.current = false;
+    const aktiv = document.activeElement;
+    const imPanel =
+      aktiv === null || aktiv === document.body || panel.current?.contains(aktiv) === true;
+    if (!imPanel) return;
+    ausloeser.current?.focus({ preventScroll: true });
+  }, [offen, ausloeser]);
+
   // Fokusfalle nur im Dialog.
   const beiPanelTaste = (ereignis: ReactKeyboardEvent<HTMLElement>) => {
     if (!dialog || ereignis.key !== "Tab" || !panel.current) return;
@@ -332,7 +349,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
           type="button"
           id="nexify-chat-ausloeser"
           className="nxc-ausloeser"
-          aria-haspopup="dialog"
+          aria-haspopup={dialog ? "dialog" : undefined}
           aria-expanded="false"
           aria-controls={CHAT_PANEL_ID}
           onClick={oeffne}
