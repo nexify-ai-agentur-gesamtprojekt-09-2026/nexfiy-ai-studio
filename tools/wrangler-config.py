@@ -147,6 +147,13 @@ def neu_schreiben(output_dir, ziel):
     # (developers.cloudflare.com/workers/wrangler/configuration/, "Top-level only keys": keep_vars).
     aus["keep_vars"] = True
 
+    # 2026-11-25 (Europe/Berlin), B-270: keep_vars hat den Klartext-Schalter CHAT_AKTIV NICHT erhalten,
+    # weil er nicht im Dashboard, sondern in der Version selbst stand (gemessen: Version b6f2b156 hatte
+    # CHAT_AKTIV='an', Version e1e4f96c nach Deploy nicht mehr -> /api/chat 503 "chat_abgeschaltet").
+    # Ein funktionskritischer Schalter gehört deshalb in die erzeugte Konfiguration, nicht in den
+    # flüchtigen Versionszustand. Abschaltbar bleibt er über die Umgebung (CHAT_AKTIV=aus beim Deploy).
+    aus["vars"] = {"CHAT_AKTIV": os.environ.get("CHAT_AKTIV", "an")}
+
     with open(ziel, "w", encoding="utf-8") as fh:
         json.dump(aus, fh, indent=2)
     print(f"WRANGLER-KONFIG: {ziel} geschrieben ({len(verworfen)} Schlüssel verworfen)")
