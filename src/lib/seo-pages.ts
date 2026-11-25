@@ -63,8 +63,7 @@ export const SEITEN: Seite[] = [
     datei: "ki-beratung.tsx",
     titel: `KI-Beratung für Unternehmen · ${BERATUNG_PREIS_NETTO} € netto je Tag`,
     kurz: "KI-Beratung",
-    beschreibung:
-      `KI-Beratung, Prozessanalyse und Coaching für Unternehmen: individuelle KI-Strategie mit NeXify AI. ${BERATUNG_PREIS_NETTO} € netto pro Beratungstag.`,
+    beschreibung: `KI-Beratung, Prozessanalyse und Coaching für Unternehmen: individuelle KI-Strategie mit NeXify AI. ${BERATUNG_PREIS_NETTO} € netto pro Beratungstag.`,
     typ: "info",
     index: true,
   },
