@@ -24,10 +24,8 @@ export const SITE_FILMS: Record<SiteFilmId, SiteFilmData> = {
     alt: "Markeninszenierung: Pascal, NeX und AIFly ORACLE im Eingangsbereich eines Gebäudes",
     transcript:
       "Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität und zu einem fairen Preis. Erzählen Sie mir, woran Sie gerade arbeiten.",
-    // 2026-11-22: Der Ton enthält ein unbelegtes Qualitäts- und Preisversprechen. Ein geändertes
-    // Transkript würde vom Gesprochenen abweichen; deshalb bleibt es wortgleich und der Film aus.
-    ausgeblendet:
-      "Unbelegtes Qualitäts- und Preisversprechen im Ton; erst nach Neuvertonung durch Pascal wieder zeigen.",
+    // 2026-11-25, 10:08 Uhr: Pascal entscheidet, dass der Studiofilm sichtbar ist ("Ist doch alles da").
+    // Der Ton ist seine eigene Aussage; das Transkript bleibt wortgleich, damit es nicht abweicht.
   },
   angebot: {
     src: "/site-assets/e3638738b1263f00.mp4",

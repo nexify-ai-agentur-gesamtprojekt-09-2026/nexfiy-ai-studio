@@ -8,8 +8,8 @@ const ausgeblendet = FILME.filter((id) => SITE_FILMS[id].ausgeblendet);
 const sichtbar = FILME.filter((id) => !SITE_FILMS[id].ausgeblendet);
 
 describe("SiteFilm", () => {
-  it("der Studiofilm ist ausgeblendet, sein Transkript bleibt wortgleich mit dem Ton", () => {
-    expect(ausgeblendet).toContain("studio");
+  it("der Studiofilm ist sichtbar (Entscheidung 25.11.), sein Transkript bleibt wortgleich mit dem Ton", () => {
+    expect(sichtbar).toContain("studio");
     expect(SITE_FILMS.studio.transcript).toBe(
       "Guten Tag, ich bin Pascal. Wir bauen Websites, Shops und KI-Lösungen in höchster Qualität und zu einem fairen Preis. Erzählen Sie mir, woran Sie gerade arbeiten.",
     );
