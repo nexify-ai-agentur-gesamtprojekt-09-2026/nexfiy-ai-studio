@@ -56,6 +56,36 @@ export const TEMPORARY_REDIRECTS: Record<string, string> = {
  * `/Registrieren`, `/Preise`). Alle Schlüssel oben sind klein geschrieben; Ziele bleiben, wie sie
  * stehen. `null`: keine Weiterleitung.
  */
+
+/**
+ * 2026-11-25 10:35 (Europe/Berlin): Alte Adressfamilien der frueheren Domain nexifyai.cloud.
+ * Warum: nexifyai.cloud leitet seit dem Umzug auf www.nexifyai.de um, aber /wissen/<slug> und
+ * /stadt/<slug> existieren dort nicht. Google folgt dem 301 und landet auf einer 404 — gemessen
+ * am 25.11.2026 lieferten /wissen/ki-fuer-handwerker, /stadt/ki-agentur-heidelberg und drei weitere
+ * 404, obwohl Google sie noch kennt. Diese Muster holen Besucher und Suchindex auf die zustaendige
+ * Seite, statt sie ins Leere zu schicken.
+ * Kein 410: die Inhalte sind nicht widerrufen, sie sind nur noch nicht wiederhergestellt.
+ */
+export const LEGACY_PREFIXES: { praefix: string; ziel: string }[] = [
+  { praefix: "/wissen/", ziel: "/wissen" },
+  { praefix: "/stadt/", ziel: "/regionen" },
+  { praefix: "/blog/", ziel: "/wissen" },
+  { praefix: "/ratgeber/", ziel: "/wissen" },
+];
+
+/** Pfade, die trotz Praefix eine eigene Seite haben und nicht umgeleitet werden duerfen. */
+const LEGACY_AUSNAHMEN = new Set(["/wissen/projekt-vorbereiten"]);
+
+/** 301 fuer alte Adressfamilien; `null`, wenn kein Muster greift. */
+export function legacyWeiterleitungFuer(pfad: string): { ziel: string; status: 301 } | null {
+  const p = pfad.toLowerCase().replace(/\/+$/, "") || "/";
+  if (LEGACY_AUSNAHMEN.has(p)) return null;
+  for (const { praefix, ziel } of LEGACY_PREFIXES) {
+    if (p.startsWith(praefix) && p.length > praefix.length) return { ziel, status: 301 };
+  }
+  return null;
+}
+
 export function weiterleitungFuer(pfad: string): { ziel: string; status: 301 | 302 } | null {
   const schluessel = pfad.toLowerCase();
   const dauerhaft = PERMANENT_REDIRECTS[schluessel];
