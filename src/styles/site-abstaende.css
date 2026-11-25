@@ -1,5 +1,6 @@
 /** Innenabstaende, eine Skala fuer alle Seiten. Additiv: captured.css bleibt unveraendert.
- *  Dreifache Klassenselektorien gewinnen unabhaengig von der Ladereihenfolge. */
+ *  captured.css setzt Abschnittsabstaende ueber #atelier-Regeln; deshalb steht #atelier auch hier,
+ *  sonst gewinnt die Altregel unabhaengig von der Ladereihenfolge. */
 :root {
   --nx-sec: clamp(56px, 6.5vw, 96px);
   --nx-gut: clamp(16px, 4.2vw, 72px);
@@ -7,32 +8,37 @@
 }
 
 /* Abschnitte: ein Rhythmus statt 114,4 px und 64 px gemischt */
-.hc-section.hc-section.hc-section {
+#atelier .hc-section.hc-section,
+#atelier .home-concept .hc-section.hc-section {
   padding-block: var(--nx-sec);
   padding-inline: var(--nx-gut);
 }
-.hc-intro.hc-intro.hc-intro {
+#atelier .hc-intro.hc-intro {
   padding-block: calc(var(--nx-sec) * 0.55);
   padding-inline: var(--nx-gut);
 }
 
-/* Karten: ein Innenabstand statt 32 px und 24 px gemischt */
-.hc-service-detail.hc-service-detail.hc-service-detail,
-.hc-product.hc-product.hc-product,
-.hc-rate.hc-rate.hc-rate,
-.is-in.is-in.is-in {
+/* Karten: ein Innenabstand statt 32 px, 28 px und 24 px gemischt */
+#atelier .hc-service-detail,
+#atelier .hc-product,
+#atelier .hc-rate,
+#atelier .hc-costs,
+#atelier .hc-finish-next,
+#atelier .is-in {
   padding: var(--nx-card);
+}
+#atelier .hc-section-heading,
+#atelier .hc-finish-heading {
+  padding: 0 0 20px;
 }
 
 /* Galerie-Karten: Text hatte links 0 px Innenabstand */
-.hc-gallery-card.hc-gallery-card.hc-gallery-card {
+#atelier .hc-gallery-card.hc-gallery-card {
   padding-inline: 24px;
   padding-block: 20px 24px;
 }
 
-/* Auf kleinen Geraeten etwas ruhiger, aber nie unter 16 px */
 @media (max-width: 640px) {
-  :root { --nx-card: 20px; }
-  .hc-section.hc-section.hc-section { padding-block: 44px; padding-inline: 18px; }
-  .hc-gallery-card.hc-gallery-card.hc-gallery-card { padding-inline: 18px; }
+  :root { --nx-card: 20px; --nx-sec: 44px; --nx-gut: 18px; }
+  #atelier .hc-gallery-card.hc-gallery-card { padding-inline: 18px; }
 }

@@ -31,12 +31,15 @@ export function suggestionsFor(pathname: string): PageSuggestion[] {
 }
 
 /**
- * Frühere Shop-Adressen dieser Domain (Inhaberentscheidung 22.11.2026): sie gibt es nicht mehr.
+ * Stillgelegte Pfade dieser Domain (Inhaberentscheidung 22.11.2026): alte Shop-Adressen
+ * (/teileklar) und der ehemalige Kundenauftritt (/studienkolleg) gibt es hier nicht mehr.
+ * Studienkolleg liegt als eigener Mandant auf studienkolleg-aachen.online; eine Weiterleitung
+ * auf fremde Domains ist untersagt, daher 404 mit noindex statt Umleitung.
  * Server und Fehlerseite fragen dieselbe Regel ab, damit beide denselben Pfadbereich meinen.
  * Auch mit mehreren Schrägstrichen am Anfang, die Browser und Proxys durchreichen.
  */
 export function isRetiredPath(pathname: string): boolean {
-  return /^\/+teileklar(\/|$)/i.test(pathname);
+  return /^\/+teileklar(\/|$)/i.test(pathname) || /^\/+studienkolleg(\/|$)/i.test(pathname);
 }
 
 /** Shortens long or encoded paths for display without breaking the layout. */

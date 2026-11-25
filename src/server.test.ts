@@ -78,6 +78,29 @@ describe("frühere Shop-Adressen (Inhaberentscheidung 22.11.2026)", () => {
     expect(start.headers.get("x-robots-tag")).toBeNull();
   });
 
+  it.each([
+    "/studienkolleg",
+    "/studienkolleg/",
+    "/studienkolleg/anmeldung",
+    "/studienkolleg?x=1",
+    "/studienkolleg/?utm_source=x",
+    "//studienkolleg",
+    "/STUDIENKOLLEG",
+    "/StudienKolleg/",
+  ])("%s ist 404, noindex und ohne Weiterleitung", async (pfad) => {
+    const antwort = await abruf(pfad);
+    expect(antwort.status).toBe(404);
+    expect(antwort.headers.get("x-robots-tag")).toBe("noindex");
+    expect(antwort.headers.get("location")).toBeNull();
+    expect(antwort.headers.get("refresh")).toBeNull();
+  });
+
+  it("reicht Querystring und Schrägstrich-Variante von /studienkolleg nicht an die Seitenausgabe weiter", async () => {
+    gesehen.length = 0;
+    await abruf("/studienkolleg/?email=erika%40firma.de");
+    expect(gesehen).toEqual(["/studienkolleg"]);
+  });
+
   it("kennt keine Weiterleitungsregel mehr, weder im Worker noch in public/_redirects", async () => {
     const { PERMANENT_REDIRECTS, TEMPORARY_REDIRECTS } = await import("./lib/server-routing");
     const alle = { ...PERMANENT_REDIRECTS, ...TEMPORARY_REDIRECTS };
