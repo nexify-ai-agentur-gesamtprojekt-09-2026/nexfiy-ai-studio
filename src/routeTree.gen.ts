@@ -15,6 +15,7 @@ import { Route as BarrierefreiheitRouteImport } from './routes/barrierefreiheit'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KiBeratungRouteImport } from './routes/ki-beratung'
 import { Route as KiHinweiseRouteImport } from './routes/ki-hinweise'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
@@ -68,6 +69,11 @@ const DatenschutzRoute = DatenschutzRouteImport.update({
 const ImpressumRoute = ImpressumRouteImport.update({
   id: '/impressum',
   path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KiBeratungRoute = KiBeratungRouteImport.update({
+  id: '/ki-beratung',
+  path: '/ki-beratung',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KiHinweiseRoute = KiHinweiseRouteImport.update({
@@ -200,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/ki-beratung': typeof KiBeratungRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/ki-beratung': typeof KiBeratungRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -265,6 +273,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/datenschutz': typeof DatenschutzRoute
   '/impressum': typeof ImpressumRoute
+  '/ki-beratung': typeof KiBeratungRoute
   '/ki-hinweise': typeof KiHinweiseRoute
   '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/datenschutz'
     | '/impressum'
+    | '/ki-beratung'
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
@@ -331,6 +341,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/datenschutz'
     | '/impressum'
+    | '/ki-beratung'
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/datenschutz'
     | '/impressum'
+    | '/ki-beratung'
     | '/ki-hinweise'
     | '/kontakt'
     | '/leistungen'
@@ -396,6 +408,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   DatenschutzRoute: typeof DatenschutzRoute
   ImpressumRoute: typeof ImpressumRoute
+  KiBeratungRoute: typeof KiBeratungRoute
   KiHinweiseRoute: typeof KiHinweiseRoute
   KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
@@ -464,6 +477,13 @@ declare module '@tanstack/react-router' {
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ki-beratung': {
+      id: '/ki-beratung'
+      path: '/ki-beratung'
+      fullPath: '/ki-beratung'
+      preLoaderRoute: typeof KiBeratungRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ki-hinweise': {
@@ -644,6 +664,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   DatenschutzRoute: DatenschutzRoute,
   ImpressumRoute: ImpressumRoute,
+  KiBeratungRoute: KiBeratungRoute,
   KiHinweiseRoute: KiHinweiseRoute,
   KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,

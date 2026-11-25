@@ -2,7 +2,7 @@
  * Inquiry form (contact): field rules, German error messages and the e-mail hand-off.
  * Pure functions only, so the rules are testable and the page markup stays a thin view.
  */
-export type InquiryKind = "contact";
+export type InquiryKind = "contact" | "beratung";
 
 export interface InquiryValues {
   name: string;
@@ -40,6 +40,14 @@ const PROFILES: Record<InquiryKind, InquiryProfile> = {
     subject: (values) =>
       `Projektanfrage von ${values.name}${values.company ? ` (${values.company})` : ""}`,
     intro: "Guten Tag Pascal,\n\nich möchte mein Vorhaben mit Ihnen besprechen.",
+  },
+  beratung: {
+    companyRequired: true,
+    companyLabel: "Unternehmen",
+    subject: (values) =>
+      `Beratungsanfrage von ${values.name}${values.company ? ` (${values.company})` : ""}`,
+    intro:
+      "Guten Tag Pascal,\n\nich interessiere mich für einen Beratungstag (NeXify AI Consulting).",
   },
 };
 

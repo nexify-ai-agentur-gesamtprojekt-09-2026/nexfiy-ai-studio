@@ -58,6 +58,16 @@ export const SEITEN: Seite[] = [
     index: true,
   },
   {
+    pfad: "/ki-beratung",
+    datei: "ki-beratung.tsx",
+    titel: "KI-Beratung für Unternehmen ab 449 € netto/Tag",
+    kurz: "KI-Beratung",
+    beschreibung:
+      "KI-Beratung, Prozessanalyse und Coaching für Unternehmen: individuelle KI-Strategie mit NeXify AI. 449 € netto pro Beratungstag.",
+    typ: "info",
+    index: true,
+  },
+  {
     pfad: "/leistungen",
     datei: "leistungen.tsx",
     titel: "Leistungen: Website, System, Kampagne",

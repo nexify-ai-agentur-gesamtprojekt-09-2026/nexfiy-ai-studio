@@ -101,14 +101,14 @@ export const datenschutzSections: LegalSection[] = [
         absenden. Verarbeitet werden Name, E-Mail-Adresse, optional der Unternehmensname und Ihre
         Nachricht. Die Anfrage wird in einer Datenbank bei Cloudflare (Cloudflare, Inc.) gespeichert
         und per E-Mail an uns zugestellt; für den Versand setzen wir Resend (Resend, Inc., USA) ein.
-        Beides sind Auftragsverarbeiter nach Art. 28 DSGVO. Für die Zustellung in die USA stützen wir
-        uns auf die Standardvertragsklauseln nach Art. 46 Abs. 2 DSGVO.
+        Beides sind Auftragsverarbeiter nach Art. 28 DSGVO. Für die Zustellung in die USA stützen
+        wir uns auf die Standardvertragsklauseln nach Art. 46 Abs. 2 DSGVO.
       </p>,
       <p key="p3">
-        Zur Abwehr von Missbrauch speichern wir zusätzlich einen gekürzten Prüfwert Ihrer
-        IP-Adresse (SHA-256, 24 Zeichen) und den Zeitpunkt des Eingangs; die vollständige
-        IP-Adresse wird nicht gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO für die
-        Bearbeitung Ihrer Anfrage und Art. 6 Abs. 1 lit. f DSGVO für den Missbrauchsschutz.
+        Zur Abwehr von Missbrauch speichern wir zusätzlich einen gekürzten Prüfwert Ihrer IP-Adresse
+        (SHA-256, 24 Zeichen) und den Zeitpunkt des Eingangs; die vollständige IP-Adresse wird nicht
+        gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO für die Bearbeitung Ihrer
+        Anfrage und Art. 6 Abs. 1 lit. f DSGVO für den Missbrauchsschutz.
       </p>,
     ],
   },

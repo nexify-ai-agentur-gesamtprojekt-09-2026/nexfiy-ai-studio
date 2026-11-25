@@ -41,8 +41,14 @@
 }
 
 @media (max-width: 640px) {
-  :root { --nx-card: 20px; --nx-sec: 44px; --nx-gut: 18px; }
-  #atelier .hc-gallery-card.hc-gallery-card { padding-inline: 18px !important; }
+  :root {
+    --nx-card: 20px;
+    --nx-sec: 44px;
+    --nx-gut: 18px;
+  }
+  #atelier .hc-gallery-card.hc-gallery-card {
+    padding-inline: 18px !important;
+  }
 }
 
 /* Textkoerper in Leistungskarten: hatte links 0 px, Text klebte am Rand */
@@ -50,12 +56,20 @@
   padding: 8px 32px 32px !important;
 }
 /* Abschluss-Karte und Hero-Buehne auf dieselbe Skala */
-#atelier .hc-finish-next { padding: var(--nx-card) !important; }
-#atelier .identity-scene { padding: clamp(32px, 4vw, 64px) var(--nx-gut) !important; }
+#atelier .hc-finish-next {
+  padding: var(--nx-card) !important;
+}
+#atelier .identity-scene {
+  padding: clamp(32px, 4vw, 64px) var(--nx-gut) !important;
+}
 
 @media (max-width: 640px) {
-  #atelier .hc-service-body { padding: 6px 20px 20px !important; }
-  #atelier .identity-scene { padding: 24px 18px !important; }
+  #atelier .hc-service-body {
+    padding: 6px 20px 20px !important;
+  }
+  #atelier .identity-scene {
+    padding: 24px 18px !important;
+  }
 }
 
 /* Galerie-Karten: Textblock unten anschlagen. Vorher blieben bis zu 151 px Leerraum
@@ -67,7 +81,10 @@
 /* 2026-11-25 11:20 (Europe/Berlin), V33: ALLE Bilder sind randlos - Kartenrand gleich Bildrand.
    Der Innenabstand bleibt ausschliesslich fuer den TEXT bestehen. Gilt seitenweit (nicht nur #atelier),
    fuer Galerie-Karten (20/24 px), Produktkarten (32 px) und Bildplatten (5-px-Rahmen). */
-.hc-gallery-card, .hc-product { overflow: hidden !important; }
+.hc-gallery-card,
+.hc-product {
+  overflow: hidden !important;
+}
 
 /* Galerie-Karten: Medium laeuft ueber die Kante, Text behaelt 24 px Innenabstand */
 .hc-gallery-card > .identity-media,
@@ -82,7 +99,9 @@
 .hc-gallery-card .identity-media,
 .hc-gallery-card img,
 .hc-gallery-card video,
-.hc-gallery-card picture { border-radius: 0 !important; }   /* Rundung kommt von der Karte */
+.hc-gallery-card picture {
+  border-radius: 0 !important;
+} /* Rundung kommt von der Karte */
 
 /* Produktkarten: Bild oben randlos, Textabstand (24 px) unveraendert */
 .hc-product > .hc-product-art {
@@ -90,11 +109,16 @@
   width: calc(100% + 64px) !important;
   border-radius: 0 !important;
 }
-.hc-product-art img, .hc-product-art video { border-radius: 0 !important; }
+.hc-product-art img,
+.hc-product-art video {
+  border-radius: 0 !important;
+}
 
 /* Bildplatten: der 5-px-Rahmen entfaellt ganz - die Platte enthaelt nur das Bild
    (kein figcaption), also traegt sie keinen Innenabstand mehr. */
-.hc-plate { padding: 0 !important; }
+.hc-plate {
+  padding: 0 !important;
+}
 .hc-plate > img,
 .hc-plate > video,
 .hc-plate > picture,
@@ -111,9 +135,15 @@
   .hc-gallery-card > figure,
   .hc-gallery-card > picture,
   .hc-gallery-card > img,
-  .hc-gallery-card > video { margin: -20px -18px auto !important; width: calc(100% + 36px) !important; }
+  .hc-gallery-card > video {
+    margin: -20px -18px auto !important;
+    width: calc(100% + 36px) !important;
+  }
 
-  .hc-product > .hc-product-art { margin: -20px -20px 0 !important; width: calc(100% + 40px) !important; }
+  .hc-product > .hc-product-art {
+    margin: -20px -20px 0 !important;
+    width: calc(100% + 40px) !important;
+  }
 }
 #atelier .hc-gallery-card > .hc-gallery-link {
   display: contents !important;
@@ -133,4 +163,68 @@
 }
 #atelier .hc-gallery-card > .hc-gallery-link > :last-child {
   padding-bottom: 0 !important;
+}
+
+/* NeXify AI Consulting — Sektion auf der Startseite (25.11.2026) */
+.kb-teaser {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+
+@media (min-width: 60rem) {
+  .kb-teaser {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+  }
+}
+
+.kb-teaser h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0.5rem 0 1rem;
+  max-width: 24ch;
+}
+
+.kb-teaser p {
+  max-width: 60ch;
+}
+
+.kb-teaser .kb-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, #ffffff 62%, transparent);
+}
+
+.kb-teaser .kb-gross {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0.35rem 0 0;
+}
+
+.kb-teaser .kb-gross span {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: color-mix(in oklab, #ffffff 60%, transparent);
+}
+
+.kb-teaser .kb-klein {
+  font-size: 0.9rem;
+  color: color-mix(in oklab, #ffffff 64%, transparent);
+  margin: 0.4rem 0 0;
+}
+
+.kb-teaser-preis {
+  display: grid;
+  align-content: center;
+  gap: 0.35rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid #c0ee38;
+  border-radius: 1rem;
+  background: color-mix(in oklab, #c0ee38 7%, #1b1e1d);
 }

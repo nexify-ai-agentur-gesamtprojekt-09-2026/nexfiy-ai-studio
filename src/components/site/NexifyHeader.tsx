@@ -53,6 +53,9 @@ export function NexifyHeader() {
         <a href="/leistungen" {...here("/leistungen")}>
           Leistungen
         </a>
+        <a href="/ki-beratung" {...here("/ki-beratung")}>
+          KI-Beratung
+        </a>
         <details className={"product-navigation"} open={openMenu === "products"}>
           <summary
             ref={productsSummary}
@@ -330,6 +333,9 @@ export function NexifyHeader() {
           <div className={"mobile-primary-links"}>
             <a href="/leistungen" {...here("/leistungen")}>
               Leistungen
+            </a>
+            <a href="/ki-beratung" {...here("/ki-beratung")}>
+              KI-Beratung
             </a>
             <a href="/wissen" {...here("/wissen")}>
               Arbeitsweise

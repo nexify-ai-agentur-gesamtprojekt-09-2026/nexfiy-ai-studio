@@ -34,8 +34,12 @@ describe("Leitplanken der Modellantwort", () => {
   });
 
   it("erkennt Beträge in Worten auch nach der Begrenzung", () => {
-    expect(hasUnapprovedAmount("Das kostet eine Million zweihunderttausend Euro.", new Set())).toBe(true);
-    expect(hasUnapprovedAmount("Zwei drei vier fünf sechs sieben acht neun Euro pro Monat.", new Set())).toBe(true);
+    expect(hasUnapprovedAmount("Das kostet eine Million zweihunderttausend Euro.", new Set())).toBe(
+      true,
+    );
+    expect(
+      hasUnapprovedAmount("Zwei drei vier fünf sechs sieben acht neun Euro pro Monat.", new Set()),
+    ).toBe(true);
   });
 
   it("lässt keinen nicht freigegebenen Betrag zum Besucher", () => {

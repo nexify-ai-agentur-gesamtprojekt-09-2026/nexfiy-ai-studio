@@ -115,6 +115,7 @@ function Index() {
                 </li>
               </ol>
             </section>
+            <ImportedSectionKiBeratung />
             <ImportedSectionEigeneWerkzeugeFR />
             <section
               id="budget"
@@ -718,6 +719,59 @@ function ImportedSectionWasKNnenWir() {
             </div>
           </details>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function ImportedSectionKiBeratung() {
+  return (
+    <section
+      id="ki-beratung"
+      className={"hc-section hc-container kb-teaser"}
+      aria-labelledby="hc-beratung-title"
+    >
+      <div className={"kb-teaser-text"}>
+        <span className={"hc-kicker"}>NeXify AI Consulting</span>
+        <h2 id="hc-beratung-title">Ihre KI-Zukunft beginnt mit einem guten Plan.</h2>
+        <p>
+          Sie möchten künstliche Intelligenz in Ihrem Unternehmen einsetzen, wissen aber noch nicht,
+          wo Sie anfangen sollen? Gemeinsam analysieren wir Ihre Abläufe, identifizieren Chancen und
+          entwickeln eine Strategie, die zu Ihrem Unternehmen passt.
+        </p>
+        <p>
+          Ob Geschäftsführung, einzelne Abteilungen oder Ihr gesamtes Team: Wir unterstützen Sie mit
+          individueller Beratung, praxisorientiertem Coaching und konkreten Handlungsempfehlungen.
+        </p>
+        <div className={"identity-links"}>
+          <a
+            className={"nexify-control primary-button identity-primary-link"}
+            data-variant="primary"
+            href="/ki-beratung"
+          >
+            <span>KI-Beratung entdecken</span>
+            <span aria-hidden="true" className={"identity-primary-arrow"}>
+              →
+            </span>
+          </a>
+          <a
+            className={"nexify-control secondary-button identity-secondary-link"}
+            data-variant="secondary"
+            href="/ki-beratung#anfrage"
+          >
+            Beratungstag anfragen
+          </a>
+        </div>
+      </div>
+      <div className={"kb-teaser-preis"}>
+        <span className={"kb-kicker"}>Beratungstag</span>
+        <p className={"kb-gross"}>
+          449 €<span> netto</span>
+        </p>
+        <p className={"kb-klein"}>
+          Professionelle KI-Beratung pro Tag, zuzüglich gegebenenfalls anwendbarer Umsatzsteuer.
+        </p>
+        <p className={"kb-klein"}>Verstehen. Planen. Erfolgreich umsetzen.</p>
       </div>
     </section>
   );

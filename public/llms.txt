@@ -1,41 +1,48 @@
 # NeXify AI
 
-> Agentur fuer Websites, Apps, Shops und KI-Automatisierung. Ein Ansprechpartner,
-> klarer Umfang, Umsetzung aus einer Hand. Sitz Venlo (NL), Projektbetreuung im DACH-Raum.
+> Agentur fuer Websites, Apps und KI-Automatisierung. Ein Ansprechpartner, klarer Umfang,
+> Umsetzung aus einer Hand. Sitz Venlo (Niederlande), Projektbetreuung im DACH-Raum.
 
 ## Seiten
 
-- [https://www.nexifyai.de/](https://www.nexifyai.de/)
-- [https://www.nexifyai.de/anmelden](https://www.nexifyai.de/anmelden)
-- [https://www.nexifyai.de/barrierefreiheit](https://www.nexifyai.de/barrierefreiheit)
-- [https://www.nexifyai.de/cookies](https://www.nexifyai.de/cookies)
-- [https://www.nexifyai.de/datenschutz](https://www.nexifyai.de/datenschutz)
-- [https://www.nexifyai.de/impressum](https://www.nexifyai.de/impressum)
-- [https://www.nexifyai.de/ki-hinweise](https://www.nexifyai.de/ki-hinweise)
-- [https://www.nexifyai.de/kontakt](https://www.nexifyai.de/kontakt)
-- [https://www.nexifyai.de/leistungen](https://www.nexifyai.de/leistungen)
-- [https://www.nexifyai.de/leistungen/agenten-automatisierung](https://www.nexifyai.de/leistungen/agenten-automatisierung)
-- [https://www.nexifyai.de/leistungen/apps-portale](https://www.nexifyai.de/leistungen/apps-portale)
-- [https://www.nexifyai.de/leistungen/websites](https://www.nexifyai.de/leistungen/websites)
-- [https://www.nexifyai.de/leistungsumfang](https://www.nexifyai.de/leistungsumfang)
-- [https://www.nexifyai.de/loesungen](https://www.nexifyai.de/loesungen)
-- [https://www.nexifyai.de/portale](https://www.nexifyai.de/portale)
-- [https://www.nexifyai.de/preise-ablauf](https://www.nexifyai.de/preise-ablauf)
-- [https://www.nexifyai.de/produkte/aifly-oracle](https://www.nexifyai.de/produkte/aifly-oracle)
-- [https://www.nexifyai.de/produkte/api](https://www.nexifyai.de/produkte/api)
-- [https://www.nexifyai.de/produkte/nex-agentic-aifly](https://www.nexifyai.de/produkte/nex-agentic-aifly)
-- [https://www.nexifyai.de/produkte/nex2fly](https://www.nexifyai.de/produkte/nex2fly)
-- [https://www.nexifyai.de/produkte/one](https://www.nexifyai.de/produkte/one)
-- [https://www.nexifyai.de/produkte/skills-mcp](https://www.nexifyai.de/produkte/skills-mcp)
-- [https://www.nexifyai.de/regionen](https://www.nexifyai.de/regionen)
-- [https://www.nexifyai.de/regionen/$land](https://www.nexifyai.de/regionen/$land)
-- [https://www.nexifyai.de/unternehmen](https://www.nexifyai.de/unternehmen)
-- [https://www.nexifyai.de/vertragsgrundlagen](https://www.nexifyai.de/vertragsgrundlagen)
-- [https://www.nexifyai.de/wissen](https://www.nexifyai.de/wissen)
-- [https://www.nexifyai.de/wissen/projekt-vorbereiten](https://www.nexifyai.de/wissen/projekt-vorbereiten)
+- [Startseite](https://www.nexifyai.de/)
+- [Barrierefreiheit](https://www.nexifyai.de/barrierefreiheit)
+- [Cookies](https://www.nexifyai.de/cookies)
+- [Datenschutz](https://www.nexifyai.de/datenschutz)
+- [Impressum](https://www.nexifyai.de/impressum)
+- [KI-Beratung](https://www.nexifyai.de/ki-beratung)
+- [KI-Hinweise](https://www.nexifyai.de/ki-hinweise)
+- [Kontakt](https://www.nexifyai.de/kontakt)
+- [Leistungen](https://www.nexifyai.de/leistungen)
+- [Leistungen: Agenten und Automatisierung](https://www.nexifyai.de/leistungen/agenten-automatisierung)
+- [Leistungen: Portale und Apps](https://www.nexifyai.de/leistungen/apps-portale)
+- [Leistungen: Websites](https://www.nexifyai.de/leistungen/websites)
+- [Leistungsumfang](https://www.nexifyai.de/leistungsumfang)
+- [Loesungen und Pakete](https://www.nexifyai.de/loesungen)
+- [Kundencenter](https://www.nexifyai.de/portale)
+- [Preise und Ablauf](https://www.nexifyai.de/preise-ablauf)
+- [Produkt AIFly ORACLE](https://www.nexifyai.de/produkte/aifly-oracle)
+- [Produkt API](https://www.nexifyai.de/produkte/api)
+- [Produkt NeX Agentic AIFly](https://www.nexifyai.de/produkte/nex-agentic-aifly)
+- [Produkt nex2fly](https://www.nexifyai.de/produkte/nex2fly)
+- [Produkt one](https://www.nexifyai.de/produkte/one)
+- [Produkt Skills und MCP](https://www.nexifyai.de/produkte/skills-mcp)
+- [Regionen](https://www.nexifyai.de/regionen)
+- [Unternehmen](https://www.nexifyai.de/unternehmen)
+- [Vertragsgrundlagen](https://www.nexifyai.de/vertragsgrundlagen)
+- [Wissen](https://www.nexifyai.de/wissen)
+- [Wissen: Projekt vorbereiten](https://www.nexifyai.de/wissen/projekt-vorbereiten)
+
+## Kundencenter
+
+Kundencenter: Zugang auf Anfrage - Zugaenge werden persoenlich je Kunde vergeben, eine
+Selbstregistrierung gibt es nicht.
 
 ## Kontakt
 
-- Website: https://www.nexifyai.de/kontakt
 - Telefon: +31 6 133 188 56
 - E-Mail: mail@nexifyai.cloud
+- Anschrift: Graaf van Loonstraat 1E, 5921 JA Venlo, Niederlande
+- Inhaber: Pascal Courbois
+- Kamer van Koophandel: 90483944
+- Umsatzsteuer-Identifikation: NL865786276B01

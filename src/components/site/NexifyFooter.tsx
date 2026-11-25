@@ -100,6 +100,9 @@ export function NexifyFooter() {
             </nav>
             <nav aria-label={"Leistungen & Zusammenarbeit"}>
               <h2>Leistungen &amp; Zusammenarbeit</h2>
+              <a href="/ki-beratung" {...here("/ki-beratung")}>
+                KI-Beratung &amp; Coaching
+              </a>
               <a href="/leistungen/websites" {...here("/leistungen/websites")}>
                 Websites &amp; Markenauftritt
               </a>
