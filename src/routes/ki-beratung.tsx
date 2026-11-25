@@ -65,12 +65,13 @@ function Index() {
                 NeXify AI<span aria-hidden="true"> / </span>KI-Beratung
               </span>
               <h1 id="page-title-beratung">
-                Ihre KI-Strategie beginnt nicht mit Software. Sondern mit den richtigen Fragen.
+                KI-Beratung: Ihre KI-Strategie beginnt nicht mit Software. Sondern mit den richtigen
+                Fragen.
               </h1>
               <p className={"identity-body"}>
-                Gemeinsam analysieren wir Ihre Unternehmensprozesse, identifizieren sinnvolle
-                Einsatzmöglichkeiten künstlicher Intelligenz und entwickeln eine Strategie, die zu
-                Ihrem Unternehmen passt.
+                In der KI-Beratung analysieren wir gemeinsam Ihre Unternehmensprozesse,
+                identifizieren sinnvolle Einsatzmöglichkeiten künstlicher Intelligenz und entwickeln
+                eine Strategie, die zu Ihrem Unternehmen passt.
               </p>
               <p className={"kb-preiszeile"}>
                 <strong>{BERATUNG_PREIS_NETTO} €</strong> netto pro Beratungstag

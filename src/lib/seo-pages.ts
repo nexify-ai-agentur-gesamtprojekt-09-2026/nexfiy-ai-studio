@@ -19,6 +19,7 @@ import {
   landBeschreibung,
   landTitel,
 } from "./regionen-daten.ts";
+import { BERATUNG_PREIS_NETTO } from "./beratung.ts";
 
 export type SeitenTyp =
   "start" | "leistung" | "produkt" | "info" | "kontakt" | "unternehmen" | "recht" | "konto";
@@ -60,10 +61,10 @@ export const SEITEN: Seite[] = [
   {
     pfad: "/ki-beratung",
     datei: "ki-beratung.tsx",
-    titel: "KI-Beratung für Unternehmen ab 449 € netto/Tag",
+    titel: `KI-Beratung für Unternehmen · ${BERATUNG_PREIS_NETTO} € netto je Tag`,
     kurz: "KI-Beratung",
     beschreibung:
-      "KI-Beratung, Prozessanalyse und Coaching für Unternehmen: individuelle KI-Strategie mit NeXify AI. 449 € netto pro Beratungstag.",
+      `KI-Beratung, Prozessanalyse und Coaching für Unternehmen: individuelle KI-Strategie mit NeXify AI. ${BERATUNG_PREIS_NETTO} € netto pro Beratungstag.`,
     typ: "info",
     index: true,
   },
