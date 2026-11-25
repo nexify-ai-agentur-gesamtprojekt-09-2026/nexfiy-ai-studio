@@ -64,8 +64,23 @@
   display: flex !important;
   flex-direction: column !important;
 }
+/* 2026-11-25 11:07 (Europe/Berlin): Die Bilder in "Ihr Angebot, auf den Punkt." und
+   "Mehr Zeit fuer die Arbeit, die zaehlt." bleiben randlos wie alle anderen Bilder der Seite.
+   Der Innenabstand der Karte (20/24 px) bleibt fuer den TEXT bestehen; nur das Medium laeuft
+   per negativem Rand ueber die Kante und wird von der Kartenrundung beschnitten. */
 #atelier .hc-gallery-card > .identity-media {
-  margin-bottom: auto !important;   /* Restluft nach oben, nicht unter den Text */
+  margin: -20px -24px auto -24px !important;
+  width: calc(100% + 48px) !important;
+  border-radius: 0 !important;      /* Rundung kommt von der Karte, nicht vom Bild */
+}
+#atelier .hc-gallery-card {
+  overflow: hidden !important;      /* schneidet das randlose Bild an der Kartenkante */
+}
+@media (max-width: 640px) {
+  #atelier .hc-gallery-card > .identity-media {
+    margin: -20px -18px auto -18px !important;
+    width: calc(100% + 36px) !important;
+  }
 }
 #atelier .hc-gallery-card > .hc-gallery-link {
   display: contents !important;
