@@ -168,8 +168,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      // 2026-11-22 (Europe/Berlin): /favicon.ico ist das Originalzeichen des NeXify-Auftritts
-      // (16, 32 und 48 px), dieselbe Datei wie public/site-assets/6515657575db596f.ico.
+      // 2026-11-25 (Europe/Berlin): eigenes Zeichen statt des Import-Maskottchens.
+      // SVG zuerst (scharf in jeder Groesse), ICO als Rueckfall fuer alte Browser.
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "16x16 32x32 48x48" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
