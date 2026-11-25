@@ -1,21 +1,22 @@
-/** Innenabstaende, eine Skala fuer alle Seiten. Additiv: captured.css bleibt unveraendert.
- *  captured.css setzt Abschnittsabstaende ueber #atelier-Regeln; deshalb steht #atelier auch hier,
- *  sonst gewinnt die Altregel unabhaengig von der Ladereihenfolge. */
+/** Innenabstaende: eine Skala fuer alle Seiten.
+ *  Diese Ebene muss gegen die generierte captured.css gewinnen (dort stehen #atelier-:is(...)-Regeln).
+ *  Deshalb: #atelier-Praefix, doppelte Klasse und -- nur fuer Abstaende -- !important.
+ *  Nur Abstaende, keine Farben, keine Schriften, keine Struktur. */
 :root {
   --nx-sec: clamp(56px, 6.5vw, 96px);
   --nx-gut: clamp(16px, 4.2vw, 72px);
-  --nx-card: 28px;
+  --nx-card: 32px;
 }
 
 /* Abschnitte: ein Rhythmus statt 114,4 px und 64 px gemischt */
 #atelier .hc-section.hc-section,
 #atelier .home-concept .hc-section.hc-section {
-  padding-block: var(--nx-sec);
-  padding-inline: var(--nx-gut);
+  padding-block: var(--nx-sec) !important;
+  padding-inline: var(--nx-gut) !important;
 }
 #atelier .hc-intro.hc-intro {
-  padding-block: calc(var(--nx-sec) * 0.55);
-  padding-inline: var(--nx-gut);
+  padding-block: calc(var(--nx-sec) * 0.55) !important;
+  padding-inline: var(--nx-gut) !important;
 }
 
 /* Karten: ein Innenabstand statt 32 px, 28 px und 24 px gemischt */
@@ -24,21 +25,22 @@
 #atelier .hc-rate,
 #atelier .hc-costs,
 #atelier .hc-finish-next,
+#atelier .hc-intro.is-in,
 #atelier .is-in {
-  padding: var(--nx-card);
+  padding: var(--nx-card) !important;
 }
 #atelier .hc-section-heading,
 #atelier .hc-finish-heading {
-  padding: 0 0 20px;
+  padding: 0 0 20px !important;
 }
 
 /* Galerie-Karten: Text hatte links 0 px Innenabstand */
 #atelier .hc-gallery-card.hc-gallery-card {
-  padding-inline: 24px;
-  padding-block: 20px 24px;
+  padding-inline: 24px !important;
+  padding-block: 20px 24px !important;
 }
 
 @media (max-width: 640px) {
   :root { --nx-card: 20px; --nx-sec: 44px; --nx-gut: 18px; }
-  #atelier .hc-gallery-card.hc-gallery-card { padding-inline: 18px; }
+  #atelier .hc-gallery-card.hc-gallery-card { padding-inline: 18px !important; }
 }
