@@ -1,7 +1,8 @@
 // 2026-11-19 19:25 (Europe/Berlin): Datenschutzerklärung eingesetzt (Freigabe Inhaber 19.11.2026).
 // Warum: Die Live-Seite trug an dieser Stelle den Platzhalter „noch in Prüfung"; der geprüfte Entwurf
 //   (state/rechtstexte/datenschutz-entwurf.md) beschreibt den gemessenen Ist-Zustand der Seite.
-// Grundlage: kein Formular-Backend (mailto), keine Analyse-Tools, ein technisch notwendiges Cookie,
+// Grundlage: Anfrageformular mit Serververarbeitung (Cloudflare D1, Versand ueber Resend),
+//              keine Analyse-Tools, ein technisch notwendiges Cookie,
 //   Auslieferung über Cloudflare, Schriften und Bilder vom eigenen Server.
 import type { LegalSection } from "@/components/site/LegalSections";
 
@@ -96,9 +97,18 @@ export const datenschutzSections: LegalSection[] = [
         </li>
       </ul>,
       <p key="p2">
-        Das Anfrageformular dieser Website überträgt keine Daten an einen Server: Es öffnet nach dem
-        Absenden Ihr E-Mail-Programm mit der fertigen Nachricht. Erst mit dem Versand aus Ihrem
-        Programm verlassen die Angaben Ihr Gerät.
+        Das Anfrageformular dieser Website überträgt Ihre Angaben an unseren Server, sobald Sie es
+        absenden. Verarbeitet werden Name, E-Mail-Adresse, optional der Unternehmensname und Ihre
+        Nachricht. Die Anfrage wird in einer Datenbank bei Cloudflare (Cloudflare, Inc.) gespeichert
+        und per E-Mail an uns zugestellt; für den Versand setzen wir Resend (Resend, Inc., USA) ein.
+        Beides sind Auftragsverarbeiter nach Art. 28 DSGVO. Für die Zustellung in die USA stützen wir
+        uns auf die Standardvertragsklauseln nach Art. 46 Abs. 2 DSGVO.
+      </p>,
+      <p key="p3">
+        Zur Abwehr von Missbrauch speichern wir zusätzlich einen gekürzten Prüfwert Ihrer
+        IP-Adresse (SHA-256, 24 Zeichen) und den Zeitpunkt des Eingangs; die vollständige
+        IP-Adresse wird nicht gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO für die
+        Bearbeitung Ihrer Anfrage und Art. 6 Abs. 1 lit. f DSGVO für den Missbrauchsschutz.
       </p>,
     ],
   },
