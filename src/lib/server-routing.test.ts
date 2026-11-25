@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { legacyWeiterleitungFuer, weiterleitungFuer } from "./server-routing";
+import { legacyWeiterleitungFuer, pfadNormalisierung, weiterleitungFuer } from "./server-routing";
 
 describe("legacyWeiterleitungFuer", () => {
   it("leitet alte Wissens- und Staedteadressen dauerhaft auf die zustaendige Seite", () => {
@@ -32,5 +32,20 @@ describe("legacyWeiterleitungFuer", () => {
 
   it("veraendert die festen Weiterleitungen nicht", () => {
     expect(weiterleitungFuer("/preise")).toEqual({ ziel: "/preise-ablauf", status: 301 });
+  });
+});
+
+describe("pfadNormalisierung", () => {
+  it("führt Großschreibung und Schrägstrich am Ende auf eine Adresse", () => {
+    expect(pfadNormalisierung("/LEISTUNGEN")).toEqual({ ziel: "/leistungen", status: 301 });
+    expect(pfadNormalisierung("/Preise-Ablauf")).toEqual({ ziel: "/preise-ablauf", status: 301 });
+    expect(pfadNormalisierung("/leistungen/")).toEqual({ ziel: "/leistungen", status: 301 });
+    expect(pfadNormalisierung("/ki-beratung/")).toEqual({ ziel: "/ki-beratung", status: 301 });
+  });
+
+  it("lässt normale Adressen und die Wurzel in Ruhe", () => {
+    expect(pfadNormalisierung("/leistungen")).toBeNull();
+    expect(pfadNormalisierung("/")).toBeNull();
+    expect(pfadNormalisierung("/ki-beratung")).toBeNull();
   });
 });

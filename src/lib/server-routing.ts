@@ -86,6 +86,22 @@ export function legacyWeiterleitungFuer(pfad: string): { ziel: string; status: 3
   return null;
 }
 
+/**
+ * 2026-11-25 13:20 (Europe/Berlin): Eine Schreibweise je Seite.
+ * Warum: /LEISTUNGEN und /Preise-Ablauf antworteten mit 200 (derselbe Inhalt unter zweiter Adresse),
+ *   /leistungen/ mit 307 (vorübergehend). Suchmaschinen führen beide Formen als eigene Adressen und
+ *   die Weiterleitung wird bei 307 nicht dauerhaft übernommen. Diese Funktion liefert das Ziel in
+ *   der einen Schreibweise: klein, ohne Schrägstrich am Ende, Abfrage bleibt erhalten.
+ * `null`, wenn die Adresse schon normal ist oder es die Wurzel ist.
+ */
+export function pfadNormalisierung(pfad: string): { ziel: string; status: 301 } | null {
+  if (pfad === "/" || pfad === "") return null;
+  const ohneSchraegstrich = pfad.replace(/\/+$/, "");
+  const klein = ohneSchraegstrich.toLowerCase();
+  if (klein === pfad) return null;
+  return { ziel: klein || "/", status: 301 };
+}
+
 export function weiterleitungFuer(pfad: string): { ziel: string; status: 301 | 302 } | null {
   const schluessel = pfad.toLowerCase();
   const dauerhaft = PERMANENT_REDIRECTS[schluessel];

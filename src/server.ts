@@ -11,6 +11,7 @@ import {
   asRetiredResponse,
   retiredPathUrl,
   legacyWeiterleitungFuer,
+  pfadNormalisierung,
   weiterleitungFuer,
   withNoindexOnNotFound,
 } from "./lib/server-routing";
@@ -118,6 +119,18 @@ export default {
         return withSecurityHeaders(serviceWorkerResponse(env as PwaBindings));
       if (url.pathname === OFFLINE_PATH) return withSecurityHeaders(offlineResponse());
       // Kurzadressen in jeder Schreibweise (/ANMELDEN, /Registrieren): src/lib/server-routing.ts.
+      // Eine Schreibweise je Seite: /LEISTUNGEN und /leistungen/ führen dauerhaft auf /leistungen.
+      // Nur lesende Abrufe — ein POST auf eine andere Schreibweise darf seinen Rumpf nicht verlieren.
+      if (request.method === "GET" || request.method === "HEAD") {
+        const normal = pfadNormalisierung(url.pathname);
+        if (normal)
+          return withSecurityHeaders(
+            Response.redirect(
+              new URL(`${normal.ziel}${url.search}`, url.origin).toString(),
+              normal.status,
+            ),
+          );
+      }
       const weiter = weiterleitungFuer(url.pathname) ?? legacyWeiterleitungFuer(url.pathname);
       if (weiter)
         return withSecurityHeaders(
