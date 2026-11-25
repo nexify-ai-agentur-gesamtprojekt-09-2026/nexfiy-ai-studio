@@ -221,3 +221,22 @@
     line-height: 1.15;
   }
 }
+
+/**
+ * 2026-11-25, 14:20 Uhr (Europe/Berlin): Abschluss-Sektion auf die Flucht der Seite bringen.
+ *
+ * Befund (gemessen, nicht geschätzt): Die Sektion .hc-finish war die einzige Sektion mit doppeltem
+ * Einzug — Außenabstand 72 px (Desktop) bzw. 24 px (Mobil) UND Innenabstand 60,48 px bzw. 18 px.
+ * Dadurch begann ihr Text bei 132 px (Desktop) bzw. 42 px (Mobil), während jede andere Sektion
+ * derselben Seite bei 60 px bzw. 18 px beginnt. Auf /produkte/api, /, /leistungen, /preise-ablauf,
+ * /ki-beratung, /unternehmen, /wissen und /portale gemessen: nur diese eine Sektion weicht ab.
+ *
+ * Jetzt: volle Breite wie die übrigen Sektionen, Innenabstand = Seitenrand. Damit steht der Text
+ * auf derselben linken Kante wie Überschriften und Absätze darüber.
+ * Der senkrechte Abstand bleibt unverändert.
+ */
+#atelier .home-concept .hc-finish {
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: var(--layout-page-padding);
+}
