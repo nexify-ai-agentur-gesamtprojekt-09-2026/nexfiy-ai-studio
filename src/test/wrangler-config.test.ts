@@ -78,7 +78,10 @@ describe("wrangler-config.py (Allowlist für wrangler.json)", () => {
     const neu = JSON.parse(readFileSync(ziel, "utf8"));
     expect(neu).not.toHaveProperty("build");
     expect(neu).not.toHaveProperty("env");
-    expect(neu).not.toHaveProperty("vars");
+    // 2026-11-25 (B-270): Die Quelle darf keine Variablen einschleusen; die erzeugte Konfiguration
+    // traegt ausschliesslich den fest verdrahteten Schalter CHAT_AKTIV (sonst verliert ein Deploy
+    // den Chat, weil keep_vars den Klartext-Wert nicht erhaelt).
+    expect(neu.vars).toEqual({ CHAT_AKTIV: "an" });
     expect(neu.keep_vars).toBe(true);
     expect(neu.d1_databases[0].database_id).toBe("2dbf4047-20ee-4a68-a258-26ee9eb100e4");
     expect(r.stderr).toContain("Schlüssel verworfen (nicht erlaubt): build");
