@@ -6,6 +6,7 @@ import {
   type MouseEvent,
   type RefObject,
 } from "react";
+import { heroFilmSofortStarten } from "./hero-film";
 
 /**
  * Shared behaviour for the imported nexifyai.cloud pages (header menus, scroll-driven shell
@@ -224,9 +225,34 @@ export function useAtelierFilms() {
     });
     videos.forEach((video) => observer.observe(video));
     const heroVideo = document.querySelector<HTMLVideoElement>(".identity-hero video");
-    if (heroVideo && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const verbindung = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    if (
+      heroVideo &&
+      heroFilmSofortStarten({
+        reduzierteBewegung: matchMedia("(prefers-reduced-motion: reduce)").matches,
+        datensparmodus: verbindung?.saveData,
+        netztyp: verbindung?.effectiveType,
+      })
+    ) {
       heroVideo.muted = true;
-      void heroVideo.play().catch(() => {});
+      // Nicht sofort: erst wenn das erste Bild steht und die Leitung frei ist. Sonst teilen sich
+      // Standbild und Film dieselbe Bandbreite (Messung 25.11.2026, siehe src/lib/hero-film.ts).
+      const starte = () => {
+        const los = () => void heroVideo.play().catch(() => {});
+        const ruhig = (
+          window as Window & {
+            requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number;
+          }
+        ).requestIdleCallback;
+        if (typeof ruhig === "function") ruhig(los, { timeout: 2500 });
+        else window.setTimeout(los, 1200);
+      };
+      if (document.readyState === "complete") starte();
+      else listen(window, "load", starte);
     }
     return () => {
       observer.disconnect();
