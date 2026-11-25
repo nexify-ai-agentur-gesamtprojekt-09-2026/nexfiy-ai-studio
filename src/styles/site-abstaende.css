@@ -73,7 +73,8 @@
 /* Textabstaende innerhalb der Karte: Kicker - Ueberschrift - Absatz */
 #atelier .hc-gallery-card .hc-art-kicker,
 #atelier .hc-gallery-card > .hc-gallery-link > :first-child {
-  margin: 0 0 8px !important;
+  /* 24 px Mindestlücke zwischen Film und Text; zusaetzliche Hoehe faengt der Auto-Abstand des Films ab */
+  margin: 24px 0 8px !important;
 }
 #atelier .hc-gallery-card h3 {
   margin: 0 0 10px !important;
