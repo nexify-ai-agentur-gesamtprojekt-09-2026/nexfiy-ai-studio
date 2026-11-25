@@ -16,6 +16,11 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    // Abdeckung nur für eigenen Quellcode (nicht .output/ oder Bibliotheken aus dem Build).
+    coverage: {
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/**/*.{test,spec}.{ts,tsx}", "src/test/**", "src/routeTree.gen.ts"],
+    },
   },
   resolve: {
     alias: { "@": path.resolve(__dirname, "./src") },

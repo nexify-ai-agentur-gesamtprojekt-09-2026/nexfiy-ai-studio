@@ -70,14 +70,15 @@ Nicht ausgezeichnet werden Bewertungen, Preise, Auszeichnungen und Koordinaten. 
 „Was ist es? / Für wen ist es geeignet? …" auf Leistungs- und Produktseiten bekommen kein
 `FAQPage`: Die Fragen sind ohne den Seitenzusammenhang nicht verständlich.
 
-`public/sitemap.xml` entsteht mit `node tools/generate-sitemap.mjs` aus der Seitentabelle; das
-Änderungsdatum je Seite ist das Git-Datum ihrer Routendatei. Kontoseiten und `/offline` stehen
+`public/sitemap.xml` entsteht bei jedem `npm run build` mit `tools/generate-sitemap.mjs` aus der
+Seitentabelle und ist nicht eingecheckt (`.gitignore`); das Änderungsdatum je Seite ist das
+Git-Datum ihrer Routendatei. Kontoseiten und `/offline` stehen
 nicht darin und tragen `noindex`. `public/robots.txt` sperrt nur `/api/`; die KI-Crawler GPTBot,
 ClaudeBot und PerplexityBot sind bewusst erlaubt und stehen in derselben Gruppe wie `*`, damit
 die Sperre von `/api/` auch für sie gilt.
 
 **Neue Seite anlegen:** Routendatei mit `pageHead("<pfad>")`, Eintrag in `seo-pages.ts`,
-`node tools/generate-sitemap.mjs`, bei Bedarf Zeile in `public/llms.txt`. `npm test` meldet jede
+bei Bedarf Zeile in `public/llms.txt` (die Sitemap erzeugt der Build). `npm test` meldet jede
 Abweichung zwischen Routen, Tabelle, Sitemap und `llms.txt`.
 
 ## KI-Suche und Ortsangaben

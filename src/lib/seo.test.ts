@@ -4,6 +4,8 @@ import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
+import { buildSitemap } from "../../tools/generate-sitemap.mjs";
+
 import {
   MARKENZUSATZ,
   SEITEN,
@@ -241,11 +243,42 @@ describe("Strukturierte Daten", () => {
   });
 });
 
-describe("Sitemap, robots.txt und llms.txt", () => {
-  const sitemap = lies("public/sitemap.xml");
-  const eintraege = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map(
+/** Git-Datum (JJJJ-MM-TT) der letzten Änderung einer Routendatei; leer ohne Git. */
+function gitDatum(datei: string): string {
+  try {
+    return execFileSync("git", ["log", "-1", "--format=%cs", "--", `src/routes/${datei}`], {
+      cwd: REPO,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+  } catch {
+    return ""; // Ohne Git (Paket ohne Historie) entfällt der Vergleich.
+  }
+}
+
+function sitemapEintraege(xml: string) {
+  return [...xml.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map(
     ([, loc, lastmod]) => ({ loc: loc ?? "", lastmod: lastmod ?? "" }),
   );
+}
+
+/** Regel je Seite: Datum gültig, nicht in der Zukunft, nicht älter als der Stand in Git. */
+function pruefeDaten(eintraege: { lastmod: string }[], quelle: string) {
+  const heute = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+  for (const [stelle, seite] of INDEXIERBAR.entries()) {
+    const lastmod = eintraege[stelle]?.lastmod ?? "";
+    expect(lastmod, seite.pfad).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(lastmod <= heute, `${seite.pfad}: ${lastmod}`).toBe(true);
+    const git = gitDatum(seite.datei);
+    if (git) expect(lastmod >= git, `${seite.pfad}: ${quelle} ${lastmod}, Git ${git}`).toBe(true);
+  }
+}
+
+describe("Sitemap, robots.txt und llms.txt", () => {
+  // 2026-11-23 (Europe/Berlin): Die Sitemap entsteht im Build (tools/generate-sitemap.mjs) und ist
+  // nicht eingecheckt; geprüft wird der erzeugte Inhalt und, nach dem Build, die gebaute Datei.
+  const sitemap = buildSitemap();
+  const eintraege = sitemapEintraege(sitemap);
 
   it("die Sitemap nennt genau die indexierbaren Seiten mit kanonischer Adresse", () => {
     expect(eintraege.map((e) => e.loc)).toEqual(
@@ -264,32 +297,35 @@ describe("Sitemap, robots.txt und llms.txt", () => {
   });
 
   it("jedes Änderungsdatum ist ein Datum, nicht in der Zukunft und nicht älter als der Stand in Git", () => {
-    const heute = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
-    for (const [stelle, seite] of INDEXIERBAR.entries()) {
-      const lastmod = eintraege[stelle]?.lastmod ?? "";
-      expect(lastmod, seite.pfad).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-      expect(lastmod <= heute, `${seite.pfad}: ${lastmod}`).toBe(true);
-      let git = "";
-      try {
-        git = execFileSync(
-          "git",
-          ["log", "-1", "--format=%cs", "--", `src/routes/${seite.datei}`],
-          {
-            cwd: REPO,
-            encoding: "utf8",
-            stdio: ["ignore", "pipe", "ignore"],
-          },
-        ).trim();
-      } catch {
-        git = ""; // Ohne Git (Paket ohne Historie) entfällt der Vergleich.
-      }
-      if (git)
-        expect(
-          lastmod >= git,
-          `${seite.pfad}: Sitemap ${lastmod}, Git ${git} – node tools/generate-sitemap.mjs`,
-        ).toBe(true);
-    }
+    pruefeDaten(eintraege, "Sitemap");
   });
+
+  it("public/sitemap.xml ist nicht eingecheckt (entsteht im Build)", () => {
+    let eingecheckt = "";
+    try {
+      eingecheckt = execFileSync("git", ["ls-files", "--", "public/sitemap.xml"], {
+        cwd: REPO,
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "ignore"],
+      }).trim();
+    } catch {
+      eingecheckt = "";
+    }
+    expect(eingecheckt).toBe("");
+    expect(lies("package.json")).toContain(
+      '"build": "node tools/generate-sitemap.mjs && vite build"',
+    );
+  });
+
+  const GEBAUT = path.join(REPO, ".output", "public", "sitemap.xml");
+  it.skipIf(!existsSync(GEBAUT))(
+    "die gebaute Sitemap nennt dieselben Seiten mit Daten, die dem Git-Stand entsprechen",
+    () => {
+      const gebaut = sitemapEintraege(readFileSync(GEBAUT, "utf8"));
+      expect(gebaut.map((e) => e.loc)).toEqual(eintraege.map((e) => e.loc));
+      pruefeDaten(gebaut, "gebaute Sitemap (npm run build)");
+    },
+  );
 
   it("robots.txt: Sitemap-Verweis, nur /api/ gesperrt, KI-Crawler in derselben Gruppe erlaubt", () => {
     const robots = lies("public/robots.txt");

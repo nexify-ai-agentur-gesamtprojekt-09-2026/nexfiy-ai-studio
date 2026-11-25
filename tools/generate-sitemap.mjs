@@ -1,23 +1,37 @@
-#!/usr/bin/env node
+// Aufruf: node tools/generate-sitemap.mjs (ohne Shebang: die Tests importieren die Datei über Vite).
 // Erzeugt public/sitemap.xml aus der Seitentabelle (src/lib/seo-pages.ts): nur Seiten, die in den
 // Suchindex gehören, mit kanonischer Adresse und dem Datum der letzten Änderung ihrer Routendatei
 // laut Git. Eine Routendatei mit noch nicht eingetragenen Änderungen bekommt das heutige Datum.
 //
-// Nutzung:  node tools/generate-sitemap.mjs          schreibt die Datei neu
-//           node tools/generate-sitemap.mjs --check  meldet Abweichungen, schreibt nichts (Exit 1)
-// Der Testlauf (src/lib/seo.test.ts) prüft dieselbe Regel; wer eine Route ändert oder anlegt,
-// lässt dieses Skript laufen und trägt die Datei mit ein.
+// 2026-11-23 (Europe/Berlin): Die Sitemap entsteht im Build (`npm run build` ruft dieses Skript vor
+// `vite build` auf, Vite kopiert public/ nach .output/public/) und ist nicht mehr eingecheckt
+// (.gitignore). Grund: Eine eingecheckte Datei veraltete mit jedem Commit, der eine Route nach dem
+// letzten Erzeugen änderte, und hielt dann main/CI rot. Die Tests prüfen die Regeln am erzeugten
+// Inhalt (src/lib/seo.test.ts) und an der gebauten Datei (dort, sobald .output/ existiert).
+// Ohne Git (Paket ohne Historie) oder in einer flachen Kopie gilt das heutige Datum bzw. das
+// Datum des vorhandenen Commits; die Auslieferung baut mit voller Historie.
+//
+// Nutzung:  node tools/generate-sitemap.mjs   schreibt public/sitemap.xml
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 const REPO = path.resolve(import.meta.dirname, "..");
 const ZIEL = path.join(REPO, "public", "sitemap.xml");
 const ORIGIN = "https://www.nexifyai.de";
-const { SEITEN } = await import(path.join(REPO, "src", "lib", "seo-pages.ts"));
+const { SEITEN } = await import(pathToFileURL(path.join(REPO, "src", "lib", "seo-pages.ts")).href);
 
 function git(...args) {
-  return execFileSync("git", args, { cwd: REPO, encoding: "utf8" }).trim();
+  try {
+    return execFileSync("git", args, {
+      cwd: REPO,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+  } catch {
+    return "";
+  }
 }
 
 /** Datum (JJJJ-MM-TT) der letzten Änderung einer Routendatei; heute, wenn sie gerade geändert ist. */
@@ -36,15 +50,7 @@ export function buildSitemap() {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${zeilen.join("\n")}\n</urlset>\n`;
 }
 
-const neu = buildSitemap();
-if (process.argv.includes("--check")) {
-  const alt = readFileSync(ZIEL, "utf8");
-  if (alt !== neu) {
-    console.error("public/sitemap.xml weicht ab – node tools/generate-sitemap.mjs ausführen.");
-    process.exit(1);
-  }
-  console.log("public/sitemap.xml ist aktuell.");
-} else {
-  writeFileSync(ZIEL, neu);
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  writeFileSync(ZIEL, buildSitemap());
   console.log(`public/sitemap.xml geschrieben: ${SEITEN.filter((s) => s.index).length} Adressen.`);
 }
