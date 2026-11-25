@@ -233,19 +233,24 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
 
   // Nach dem Schliessen zurueck auf den Ausloeser (WCAG 2.2, 2.4.3). Ohne das bleibt der Fokus
   // im geschlossenen Panel bzw. auf <body>; Tastaturnutzende beginnen wieder am Seitenanfang.
-  const warOffen = useRef(false);
+  const oeffner = useRef<HTMLElement | null>(null);
   useEffect(() => {
     if (offen) {
-      warOffen.current = true;
+      const aktiv = document.activeElement;
+      oeffner.current = aktiv instanceof HTMLElement && aktiv !== document.body ? aktiv : null;
       return;
     }
-    if (!warOffen.current) return;
-    warOffen.current = false;
-    const aktiv = document.activeElement;
-    const imPanel =
-      aktiv === null || aktiv === document.body || panel.current?.contains(aktiv) === true;
-    if (!imPanel) return;
-    ausloeser.current?.focus({ preventScroll: true });
+    const ziel = oeffner.current;
+    if (!ziel) return;
+    oeffner.current = null;
+    const sichtbar = document.contains(ziel) && ziel.offsetParent !== null;
+    if (sichtbar) {
+      ziel.focus({ preventScroll: true });
+      return;
+    }
+    // Rueckfall: der Ausloeser selbst - nur wenn er sichtbar ist, sonst bleibt der Fokus weg.
+    const knopf = ausloeser.current;
+    if (knopf && knopf.offsetParent !== null) knopf.focus({ preventScroll: true });
   }, [offen, ausloeser]);
 
   // Fokusfalle nur im Dialog.
@@ -349,7 +354,7 @@ export function ChatDock({ dock }: { dock: ChatDockZustand }) {
           type="button"
           id="nexify-chat-ausloeser"
           className="nxc-ausloeser"
-          aria-haspopup={dialog ? "dialog" : undefined}
+          aria-haspopup={breit === false ? "dialog" : undefined}
           aria-expanded="false"
           aria-controls={CHAT_PANEL_ID}
           onClick={oeffne}

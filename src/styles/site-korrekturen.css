@@ -286,3 +286,15 @@
   text-decoration-thickness: from-font;
   text-underline-offset: 0.18em;
 }
+
+/**
+ * 2026-11-25, 15:05 Uhr: Nachschaerfung der Fliesstext-Links.
+ * Der erste Versuch mit ":not([class])" griff nicht, weil die Links ein leeres class-Attribut
+ * tragen. Gemessen nach dem ersten Deploy: text-decoration weiterhin "none".
+ * Jetzt ausgeschlossen wird nur, was eigene Gestalt hat (.hc-text-link, .button).
+ */
+:root:root #atelier main :is(p, li) a[href]:not(.hc-text-link):not(.button) {
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
+}
