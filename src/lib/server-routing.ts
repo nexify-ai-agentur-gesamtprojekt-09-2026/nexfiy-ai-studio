@@ -94,12 +94,18 @@ export function legacyWeiterleitungFuer(pfad: string): { ziel: string; status: 3
  *   der einen Schreibweise: klein, ohne Schrägstrich am Ende, Abfrage bleibt erhalten.
  * `null`, wenn die Adresse schon normal ist oder es die Wurzel ist.
  */
-export function pfadNormalisierung(pfad: string): { ziel: string; status: 301 } | null {
+export function pfadNormalisierung(
+  pfad: string,
+  bekannt: Set<string>,
+): { ziel: string; status: 301 } | null {
   if (pfad === "/" || pfad === "") return null;
   const ohneSchraegstrich = pfad.replace(/\/+$/, "");
   const klein = ohneSchraegstrich.toLowerCase();
   if (klein === pfad) return null;
-  return { ziel: klein || "/", status: 301 };
+  // Nur Seiten, die es wirklich gibt. Sonst würde aus /regionen/Bayern eine Weiterleitung auf eine
+  // Adresse, die 404 liefert — und die Sperre für unbekannte Länder verlöre ihre Wirkung.
+  if (!bekannt.has(klein)) return null;
+  return { ziel: klein, status: 301 };
 }
 
 export function weiterleitungFuer(pfad: string): { ziel: string; status: 301 | 302 } | null {

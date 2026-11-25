@@ -7,6 +7,7 @@ import { setzeChatSchalter } from "./lib/chat-schalter";
 import { renderErrorPage } from "./lib/error-page";
 import { offlineResponse, serviceWorkerResponse, type PwaBindings } from "./lib/pwa";
 import { OFFLINE_PATH, SW_PATH } from "./lib/pwa-config";
+import { SEITEN } from "./lib/seo";
 import {
   asRetiredResponse,
   retiredPathUrl,
@@ -19,6 +20,16 @@ import {
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
 };
+
+/**
+ * Alle ausgelieferten Seitenadressen in einer Schreibweise. Grundlage ist die Seitentabelle, damit
+ * eine neue Seite automatisch mitgezählt wird und keine zweite Liste gepflegt werden muss.
+ */
+// Nur Seiten, die im Suchindex stehen. Die 16 Bundeslandseiten sind bewusst noindex und sollen
+// unter abweichender Schreibweise 404 liefern, nicht 301.
+const BEKANNTE_SEITEN = new Set<string>(
+  SEITEN.filter((seite) => seite.index).map((seite) => seite.pfad.toLowerCase()),
+);
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
@@ -119,18 +130,6 @@ export default {
         return withSecurityHeaders(serviceWorkerResponse(env as PwaBindings));
       if (url.pathname === OFFLINE_PATH) return withSecurityHeaders(offlineResponse());
       // Kurzadressen in jeder Schreibweise (/ANMELDEN, /Registrieren): src/lib/server-routing.ts.
-      // Eine Schreibweise je Seite: /LEISTUNGEN und /leistungen/ führen dauerhaft auf /leistungen.
-      // Nur lesende Abrufe — ein POST auf eine andere Schreibweise darf seinen Rumpf nicht verlieren.
-      if (request.method === "GET" || request.method === "HEAD") {
-        const normal = pfadNormalisierung(url.pathname);
-        if (normal)
-          return withSecurityHeaders(
-            Response.redirect(
-              new URL(`${normal.ziel}${url.search}`, url.origin).toString(),
-              normal.status,
-            ),
-          );
-      }
       const weiter = weiterleitungFuer(url.pathname) ?? legacyWeiterleitungFuer(url.pathname);
       if (weiter)
         return withSecurityHeaders(
@@ -139,6 +138,21 @@ export default {
             weiter.status,
           ),
         );
+      // Alte Shop- und Studienadressen antworten 404 (Inhaberentscheidung 22.11.2026). Sie werden
+      // weder normalisiert noch weitergeleitet — sonst verlöre die Sperre ihre Wirkung.
+      const retired = retiredPathUrl(url);
+      if (!retired && (request.method === "GET" || request.method === "HEAD")) {
+        // Eine Schreibweise je Seite: /LEISTUNGEN und /leistungen/ führen dauerhaft auf /leistungen.
+        // Nur lesende Abrufe — ein POST auf eine andere Schreibweise darf seinen Rumpf nicht verlieren.
+        const normal = pfadNormalisierung(url.pathname, BEKANNTE_SEITEN);
+        if (normal)
+          return withSecurityHeaders(
+            Response.redirect(
+              new URL(`${normal.ziel}${url.search}`, url.origin).toString(),
+              normal.status,
+            ),
+          );
+      }
       const handler = await getServerEntry();
       // Chat-Schalter fürs Seiten-HTML (src/lib/chat-schalter.ts): vor dem Rendern ermittelt, damit
       // die Seite ohne Zusatzanfrage weiß, ob es einen Chat gibt. Im Zweifel aus.
@@ -148,7 +162,6 @@ export default {
           () => false,
         ),
       );
-      const retired = retiredPathUrl(url);
       if (retired) {
         const response = await handler.fetch(
           new Request(retired, { method: "GET", headers: request.headers }),
