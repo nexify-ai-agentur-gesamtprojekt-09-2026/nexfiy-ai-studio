@@ -145,27 +145,29 @@ function Index() {
           id="leistungen"
           aria-labelledby="kb-leistungen"
         >
-          <div className={"hc-section-heading"}>
-            <span className={"hc-kicker"}>Beratungsbereiche</span>
-            <h2 id="kb-leistungen">Von der ersten Idee bis zur konkreten KI-Strategie.</h2>
-            <p>
-              Acht Beratungsbereiche, ein Tagessatz. Sie wählen, worauf wir den Tag konzentrieren –
-              meist sind es zwei oder drei Bereiche, die zusammengehören.
-            </p>
+          <div className={"hc-service-layout"}>
+            <header className={"hc-section-heading"}>
+              <span className={"hc-kicker"}>Beratungsbereiche</span>
+              <h2 id="kb-leistungen">Von der ersten Idee bis zur konkreten KI-Strategie.</h2>
+              <p>
+                Acht Beratungsbereiche, ein Tagessatz. Sie wählen, worauf wir den Tag konzentrieren
+                – meist sind es zwei oder drei Bereiche, die zusammengehören.
+              </p>
+            </header>
+            <ol className={"hc-service-list"}>
+              {BERATUNG_BEREICHE.map((b, i) => (
+                <li className={"hc-service-detail"} key={b.titel}>
+                  <span className={"hc-caption"} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className={"hc-service-name"}>{b.titel}</h3>
+                    <p className={"hc-service-body"}>{b.nutzen}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className={"hc-service-list"}>
-            {BERATUNG_BEREICHE.map((b, i) => (
-              <li className={"hc-service-detail"} key={b.titel}>
-                <span className={"hc-caption"} aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className={"hc-service-name"}>{b.titel}</h3>
-                  <p className={"hc-service-body"}>{b.nutzen}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </section>
 
         <section className={"hc-section hc-container"} aria-labelledby="kb-zielgruppen">
@@ -202,24 +204,26 @@ function Index() {
           </p>
         </section>
 
-        <section className={"hc-section hc-container"} id="ablauf" aria-labelledby="kb-ablauf">
-          <div className={"hc-section-heading"}>
-            <span className={"hc-kicker"}>Ablauf</span>
-            <h2 id="kb-ablauf">Gemeinsam von der Analyse zur Handlungsempfehlung.</h2>
+        <section className={"hc-section hc-container hc-service-story"} id="ablauf" aria-labelledby="kb-ablauf">
+          <div className={"hc-service-layout"}>
+            <header className={"hc-section-heading"}>
+              <span className={"hc-kicker"}>Ablauf</span>
+              <h2 id="kb-ablauf">Gemeinsam von der Analyse zur Handlungsempfehlung.</h2>
+            </header>
+            <ol className={"hc-service-list"}>
+              {BERATUNG_ABLAUF.map((s, i) => (
+                <li className={"hc-service-detail"} key={s.titel}>
+                  <span className={"hc-caption"} aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className={"hc-service-name"}>{s.titel}</h3>
+                    <p className={"hc-service-body"}>{s.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-          <ol className={"hc-service-list"}>
-            {BERATUNG_ABLAUF.map((s, i) => (
-              <li className={"hc-service-detail"} key={s.titel}>
-                <span className={"hc-caption"} aria-hidden="true">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className={"hc-service-name"}>{s.titel}</h3>
-                  <p className={"hc-service-body"}>{s.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
           <div className={"hc-service-detail pc-module"}>
             <span className={"hc-caption"}>
               Der Beratungstag: {BERATUNG_TAG_STUNDEN} Stunden, klar geteilt
@@ -247,7 +251,7 @@ function Index() {
           aria-labelledby="kb-ergebnisse"
         >
           <div className={"hc-service-layout"}>
-            <div>
+            <header className={"hc-section-heading"}>
               <span className={"hc-kicker"}>Ergebnis</span>
               <h2 id="kb-ergebnisse">
                 Sie erhalten Klarheit, Orientierung und einen konkreten Fahrplan.
@@ -256,7 +260,7 @@ function Index() {
                 Am Ende des Tages steht keine Präsentation, die im Ordner verschwindet, sondern eine
                 Dokumentation, mit der Sie weiterarbeiten können – auch ohne uns.
               </p>
-            </div>
+            </header>
             <ul className={"hc-service-list"}>
               {BERATUNG_ERGEBNISSE.map((e) => (
                 <li className={"hc-service-detail"} key={e}>
@@ -269,13 +273,15 @@ function Index() {
 
         <section className={"hc-section hc-container"} id="preis" aria-labelledby="kb-preis">
           <div className={"hc-service-layout"}>
-            <div>
+            <header className={"hc-section-heading"}>
               <span className={"hc-kicker"}>Preis</span>
               <h2 id="kb-preis">Professionelle Beratung. Transparent kalkuliert.</h2>
               <p className={"hc-service-body"}>
                 Ein Tag, ein Preis, keine Staffelung nach Gesprächsdauer. Der Beratungstag ist ein
                 eigenständiges Angebot und keine Vorstufe zu einem Entwicklungsauftrag.
               </p>
+            </header>
+            <div>
               <ul className={"hc-service-list"}>
                 <li className={"hc-service-detail"}>
                   {BERATUNG_TAG_STUNDEN} Stunden einschließlich Vorbereitung, Arbeitszeit und
@@ -294,19 +300,19 @@ function Index() {
                   Kein Abonnement, keine automatische Verlängerung, keine Umsetzungspflicht
                 </li>
               </ul>
-            </div>
-            <div className={"hc-service-detail pc-module"}>
-              <span className={"hc-caption"}>Beratungstag</span>
-              <div className={"hc-costs"}>{BERATUNG_PREIS_NETTO} € netto</div>
-              <p className={"hc-service-body"}>
-                zuzüglich gegebenenfalls anwendbarer Umsatzsteuer. Das Angebot richtet sich an
-                Geschäftskunden. Zusätzliche Tage und Vor-Ort-Termine werden vor der Beauftragung
-                ausdrücklich vereinbart.
-              </p>
-              <a className={"nexify-control primary-button"} data-variant="primary" href="#anfrage">
-                <span>Beratungstag anfragen</span>
-                <span aria-hidden="true">→</span>
-              </a>
+              <div className={"hc-service-detail pc-module"}>
+                <span className={"hc-caption"}>Beratungstag</span>
+                <div className={"hc-costs"}>{BERATUNG_PREIS_NETTO} € netto</div>
+                <p className={"hc-service-body"}>
+                  zuzüglich gegebenenfalls anwendbarer Umsatzsteuer. Das Angebot richtet sich an
+                  Geschäftskunden. Zusätzliche Tage und Vor-Ort-Termine werden vor der Beauftragung
+                  ausdrücklich vereinbart.
+                </p>
+                <a className={"nexify-control primary-button"} data-variant="primary" href="#anfrage">
+                  <span>Beratungstag anfragen</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
           </div>
         </section>
