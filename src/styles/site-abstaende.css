@@ -57,3 +57,31 @@
   #atelier .hc-service-body { padding: 6px 20px 20px !important; }
   #atelier .identity-scene { padding: 24px 18px !important; }
 }
+
+/* Galerie-Karten: Textblock unten anschlagen. Vorher blieben bis zu 151 px Leerraum
+   UNTER dem Absatz, weil die Karte auf gleiche Hoehe gestreckt wird, der Text aber oben hing. */
+#atelier .hc-gallery-card {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#atelier .hc-gallery-card > .identity-media {
+  margin-bottom: auto !important;   /* Restluft nach oben, nicht unter den Text */
+}
+#atelier .hc-gallery-card > .hc-gallery-link {
+  display: contents !important;
+}
+/* Textabstaende innerhalb der Karte: Kicker - Ueberschrift - Absatz */
+#atelier .hc-gallery-card .hc-art-kicker,
+#atelier .hc-gallery-card > .hc-gallery-link > :first-child {
+  margin: 0 0 8px !important;
+}
+#atelier .hc-gallery-card h3 {
+  margin: 0 0 10px !important;
+  text-wrap: balance;
+}
+#atelier .hc-gallery-card p {
+  margin: 0 !important;
+}
+#atelier .hc-gallery-card > .hc-gallery-link > :last-child {
+  padding-bottom: 0 !important;
+}
