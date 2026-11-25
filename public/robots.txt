@@ -1,26 +1,24 @@
-# NeXify AI – Regeln für Suchmaschinen und KI-Crawler.
-#
-# Alle Seiten dürfen abgerufen werden; gesperrt ist nur die Schnittstelle unter /api/.
-# KI-Crawler sind bewusst erlaubt (die Agentur will zitiert werden) und deshalb namentlich
-# genannt. Sie stehen in derselben Gruppe wie alle anderen: Eine eigene Gruppe je Crawler würde
-# die Regeln der Gruppe "*" für ihn aufheben, also auch die Sperre von /api/.
-#
-# Die Kontoadressen (/anmelden, /registrieren, /passwort-vergessen) leiten vorläufig auf
-# /portale weiter. Sie und /offline sind hier nicht gesperrt: "noindex" und eine Weiterleitung
-# wirken nur, wenn die Adresse abgerufen werden darf.
-
 User-agent: *
-User-agent: GPTBot
-User-agent: OAI-SearchBot
-User-agent: ChatGPT-User
-User-agent: ClaudeBot
-User-agent: Claude-SearchBot
-User-agent: PerplexityBot
-User-agent: Perplexity-User
-User-agent: Google-Extended
-User-agent: Applebot
-User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
+
+# Nicht oeffentlich: Auth-Flows und Kundenkonten (kein Index)
+Disallow: /registrieren
+Disallow: /passwort-vergessen
+Disallow: /teileklar/kasse
+Disallow: /teileklar/warenkorb
+Disallow: /teileklar/bestellungen
+Disallow: /teileklar/termine
+Disallow: /teileklar/gutscheine
+
+# KI-Crawler ausdruecklich erlaubt (Agentur-Seite will zitiert werden)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
 
 Sitemap: https://www.nexifyai.de/sitemap.xml
