@@ -64,23 +64,53 @@
   display: flex !important;
   flex-direction: column !important;
 }
-/* 2026-11-25 11:07 (Europe/Berlin): Die Bilder in "Ihr Angebot, auf den Punkt." und
-   "Mehr Zeit fuer die Arbeit, die zaehlt." bleiben randlos wie alle anderen Bilder der Seite.
-   Der Innenabstand der Karte (20/24 px) bleibt fuer den TEXT bestehen; nur das Medium laeuft
-   per negativem Rand ueber die Kante und wird von der Kartenrundung beschnitten. */
-#atelier .hc-gallery-card > .identity-media {
-  margin: -20px -24px auto -24px !important;
+/* 2026-11-25 11:20 (Europe/Berlin), V33: ALLE Bilder sind randlos - Kartenrand gleich Bildrand.
+   Der Innenabstand bleibt ausschliesslich fuer den TEXT bestehen. Gilt seitenweit (nicht nur #atelier),
+   fuer Galerie-Karten (20/24 px), Produktkarten (32 px) und Bildplatten (5-px-Rahmen). */
+.hc-gallery-card, .hc-product { overflow: hidden !important; }
+
+/* Galerie-Karten: Medium laeuft ueber die Kante, Text behaelt 24 px Innenabstand */
+.hc-gallery-card > .identity-media,
+.hc-gallery-card > figure,
+.hc-gallery-card > picture,
+.hc-gallery-card > img,
+.hc-gallery-card > video {
+  margin: -20px -24px auto !important;
   width: calc(100% + 48px) !important;
-  border-radius: 0 !important;      /* Rundung kommt von der Karte, nicht vom Bild */
+  max-width: none !important;
 }
-#atelier .hc-gallery-card {
-  overflow: hidden !important;      /* schneidet das randlose Bild an der Kartenkante */
+.hc-gallery-card .identity-media,
+.hc-gallery-card img,
+.hc-gallery-card video,
+.hc-gallery-card picture { border-radius: 0 !important; }   /* Rundung kommt von der Karte */
+
+/* Produktkarten: Bild oben randlos, Textabstand (24 px) unveraendert */
+.hc-product > .hc-product-art {
+  margin: -32px -32px 0 !important;
+  width: calc(100% + 64px) !important;
+  border-radius: 0 !important;
 }
+.hc-product-art img, .hc-product-art video { border-radius: 0 !important; }
+
+/* Bildplatten: 5-px-Rahmen entfaellt, Bild bis zur Plattenrundung */
+.hc-plate > img,
+.hc-plate > video,
+.hc-plate > picture {
+  margin: -5px -5px 0 !important;
+  width: calc(100% + 10px) !important;
+  border-radius: 0 !important;
+}
+.hc-plate img, .hc-plate video { border-radius: 0 !important; }
+
 @media (max-width: 640px) {
-  #atelier .hc-gallery-card > .identity-media {
-    margin: -20px -18px auto -18px !important;
-    width: calc(100% + 36px) !important;
-  }
+  .hc-gallery-card > .identity-media,
+  .hc-gallery-card > figure,
+  .hc-gallery-card > picture,
+  .hc-gallery-card > img,
+  .hc-gallery-card > video { margin: -20px -18px auto !important; width: calc(100% + 36px) !important; }
+
+  .hc-product > .hc-product-art { margin: -20px -20px 0 !important; width: calc(100% + 40px) !important; }
+}
 }
 #atelier .hc-gallery-card > .hc-gallery-link {
   display: contents !important;
