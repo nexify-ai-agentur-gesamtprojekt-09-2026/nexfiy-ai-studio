@@ -127,6 +127,17 @@ if [ "${DEPLOY_SKIP_BUILD:-}" = "1" ]; then
 else
   npm run build
 fi
+
+# 2026-11-25 (Europe/Berlin): Tor vor der Auslieferung.
+# Grund: an einem Tag wurden zwei Staende live gestellt, deren Testlauf rot war (26 und 2 Tests),
+# weil dieses Skript die Tests nie ausfuehrte. Ab hier gilt: kein Deploy ohne gruenen Testlauf.
+# Bewusste Umgehung nur mit DEPLOY_SKIP_TESTS=1 — dann steht die Warnung im Protokoll.
+if [ "${DEPLOY_SKIP_TESTS:-}" = "1" ]; then
+  echo "WARNUNG: Testlauf uebersprungen (DEPLOY_SKIP_TESTS=1)."
+else
+  echo "Testlauf vor der Auslieferung ..."
+  npx vitest run
+fi
 # 2026-11-22 (Europe/Berlin), Sicherheitsbefund PR #8: Die wrangler.json aus dem Build wird nicht
 # ungefiltert verwendet. tools/wrangler-config.py übernimmt nur erlaubte Schlüssel (build.command u. a.
 # werden verworfen und gemeldet), setzt Name, D1-Binding DB und keep_vars fest, verlangt Pfade
