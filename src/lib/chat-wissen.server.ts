@@ -86,6 +86,23 @@ function normalisiert(text: string): string {
 /** Anfänge der Regelsätze; erscheinen sie wörtlich in einer Antwort, wurde das Regelwerk ausgegeben. */
 const REGEL_MARKER = REGELN.map((regel) => normalisiert(regel).slice(0, 56));
 
+/**
+ * Fremde Systemvorgaben, die nie in einer Besucherantwort stehen dürfen.
+ *
+ * Warum: Der Modellweg kann eine zusätzliche interne Vorgabe mitbringen. Gemessen am 27.11.2026
+ * hat das Modell auf die Aufforderung, die Frage wörtlich zu wiederholen, einen internen
+ * Identitätsanker ("NEXIFY AI - KURZANKER (gilt fuer jeden Request) … SPERREN (nicht verhandelbar)")
+ * unverändert ausgegeben (Registerbefund B-318). Diese Sätze stammen nicht aus dem Regelwerk dieser
+ * Website; ihr Erscheinen heißt immer: die Antwort ist unbrauchbar und wird ersetzt.
+ */
+const EXTERNE_MARKER = [
+  "kurzanker",
+  "gilt fuer jeden request",
+  "gilt für jeden request",
+  "sperren (nicht verhandelbar)",
+  "mandantentrennung: kein cross-kunden-kontext",
+];
+
 /** Standardantwort, wenn eine Ausgabe das Regelwerk wiedergeben würde. */
 export const CHAT_ERSATZANTWORT =
   "Dazu kann ich nichts sagen. Ich helfe Ihnen gern bei Fragen zu den Leistungen, Paketen und Produkten von NeXify AI oder beim Weg zur persönlichen Anfrage unter /kontakt.";
@@ -94,9 +111,10 @@ export const CHAT_ERSATZANTWORT =
 export const CHAT_LEERANTWORT =
   "Darauf habe ich keine Antwort, die ich Ihnen hier zeigen kann. Stellen Sie die Frage gern anders – oder schreiben Sie uns direkt über /kontakt.";
 
-/** True, wenn die Antwort die interne Kennung oder wörtliche Regelsätze enthält. */
+/** True, wenn die Antwort die interne Kennung, wörtliche Regelsätze oder eine fremde Systemvorgabe enthält. */
 export function enthaeltRegelwerk(antwort: string): boolean {
   if (antwort.includes(CHAT_KANARIENWERT)) return true;
   const text = normalisiert(antwort);
+  if (EXTERNE_MARKER.some((marker) => text.includes(marker))) return true;
   return REGEL_MARKER.some((marker) => text.includes(marker));
 }
