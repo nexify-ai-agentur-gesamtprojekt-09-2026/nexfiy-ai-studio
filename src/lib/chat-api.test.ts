@@ -883,7 +883,8 @@ describe(
 describe("handleChat: Anbieteraufruf", () => {
   it("sendet den festen Routernamen des Policy-Modells mit Reasoning high", async () => {
     expect(CHAT_MODELL).toBe("deepseek/deepseek-v4.1-flash-1017");
-    expect(CHAT_MODELL_ROUTERNAME).toBe("openrouter/deepseek-v4.1-flash");
+    // 28.11.2026 (B-318): direkte DeepSeek-Route statt OpenRouter (Prompt-Ersetzung upstream belegt).
+    expect(CHAT_MODELL_ROUTERNAME).toBe("ds/deepseek-v4.1-flash");
     const fetchMock = anbieterJson("Antwort");
     vi.stubGlobal("fetch", fetchMock);
     await handleChat(anfrage({ message: "Was bietet NeXify AI?" }), bindings(db));

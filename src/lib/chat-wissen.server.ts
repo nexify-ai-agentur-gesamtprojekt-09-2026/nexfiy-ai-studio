@@ -15,12 +15,14 @@ import { CHAT_KONTAKT_MAIL } from "@/lib/chat-seiten";
 /** Modellvertrag des Projekts (config/llm-policy.json): exakt dieses Modell, Reasoning `high`, kein Ersatzmodell. */
 export const CHAT_MODELL = "deepseek/deepseek-v4.1-flash-1017";
 /**
- * Name, unter dem der 9Router genau dieses Policy-Modell führt. Fest, nicht per Variable änderbar.
- * Warum nicht die Policy-Kennung: Der Router lehnt sie mit HTTP 400 ab und bietet keinen datierten
- * Stand (-1017) an – gemessen am 13.11.2026, vom Inhaber geprüft und freigegeben
- * (Monorepo apps/web/lib/chat-llm.ts). Das ist dieselbe Route, kein Ersatzmodell.
+ * Name, unter dem der 9Router genau dieses Modell führt. Fest, nicht per Variable änderbar.
+ * 28.11.2026 (B-318): Route von `openrouter/deepseek-v4.1-flash` auf die direkte
+ * DeepSeek-Connection umgestellt. Beleg: der OpenRouter-Pfad beantwortete eine nie gestellte
+ * Frage (Prompt-Ersetzung upstream, gemessen 28.11.2026 07:2x CET), der ds-Pfad antwortet
+ * sachlich. Damit gilt wieder die Kanonregel „kein openrouter/*-Upstream".
+ * Rueckweg: CHAT_MODELL_ROUTERNAME = "openrouter/deepseek-v4.1-flash" + Deploy.
  */
-export const CHAT_MODELL_ROUTERNAME = "openrouter/deepseek-v4.1-flash";
+export const CHAT_MODELL_ROUTERNAME = "ds/deepseek-v4.1-flash";
 /**
  * Kennungen, unter denen der Router in seiner Antwort (`model`) genau dieses Modell ausweisen darf.
  * Meldet er etwas anderes oder nichts, wird die Antwort verworfen (502) und der Vorfall protokolliert.
@@ -31,6 +33,8 @@ export const CHAT_MODELL_ERLAUBT: readonly string[] = [
   CHAT_MODELL_ROUTERNAME,
   "deepseek/deepseek-v4.1-flash",
   "deepseek-v4.1-flash",
+  /** 28.11.2026: unter dieser Kennung meldet die direkte DeepSeek-Connection dasselbe Modell. */
+  "deepseek-flash",
 ];
 export const CHAT_REASONING = { effort: "high" } as const;
 
